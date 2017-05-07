@@ -1,0 +1,14 @@
+{
+	"category" : "MicroKanren-testing",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ExtensionMethods",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }
