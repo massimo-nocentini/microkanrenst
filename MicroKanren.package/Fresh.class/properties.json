@@ -6,9 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"id" ],
-	"name" : "Var",
+		"receiver" ],
+	"name" : "Fresh",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "Goal",
 	"type" : "normal" }

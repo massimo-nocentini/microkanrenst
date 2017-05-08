@@ -1,3 +1,3 @@
 as yet unclassified
 solutions
-	self shouldBeImplemented.
+	^ Runner onGoal: self

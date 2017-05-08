@@ -2,4 +2,5 @@
 cdr
 	"Returns the tail of this list"
 
-	^ self ifNotEmpty: [ self firstLink asLinkedList ]
+	^ self
+		ifNotEmpty: [ firstLink nextLink ifNil: [ self class new ] ifNotNilDo: [ :nl | self class with: nl ] ]

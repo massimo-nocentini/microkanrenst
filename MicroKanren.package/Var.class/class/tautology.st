@@ -1,0 +1,3 @@
+creating
+tautology
+	^ #tautology

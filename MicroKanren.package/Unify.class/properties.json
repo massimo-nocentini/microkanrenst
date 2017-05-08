@@ -6,9 +6,10 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"id" ],
-	"name" : "Var",
+		"this",
+		"that" ],
+	"name" : "Unify",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "Goal",
 	"type" : "normal" }

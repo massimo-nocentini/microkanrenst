@@ -6,9 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"id" ],
-	"name" : "Var",
+		 ],
+	"name" : "UnificationError",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "Exception",
 	"type" : "normal" }

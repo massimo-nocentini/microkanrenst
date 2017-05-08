@@ -6,8 +6,11 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"id" ],
-	"name" : "Var",
+		"substitution",
+		"birthdate",
+		"vars_history",
+		"vars" ],
+	"name" : "State",
 	"pools" : [
 		 ],
 	"super" : "Object",

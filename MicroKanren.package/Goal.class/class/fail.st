@@ -1,0 +1,3 @@
+creating
+fail
+	^ Fail new
