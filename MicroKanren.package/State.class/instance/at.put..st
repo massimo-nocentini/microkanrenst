@@ -1,8 +1,14 @@
 as yet unclassified
 at: aVar put: aValue
-	substitution
+	| s |
+	s := substitution copy.
+	s
 		at: aVar
 		ifPresent: [ :v | 
 			aValue = v
 				ifFalse: [ UnificationError signal ] ]
-		ifAbsent: [ substitution at: aVar put: aValue ]
+		ifAbsent: [ s at: aVar put: aValue ].
+	^ self class new
+		birthdate: birthdate;
+		substitution: s;
+		yourself
