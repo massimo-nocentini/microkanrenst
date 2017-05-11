@@ -6,11 +6,10 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"this",
-		"that",
-		"unifier" ],
-	"name" : "Unify",
+		"left",
+		"right" ],
+	"name" : "MPlus",
 	"pools" : [
 		 ],
-	"super" : "Goal",
+	"super" : "StreamCombination",
 	"type" : "normal" }

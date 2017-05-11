@@ -6,11 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"this",
-		"that",
-		"unifier" ],
-	"name" : "Unify",
+		 ],
+	"name" : "StreamCombination",
 	"pools" : [
 		 ],
-	"super" : "Goal",
+	"super" : "Object",
 	"type" : "normal" }

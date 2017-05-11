@@ -2,7 +2,7 @@ dispatching
 collectVars: aCollection forFresh: aFresh
 	| nextState |
 	nextState := self class new
-		substitution: substitution copy;
+		substitution: substitution;
 		birthdate: birthdate + aCollection size;
 		yourself.
 	vars := aCollection collect: [ :i | Var id: i ].

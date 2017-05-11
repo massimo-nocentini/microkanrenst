@@ -1,3 +1,3 @@
 creating
-inState: aState
+state: aState
 	state := aState

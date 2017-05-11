@@ -1,0 +1,3 @@
+dispatched
+interleavedStrategy: anInterleaved
+	self subclassResponsibility

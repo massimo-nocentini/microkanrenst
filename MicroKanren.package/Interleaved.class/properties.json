@@ -6,11 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"this",
-		"that",
-		"unifier" ],
-	"name" : "Unify",
+		 ],
+	"name" : "Interleaved",
 	"pools" : [
 		 ],
-	"super" : "Goal",
+	"super" : "StreamCombinationStrategy",
 	"type" : "normal" }
