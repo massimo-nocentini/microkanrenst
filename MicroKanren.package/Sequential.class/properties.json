@@ -1,0 +1,14 @@
+{
+	"category" : "MicroKanren-core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "Sequential",
+	"pools" : [
+		 ],
+	"super" : "StreamCombinationStrategy",
+	"type" : "normal" }
