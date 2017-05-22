@@ -1,3 +1,3 @@
 accessing
-goal: aSucceed
-	goal := aSucceed
+goal: aGoal
+	goal := aGoal

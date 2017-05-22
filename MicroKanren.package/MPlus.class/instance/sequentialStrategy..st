@@ -1,3 +1,3 @@
 dispatched
 sequentialStrategy: aSequential
-	^ left , right
+	^ left mplus: right sequential: aSequential
