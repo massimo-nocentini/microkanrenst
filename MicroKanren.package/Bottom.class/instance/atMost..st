@@ -1,0 +1,3 @@
+listing
+atMost: anInteger
+	^ self

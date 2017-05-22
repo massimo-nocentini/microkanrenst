@@ -1,3 +1,3 @@
 running
 onState: aState
-	^ LinkedList with: aState
+	^ aState asChain

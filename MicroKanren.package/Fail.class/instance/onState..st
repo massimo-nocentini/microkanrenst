@@ -1,3 +1,3 @@
 running
 onState: aState
-	^ LinkedList new
+	^ nil asChain

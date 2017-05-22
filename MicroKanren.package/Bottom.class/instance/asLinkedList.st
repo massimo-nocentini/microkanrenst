@@ -1,0 +1,3 @@
+listing
+asLinkedList
+	^ LinkedList new

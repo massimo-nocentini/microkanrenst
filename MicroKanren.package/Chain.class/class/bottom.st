@@ -1,0 +1,3 @@
+creating
+bottom
+	^ Bottom new

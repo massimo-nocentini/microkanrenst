@@ -1,0 +1,14 @@
+{
+	"category" : "MicroKanren-chain",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "ChainTest",
+	"pools" : [
+		 ],
+	"super" : "TestCase",
+	"type" : "normal" }

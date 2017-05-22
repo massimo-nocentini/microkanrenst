@@ -1,0 +1,14 @@
+{
+	"category" : "MicroKanren-chain",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "Bottom",
+	"pools" : [
+		 ],
+	"super" : "Chain",
+	"type" : "normal" }

@@ -1,3 +1,3 @@
 running
 all
-	^ State empty into: goal
+	^ (State empty into: goal) asLinkedList
