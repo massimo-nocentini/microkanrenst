@@ -10,5 +10,5 @@
 	"name" : "UnificationError",
 	"pools" : [
 		 ],
-	"super" : "Exception",
+	"super" : "Error",
 	"type" : "normal" }

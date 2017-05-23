@@ -1,3 +1,3 @@
 reification
 reify: anObj onState: aState
-	^ anObj reifyUsing: self onState: aState
+	^ (aState walk: anObj) reifyUsing: self onState: aState
