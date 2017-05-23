@@ -1,5 +1,6 @@
 dispatched
 onState: aState withVars: aCollection
 	| g |
-	g := receiver valueWithArguments: aCollection.
+	vars := aCollection.
+	g := receiver valueWithArguments: vars.
 	^ aState into: g

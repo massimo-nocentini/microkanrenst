@@ -1,6 +1,6 @@
 dispatching
 collectVars: aCollection forFresh: aFresh
-	| nextState |
+	| nextState vars |
 	nextState := self class new
 		substitution: substitution;
 		birthdate: birthdate + aCollection size;

@@ -1,0 +1,3 @@
+reification
+vars
+	self subclassResponsibility
