@@ -1,3 +1,3 @@
 reification
 vars
-	self subclassResponsibility
+	^ {}

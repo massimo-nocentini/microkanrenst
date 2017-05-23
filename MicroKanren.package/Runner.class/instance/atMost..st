@@ -1,3 +1,3 @@
 selecting
 atMost: anInteger
-	^ ((State empty into: goal) atMost: anInteger) asLinkedList
+	^ self reify: ((State empty into: goal) atMost: anInteger) asLinkedList
