@@ -1,8 +1,11 @@
 reification
 reify: vars
+	| walker reifier |
+	walker := Walker new.
+	reifier := Reifier new.
 	^ vars
 		collect: [ :v | 
 			| w s |
-			w := Walker new star: v onState: self.
-			s := Reifier new reify: w onState: self class empty.
-			Walker new star: w onState: s ]
+			w := walker walkStar: v onState: self.
+			s := reifier reify: w onState: self class empty.
+			walker walkStar: w onState: s ]
