@@ -1,4 +1,4 @@
-running
+reification
 reify: states
 	| vars |
 	vars := goal vars ifEmpty: [ {Var tautology} ].

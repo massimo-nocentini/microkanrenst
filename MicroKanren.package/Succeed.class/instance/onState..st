@@ -1,3 +1,3 @@
 running
 onState: aState
-	^ aState asChain
+	^ Chain with: aState

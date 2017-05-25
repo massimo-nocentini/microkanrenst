@@ -15,12 +15,11 @@ testUnify
 	"reification"
 	g := [ :q | true asGoal ] fresh.
 	self assert: g solutions all equals: {#_0}.
-	g := [ :r | 
-	[ :x :y | 
-	r
-		unifyWith:
-			{x.
-			y} ] fresh ] fresh.
+	g := [ :r | [ :x :y | r unifyWith: (Array with: x with: y) ] fresh ] fresh.
 	self assert: g solutions all equals: (Array with: {#_0 . #_1}).
 	g := [ :r | [ :x :y | r unifyWith: (LinkedList with: x with: y) ] fresh ] fresh.
-	self assert: g solutions all equals: (Array with: {#_0 . #_1})
+	self assert: g solutions all equals: (Array with: {#_0 . #_1}).
+	g := [ :r | [ :x :y | (LinkedList with: x with: y) unifyWith: r ] fresh ] fresh.
+	self assert: g solutions all equals: (Array with: {#_0 . #_1}).
+	g := [ :r | [ :x :y | (LinkedList with: x with: r) unifyWith: (LinkedList with: 1 with: y) ] fresh ].
+	self assert: g fresh solutions all equals: {#_0}
