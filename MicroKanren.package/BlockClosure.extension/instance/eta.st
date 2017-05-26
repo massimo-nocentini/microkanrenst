@@ -1,3 +1,3 @@
 *MicroKanren-core
 eta
-	^ [ :s | self fresh onState: s ]
+	^ Goal eta: self fresh

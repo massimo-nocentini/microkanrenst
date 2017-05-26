@@ -1,3 +1,3 @@
 running
 onState: aState
-	^ interleaving of: ((both onState: aState) bind: and)
+	^ interleaving of: ((both onState: aState) value bind: and)
