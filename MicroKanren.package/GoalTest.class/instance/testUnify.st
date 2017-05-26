@@ -21,5 +21,9 @@ testUnify
 	self assert: g solutions all equals: (Array with: {#_0 . #_1}).
 	g := [ :r | [ :x :y | (LinkedList with: x with: y) unifyWith: r ] fresh ] fresh.
 	self assert: g solutions all equals: (Array with: {#_0 . #_1}).
-	g := [ :r | [ :x :y | (LinkedList with: x with: r) unifyWith: (LinkedList with: 1 with: y) ] fresh ].
-	self assert: g fresh solutions all equals: {#_0}
+	g := [ :r | [ :x :y | (LinkedList with: x with: r) unifyWith: (LinkedList with: 1 with: y) ] fresh ] fresh.
+	self assert: g solutions all equals: {#_0}.
+
+	"sharing"
+	g := [ :r | [ :x | (r unifyWith: x) , (x unifyWith: true) ] fresh ].
+	self assert: g fresh solutions all equals: {true}

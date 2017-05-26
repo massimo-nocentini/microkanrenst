@@ -1,3 +1,3 @@
 dispatched
 walkStarObject: anObj onState: aState
-	^ anObj
+	^ aState walk: anObj
