@@ -1,0 +1,16 @@
+{
+	"category" : "MicroKanren-core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"question",
+		"answer",
+		"otherwise" ],
+	"name" : "If",
+	"pools" : [
+		 ],
+	"super" : "Goal",
+	"type" : "normal" }
