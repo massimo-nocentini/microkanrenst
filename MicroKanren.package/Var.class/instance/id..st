@@ -1,3 +1,3 @@
-accessing
+initializing
 id: aString
 	id := aString
