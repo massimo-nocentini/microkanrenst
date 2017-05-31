@@ -1,3 +1,3 @@
 *MicroKanren-core
-walkStar: aWalker onState: aState
+walkStarUsingWalker: aWalker onState: aState
 	^ aWalker walkStarObject: self onState: aState
