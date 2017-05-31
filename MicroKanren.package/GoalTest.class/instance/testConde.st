@@ -32,10 +32,18 @@ testConde
 	g := [ :x :y | 
 	Goal cond e
 		if: (self teacup: x) , (y unifyWith: true) then: true asGoal;
-		if: (x unifyWith: true) then: (y unifyWith: false) ] fresh.
+		if: (x unifyWith: true) then: (y unifyWith: false);
+		else: true asGoal ] fresh.
 	self
 		assert: g solutions all
-		equals: (Array with: {#tea . true} with: {#cup . true} with: {true . false}).
+		equals:
+			(Array
+				with: {#tea . true}
+				with: {#cup . true}
+				with: {true . false}
+				with:
+					{0 asReifiedVar.
+					1 asReifiedVar}).
 	g := [ :x | 
 	(LinkedList new
 		add: (x unifyWith: #olive) -> true asGoal;

@@ -15,6 +15,14 @@ testUnify
 	"reification"
 	g := [ :q | true asGoal ] fresh.
 	self assert: g solutions all equals: {0 asReifiedVar}.
+	g := [ :q :r | true asGoal ] fresh.
+	self
+		assert: g solutions all
+		equals:
+			(Array
+				with:
+					{0 asReifiedVar.
+					1 asReifiedVar}).
 	g := [ :r | [ :x :y | r unifyWith: (Array with: x with: y) ] fresh ] fresh.
 	self
 		assert: g solutions all
