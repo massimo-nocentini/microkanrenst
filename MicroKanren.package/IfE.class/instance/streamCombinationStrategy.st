@@ -1,3 +1,0 @@
-templating
-streamCombinationStrategy
-	^ Sequential new

@@ -1,0 +1,3 @@
+initializing
+streamCombinationStrategy: aStrategy
+	streamCombinationStrategy := aStrategy
