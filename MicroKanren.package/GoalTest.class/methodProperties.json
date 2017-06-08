@@ -1,18 +1,23 @@
 {
 	"instance" : {
+		"setUp" : "MassimoNocentini 6/8/2017 19:02",
 		"testConj" : " 6/8/2017 11:25:29",
 		"teacup:" : " 6/8/2017 11:25:29",
 		"testFives" : " 6/8/2017 11:25:29",
 		"testSucceed" : " 6/8/2017 11:25:29",
-		"testNats" : " 6/8/2017 11:25:29",
+		"testAppendo" : "MassimoNocentini 6/8/2017 21:03",
 		"fives:" : " 6/8/2017 11:25:29",
-		"testUnify" : " 6/8/2017 11:25:29",
+		"testCaro" : "MassimoNocentini 6/8/2017 21:21",
+		"testNats" : " 6/8/2017 11:25:29",
 		"nats:stage:" : " 6/8/2017 11:25:29",
-		"testDisj" : " 6/8/2017 11:25:29",
+		"testUnify" : " 6/8/2017 11:25:29",
+		"testConde" : " 6/8/2017 11:25:29",
 		"nats:" : " 6/8/2017 11:25:29",
 		"swappedfives:" : " 6/8/2017 11:25:29",
-		"testConde" : " 6/8/2017 11:25:29",
-		"testFail" : " 6/8/2017 11:25:29"
+		"testDisj" : " 6/8/2017 11:25:29",
+		"testFail" : " 6/8/2017 11:25:29",
+		"testConso" : "MassimoNocentini 6/8/2017 19:15",
+		"testCdro" : "MassimoNocentini 6/8/2017 21:25"
 	},
 	"class" : { }
 }

@@ -1,13 +1,14 @@
 {
 	"commentStamp" : "",
-	"super" : "TestCase",
-	"category" : "MicroKanren-testing",
+	"super" : "Object",
+	"category" : "MicroKanren-core",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"sexpTheory"
+		"car",
+		"cdr"
 	],
-	"name" : "GoalTest",
+	"name" : "Cons",
 	"type" : "normal"
 }

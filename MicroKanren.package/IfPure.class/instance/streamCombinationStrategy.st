@@ -1,3 +1,0 @@
-templating
-streamCombinationStrategy
-	self subclassResponsibility

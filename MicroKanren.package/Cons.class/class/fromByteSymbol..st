@@ -1,0 +1,3 @@
+creating
+fromByteSymbol: aSymbol
+	^ aSymbol

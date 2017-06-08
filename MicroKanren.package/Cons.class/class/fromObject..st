@@ -1,0 +1,3 @@
+creating
+fromObject: anObj
+	^ anObj
