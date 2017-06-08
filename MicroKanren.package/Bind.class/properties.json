@@ -1,15 +1,14 @@
 {
-	"category" : "MicroKanren-core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "StreamCombination",
+	"category" : "MicroKanren-core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"combiner",
-		"stream" ],
+		"stream"
+	],
 	"name" : "Bind",
-	"pools" : [
-		 ],
-	"super" : "StreamCombination",
-	"type" : "normal" }
+	"type" : "normal"
+}

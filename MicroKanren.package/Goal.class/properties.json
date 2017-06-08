@@ -1,14 +1,11 @@
 {
-	"category" : "MicroKanren-core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "MassimoNocentini 5/31/2017 14:51",
-	"instvars" : [
-		 ],
-	"name" : "Goal",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "MicroKanren-core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "Goal",
+	"type" : "normal"
+}

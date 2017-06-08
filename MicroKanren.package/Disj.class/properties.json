@@ -1,16 +1,15 @@
 {
-	"category" : "MicroKanren-core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Goal",
+	"category" : "MicroKanren-core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"either",
 		"or",
-		"interleaving" ],
+		"interleaving"
+	],
 	"name" : "Disj",
-	"pools" : [
-		 ],
-	"super" : "Goal",
-	"type" : "normal" }
+	"type" : "normal"
+}

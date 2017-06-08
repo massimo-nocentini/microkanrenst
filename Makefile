@@ -5,4 +5,4 @@ run:
 fresh:
 	rm -rf snapshot
 	mkdir snapshot
-	cd snapshot && curl get.pharo.org | bash
+	cd snapshot && wget -O- get.pharo.org/64 | bash

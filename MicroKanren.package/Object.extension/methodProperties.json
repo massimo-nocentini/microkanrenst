@@ -1,0 +1,13 @@
+{
+	"instance" : {
+		"unifyWithVar:usingUnifier:onState:" : " 6/8/2017 11:25:29",
+		"unifyWith:usingUnifier:onState:" : " 6/8/2017 11:25:29",
+		"equalReifiedVar:" : " 6/8/2017 11:25:29",
+		"unifyWith:" : " 6/8/2017 11:25:29",
+		"walkStarUsingWalker:onState:" : " 6/8/2017 11:25:29",
+		"reifyUsing:onState:" : " 6/8/2017 11:25:29",
+		"unifyWithObject:usingUnifier:onState:" : " 6/8/2017 11:25:29",
+		"unifyWithLinkedList:usingUnifier:onState:" : " 6/8/2017 11:25:29"
+	},
+	"class" : { }
+}
