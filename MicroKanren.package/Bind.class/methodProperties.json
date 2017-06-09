@@ -2,6 +2,7 @@
 	"instance" : {
 		"stream:" : " 6/8/2017 11:25:29",
 		"combiner:" : " 6/8/2017 11:25:29",
+		"interleavedStrategy:" : "MassimoNocentini 6/9/2017 10:27",
 		"sequentialStrategy:" : " 6/8/2017 11:25:29"
 	},
 	"class" : {

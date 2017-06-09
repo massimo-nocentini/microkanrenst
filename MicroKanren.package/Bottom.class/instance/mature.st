@@ -1,3 +1,3 @@
 listing
-asLinkedList
+mature
 	^ LinkedList new

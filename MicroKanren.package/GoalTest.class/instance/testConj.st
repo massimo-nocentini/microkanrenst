@@ -1,4 +1,4 @@
-as yet unclassified
+tests
 testConj
 	| g |
 	g := [ :q | false asGoal , (true unifyWith: q) ] fresh.

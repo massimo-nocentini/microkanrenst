@@ -1,3 +1,3 @@
 selecting
 all
-	^ self reify: (State empty into: goal) asLinkedList
+	^ self reify: (State empty into: goal) mature

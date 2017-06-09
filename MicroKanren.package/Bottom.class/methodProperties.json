@@ -1,10 +1,11 @@
 {
 	"instance" : {
-		"mplus:interleaved:" : " 6/8/2017 11:25:29",
+		"mplus:interleaved:" : "MassimoNocentini 6/9/2017 16:22",
 		"bind:sequential:" : " 6/8/2017 11:25:29",
-		"asLinkedList" : " 6/8/2017 11:25:29",
 		"atMost:" : " 6/8/2017 11:25:29",
-		"mplus:sequential:" : " 6/8/2017 11:25:29"
+		"mature" : "MassimoNocentini 6/9/2017 10:37",
+		"bind:interleaved:" : "MassimoNocentini 6/9/2017 10:29",
+		"mplus:sequential:" : "MassimoNocentini 6/9/2017 16:22"
 	},
 	"class" : { }
 }

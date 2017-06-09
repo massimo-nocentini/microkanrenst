@@ -1,3 +1,3 @@
 running
 onState: aState
-	^ [ goal onState: aState ]
+	^ goal onState: aState

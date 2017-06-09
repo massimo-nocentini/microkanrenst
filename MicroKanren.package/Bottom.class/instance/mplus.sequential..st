@@ -1,3 +1,3 @@
 dispatched
 mplus: anotherChain sequential: aSequential
-	^ anotherChain
+	^ anotherChain value

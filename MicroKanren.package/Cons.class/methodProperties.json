@@ -5,11 +5,13 @@
 		"cdr:" : "MassimoNocentini 6/8/2017 11:56",
 		"car" : "MassimoNocentini 6/8/2017 12:05",
 		"walkStarUsingWalker:onState:" : "MassimoNocentini 6/8/2017 12:14",
+		"printOn:" : "MassimoNocentini 6/9/2017 16:48",
 		"unifyWithCons:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 12:02",
 		"hash" : "MassimoNocentini 6/8/2017 12:40",
 		"unifyWithLinkedList:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 14:02",
-		"reifyUsing:onState:" : "MassimoNocentini 6/8/2017 12:16",
+		"asLinkedList" : "MassimoNocentini 6/9/2017 17:10",
 		"car:" : "MassimoNocentini 6/8/2017 11:55",
+		"reifyUsing:onState:" : "MassimoNocentini 6/8/2017 12:16",
 		"unifyWith:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 12:01"
 	},
 	"class" : {

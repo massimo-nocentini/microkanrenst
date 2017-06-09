@@ -1,3 +1,3 @@
 listing
-asLinkedList
+mature
 	self subclassResponsibility
