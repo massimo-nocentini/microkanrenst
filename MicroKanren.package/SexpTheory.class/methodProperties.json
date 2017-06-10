@@ -1,9 +1,10 @@
 {
 	"instance" : {
-		"let:be:append:" : "MassimoNocentini 6/8/2017 19:37",
 		"let:cdr:" : "MassimoNocentini 6/8/2017 21:19",
 		"let:be:cons:" : "MassimoNocentini 6/8/2017 21:20",
-		"let:car:" : "MassimoNocentini 6/8/2017 21:18"
+		"let:car:" : "MassimoNocentini 6/8/2017 21:18",
+		"let:be:append:" : "MassimoNocentini 6/8/2017 19:37",
+		"let:reverse:" : "MassimoNocentini 6/10/2017 13:48"
 	},
 	"class" : { }
 }

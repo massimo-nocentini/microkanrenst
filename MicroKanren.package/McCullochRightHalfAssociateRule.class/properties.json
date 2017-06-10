@@ -1,0 +1,11 @@
+{
+	"commentStamp" : "",
+	"super" : "InductionRule",
+	"category" : "MicroKanren-theories",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "McCullochRightHalfAssociateRule",
+	"type" : "normal"
+}

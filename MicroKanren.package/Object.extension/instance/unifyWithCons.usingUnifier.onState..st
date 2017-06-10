@@ -1,3 +1,3 @@
 *MicroKanren-core
 unifyWithCons: aCons usingUnifier: anUnifier onState: aState
-	self subclassResponsibility
+	^ anUnifier unifyObject: self withObject: aCons onState: aState

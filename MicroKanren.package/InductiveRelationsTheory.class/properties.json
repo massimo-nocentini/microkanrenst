@@ -1,0 +1,14 @@
+{
+	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "MicroKanren-theories",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"rules",
+		"sexpTheory"
+	],
+	"name" : "InductiveRelationsTheory",
+	"type" : "normal"
+}
