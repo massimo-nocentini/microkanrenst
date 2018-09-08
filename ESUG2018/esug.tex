@@ -39,6 +39,28 @@ outline
 \end{minted}
 \end{frame}
 
+\begin{frame}[fragile]
+\frametitle{Main idea}
+\begin{displaymath}
+\forall a,b,c.\,P(a,b,c) \leftrightarrow a + b = c \quad\text{entails}\quad P(1,2,3)
+\end{displaymath}
+can be expressed using either the \textit{imperative style}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+a := 1.
+b := 2.
+c := a + b.
+Object assert: [ c = 3 ].
+\end{minted}
+or the \textit{functional style}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+([ :a :b | a + b ] value: 1 value: 2) = 3
+\end{minted}
+or, finally, the \textit{declarative style}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+[ :a :b :c | a + b = c ] value: 1 value: 2 value: 3
+\end{minted}
+
+\end{frame}
 
 \begin{frame}[fragile]
 
@@ -106,7 +128,7 @@ let $G$ be a set of equations, unification rules are
 $$G \cup \lbrace s_{0}=t_{0},\ldots, s_{k}=t_{k} \rbrace$$
 \item[conflict] if $f\neq g \vee k\neq m$ then $$G \cup \lbrace f(s_{0}, \ldots, s_{k}) = g(t_{0}, \ldots, t_{m})\rbrace \rightarrow \,\perp$$
 \item[eliminate] if $x \not\in vars(t)$ and $x \in vars(G)$ then $$G \cup \lbrace x = t\rbrace \rightarrow G\lbrace x \mapsto t\rbrace \cup \left\lbrace x \triangleq t\right\rbrace $$
-\item[occur check] if $x \in vars(f(s_{0},\ldots,s_{k}))$ then $$G \cup \lbrace x = t(s_{0}, \ldots, s_{k}\rbrace \rightarrow \,\perp$$
+\item[occur check] if $x \in vars(f(s_{0},\ldots,s_{k}))$ then $$G \cup \lbrace x = t(s_{0}, \ldots, s_{k})\rbrace \rightarrow \,\perp$$
 \end{description}
 %without *occur checks*, generating a substitution $\theta$ is a *recursive enumerable* problem
 \end{frame}
@@ -120,6 +142,10 @@ $$G \cup \lbrace s_{0}=t_{0},\ldots, s_{k}=t_{k} \rbrace$$
 \item resolution by unification via \textit{structural induction}
 \item \textit{complete}, but \textit{unfair}, search strategy
 \end{itemize}
+
+A \textit{goal} is an object that responds to the \verb|#onState:| selector, it
+receives a \textit{substitution} and returns a \verb|Chain| object of
+substitutions. 
 
 \iffalse
 my contribution
@@ -437,12 +463,9 @@ Cond>>onState: aState
 \frametitle{Unifier}
 Let $\mathcal{D}$ be the set of \textit{Dyck paths} and let $\leadsto$ be the \textit{CFG}
 $$
-\left\lbrace\begin{array}{l}
-\leadsto = \varepsilon \\
-\leadsto = ( \leadsto ) \leadsto \\
-\end{array}\right\rbrace
+\leadsto = \varepsilon \,\left|\, ( \leadsto ) \leadsto \right.
 $$
-question: enumerate $\mathcal{D}$ using $\leadsto$.
+where $\varepsilon$ is the empty string; question: enumerate $\mathcal{D}$ using $\leadsto$.
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 dycko: alpha
     ^ Goal cond e
