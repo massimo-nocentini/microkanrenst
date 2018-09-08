@@ -1,0 +1,531 @@
+
+\documentclass{beamer}
+
+\usepackage{euler}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{minted}
+\usepackage[scaled=0.8]{beramono}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+\usefonttheme[onlymath]{serif}
+
+\usemintedstyle{friendly}
+
+\setbeamertemplate{blocks}[rounded]
+
+%Information to be included in the title page:
+\title{Relational Programming in Smalltalk}
+\author{Massimo Nocentini}
+\institute{University of Florence, Italy}
+\date{ESUG2018}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}[fragile]
+\frametitle{}
+\begin{minted}[fontsize=\small]{smalltalk}
+outline
+    ^ LinkedList new
+        add: 'Resolution by refutation';
+        add: 'Resolution by unification';
+        yourself
+\end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]
+
+\frametitle{Resolution by \textit{Refutation}}
+
+Let $\alpha$ be a sentence in \textit{CNF} and $M(\alpha)$ the set of models that
+satisfy it, where a model is a set of assignments that make $\alpha$ true.
+\vfill
+$\alpha$ is \textit{valid} if it is true in \textit{all} models; oth,\\
+$\alpha$ is \textit{satisfiable} if it is true in \textit{some} model.
+\vfill
+\textit{Logical reasoning} boils down to decide the \textit{entailment}
+relation $\models$
+\begin{displaymath}
+\begin{split}
+M(\alpha) &\subseteq M(\beta) \leftrightarrow \\
+\alpha &\models \beta \leftrightarrow \\
+(\alpha &\Rightarrow \beta) \text{ is valid } \leftrightarrow\\
+\neg(\neg\alpha &\vee \beta) \text{ is unsatisfiable}
+\end{split}
+\end{displaymath}
+therefore, to prove a sentence $\alpha$ reduces to decide
+$\neg\alpha\models\perp$,\\where $\perp$ is the (\textit{unsatisfiable}) empty
+clause.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Resolution by \textit{Refutation}}
+The \textit{resolution rule} is a \textit{complete} inference algorithm; \\
+let $l_{q}, m_{w} \in\lbrace 0,1\rbrace$ in
+\begin{displaymath}
+{\left(l_{0}, \ldots, l_{i}, \ldots, l_{j-1}\right) \quad \left(m_{0}, \ldots, m_{r},\ldots, m_{k-1}\right) \quad l_{i} = \neg m_{r}
+\over
+\left(l_{0},\ldots, l_{i-1},l_{i+1}, \ldots,l_{j-1}, m_{0},\ldots, m_{r-1},m_{r+1},\ldots, m_{k-1}\right)}
+\end{displaymath}
+where $\left(l_{0},\ldots, l_{i}, \ldots, l_{j-1}\right) = l_{0}\vee \ldots \vee l_{i} \vee \ldots \vee l_{j-1}$.
+\vfill
+The \textit{DPLL} algorithm is a recursive, depth-first enumeration of models
+using the resolution rule, paired with heuristics \textit{early termination},
+\textit{pure symbol} and \textit{unit clause} to speed up.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Resolution by \textit{Unification}}
+
+\textit{Unification} is the process of solving \textit{equations among symbolic
+expressions}; a \textit{solution} is denoted as a \textit{substitution}
+$\theta$, namely a mapping that assigns a symbolic values to free variables.
+\vfill
+Let $x$ and $y$ be free variables, the set
+$$\lbrace cons(x,cons(x,nil)) = cons(2,y)\rbrace$$
+has solution $\theta = \lbrace x \mapsto 2, y \mapsto cons(2,nil) \rbrace$;
+moreover, the set
+$$ \lbrace y = cons(2,y) \rbrace $$
+has no \textit{finite} solution; oth, $\theta = \lbrace y \mapsto
+cons(2,cons(2,cons(2,...))) \rbrace$ is a solution by \textit{bisimulation}.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Resolution by \textit{Unification}}
+let $G$ be a set of equations, unification rules are
+\begin{description}
+\item[delete] $G \cup \lbrace t = t \rbrace \rightarrow G$
+\item[decompose] $G \cup \lbrace f(s_{0}, \ldots, s_{k}) = f(t_{0}, \ldots, t_{k})\rbrace$ entails
+$$G \cup \lbrace s_{0}=t_{0},\ldots, s_{k}=t_{k} \rbrace$$
+\item[conflict] if $f\neq g \vee k\neq m$ then $$G \cup \lbrace f(s_{0}, \ldots, s_{k}) = g(t_{0}, \ldots, t_{m})\rbrace \rightarrow \,\perp$$
+\item[eliminate] if $x \not\in vars(t)$ and $x \in vars(G)$ then $$G \cup \lbrace x = t\rbrace \rightarrow G\lbrace x \mapsto t\rbrace \cup \left\lbrace x \triangleq t\right\rbrace $$
+\item[occur check] if $x \in vars(f(s_{0},\ldots,s_{k}))$ then $$G \cup \lbrace x = t(s_{0}, \ldots, s_{k}\rbrace \rightarrow \,\perp$$
+\end{description}
+%without *occur checks*, generating a substitution $\theta$ is a *recursive enumerable* problem
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{microkanren}
+\begin{itemize}
+\item a \textit{DSL} for relational programming written in Scheme
+\item \textit{purely functional} implementation of \textit{miniKanren}
+\item \textit{explicit streams} of satisfying states, \textit{goal-based} approach
+\item resolution by unification via \textit{structural induction}
+\item \textit{complete}, but \textit{unfair}, search strategy
+\end{itemize}
+
+\iffalse
+my contribution
+- _Pythonic_ [implementation][mkpy]: functional at the core, objective at the interface
+- generators subsume _countably_-satisfiable relations; complete, _fair_ [search][dovetail]
+- _The Reasoned Schemer_ fully tested via [Travis CI][travis]; moreover, [read the docs][rtfd]
+- case studies: Smullyan puzzles and combinatorics
+- tweaking HOL Light for _certified deductions_, [wip][klight]
+\fi
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Chain subclass: \#Bottom}
+
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+BlockClosure>>links: anObj
+    ^ Chain item: anObj linker: self
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Chain class>>bottom
+    ^ Bottom new
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Chain class>>item: anObj linker: aBlockClosure
+    ^ Knot new 
+        item: anObj;
+        linker: aBlockClosure;
+        yourself
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+bind: aGoal interleaved: anInterleaved
+    ^ self
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+mplus: anotherChain interleaved: anInterleaved
+    ^ anotherChain value
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+atMost: anInteger
+    ^ self
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+mature
+    ^ LinkedList new
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Chain subclass: \#Knot}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+bind: aGoal interleaved: anInterleaved
+    | alpha beta |
+    alpha := aGoal onState: item.
+    beta := [ self next bind: aGoal interleaved: anInterleaved ].
+    ^ alpha mplus: beta interleaved: anInterleaved
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+mplus: anotherChain interleaved: anInterleaved
+    ^ [ :_ | anotherChain value 
+                mplus: [ self next ] 
+                interleaved: anInterleaved ] links: item
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+next
+    ^ linker value: item
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+atMost: n
+    ^ n isZero
+        ifTrue: [ Chain bottom ]
+        ifFalse: [ [ :_ | self next value atMost: n - 1 ] links: item ]
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+mature
+    ^ self next mature
+        addFirst: item;
+        yourself
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{ChainTest}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+ints: i
+    ^ [ :a | self ints: a + 1 ] links: i
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+fib: m fib: n
+    ^ [ :_ | self fib: n fib: m + n ] links: m
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+collatz: o
+    ^ [ :_ | o even
+                ifTrue: [ self collatz: o / 2 ]
+                ifFalse: [ self collatz: 3 * o + 1 ] ] links: o
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+testNumbers
+    self assert: (self nats atMost: 10) mature equals: (0 to: 9).
+    self
+        assert: (self fibs atMost: 10) mature
+        equals: {0 . 1 . 1 . 2 . 3 . 5 . 8 . 13 . 21 . 34}.
+    self
+        assert: ((self collatz: 10) atMost: 10) mature
+        equals: {10 . 5 . 16 . 8 . 4 . 2 . 1 . 4 . 2 . 1}.
+    self
+        assert: ((self gcd: 18 gcd: 32) atMost: 10) mature
+        equals: {18 . 32 . 18 . 14 . 4 . 2 . 2}
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Chain combinators}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Bind class>>combine: aGoal with: aCollection
+    ^ self new
+        combiner: aGoal;
+        stream: aCollection;
+        yourself
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Bind>>interleavedStrategy: anInterleaved
+    ^ stream bind: combiner interleaved: anInterleaved
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+MPlus class>>with: aCollection with: anotherCollection
+    ^ self new
+        left: aCollection;
+        right: anotherCollection;
+        yourself
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+MPlus>>interleavedStrategy: anInterleaved
+    ^ left mplus: right interleaved: anInterleaved
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Sequential>>of: aStreamCombination
+    ^ aStreamCombination sequentialStrategy: self
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Interleaved>>of: aStreamCombination
+    ^ aStreamCombination interleavedStrategy: self
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Goals}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Succeed>>onState: aState
+    ^ Chain with: aState
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Fail>>onState: aState
+    ^ Chain bottom
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>at: aVar put: aValue
+    | s |
+    s := substitution copy.
+    s
+        at: aVar
+        ifPresent: [ :v | 
+            aValue = v
+                ifFalse: [ UnificationError signal ] ]
+        ifAbsent: [ s at: aVar put: aValue ].
+    ^ self class new
+        birthdate: birthdate;
+        substitution: s;
+        yourself
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Goals}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Fresh>>onState: aState
+    ^ aState collectVars: (1 to: receiver numArgs) forFresh: self
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>collectVars: aCollection forFresh: aFresh
+    | nextState vars |
+    nextState := self class new
+        substitution: substitution;
+        birthdate: birthdate + aCollection size;
+        yourself.
+    vars := aCollection collect: [ :i | Var id: i ].
+    ^ aFresh onState: nextState withVars: vars
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Fresh>>onState: aState withVars: aCollection
+    | g |
+    vars := aCollection.
+    g := receiver valueWithArguments: vars.
+    ^ g onState: aState
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+BlockClosure>>fresh
+    ^ Goal fresh: self
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Goals}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object>>unifyWith: another
+    ^ Goal unify: self with: another
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Unify>>onState: aState
+    ^ [ | extended_state |
+        extended_state := Unifier new 
+                            unify: this with: that onState: aState.
+        Goal succeed onState: extended_state ]
+            on: UnificationError
+            do: [ Goal fail onState: aState ]
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Unifier>>unify: anObj with: anotherObj onState: aState
+    | aWalkedObj anotherWalkedObj |
+    aWalkedObj := aState walk: anObj.
+    anotherWalkedObj := aState walk: anotherObj.
+    ^ aWalkedObj unifyWith: anotherWalkedObj 
+                 usingUnifier: self 
+                 onState: aState
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>walk: anObj
+    | k |
+    k := anObj.
+    [ k := substitution at: k ifAbsent: [ ^ k ] ] repeat
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unifier}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+unifyObject: anObj withObject: anotherObj onState: aState
+    ^ anObj = anotherObj
+        ifTrue: [ aState ]
+        ifFalse: [ UnificationError signal ]
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+unifyVar: aVar withObject: anObject onState: aState
+    ^ aState at: aVar put: anObject
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+unifyVar: aVar withVar: anotherVar onState: aState
+    ^ aVar = anotherVar
+        ifTrue: [ aState ]
+        ifFalse: [ 
+            self unifyVar: aVar withObject: anotherVar onState: aState ]
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+unifyLinkedList: aCollection withLinkedList: anotherCollection onState: aState
+    ^ aCollection size = anotherCollection size
+        ifTrue: [ (aCollection zip: anotherCollection)
+            inject: aState
+            into: [ :s :pair | self unify: pair key 
+                                    with: pair value 
+                                    onState: s ] ]
+        ifFalse: [ UnificationError signal ]
+\end{minted}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Unifier}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Disj>>onState: aState
+    ^ interleaving of: ((either onState: aState) 
+        mplus: [ or onState: aState ])
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Conj>>onState: aState
+    ^ interleaving of: ((both onState: aState) bind: and)
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Cond>>if: ifGoal then: thenGoal
+    clauses add: ifGoal -> thenGoal
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Cond>>ifPure: aStrategy
+    if := [ :clause :otherwise | 
+            IfPure new
+                question: clause key 
+                    answer: clause value 
+                    otherwise: otherwise;
+                streamCombinationStrategy: aStrategy;
+                yourself ]
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unifier}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Cond>>e
+    self ifPure: Sequential new
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Cond>>i
+    self ifPure: Interleaved new
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Cond>>onState: aState
+    | g |
+    else ifNil: [ self else: false asGoal ].
+    g := clauses copy
+            add: else;
+            reduceRight: if.
+    ^ g onState: aState
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unifier}
+Let $\mathcal{D}$ be the set of \textit{Dyck paths} and let $\leadsto$ be the \textit{CFG}
+$$
+\left\lbrace\begin{array}{l}
+\leadsto = \varepsilon \\
+\leadsto = ( \leadsto ) \leadsto \\
+\end{array}\right\rbrace
+$$
+question: enumerate $\mathcal{D}$ using $\leadsto$.
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+dycko: alpha
+    ^ Goal cond e
+        if: alpha nilo then: true asGoal;
+        else: [ :beta :gamma | 
+            (sexpTheory let: alpha 
+                        be: ($( cons: beta) 
+                        append: ($) cons: gamma)) & 
+            ([ self dycko: beta ] eta & 
+             [ self dycko: gamma ] eta) ] fresh
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unifier}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+testDycko
+    | g |
+
+    "enumeration"
+    g := [ :alpha | combTheory dycko: alpha ] fresh.
+    self
+        assert: (g solutions atMost: 20)
+        equals:
+            ({nil . '()' . '(())' . '()()' . '(()())' . '()(())' . 
+            '(())()' . '()()()' . '(()()())'.  '()(()())' . 
+            '(())(())' . '()()(())' . '((()))' . '()(())()' . 
+            '(())()()' . '()()()()'.  '(()()()())' . '()(()()())' . 
+            '(())(()())' . '()()(()())'} collect: #asCons).
+
+    "an invalid Dyck path"
+    g := [ :alpha | combTheory dycko: '(()(())()(' asCons ] fresh.  
+    self assert: g solutions all equals: {}
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unifier}
+Let $X$ and $Y$ be natural numbers in machine 
+\begin{displaymath}
+\mathcal{C} =  \left \lbrace{ \over 2X \stackrel{\circ}{\rightarrow} X} , {X \stackrel{\circ}{\rightarrow} Y \over 3X \stackrel{\circ}{\rightarrow} Y 2 Y} \right \rbrace
+\end{displaymath}
+question: does exist a number $\alpha$ such that $ \alpha \stackrel{\circ}{\rightarrow} \alpha $?
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+consumes: two_alpha produces: alpha machine: aMachine
+    ^ two_alpha unifyWith: (2 cons: alpha)
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+consumes: three_alpha produces: alpha_two_alpha machine: aMachine
+    ^ [ :beta :gamma | 
+        (three_alpha unifyWith: (3 cons: beta)) &
+        ((self associate: gamma is: alpha_two_alpha machine: aMachine) & 
+        (aMachine proves: beta relates: gamma)) ] fresh
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Unifier}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+InductiveRelationsTheory>>proves: anObj relates: anotherObj
+    | g |
+    g := Goal cond i.
+    rules do: [ :r | g if: (r consumes: anObj 
+                              produces: anotherObj 
+                              machine: self) 
+                       then: true asGoal ].
+    ^ g
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+testFirstMachine
+    | g |
+
+    "McCulloch's first machine"
+    g := [ :a | self mcculloch proves: a relates: a ] fresh.
+    self assert: (g solutions atMost: 1) equals: {#(3 2 3) asCons}.
+
+    "Montecarlo lock"
+    g := [ :a | self mclock proves: a relates: a ] fresh.
+    self
+        assert: ((g solutions atMost: 1) collect: #asLinkedList)
+        equals: {#(5 4 6 4 2 5 4 6 4 2)}
+\end{minted}
+\end{frame}
+
+\end{document}
+
