@@ -7,7 +7,7 @@
 \usepackage{textcomp}
 \usepackage{minted}
 \usepackage[scaled=0.8]{beramono}
-
+\usepackage{CJKutf8}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -33,14 +33,43 @@
 \begin{minted}[fontsize=\small]{smalltalk}
 outline
     ^ LinkedList new
-        add: 'Resolution by refutation';
-        add: 'Resolution by unification';
+        add: 'me and motivations';
+        add: 'Refutation and Unification resolutions ';
+        add: 'Microkanren in Smalltalk';
+        add: 'Dyck paths and the McCulloch machine';
         yourself
 \end{minted}
 \end{frame}
 
+
+\begin{frame}[fragile]
+\frametitle{Hi!}
+\begin{Verbatim}[fontsize=\small]
+$ whoami
+Massimo Nocentini
+PhD student @ University of Florence
+Mathematician (algebraic combinatorics, formal methods for algs)
+Programmer (automated reasoning, logics and symbolic comp)
+https://github.com/massimo-nocentini
+$ clear
+\end{Verbatim}
+I believe \textit{microkanren} is, first of all, an \textit{educational beast},
+concerning unification, lazy streams, backtracking and optimization; the
+abstract definition was shown by \textit{Dan Friedman} and \textit{Jason
+Hemann} at Scheme '13, Alexandria.
+\vfill
+I repeat the exercise of writing it in:
+\begin{itemize}
+\item Python, native \verb|generator|s :) limits on recursive calls :(
+\item OCaml, algebraic datatypes :) hard to extend :(
+\item Smalltalk, simple, fast and clear :) many dispatching msgs :/
+\end{itemize}
+
+\end{frame}
+
 \begin{frame}[fragile]
 \frametitle{Main idea}
+In math a relation $P$ is usually characterized by
 \begin{displaymath}
 \forall a,b,c.\,P(a,b,c) \leftrightarrow a + b = c \quad\text{entails}\quad P(1,2,3)
 \end{displaymath}
@@ -53,11 +82,13 @@ Object assert: [ c = 3 ].
 \end{minted}
 or the \textit{functional style}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-([ :a :b | a + b ] value: 1 value: 2) = 3
+Object assert: [
+    ([ :a :b | a + b ] value: 1 value: 2) = 3 ]
 \end{minted}
 or, finally, the \textit{declarative style}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-[ :a :b :c | a + b = c ] value: 1 value: 2 value: 3
+Object assert: [
+    [ :a :b :c | a + b = c ] value: 1 value: 2 value: 3 ]
 \end{minted}
 
 \end{frame}
@@ -72,31 +103,31 @@ satisfy it, where a model is a set of assignments that make $\alpha$ true.
 $\alpha$ is \textit{valid} if it is true in \textit{all} models; oth,\\
 $\alpha$ is \textit{satisfiable} if it is true in \textit{some} model.
 \vfill
-\textit{Logical reasoning} boils down to decide the \textit{entailment}
-relation $\models$
+Let $\models$ and $\Rightarrow$ denote the \textit{entail} and \textit{imply} relations, respectively, in
 \begin{displaymath}
 \begin{split}
-M(\alpha) &\subseteq M(\beta) \leftrightarrow \\
 \alpha &\models \beta \leftrightarrow \\
+M(\alpha) &\subseteq M(\beta) \leftrightarrow \\
 (\alpha &\Rightarrow \beta) \text{ is valid } \leftrightarrow\\
-\neg(\neg\alpha &\vee \beta) \text{ is unsatisfiable}
+\neg(\neg\alpha &\vee \beta) \text{ is unsatisfiable;}
 \end{split}
 \end{displaymath}
 therefore, to prove a sentence $\alpha$ reduces to decide
-$\neg\alpha\models\perp$,\\where $\perp$ is the (\textit{unsatisfiable}) empty
-clause.
+$$\neg\alpha\models\perp\quad\leftrightarrow\quad\alpha\text{ is valid,}$$
+where $\perp$ denotes the empty clause, namely \textit{falsehood}.
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Resolution by \textit{Refutation}}
-The \textit{resolution rule} is a \textit{complete} inference algorithm; \\
-let $l_{q}, m_{w} \in\lbrace 0,1\rbrace$ in
+The \textit{resolution rule} is a \textit{complete} inference algorithm,
 \begin{displaymath}
 {\left(l_{0}, \ldots, l_{i}, \ldots, l_{j-1}\right) \quad \left(m_{0}, \ldots, m_{r},\ldots, m_{k-1}\right) \quad l_{i} = \neg m_{r}
 \over
 \left(l_{0},\ldots, l_{i-1},l_{i+1}, \ldots,l_{j-1}, m_{0},\ldots, m_{r-1},m_{r+1},\ldots, m_{k-1}\right)}
 \end{displaymath}
-where $\left(l_{0},\ldots, l_{i}, \ldots, l_{j-1}\right) = l_{0}\vee \ldots \vee l_{i} \vee \ldots \vee l_{j-1}$.
+where $\left(l_{0},\ldots, l_{i}, \ldots, l_{j-1}\right) = l_{0}\vee \ldots
+\vee l_{i} \vee \ldots \vee l_{j-1}$, \\
+for all $l_{q}, m_{w} \in\lbrace 0,1\rbrace$.
 \vfill
 The \textit{DPLL} algorithm is a recursive, depth-first enumeration of models
 using the resolution rule, paired with heuristics \textit{early termination},
@@ -115,8 +146,9 @@ $$\lbrace cons(x,cons(x,nil)) = cons(2,y)\rbrace$$
 has solution $\theta = \lbrace x \mapsto 2, y \mapsto cons(2,nil) \rbrace$;
 moreover, the set
 $$ \lbrace y = cons(2,y) \rbrace $$
-has no \textit{finite} solution; oth, $\theta = \lbrace y \mapsto
-cons(2,cons(2,cons(2,...))) \rbrace$ is a solution by \textit{bisimulation}.
+has no \textit{finite} solution; on the other hand,
+$$\theta = \lbrace y \mapsto cons(2,cons(2,cons(2,...))) \rbrace$$
+is a solution upto \textit{bisimulation}.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -128,33 +160,43 @@ let $G$ be a set of equations, unification rules are
 $$G \cup \lbrace s_{0}=t_{0},\ldots, s_{k}=t_{k} \rbrace$$
 \item[conflict] if $f\neq g \vee k\neq m$ then $$G \cup \lbrace f(s_{0}, \ldots, s_{k}) = g(t_{0}, \ldots, t_{m})\rbrace \rightarrow \,\perp$$
 \item[eliminate] if $x \not\in vars(t)$ and $x \in vars(G)$ then $$G \cup \lbrace x = t\rbrace \rightarrow G\lbrace x \mapsto t\rbrace \cup \left\lbrace x \triangleq t\right\rbrace $$
-\item[occur check] if $x \in vars(f(s_{0},\ldots,s_{k}))$ then $$G \cup \lbrace x = t(s_{0}, \ldots, s_{k})\rbrace \rightarrow \,\perp$$
+\item[occur check] if $x \in vars(f(s_{0},\ldots,s_{k}))$ then $$G \cup \lbrace x = f(s_{0}, \ldots, s_{k})\rbrace \rightarrow \,\perp$$
 \end{description}
 %without *occur checks*, generating a substitution $\theta$ is a *recursive enumerable* problem
 \end{frame}
 
 \begin{frame}[fragile]
 \frametitle{microkanren}
+Let \textit{solution}, \textit{substitution} and \textit{state} be synonyms; so, $\mu$-kanren
 \begin{itemize}
-\item a \textit{DSL} for relational programming written in Scheme
-\item \textit{purely functional} implementation of \textit{miniKanren}
-\item \textit{explicit streams} of satisfying states, \textit{goal-based} approach
-\item resolution by unification via \textit{structural induction}
-\item \textit{complete}, but \textit{unfair}, search strategy
+\item is a \textit{DSL} for relational programming written in Scheme
+\item is a \textit{purely functional} core of \textit{miniKanren}
+\item provides \textit{explicit streams} of satisfying states
+\item encodes math rel using a \textit{goal-based} approach
+\item uses resolution by unification via \textit{structural induction}
 \end{itemize}
-
+\vfill
 A \textit{goal} is an object that responds to the \verb|#onState:| selector, it
 receives a \textit{substitution} and returns a \verb|Chain| object of
-substitutions. 
+substitutions.
+\end{frame}
 
-\iffalse
-my contribution
-- _Pythonic_ [implementation][mkpy]: functional at the core, objective at the interface
-- generators subsume _countably_-satisfiable relations; complete, _fair_ [search][dovetail]
-- _The Reasoned Schemer_ fully tested via [Travis CI][travis]; moreover, [read the docs][rtfd]
-- case studies: Smullyan puzzles and combinatorics
-- tweaking HOL Light for _certified deductions_, [wip][klight]
-\fi
+\begin{frame}[fragile]
+\frametitle{Chain hierarchy}
+We model a (possibly infinite) space of objects with the
+\verb|Chain| hierarchy, which has \verb|Bottom| and \verb|Knot|
+as subclasses which denote the empty and a populated set, respectively.
+\vfill
+Although Pharo provides the \verb|Generator| class, we write our version of
+\textit{lazy} enumeration, which is purely functional (neither clever uses of
+\verb|thisContext| nor reentrant blocks).
+\vfill
+Encodes the two \textit{monadic} operations \verb|mplus| and \verb|bind|,
+which allow us to merge two \verb|Chain|s and to combine a \verb|Chain| obj
+to yield an extended \verb|Chain| obj, respectively.
+\vfill
+Dispatch over two strategies \verb|Sequential| and \verb|Interleaved| in
+order to \textit{enumerate} solution spaces.
 \end{frame}
 
 \begin{frame}[fragile]
@@ -170,7 +212,7 @@ Chain class>>bottom
 \end{minted}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Chain class>>item: anObj linker: aBlockClosure
-    ^ Knot new 
+    ^ Knot new
         item: anObj;
         linker: aBlockClosure;
         yourself
@@ -204,8 +246,8 @@ bind: aGoal interleaved: anInterleaved
 \end{minted}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 mplus: anotherChain interleaved: anInterleaved
-    ^ [ :_ | anotherChain value 
-                mplus: [ self next ] 
+    ^ [ :_ | anotherChain value
+                mplus: [ self next ]
                 interleaved: anInterleaved ] links: item
 \end{minted}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
@@ -244,19 +286,19 @@ collatz: o
 \end{minted}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 testNumbers
-    self assert: (self nats atMost: 10) mature equals: (0 to: 9).
+    self
+        assert: (self nats atMost: 10) mature
+        equals: (0 to: 9).
     self
         assert: (self fibs atMost: 10) mature
         equals: {0 . 1 . 1 . 2 . 3 . 5 . 8 . 13 . 21 . 34}.
     self
         assert: ((self collatz: 10) atMost: 10) mature
         equals: {10 . 5 . 16 . 8 . 4 . 2 . 1 . 4 . 2 . 1}.
-    self
-        assert: ((self gcd: 18 gcd: 32) atMost: 10) mature
-        equals: {18 . 32 . 18 . 14 . 4 . 2 . 2}
 \end{minted}
 \end{frame}
 
+\iffalse
 \begin{frame}[fragile]
 \frametitle{Chain combinators}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
@@ -290,24 +332,48 @@ Interleaved>>of: aStreamCombination
     ^ aStreamCombination interleavedStrategy: self
 \end{minted}
 \end{frame}
+\fi
 
 \begin{frame}[fragile]
-\frametitle{Goals}
+\frametitle{Goal hierarchy}
+\textit{microkanren} represents math rels using the \verb|Goal| hierarchy
+\begin{itemize}
+\item \verb|Succeed| it \textit{is} satisfied by \textit{each} sub;
+\item \verb|Fail| it \textit{is not} satisfied by \textit{any} sub;
+\item \verb|Or| it is satisfied if at least one obj it consumes can be satisfied;
+\item \verb|And| it is satisfied if both objs it consumes can be satisfied;
+\item \verb|Fresh| it introduces logic vars into the goal it combines;
+\item \verb|Unify| it is satisfied if the two objs it consumes can be unified.
+\end{itemize}
+\vfill
+Moreover, a substitution (aka, a set of assignments) is represented by a
+\verb|Dictionary| obj, wrapped by \verb|State| obj to count the number of logic
+vars introduced by \verb|Fresh| goals.
+\vfill
+Our substitutions are \textit{triangular} in the sense that if
+\begin{displaymath}
+\theta =  \lbrace x \mapsto y, y \mapsto z, z \mapsto 3 \rbrace
+\end{displaymath}
+then $x \mapsto 3$ is subsumed by $\theta$,
+this is implemented in \mintinline{smalltalk}|State>>#walk|.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{State}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Succeed>>onState: aState
-    ^ Chain with: aState
+State>>walk: anObj
+    | k |
+    k := anObj.
+    [ k := substitution at: k ifAbsent: [ ^ k ] ] repeat
 \end{minted}
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-Fail>>onState: aState
-    ^ Chain bottom
-\end{minted}
+A substitution is extended by
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 State>>at: aVar put: aValue
     | s |
     s := substitution copy.
     s
         at: aVar
-        ifPresent: [ :v | 
+        ifPresent: [ :v |
             aValue = v
                 ifFalse: [ UnificationError signal ] ]
         ifAbsent: [ s at: aVar put: aValue ].
@@ -319,7 +385,30 @@ State>>at: aVar put: aValue
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Goals}
+\frametitle{Goal subclass: \#[Succeed | Fail | Disj | Conj]}
+In parallel, \mintinline{smalltalk}{true} and \mintinline{smalltalk}{false} have logical brothers
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Succeed>>onState: aState
+    ^ Chain with: aState
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Fail>>onState: aState
+    ^ Chain bottom
+\end{minted}
+respectively; btw, for conjuction and disjunction we have
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Disj>>onState: aState
+    ^ interleaving of: ((either onState: aState)
+        mplus: [ or onState: aState ])
+\end{minted}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Conj>>onState: aState
+    ^ interleaving of: ((both onState: aState) bind: and)
+\end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Goal subclass: \#Fresh}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Fresh>>onState: aState
     ^ aState collectVars: (1 to: receiver numArgs) forFresh: self
@@ -347,8 +436,9 @@ BlockClosure>>fresh
 \end{minted}
 \end{frame}
 
+
 \begin{frame}[fragile]
-\frametitle{Goals}
+\frametitle{Goal subclass: \#Unify}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Object>>unifyWith: another
     ^ Goal unify: self with: another
@@ -356,7 +446,7 @@ Object>>unifyWith: another
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Unify>>onState: aState
     ^ [ | extended_state |
-        extended_state := Unifier new 
+        extended_state := Unifier new
                             unify: this with: that onState: aState.
         Goal succeed onState: extended_state ]
             on: UnificationError
@@ -367,15 +457,9 @@ Unifier>>unify: anObj with: anotherObj onState: aState
     | aWalkedObj anotherWalkedObj |
     aWalkedObj := aState walk: anObj.
     anotherWalkedObj := aState walk: anotherObj.
-    ^ aWalkedObj unifyWith: anotherWalkedObj 
-                 usingUnifier: self 
+    ^ aWalkedObj unifyWith: anotherWalkedObj
+                 usingUnifier: self
                  onState: aState
-\end{minted}
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>walk: anObj
-    | k |
-    k := anObj.
-    [ k := substitution at: k ifAbsent: [ ^ k ] ] repeat
 \end{minted}
 \end{frame}
 
@@ -395,51 +479,34 @@ unifyVar: aVar withObject: anObject onState: aState
 unifyVar: aVar withVar: anotherVar onState: aState
     ^ aVar = anotherVar
         ifTrue: [ aState ]
-        ifFalse: [ 
+        ifFalse: [
             self unifyVar: aVar withObject: anotherVar onState: aState ]
 \end{minted}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-unifyLinkedList: aCollection withLinkedList: anotherCollection onState: aState
-    ^ aCollection size = anotherCollection size
-        ifTrue: [ (aCollection zip: anotherCollection)
+unifyLinkedList: c withLinkedList: d onState: aState
+    ^ c size = d size
+        ifTrue: [ (c zip: d)
             inject: aState
-            into: [ :s :pair | self unify: pair key 
-                                    with: pair value 
-                                    onState: s ] ]
+            into: [ :s :p | self unify: p key with: p value onState: s ] ]
         ifFalse: [ UnificationError signal ]
 \end{minted}
 \end{frame}
 
 
 \begin{frame}[fragile]
-\frametitle{Unifier}
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-Disj>>onState: aState
-    ^ interleaving of: ((either onState: aState) 
-        mplus: [ or onState: aState ])
-\end{minted}
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-Conj>>onState: aState
-    ^ interleaving of: ((both onState: aState) bind: and)
-\end{minted}
+\frametitle{Goal subclass: \#Cond}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Cond>>if: ifGoal then: thenGoal
     clauses add: ifGoal -> thenGoal
 \end{minted}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Cond>>ifPure: aStrategy
-    if := [ :clause :otherwise | 
-            IfPure new
-                question: clause key 
-                    answer: clause value 
-                    otherwise: otherwise;
-                streamCombinationStrategy: aStrategy;
-                yourself ]
+    if := [ :c :o |
+        IfPure new
+            question: c key answer: c value otherwise: o;
+            streamCombinationStrategy: aStrategy;
+            yourself ]
 \end{minted}
-\end{frame}
-
-\begin{frame}[fragile]
-\frametitle{Unifier}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Cond>>e
     self ifPure: Sequential new
@@ -460,27 +527,28 @@ Cond>>onState: aState
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Unifier}
+\frametitle{Dyck paths}
 Let $\mathcal{D}$ be the set of \textit{Dyck paths} and let $\leadsto$ be the \textit{CFG}
 $$
-\leadsto = \varepsilon \,\left|\, ( \leadsto ) \leadsto \right.
+\leadsto \,= \varepsilon \,\left|\, ( \leadsto ) \leadsto \right.
 $$
-where $\varepsilon$ is the empty string; question: enumerate $\mathcal{D}$ using $\leadsto$.
+where $\varepsilon$ is the empty string; so, \textit{enumerate} $\mathcal{D}$
+\textit{using} $\leadsto$.
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 dycko: alpha
     ^ Goal cond e
         if: alpha nilo then: true asGoal;
-        else: [ :beta :gamma | 
-            (sexpTheory let: alpha 
-                        be: ($( cons: beta) 
-                        append: ($) cons: gamma)) & 
-            ([ self dycko: beta ] eta & 
+        else: [ :beta :gamma |
+            (sexpTheory let: alpha
+                        be: ($( cons: beta)
+                        append: ($) cons: gamma)) &
+            ([ self dycko: beta ] eta &
              [ self dycko: gamma ] eta) ] fresh
 \end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Unifier}
+\frametitle{Dyck paths}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 testDycko
     | g |
@@ -490,47 +558,47 @@ testDycko
     self
         assert: (g solutions atMost: 20)
         equals:
-            ({nil . '()' . '(())' . '()()' . '(()())' . '()(())' . 
-            '(())()' . '()()()' . '(()()())'.  '()(()())' . 
-            '(())(())' . '()()(())' . '((()))' . '()(())()' . 
-            '(())()()' . '()()()()'.  '(()()()())' . '()(()()())' . 
+            ({nil . '()' . '(())' . '()()' . '(()())' . '()(())' .
+            '(())()' . '()()()' . '(()()())'.  '()(()())' .
+            '(())(())' . '()()(())' . '((()))' . '()(())()' .
+            '(())()()' . '()()()()'.  '(()()()())' . '()(()()())' .
             '(())(()())' . '()()(()())'} collect: #asCons).
 
     "an invalid Dyck path"
-    g := [ :alpha | combTheory dycko: '(()(())()(' asCons ] fresh.  
+    g := [ :alpha | combTheory dycko: '(()(())()(' asCons ] fresh.
     self assert: g solutions all equals: {}
 \end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Unifier}
-Let $X$ and $Y$ be natural numbers in machine 
+\frametitle{McCulloch's machine and the MC lock puzzle}
+Let $X$ and $Y$ be natural numbers in machine
 \begin{displaymath}
 \mathcal{C} =  \left \lbrace{ \over 2X \stackrel{\circ}{\rightarrow} X} , {X \stackrel{\circ}{\rightarrow} Y \over 3X \stackrel{\circ}{\rightarrow} Y 2 Y} \right \rbrace
 \end{displaymath}
-question: does exist a number $\alpha$ such that $ \alpha \stackrel{\circ}{\rightarrow} \alpha $?
+question: \textit{does exist a number} $\alpha$ \textit{such that} $ \alpha \stackrel{\circ}{\rightarrow} \alpha $?
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 consumes: two_alpha produces: alpha machine: aMachine
     ^ two_alpha unifyWith: (2 cons: alpha)
 \end{minted}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 consumes: three_alpha produces: alpha_two_alpha machine: aMachine
-    ^ [ :beta :gamma | 
+    ^ [ :beta :gamma |
         (three_alpha unifyWith: (3 cons: beta)) &
-        ((self associate: gamma is: alpha_two_alpha machine: aMachine) & 
+        ((self associate: gamma is: alpha_two_alpha machine: aMachine) &
         (aMachine proves: beta relates: gamma)) ] fresh
 \end{minted}
 \end{frame}
 
 \begin{frame}[fragile]
-\frametitle{Unifier}
+\frametitle{McCulloch's machine and the MC lock puzzle}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 InductiveRelationsTheory>>proves: anObj relates: anotherObj
     | g |
     g := Goal cond i.
-    rules do: [ :r | g if: (r consumes: anObj 
-                              produces: anotherObj 
-                              machine: self) 
+    rules do: [ :r | g if: (r consumes: anObj
+                              produces: anotherObj
+                              machine: self)
                        then: true asGoal ].
     ^ g
 \end{minted}
@@ -548,6 +616,51 @@ testFirstMachine
         assert: ((g solutions atMost: 1) collect: #asLinkedList)
         equals: {#(5 4 6 4 2 5 4 6 4 2)}
 \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{End}
+A quick check:
+\\\\
+\begin{overprint}
+    \onslide<1>
+    \begin{tabular}{c}
+        $\displaystyle { \over 323 \stackrel{\circ}{\rightarrow}\quad } $\\
+    \end{tabular}
+    \onslide<2>
+    \begin{tabular}{c}
+        $\displaystyle { \over 23 \stackrel{\circ}{\rightarrow}\quad } $\\
+        $\displaystyle {   \over 323 \stackrel{\circ}{\rightarrow}\quad } $\\
+    \end{tabular}
+    \onslide<3>
+    \begin{tabular}{c}
+        $\displaystyle { \over 23 \stackrel{\circ}{\rightarrow} 3} $\\
+        $\displaystyle {   \over 323 \stackrel{\circ}{\rightarrow}\quad } $\\
+    \end{tabular}
+    \onslide<4>
+    \begin{tabular}{c}
+        $\displaystyle { \over 23 \stackrel{\circ}{\rightarrow} 3} $\\
+        $\displaystyle {   \over 323 \stackrel{\circ}{\rightarrow}323 } $\\
+    \end{tabular}
+    \onslide<5>
+    \begin{tabular}{c}
+        $\displaystyle { \over 23 \stackrel{\circ}{\rightarrow} 3} $\\
+        $\displaystyle {   \over 323 \stackrel{\circ}{\rightarrow}323 } $\\
+    \end{tabular}
+    \\\\\\\\
+    Future directions:
+    \begin{itemize}
+        \item unification is just a \textit{constraint}...
+        \item ...so add \textit{disequality}, \textit{type checks} and other constraints
+        \item \textit{impure} operators, such as Prolog's \textit{cut} (!)
+        \item automatic message dispatching for unifications
+    \end{itemize}
+\end{overprint}
+
+\end{frame}
+
+\begin{frame}{ }
+\Huge Thanks!
 \end{frame}
 
 \end{document}
