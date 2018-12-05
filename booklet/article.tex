@@ -1,0 +1,168 @@
+
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{inputenc}
+\usepackage{euler}
+\usepackage[T1]{fontenc}
+\usepackage{libertine}
+\usepackage{lipsum}
+\usepackage{fancyvrb}
+\usepackage{url}
+\usepackage[english]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{acronym}
+\usepackage{hyperref}
+\usepackage{tabu}
+\usepackage{rotating}
+\usepackage{mathdots}
+\usepackage{minted}
+\usepackage{units}
+\usepackage{float}
+\usepackage{bbold}
+\usepackage[sort&compress,square,comma,authoryear]{natbib}
+
+\fvset{fontsize=\normalsize}
+\setmonofont[Scale=0.8]{Menlo}
+\usemintedstyle{xcode}
+\hypersetup{colorlinks=false, citecolor=Violet}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\author{Massimo Nocentini}
+\title{Relational programming in Smalltalk}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This booklet is an extended description of $mu$Kanren, a relational interpreter
+formerly implemented in Scheme and ported in Smalltalk for the sake of
+understanding and, of course, fun. It enjoy simplicity and elegance despite the
+complex nature of logic systems; moreover, using an uniform but powerful
+language such as Smalltalk it is possible to appreciate and benefit from them
+all.
+\end{abstract}
+
+\section{Introduction}
+
+I believe \textit{microkanren} is, first of all, an \textit{educational beast},
+concerning unification, lazy streams, backtracking and optimization; the
+abstract definition was shown in \citep{Hemann:muKanren}.
+I repeat the exercise of writing it in \citep{Nocentini:kanrens}:
+\begin{itemize}
+\item Python, native \verb|generator|s :) limits on recursive calls :(
+\item OCaml, algebraic datatypes :) hard to extend :(
+\item Smalltalk, simple, fast and clear :) many dispatching msgs :/
+\end{itemize}
+
+\begin{example}
+In math a relation $P$ is usually characterized by
+\begin{displaymath}
+\forall a,b,c.\,P(a,b,c) \leftrightarrow a + b = c \quad\text{entails}\quad P(1,2,3)
+\end{displaymath}
+can be expressed using either the \textit{imperative style}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+a := 1.  b := 2.  c := a + b.  Object assert: [ c = 3 ]
+\end{minted}
+or the \textit{functional style}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object assert: [ ([ :a :b | a + b ] value: 1 value: 2) = 3 ]
+\end{minted}
+or, finally, the \textit{declarative style}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object assert: [ [ :a :b :c | a + b = c ] value: 1 value: 2 value: 3 ]
+\end{minted}
+which closely resembles the mathematical statement.
+\end{example}
+
+We quickly review some mathematical backgrounds underlying logic systems;
+in particular deductions are performed according to \emph{resolutions}
+
+\begin{description}
+
+\item[by refutation] Let $\alpha$ be a sentence in \emph{conjunctive normal
+form} (CNF for short) and $M(\alpha)$ the set of models that satisfy $\alpha$
+-- recall that a \emph{model} is a set of assignments of values to free
+variables in $\alpha$ that make the whole sentence true.  We say that, on one
+hand, $\alpha$ is \textit{valid} if it is true in \textit{all} models; on the
+other hand, $\alpha$ is \textit{satisfiable} if it is true in \textit{some}
+model.
+
+Let $\models$ and $\Rightarrow$ denote the \textit{entail} and \textit{imply}
+relations, respectively; so,
+\begin{displaymath}
+\begin{split}
+\alpha \models \beta \leftrightarrow
+M(\alpha) \subseteq M(\beta) \leftrightarrow
+(\alpha \Rightarrow \beta) \text{ is valid } \leftrightarrow
+\neg(\neg\alpha \vee \beta) \text{ is unsatisfiable.}
+\end{split}
+\end{displaymath}
+Therefore, to prove a sentence $\alpha$ reduces to prove
+$\neg\alpha\models\perp$, where $\perp$ denotes the empty clause $()$, namely
+\textit{falsehood}, which can be deduced by the \textit{resolution rule}
+introduced in \citep{Robinson:1965:MLB:321250.321253}; if $l_{i}$ and $m_{r}$
+bound to the same variable then
+\begin{displaymath}
+{\left(l_{0}, \ldots, l_{i}, \ldots, l_{j-1}\right) \quad \left(m_{0}, \ldots, m_{r},\ldots, m_{k-1}\right) \quad l_{i} = \neg m_{r}
+\over
+\left(l_{0},\ldots, l_{i-1},l_{i+1}, \ldots,l_{j-1}, m_{0},\ldots, m_{r-1},m_{r+1},\ldots, m_{k-1}\right)}
+\end{displaymath}
+where $\left(l_{0},\ldots, l_{i}, \ldots, l_{j-1}\right) = l_{0}\vee \ldots
+\vee l_{i} \vee \ldots \vee l_{j-1}$, for all $l_{q}, m_{w} \in\lbrace 0,1\rbrace$.
+This rule is a \textit{complete} inference algorithm, namely it enumerates
+\emph{all} deductions for a given sentence, although requiring
+\emph{exponential} time; for the sake of concreteness, the \textit{DPLL}
+algorithm \citep{Davis:1962:MPT:368273.368557}
+is a recursive, depth-first enumeration of models using the
+resolution rule paired with heuristics \textit{early termination},
+\textit{pure symbol} and \textit{unit clause} to speed up.
+
+\item[by unification] is a the process introduced in \citep{robinson_unif} and
+improved by \citep{Martelli:1982:EUA:357162.357169}; it consists of solving
+\textit{equations among symbolic expressions}. A \textit{solution} is denoted
+as a \textit{substitution} $\theta$, namely a mapping that assigns a symbolic
+values to free variables; let $G$ be a set of equations, unification proceeds
+according to the following rules:
+\begin{description}
+\item[delete] $G \cup \lbrace t = t \rbrace \rightarrow G$
+\item[decompose] $G \cup \lbrace f(s_{0}, \ldots, s_{k}) = f(t_{0}, \ldots, t_{k})\rbrace$ entails
+$$G \cup \lbrace s_{0}=t_{0},\ldots, s_{k}=t_{k} \rbrace$$
+\item[conflict] if $f\neq g \vee k\neq m$ then $$G \cup \lbrace f(s_{0}, \ldots, s_{k}) = g(t_{0}, \ldots, t_{m})\rbrace \rightarrow \,\perp$$
+\item[eliminate] if $x \not\in vars(t)$ and $x \in vars(G)$ then $$G \cup \lbrace x = t\rbrace \rightarrow G\lbrace x \mapsto t\rbrace \cup \left\lbrace x \triangleq t\right\rbrace $$
+\item[occur check] if $x \in vars(f(s_{0},\ldots,s_{k}))$ then $$G \cup \lbrace x = f(s_{0}, \ldots, s_{k})\rbrace \rightarrow \,\perp;$$
+without it, generating a $\theta$ is a
+\emph{recursive enumerable} problem.
+\end{description}
+
+\end{description}
+
+\begin{example}
+Let $x$ and $y$ be free variables, the set
+$$\lbrace cons(x,cons(x,nil)) = cons(2,y)\rbrace$$
+has solution $\theta = \lbrace x \mapsto 2, y \mapsto cons(2,nil) \rbrace$;
+on the contrary, the set
+$$ \lbrace y = cons(2,y) \rbrace $$
+has no \textit{finite} solution, nonetheless
+$$\theta = \lbrace y \mapsto cons(2,cons(2,cons(2,...))) \rbrace$$
+is a solution upto \textit{bisimulation}
+\citep{10.1007/BFb0017309, DBLP:books/daglib/0067019}.
+\end{example}
+
+
+\section{Conclusions}
+
+A quine generator is described in \citep{Byrd:2012:MLU:2661103.2661105}.
+
+\bibliographystyle{plainnat}
+\bibliography{biblio}
+\end{document}
