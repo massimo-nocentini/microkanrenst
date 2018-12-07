@@ -44,19 +44,43 @@
 \maketitle
 
 \begin{abstract}
-This booklet is an extended description of $mu$Kanren, a relational interpreter
-formerly implemented in Scheme and ported in Smalltalk for the sake of
-understanding and, of course, fun. It enjoy simplicity and elegance despite the
-complex nature of logic systems; moreover, using an uniform but powerful
-language such as Smalltalk it is possible to appreciate and benefit from them
-all.
+This booklet is an extended description of $\mu$Kanren, a relational
+interpreter formerly implemented in Scheme and ported in Smalltalk for the sake
+of understanding and, of course, fun. It enjoy simplicity and elegance despite
+the complex nature of logic systems; moreover, using an uniform but powerful
+language such as Smalltalk it is possible to appreciate and benefit from both
+of them.
 \end{abstract}
 
 \section{Introduction}
 
+This document extends the presentation of $\mu$Kanren shown at the last ESUG
+conference \citep{ESUG2018} in two ways: (i)~it recaps existing ``literature''
+on the subject and (ii)~it describes in more details our implementation coded
+in Smalltalk.
+
+It is a waste of time to repeat ourself on $\mu$Kanren's definition; on the
+contrary, we believe interesting to look up and to watch over the many
+implementation it has inspired since its seminal paper \citep{Hemann:muKanren}
+and how programmers stretch the canonical implementation to take advantage of
+their favorite programming language's features.
+
+Certainly the book \citep{Friedman:Reasoned:Schemer} is the main reference
+written in the same style of the other \emph{little books} of which Dan
+Friedman coauthors them all; moreover, Byrd's dissertation \citep{Byrd:PhD}
+shows advanced stuff and techniques while the repository
+\citep{byrd:minikanren:repo} -- updated regularly by Byrd himself -- keeps
+pointers to implementations, articles and presentations. All these references
+uses the Scheme programming language, $\mu$Kanren is \emph{purely functional}
+therefore any language that has the same power of the $\lambda$-calculus is a
+candidate for implementing it, Scheme in particular; in parallel,
+\citep{byrd:minikanren} has the same nature but uses Scheme macrology and in
+some aspect it requires little effort to port to other languages that haven't
+macros.
+
 I believe \textit{microkanren} is, first of all, an \textit{educational beast},
 concerning unification, lazy streams, backtracking and optimization; the
-abstract definition was shown in \citep{Hemann:muKanren}.
+abstract definition was shown in 
 I repeat the exercise of writing it in \citep{Nocentini:kanrens}:
 \begin{itemize}
 \item Python, native \verb|generator|s :) limits on recursive calls :(
