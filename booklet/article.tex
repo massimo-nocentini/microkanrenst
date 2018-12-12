@@ -78,22 +78,51 @@ candidate for implementing it, Scheme in particular; in parallel,
 some aspect it requires little effort to port to other languages that haven't
 macros.
 
-I believe \textit{microkanren} is, first of all, an \textit{educational beast},
-concerning unification, lazy streams, backtracking and optimization; the
-abstract definition was shown in 
-I repeat the exercise of writing it in \citep{Nocentini:kanrens}:
+Another implementation using the \emph{Clojure} dialect of Lisp is
+\citep{clojure:core.logic} which targets the JVM an provides constraints and
+nominal logic programming; on the other hand, \citep{sullivan:microkanrenhs}
+is a clean and concise implementation using Haskell, while many others simpler
+versions can be found, written for the sake of understanding and, ultimately,
+for fun.
+
+Finally, your humble authors believe that $\mu$Kanren is a sophisticated
+\textit{educational machine} because it concerns and mix together unification,
+lazy streams, backtracking and optimization techniques; moreover, it allows
+programmers to write their own version according to their personal taste and
+style, ranging from implementations pretty imperative to ones built over
+categories.  We repeat the exercise of writing it in \citep{Nocentini:kanrens}
+targeting different languages, in particular
 \begin{itemize}
-\item Python, native \verb|generator|s :) limits on recursive calls :(
-\item OCaml, algebraic datatypes :) hard to extend :(
-\item Smalltalk, simple, fast and clear :) many dispatching msgs :/
+\item using \emph{Python} we take advantage of native \verb|generator|s objects
+and we provide a \emph{fair} enumeration strategy that the canonical one
+hasn't; on the contrary, we experience computational limits because of
+\texttt{RecursionError} exceptions. This implementation is complete and
+parallels the one shown in the reference book, accompanied by a unit test suite
+that covers \emph{all} questions explained in the book and some new
+applications such as (i)~finding fixed points of a set of inference rules and
+enumeration of classes of combinatorial objects.
+\item using \emph{OCaml} the syntax of the language can be cleanly defined by
+algebraic datatypes and the type system helps in the design of the required
+operators.  While object-oriented languages make extensibility a relative
+simple task, this implementation is harder unless we can make changes to basic
+types, at least for what concerns the central \emph{unification} procedure.
+All of this is preparatory to modify the tactics mechanism of the \emph{HOL
+Light} theorem prover in order to introduce the relational paradigm in that
+environment.
 \end{itemize}
+The current work describe a Smalltalk implementation of the basic system
+with the aim to learn and experiment with a pure object environment, such as 
+Pharo and Squeak. Starting small, the next example we show three different
+kinds to perform an identity among \verb|SmallInteger| objects:
 
 \begin{example}
-In math a relation $P$ is usually characterized by
+In math a relation $P$ is usually characterized by a statement such as
 \begin{displaymath}
-\forall a,b,c.\,P(a,b,c) \leftrightarrow a + b = c \quad\text{entails}\quad P(1,2,3)
+\forall a,b,c.\,P(a,b,c) \leftrightarrow a + b = c \quad\text{from which}\quad
+P(1,2,3) \quad\text{can be proved.}
 \end{displaymath}
-can be expressed using either the \textit{imperative style}
+The same check can be expressed in Smalltalk using either the
+\textit{imperative style}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 a := 1.  b := 2.  c := a + b.  Object assert: [ c = 3 ]
 \end{minted}
@@ -107,6 +136,8 @@ Object assert: [ [ :a :b :c | a + b = c ] value: 1 value: 2 value: 3 ]
 \end{minted}
 which closely resembles the mathematical statement.
 \end{example}
+
+\section{Resolution methods}
 
 We quickly review some mathematical backgrounds underlying logic systems;
 in particular deductions are performed according to \emph{resolutions}
