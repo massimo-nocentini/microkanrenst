@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "Goal",
 	"category" : "MicroKanren-core",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"this",
-		"that"
-	],
+		"that" ],
 	"name" : "Unify",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Goal",
+	"type" : "normal" }

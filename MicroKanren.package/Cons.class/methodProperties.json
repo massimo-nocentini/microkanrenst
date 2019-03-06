@@ -1,25 +1,22 @@
 {
-	"instance" : {
-		"cdr" : "MassimoNocentini 6/8/2017 12:05",
-		"=" : "MassimoNocentini 6/8/2017 12:40",
-		"cdr:" : "MassimoNocentini 6/8/2017 11:56",
-		"car" : "MassimoNocentini 6/8/2017 12:05",
-		"walkStarUsingWalker:onState:" : "MassimoNocentini 6/8/2017 12:14",
-		"printOn:" : "MassimoNocentini 6/9/2017 16:48",
-		"unifyWithCons:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 12:02",
-		"hash" : "MassimoNocentini 6/8/2017 12:40",
-		"unifyWithLinkedList:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 14:02",
-		"asLinkedList" : "MassimoNocentini 6/9/2017 17:10",
-		"car:" : "MassimoNocentini 6/8/2017 11:55",
-		"reifyUsing:onState:" : "MassimoNocentini 6/8/2017 12:16",
-		"unifyWith:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 12:01"
-	},
 	"class" : {
+		"car:cdr:" : "MassimoNocentini 6/8/2017 15:29",
+		"fromByteSymbol:" : "MassimoNocentini 6/8/2017 21:07",
+		"fromObject:" : "MassimoNocentini 6/8/2017 21:05",
 		"fromObject:lastCdr:" : "MassimoNocentini 6/8/2017 21:00",
 		"fromSequenceableCollection:" : "MassimoNocentini 6/8/2017 21:02",
-		"fromSequenceableCollection:lastCdr:" : "MassimoNocentini 6/8/2017 21:10",
-		"fromObject:" : "MassimoNocentini 6/8/2017 21:05",
-		"car:cdr:" : "MassimoNocentini 6/8/2017 15:29",
-		"fromByteSymbol:" : "MassimoNocentini 6/8/2017 21:07"
-	}
-}
+		"fromSequenceableCollection:lastCdr:" : "MassimoNocentini 6/8/2017 21:10" },
+	"instance" : {
+		"=" : "MassimoNocentini 6/8/2017 12:40",
+		"asLinkedList" : "MassimoNocentini 6/9/2017 17:10",
+		"car" : "MassimoNocentini 6/8/2017 12:05",
+		"car:" : "MassimoNocentini 6/8/2017 11:55",
+		"cdr" : "MassimoNocentini 6/8/2017 12:05",
+		"cdr:" : "MassimoNocentini 6/8/2017 11:56",
+		"hash" : "MassimoNocentini 6/8/2017 12:40",
+		"printOn:" : "MassimoNocentini 6/9/2017 16:48",
+		"reifyUsing:onState:" : "MassimoNocentini 6/8/2017 12:16",
+		"unifyWith:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 12:01",
+		"unifyWithCons:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 12:02",
+		"unifyWithLinkedList:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 14:02",
+		"walkStarUsingWalker:onState:" : "MassimoNocentini 6/8/2017 12:14" } }

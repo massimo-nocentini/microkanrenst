@@ -1,7 +1,6 @@
 {
+	"class" : {
+		 },
 	"instance" : {
 		"associate:is:machine:" : "MassimoNocentini 6/10/2017 12:06",
-		"consumes:produces:machine:" : "MassimoNocentini 6/10/2017 13:53"
-	},
-	"class" : { }
-}
+		"consumes:produces:machine:" : "MassimoNocentini 6/10/2017 13:53" } }

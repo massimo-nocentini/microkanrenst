@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "StreamCombination",
 	"category" : "MicroKanren-core",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"left",
-		"right"
-	],
+		"right" ],
 	"name" : "MPlus",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "StreamCombination",
+	"type" : "normal" }

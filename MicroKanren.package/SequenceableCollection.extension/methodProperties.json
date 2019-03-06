@@ -1,8 +1,8 @@
 {
+	"class" : {
+		 },
 	"instance" : {
-		"cond" : " 6/8/2017 11:25:29",
+		"asCons" : "MassimoNocentini 6/8/2017 12:24",
 		"asCons:" : "MassimoNocentini 6/8/2017 21:00",
-		"asCons" : "MassimoNocentini 6/8/2017 12:24"
-	},
-	"class" : { }
-}
+		"cond" : "6/8/2017 11:25:29",
+		"reduceRight:" : "MN 10/16/2018 16:30" } }

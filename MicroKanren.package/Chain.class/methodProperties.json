@@ -1,19 +1,16 @@
 {
-	"instance" : {
-		"mplus:interleaved:" : " 6/8/2017 11:25:29",
-		"bind:sequential:" : " 6/8/2017 11:25:29",
-		"mplus:" : " 6/8/2017 11:25:29",
-		"next" : " 6/8/2017 11:25:29",
-		"atMost:" : " 6/8/2017 11:25:29",
-		"mature" : "MassimoNocentini 6/9/2017 10:37",
-		"bind:" : " 6/8/2017 11:25:29",
-		"bind:interleaved:" : "MassimoNocentini 6/9/2017 10:27",
-		"mplus:sequential:" : " 6/8/2017 11:25:29"
-	},
 	"class" : {
-		"with:" : " 6/8/2017 11:25:29",
-		"bottom" : " 6/8/2017 11:25:29",
-		"item:linker:" : " 6/8/2017 11:25:29",
-		"repeat:" : " 6/8/2017 11:25:29"
-	}
-}
+		"bottom" : "6/8/2017 11:25:29",
+		"item:linker:" : "6/8/2017 11:25:29",
+		"repeat:" : "6/8/2017 11:25:29",
+		"with:" : "6/8/2017 11:25:29" },
+	"instance" : {
+		"atMost:" : "6/8/2017 11:25:29",
+		"bind:" : "6/8/2017 11:25:29",
+		"bind:interleaved:" : "MassimoNocentini 6/9/2017 10:27",
+		"bind:sequential:" : "6/8/2017 11:25:29",
+		"mature" : "MassimoNocentini 6/9/2017 10:37",
+		"mplus:" : "6/8/2017 11:25:29",
+		"mplus:interleaved:" : "6/8/2017 11:25:29",
+		"mplus:sequential:" : "6/8/2017 11:25:29",
+		"next" : "6/8/2017 11:25:29" } }

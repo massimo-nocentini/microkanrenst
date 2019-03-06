@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "Goal",
 	"category" : "MicroKanren-core",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"receiver",
-		"vars"
-	],
+		"vars" ],
 	"name" : "Fresh",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Goal",
+	"type" : "normal" }

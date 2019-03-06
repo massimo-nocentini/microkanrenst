@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "InductionRule",
 	"category" : "MicroKanren-theories",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "McCullochAssociateRule",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "InductionRule",
+	"type" : "normal" }

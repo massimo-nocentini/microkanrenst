@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "Goal",
 	"category" : "MicroKanren-core",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"goal"
-	],
+		"goal" ],
 	"name" : "Eta",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Goal",
+	"type" : "normal" }

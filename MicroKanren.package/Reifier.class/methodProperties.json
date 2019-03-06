@@ -1,11 +1,10 @@
 {
+	"class" : {
+		 },
 	"instance" : {
+		"reify:onState:" : "6/8/2017 11:25:29",
+		"reifyArray:onState:" : "6/8/2017 11:25:29",
 		"reifyCons:onState:" : "MassimoNocentini 6/8/2017 12:20",
-		"reifyVar:onState:" : " 6/8/2017 11:25:29",
-		"reifyLinkedList:onState:" : " 6/8/2017 11:25:29",
-		"reifyArray:onState:" : " 6/8/2017 11:25:29",
-		"reify:onState:" : " 6/8/2017 11:25:29",
-		"reifyObject:onState:" : " 6/8/2017 11:25:29"
-	},
-	"class" : { }
-}
+		"reifyLinkedList:onState:" : "6/8/2017 11:25:29",
+		"reifyObject:onState:" : "6/8/2017 11:25:29",
+		"reifyVar:onState:" : "6/8/2017 11:25:29" } }

@@ -1,11 +1,10 @@
 {
+	"class" : {
+		 },
 	"instance" : {
-		"mplus:interleaved:" : "MassimoNocentini 6/9/2017 16:22",
-		"bind:sequential:" : " 6/8/2017 11:25:29",
-		"atMost:" : " 6/8/2017 11:25:29",
-		"mature" : "MassimoNocentini 6/9/2017 10:37",
+		"atMost:" : "6/8/2017 11:25:29",
 		"bind:interleaved:" : "MassimoNocentini 6/9/2017 10:29",
-		"mplus:sequential:" : "MassimoNocentini 6/9/2017 16:22"
-	},
-	"class" : { }
-}
+		"bind:sequential:" : "6/8/2017 11:25:29",
+		"mature" : "MassimoNocentini 6/9/2017 10:37",
+		"mplus:interleaved:" : "MassimoNocentini 6/9/2017 16:22",
+		"mplus:sequential:" : "MassimoNocentini 6/9/2017 16:22" } }

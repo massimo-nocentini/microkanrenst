@@ -1,14 +1,15 @@
 {
-	"commentStamp" : "",
-	"super" : "Chain",
 	"category" : "MicroKanren-chain",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
 		"item",
-		"linker"
-	],
+		"linker" ],
 	"name" : "Knot",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Chain",
+	"type" : "normal" }

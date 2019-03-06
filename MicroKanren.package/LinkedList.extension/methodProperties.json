@@ -1,17 +1,16 @@
 {
+	"class" : {
+		 },
 	"instance" : {
-		"zip:" : " 6/8/2017 11:25:29",
+		"," : "6/8/2017 11:25:29",
+		"allButFirst" : "6/8/2017 11:25:29",
+		"bind:" : "6/8/2017 11:25:29",
+		"car" : "6/8/2017 11:25:29",
 		"cdr" : "AutoDeprecationRefactoring 6/8/2017 11:25",
-		"," : " 6/8/2017 11:25:29",
-		"allButFirst" : " 6/8/2017 11:25:29",
-		"walkStarUsingWalker:onState:" : " 6/8/2017 11:25:29",
-		"car" : " 6/8/2017 11:25:29",
-		"zip:with:" : " 6/8/2017 11:25:29",
-		"bind:" : " 6/8/2017 11:25:29",
-		"unifyWithLinkedList:usingUnifier:onState:" : " 6/8/2017 11:25:29",
-		"reifyUsing:onState:" : " 6/8/2017 11:25:29",
-		"mplus:" : " 6/8/2017 11:25:29",
-		"unifyWith:usingUnifier:onState:" : " 6/8/2017 11:25:29"
-	},
-	"class" : { }
-}
+		"mplus:" : "6/8/2017 11:25:29",
+		"reifyUsing:onState:" : "6/8/2017 11:25:29",
+		"unifyWith:usingUnifier:onState:" : "6/8/2017 11:25:29",
+		"unifyWithLinkedList:usingUnifier:onState:" : "6/8/2017 11:25:29",
+		"walkStarUsingWalker:onState:" : "6/8/2017 11:25:29",
+		"zip:" : "6/8/2017 11:25:29",
+		"zip:with:" : "6/8/2017 11:25:29" } }

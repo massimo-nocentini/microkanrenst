@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "Var",
 	"category" : "MicroKanren-core",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "ReifiedVar",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "Var",
+	"type" : "normal" }

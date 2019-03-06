@@ -1,7 +1,6 @@
 {
+	"class" : {
+		 },
 	"instance" : {
-		"reifyUsing:onState:" : " 6/8/2017 11:25:29",
-		"walkStarUsingWalker:onState:" : " 6/8/2017 11:25:29"
-	},
-	"class" : { }
-}
+		"reifyUsing:onState:" : "6/8/2017 11:25:29",
+		"walkStarUsingWalker:onState:" : "6/8/2017 11:25:29" } }

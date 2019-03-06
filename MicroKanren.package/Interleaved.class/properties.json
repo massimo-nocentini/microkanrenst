@@ -1,11 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "StreamCombinationStrategy",
 	"category" : "MicroKanren-core",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
-	"instvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
 	"name" : "Interleaved",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "StreamCombinationStrategy",
+	"type" : "normal" }

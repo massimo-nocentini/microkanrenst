@@ -1,6 +1,7 @@
 helpers
 gcd: m gcd: n
-	^ [ :_ | 
+	^ [ :useless
+	 | 
 	n isZero
 		ifTrue: [ Chain with: m ]
-		ifFalse: [ self gcd: n gcd: m % n ] ] links: m
+		ifFalse: [ self gcd: n gcd: m \\ n ] ] links: m

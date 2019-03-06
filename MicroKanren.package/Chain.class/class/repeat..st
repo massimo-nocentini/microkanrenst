@@ -1,3 +1,3 @@
 creating
 repeat: anObj
-	^ [ :_ | self repeat: anObj ] links: anObj
+	^ [ :useless | self repeat: anObj ] links: anObj

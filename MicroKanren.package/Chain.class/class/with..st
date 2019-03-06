@@ -1,3 +1,3 @@
 creating
 with: anObj
-	^ [ :_ | Chain bottom ] links: anObj
+	^ [ :useless | Chain bottom ] links: anObj

@@ -1,13 +1,14 @@
 {
-	"commentStamp" : "",
-	"super" : "If",
 	"category" : "MicroKanren-core",
-	"classinstvars" : [ ],
-	"pools" : [ ],
-	"classvars" : [ ],
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
 	"instvars" : [
-		"streamCombinationStrategy"
-	],
+		"streamCombinationStrategy" ],
 	"name" : "IfPure",
-	"type" : "normal"
-}
+	"pools" : [
+		 ],
+	"super" : "If",
+	"type" : "normal" }
