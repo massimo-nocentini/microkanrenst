@@ -36,6 +36,8 @@
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 
+\newcommand{\stcode}[1]{\begin{minted}[fontsize=\footnotesize]{smalltalk} #1 \end{minted}}
+
 \author{Massimo Nocentini}
 \title{Relational programming in Smalltalk}
 
@@ -52,7 +54,7 @@ language such as Smalltalk it is possible to appreciate and benefit from both
 of them.
 \end{abstract}
 
-\section{Introduction}
+\section*{Introduction}
 
 This document extends the presentation of $\mu$Kanren shown at the last ESUG
 conference \citep{ESUG2018} in two ways: (i)~it recaps existing ``literature''
@@ -137,14 +139,91 @@ Object assert: [ [ :a :b :c | a + b = c ] value: 1 value: 2 value: 3 ]
 which closely resembles the mathematical statement.
 \end{example}
 
-\section{Resolution methods}
+\tableofcontents
+
+\section{Bootstrapping $\mu$Kanren}
+
+We believe that an unusual development process can be done in Smalltalk and it
+is the one that had driven and currently drives the present description.
+Instead of creating classes first, we start by looking at some \textit{existing
+object} that can be a good candidate to take into account our messages; in
+sight of this approach, we give the fundamentals of $\mu$Kanren -- more
+generally, for a class of logic programming languages -- starting from the two
+nice boolean objects. 
+    
+\subsection{\texttt{Succeed} and \texttt{Fail} classes}    
+
+Let us consider the object \Verb|false| whose responsibility is to represent
+\textit{falsehood}, hence it should be a good candidate to provide us something
+related to this from the \textit{relational} point of view,
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+false asGoal
+\end{minted}
+namely, \Verb|false| can build for us an object that represents a relation that
+cannot be satisfied at all responding to the message selector \Verb|asGoal| --
+don't be scared by multiple names, we freely interchange the terms
+\textit{goal} and \textit{relation} postponing to later sections the
+description of their technical difference. Moreover, let us 
+assume that the infrastructure that actually build results is given and implemented
+by the \textit{oracle block} \texttt{B := [:g | g solutions all]}, we write our first test case:
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+GoalTest>>#testFail
+    self 
+        assert: false asGoal solutions all 
+        equals: {}
+\end{minted}
+Now we get within the \Verb|False| class to add the implementation of the message
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+False>>#asGoal
+    ^ Goal fail
+\end{minted}
+and of the message
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Goal>>#fail
+    ^ Fail new
+\end{minted}
+such that to say that \verb|Fail| denotes the impossibility to satisfy a relation
+is the same to code the message
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Fail>>#onState: aState 
+    ^ Chain bottom
+\end{minted}
+which will be used within the message \Verb|solutions| sent in the oracle block
+\Verb|B| -- a lot remains to be explained, such as the \Verb|Chain| class and
+streams in particular, all in what follows.
+
+In parallel, we reproduce for the object \Verb|true| the steps did for
+the object \Verb|false|; first,
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+GoalTest>>#testSucceed
+    self 
+        assert: true asGoal solutions all 
+        equals: {Var tautology}
+\end{minted}
+second,
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+True>>#asGoal
+    ^ Goal succeed
+\end{minted}
+third,
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Goal>>#succeed
+    ^ Succeed new
+\end{minted}
+fourth,
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Succeed>>#onState: aState 
+    ^ Chain with: aState
+\end{minted}
+
+\section{Theoretical backgrounds}
 
 We quickly review some mathematical backgrounds underlying logic systems;
 in particular deductions are performed according to \emph{resolutions}
 
-\begin{description}
+\subsection{Resolution by refutation} 
 
-\item[by refutation] Let $\alpha$ be a sentence in \emph{conjunctive normal
+Let $\alpha$ be a sentence in \emph{conjunctive normal
 form} (CNF for short) and $M(\alpha)$ the set of models that satisfy $\alpha$
 -- recall that a \emph{model} is a set of assignments of values to free
 variables in $\alpha$ that make the whole sentence true.  We say that, on one
@@ -182,7 +261,9 @@ is a recursive, depth-first enumeration of models using the
 resolution rule paired with heuristics \textit{early termination},
 \textit{pure symbol} and \textit{unit clause} to speed up.
 
-\item[by unification] is a the process introduced in \citep{robinson_unif} and
+\subsection{Resolution by unification} 
+
+This method was introduced in \citep{robinson_unif} and
 improved by \citep{Martelli:1982:EUA:357162.357169}; it consists of solving
 \textit{equations among symbolic expressions}. A \textit{solution} is denoted
 as a \textit{substitution} $\theta$, namely a mapping that assigns a symbolic
@@ -199,8 +280,6 @@ without it, generating a $\theta$ is a
 \emph{recursive enumerable} problem.
 \end{description}
 
-\end{description}
-
 \begin{example}
 Let $x$ and $y$ be free variables, the set
 $$\lbrace cons(x,cons(x,nil)) = cons(2,y)\rbrace$$
@@ -212,11 +291,10 @@ $$\theta = \lbrace y \mapsto cons(2,cons(2,cons(2,...))) \rbrace$$
 is a solution upto \textit{bisimulation}
 \citep{10.1007/BFb0017309, DBLP:books/daglib/0067019}.
 \end{example}
-
-
 \section{Conclusions}
 
-A quine generator is described in \citep{Byrd:2012:MLU:2661103.2661105}.
+A quine generator is described in \citep{Byrd:2012:MLU:2661103.2661105} and
+we aim to reproduce it.
 
 \bibliographystyle{plainnat}
 \bibliography{biblio}

@@ -4,6 +4,7 @@ article.blg
 article.log
 article.out
 article.pdf
-
+article.toc
+*.swp
 _minted-article/
 
