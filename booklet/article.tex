@@ -48,7 +48,7 @@
 \begin{abstract}
 This booklet is an extended description of $\mu$Kanren, a relational
 interpreter formerly implemented in Scheme and ported in Smalltalk for the sake
-of understanding and, of course, fun. It enjoy simplicity and elegance despite
+of understanding and, of course, fun. It enjoys simplicity and elegance despite
 the complex nature of logic systems; moreover, using an uniform but powerful
 language such as Smalltalk it is possible to appreciate and benefit from both
 of them.
@@ -63,32 +63,32 @@ in Smalltalk.
 
 It is a waste of time to repeat ourself on $\mu$Kanren's definition; on the
 contrary, we believe interesting to look up and to watch over the many
-implementation it has inspired since its seminal paper \citep{Hemann:muKanren}
+implementations it has inspired since its seminal paper \citep{Hemann:muKanren}
 and how programmers stretch the canonical implementation to take advantage of
 their favorite programming language's features.
 
 Certainly the book \citep{Friedman:Reasoned:Schemer} is the main reference
 written in the same style of the other \emph{little books} of which Dan
 Friedman coauthors them all; moreover, Byrd's dissertation \citep{Byrd:PhD}
-shows advanced stuff and techniques while the repository
-\citep{byrd:minikanren:repo} -- updated regularly by Byrd himself -- keeps
+shows advanced stuffs and techniques while the repository
+\url{http://minikanren.org/} -- updated regularly by Byrd himself -- keeps
 pointers to implementations, articles and presentations. All these references
-uses the Scheme programming language, $\mu$Kanren is \emph{purely functional}
+use the Scheme programming language, $\mu$Kanren is \emph{purely functional}
 therefore any language that has the same power of the $\lambda$-calculus is a
-candidate for implementing it, Scheme in particular; in parallel,
-\citep{byrd:minikanren} has the same nature but uses Scheme macrology and in
-some aspect it requires little effort to port to other languages that haven't
-macros.
+candidate for implementing it, Scheme in particular; in parallel, the
+implementation with symbolic constraints has the same nature but uses Scheme
+macrology and in some aspect it requires little effort to port to other
+languages that haven't macros.
 
 Another implementation using the \emph{Clojure} dialect of Lisp is
-\citep{clojure:core.logic} which targets the JVM an provides constraints and
+\citep{clojure:core.logic} which targets the JVM and provides constraints and
 nominal logic programming; on the other hand, \citep{sullivan:microkanrenhs}
 is a clean and concise implementation using Haskell, while many others simpler
 versions can be found, written for the sake of understanding and, ultimately,
 for fun.
 
 Finally, your humble authors believe that $\mu$Kanren is a sophisticated
-\textit{educational machine} because it concerns and mix together unification,
+\textit{educational machine} because it concerns and mixes together unification,
 lazy streams, backtracking and optimization techniques; moreover, it allows
 programmers to write their own version according to their personal taste and
 style, ranging from implementations pretty imperative to ones built over
@@ -112,10 +112,10 @@ All of this is preparatory to modify the tactics mechanism of the \emph{HOL
 Light} theorem prover in order to introduce the relational paradigm in that
 environment.
 \end{itemize}
-The current work describe a Smalltalk implementation of the basic system
+The current work describes a Smalltalk implementation of the basic system
 with the aim to learn and experiment with a pure object environment, such as 
 Pharo and Squeak. Starting small, the next example we show three different
-kinds to perform an identity among \verb|SmallInteger| objects:
+ways to express equality between \verb|SmallInteger| objects:
 
 \begin{example}
 In math a relation $P$ is usually characterized by a statement such as
@@ -164,15 +164,16 @@ cannot be satisfied at all responding to the message selector \Verb|asGoal| --
 don't be scared by multiple names, we freely interchange the terms
 \textit{goal} and \textit{relation} postponing to later sections the
 description of their technical difference. Moreover, let us 
-assume that the infrastructure that actually build results is given and implemented
-by the \textit{oracle block} \texttt{B := [:g | g solutions all]}, we write our first test case:
+assume that the infrastructure that actually builds results is given and implemented
+by the block \texttt{B := [:g | g solutions all]}, we write our first test case:
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 GoalTest>>#testFail
     self 
         assert: false asGoal solutions all 
         equals: {}
 \end{minted}
-Now we get within the \Verb|False| class to add the implementation of the message
+Now we extend the \Verb|False| class with the following \Verb|asGoal| message
+definition
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 False>>#asGoal
     ^ Goal fail
@@ -188,7 +189,7 @@ is the same to code the message
 Fail>>#onState: aState 
     ^ Chain bottom
 \end{minted}
-which will be used within the message \Verb|solutions| sent in the oracle block
+which will be used within the message \Verb|solutions| sent in the block
 \Verb|B| -- a lot remains to be explained, such as the \Verb|Chain| class and
 streams in particular, all in what follows.
 
@@ -219,7 +220,7 @@ Succeed>>#onState: aState
 \section{Theoretical backgrounds}
 
 We quickly review some mathematical backgrounds underlying logic systems;
-in particular deductions are performed according to \emph{resolutions}
+in particular deductions are performed according to \emph{resolution} methods.
 
 \subsection{Resolution by refutation} 
 
