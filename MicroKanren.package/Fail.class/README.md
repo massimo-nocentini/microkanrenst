@@ -1,0 +1,1 @@
+Falsehood is a goal that admits no solutions at all.
