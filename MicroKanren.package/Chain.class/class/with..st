@@ -1,3 +1,4 @@
 creating
-with: anObj
-	^ [ :useless | Chain bottom ] links: anObj
+with: anObj 
+	^ [ Chain bottom]
+		links: anObj

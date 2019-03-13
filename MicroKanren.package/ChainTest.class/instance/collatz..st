@@ -1,6 +1,6 @@
 helpers
-collatz: o
-	^ [ :useless | 
-	o even
-		ifTrue: [ self collatz: o / 2 ]
-		ifFalse: [ self collatz: 3 * o + 1 ] ] links: o
+collatz: o 
+	^ [o even
+		ifTrue: [self collatz: o / 2]
+		ifFalse: [self collatz: 3 * o + 1]]
+		links: o

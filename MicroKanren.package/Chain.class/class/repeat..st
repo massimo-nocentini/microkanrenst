@@ -1,3 +1,4 @@
 creating
-repeat: anObj
-	^ [ :useless | self repeat: anObj ] links: anObj
+repeat: anObj 
+	^ [self repeat: anObj]
+		links: anObj

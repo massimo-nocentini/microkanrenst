@@ -1,3 +1,4 @@
 helpers
-ints: i
-	^ [ :a | self ints: a + 1 ] links: i
+ints: i 
+	^ [ self ints: i + 1]
+		links: i

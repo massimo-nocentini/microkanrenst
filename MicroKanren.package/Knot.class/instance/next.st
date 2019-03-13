@@ -1,3 +1,3 @@
 listing
 next
-	^ linker value: item
+	^ linker value

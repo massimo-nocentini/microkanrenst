@@ -3,7 +3,7 @@ reify: vars
 	| walker reifier reificationState |
 	walker := Walker new.
 	reifier := Reifier new.
-	reificationState := self class empty.
+	reificationState := Dictionary new asState.
 	^ vars
 		collect: [ :v | 
 			| w s |

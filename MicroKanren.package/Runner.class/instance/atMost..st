@@ -1,3 +1,3 @@
 selecting
 atMost: anInteger
-	^ self reify: ((State empty into: goal) atMost: anInteger) mature
+	^ self reify: ((self emptyState into: goal) atMost: anInteger) mature

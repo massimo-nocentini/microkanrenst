@@ -1,3 +1,4 @@
 helpers
-fib: m fib: n
-	^ [ :useless | self fib: n fib: m + n ] links: m
+fib: m fib: n 
+	^ [self fib: n fib: m + n]
+		links: m
