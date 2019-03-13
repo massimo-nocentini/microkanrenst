@@ -1,3 +1,3 @@
 listing
-atMost: anInteger
+next: anInteger 
 	self subclassResponsibility

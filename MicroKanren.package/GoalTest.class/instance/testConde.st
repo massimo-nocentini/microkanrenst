@@ -61,5 +61,5 @@ testConde
 			add: (x unifyWith: #oil) -> true asGoal;
 		yourself) cond e ] fresh
 	"self
-		assert: (g solutions atMost: 10)
+		assert: (g solutions next: 10)
 		equals: {#olive . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}"

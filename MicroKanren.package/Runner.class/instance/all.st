@@ -1,3 +1,3 @@
 selecting
 all
-	^ self reify: (self emptyState into: goal) mature
+	^ self reify: (self emptyState into: goal) contents

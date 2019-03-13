@@ -1,3 +1,0 @@
-listing
-mature
-	self subclassResponsibility

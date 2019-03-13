@@ -1,3 +1,3 @@
 listing
-next
+contents
 	self subclassResponsibility

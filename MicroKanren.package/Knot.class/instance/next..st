@@ -1,6 +1,6 @@
 listing
-atMost: n 
+next: n 
 	^ n isZero
 		ifTrue: [Chain bottom]
-		ifFalse: [[self next value atMost: n - 1]
+		ifFalse: [[self next value next: n - 1]
 				links: item]

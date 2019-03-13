@@ -1,5 +1,5 @@
 listing
-mature
-	^ self next mature
+contents
+	^ self next contents
 		addFirst: item;
 		yourself
