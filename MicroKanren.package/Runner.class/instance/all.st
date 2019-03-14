@@ -1,3 +1,5 @@
 selecting
 all
-	^ self reify: (self emptyState into: goal) contents
+|chain|
+chain:= (goal onState: self emptyState).
+	^ self reify: chain contents

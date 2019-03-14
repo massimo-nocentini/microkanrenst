@@ -1,4 +1,4 @@
 *MicroKanren-core
 consedObject: car
 
- ^ self links: car
+ ^ Chain item: car linker: self

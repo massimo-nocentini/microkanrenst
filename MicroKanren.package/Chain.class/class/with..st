@@ -1,4 +1,4 @@
 creating
 with: anObj 
-	^ [ Chain bottom]
-		links: anObj
+	^ anObj cons: Chain bottom
+		

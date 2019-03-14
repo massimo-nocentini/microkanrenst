@@ -1,4 +1,4 @@
 creating
 repeat: anObj 
-	^ [self repeat: anObj]
-		links: anObj
+	^ anObj cons: [self repeat: anObj]
+		

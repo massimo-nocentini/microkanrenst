@@ -1,5 +1,5 @@
 as yet unclassified
-reifyUsing: aReifier onState: aState
+reifyUsing: aReifier 
 	"No work to be done here because a ReifiedVar is already reified, btw."
 
-	^ aState
+	^ aReifier reifyReifiedVar: self

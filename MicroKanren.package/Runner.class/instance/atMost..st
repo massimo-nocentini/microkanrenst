@@ -1,3 +1,5 @@
 selecting
 atMost: anInteger
-	^ self reify: ((self emptyState into: goal) next: anInteger) contents
+|chain|
+chain := (goal onState: self emptyState ).
+	^ self reify: (chain next: anInteger) contents

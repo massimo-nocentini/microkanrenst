@@ -1,6 +1,6 @@
 dispatched
 mplus: anotherChain interleaved: anInterleaved 
-	^ [anotherChain value
+	^item cons: [anotherChain value
 		mplus: [self next]
 		interleaved: anInterleaved]
-		links: item
+		

@@ -1,0 +1,3 @@
+dispatched
+reifyObject: anObj
+	^ state
