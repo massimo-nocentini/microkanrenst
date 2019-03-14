@@ -62,7 +62,7 @@ properties.
 
 \section{Preparing the wires...}
 
-\subsection{Goals and substitutions}
+\subsection{\texttt{Goal}s and \texttt{State}s}
 
 A \textit{goal} is any object that responds to the selector \Verb|#onState:| so
 that it receives a substitution and produces an ordered sequence of zero or
@@ -75,21 +75,21 @@ goal\footnote{put here the reference to its subsection}. An empty substitution
 is created by \stcode{Dictionary new asState} where
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Dictionary>>#asState
-    ^ State new 
+    ^ State new
         birthdate: 0;
         substitution: self;
         yourself
 \end{minted}
 and it can be augmented by
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#at: aVar put: aValue 
+State>>#at: aVar put: aValue
     | s |
     s := substitution copy.
     s "check that if a key already exists at aVar, then the values must be the same"
       at: aVar
       ifPresent: [:v | aValue = v ifFalse: [UnificationError signal]]
       ifAbsentPut: aValue.
-    ^ self class new 
+    ^ self class new
         birthdate: birthdate;
         substitution: s;
         yourself
@@ -97,97 +97,129 @@ State>>#at: aVar put: aValue
 mantaining a protocol coherent to the one of \Verb|Dictionary| objects for
 extension.
 
-\subsection{Chains}
+\subsection{\texttt{Chain}s and \texttt{Cons}es}
 
 Because the sequence of substitutions may be infinite, we
 represent it not as a \Verb|LinkedList| object but as a \Verb|Chain| object;
 as usual, we find \Verb|BlockClosure| objects good candidates to represent (a possibly
 infinite) computation. Some examples are in order,
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
+ChainTest>>#collatz: o
+    ^ o
+        cons: [o even
+                ifTrue: [self collatz: o / 2]
+                ifFalse: [self collatz: 3 * o + 1]]
+
 ChainTest>>#fibs
     ^ self fib: 0 fib: 1
 
-ChainTest>>#fib: m fib: n 
-    ^ [self fib: n fib: m + n] links: m
+ChainTest>>#fib: m fib: n
+    ^ m cons: [self fib: n fib: m + n]
 
-ChainTest>>#gcd: m gcd: n 
-    ^ [n isZero 
-            ifTrue: [Chain with: m]
-            ifFalse: [self gcd: n gcd: m \\ n]] 
-        links: m
+ChainTest>>#gcd: m gcd: n
+    ^ m cons: [n isZero
+                ifTrue: [Chain with: m]
+                ifFalse: [self gcd: n gcd: m \\ n]]
 
 ChainTest>>#nats
     ^ self ints: 0
 
-ChainTest>>#ints: i 
-    ^ [self ints: i + 1] links: i
+ChainTest>>#ints: i
+    ^ i cons: [self ints: i + 1]
 
-ChainTest>>#upto2
-    ^ [[[Chain bottom] links: 2] links: 1] links: 0
+ChainTest>>#zeroOneTwo
+    ^ 0 cons: (1 cons: (2 cons: Chain bottom))
 \end{minted}
-where blocks define the message \Verb|#links:| as 
+where any \Verb|Object| object respond to the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-BlockClosure>>#links: anObj
-    ^ Chain item: anObj linker: self
+Object>>#cons: anObj
+    ^ anObj consedObject: self
 \end{minted}
-exposing the abstract class \Verb|Chain| and its class-side messages
+which dispatches over
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object>>#consedObject: car
+    ^ Cons car: car asCons cdr: self asCons
+
+BlockClosure>>#consedObject: car
+    ^ Chain item: car linker: self
+
+Chain>>#consedObject: car
+    ^ car cons: [self]
+\end{minted}
+where (i)~\Verb|Cons| objects mimic \textit{Lisp's cons cells}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Cons class>>#car: anObj cdr: anotherObj 
+    ^ self new 
+        car: anObj;
+        cdr: anotherObj;
+        yourself
+
+Object>>#asCons
+    ^ Cons fromObject: self
+
+Cons class>>#fromObject: anObj 
+    ^ anObj
+\end{minted}
+and (ii)~the abstract class \Verb|Chain| provides the following class-side messages
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Chain class>>#bottom
     ^ Bottom new
 
-Chain class>>#item: anObj linker: aBlockClosure 
-    ^ Knot new 
+Chain class>>#item: anObj linker: aBlockClosure
+    ^ Knot new
         item: anObj;
         linker: aBlockClosure;
         yourself
 
-Chain class>>#with: anObj 
-    ^ [Chain bottom] links: anObj
+Chain class>>#with: anObj
+    ^ anObj cons: Chain bottom
 
-Chain class>>#repeat: anObj 
-    ^ [self repeat: anObj] links: anObj
+Chain class>>#repeat: anObj
+    ^ anObj cons: [self repeat: anObj]
 \end{minted}
-together with its two subclasses \Verb|Knot| and \Verb|Bottom|; a comprehensive
+together with its two subclasses \Verb|Knot| and \Verb|Bottom|. A comprehensive
 test case follows
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 ChainTest>>#testNumbers
-    self 
-        assert: Chain bottom contents 
+    self
+        assert: Chain bottom contents
         equals: LinkedList new.
     self
         assert: (self nats next: 10) contents
         equals: (0 to: 9).
     self
-        assert: (self upto2 next: 10) contents
+        assert: (self zeroOneTwo next: 10) contents
         equals: (0 to: 2).
     self
-        assert: (self upto2 next: 1) contents
+        assert: (self zeroOneTwo next: 1) contents
         equals: (0 to: 0).
-    self 
-        assert: (self fibs next: 10) contents 
+    self
+        assert: (self fibs next: 10) contents
         equals: {0. 1. 1. 2. 3. 5. 8. 13. 21. 34}.
-    self 
-        assert: ((self collatz: 10) next: 10) contents 
+    self
+        assert: ((self collatz: 10) next: 10) contents
         equals: {10. 5. 16. 8. 4. 2. 1. 4. 2. 1}.
-    self 
-        assert: ((self gcd: 18 gcd: 32) next: 10) contents 
+    self
+        assert: ((self gcd: 18 gcd: 32) next: 10) contents
         equals: {18. 32. 18. 14. 4. 2. 2}.
-    self 
-        assert: ((Chain repeat: 4) next: 10) contents 
+    self
+        assert: ((Chain repeat: 4) next: 10) contents
         equals: {4. 4. 4. 4. 4. 4. 4. 4. 4. 4}
 \end{minted}
+
 On one hand, when a \Verb|Chain| object (i)~receives the selector
 \Verb|#next:| that carries a \Verb|SmallInteger| object $i$ it keeps at most
-$i$ objects and then truncate itself, precisely  
+$i$ objects and then truncate itself, precisely
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Bottom>>#next: anInteger 
+Bottom>>#next: anInteger
     ^ self
 
-Knot>>#next: n 
+Knot>>#next: n
     ^ n isZero
         ifTrue: [Chain bottom]
         ifFalse: [[self next value next: n - 1] links: item]
 \end{minted}
+
 On the other hand, when a \Verb|Chain| object (ii)~receives the selector
 \Verb|#contents| it builds a \Verb|LinkedList| object \textit{eagerly},
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
@@ -195,7 +227,7 @@ Bottom>>#contents
     ^ LinkedList new
 
 Knot>>#contents
-    ^ self next contents 
+    ^ self next contents
         addFirst: item;
         yourself
 \end{minted}
@@ -204,10 +236,132 @@ where \Verb|Knot| objects provide the following simple but fundamental message
 Knot>>#next
     ^ linker value
 \end{minted}
-Observe that the \Verb|Chain| hierarchy support part of the protocol provided
-by\Verb|ReadStream| objects because of the messages \Verb|#next|, \Verb|#next:|
+Observe that the \Verb|Chain| hierarchy support the protocol provided
+by \Verb|ReadStream| objects because of the messages \Verb|#next|, \Verb|#next:|
 and \Verb|#contents|.
 
+\subsection{\texttt{Runner}s, \texttt{Reifier}s and \texttt{Var}s}
+
+Recall that a goal $g$ responds with a \Verb|Chain| that contains either zero,
+one, or more substitutions when it receives the message \Verb|#onState:|; in order
+to manipulate those substitutions, $g$ provides the message
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Goal>>#solutions
+    ^ Runner onGoal: self
+
+Runner class>>#onGoal: aGoal 
+    ^ self new 
+        goal: aGoal;
+        yourself
+\end{minted}
+which builds a \Verb|Runner| object able to process the sequence of substitution, both (i)~all of them with the message
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Runner>>#all
+    | chain |
+    chain := goal onState: self emptyState.
+    ^ self reify: chain contents
+\end{minted}
+and (ii)~at most $n$ of them with the message
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Runner>>#atMost: anInteger 
+    | chain |
+    chain := goal onState: self emptyState.
+    ^ self reify: (chain next: anInteger) contents
+\end{minted}
+using the helper message 
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Runner>>#emptyState
+    ^ Dictionary new asState
+\end{minted}
+
+We are now ready to describe the reification process which starts in
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Runner>>#reify: states 
+    | vars |
+    vars := goal vars ifEmpty: [{Var tautology}].
+    ^ states
+        collect: [:s | "`s` stands for `state`"
+                    | rs | "`rs` stands for `reified state`"
+                    rs := s reify: vars.
+                    rs size = 1 ifTrue: [rs first] ifFalse: [rs]]
+\end{minted}
+where the accessor \Verb|#vars| is defined for any \Verb|Goal| objects and overridden by \Verb|Fresh| goals 
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Goal>>#vars
+    ^ {}
+
+Fresh>>#vars
+    ^ vars
+\end{minted}
+respectively; in parallel, every \Verb|State| object responds to the selector \Verb|#reify:| with
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>#reify: vars 
+    | walker reifier |
+    walker := Walker on: self.
+    reifier := Reifier on: Dictionary new asState.
+    ^ vars
+        collect: [:v | 
+                    | w s |
+                    w := walker walkStar: v.
+                    s := reifier reify: w.
+                    (Walker on: s) walkStar: w]
+\end{minted}
+where a \Verb|Walker| object is built by 
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Walker class>>#on: aState
+    ^ self new 
+        state: aState;
+        yourself
+\end{minted}
+and it responds to the selector \Verb|#walkStar| with
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Walker>>#walkStar: aVar 
+    ^ (state walk: aVar)
+        walkStarUsingWalker: self
+\end{minted}
+which relies on 
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>#walk: anObj 
+    | k |
+    k := anObj.
+    [k := substitution
+            at: k
+            ifAbsent: [^ k]] repeat
+\end{minted}
+and different objects responds to \Verb|#walkStarUsingWalker:| as follows
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object>>#walkStarUsingWalker: aWalker
+    ^ aWalker walkStarObject: self 
+
+Array>>#walkStarUsingWalker: aWalker
+    ^ aWalker walkStarArray: self
+
+LinkedList>>#walkStarUsingWalker: aWalker
+    ^ aWalker walkStarLinkedList: self 
+
+Cons>>#walkStarUsingWalker: aWalker
+    ^ aWalker walkStarCons: self 
+\end{minted}
+dispatching over \Verb|Walker| objects
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Walker>>#walkStarObject: anObj 
+    ^ state walk: anObj
+
+Walker>>#walkStarArray: aCollection 
+    ^ aCollection
+        collect: [:each | self walkStar: each]
+
+Walker>>#walkStarLinkedList: aCollection 
+    ^ aCollection
+        collect: [:each | self walkStar: each] 
+
+Walker>>#walkStarCons: aCons 
+    | car cdr |
+    car := self walkStar: aCons car.
+    cdr := self walkStar: aCons cdr.
+    ^ car cons: cdr 
+\end{minted}
+respectively.
 
 \section{Bootstrapping $\mu$Kanren}
 
@@ -217,9 +371,9 @@ Instead of creating classes first, we start by looking at some \textit{existing
 object} that can be a good candidate to take into account our messages; in
 sight of this approach, we give the fundamentals of $\mu$Kanren -- more
 generally, for a class of logic programming languages -- starting from the two
-nice boolean objects. 
-    
-\subsection{\texttt{Succeed} and \texttt{Fail} classes}    
+nice boolean objects.
+
+\subsection{\texttt{Succeed} and \texttt{Fail} classes}
 
 Let us consider the object \Verb|false| whose responsibility is to represent
 \textit{falsehood}, hence it should be a good candidate to provide us something
@@ -231,13 +385,13 @@ namely, \Verb|false| can build for us an object that represents a relation that
 cannot be satisfied at all responding to the message selector \Verb|asGoal| --
 don't be scared by multiple names, we freely interchange the terms
 \textit{goal} and \textit{relation} postponing to later sections the
-description of their technical difference. Moreover, let us 
+description of their technical difference. Moreover, let us
 assume that the infrastructure that actually builds results is given and implemented
 by the block \texttt{B := [:g | g solutions all]}, we write our first test case:
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 GoalTest>>#testFail
-    self 
-        assert: false asGoal solutions all 
+    self
+        assert: false asGoal solutions all
         equals: {}
 \end{minted}
 Now we extend the \Verb|False| class with the following \Verb|asGoal| message
@@ -254,7 +408,7 @@ Goal>>#fail
 such that to say that \verb|Fail| denotes the impossibility to satisfy a relation
 is the same to code the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Fail>>#onState: aState 
+Fail>>#onState: aState
     ^ Chain bottom
 \end{minted}
 which will be used within the message \Verb|solutions| sent in the block
@@ -265,8 +419,8 @@ In parallel, we reproduce for the object \Verb|true| the steps did for
 the object \Verb|false|; first,
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 GoalTest>>#testSucceed
-    self 
-        assert: true asGoal solutions all 
+    self
+        assert: true asGoal solutions all
         equals: {Var tautology}
 \end{minted}
 second,
@@ -281,7 +435,7 @@ Goal>>#succeed
 \end{minted}
 fourth,
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Succeed>>#onState: aState 
+Succeed>>#onState: aState
     ^ Chain with: aState
 \end{minted}
 
@@ -290,7 +444,7 @@ Succeed>>#onState: aState
 We quickly review some mathematical backgrounds underlying logic systems;
 in particular deductions are performed according to \emph{resolution} methods.
 
-\subsection{Resolution by refutation} 
+\subsection{Resolution by refutation}
 
 Let $\alpha$ be a sentence in \emph{conjunctive normal
 form} (CNF for short) and $M(\alpha)$ the set of models that satisfy $\alpha$
@@ -330,7 +484,7 @@ is a recursive, depth-first enumeration of models using the
 resolution rule paired with heuristics \textit{early termination},
 \textit{pure symbol} and \textit{unit clause} to speed up.
 
-\subsection{Resolution by unification} 
+\subsection{Resolution by unification}
 
 This method was introduced in \citep{robinson_unif} and
 improved by \citep{Martelli:1982:EUA:357162.357169}; it consists of solving
