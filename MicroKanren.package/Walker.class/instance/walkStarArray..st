@@ -1,4 +1,3 @@
 dispatched
-walkStarArray: aCollection
-	^ aCollection
-		collect: [:each | self walkStar: each]
+walkStarArray: aCollection 
+	^ self walkStarCollection: aCollection

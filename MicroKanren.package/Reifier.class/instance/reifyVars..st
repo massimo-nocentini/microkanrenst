@@ -1,11 +1,11 @@
 reification
-reify: vars 
+reifyVars: vars 
 	| walker reifier |
-	walker := Walker on: self.
-	reifier := Reifier on: Dictionary new asState.
+	walker := state walker.
+	reifier := Dictionary new asState reifier.
 	^ vars
 		collect: [:v | 
 			| w s |
 			w := walker walkStar: v.
 			s := reifier reify: w.
-			(Walker on: s) walkStar: w ]
+			s walker walkStar: w]
