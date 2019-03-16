@@ -72,7 +72,11 @@ values which are indexed by \textit{logic variables}, therefore a
 that also keeps record of an incremental numbering \Verb|birthdate| whose
 meaning will be clarified later when we'll describe the \Verb|Fresh|
 goal\footnote{put here the reference to its subsection}. An empty substitution
-is created by \stcode{Dictionary new asState} where
+is created by
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Dictionary new asState
+\end{minted}
+where
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Dictionary>>#asState
     ^ State new
@@ -94,8 +98,9 @@ State>>#at: aVar put: aValue
         substitution: s;
         yourself
 \end{minted}
-mantaining a protocol coherent to the one of \Verb|Dictionary| objects for
-extension.
+mantaining a coherent protocol with respect to the one of \Verb|Dictionary|
+objects for extension; moreover, \Verb|UnificationError| objects will be
+explained in a later section when will talk about the unification process.
 
 \subsection{\texttt{Chain}s and \texttt{Cons}es}
 
@@ -148,8 +153,8 @@ Chain>>#consedObject: car
 \end{minted}
 where (i)~\Verb|Cons| objects mimic \textit{Lisp's cons cells}
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Cons class>>#car: anObj cdr: anotherObj 
-    ^ self new 
+Cons class>>#car: anObj cdr: anotherObj
+    ^ self new
         car: anObj;
         cdr: anotherObj;
         yourself
@@ -157,7 +162,7 @@ Cons class>>#car: anObj cdr: anotherObj
 Object>>#asCons
     ^ Cons fromObject: self
 
-Cons class>>#fromObject: anObj 
+Cons class>>#fromObject: anObj
     ^ anObj
 \end{minted}
 and (ii)~the abstract class \Verb|Chain| provides the following class-side messages
@@ -177,7 +182,7 @@ Chain class>>#with: anObj
 Chain class>>#repeat: anObj
     ^ anObj cons: [self repeat: anObj]
 \end{minted}
-together with its two subclasses \Verb|Knot| and \Verb|Bottom|. A comprehensive
+having two subclasses \Verb|Knot| and \Verb|Bottom|. A comprehensive
 test case follows
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 ChainTest>>#testNumbers
@@ -208,16 +213,16 @@ ChainTest>>#testNumbers
 \end{minted}
 
 On one hand, when a \Verb|Chain| object (i)~receives the selector
-\Verb|#next:| that carries a \Verb|SmallInteger| object $i$ it keeps at most
-$i$ objects and then truncate itself, precisely
+\Verb|#next:| that carries a \Verb|SmallInteger| object $n$ then it keeps at most
+$n$ objects and then truncate itself, precisely
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Bottom>>#next: anInteger
+Bottom>>#next: n
     ^ self
 
 Knot>>#next: n
-    ^ n isZero
-        ifTrue: [Chain bottom]
-        ifFalse: [[self next value next: n - 1] links: item]
+    ^ n = 1
+        ifTrue: [Chain with: item]
+        ifFalse: [item cons: [self next next: n - 1]]
 \end{minted}
 
 On the other hand, when a \Verb|Chain| object (ii)~receives the selector
@@ -242,50 +247,49 @@ and \Verb|#contents|.
 
 \subsection{\texttt{Runner}s, \texttt{Reifier}s and \texttt{Var}s}
 
-Recall that a goal $g$ responds with a \Verb|Chain| that contains either zero,
-one, or more substitutions when it receives the message \Verb|#onState:|; in order
-to manipulate those substitutions, $g$ provides the message
+Recall that a \Verb|Goal| object responds with a \Verb|Chain| that contains either zero,
+one, or more substitutions when it receives the message \Verb|#onState:| and it
+delegates the task to process those substitutions to \Verb|Runner| objects,
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Goal>>#solutions
     ^ Runner onGoal: self
 
-Runner class>>#onGoal: aGoal 
-    ^ self new 
+Runner class>>#onGoal: aGoal
+    ^ self new
         goal: aGoal;
         yourself
 \end{minted}
-which builds a \Verb|Runner| object able to process the sequence of substitution, both (i)~all of them with the message
+which are able to process both (i)~all of them with the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Runner>>#all
-    | chain |
-    chain := goal onState: self emptyState.
-    ^ self reify: chain contents
+    ^ self run contents
 \end{minted}
 and (ii)~at most $n$ of them with the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Runner>>#atMost: anInteger 
-    | chain |
-    chain := goal onState: self emptyState.
-    ^ self reify: (chain next: anInteger) contents
+Runner>>#atMost: anInteger
+    ^ (self run next: anInteger) contents
 \end{minted}
-using the helper message 
+relying on the unary message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Runner>>#emptyState
-    ^ Dictionary new asState
-\end{minted}
-
-We are now ready to describe the reification process which starts in
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-Runner>>#reify: states 
-    | vars |
-    vars := goal vars ifEmpty: [{Var tautology}].
+Runner>>#run
+    | states vars selector |
+    states := goal onState: Dictionary new asState.
+    vars := goal vars ifEmpty: [LinkedList with: Var tautology].
+    selector := vars size = 1 ifTrue: #first ifFalse: #yourself.
     ^ states
-        collect: [:s | "`s` stands for `state`"
-                    | rs | "`rs` stands for `reified state`"
-                    rs := s reify: vars.
-                    rs size = 1 ifTrue: [rs first] ifFalse: [rs]]
+        collect: [:s | selector
+                        value: (s reifier reifyVars: vars)]
 \end{minted}
-where the accessor \Verb|#vars| is defined for any \Verb|Goal| objects and overridden by \Verb|Fresh| goals 
+having the responsibilities
+\begin{itemize}
+
+\item to send the message \Verb|#onState:| to \Verb|Goal| objects to start the
+resolution process from an empty state, this can be considered the entry point of
+the ``computation'' that produces a \Verb|Chain| of substitutions;
+
+\item to take into account the variables with respect to results should be
+provided; as a particular case, if the root goal doesn't introduce any logic
+variable, by means of the auxiliary messages
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Goal>>#vars
     ^ {}
@@ -293,73 +297,181 @@ Goal>>#vars
 Fresh>>#vars
     ^ vars
 \end{minted}
-respectively; in parallel, every \Verb|State| object responds to the selector \Verb|#reify:| with
+then it is equivalent to prove a \textit{tautology}, represented by
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#reify: vars 
+Var class>>#tautology
+    ^ #tautology
+\end{minted}
+which require to decide that a relation is always true regardless values taken
+by logic variables;
+
+\item to simplify the results presentation when the root \Verb|Goal| object
+introduces \textit{exactly one} logic variable: in this case a
+\Verb|LinkedList| of values for that variable will be produced; otherwise, a
+\Verb|LinkedList| of \Verb|LinkedList| of values will be produces each one for
+each tuple of logic variables introduced by the root \Verb|Goal| object -- this
+point will be clear when we'll explain \Verb|Fresh| goals that are the only
+ones able to introduce logic variables;
+
+\item to map each substitution (always translate to \Verb|State| object) that
+satisfies the root \Verb|Goal| object do \textit{reify} the required variables,
+this is accomplished by the messages
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+s reifier reifyVars: vars
+\end{minted}
+within the block argument of the returning \Verb|#collect:| message send.
+\end{itemize}
+The last point shows that \Verb|Chain| objects are \textit{functors} according
+to the Haskell terminology because they answer to the message \Verb|#collect:|,
+which is a synonism for the function \Verb|fmap :: (a -> b) -> f a -> f b|, as
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Chain>>#collect: aBlockClosure
+    ^ self
+
+Knot>>#collect: aBlockClosure
+    | v |
+    v := aBlockClosure value: item.
+    ^ v cons: [self next collect: aBlockClosure]
+\end{minted}
+respectively.  We are now ready to describe the reification process which
+requires
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>#reifier
+    ^ Reifier on: self
+
+Reifier>>#reifyVars: vars
     | walker reifier |
-    walker := Walker on: self.
-    reifier := Reifier on: Dictionary new asState.
+    walker := state walker.
+    reifier := Dictionary new asState reifier.
     ^ vars
-        collect: [:v | 
+        collect: [:v |
                     | w s |
                     w := walker walkStar: v.
                     s := reifier reify: w.
-                    (Walker on: s) walkStar: w]
+                    s walker walkStar: w]
 \end{minted}
-where a \Verb|Walker| object is built by 
+which uses the message
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Reifier>>#reify: anObj 
+    ^ (state walk: anObj) 
+        reifyUsing: self
+\end{minted}
+to dispatch the message \Verb|#reifyUsing:| over
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object>>#reifyUsing: aReifier
+    ^ aReifier reifyObject: self 
+
+Var>>#reifyUsing: aReifier 
+    ^ aReifier reifyVar: self 
+
+ReifiedVar>>#reifyUsing: aReifier 
+    ^ aReifier reifyReifiedVar: self
+
+Array>>#reifyUsing: aReifier
+    ^ aReifier reifyArray: self 
+
+LinkedList>>#reifyUsing: aReifier 
+    ^ aReifier reifyLinkedList: self 
+
+Cons>>#reifyUsing: aReifier 
+    ^ aReifier reifyCons: self 
+\end{minted}
+and to collect replies as
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Reifier>>#reifyObject: anObj 
+    ^ state
+
+Reifier>>#reifyVar: aVar 
+    ^ state reifyVar: aVar
+
+Reifier>>#reifyReifiedVar: aVar 
+    ^ state
+
+Reifier>>#reifyArray: aCollection 
+    ^ self reifyCollection: aCollection
+
+Reifier>>#reifyArray: aCollection 
+    ^ self reifyCollection: aCollection
+
+Reifier>>#reifyArray: aCollection 
+    ^ self reifyCollection: aCollection
+
+Reifier>>#reifyCollection: aCollection 
+    ^ aCollection inject: state into: [:s :c | s reifier reify: c]
+\end{minted}
+requiring the auxiliary message
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>#reifyVar: aVar 
+    substitution
+        at: aVar
+        ifAbsentPut: [ReifiedVar new 
+                        id: substitution size; 
+                        yourself]
+\end{minted}
+and
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>#walk: anObj 
+    | k |
+    k := anObj.
+    [k := substitution at: k ifAbsent: [^ k]] repeat
+\end{minted}
+
+\hrulefill
+
+where a \Verb|Walker| object is built by
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Walker class>>#on: aState
-    ^ self new 
+    ^ self new
         state: aState;
         yourself
 \end{minted}
 and it responds to the selector \Verb|#walkStar| with
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Walker>>#walkStar: aVar 
+Walker>>#walkStar: aVar
     ^ (state walk: aVar)
         walkStarUsingWalker: self
 \end{minted}
-which relies on 
+which relies on
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#walk: anObj 
+State>>#walk: anObj
     | k |
     k := anObj.
     [k := substitution
             at: k
             ifAbsent: [^ k]] repeat
 \end{minted}
-and different objects responds to \Verb|#walkStarUsingWalker:| as follows
+and objects of different classes responds to \Verb|#walkStarUsingWalker:| as follows
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Object>>#walkStarUsingWalker: aWalker
-    ^ aWalker walkStarObject: self 
+    ^ aWalker walkStarObject: self
 
 Array>>#walkStarUsingWalker: aWalker
     ^ aWalker walkStarArray: self
 
 LinkedList>>#walkStarUsingWalker: aWalker
-    ^ aWalker walkStarLinkedList: self 
+    ^ aWalker walkStarLinkedList: self
 
 Cons>>#walkStarUsingWalker: aWalker
-    ^ aWalker walkStarCons: self 
+    ^ aWalker walkStarCons: self
 \end{minted}
 dispatching over \Verb|Walker| objects
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Walker>>#walkStarObject: anObj 
+Walker>>#walkStarObject: anObj
     ^ state walk: anObj
 
-Walker>>#walkStarArray: aCollection 
+Walker>>#walkStarArray: aCollection
     ^ aCollection
         collect: [:each | self walkStar: each]
 
-Walker>>#walkStarLinkedList: aCollection 
+Walker>>#walkStarLinkedList: aCollection
     ^ aCollection
-        collect: [:each | self walkStar: each] 
+        collect: [:each | self walkStar: each]
 
-Walker>>#walkStarCons: aCons 
+Walker>>#walkStarCons: aCons
     | car cdr |
     car := self walkStar: aCons car.
     cdr := self walkStar: aCons cdr.
-    ^ car cons: cdr 
+    ^ car cons: cdr
 \end{minted}
 respectively.
 
