@@ -6,6 +6,7 @@
 *.pdf
 *.toc
 *.synctex.gz
+*.pyg
 *.swp
 _minted-article/
 
