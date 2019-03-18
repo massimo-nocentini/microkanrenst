@@ -1,3 +1,0 @@
-creating
-fromObject: anObj
-	^ anObj

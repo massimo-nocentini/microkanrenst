@@ -1,3 +1,0 @@
-dispatched
-reifyObject: anObj
-	^ state

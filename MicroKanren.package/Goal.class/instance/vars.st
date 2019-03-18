@@ -1,3 +1,0 @@
-reification
-vars
-	^ {}

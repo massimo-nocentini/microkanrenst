@@ -1,3 +1,0 @@
-dispatching
-of: aStreamCombination
-	self subclassResponsibility

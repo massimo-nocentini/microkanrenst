@@ -1,3 +1,0 @@
-creating
-cond
-	^ Cond new

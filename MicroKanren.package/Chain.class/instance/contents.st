@@ -1,3 +1,0 @@
-listing
-contents
-	self subclassResponsibility

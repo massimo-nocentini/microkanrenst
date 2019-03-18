@@ -1,3 +1,0 @@
-listing
-collect: aBlockClosure 
-	^ self
