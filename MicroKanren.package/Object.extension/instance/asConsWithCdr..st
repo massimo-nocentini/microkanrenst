@@ -1,3 +1,3 @@
 *MicroKanren-core
-asCons: aCdr
+asConsWithCdr: aCdr
 	^ Cons fromObject: self lastCdr: aCdr

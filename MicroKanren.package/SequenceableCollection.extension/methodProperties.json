@@ -3,6 +3,8 @@
 		 },
 	"instance" : {
 		"asCons" : "MassimoNocentini 6/8/2017 12:24",
-		"asCons:" : "MassimoNocentini 6/8/2017 21:00",
+		"asConsWithCdr:" : "MN 3/18/2019 15:27",
 		"cond" : "6/8/2017 11:25:29",
+		"foldr1:" : "MN 3/18/2019 15:40",
+		"foldr:init:" : "MN 3/18/2019 15:40",
 		"reduceRight:" : "MN 10/16/2018 16:30" } }

@@ -1,6 +1,5 @@
 creating
-fromSequenceableCollection: aCollection lastCdr: aCdr
-	| cell |
-	cell := aCdr asCons.
-	aCollection reverseDo: [ :each | cell := self car: each asCons cdr: cell ].
-	^ cell
+fromSequenceableCollection: aCollection lastCdr: aCdr 
+	^ aCollection
+		foldr: [:each :acc | self car: each asCons cdr: acc asCons]
+		init: aCdr

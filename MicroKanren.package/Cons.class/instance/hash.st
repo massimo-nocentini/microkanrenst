@@ -1,3 +1,3 @@
 comparing
 hash
-	^ self car hash bitXor: self cdr hash
+	^  car hash bitXor:  cdr hash

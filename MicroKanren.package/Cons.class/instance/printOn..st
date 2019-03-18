@@ -1,10 +1,15 @@
 printing
-printOn: aStream
+printOn: aStream 
+	| cell |
 	aStream nextPut: $(.
-	car printOn: aStream.
-	aStream nextPut: Character space.
-	cdr isNil
-		ifTrue: [ aStream nextPut: $) ]
-		ifFalse: [ cdr class = self class
-				ifFalse: [ aStream nextPutAll: '. ' ].
-			cdr printOn: aStream ]
+	cell := self.
+	[cell car printOn: aStream.
+	cell cdr
+		ifNotNil: [aStream nextPut: Character space].
+	cell := cell cdr.
+	cell class = Cons] whileTrue.
+	cell
+		ifNotNil: [aStream nextPut: $.;
+				 nextPut: Character space.cell printOn: aStream.].
+	
+	aStream nextPut: $)
