@@ -1,4 +1,4 @@
 reification
-reify: anObj 
+value: anObj 
 	^ (state walk: anObj)
 		reifyUsing: self

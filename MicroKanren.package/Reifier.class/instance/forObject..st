@@ -1,3 +1,3 @@
 dispatched
-reifyObject: anObj
+forObject: anObj 
 	^ state

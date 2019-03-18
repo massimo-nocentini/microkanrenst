@@ -1,3 +1,3 @@
 *MicroKanren-core
 reifyUsing: aReifier
-	^ aReifier reifyObject: self 
+	^ aReifier forObject: self 

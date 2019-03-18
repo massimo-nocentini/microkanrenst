@@ -2,13 +2,13 @@
 	"class" : {
 		"on:" : "MN 3/14/2019 14:40" },
 	"instance" : {
-		"reify:" : "MN 3/14/2019 17:28",
-		"reifyArray:" : "MN 3/15/2019 18:01",
-		"reifyCollection:" : "MN 3/15/2019 18:01",
-		"reifyCons:" : "MN 3/15/2019 18:02",
-		"reifyLinkedList:" : "MN 3/15/2019 18:01",
-		"reifyObject:" : "MN 3/14/2019 17:08",
-		"reifyReifiedVar:" : "MN 3/14/2019 17:29",
-		"reifyVar:" : "MN 3/14/2019 17:09",
-		"reifyVars:" : "MN 3/15/2019 17:27",
-		"state:" : "MN 3/14/2019 14:40" } }
+		"_forCollection:" : "MN 3/18/2019 09:25",
+		"forArray:" : "MN 3/18/2019 09:28",
+		"forCons:" : "MN 3/18/2019 09:28",
+		"forLinkedList:" : "MN 3/18/2019 09:28",
+		"forObject:" : "MN 3/18/2019 09:26",
+		"forReifiedVar:" : "MN 3/18/2019 09:26",
+		"forVar:" : "MN 3/18/2019 09:27",
+		"reifyVars:" : "MN 3/18/2019 09:07",
+		"state:" : "MN 3/14/2019 14:40",
+		"value:" : "MN 3/18/2019 09:03" } }

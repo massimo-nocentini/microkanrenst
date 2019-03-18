@@ -1,3 +1,3 @@
 *MicroKanren-core
 walkStarUsingWalker: aWalker
-	^ aWalker walkStarLinkedList: self 
+	^ aWalker forLinkedList: self 

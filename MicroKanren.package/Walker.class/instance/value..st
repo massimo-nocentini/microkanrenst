@@ -1,4 +1,4 @@
 dispatching
-walkStar: aVar 
+value: aVar 
 	^ (state walk: aVar)
 		walkStarUsingWalker: self

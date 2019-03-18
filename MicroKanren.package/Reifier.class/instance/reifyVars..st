@@ -6,6 +6,6 @@ reifyVars: vars
 	^ vars
 		collect: [:v | 
 			| w s |
-			w := walker walkStar: v.
-			s := reifier reify: w.
-			s walker walkStar: w]
+			w := walker value: v.
+			s := reifier value: w.
+			s walker value: w]

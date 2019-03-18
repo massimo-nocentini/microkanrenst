@@ -1,3 +1,3 @@
 *MicroKanren-core
 walkStarUsingWalker: aWalker
-	^ aWalker walkStarArray: self
+	^ aWalker forArray: self

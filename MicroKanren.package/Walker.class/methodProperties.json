@@ -2,10 +2,10 @@
 	"class" : {
 		"on:" : "MN 3/14/2019 14:37" },
 	"instance" : {
+		"_forCollection:" : "MN 3/18/2019 09:22",
+		"forArray:" : "MN 3/18/2019 09:22",
+		"forCons:" : "MN 3/18/2019 09:23",
+		"forLinkedList:" : "MN 3/18/2019 09:23",
+		"forObject:" : "MN 3/18/2019 09:21",
 		"state:" : "MN 3/14/2019 14:38",
-		"walkStar:" : "MN 3/14/2019 14:55",
-		"walkStarArray:" : "MN 3/15/2019 17:33",
-		"walkStarCollection:" : "MN 3/15/2019 17:32",
-		"walkStarCons:" : "MN 3/15/2019 17:47",
-		"walkStarLinkedList:" : "MN 3/15/2019 17:33",
-		"walkStarObject:" : "MN 3/14/2019 14:49" } }
+		"value:" : "MN 3/18/2019 09:07" } }

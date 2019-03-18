@@ -1,0 +1,3 @@
+dispatched
+forReifiedVar: aVar 
+	^ state

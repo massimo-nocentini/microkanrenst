@@ -1,3 +1,3 @@
 as yet unclassified
 walkStarUsingWalker: aWalker
-	^ aWalker walkStarCons: self 
+	^ aWalker forCons: self 

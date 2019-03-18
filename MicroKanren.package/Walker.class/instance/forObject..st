@@ -1,3 +1,3 @@
 dispatched
-walkStarObject: anObj
+forObject: anObj 
 	^ state walk: anObj

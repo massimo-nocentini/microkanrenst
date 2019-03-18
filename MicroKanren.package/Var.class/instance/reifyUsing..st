@@ -1,3 +1,3 @@
 dispatching
 reifyUsing: aReifier 
-	^ aReifier reifyVar: self 
+	^ aReifier forVar: self 
