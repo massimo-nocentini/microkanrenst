@@ -486,30 +486,26 @@ State>>#walk: anObj
     k := anObj.
     [k := substitution at: k ifAbsent: [^ k]] repeat
 \end{minted}
-
-\hrulefill
-
-where a \Verb|Walker| object is built by
+Observe that \ct{Chain} objects are also \textit{foldable} according to the
+Haskell \ct{Foldable} typeclass because they respond to the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Walker class>>#on: aState
-    ^ self new
-        state: aState;
-        yourself
+Cons>>#inject: init into: aBlock 
+    | accumulated |
+    accumulated := aBlock value: init value: car.
+    ^ aBlock value: accumulated value: cdr
+\end{minted}
+
+The reification process requires \ct{Walker} objects which are built by
+\ct{State} objects using the template method
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>#walker
+    ^ Walker on: self
 \end{minted}
 and it responds to the selector \Verb|#walkStar| with
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Walker>>#walkStar: aVar
     ^ (state walk: aVar)
         walkStarUsingWalker: self
-\end{minted}
-which relies on
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#walk: anObj
-    | k |
-    k := anObj.
-    [k := substitution
-            at: k
-            ifAbsent: [^ k]] repeat
 \end{minted}
 and objects of different classes responds to \Verb|#walkStarUsingWalker:| as follows
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
