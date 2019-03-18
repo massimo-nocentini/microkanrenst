@@ -390,10 +390,10 @@ Reifier>>#reifyReifiedVar: aVar
 Reifier>>#reifyArray: aCollection 
     ^ self reifyCollection: aCollection
 
-Reifier>>#reifyArray: aCollection 
+Reifier>>#reifyLinkedList: aCollection 
     ^ self reifyCollection: aCollection
 
-Reifier>>#reifyArray: aCollection 
+Reifier>>#reifyCons: aCollection 
     ^ self reifyCollection: aCollection
 
 Reifier>>#reifyCollection: aCollection 
@@ -415,30 +415,31 @@ State>>#walk: anObj
     k := anObj.
     [k := substitution at: k ifAbsent: [^ k]] repeat
 \end{minted}
-
-\hrulefill
-
-where a \Verb|Walker| object is built by
+Observe that \Verb|Chain| objects are also \textit{foldable} according to the Haskell \Verb|Foldable| typeclass because 
+they respond to the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
+Cons>>#inject: init into: aBlock 
+    | accumulated |
+    accumulated := aBlock value: init value: car.
+    ^ aBlock value: accumulated value: cdr
+\end{minted}
+
+The reification process requires \Verb|Walker| objects which are built by
+\Verb|State| objects using the template method
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>#walker
+    ^ Walker on: self
+
 Walker class>>#on: aState
     ^ self new
         state: aState;
         yourself
 \end{minted}
-and it responds to the selector \Verb|#walkStar| with
+\Verb|Walker| responds to the selector \Verb|#walkStar| with
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Walker>>#walkStar: aVar
     ^ (state walk: aVar)
         walkStarUsingWalker: self
-\end{minted}
-which relies on
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#walk: anObj
-    | k |
-    k := anObj.
-    [k := substitution
-            at: k
-            ifAbsent: [^ k]] repeat
 \end{minted}
 and objects of different classes responds to \Verb|#walkStarUsingWalker:| as follows
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
