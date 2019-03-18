@@ -22,10 +22,6 @@
 \usepackage{bbold}
 \usepackage[sort&compress,square,comma,authoryear]{natbib}
 
-
-
-
-
 \fvset{fontsize=\normalsize}
 \setmonofont[Scale=0.8]{Menlo}
 \usemintedstyle{xcode}
@@ -45,6 +41,7 @@
 % Revisions and comments Macros
 % ********************************************************************* 
 \usepackage{xcolor}
+\usepackage{xspace}
 \usepackage[normalem]{ulem} 			% \sout macro
 \newboolean{showcomments}
 % \setboolean{showcomments}{false}
@@ -77,10 +74,9 @@
 } 
 %---% add your own macros 
 \newcommand{\sd}[1]{\nb{Stef}{orange}{#1}}
+\newcommand{\mn}[1]{\nb{Massimo}{blue}{#1}}
 
 \newcommand{\ct}[1]{{\textsf{#1}}\xspace}
-
-
 
 \author{Massimo Nocentini}
 \title{Relational programming in Smalltalk}
@@ -236,7 +232,7 @@ Cons class >> fromObject: anObj
     ^ anObj
 \end{minted}
 
-\s{I do not get fromObject: implementation. because you do not wrap the object.
+\sd{I do not get fromObject: implementation. because you do not wrap the object.
 So 1 asCons will return 1}
 and (ii)~the abstract class \ct{Chain} provides the following class-side messages
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
@@ -299,7 +295,7 @@ Knot >> next: n
 \end{minted}
 
 On the other hand, when a \ct{Chain} object (ii)~receives the message
-\ct{#contents} it builds a \ct{LinkedList} object \textit{eagerly},
+\ct{\#contents} it builds a \ct{LinkedList} object \textit{eagerly},
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Bottom >> contents
     ^ LinkedList new
@@ -314,14 +310,14 @@ where \Verb|Knot| objects provide the following simple but fundamental message
 Knot>>#next
     ^ linker value
 \end{minted}
-Observe that the \ct{|Chain} hierarchy supports the protocol provided
-by \ct{ReadStream} objects because of the messages \ct{#next}, \ct{#next:}
-and \ct{#contents}.
+Observe that the \ct{Chain} hierarchy supports the protocol provided
+by \ct{ReadStream} objects because of the messages \ct{\#next}, \ct{\#next:}
+and \ct{\#contents}.
 
 \subsection{\texttt{Runner}s, \texttt{Reifier}s and \texttt{Var}s}
 
 Recall \sd{it was not said that way so I do not recall} that a \ct{Goal} object responds with a \ct{Chain} that contains either zero,
-one, or more substitutions when it receives the message \ct{#onState:} and it
+one, or more substitutions when it receives the message \ct{\#onState:} and it
 delegates the task to process those substitutions to \ct{Runner} objects,
 
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
@@ -465,10 +461,10 @@ Reifier>>#reifyReifiedVar: aVar
 Reifier>>#reifyArray: aCollection 
     ^ self reifyCollection: aCollection
 
-Reifier>>#reifyLinkedList: aCollection 
+Reifier>>#reifyArray: aCollection 
     ^ self reifyCollection: aCollection
 
-Reifier>>#reifyCons: aCollection 
+Reifier>>#reifyArray: aCollection 
     ^ self reifyCollection: aCollection
 
 Reifier>>#reifyCollection: aCollection 
@@ -490,31 +486,30 @@ State>>#walk: anObj
     k := anObj.
     [k := substitution at: k ifAbsent: [^ k]] repeat
 \end{minted}
-Observe that \Verb|Chain| objects are also \textit{foldable} according to the Haskell \Verb|Foldable| typeclass because 
-they respond to the message
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-Cons>>#inject: init into: aBlock 
-    | accumulated |
-    accumulated := aBlock value: init value: car.
-    ^ aBlock value: accumulated value: cdr
-\end{minted}
 
-The reification process requires \Verb|Walker| objects which are built by
-\Verb|State| objects using the template method
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#walker
-    ^ Walker on: self
+\hrulefill
 
+where a \Verb|Walker| object is built by
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
 Walker class>>#on: aState
     ^ self new
         state: aState;
         yourself
 \end{minted}
-\Verb|Walker| responds to the selector \Verb|#walkStar| with
+and it responds to the selector \Verb|#walkStar| with
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Walker>>#walkStar: aVar
     ^ (state walk: aVar)
         walkStarUsingWalker: self
+\end{minted}
+which relies on
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+State>>#walk: anObj
+    | k |
+    k := anObj.
+    [k := substitution
+            at: k
+            ifAbsent: [^ k]] repeat
 \end{minted}
 and objects of different classes responds to \Verb|#walkStarUsingWalker:| as follows
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
