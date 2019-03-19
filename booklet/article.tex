@@ -37,16 +37,16 @@
 
 \newcommand{\stcode}[1]{\mintinline[fontsize=\footnotesize]{smalltalk}{#1}}
 
-% ********************************************************************* 
+% *********************************************************************
 % Revisions and comments Macros
-% ********************************************************************* 
+% *********************************************************************
 \usepackage{xcolor}
 \usepackage{xspace}
 \usepackage[normalem]{ulem} 			% \sout macro
 \newboolean{showcomments}
 % \setboolean{showcomments}{false}
 \setboolean{showcomments}{true}
-	
+
 \ifthenelse{\boolean{showcomments}}
 {
 	\newcommand{\nb}[3]{
@@ -56,10 +56,10 @@
     	{\color{blue}\sf\small$\blacktriangleright$\textit{#2}$\blacktriangleleft$}}
 	\newcommand{\old}[1]{{\color{gray}\sout{#1}}} % old to be removed
 	\newcommand{\del}[1]{\old{#1}} % please remove
-	\newcommand{\ins}[1]{{\textcolor{blue}{\uline{#1}}}} % please insert	
-	\newcommand{\ugh}[1]{{\textcolor{red}{\uwave{#1}}}} % please rephrase	
+	\newcommand{\ins}[1]{{\textcolor{blue}{\uline{#1}}}} % please insert
+	\newcommand{\ugh}[1]{{\textcolor{red}{\uwave{#1}}}} % please rephrase
 	\newcommand{\chg}[2]{{\textcolor{red}{\sout{#1}}}{\ra}\textcolor{blue}{\uline{#2}}} % please change
-	\newcommand{\here}{\bnote{***}{CONTINUE HERE}} 
+	\newcommand{\here}{\bnote{***}{CONTINUE HERE}}
 	\newcommand{\fix}[1]{\bnote{FIX}{#1}}
 }{
 	\newcommand{\bnote}[2]{}
@@ -71,8 +71,8 @@
 	\newcommand{\chg}[2]{}
 	\newcommand{\here}{}
 	\newcommand{\fix}[1]{}
-} 
-%---% add your own macros 
+}
+%---% add your own macros
 \newcommand{\sd}[1]{\nb{Stef}{orange}{#1}}
 \newcommand{\mn}[1]{\nb{Massimo}{blue}{#1}}
 
@@ -102,29 +102,60 @@ properties.
 
 \section{Preparing the wires...}
 
-\sd{As a style point of view I would not put code inside sentence. We should be able to read the text without the code and the code without the text. It makes paragraphs more self contained.}
+\sd{As a style point of view I would not put code inside sentence. We should be
+able to read the text without the code and the code without the text. It makes
+paragraphs more self contained.}
 
 \sd{Why don't you start with Cons. Then once people understand Cons and infinite stream
-you can introduce Goal and state and always example first.}
+you can introduce Goal and state and always example first.
+\mn{I do prefer to explain both of them when the need arises to not postpone the main definition of Goal.}}
 
 \sd{Having an diagram showing how an object will be composed will also help}
 
-\subsection{\ct{Goal}s and \ct{State}s}
+In this section we describe the fundamentals of $\mu$Kanren and the protocols
+that objects provide to compose the architecture on which Section
+\ref{sec:bootstrapping} will define core logic operators.
 
-A \textit{goal} is any object that responds to the message \ct{\#onState:} so
-that it receives a substitution and produces an ordered sequence of zero or
-more substitutions.
+We start describing objects that (i)~encodes relational statements,
+(ii)~logical variables and (iii)~associations of values to variables such that
+a given predicate can be satisfied.
 
-\sd{Show a test. I do not get what is a state? A variable? Why this is call onState:}
-\sd{Why this is not \ct{goal withSubstitution: aSubstitution}}
+\subsection{Goals, variables and states}
 
- In turn, a substitution is an unordered collection of
+A \textit{goal} $g$ denotes a logical relation; precisely, $g$ is any object
+that responds to the message \ct{\#onState:} so that it receives a substitution
+and produces an ordered sequence of zero or more substitutions.
+
+In turn, a substitution is an unordered collection of
 values which are indexed by \textit{logic variables}, therefore a
-\ct{Dictionary} object fits perfectly \sd{show an example now}; we wrap it \sd{who?} in a \ct{State} object
-that also keeps record of an incremental numbering  \ct{birthdate} whose
-meaning will be clarified later when we'll describe the  \ct{Fresh}
-goal\footnote{put here the reference to its subsection}. An empty substitution
-is created by
+\ct{Dictionary} object fits perfectly. For the sake of clarity, the predicate
+\begin{displaymath}
+inc(X, succ(succ(zero))) \quad\text{where}\quad Y = succ(X) \rightarrow inc(X, Y),
+\end{displaymath}
+is satisfied by the substitution
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+|X|
+X := (Var id: 0).
+Dictionary new
+    at: X put: 'succ(zero)';
+    yourself
+\end{minted}
+
+Moreover, logic variables are created by means of the message
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Var class >> id: anInteger
+    ^ self new
+        id: ('var_' , anInteger asString) asSymbol;
+        yourself
+\end{minted}
+
+We wrap a substitution in a \ct{State} object that keeps record of metadata
+about the computation, for instance a \ct{State} has an integer \ct{birthdate}
+to track the (discrete) time when a logic variable has been introduced -- its
+meaning will be clarified later when we'll describe the \ct{Fresh}
+goal\footnote{put here the reference to its subsection}.
+
+An initial \ct{State} object is created by
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Dictionary new asState
 \end{minted}
@@ -142,7 +173,7 @@ State >> at: aVar put: aValue
     | s |
     s := substitution copy.
     "check that if a key already exists at aVar, then the values must be the same"
-    s 
+    s
       at: aVar
       ifPresent: [:v | aValue = v ifFalse: [UnificationError signal]]
       ifAbsentPut: aValue.
@@ -152,25 +183,109 @@ State >> at: aVar put: aValue
         yourself
 \end{minted}
 maintaining a coherent protocol with respect to the one of \Verb|Dictionary|
-objects for extension; moreover, \ct{UnificationError} objects will be
+objects for extension; finally, \ct{UnificationError} objects will be
 explained in a later section when will talk about the unification process.
 
-\subsection{\ct{Chain}s and \ct{Cons}es}
-\sd{As a general comments. You should say to the reader. We will do that. And do piece by piece
-Now I discover things just stumbling on them.}
+\subsection{Cons cells}
 
-\sd{Example: In this section we will build the infrastructure to represent potentially infinite lists. 
-For this will start building a chain. A chain is composed of consed: objects following Lisp tradition. 
-We will define first the class Chain as an abstract class with two subclass \ct{Knot} and \ct{Bottom}.
-\ct{Bottom} will represent the empty cell of lisp on top of which any list is build. \ct{Knot} represents 
-a ...
-}
+Because the sequence of substitutions may be infinite, we represent it not as a
+\ct{LinkedList} object but as a \ct{Chain} object which has the capability to
+represent potentially infinite sequences.  For this we will start building
+\ct{Cons} cells; following the Lisp tradition, we reproduce the usual behavior
+as the next test method shows:
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+testCons
+    self
+        assert: '(0)'
+        equals: (0 cons: nil) asString.
+    self
+        assert: '(0 1 2 3 4 5 6 7 8 9)'
+        equals: (0 to: 9) asCons asString.
+    self
+        assert: '((1 2) 3 4 (5 (6 8)) 7)'
+        equals: {{1. 2}. 3. 4. {5. {6. 8}}. 7} asCons asString.
 
+    "dotted pairs notation"
+    self
+        assert: '(0 . 1)'
+        equals: (0 cons: 1) asString.
+    self
+        assert: '(0 1 2 3 4 5 6 7 8 9 . 10)'
+        equals: ((0 to: 9) asConsWithCdr: 10) asString.
+    self
+        assert: '(((3 . 4) . 5) 6 7)'
+        equals: (((3 cons: 4) cons: 5) cons: (6 cons: (7 cons: nil))) asString
+\end{minted}
+We split its description of
+\begin{itemize}
+\item the creation message \ct{\#cons:} is defined as
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object >> cons: anObj
+    ^ anObj consedObject: self
+\end{minted}
+which dispatches the message \ct{\#consedObject:} on its argument to build
+\ct{Cons} cells with
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object >> consedObject: car
+    ^ Cons car: car cdr: self
 
-Because the sequence of substitutions may be infinite, we
-represent it not as a \ct{LinkedList} object but as a \ct{Chain} object;
-as usual, we find \ct{BlockClosure} objects good candidates to represent (a possibly
-infinite) computation. Some examples are in order, \sd{ChainTest -> ChainExamples}
+Cons class >>  car: anObj cdr: anotherObj
+    ^ self new
+        car: anObj;
+        cdr: anotherObj;
+        yourself
+\end{minted}
+
+\item the translation message \ct{\#asCons} is defined and overridden as
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object >> asCons
+    ^ Cons fromObject: self
+
+ByteSymbol >> asCons
+    ^ Cons fromByteSymbol: self
+
+SequenceableCollection >> asCons
+    ^ Cons fromSequenceableCollection: self
+\end{minted}
+in parallel, the class object \ct{Cons} responds as follows
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Cons >> fromObject: anObj
+    ^ anObj
+
+Cons >> fromByteSymbol: aSymbol
+    ^ aSymbol
+
+Cons >> fromSequenceableCollection: aCollection
+    ^ self fromSequenceableCollection: aCollection lastCdr: nil
+
+Cons >> fromSequenceableCollection: aCollection lastCdr: aCdr
+    ^ aCollection
+        foldr: [:each :acc | self car: each asCons cdr: acc asCons]
+        init: aCdr
+\end{minted}
+Finally, to build the more general notion of \textit{dotted pairs},
+the message \ct{\#asConsWithCdr:} is defined and overridden as
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object >> asConsWithCdr: aCdr
+    ^ Cons fromObject: self lastCdr: aCdr
+
+SequenceableCollection >> asConsWithCdr: aCdr
+    ^ Cons fromSequenceableCollection: self lastCdr: aCdr
+\end{minted}
+which require
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Cons >> fromObject: anObj lastCdr: aCdr
+    ^ self car: anObj cdr: aCdr
+\end{minted}
+
+\end{itemize}
+
+\subsection{Chains}
+
+We find \ct{BlockClosure} objects good candidates to
+represent a suspended (and possibly infinite) computation. The following
+auxiliary methods for the test case \ct{ChainTest} show examples of how
+\ct{BlockClosure}s can be used as arguments for the message \ct{\#cons:},
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 ChainTest >> collatz: o
     ^ o
@@ -198,43 +313,15 @@ ChainTest >> ints: i
 ChainTest >> zeroOneTwo
     ^ 0 cons: (1 cons: (2 cons: Chain bottom))
 \end{minted}
-where any \ct{Object} object respond to the message \ct{cons:} as follows: 
-\sd{what is the argument?}
-\sd{Separate Cons and Chain explanation}
-\sd{why not just started with Cons. Ok we have an object}
+In turn, when a \ct{BlockClosure} receives the dispatched message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Object >> cons: anObj
-    ^ anObj consedObject: self
-\end{minted}
-which dispatches over
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-Object >> consedObject: car
-    ^ Cons car: car asCons cdr: self asCons
-
 BlockClosure >> consedObject: car
     ^ Chain item: car linker: self
-
-Chain >> consedObject: car
-    ^ car cons: [self]
 \end{minted}
-where (i)~\ct{Cons} objects mimic \textit{Lisp's cons cells}
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-Cons class >>  car: anObj cdr: anotherObj
-    ^ self new
-        car: anObj;
-        cdr: anotherObj;
-        yourself
-
-Object >> asCons
-    ^ Cons fromObject: self
-
-Cons class >> fromObject: anObj
-    ^ anObj
-\end{minted}
-
-\sd{I do not get fromObject: implementation. because you do not wrap the object.
-So 1 asCons will return 1}
-and (ii)~the abstract class \ct{Chain} provides the following class-side messages
+then it builds a \ct{Chain}; precisely, \ct{Chain} is an abstract class with
+two subclasses \ct{Bottom} which denotes an empty sequence and \ct{Knot} which
+denotes a sequence that has a value and a tail sequence that is not evaluated
+yet, providing a \ct{BlockClosure} to do that, one item at a time.
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Chain class >> bottom
     ^ Bottom new
@@ -244,15 +331,21 @@ Chain class >> item: anObj linker: aBlockClosure
         item: anObj;
         linker: aBlockClosure;
         yourself
-
+\end{minted}
+Moreover, a \ct{Chain} can be used as argument of a \ct{\#cons:} message send
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Chain >> consedObject: car
+    ^ car cons: [self]
+\end{minted}
+directly and other constructors are provided by \ct{Chain} class messages
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
 Chain class >> with: anObj
     ^ anObj cons: Chain bottom
 
 Chain class >> repeat: anObj
     ^ anObj cons: [self repeat: anObj]
 \end{minted}
-having two subclasses \ct{Knot} and \ct{Bottom}. A comprehensive
-test case follows \sd{split it and explain.}
+that allow us to write the following comprehensive test case
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 ChainTest >> testNumbers
     self
@@ -281,7 +374,7 @@ ChainTest >> testNumbers
         equals: {4. 4. 4. 4. 4. 4. 4. 4. 4. 4}
 \end{minted}
 
-On one hand, when a \ct{Chain} object (i)~receives the message
+On one hand, when a \ct{Chain} object receives the message
 \ct{next:} that carries a \ct{SmallInteger} object $n$ then it keeps at most
 $n$ objects and then truncate itself, precisely
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
@@ -294,7 +387,7 @@ Knot >> next: n
         ifFalse: [item cons: [self next next: n - 1]]
 \end{minted}
 
-On the other hand, when a \ct{Chain} object (ii)~receives the message
+On the other hand, when a \ct{Chain} object receives the message
 \ct{\#contents} it builds a \ct{LinkedList} object \textit{eagerly},
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Bottom >> contents
@@ -307,19 +400,23 @@ Knot >> contents
 \end{minted}
 where \Verb|Knot| objects provide the following simple but fundamental message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Knot>>#next
+Knot >> next
     ^ linker value
 \end{minted}
-Observe that the \ct{Chain} hierarchy supports the protocol provided
+that allows us to do one more step in filling the not yet evaluated rest of the
+sequence. Observe that the \ct{Chain} hierarchy supports the protocol provided
 by \ct{ReadStream} objects because of the messages \ct{\#next}, \ct{\#next:}
 and \ct{\#contents}.
 
-\subsection{\texttt{Runner}s, \texttt{Reifier}s and \texttt{Var}s}
+\subsection{The Runner}
 
-Recall \sd{it was not said that way so I do not recall} that a \ct{Goal} object responds with a \ct{Chain} that contains either zero,
-one, or more substitutions when it receives the message \ct{\#onState:} and it
-delegates the task to process those substitutions to \ct{Runner} objects,
+We can now be more precise and rephrase that a \ct{Goal} object responds with a
+\ct{Chain} that contains either zero, one or more substitutions when it
+receives the message \ct{\#onState:}.
 
+In this section we describe three components that have the responsibility to
+report and to present the substitutions that satisfy the given goal. The entry
+point is the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Goal >> solutions
     ^ Runner onGoal: self
@@ -329,20 +426,22 @@ Runner class >> onGoal: aGoal
         goal: aGoal;
         yourself
 \end{minted}
-which are able to process both (i)~all of them with the message
+that allows a goal to build a \ct{Runner} which has the responsibilities to
+process the \ct{Chain} of substitutions; in particular, (i)~all of them with
+the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Runner >> all
     ^ self run contents
 \end{minted}
-and (ii)~at most $n$ of them with the message \ct{atMost:} below: 
+and (ii)~at most $n$ of them with the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
 Runner >> atMost: anInteger
     ^ (self run next: anInteger) contents
 \end{minted}
-relying on the unary message \ct{run}
 
+Those messages rely on the unary message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Runner>>#run
+Runner >> run
     | states vars selector |
     states := goal onState: Dictionary new asState.
     vars := goal vars ifEmpty: [LinkedList with: Var tautology].
@@ -351,137 +450,139 @@ Runner>>#run
         collect: [:s | selector
                         value: (s reifier reifyVars: vars)]
 \end{minted}
-having the responsibilities
+that accomplishes the responsibilities
 \begin{itemize}
 
-\item to send the message \Verb|#onState:| to \Verb|Goal| objects to start the
-resolution process from an empty state, this can be considered the entry point of
-the ``computation'' that produces a \Verb|Chain| of substitutions;
+\item to send the message \Verb|#onState:| to a \Verb|Goal| $g$ in order to
+start the resolution process from an empty state -- this can be considered the
+entry point of the ``computation'' that produces the \Verb|Chain| of
+substitutions that satisfy $g$;
 
 \item to take into account the variables with respect to results should be
-provided; as a particular case, if the root goal doesn't introduce any logic
-variable, by means of the auxiliary messages
+provided; as a particular case, if the root \ct{Goal} $g$ doesn't introduce any logic
+variable, recovered by the messages
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Goal>>#vars
+Goal >> vars
     ^ {}
 
-Fresh>>#vars
+Fresh >> vars
     ^ vars
 \end{minted}
-then it is equivalent to prove a \textit{tautology}, represented by
+then it is equivalent to prove that $g$ is a \textit{tautology}, represented
+by
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Var class>>#tautology
+Var class >> tautology
     ^ #tautology
 \end{minted}
-which require to decide that a relation is always true regardless values taken
-by logic variables;
+which requires to decide that a relation is always \textit{true} regardless
+the values associated to logic variables;
 
-\item to simplify the results presentation when the root \Verb|Goal| object
-introduces \textit{exactly one} logic variable: in this case a
-\Verb|LinkedList| of values for that variable will be produced; otherwise, a
-\Verb|LinkedList| of \Verb|LinkedList| of values will be produces each one for
-each tuple of logic variables introduced by the root \Verb|Goal| object -- this
-point will be clear when we'll explain \Verb|Fresh| goals that are the only
-ones able to introduce logic variables;
+\item to simplify the presentation of results when the root \Verb|Goal| object
+introduces \textit{exactly one} logic variable $v$: in this case a
+\Verb|LinkedList| of values associated to $v$ will be produced; otherwise, a
+\Verb|LinkedList| of \Verb|LinkedList| of values will be produced, a list for
+each tuple of logic variables introduced -- this point will become clear when
+we'll explain \Verb|Fresh| goals that are the only ones able to introduce logic
+variables;
 
 \item to map each substitution (always translate to \Verb|State| object) that
-satisfies the root \Verb|Goal| object do \textit{reify} the required variables,
-this is accomplished by the messages
-\begin{minted}[fontsize=\footnotesize]{smalltalk}
-s reifier reifyVars: vars
-\end{minted}
-within the block argument of the returning \Verb|#collect:| message send.
+satisfies the root \Verb|Goal| object to a \textit{reified} substitution.
 \end{itemize}
+
 The last point shows that \Verb|Chain| objects are \textit{functors} according
 to the Haskell terminology because they answer to the message \Verb|#collect:|,
 which is a synonism for the function \Verb|fmap :: (a -> b) -> f a -> f b|, as
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Chain>>#collect: aBlockClosure
+Chain >> collect: aBlockClosure
     ^ self
 
-Knot>>#collect: aBlockClosure
+Knot >> collect: aBlockClosure
     | v |
     v := aBlockClosure value: item.
     ^ v cons: [self next collect: aBlockClosure]
 \end{minted}
-respectively.  We are now ready to describe the reification process which
+respectively.
+
+\subsection{The Reifier}
+
+We are now ready to describe the reification process which
 requires
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#reifier
+State >> reifier
     ^ Reifier on: self
 
-Reifier>>#reifyVars: vars
+Reifier >> reifyVars: vars
     | walker reifier |
     walker := state walker.
     reifier := Dictionary new asState reifier.
     ^ vars
         collect: [:v |
                     | w s |
-                    w := walker walkStar: v.
-                    s := reifier reify: w.
-                    s walker walkStar: w]
+                    w := walker value: v.
+                    s := reifier value: w.
+                    s walker value: w]
 \end{minted}
 which uses the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Reifier>>#reify: anObj 
-    ^ (state walk: anObj) 
-        reifyUsing: self
+Reifier >> value: anObj
+    ^ (state walk: anObj)
+        reifyUsingReifier: self
 \end{minted}
-to dispatch the message \Verb|#reifyUsing:| over
+to dispatch the message \Verb|#reifyUsingReifier:| over
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Object>>#reifyUsing: aReifier
-    ^ aReifier reifyObject: self 
+Object >> reifyUsingReifier: aReifier
+    ^ aReifier reifyObject: self
 
-Var>>#reifyUsing: aReifier 
-    ^ aReifier reifyVar: self 
+Var >> reifyUsingReifier: aReifier
+    ^ aReifier forVar: self
 
-ReifiedVar>>#reifyUsing: aReifier 
-    ^ aReifier reifyReifiedVar: self
+ReifiedVar >> reifyUsingReifier: aReifier
+    ^ aReifier forReifiedVar: self
 
-Array>>#reifyUsing: aReifier
-    ^ aReifier reifyArray: self 
+Array >> reifyUsingReifier: aReifier
+    ^ aReifier forArray: self
 
-LinkedList>>#reifyUsing: aReifier 
-    ^ aReifier reifyLinkedList: self 
+LinkedList >> reifyUsingReifier: aReifier
+    ^ aReifier forLinkedList: self
 
-Cons>>#reifyUsing: aReifier 
-    ^ aReifier reifyCons: self 
+Cons >> reifyUsingReifier: aReifier
+    ^ aReifier forCons: self
 \end{minted}
 and to collect replies as
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Reifier>>#reifyObject: anObj 
+Reifier >> forObject: anObj
     ^ state
 
-Reifier>>#reifyVar: aVar 
+Reifier >> forVar: aVar
     ^ state reifyVar: aVar
 
-Reifier>>#reifyReifiedVar: aVar 
+Reifier >> forReifiedVar: aVar
     ^ state
 
-Reifier>>#reifyArray: aCollection 
-    ^ self reifyCollection: aCollection
+Reifier >> forArray: aCollection
+    ^ self _forCollection: aCollection
 
-Reifier>>#reifyArray: aCollection 
-    ^ self reifyCollection: aCollection
+Reifier >> forLinkedList: aCollection
+    ^ self _forCollection: aCollection
 
-Reifier>>#reifyArray: aCollection 
-    ^ self reifyCollection: aCollection
+Reifier >> forCons: aCollection
+    ^ self _forCollection: aCollection
 
-Reifier>>#reifyCollection: aCollection 
-    ^ aCollection inject: state into: [:s :c | s reifier reify: c]
+Reifier >> _forCollection: aCollection
+    ^ aCollection inject: state into: [:s :c | s reifier value: c]
 \end{minted}
 requiring the auxiliary message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#reifyVar: aVar 
+State >> reifyVar: aVar
     substitution
         at: aVar
-        ifAbsentPut: [ReifiedVar new 
-                        id: substitution size; 
+        ifAbsentPut: [ReifiedVar new
+                        id: substitution size;
                         yourself]
 \end{minted}
 and
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#walk: anObj 
+State >> walk: anObj
     | k |
     k := anObj.
     [k := substitution at: k ifAbsent: [^ k]] repeat
@@ -489,60 +590,61 @@ State>>#walk: anObj
 Observe that \ct{Chain} objects are also \textit{foldable} according to the
 Haskell \ct{Foldable} typeclass because they respond to the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Cons>>#inject: init into: aBlock 
+Cons >> inject: init into: aBlock
     | accumulated |
     accumulated := aBlock value: init value: car.
     ^ aBlock value: accumulated value: cdr
 \end{minted}
 
+\subsection{The Walker}
 The reification process requires \ct{Walker} objects which are built by
 \ct{State} objects using the template method
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-State>>#walker
+State >> walker
     ^ Walker on: self
 \end{minted}
-and it responds to the selector \Verb|#walkStar| with
+and it responds to the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Walker>>#walkStar: aVar
+Walker >> value: aVar
     ^ (state walk: aVar)
         walkStarUsingWalker: self
 \end{minted}
 and objects of different classes responds to \Verb|#walkStarUsingWalker:| as follows
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Object>>#walkStarUsingWalker: aWalker
-    ^ aWalker walkStarObject: self
+Object >> walkStarUsingWalker: aWalker
+    ^ aWalker forObject: self
 
-Array>>#walkStarUsingWalker: aWalker
-    ^ aWalker walkStarArray: self
+Array >> walkStarUsingWalker: aWalker
+    ^ aWalker forArray: self
 
-LinkedList>>#walkStarUsingWalker: aWalker
-    ^ aWalker walkStarLinkedList: self
+LinkedList >> walkStarUsingWalker: aWalker
+    ^ aWalker forLinkedList: self
 
-Cons>>#walkStarUsingWalker: aWalker
-    ^ aWalker walkStarCons: self
+Cons >> walkStarUsingWalker: aWalker
+    ^ aWalker forCons: self
 \end{minted}
 dispatching over \Verb|Walker| objects
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Walker>>#walkStarObject: anObj
+Walker >> forObject: anObj
     ^ state walk: anObj
 
-Walker>>#walkStarArray: aCollection
-    ^ aCollection
-        collect: [:each | self walkStar: each]
+Walker >> forArray: aCollection
+    ^ self _forCollection: aCollection
 
-Walker>>#walkStarLinkedList: aCollection
-    ^ aCollection
-        collect: [:each | self walkStar: each]
+Walker >> forLinkedList: aCollection
+    ^ self _forCollection: aCollection
 
-Walker>>#walkStarCons: aCons
-    | car cdr |
-    car := self walkStar: aCons car.
-    cdr := self walkStar: aCons cdr.
-    ^ car cons: cdr
+Walker >> forCons: aCons
+    ^ self _forCollection: aCons
+
+Walker >> _forCollection: aCollection
+    ^ aCollection
+        collect: [:each | self value: each]
 \end{minted}
 respectively.
 
 \section{Bootstrapping $\mu$Kanren}
+\label{sec:bootstrapping}
 
 We believe that an unusual development process can be done in Smalltalk and it
 is the one that had driven and currently drives the present description.
@@ -568,7 +670,7 @@ description of their technical difference. Moreover, let us
 assume that the infrastructure that actually builds results is given and implemented
 by the block \texttt{B := [:g | g solutions all]}, we write our first test case:
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-GoalTest>>#testFail
+GoalTest >> testFail
     self
         assert: false asGoal solutions all
         equals: {}
@@ -576,18 +678,18 @@ GoalTest>>#testFail
 Now we extend the \Verb|False| class with the following \Verb|asGoal| message
 definition
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-False>>#asGoal
+False >> asGoal
     ^ Goal fail
 \end{minted}
 and of the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Goal>>#fail
+Goal >> fail
     ^ Fail new
 \end{minted}
 such that to say that \verb|Fail| denotes the impossibility to satisfy a relation
 is the same to code the message
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Fail>>#onState: aState
+Fail >> onState: aState
     ^ Chain bottom
 \end{minted}
 which will be used within the message \Verb|solutions| sent in the block
@@ -597,24 +699,24 @@ streams in particular, all in what follows.
 In parallel, we reproduce for the object \Verb|true| the steps did for
 the object \Verb|false|; first,
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-GoalTest>>#testSucceed
+GoalTest >> testSucceed
     self
         assert: true asGoal solutions all
         equals: {Var tautology}
 \end{minted}
 second,
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-True>>#asGoal
+True >> asGoal
     ^ Goal succeed
 \end{minted}
 third,
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Goal>>#succeed
+Goal >> succeed
     ^ Succeed new
 \end{minted}
 fourth,
 \begin{minted}[fontsize=\footnotesize]{smalltalk}
-Succeed>>#onState: aState
+Succeed >> onState: aState
     ^ Chain with: aState
 \end{minted}
 
