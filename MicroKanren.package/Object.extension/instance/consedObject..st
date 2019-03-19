@@ -1,3 +1,3 @@
 *MicroKanren-core
 consedObject: car
-	^ Cons car: car asCons cdr: self asCons
+	^ Cons car: car  cdr: self 

@@ -1,3 +1,3 @@
 *MicroKanren-core
-reifyUsing: aReifier 
+reifyUsingReifier: aReifier 
 	^ aReifier forLinkedList: self 

@@ -1,3 +1,3 @@
 dispatching
-reifyUsing: aReifier 
+reifyUsingReifier: aReifier 
 	^ aReifier forVar: self 

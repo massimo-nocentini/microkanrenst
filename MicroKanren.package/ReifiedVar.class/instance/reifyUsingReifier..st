@@ -1,5 +1,5 @@
 as yet unclassified
-reifyUsing: aReifier 
+reifyUsingReifier: aReifier 
 	"No work to be done here because a ReifiedVar is already reified, btw."
 
 	^ aReifier forReifiedVar: self
