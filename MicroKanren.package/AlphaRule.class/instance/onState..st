@@ -1,6 +1,6 @@
 running
 onState: aState 
-	| reifier |
-	reifier := aState walker.
-	^ ((reifier value: x)
-		= (reifier value: y)) asGoal onState: aState
+	| values |
+	values := aState reifier reifyVars: {x . y}.
+	^ (values first
+		= values second) asGoal onState: aState
