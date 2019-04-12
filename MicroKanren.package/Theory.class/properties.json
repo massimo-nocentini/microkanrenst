@@ -1,0 +1,14 @@
+{
+	"category" : "MicroKanren-theories",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "Theory",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }
