@@ -1,42 +1,21 @@
 tests
 testCdro
-	| g |
-	g := [ :r | [ :d | (sexpTheory let: d cdr: 'acorn') , (sexpTheory let: r car: d) ] fresh ]
-		fresh.
+	| g µ |
+	µ := Theory sexp.
+	g := [:r | [:d | (µ cdro value: 'acorn' asCons value: d)
+				, (µ caro value: d value: r)] fresh] fresh.
 	self assert: g solutions all equals: {$c}.
-	g := [ :r | 
-	[ :x :y | 
-	| l m vl |
-	l := LinkedList new
-		add: #grape;
-		add: #raisin;
-		add: #pear;
-		yourself.
-	m := LinkedList new
-		add: (#a cons: nil);
-		add: (#b cons: nil);
-		add: (#c cons: nil);
-		yourself.
-	vl := x cons: y.
-	(sexpTheory let: x cdr: l) , (sexpTheory let: y car: m) , (vl unifyWith: r)
-		, (r unifyWith: vl) ] fresh ] fresh.
-	self
-		assert: g solutions all
-		equals:
-			{{{#raisin . #pear}.
-			#a} asCons}.
-	g := [ :r | sexpTheory let: 'corn' cdr: 'acorn' ] fresh.
+	g := [:r | [:x :y |
+			(µ cdro value: {#grape. #raisin. #pear} asCons value: x)
+				, (µ caro value:  {#a cons: nil. #b cons: nil. #c cons: nil} asCons value: y)
+				, (µ conso value: x value: y value:  r)] fresh] fresh.
+	self assert: g solutions all equals: {{{#raisin. #pear}. #a} asCons}.
+	g := [:r | µ cdro value: 'acorn' asCons value: 'corn' asCons] fresh.
 	self assert: g solutions all equals: {0 asReifiedVar}.
-	g := [ :r | sexpTheory let: 'acorn' cdr: 'acorn' ] fresh.
+	g := [:r | µ cdro value: 'acorn' asCons value: 'acorn' asCons] fresh.
 	self assert: g solutions all equals: {}.
-	g := [ :r | 
-	sexpTheory
-		let:
-			{r.
-			$r.
-			$n}
-		cdr: 'corn' ] fresh.
+	g := [:r | µ cdro value: 'corn' asCons value: {r. $r. $n} asCons] fresh.
 	self assert: g solutions all equals: {$o}.
-	g := [ :l | [ :x | (sexpTheory let: $a car: l) , (sexpTheory let: 'corn' cdr: l) ] fresh ]
-		fresh.
+	g := [:l | [:x | (µ caro value: l value: $a)
+				, (µ cdro value: l value: 'corn' asCons)] fresh] fresh.
 	self assert: g solutions all equals: {'acorn' asCons}

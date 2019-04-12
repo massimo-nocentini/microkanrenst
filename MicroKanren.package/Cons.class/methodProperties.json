@@ -18,7 +18,7 @@
 		"inject:into:" : "MN 3/15/2019 18:04",
 		"printOn:" : "MN 3/18/2019 18:51",
 		"reifyUsingReifier:" : "MN 3/19/2019 15:41",
-		"unifyWith:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 12:01",
-		"unifyWithCons:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 12:02",
-		"unifyWithLinkedList:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 14:02",
+		"unifyWith:usingUnifier:" : "MN 4/2/2019 22:47",
+		"unifyWithCons:usingUnifier:" : "MN 4/2/2019 22:56",
+		"unifyWithLinkedList:usingUnifier:" : "MN 4/2/2019 22:56",
 		"walkStarUsingWalker:" : "MN 3/18/2019 09:14" } }

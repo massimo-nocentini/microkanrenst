@@ -1,3 +1,3 @@
 combining
-| other
-	^ Disj either: self or: other
+| other 
+	^ Disj new either: self; or: other; interleaving: Interleaved new; yourself

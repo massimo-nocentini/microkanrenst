@@ -5,8 +5,8 @@
 	"instance" : {
 		"id:" : "6/8/2017 11:25:29",
 		"reifyUsingReifier:" : "MN 3/19/2019 15:42",
-		"unifyWith:usingUnifier:onState:" : "6/8/2017 11:25:29",
-		"unifyWithCons:usingUnifier:onState:" : "MassimoNocentini 6/8/2017 12:13",
-		"unifyWithLinkedList:usingUnifier:onState:" : "6/8/2017 11:25:29",
-		"unifyWithObject:usingUnifier:onState:" : "6/8/2017 11:25:29",
-		"unifyWithVar:usingUnifier:onState:" : "6/8/2017 11:25:29" } }
+		"unifyWith:usingUnifier:" : "MN 4/2/2019 22:47",
+		"unifyWithCons:usingUnifier:" : "MN 4/2/2019 23:00",
+		"unifyWithLinkedList:usingUnifier:" : "MN 4/2/2019 23:00",
+		"unifyWithObject:usingUnifier:" : "MN 4/2/2019 23:00",
+		"unifyWithVar:usingUnifier:" : "MN 4/2/2019 23:01" } }

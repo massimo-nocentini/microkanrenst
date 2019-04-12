@@ -2,10 +2,11 @@
 	"class" : {
 		 },
 	"instance" : {
-		"unify:with:onState:" : "6/8/2017 11:25:29",
-		"unifyCons:withCons:onState:" : "MassimoNocentini 6/8/2017 20:50",
-		"unifyLinkedList:withLinkedList:onState:" : "6/8/2017 11:25:29",
-		"unifyObject:withObject:onState:" : "6/8/2017 11:25:29",
-		"unifyObject:withVar:onState:" : "6/8/2017 11:25:29",
-		"unifyVar:withObject:onState:" : "6/8/2017 11:25:29",
-		"unifyVar:withVar:onState:" : "6/8/2017 11:25:29" } }
+		"forCons:forCons:" : "MN 4/2/2019 23:02",
+		"forLinkedList:forLinkedList:" : "MN 4/2/2019 23:05",
+		"forObject:forObject:" : "MN 4/2/2019 23:03",
+		"forObject:forVar:" : "MN 4/2/2019 23:04",
+		"forVar:forObject:" : "MN 4/2/2019 23:06",
+		"forVar:forVar:" : "MN 4/2/2019 23:07",
+		"state:" : "MN 4/2/2019 22:39",
+		"value:value:" : "MN 4/2/2019 22:50" } }

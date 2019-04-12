@@ -1,3 +1,6 @@
 combining
-, other
-	^ Conj both: self and: other
+, other 
+	^ Conj new both: self;
+		 and: other;
+		interleaving: Sequential new;
+		 yourself

@@ -1,7 +1,8 @@
 {
 	"class" : {
-		"either:or:" : "6/8/2017 11:25:29" },
+		 },
 	"instance" : {
-		"either:or:" : "6/8/2017 11:25:29",
-		"initialize" : "6/8/2017 11:25:29",
-		"onState:" : "MassimoNocentini 6/9/2017 16:20" } }
+		"either:" : "MN 3/28/2019 15:55",
+		"interleaving:" : "MN 3/28/2019 15:56",
+		"onState:" : "MassimoNocentini 6/9/2017 16:20",
+		"or:" : "MN 3/28/2019 15:56" } }

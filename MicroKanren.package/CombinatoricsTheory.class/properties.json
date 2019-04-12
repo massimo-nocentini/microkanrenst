@@ -6,9 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"sexpTheory" ],
+		 ],
 	"name" : "CombinatoricsTheory",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "Theory",
 	"type" : "normal" }

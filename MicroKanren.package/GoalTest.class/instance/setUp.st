@@ -1,4 +1,4 @@
 initialization
 setUp
-	sexpTheory := SexpTheory new.
+	sexpTheory := Theory sexp.
 	combTheory := CombinatoricsTheory new

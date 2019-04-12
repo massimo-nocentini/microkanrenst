@@ -1,3 +1,6 @@
 combining
-& anotherGoal
-	^ (self , anotherGoal) interleaved
+&  other 
+	^ Conj new both: self;
+		 and: other;
+		 interleaving: Interleaved new;
+		 yourself

@@ -10,5 +10,5 @@
 	"name" : "SexpTheory",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "Theory",
 	"type" : "normal" }

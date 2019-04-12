@@ -2,8 +2,9 @@
 	"class" : {
 		 },
 	"instance" : {
-		"let:be:append:" : "MassimoNocentini 6/8/2017 19:37",
-		"let:be:cons:" : "MassimoNocentini 6/8/2017 21:20",
-		"let:car:" : "MassimoNocentini 6/8/2017 21:18",
-		"let:cdr:" : "MassimoNocentini 6/8/2017 21:19",
-		"let:reverse:" : "MassimoNocentini 6/10/2017 13:48" } }
+		"appendo" : "MN 4/3/2019 23:30",
+		"caro" : "MN 4/3/2019 11:09",
+		"cdro" : "MN 4/3/2019 11:12",
+		"conso" : "MN 4/3/2019 11:04",
+		"nilo" : "MN 4/3/2019 23:29",
+		"reverseo" : "MN 4/3/2019 23:32" } }
