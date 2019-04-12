@@ -1,0 +1,15 @@
+{
+	"category" : "MicroKanren-core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"x",
+		"y" ],
+	"name" : "AlphaRule",
+	"pools" : [
+		 ],
+	"super" : "Goal",
+	"type" : "normal" }
