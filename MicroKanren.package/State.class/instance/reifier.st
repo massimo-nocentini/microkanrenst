@@ -1,3 +1,3 @@
-as yet unclassified
+reification
 reifier
-	^ Reifier on: self
+	^ self reifierWithVarCtor: #asReifiedVar

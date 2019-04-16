@@ -1,0 +1,16 @@
+{
+	"category" : "MicroKanren-core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"block",
+		"args",
+		"table" ],
+	"name" : "Tabled",
+	"pools" : [
+		 ],
+	"super" : "Goal",
+	"type" : "normal" }

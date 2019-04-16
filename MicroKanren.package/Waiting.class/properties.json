@@ -6,9 +6,9 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
-	"name" : "StreamCombination",
+		"streams" ],
+	"name" : "Waiting",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "Chain",
 	"type" : "normal" }

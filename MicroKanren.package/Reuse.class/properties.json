@@ -1,0 +1,14 @@
+{
+	"category" : "MicroKanren-core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "Reuse",
+	"pools" : [
+		 ],
+	"super" : "TablingCall",
+	"type" : "normal" }

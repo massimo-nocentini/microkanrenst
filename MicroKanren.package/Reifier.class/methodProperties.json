@@ -1,6 +1,6 @@
 {
 	"class" : {
-		"on:" : "MN 3/14/2019 14:40" },
+		 },
 	"instance" : {
 		"_forCollection:" : "MN 3/18/2019 09:25",
 		"forArray:" : "MN 3/18/2019 09:28",
@@ -8,7 +8,8 @@
 		"forLinkedList:" : "MN 3/18/2019 09:28",
 		"forObject:" : "MN 3/18/2019 09:26",
 		"forReifiedVar:" : "MN 3/18/2019 09:26",
-		"forVar:" : "MN 3/18/2019 09:27",
+		"forVar:" : "MN 4/15/2019 11:27",
 		"reifyVars:" : "MN 3/18/2019 09:07",
 		"state:" : "MN 3/14/2019 14:40",
-		"value:" : "MN 3/19/2019 15:42" } }
+		"value:" : "MN 3/19/2019 15:42",
+		"varCtor:" : "MN 4/15/2019 11:24" } }

@@ -1,0 +1,3 @@
+tabling
+isReady
+	self subclassResponsibility

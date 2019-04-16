@@ -3,7 +3,7 @@ tabled
 	| table ctor |
 	table := Dictionary new.
 	ctor := [:args | Goal
-				tabled: self
+				tabledBlock: self
 				withArgs: args
 				withTable: table].
 	^ numArgs caseOf: {

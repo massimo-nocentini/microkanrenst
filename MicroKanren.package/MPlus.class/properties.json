@@ -11,5 +11,5 @@
 	"name" : "MPlus",
 	"pools" : [
 		 ],
-	"super" : "StreamCombination",
+	"super" : "StreamCombinator",
 	"type" : "normal" }

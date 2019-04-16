@@ -1,0 +1,14 @@
+{
+	"category" : "MicroKanren-core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		 ],
+	"name" : "StreamCombinator",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

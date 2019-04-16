@@ -1,7 +1,7 @@
 running
-onState: aState
-	^ [ | extended_state |
-	extended_state :=aState unifier value: this value: that.
-	Goal succeed onState: extended_state ]
+onState: aState 
+	^ [| extended_state |
+	extended_state := aState unifier value: this value: that.
+	true asGoal onState: extended_state]
 		on: UnificationError
-		do: [ Goal fail onState: aState ]
+		do: [false asGoal onState: aState]

@@ -1,5 +1,3 @@
 *MicroKanren-core
 asReifiedVar
-	^ ReifiedVar new
-		id: self;
-		yourself
+	^ self asReifiedWithVarClass: ReifiedVar

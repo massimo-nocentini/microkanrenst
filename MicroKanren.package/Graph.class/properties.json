@@ -1,0 +1,15 @@
+{
+	"category" : "MicroKanren-utilities",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"vertices",
+		"edges" ],
+	"name" : "Graph",
+	"pools" : [
+		 ],
+	"super" : "Object",
+	"type" : "normal" }

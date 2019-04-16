@@ -11,5 +11,5 @@
 	"name" : "Bind",
 	"pools" : [
 		 ],
-	"super" : "StreamCombination",
+	"super" : "StreamCombinator",
 	"type" : "normal" }
