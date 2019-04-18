@@ -1,3 +1,3 @@
 initializing
-linker: aBlockClosure
-	linker := aBlockClosure
+linker: aChain 
+	rest := aChain

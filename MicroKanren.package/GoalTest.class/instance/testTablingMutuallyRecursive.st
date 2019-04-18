@@ -2,44 +2,36 @@ tests
 testTablingMutuallyRecursive
 	| fº gº |
 	gº := nil.
-	fº := [:x | Goal cond e
-				if: (x unifyWith: 0)
-				then: true asGoal;
+	fº := [:x | Goal cond e if: x =° 0 then: true asGoal;
 				
 				else: (gº value: x);
 				 yourself].
-	gº := [:x | Goal cond e
-				if: (x unifyWith: 1)
-				then: true asGoal;
+	gº := [:x | Goal cond e if: x =° 1 then: true asGoal;
 				
 				else: (fº value: x);
 				 yourself].
 	"self
-		assert: {0. 1}
-		equals: ([:q | fº value: q] fresh solutions atMost: 2)."
-	fº := [:x | Goal cond e
-				if: (x unifyWith: 0)
-				then: true asGoal;
+	assert: {0. 1}
+	equals: ([:q | fº value: q] fresh solutions next: 2) contents."
+	fº := [:x | Goal cond e if: x =° 0 then: true asGoal;
 				
 				else: (gº value: x);
 				 yourself] tabled.
-	gº := [:x | Goal cond e
-				if: (x unifyWith: 1)
-				then: true asGoal;
+	gº := [:x | Goal cond e if: x =° 1 then: true asGoal;
 				
 				else: (fº value: x);
 				 yourself].
-	self assert: {0. 1} equals: [:q | fº value: q] fresh solutions all.
+	self assert: {0. 1} equals: [:q | fº value: q] fresh solutions contents.
 	fº := [:x | Goal cond e
-				if: (x unifyWith: 0)
+				if: (x =° 0)
 				then: true asGoal;
 				
 				else: (gº value: x);
 				 yourself].
 	gº := [:x | Goal cond e
-				if: (x unifyWith: 1)
+				if: (x =° 1)
 				then: true asGoal;
 				
 				else: (fº value: x);
 				 yourself] tabled.
-	self assert: {0. 1. 0} equals: [:q | fº value: q] fresh solutions all
+	self assert: {0. 1. 0} equals: [:q | fº value: q] fresh solutions contents

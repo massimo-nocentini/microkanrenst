@@ -1,5 +1,4 @@
 listing
 contents
-	^ self next contents
-		addFirst: item;
-		yourself
+	^ rest contents addFirst: item;
+		 yourself

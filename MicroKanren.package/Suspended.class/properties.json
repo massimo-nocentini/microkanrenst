@@ -6,9 +6,8 @@
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"item",
-		"rest" ],
-	"name" : "Knot",
+		"block" ],
+	"name" : "Suspended",
 	"pools" : [
 		 ],
 	"super" : "Chain",

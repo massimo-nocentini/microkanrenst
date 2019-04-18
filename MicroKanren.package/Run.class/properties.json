@@ -7,8 +7,8 @@
 	"commentStamp" : "",
 	"instvars" : [
 		"goal" ],
-	"name" : "Runner",
+	"name" : "Run",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "Goal",
 	"type" : "normal" }

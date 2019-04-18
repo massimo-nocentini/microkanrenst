@@ -7,4 +7,4 @@ testTablingAnswersInsteadOfSubstitutions
 				then: (fº value: y);
 				
 				else: (fº value: y)] fresh.
-	self assert: {{5. 6}. {0 asReifiedVar. 6}} equals: gº solutions all
+	self assert: {{5. 6}. {0 asReifiedVar. 6}} equals: gº solutions contents

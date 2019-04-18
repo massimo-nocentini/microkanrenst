@@ -3,13 +3,11 @@ testCaro
 	| g µ |
 	µ := Theory sexp.
 	g := [:r | µ caro value: 'acorn' asCons value: r] fresh.
-	self assert: g solutions all equals: {$a}.
-	g := [:r | [:x :y | 
-			
-			(µ caro value: {#grape. #raisin. #pear} asCons value: x)
-				, (µ caro value:  {#a cons: nil. #b cons: nil. #c cons: nil} asCons value: y)
+	self assert: g solutions contents equals: {$a}.
+	g := [:r | [:x :y | (µ caro value: {#grape. #raisin. #pear} asCons value: x)
+				, (µ caro value: {#a cons: nil. #b cons: nil. #c cons: nil} asCons value: y)
 				, (µ conso
 						value: x
 						value: y
 						value: r)] fresh] fresh.
-	self assert: g solutions all equals: {{#grape. #a} asCons}
+	self assert: g solutions contents equals: {{#grape. #a} asCons}

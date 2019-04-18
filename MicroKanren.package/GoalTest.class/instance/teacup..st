@@ -1,5 +1,3 @@
 as yet unclassified
-teacup: x
-	^ (LinkedList
-		with: (x unifyWith: #tea) -> true asGoal
-		with: (x unifyWith: #cup) -> true asGoal) cond e
+teacup: x 
+	^ (LinkedList new add: x =° #tea -> true asGoal; add: x =° #cup -> true asGoal; yourself) cond e

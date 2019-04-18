@@ -1,3 +1,3 @@
-as yet unclassified
+running
 solutions
-	^ Runner onGoal: self
+	^ self ! Dictionary new asState
