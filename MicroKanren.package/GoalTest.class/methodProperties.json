@@ -11,7 +11,7 @@
 		"setUp" : "MN 4/3/2019 12:18",
 		"swappedfives:" : "6/8/2017 11:25:29",
 		"teacup:" : "6/8/2017 11:25:29",
-		"testAlphaRuleo" : "MN 4/12/2019 00:38",
+		"testAlphaRuleo" : "MN 4/18/2019 09:40",
 		"testAppendo" : "MN 4/3/2019 23:11",
 		"testCaro" : "MN 4/3/2019 14:37",
 		"testCdro" : "MN 4/3/2019 22:48",
@@ -26,5 +26,7 @@
 		"testNats" : "MN 3/13/2019 17:19",
 		"testSucceed" : "MN 3/6/2019 15:03",
 		"testTabling" : "MN 4/16/2019 17:55",
+		"testTablingAnswersInsteadOfSubstitutions" : "MN 4/18/2019 09:39",
+		"testTablingMutuallyRecursive" : "MN 4/17/2019 08:32",
 		"testTeaCup" : "MN 3/28/2019 16:25",
 		"testUnify" : "6/8/2017 11:25:29" } }

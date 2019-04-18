@@ -19,7 +19,7 @@ onState: aState
 							"Just use standard unification for now,
 							`subunify` will follow."
 							combinator := (g onState: aState)
-										mplus:  [loop value: answers allButFirst].
-							Interleaved new of: combinator]].
+										mplus: [loop value: answers allButFirst].
+							Sequential new of: combinator]].
 			loop value: start].
 	^ fix value: cache value: LinkedList new
