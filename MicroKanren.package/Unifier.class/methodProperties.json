@@ -2,9 +2,10 @@
 	"class" : {
 		 },
 	"instance" : {
+		"forArray:forArray:" : "MN 4/19/2019 19:59",
 		"forCons:forCons:" : "MN 4/2/2019 23:02",
 		"forLinkedList:forLinkedList:" : "MN 4/2/2019 23:05",
-		"forObject:forObject:" : "MN 4/2/2019 23:03",
+		"forObject:forObject:" : "MN 4/19/2019 19:59",
 		"forObject:forVar:" : "MN 4/2/2019 23:04",
 		"forVar:forObject:" : "MN 4/2/2019 23:06",
 		"forVar:forVar:" : "MN 4/2/2019 23:07",

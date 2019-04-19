@@ -3,4 +3,6 @@
 		 },
 	"instance" : {
 		"reifyUsingReifier:" : "MN 3/19/2019 15:40",
+		"unifyWith:usingUnifier:" : "MN 4/19/2019 19:53",
+		"unifyWithArray:usingUnifier:" : "MN 4/19/2019 19:54",
 		"walkStarUsingWalker:" : "MN 3/18/2019 09:12" } }

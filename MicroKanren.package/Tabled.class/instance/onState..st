@@ -17,4 +17,4 @@ onState: aState
 			m := Master new args: args;
 						 cache: cache;
 						 yourself.
-			g & m onState: aState]
+			g , m onState: aState]

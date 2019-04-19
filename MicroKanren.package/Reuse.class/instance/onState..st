@@ -13,12 +13,12 @@ onState: aState
 							Waiting new streams: {alpha};
 								 yourself
 							"one element list"]
-						ifFalse: [| g reifiedAnswer combinator |
+						ifFalse: [| reifiedAnswer combinator |
 							reifiedAnswer := (aState trasparentReifier reifyVars: {answers first}) first.
-							g := args unifyWith: reifiedAnswer.
+							
 							"Just use standard unification for now,
 							`subunify` will follow."
-							combinator := (g onState: aState)
+							combinator := [args =° reifiedAnswer onState: aState] suspended
 										mplus: [loop value: answers allButFirst].
 							Sequential new of: combinator]].
 			loop value: start].

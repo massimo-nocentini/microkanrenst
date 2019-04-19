@@ -1,3 +1,3 @@
 dispatched
 mplus: aBlockClosure interleaved: anInterleaved 
-	^ block value mplus: aBlockClosure interleaved: anInterleaved
+	^ aBlockClosure value mplus: block interleaved: anInterleaved
