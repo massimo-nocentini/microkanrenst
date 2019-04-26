@@ -1,3 +1,6 @@
 running
 solutions
-	^ self ! Dictionary new asState
+| g |
+	g := Run new goal: self;
+				 yourself.
+	^ g onState:  Dictionary new asState

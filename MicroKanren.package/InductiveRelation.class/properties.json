@@ -1,14 +1,13 @@
 {
-	"category" : "MicroKanren-datastructures",
+	"category" : "MicroKanren-ext",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"vertices",
-		"edges" ],
-	"name" : "Graph",
+		"rules" ],
+	"name" : "InductiveRelation",
 	"pools" : [
 		 ],
 	"super" : "Object",

@@ -1,5 +1,5 @@
 {
-	"category" : "MicroKanren-core",
+	"category" : "MicroKanren-chains",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
@@ -7,7 +7,7 @@
 	"commentStamp" : "",
 	"instvars" : [
 		 ],
-	"name" : "StreamCombinator",
+	"name" : "ChainCombinator",
 	"pools" : [
 		 ],
 	"super" : "Object",

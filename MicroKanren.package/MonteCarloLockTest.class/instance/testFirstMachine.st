@@ -1,12 +1,12 @@
 tests
 testFirstMachine
 	"McCulloch's first machine"
-	| g |
-	g := [:a | self mcculloch proves: a relates: a] fresh.
+	| g µ|
+	µ := Theory montecarloLock.
+	g := [:a | µ mccullochº value: a value: a] fresh.
 	self assert: (g solutions next: 1) contents equals: {#(3 2 3) asCons}.
 	"Montecarlo lock"
-	g := [:a | self mclock proves: a relates: a] fresh.
+	g := [:a | µ mclockº value: a value: a] fresh.
 	self
-		assert: ((g solutions next: 1) contents
-				collect: #asLinkedList)
+		assert: ((g solutions next: 1) contents collect: #asLinkedList)
 		equals: {#(5 4 6 4 2 5 4 6 4 2)}

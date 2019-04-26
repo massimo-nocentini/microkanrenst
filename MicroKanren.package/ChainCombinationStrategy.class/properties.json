@@ -1,14 +1,13 @@
 {
-	"category" : "MicroKanren-theories",
+	"category" : "MicroKanren-chains",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		"rules",
-		"sexpTheory" ],
-	"name" : "InductiveRelationsTheory",
+		 ],
+	"name" : "ChainCombinationStrategy",
 	"pools" : [
 		 ],
 	"super" : "Object",

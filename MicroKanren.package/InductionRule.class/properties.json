@@ -1,14 +1,14 @@
 {
-	"category" : "MicroKanren-theories",
+	"category" : "MicroKanren-ext",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
 		 ],
 	"commentStamp" : "",
 	"instvars" : [
-		 ],
+		"machine" ],
 	"name" : "InductionRule",
 	"pools" : [
 		 ],
-	"super" : "Object",
+	"super" : "InductiveRelation",
 	"type" : "normal" }

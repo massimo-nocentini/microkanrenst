@@ -1,4 +1,5 @@
 initializing
 initialize
 	super initialize.
-	clauses := LinkedList new
+	self clauses: LinkedList new;
+	else: false asGoal

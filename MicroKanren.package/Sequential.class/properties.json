@@ -1,5 +1,5 @@
 {
-	"category" : "MicroKanren-core",
+	"category" : "MicroKanren-chains",
 	"classinstvars" : [
 		 ],
 	"classvars" : [
@@ -10,5 +10,5 @@
 	"name" : "Sequential",
 	"pools" : [
 		 ],
-	"super" : "StreamCombinationStrategy",
+	"super" : "ChainCombinationStrategy",
 	"type" : "normal" }
