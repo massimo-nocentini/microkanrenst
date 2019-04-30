@@ -7,10 +7,9 @@
 	"commentStamp" : "",
 	"instvars" : [
 		"either",
-		"or",
-		"interleaving" ],
+		"or" ],
 	"name" : "Disj",
 	"pools" : [
 		 ],
-	"super" : "Goal",
+	"super" : "GoalWithChainCombinationStrategy",
 	"type" : "normal" }

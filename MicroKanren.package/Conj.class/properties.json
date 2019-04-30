@@ -7,10 +7,9 @@
 	"commentStamp" : "",
 	"instvars" : [
 		"both",
-		"and",
-		"interleaving" ],
+		"and" ],
 	"name" : "Conj",
 	"pools" : [
 		 ],
-	"super" : "Goal",
+	"super" : "GoalWithChainCombinationStrategy",
 	"type" : "normal" }

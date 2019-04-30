@@ -1,0 +1,14 @@
+{
+	"category" : "MicroKanren-core",
+	"classinstvars" : [
+		 ],
+	"classvars" : [
+		 ],
+	"commentStamp" : "",
+	"instvars" : [
+		"chainCombinationStrategy" ],
+	"name" : "GoalWithChainCombinationStrategy",
+	"pools" : [
+		 ],
+	"super" : "Goal",
+	"type" : "normal" }

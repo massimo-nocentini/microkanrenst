@@ -1,6 +1,6 @@
 combining
-&  other 
+,, other 
 	^ Conj new both: self;
 		 and: other;
-		 interleaving: Interleaved new;
+		 chainCombinationStrategy: Interleaved new;
 		 yourself

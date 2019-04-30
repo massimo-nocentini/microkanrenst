@@ -6,5 +6,5 @@ testTablingAnswersInsteadOfSubstitutions
 				if: x =° 5
 				then: (fº value: y);
 				
-				else: (fº value: y)] fresh.
+			if: true asGoal	then: (fº value: y)] fresh.
 	self assert: {{5. 6}. {0 asReifiedVar. 6}} equals: gº solutions contents

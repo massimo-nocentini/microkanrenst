@@ -1,5 +1,7 @@
 *MicroKanren-core
 cond
-	^ Goal cond
-		clauses: self;
-		yourself
+ |g|
+	g := Goal cond.
+	self do: [:each | g if: each key then: each value].
+	^ g
+	

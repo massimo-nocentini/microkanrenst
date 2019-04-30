@@ -12,5 +12,5 @@
 	"name" : "If",
 	"pools" : [
 		 ],
-	"super" : "Goal",
+	"super" : "GoalWithChainCombinationStrategy",
 	"type" : "normal" }

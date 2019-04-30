@@ -2,10 +2,10 @@ as yet unclassified
 testConde
 	| g |
 	g := (LinkedList new add: false asGoal -> true asGoal;
-				 yourself) cond e else: false asGoal.
+				 yourself) cond e .
 	self assert: g solutions contents equals: {}.
-	g := (LinkedList new add: false asGoal -> false asGoal;
-				 yourself) cond e else: true asGoal.
+	g := (LinkedList new add: false asGoal -> false asGoal; add: true asGoal -> true asGoal;
+				 yourself) cond e .
 	self assert: g solutions contents equals: {Var tautology}.
 	g := [:x | (LinkedList new add: x =° #olive -> true asGoal;
 				 add: x =° #apple -> false asGoal;
@@ -26,7 +26,7 @@ testConde
 	g := [:x :y | Goal cond e if: (self teacup: x)
 					, (y =° true) then: true asGoal;
 				 if: x =° true then: y =° false;
-				 else: true asGoal] fresh.
+				 if: true asGoal then: true asGoal] fresh.
 	self
 		assert: g solutions contents
 		equals: (Array

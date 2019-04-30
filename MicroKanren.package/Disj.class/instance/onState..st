@@ -1,3 +1,5 @@
 running
-onState: aState
-	^ interleaving of: ((either onState: aState) mplus: [ or onState: aState ])
+onState: aState 
+	^ chainCombinationStrategy
+		of: ((either onState: aState)
+				mplus: [or onState: aState])
