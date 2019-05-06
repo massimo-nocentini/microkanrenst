@@ -1,6 +1,3 @@
 as yet unclassified
 cdro
-	^ [:aCons :aCdr | [:aCar | self conso
-		value: aCar
-		value: aCdr
-		value: aCons] fresh]
+	^ [:aCons :aCdr | [:aCar | self conso §§ {aCar.aCdr.aCons}] fresh]

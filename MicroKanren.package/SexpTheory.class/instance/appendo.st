@@ -1,15 +1,5 @@
 as yet unclassified
 appendo
-	^ [:aCollection :anotherCollection :aResult |( LinkedList new add: (self nilo value: aCollection)
-			-> (aResult =° anotherCollection);
-		 add: true asGoal -> [:a :d :rec | (self conso
-				value: a
-				value: d
-				value: aCollection)
-				, (self conso
-						value: a
-						value: rec
-						value: aResult) , [self appendo
-					value: d
-					value: anotherCollection
-					value: rec] eta] fresh; yourself) cond e]
+	^ [:aCollection :anotherCollection :aResult | Goal cond e if: aCollection nilº then: aResult =° anotherCollection;
+		 if: true asGoal then: [:a :d :rec | self conso §§ {a. d. aCollection} , (self conso §§ {a. rec. aResult}) , [self appendo §§ {d. anotherCollection. rec}] eta] fresh;
+		 yourself]

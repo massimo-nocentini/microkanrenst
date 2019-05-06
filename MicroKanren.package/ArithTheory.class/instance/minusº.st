@@ -1,3 +1,3 @@
 as yet unclassified
 minusº
-	^ [:n :m :k | self plusº valueWithArguments: {m. k. n}]
+	^ [:n :m :k | self plusº §§ {m. k. n}]
