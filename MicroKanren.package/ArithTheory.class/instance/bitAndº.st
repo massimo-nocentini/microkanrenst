@@ -1,3 +1,7 @@
 as yet unclassified
 bitAndº
-	^ [:x :y :z | x =° 0 , (y =° 0) , (z =° 0) | (x =° 0 , (y =° 1) , (z =° 0)) | (x =° 1 , (y =° 0) , (z =° 0)) | (x =° 1 , (y =° 1) , (z =° 1))]
+	^ [:x :y :z | Goal cond e if: x =° 0 , (y =° 0) then: z =° 0;
+		 if: x =° 0 , (y =° 1) then: z =° 0;
+		 if: x =° 1 , (y =° 0) then: z =° 0;
+		 if: x =° 1 , (y =° 1) then: z =° 1;
+		yourself]

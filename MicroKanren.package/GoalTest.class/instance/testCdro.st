@@ -12,8 +12,8 @@ testCdro
 						value: y
 						value: r)] fresh] fresh.
 	self assert: g solutions contents equals: {{{#raisin. #pear}. #a} asCons}.
-	g := [:r | µ cdro value: 'acorn' asCons value: 'corn' asCons] fresh.
-	self assert: g solutions contents equals: {0 asReifiedVar}.
+	g := [µ cdro value: 'acorn' asCons value: 'corn' asCons] fresh.
+	self assert: g solutions contents equals: {Var tautology}.
 	g := [:r | µ cdro value: 'acorn' asCons value: 'acorn' asCons] fresh.
 	self assert: g solutions contents equals: {}.
 	g := [:r | µ cdro value: 'corn' asCons value: {r. $r. $n} asCons] fresh.
