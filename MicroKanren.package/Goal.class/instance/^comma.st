@@ -2,5 +2,5 @@ combining
 , other 
 	^ Conj new both: self;
 		 and: other;
-		 chainCombinationStrategy: Sequential new;
+		 chainCombinationStrategy: Interleaved new;
 		 yourself

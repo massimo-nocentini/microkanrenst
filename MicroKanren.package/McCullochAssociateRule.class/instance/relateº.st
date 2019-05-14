@@ -8,4 +8,4 @@ relateº
 				value: gamma
 				value: (2 cons: gamma)
 				value: gamma_2_gamma)
-		,, (machine relateº value: beta value: gamma)] fresh]
+		, (machine relateº value: beta value: gamma)] fresh]

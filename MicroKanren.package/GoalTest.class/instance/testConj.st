@@ -18,5 +18,5 @@ testConj
 		
 	"interleaved conj"
 	g := [:x :y | (x =° 5)
-				,, (y =° 6)] fresh.
+				, (y =° 6)] fresh.
 	self assert: g solutions contents equals: {#(5 6)}
