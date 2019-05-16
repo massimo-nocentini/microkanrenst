@@ -1,6 +1,4 @@
 dispatched
-mplus: anotherChain interleaved: anInterleaved 
+mplus: aBlockClosure interleaved: anInterleaved 
 	^ item
-		cons: [anotherChain value
-				mplus: [rest]
-				interleaved: anInterleaved]
+		cons: [aBlockClosure value mplus: [rest] interleaved: anInterleaved]

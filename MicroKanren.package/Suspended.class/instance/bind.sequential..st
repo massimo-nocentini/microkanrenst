@@ -1,3 +1,3 @@
 dispatched
-bind: anAlphaRule sequential: aSequential 
-	^ block value bind:anAlphaRule sequential: aSequential
+bind: aBlockClosure sequential: aSequential 
+	^ block value bind: aBlockClosure sequential: aSequential

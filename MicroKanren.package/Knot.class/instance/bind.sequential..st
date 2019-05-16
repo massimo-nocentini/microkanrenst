@@ -1,6 +1,6 @@
 dispatched
-bind: aGoal sequential: aSequential 
+bind: aBlockClosure sequential: aSequential 
 	| alpha beta |
-	alpha := aGoal onState: item.
-	beta := [rest bind: aGoal sequential: aSequential].
+	alpha := aBlockClosure value: item.
+	beta := [rest bind: aBlockClosure sequential: aSequential].
 	^ alpha mplus: beta sequential: aSequential

@@ -1,6 +1,6 @@
 as yet unclassified
-bind: aGoal interleaved: anInterleaved 
+bind: aBlockClosure interleaved: anInterleaved 
 	| alpha beta |
-	alpha := aGoal onState: item.
-	beta := [rest bind: aGoal interleaved: anInterleaved].
+	alpha := aBlockClosure value: item.
+	beta := [rest bind: aBlockClosure interleaved: anInterleaved].
 	^ alpha mplus: beta interleaved: anInterleaved
