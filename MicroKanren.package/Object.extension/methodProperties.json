@@ -2,7 +2,7 @@
 	"class" : {
 		 },
 	"instance" : {
-		"=°" : "MN 4/18/2019 09:34",
+		"=°" : "MN 6/11/2019 12:50",
 		"asCons" : "MassimoNocentini 6/8/2017 21:05",
 		"asConsWithCdr:" : "MN 3/18/2019 15:27",
 		"cons:" : "MN 3/13/2019 18:24",
@@ -21,5 +21,6 @@
 		"unifyWithLinkedList:usingUnifier:" : "MN 4/2/2019 22:59",
 		"unifyWithObject:usingUnifier:" : "MN 4/2/2019 22:59",
 		"unifyWithVar:usingUnifier:" : "MN 4/2/2019 23:04",
+		"unifyo" : "MN 6/10/2019 19:08",
 		"walkStarUsingWalker:" : "MN 3/18/2019 09:14",
 		"zeroº" : "MN 5/6/2019 23:09" } }

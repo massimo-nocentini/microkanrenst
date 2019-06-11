@@ -1,4 +1,4 @@
 as yet unclassified
-mclockº
+mclocko
 	^ InductiveRelation new rules: {McCullochRepeatRule new. McCullochReverseRule new. McCullochRightHalfAssociateRule new. McCullochShrinkRule new};
-		 relateº
+		 relateo

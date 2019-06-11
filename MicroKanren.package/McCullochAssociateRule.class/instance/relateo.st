@@ -1,5 +1,5 @@
 computing
-relateº
+relateo
 	| µ |
 	µ := Theory sexp.
 	^ [:three_beta :gamma_2_gamma | [:beta :gamma | three_beta
@@ -8,4 +8,4 @@ relateº
 				value: gamma
 				value: (2 cons: gamma)
 				value: gamma_2_gamma)
-		, (machine relateº value: beta value: gamma)] fresh]
+		, (machine relateo value: beta value: gamma)] fresh]

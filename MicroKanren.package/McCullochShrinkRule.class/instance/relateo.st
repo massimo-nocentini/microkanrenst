@@ -1,8 +1,8 @@
 computing
-relateº
+relateo
 	| µ |
 	µ := Theory sexp.
-	^ [:alpha :beta |  µ appendo
+	^ [:alpha :beta | µ appendo
 		value: (2 cons: beta)
 		value: (2 cons: nil)
 		value: alpha]

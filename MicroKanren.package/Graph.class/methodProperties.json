@@ -3,6 +3,8 @@
 		 },
 	"instance" : {
 		"asGoal" : "MN 4/26/2019 22:13",
-		"at:put:" : "MN 4/16/2019 17:09",
+		"at:put:" : "MN 6/10/2019 14:41",
+		"incomingTo:from:" : "MN 6/10/2019 14:40",
 		"initialize" : "MN 4/16/2019 16:54",
+		"outgoingFrom:to:" : "MN 6/10/2019 14:40",
 		"vertices" : "MN 4/16/2019 16:57" } }

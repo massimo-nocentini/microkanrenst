@@ -1,0 +1,3 @@
+computing
+relateo
+	self subclassResponsibility

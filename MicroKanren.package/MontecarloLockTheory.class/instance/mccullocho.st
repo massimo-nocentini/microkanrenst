@@ -1,4 +1,4 @@
 as yet unclassified
-mccullochº
+mccullocho
 	^ InductiveRelation new rules: {McCullochAssociateRule new. McCullochIdentityRule new};
-		 relateº
+		 relateo

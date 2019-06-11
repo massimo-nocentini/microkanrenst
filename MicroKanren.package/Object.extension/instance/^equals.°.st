@@ -1,3 +1,3 @@
 *MicroKanren-core
 =° anObject
-	^ self unifyWith: anObject
+ ^ self unifyo value: anObject
