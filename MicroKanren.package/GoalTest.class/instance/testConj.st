@@ -1,22 +1,22 @@
 tests
 testConj
 	| g |
-	g := [:q | false asGoal , (true =° q)] fresh.
+	g := [:q | false asGoal , (true unifyo value: q)] fresh.
 	self assert: g solutions contents equals: {}.
-	g := [:q | true asGoal , (false =° q)] fresh.
+	g := [:q | true asGoal , (false unifyo value: q)] fresh.
 	self assert: g solutions contents equals: {false}.
-	g := [:a | 3 =° a , (4 =° a)] fresh.
+	g := [:a | (3 unifyo value: a) , (4 unifyo value: a)] fresh.
 	self assert: g solutions contents equals: {}.
-	g := [:a | a =° 4 , (4 =° a)] fresh.
+	g := [:a | (a unifyo value: 4) , (4 unifyo value: a)] fresh.
 	self assert: g solutions contents equals: {4}.
-	g := [:a | 3 =° a , [:b | 4 =° b] fresh] fresh.
+	g := [:a | (3 unifyo value: a) , [:b | 4 unifyo value: b] fresh] fresh.
 	self assert: g solutions contents equals: {3}.
-	g := [:a :b | 3 =° a , (4 =° b)] fresh.
+	g := [:a :b |( 3 unifyo value: a) , (4 unifyo value: b)] fresh.
 	self
 		assert: g solutions contents
 		equals: (LinkedList with: {3. 4}).
 		
 	"interleaved conj"
-	g := [:x :y | (x =° 5)
-				, (y =° 6)] fresh.
+	g := [:x :y | (x unifyo value: 5)
+				, (y unifyo value: 6)] fresh.
 	self assert: g solutions contents equals: {#(5 6)}

@@ -1,3 +1,3 @@
 as yet unclassified
 nilo
-	^ [:anObj |  anObj =° nil]
+	^ [:anObj | anObj unifyo value: nil]

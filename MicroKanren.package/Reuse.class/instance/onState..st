@@ -18,7 +18,7 @@ onState: aState
 							
 							"Just use standard unification for now,
 							`subunify` will follow."
-							combinator := [args =° reifiedAnswer onState: aState] suspended
+							combinator := [(args  unifyo value: reifiedAnswer) onState: aState] suspended
 										mplus: [loop value: answers allButFirst].
 							Sequential new of: combinator]].
 			loop value: start].

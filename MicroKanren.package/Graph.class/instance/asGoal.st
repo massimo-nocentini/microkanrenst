@@ -5,6 +5,6 @@ asGoal
 	g := Goal cond e.
 	edges
 		do: [:each | g
-				if: x =° (each key)
-				then: y =° (each value)].
+				if: (x unifyo value: (each key))
+				then: (y unifyo value: (each value))].
 	g]

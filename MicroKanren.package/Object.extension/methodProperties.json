@@ -2,18 +2,17 @@
 	"class" : {
 		 },
 	"instance" : {
-		"=°" : "MN 6/11/2019 12:50",
 		"asCons" : "MassimoNocentini 6/8/2017 21:05",
 		"asConsWithCdr:" : "MN 3/18/2019 15:27",
 		"cons:" : "MN 3/13/2019 18:24",
 		"consedObject:" : "MN 3/19/2019 12:12",
 		"equalReifiedVar:" : "6/8/2017 11:25:29",
-		"greaterThanOneº" : "MN 5/6/2019 23:08",
+		"greaterThanOneo" : "MN 6/26/2019 11:09",
 		"isAlphaEquivalentTo:inState:" : "MN 4/15/2019 09:35",
-		"nilº" : "MN 5/6/2019 23:29",
-		"oneº" : "MN 5/6/2019 23:08",
-		"pairº" : "MN 5/9/2019 11:30",
-		"positiveº" : "MN 5/6/2019 23:08",
+		"nilo" : "MN 6/26/2019 11:09",
+		"oneo" : "MN 6/26/2019 11:09",
+		"pairo" : "MN 6/26/2019 11:09",
+		"positiveo" : "MN 6/26/2019 11:09",
 		"reifyUsingReifier:" : "MN 3/19/2019 15:41",
 		"unifyWith:" : "6/8/2017 11:25:29",
 		"unifyWith:usingUnifier:" : "MN 4/2/2019 22:47",
@@ -23,4 +22,4 @@
 		"unifyWithVar:usingUnifier:" : "MN 4/2/2019 23:04",
 		"unifyo" : "MN 6/10/2019 19:08",
 		"walkStarUsingWalker:" : "MN 3/18/2019 09:14",
-		"zeroº" : "MN 5/6/2019 23:09" } }
+		"zeroo" : "MN 6/26/2019 11:09" } }

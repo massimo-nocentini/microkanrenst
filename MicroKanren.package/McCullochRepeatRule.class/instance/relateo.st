@@ -2,8 +2,8 @@ computing
 relateo
 	| µ |
 	µ := Theory sexp.
-	^ [:alpha :gamma_gamma | [:beta :gamma | alpha
-		=° (5 cons: beta)
+	^ [:alpha :gamma_gamma | [:beta :gamma | (alpha
+		unifyo value:  (5 cons: beta))
 		, (µ appendo
 				value: gamma
 				value: gamma

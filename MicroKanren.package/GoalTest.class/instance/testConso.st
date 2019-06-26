@@ -22,7 +22,7 @@ testConso
 				value: #(#b #c #d) asCons
 				value: #(#a #b #c #d) asCons] fresh.
 	self assert: g solutions contents equals: {#a}.
-	g := [:l | [:x :y :z | (l =° {#e. #a. #d. x} asCons)
+	g := [:l | [:x :y :z | (l unifyo value: {#e. #a. #d. x} asCons)
 				, (µ conso
 						value: y
 						value: {#a. z. #c} asCons
