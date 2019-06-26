@@ -1,3 +1,0 @@
-creating
-arith
-	^ ArithTheory new

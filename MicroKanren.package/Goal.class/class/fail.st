@@ -1,3 +1,0 @@
-creating
-fail
-	^ Fail new

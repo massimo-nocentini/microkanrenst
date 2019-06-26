@@ -1,3 +1,0 @@
-creating
-fromByteSymbol: aSymbol
-	^ aSymbol

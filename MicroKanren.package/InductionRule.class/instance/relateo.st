@@ -1,3 +1,0 @@
-computing
-relateo
-	self subclassResponsibility

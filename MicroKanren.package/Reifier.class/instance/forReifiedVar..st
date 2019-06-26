@@ -1,3 +1,0 @@
-dispatched
-forReifiedVar: aVar 
-	^ state

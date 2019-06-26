@@ -1,1 +1,0 @@
-I represent *goal* objects, namely a goal maps a `State` object to a `Chain` of `State` object.

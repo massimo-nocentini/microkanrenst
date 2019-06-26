@@ -1,3 +1,0 @@
-tabling
-isReady
-	self subclassResponsibility

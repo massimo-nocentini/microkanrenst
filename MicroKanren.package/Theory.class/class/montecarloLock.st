@@ -1,3 +1,0 @@
-creating
-montecarloLock
-	^ MontecarloLockTheory new

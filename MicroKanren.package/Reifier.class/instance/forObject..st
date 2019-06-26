@@ -1,3 +1,0 @@
-dispatched
-forObject: anObj 
-	^ state
