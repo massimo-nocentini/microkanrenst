@@ -1,0 +1,44 @@
+Extension { #name : #BlockClosure }
+
+{ #category : #'*MicroKanren-core' }
+BlockClosure >> &&! args [
+	^ self valueWithArguments: args
+]
+
+{ #category : #'*MicroKanren-core' }
+BlockClosure >> consedObject: car [
+
+ ^ Chain item: car linker: self suspended
+]
+
+{ #category : #'*MicroKanren-core' }
+BlockClosure >> eta [
+	^ Goal eta: self fresh
+]
+
+{ #category : #'*MicroKanren-core' }
+BlockClosure >> fresh [
+	^ Goal fresh: self
+]
+
+{ #category : #'*MicroKanren-core' }
+BlockClosure >> suspended [
+
+	^ (Suspended new block: self; yourself)
+]
+
+{ #category : #'*MicroKanren-core' }
+BlockClosure >> tabled [
+	| table ctor |
+	table := Dictionary new.
+	ctor := [:args | Goal
+				tabledBlock: self
+				withArgs: args
+				withTable: table].
+	^ numArgs caseOf: {
+		[1] -> [[:a | ctor value: {a}]].
+		[2] -> [[:a :b | ctor value: {a. b}]].
+		[3] -> [[:a :b :c | ctor value: {a. b. c}]].
+		[4] -> [[:a :b :c :d | ctor value: {a. b. c. d}]].
+		[5] -> [[:a :b :c :d :e | ctor value: {a. b. c. d. e}]]}
+]
