@@ -36,11 +36,3 @@ ExtensionMethodsTest >> testCarCdr [
 		assert: ll cdr cdr cdr equals: LinkedList new;
 		should: [ ll cdr cdr car ] raise: Error
 ]
-
-{ #category : #'about linked lists' }
-ExtensionMethodsTest >> testGraph [
-	| G |
-	G := {#a -> #b. #b -> #c. #c -> #d. #d -> #a. #c -> #a} asGraph.
-	self assert: {#b} equals: G vertices @ #a @ #outgoings.
-	self assert: {#d . #c} equals: G vertices @ #a @ #incomings
-]
