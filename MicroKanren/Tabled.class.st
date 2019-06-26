@@ -6,7 +6,7 @@ Class {
 		'args',
 		'table'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #accessing }

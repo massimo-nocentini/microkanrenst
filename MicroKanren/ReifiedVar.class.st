@@ -1,7 +1,7 @@
 Class {
 	#name : #ReifiedVar,
 	#superclass : #Var,
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #'as yet unclassified' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #CombinatoricsTheory,
 	#superclass : #Theory,
-	#category : 'MicroKanren-theories'
+	#category : #'MicroKanren-Theories'
 }
 
 { #category : #'as yet unclassified' }

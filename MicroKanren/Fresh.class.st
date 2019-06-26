@@ -5,7 +5,7 @@ Class {
 		'receiver',
 		'vars'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #running }

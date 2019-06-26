@@ -1,7 +1,7 @@
 Class {
 	#name : #ArithTest,
 	#superclass : #TestCase,
-	#category : 'MicroKanren-testing'
+	#category : #'MicroKanren-Testing'
 }
 
 { #category : #'as yet unclassified' }

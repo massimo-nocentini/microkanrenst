@@ -1,7 +1,7 @@
 Class {
 	#name : #MonteCarloLockTest,
 	#superclass : #TestCase,
-	#category : 'MicroKanren-testing'
+	#category : #'MicroKanren-Testing'
 }
 
 { #category : #tests }

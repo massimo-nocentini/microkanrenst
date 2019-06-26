@@ -5,7 +5,7 @@ Class {
 		'clauses',
 		'if'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #initializing }

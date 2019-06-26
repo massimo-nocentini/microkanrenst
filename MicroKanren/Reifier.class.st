@@ -5,7 +5,7 @@ Class {
 		'state',
 		'varCtor'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #dispatched }

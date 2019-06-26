@@ -1,7 +1,7 @@
 Class {
 	#name : #Reuse,
 	#superclass : #TablingCall,
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #accessing }

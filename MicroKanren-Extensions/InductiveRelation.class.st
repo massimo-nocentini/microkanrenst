@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'rules'
 	],
-	#category : 'MicroKanren-ext'
+	#category : #'MicroKanren-Extensions'
 }
 
 { #category : #computing }

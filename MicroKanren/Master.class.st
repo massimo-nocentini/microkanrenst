@@ -1,7 +1,7 @@
 Class {
 	#name : #Master,
 	#superclass : #TablingCall,
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #'as yet unclassified' }

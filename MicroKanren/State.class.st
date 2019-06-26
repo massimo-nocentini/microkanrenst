@@ -5,7 +5,7 @@ Class {
 		'substitution',
 		'birthdate'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #'as yet unclassified' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #IfPure,
 	#superclass : #If,
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #running }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'chainCombinationStrategy'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #'as yet unclassified' }

@@ -5,7 +5,7 @@ Class {
 		'args',
 		'cache'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #accessing }

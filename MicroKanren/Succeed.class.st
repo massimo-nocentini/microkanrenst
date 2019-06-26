@@ -1,7 +1,7 @@
 Class {
 	#name : #Succeed,
 	#superclass : #Goal,
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #running }

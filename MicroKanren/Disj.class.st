@@ -5,7 +5,7 @@ Class {
 		'either',
 		'or'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #accessing }

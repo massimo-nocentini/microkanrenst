@@ -5,7 +5,7 @@ Class {
 		'sexpTheory',
 		'combTheory'
 	],
-	#category : 'MicroKanren-testing'
+	#category : #'MicroKanren-Testing'
 }
 
 { #category : #'as yet unclassified' }
@@ -263,18 +263,6 @@ GoalTest >> testDisj [
 	g := [:a | (3 unifyo value: a)
 				| (3 unifyo value: a)] fresh.
 	self assert: g solutions contents equals: {3. 3}
-]
-
-{ #category : #tests }
-GoalTest >> testDycko [
-	| g |
-	g := [:alpha | combTheory dycko value: alpha] fresh.
-	self
-		assert: (g solutions next: 20) contents
-		equals: ({nil. '()'. '(())'. '(()())'. '()()'. '()(())'. '()(()())'. '(()()())'. '()()()'. '(())()'. '()()(())'. '()()(()())'. '(())(())'. '()(()()())'. '()()()()'. '((()))'. '()(())()'. '(())(()())'. '()()()(())'. '()()()(()())'} collect: #asCons).
-	g := [:alpha | combTheory dycko value: '(()(())()(' asCons] fresh.
-	"an invalid Dyck path"
-	self assert: g solutions contents equals: {}
 ]
 
 { #category : #'as yet unclassified' }

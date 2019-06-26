@@ -6,7 +6,7 @@ Class {
 		'answer',
 		'otherwise'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #initializing }

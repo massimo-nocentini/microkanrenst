@@ -5,7 +5,7 @@ Class {
 		'x',
 		'y'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #running }

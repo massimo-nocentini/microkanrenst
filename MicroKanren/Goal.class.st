@@ -4,7 +4,7 @@ I represent *goal* objects, namely a goal maps a `State` object to a `Chain` of 
 Class {
 	#name : #Goal,
 	#superclass : #Object,
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #creating }

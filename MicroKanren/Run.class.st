@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'goal'
 	],
-	#category : 'MicroKanren-core'
+	#category : #MicroKanren
 }
 
 { #category : #accessing }
