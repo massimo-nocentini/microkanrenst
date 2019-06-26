@@ -1,7 +1,7 @@
 Class {
 	#name : #Theory,
 	#superclass : #Object,
-	#category : #'MicroKanren-Theories'
+	#category : #'MicroKanren-Theories-theories'
 }
 
 { #category : #creating }

@@ -1,7 +1,7 @@
 Class {
 	#name : #McCullochRightHalfAssociateRule,
 	#superclass : #InductionRule,
-	#category : #'MicroKanren-Theories'
+	#category : #'MicroKanren-Theories-McCulloch machine\'s rules'
 }
 
 { #category : #computing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #SexpTheory,
 	#superclass : #Theory,
-	#category : #'MicroKanren-Theories'
+	#category : #'MicroKanren-Theories-theories'
 }
 
 { #category : #'lambda calculus' }
