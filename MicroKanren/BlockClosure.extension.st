@@ -6,12 +6,6 @@ BlockClosure >> &&! args [
 ]
 
 { #category : #'*MicroKanren-core' }
-BlockClosure >> consedObject: car [
-
- ^ Chain item: car linker: self suspended
-]
-
-{ #category : #'*MicroKanren-core' }
 BlockClosure >> eta [
 	^ Goal eta: self fresh
 ]
@@ -19,12 +13,6 @@ BlockClosure >> eta [
 { #category : #'*MicroKanren-core' }
 BlockClosure >> fresh [
 	^ Goal fresh: self
-]
-
-{ #category : #'*MicroKanren-core' }
-BlockClosure >> suspended [
-
-	^ (Suspended new block: self; yourself)
 ]
 
 { #category : #'*MicroKanren-core' }
