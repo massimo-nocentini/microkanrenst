@@ -1,14 +1,11 @@
 {
-	"category" : "MicroKanren-chains",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "Interleaved",
-	"pools" : [
-		 ],
 	"super" : "ChainCombinationStrategy",
-	"type" : "normal" }
+	"category" : "MicroKanren-chains",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "Interleaved",
+	"type" : "normal"
+}

@@ -1,15 +1,14 @@
 {
-	"category" : "MicroKanren-datastructures",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "MicroKanren-datastructures",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"car",
-		"cdr" ],
+		"cdr"
+	],
 	"name" : "Cons",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

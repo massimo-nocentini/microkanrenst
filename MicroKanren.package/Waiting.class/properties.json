@@ -1,14 +1,13 @@
 {
-	"category" : "MicroKanren-chains",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"streams" ],
-	"name" : "Waiting",
-	"pools" : [
-		 ],
 	"super" : "Chain",
-	"type" : "normal" }
+	"category" : "MicroKanren-chains",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"streams"
+	],
+	"name" : "Waiting",
+	"type" : "normal"
+}

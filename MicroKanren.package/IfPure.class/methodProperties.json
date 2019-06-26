@@ -1,5 +1,6 @@
 {
-	"class" : {
-		 },
 	"instance" : {
-		"onState:" : "MN 5/16/2019 10:11" } }
+		"onState:" : "MN 5/16/2019 10:11"
+	},
+	"class" : { }
+}

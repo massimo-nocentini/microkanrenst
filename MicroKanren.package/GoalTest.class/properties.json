@@ -1,15 +1,14 @@
 {
-	"category" : "MicroKanren-testing",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "TestCase",
+	"category" : "MicroKanren-testing",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"sexpTheory",
-		"combTheory" ],
+		"combTheory"
+	],
 	"name" : "GoalTest",
-	"pools" : [
-		 ],
-	"super" : "TestCase",
-	"type" : "normal" }
+	"type" : "normal"
+}

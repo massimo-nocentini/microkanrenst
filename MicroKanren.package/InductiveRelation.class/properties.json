@@ -1,14 +1,13 @@
 {
-	"category" : "MicroKanren-ext",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		"rules" ],
-	"name" : "InductiveRelation",
-	"pools" : [
-		 ],
 	"super" : "Object",
-	"type" : "normal" }
+	"category" : "MicroKanren-ext",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"rules"
+	],
+	"name" : "InductiveRelation",
+	"type" : "normal"
+}

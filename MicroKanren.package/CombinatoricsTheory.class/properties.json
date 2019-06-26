@@ -1,14 +1,11 @@
 {
-	"category" : "MicroKanren-theories",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "CombinatoricsTheory",
-	"pools" : [
-		 ],
 	"super" : "Theory",
-	"type" : "normal" }
+	"category" : "MicroKanren-theories",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "CombinatoricsTheory",
+	"type" : "normal"
+}

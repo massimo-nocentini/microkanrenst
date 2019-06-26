@@ -1,6 +1,7 @@
 {
-	"class" : {
-		 },
 	"instance" : {
 		"testFirstMachine" : "MN 6/10/2019 15:23",
-		"testSimpleRules" : "MN 6/10/2019 15:23" } }
+		"testSimpleRules" : "MN 6/10/2019 15:23"
+	},
+	"class" : { }
+}

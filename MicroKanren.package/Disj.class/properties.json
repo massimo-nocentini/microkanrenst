@@ -1,15 +1,14 @@
 {
-	"category" : "MicroKanren-core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "GoalWithChainCombinationStrategy",
+	"category" : "MicroKanren-core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"either",
-		"or" ],
+		"or"
+	],
 	"name" : "Disj",
-	"pools" : [
-		 ],
-	"super" : "GoalWithChainCombinationStrategy",
-	"type" : "normal" }
+	"type" : "normal"
+}

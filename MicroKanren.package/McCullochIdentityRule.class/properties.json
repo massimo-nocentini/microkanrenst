@@ -1,14 +1,11 @@
 {
-	"category" : "MicroKanren-theories",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "McCullochIdentityRule",
-	"pools" : [
-		 ],
 	"super" : "InductionRule",
-	"type" : "normal" }
+	"category" : "MicroKanren-theories",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "McCullochIdentityRule",
+	"type" : "normal"
+}

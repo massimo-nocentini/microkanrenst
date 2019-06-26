@@ -1,5 +1,6 @@
 {
-	"class" : {
-		 },
 	"instance" : {
-		"chainCombinationStrategy:" : "MN 4/30/2019 12:22" } }
+		"chainCombinationStrategy:" : "MN 4/30/2019 12:22"
+	},
+	"class" : { }
+}

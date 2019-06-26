@@ -1,14 +1,11 @@
 {
-	"category" : "MicroKanren-core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "MN 3/6/2019 18:27",
-	"instvars" : [
-		 ],
-	"name" : "Fail",
-	"pools" : [
-		 ],
 	"super" : "Goal",
-	"type" : "normal" }
+	"category" : "MicroKanren-core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "Fail",
+	"type" : "normal"
+}

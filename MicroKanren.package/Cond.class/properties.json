@@ -1,15 +1,14 @@
 {
-	"category" : "MicroKanren-core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Goal",
+	"category" : "MicroKanren-core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"clauses",
-		"if" ],
+		"if"
+	],
 	"name" : "Cond",
-	"pools" : [
-		 ],
-	"super" : "Goal",
-	"type" : "normal" }
+	"type" : "normal"
+}

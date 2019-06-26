@@ -1,16 +1,15 @@
 {
-	"category" : "MicroKanren-core",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "GoalWithChainCombinationStrategy",
+	"category" : "MicroKanren-core",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"question",
 		"answer",
-		"otherwise" ],
+		"otherwise"
+	],
 	"name" : "If",
-	"pools" : [
-		 ],
-	"super" : "GoalWithChainCombinationStrategy",
-	"type" : "normal" }
+	"type" : "normal"
+}

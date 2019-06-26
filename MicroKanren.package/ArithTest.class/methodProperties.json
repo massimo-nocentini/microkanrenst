@@ -1,14 +1,15 @@
 {
-	"class" : {
-		 },
 	"instance" : {
-		"testAddero" : "MN 6/26/2019 10:18",
-		"testBitAndo" : "MN 6/26/2019 10:18",
 		"testBitXoro" : "MN 6/26/2019 10:19",
-		"testFullAddero" : "MN 6/26/2019 10:19",
-		"testGreaterThanOneo" : "MN 6/26/2019 10:19",
-		"testHalfAddero" : "MN 6/26/2019 10:19",
+		"testAddero" : "MN 6/26/2019 10:18",
 		"testMinuso" : "MN 6/26/2019 10:19",
-		"testPluso" : "MN 6/26/2019 10:19",
+		"testSucco" : "MN 6/26/2019 10:19",
+		"testHalfAddero" : "MN 6/26/2019 10:19",
+		"testBitAndo" : "MN 6/26/2019 10:18",
 		"testPositiveo" : "MN 6/26/2019 10:19",
-		"testSucco" : "MN 6/26/2019 10:19" } }
+		"testGreaterThanOneo" : "MN 6/26/2019 10:19",
+		"testFullAddero" : "MN 6/26/2019 10:19",
+		"testPluso" : "MN 6/26/2019 10:19"
+	},
+	"class" : { }
+}

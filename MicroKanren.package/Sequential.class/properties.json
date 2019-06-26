@@ -1,14 +1,11 @@
 {
-	"category" : "MicroKanren-chains",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
-	"instvars" : [
-		 ],
-	"name" : "Sequential",
-	"pools" : [
-		 ],
 	"super" : "ChainCombinationStrategy",
-	"type" : "normal" }
+	"category" : "MicroKanren-chains",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [ ],
+	"name" : "Sequential",
+	"type" : "normal"
+}

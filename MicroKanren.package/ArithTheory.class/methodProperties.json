@@ -1,17 +1,18 @@
 {
-	"class" : {
-		 },
 	"instance" : {
-		"addero" : "MN 6/26/2019 11:08",
 		"bitAndo" : "MN 6/26/2019 10:30",
-		"bitFullAddero" : "MN 6/26/2019 11:08",
+		"positiveo" : "MN 6/26/2019 09:50",
 		"bitHalfAddero" : "MN 6/26/2019 11:10",
 		"bitXoro" : "MN 6/26/2019 10:32",
-		"genAddero" : "MN 6/26/2019 11:10",
 		"greaterThanOneo" : "MN 6/26/2019 10:32",
+		"bitFullAddero" : "MN 6/26/2019 11:08",
+		"succo" : "MN 6/26/2019 11:11",
+		"genAddero" : "MN 6/26/2019 11:10",
+		"addero" : "MN 6/26/2019 11:08",
 		"minuso" : "MN 6/26/2019 11:11",
 		"oneo" : "MN 6/26/2019 09:45",
 		"pluso" : "MN 6/26/2019 11:11",
-		"positiveo" : "MN 6/26/2019 09:50",
-		"succo" : "MN 6/26/2019 11:11",
-		"zeroo" : "MN 6/26/2019 10:16" } }
+		"zeroo" : "MN 6/26/2019 10:16"
+	},
+	"class" : { }
+}

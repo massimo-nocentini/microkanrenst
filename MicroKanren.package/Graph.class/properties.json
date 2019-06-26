@@ -1,15 +1,14 @@
 {
-	"category" : "MicroKanren-datastructures",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "Object",
+	"category" : "MicroKanren-datastructures",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"vertices",
-		"edges" ],
+		"edges"
+	],
 	"name" : "Graph",
-	"pools" : [
-		 ],
-	"super" : "Object",
-	"type" : "normal" }
+	"type" : "normal"
+}

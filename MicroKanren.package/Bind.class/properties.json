@@ -1,15 +1,14 @@
 {
-	"category" : "MicroKanren-chains",
-	"classinstvars" : [
-		 ],
-	"classvars" : [
-		 ],
 	"commentStamp" : "",
+	"super" : "ChainCombinator",
+	"category" : "MicroKanren-chains",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
 	"instvars" : [
 		"combiner",
-		"stream" ],
+		"stream"
+	],
 	"name" : "Bind",
-	"pools" : [
-		 ],
-	"super" : "ChainCombinator",
-	"type" : "normal" }
+	"type" : "normal"
+}

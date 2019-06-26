@@ -1,9 +1,10 @@
 {
-	"class" : {
-		 },
 	"instance" : {
 		"asConsedBinaryRepr" : "MN 4/27/2019 12:50",
-		"asConsedBinaryRepr:" : "MN 4/27/2019 20:15",
+		"asVar" : "MN 4/15/2019 10:06",
 		"asReifiedVar" : "MN 4/15/2019 10:06",
-		"asReifiedWithVarClass:" : "MN 4/15/2019 10:05",
-		"asVar" : "MN 4/15/2019 10:06" } }
+		"asConsedBinaryRepr:" : "MN 4/27/2019 20:15",
+		"asReifiedWithVarClass:" : "MN 4/15/2019 10:05"
+	},
+	"class" : { }
+}
