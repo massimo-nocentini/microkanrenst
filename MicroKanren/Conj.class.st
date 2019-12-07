@@ -1,6 +1,6 @@
 Class {
 	#name : #Conj,
-	#superclass : #GoalWithChainCombinationStrategy,
+	#superclass : #Goal,
 	#instVars : [
 		'both',
 		'and'

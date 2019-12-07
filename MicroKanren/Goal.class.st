@@ -62,16 +62,6 @@ Goal >> , other [
 	^ Conj new
 		both: self;
 		and: other;
-		chainCombinationStrategy: #+;
-		yourself
-]
-
-{ #category : #combining }
-Goal >> ,, other [
-	^ Conj new
-		both: self;
-		and: other;
-		chainCombinationStrategy: #,;
 		yourself
 ]
 
@@ -99,6 +89,5 @@ Goal >> | other [
 	^ Disj new
 		either: self;
 		or: other;
-		chainCombinationStrategy: #+;
 		yourself
 ]

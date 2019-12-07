@@ -24,23 +24,25 @@ Cond >> if: ifGoal then: thenGoal [
 ]
 
 { #category : #'as yet unclassified' }
-Cond >> ifPure: aStrategy [ 
-	if := [:clause :otherwise | IfPure new question: clause key;
-				 answer: clause value;
-				 otherwise: otherwise;
-				 chainCombinationStrategy: aStrategy;
-				 yourself]
+Cond >> ifPure: aStrategy [
+	if := [ :clause :otherwise | 
+	IfPure new
+		question: clause key;
+		answer: clause value;
+		otherwise: otherwise;
+		chainCombinationStrategy: aStrategy;
+		yourself ]
 ]
 
 { #category : #initializing }
 Cond >> initialize [
 	super initialize.
-	clauses:= LinkedList new.
+	clauses := OrderedCollection new
 ]
 
 { #category : #running }
-Cond >> onState: aState [ 
-	| g |
+Cond >> onState: aState [
+	^ [ | g |
 	g := clauses foldr: if init: false asGoal.
-	^ g onState: aState
+	g onState: aState ] srfi41Stream
 ]

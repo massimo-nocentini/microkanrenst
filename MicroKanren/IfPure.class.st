@@ -6,6 +6,7 @@ Class {
 
 { #category : #running }
 IfPure >> onState: aState [
-	^ [ question , answer onState: aState ] srfi41Stream
-		+ [ otherwise onState: aState ] srfi41Stream
+	^ chainCombinationStrategy
+		value: (question , answer onState: aState)
+		value: (otherwise onState: aState)
 ]

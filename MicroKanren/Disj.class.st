@@ -1,6 +1,6 @@
 Class {
 	#name : #Disj,
-	#superclass : #GoalWithChainCombinationStrategy,
+	#superclass : #Goal,
 	#instVars : [
 		'either',
 		'or'
