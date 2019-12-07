@@ -19,9 +19,7 @@ Conj >> both: aGoal [
 ]
 
 { #category : #running }
-Conj >> onState: aState [ 
-	| combinator |
-	combinator := [both onState: aState] suspended
-				bind: [:anotherState | and onState: anotherState].
-	^ chainCombinationStrategy of: combinator
+Conj >> onState: aState [
+	^ [ :refinedState | and onState: refinedState ]
+		>>= (both onState: aState)
 ]

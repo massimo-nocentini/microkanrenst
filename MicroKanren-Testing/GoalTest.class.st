@@ -1,6 +1,6 @@
 Class {
 	#name : #GoalTest,
-	#superclass : #TestCase,
+	#superclass : #Srfi41AbstractTest,
 	#instVars : [
 		'sexpTheory',
 		'combTheory'
@@ -9,9 +9,8 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-GoalTest >> fives: x [ 
-	^ (5 unifyo value: x)
-		| [self fives: x] eta
+GoalTest >> fives: x [
+	^ (5 unifyo value: x) | [ self fives: x ] eta
 ]
 
 { #category : #'as yet unclassified' }
@@ -25,21 +24,19 @@ GoalTest >> nats: x stage: i [
 ]
 
 { #category : #'as yet unclassified' }
-GoalTest >> nats: x stage: i offset: o [ 
-	^ (x unifyo value: i)
-		| [self nats: x stage: i + o] eta
+GoalTest >> nats: x stage: i offset: o [
+	^ (x unifyo value: i) | [ self nats: x stage: i + o ] eta
 ]
 
 { #category : #tests }
 GoalTest >> patho: edgeo [
 	| patho |
-
 	patho := nil.
-	patho := [:x :y | 
-				 (edgeo value: x value: y) | 
-				  [:z | (edgeo value: x value: z)
-					, (patho value: z value: y)] fresh
-				] tabled.
+	patho := [ :x :y | 
+	(edgeo value: x value: y)
+		|
+			[ :z | (edgeo value: x value: z) , (patho value: z value: y) ] fresh ]
+		tabled.
 	^ patho
 ]
 
@@ -55,92 +52,153 @@ GoalTest >> setUp [
 ]
 
 { #category : #'as yet unclassified' }
-GoalTest >> swappedfives: x [ 
-	^ [self fives: x] eta
-		| (5 unifyo value: x)
+GoalTest >> swappedfives: x [
+	^ [ self fives: x ] eta | (5 unifyo value: x)
 ]
 
 { #category : #'as yet unclassified' }
-GoalTest >> teacup: x [ 
-	^ (LinkedList new add: (x unifyo value: #tea) -> true asGoal; add: (x unifyo value: #cup) -> true asGoal; yourself) cond e
+GoalTest >> teacup: x [
+	^ (LinkedList new
+		add: (x unifyo value: #tea) -> true asGoal;
+		add: (x unifyo value: #cup) -> true asGoal;
+		yourself) cond e
 ]
 
 { #category : #'as yet unclassified' }
 GoalTest >> testAlphaRuleo [
 	| g µ |
 	µ := Theory sexp.
-	g := [:x :y | µ alphaRuleo value: x value: y] fresh.
-	self assert: g solutions contents equals: {}.
-	g := [[:x :y | (x unifyo value: 3) , (y unifyo value: 3)
-				, (µ alphaRuleo value: x value: y)] fresh] eta.
-	self assert: g solutions contents equals: {Var tautology}.
-	g := [[:x :y | (x unifyo value: 3) , (y unifyo value: 4)
-				, (µ alphaRuleo value: x value: y)] fresh] eta.
-	self assert: g solutions contents equals: {}.
-	g := [:x :y | (x unifyo value: y)
-				, (µ alphaRuleo value: x value: y)] fresh.
-	self assert: g solutions contents equals: {{0 asReifiedVar. 0 asReifiedVar}}.
-	g := [:x :y | (µ alphaRuleo value: x value: y)
-				, (x unifyo value: y)] fresh.
-	self assert: g solutions contents equals: {}
+	g := [ :x :y | µ alphaRuleo value: x value: y ] fresh.
+	self assert: g solutions equals: {} modulo: #asOrderedCollection.
+	g := [ [ :x :y | 
+	(x unifyo value: 3) , (y unifyo value: 3)
+		, (µ alphaRuleo value: x value: y) ] fresh ] eta.
+	self
+		assert: g solutions
+		equals: {Var tautology}
+		modulo: #asOrderedCollection.
+	g := [ [ :x :y | 
+	(x unifyo value: 3) , (y unifyo value: 4)
+		, (µ alphaRuleo value: x value: y) ] fresh ] eta.
+	self assert: g solutions isEmpty.
+	g := [ :x :y | (x unifyo value: y) , (µ alphaRuleo value: x value: y) ]
+		fresh.
+	self
+		assert: g solutions
+		equals:
+			{{0 asReifiedVar.
+			0 asReifiedVar}}
+		modulo: #asOrderedCollection.
+	g := [ :x :y | (µ alphaRuleo value: x value: y) , (x unifyo value: y) ]
+		fresh.
+	self assert: g solutions isEmpty
 	"alphaRuleo is an impure operator."
 ]
 
 { #category : #tests }
 GoalTest >> testAppendo [
 	| g |
-	g := [:l | sexpTheory appendo
-				value: #(#a #b #c) asCons
-				value: #(#d #e) asCons
-				value: l] fresh.
-	self assert: g solutions contents equals: {#(#a #b #c #d #e) asCons}.
-	g := [:l | sexpTheory appendo
-				value: #(#a #b #c) asCons
-				value: (#(#d) asConsWithCdr: l)
-				value: #(#a #b #c #d #e) asCons] fresh.
-	self assert: g solutions contents equals: {#e cons: nil}.
-	g := [:l | sexpTheory appendo
-				value: #(#a #b #c) asCons
-				value: (#(#d) asConsWithCdr: l)
-				value: (#(#a #b #c #d) asConsWithCdr: #e)] fresh.
-	self assert: g solutions contents equals: {#e}
+	g := [ :l | 
+	sexpTheory appendo
+		value: #(#a #b #c) asCons
+		value: #(#d #e) asCons
+		value: l ] fresh.
+	self
+		assert: g solutions
+		equals: {#(#a #b #c #d #e) asCons}
+		modulo: #asOrderedCollection.
+	g := [ :l | 
+	sexpTheory appendo
+		value: #(#a #b #c) asCons
+		value: (#(#d) asConsWithCdr: l)
+		value: #(#a #b #c #d #e) asCons ] fresh.
+	self
+		assert: g solutions
+		equals: {(#e cons: nil)}
+		modulo: #asOrderedCollection.
+	g := [ :l | 
+	sexpTheory appendo
+		value: #(#a #b #c) asCons
+		value: (#(#d) asConsWithCdr: l)
+		value: (#(#a #b #c #d) asConsWithCdr: #e) ] fresh.
+	self assert: g solutions equals: {#e} modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
 GoalTest >> testCaro [
 	| g µ |
 	µ := Theory sexp.
-	g := [:r | µ caro value: 'acorn' asCons value: r] fresh.
-	self assert: g solutions contents equals: {$a}.
-	g := [:r | [:x :y | (µ caro value: {#grape. #raisin. #pear} asCons value: x)
-				, (µ caro value: {#a cons: nil. #b cons: nil. #c cons: nil} asCons value: y)
-				, (µ conso &&!{x. y.r})] fresh] fresh.
-	self assert: g solutions contents equals: {{#grape. #a} asCons}
+	g := [ :r | µ caro value: 'acorn' asCons value: r ] fresh.
+	self assert: g solutions equals: {$a} modulo: #asOrderedCollection.
+	g := [ :r | 
+	[ :x :y | 
+	(µ caro value: {#grape . #raisin . #pear} asCons value: x)
+		,
+			(µ caro
+				value:
+					{(#a cons: nil).
+					(#b cons: nil).
+					(#c cons: nil)} asCons
+				value: y)
+		,
+			(µ conso
+				!!
+					{x.
+					y.
+					r}) ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals: {{#grape . #a} asCons}
+		modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
 GoalTest >> testCdro [
 	| g µ |
 	µ := Theory sexp.
-	g := [:r | [:d | (µ cdro value: 'acorn' asCons value: d)
-				, (µ caro value: d value: r)] fresh] fresh.
-	self assert: g solutions contents equals: {$c}.
-	g := [:r | [:x :y | (µ cdro value: {#grape. #raisin. #pear} asCons value: x)
-				, (µ caro value: {#a cons: nil. #b cons: nil. #c cons: nil} asCons value: y)
-				, (µ conso
-						value: x
-						value: y
-						value: r)] fresh] fresh.
-	self assert: g solutions contents equals: {{{#raisin. #pear}. #a} asCons}.
-	g := [µ cdro value: 'acorn' asCons value: 'corn' asCons] fresh.
-	self assert: g solutions contents equals: {Var tautology}.
-	g := [:r | µ cdro value: 'acorn' asCons value: 'acorn' asCons] fresh.
-	self assert: g solutions contents equals: {}.
-	g := [:r | µ cdro value: 'corn' asCons value: {r. $r. $n} asCons] fresh.
-	self assert: g solutions contents equals: {$o}.
-	g := [:l | [:x | (µ caro value: l value: $a)
-				, (µ cdro value: l value: 'corn' asCons)] fresh] fresh.
-	self assert: g solutions contents equals: {'acorn' asCons}
+	g := [ :r | 
+	[ :d | (µ cdro value: 'acorn' asCons value: d) , (µ caro value: d value: r) ]
+		fresh ] fresh.
+	self assert: g solutions equals: {$c} modulo: #asOrderedCollection.
+	g := [ :r | 
+	[ :x :y | 
+	(µ cdro value: {#grape . #raisin . #pear} asCons value: x)
+		,
+			(µ caro
+				value:
+					{(#a cons: nil).
+					(#b cons: nil).
+					(#c cons: nil)} asCons
+				value: y) , (µ conso value: x value: y value: r) ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals:
+			{{{#raisin . #pear}.
+			#a} asCons}
+		modulo: #asOrderedCollection.
+	g := [ µ cdro value: 'acorn' asCons value: 'corn' asCons ] fresh.
+	self
+		assert: g solutions
+		equals: {Var tautology}
+		modulo: #asOrderedCollection.
+	g := [ :r | µ cdro value: 'acorn' asCons value: 'acorn' asCons ]
+		fresh.
+	self assert: g solutions isEmpty.
+	g := [ :r | 
+	µ cdro
+		value: 'corn' asCons
+		value:
+			{r.
+			$r.
+			$n} asCons ] fresh.
+	self assert: g solutions equals: {$o} modulo: #asOrderedCollection.
+	g := [ :l | 
+	[ :x | (µ caro value: l value: $a) , (µ cdro value: l value: 'corn' asCons) ]
+		fresh ] fresh.
+	self
+		assert: g solutions
+		equals: {'acorn' asCons}
+		modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
@@ -201,25 +259,27 @@ GoalTest >> testConde [
 { #category : #tests }
 GoalTest >> testConj [
 	| g |
-	g := [:q | false asGoal , (true unifyo value: q)] fresh.
-	self assert: g solutions contents equals: {}.
-	g := [:q | true asGoal , (false unifyo value: q)] fresh.
-	self assert: g solutions contents equals: {false}.
-	g := [:a | (3 unifyo value: a) , (4 unifyo value: a)] fresh.
-	self assert: g solutions contents equals: {}.
-	g := [:a | (a unifyo value: 4) , (4 unifyo value: a)] fresh.
-	self assert: g solutions contents equals: {4}.
-	g := [:a | (3 unifyo value: a) , [:b | 4 unifyo value: b] fresh] fresh.
-	self assert: g solutions contents equals: {3}.
-	g := [:a :b |( 3 unifyo value: a) , (4 unifyo value: b)] fresh.
+	g := [ :q | false asGoal , (true unifyo value: q) ] fresh.
+	self assert: g solutions isEmpty.
+	g := [ :q | true asGoal , (false unifyo value: q) ] fresh.
+	self assert: g solutions equals: {false} modulo: #asOrderedCollection.
+	g := [ :a | (3 unifyo value: a) , (4 unifyo value: a) ] fresh.
+	self assert: g solutions isEmpty.
+	g := [ :a | (a unifyo value: 4) , (4 unifyo value: a) ] fresh.
+	self assert: g solutions equals: {4} modulo: #asOrderedCollection.
+	g := [ :a | (3 unifyo value: a) , [ :b | 4 unifyo value: b ] fresh ]
+		fresh.
+	self assert: g solutions equals: {3} modulo: #asOrderedCollection.
+	g := [ :a :b | (3 unifyo value: a) , (4 unifyo value: b) ] fresh.
 	self
-		assert: g solutions contents
-		equals: (LinkedList with: {3. 4}).
-		
-	"interleaved conj"
-	g := [:x :y | (x unifyo value: 5)
-				, (y unifyo value: 6)] fresh.
-	self assert: g solutions contents equals: {#(5 6)}
+		assert: g solutions
+		equals: {{3 . 4}}
+		modulo: #asOrderedCollection.
+	g := [ :x :y | (x unifyo value: 3) , (y unifyo value: 4) ] fresh.
+	self
+		assert: g solutions
+		equals: {{3 . 4}}
+		modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
@@ -257,17 +317,29 @@ GoalTest >> testConso [
 { #category : #'as yet unclassified' }
 GoalTest >> testDisj [
 	| g |
-	g := [:a | (3 unifyo value: a)
-				| (4 unifyo value: a)] fresh.
-	self assert: g solutions contents equals: {4 . 3}.
-	g := [:a | (3 unifyo value: a)
-				| (3 unifyo value: a)] fresh.
-	self assert: g solutions contents equals: {3. 3}
+	g := [ :a | (3 unifyo value: a) | (4 unifyo value: a) ] fresh.
+	self assert: g solutions equals: {3 . 4} modulo: #asOrderedCollection.
+	g := [ :a | (4 unifyo value: a) | (3 unifyo value: a) ] fresh.
+	self assert: g solutions equals: {4 . 3} modulo: #asOrderedCollection.
+	g := [ :a | (3 unifyo value: a) | (3 unifyo value: a) ] fresh.
+	self assert: g solutions equals: {3 . 3} modulo: #asOrderedCollection.
+	g := [ :a | (3 unifyo value: a) | (4 unifyo value: a) | (5 unifyo value: a) ]
+		fresh.
+	self
+		assert: g solutions
+		equals: {3 . 5 . 4}
+		modulo: #asOrderedCollection.
+	g := [ :a | (3 unifyo value: a) | ((4 unifyo value: a) | (5 unifyo value: a)) ]
+		fresh.
+	self
+		assert: g solutions
+		equals: {3 . 4 . 5}
+		modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
 GoalTest >> testFail [
-	self assert: false asGoal solutions contents equals: {}
+	self assert: false asGoal solutions isEmpty
 ]
 
 { #category : #'as yet unclassified' }
@@ -291,12 +363,12 @@ GoalTest >> testLengtho [
 	self assert: g solutions contents equals: {Var tautology}.
 	g := [:n | µ lengtho value: {#anElement} asCons value: n] fresh.
 	self assert: (g solutions next: 1) contents equals: {1 asConsedBinaryRepr}.
-	g := µ lengtho &&! {(1 to: 10) asCons. 10 asConsedBinaryRepr}.
+	g := µ lengtho !! {(1 to: 10) asCons. 10 asConsedBinaryRepr}.
 	self assert: g solutions contents equals: {Var tautology}.
-	g := [:lst | µ lengtho &&! {lst. 3 asConsedBinaryRepr}] fresh.
+	g := [:lst | µ lengtho !! {lst. 3 asConsedBinaryRepr}] fresh.
 	self assert: g solutions contents equals: {{0 asReifiedVar. 1 asReifiedVar. 2 asReifiedVar} asCons}.
 	self flag: 'FIXME: workaround to preveent unbounded computation'.
-	g := [:n | µ lengtho &&! {(1 to: 10) asCons. n}] fresh.
+	g := [:n | µ lengtho !! {(1 to: 10) asCons. n}] fresh.
 	self assert: (g solutions next: 1) contents equals: {10 asConsedBinaryRepr}
 ]
 
@@ -314,10 +386,25 @@ GoalTest >> testNats [
 GoalTest >> testSucceed [
 	"A relation that can *always* be satisfied, regardless of free
 	variables that appear in it, is called _tautology_."
-	self assert: true asGoal solutions contents equals: {Var tautology}.
-	self assert: (true asGoal | false asGoal) solutions contents equals: {Var tautology}.
-	self assert: (true asGoal | true asGoal) solutions contents equals: {Var tautology. Var tautology}.
-	self assert: (true asGoal , true asGoal) solutions contents equals: {Var tautology}
+
+	self
+		assert: true asGoal solutions
+		equals: {Var tautology}
+		modulo: #asOrderedCollection.
+	self
+		assert: (true asGoal | false asGoal) solutions
+		equals: {Var tautology}
+		modulo: #asOrderedCollection.
+	self
+		assert: (true asGoal | true asGoal) solutions
+		equals:
+			{Var tautology.
+			Var tautology}
+		modulo: #asOrderedCollection.
+	self
+		assert: (true asGoal , true asGoal) solutions
+		equals: {Var tautology}
+		modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
@@ -385,64 +472,125 @@ GoalTest >> testTablingMutuallyRecursive [
 { #category : #'as yet unclassified' }
 GoalTest >> testTeaCup [
 	| g |
-	g := [:x :y :z | (self teacup: x)
-				,, ((self teacup: y)
-						,, (self teacup: z))] fresh.
-	self assert: g solutions contents equals: {#(#tea #tea #tea). #(#tea #tea #cup). #(#tea #cup #tea). #(#tea #cup #cup). #(#cup #tea #tea). #(#cup #tea #cup). #(#cup #cup #tea). #(#cup #cup #cup)}.
-	g := [:x :y :z | (self teacup: x)
-				, ((self teacup: y)
-						, (self teacup: z))] fresh.
-	self assert: g solutions contents equals: {#(#tea #tea #tea) .#(#cup #tea #tea). #(#tea #cup #tea) .#(#cup #cup #tea) .#(#tea #tea #cup). #(#cup #tea #cup). #(#tea #cup #cup) .#(#cup #cup #cup)}
+	g := [ :x :y :z | (self teacup: x) ,, ((self teacup: y) ,, (self teacup: z)) ]
+		fresh.
+	self
+		assert: g solutions
+		equals:
+			{#(#tea #tea #tea).
+			#(#tea #tea #cup).
+			#(#tea #cup #tea).
+			#(#tea #cup #cup).
+			#(#cup #tea #tea).
+			#(#cup #tea #cup).
+			#(#cup #cup #tea).
+			#(#cup #cup #cup)}
+		modulo: #asOrderedCollection.
+	g := [ :x :y :z | (self teacup: x) , ((self teacup: y) , (self teacup: z)) ]
+		fresh.
+	self
+		assert: g solutions
+		equals:
+			{#(#tea #tea #tea).
+			#(#cup #tea #tea).
+			#(#tea #cup #tea).
+			#(#cup #cup #tea).
+			#(#tea #tea #cup).
+			#(#cup #tea #cup).
+			#(#tea #cup #cup).
+			#(#cup #cup #cup)}
+		modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
 GoalTest >> testUnify [
 	| g |
 	g := 3 unifyo value: 3.
-	self assert: g solutions contents equals: {Var tautology}.
+	self
+		assert: g solutions
+		equals: {Var tautology}
+		modulo: #asOrderedCollection.
 	g := 4 unifyo value: 3.
-	self assert: g solutions contents equals: {}.
+	self assert: g solutions isEmpty.
 	"symmetry"
-	g := [:q | 4 unifyo value: q] fresh.
-	self assert: g solutions contents equals: {4}.
-	g := [:q | q unifyo value: 4] fresh.
-	self assert: g solutions contents equals: {4}.
+	g := [ :q | 4 unifyo value: q ] fresh.
+	self assert: g solutions equals: {4} modulo: #asOrderedCollection.
+	g := [ :q | q unifyo value: 4 ] fresh.
+	self assert: g solutions equals: {4} modulo: #asOrderedCollection.
 	"reification"
-	g := [:q | true asGoal] fresh.
-	self assert: g solutions contents equals: {0 asReifiedVar}.
-	g := [:q :r | true asGoal] fresh.
+	g := [ :q | true asGoal ] fresh.
 	self
-		assert: g solutions contents
-		equals: (Array with: {0 asReifiedVar. 1 asReifiedVar}).
-	g := [:r | [:x :y | r
-				unifyo value: (Array with: x with: y)] fresh] fresh.
+		assert: g solutions
+		equals: {0 asReifiedVar}
+		modulo: #asOrderedCollection.
+	g := [ :q :r | true asGoal ] fresh.
 	self
-		assert: g solutions contents
-		equals: (Array with: {0 asReifiedVar. 1 asReifiedVar}).
-	g := [:r | [:x :y | r
-				unifyo value: (LinkedList with: x with: y)] fresh] fresh.
+		assert: g solutions
+		equals:
+			(Array
+				with:
+					{0 asReifiedVar.
+					1 asReifiedVar})
+		modulo: #asOrderedCollection.
+	g := [ :r | [ :x :y | r unifyo value: (Array with: x with: y) ] fresh ]
+		fresh.
 	self
-		assert: g solutions contents
-		equals: (Array with: {0 asReifiedVar. 1 asReifiedVar}).
-	g := [:r | [:x :y | (LinkedList with: x with: y)
-				unifyo value: r] fresh] fresh.
+		assert: g solutions
+		equals:
+			(Array
+				with:
+					{0 asReifiedVar.
+					1 asReifiedVar})
+		modulo: #asOrderedCollection.
+	g := [ :r | [ :x :y | r unifyo value: (LinkedList with: x with: y) ] fresh ]
+		fresh.
 	self
-		assert: g solutions contents
-		equals: (Array with: {0 asReifiedVar. 1 asReifiedVar}).
-	g := [:r | [:x :y | (LinkedList
-				with: x
-				with: y
-				with: x
-				with: y)
-				unifyo value: r] fresh] fresh.
+		assert: g solutions
+		equals:
+			(Array
+				with:
+					{0 asReifiedVar.
+					1 asReifiedVar})
+		modulo: #asOrderedCollection.
+	g := [ :r | [ :x :y | (LinkedList with: x with: y) unifyo value: r ] fresh ]
+		fresh.
 	self
-		assert: g solutions contents
-		equals: (Array with: {0 asReifiedVar. 1 asReifiedVar. 0 asReifiedVar. 1 asReifiedVar}).
-	g := [:r | [:x :y | (LinkedList with: x with: r)
-				unifyo value: (LinkedList with: 1 with: y)] fresh].
-	self assert: g fresh solutions contents equals: {0 asReifiedVar}.
+		assert: g solutions
+		equals:
+			(Array
+				with:
+					{0 asReifiedVar.
+					1 asReifiedVar})
+		modulo: #asOrderedCollection.
+	g := [ :r | 
+	[ :x :y | 
+	(LinkedList
+		with: x
+		with: y
+		with: x
+		with: y) unifyo value: r ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals:
+			(Array
+				with:
+					{0 asReifiedVar.
+					1 asReifiedVar.
+					0 asReifiedVar.
+					1 asReifiedVar})
+		modulo: #asOrderedCollection.
+	g := [ :r | 
+	[ :x :y | 
+	(LinkedList with: x with: r) unifyo
+		value: (LinkedList with: 1 with: y) ] fresh ].
+	self
+		assert: g fresh solutions
+		equals: {0 asReifiedVar}
+		modulo: #asOrderedCollection.
 	"sharing"
-	g := [:r | [:x | (r unifyo value: x)
-				, (x unifyo value: true)] fresh].
-	self assert: g fresh solutions contents equals: {true}
+	g := [ :r | [ :x | (r unifyo value: x) , (x unifyo value: true) ] fresh ].
+	self
+		assert: g fresh solutions
+		equals: {true}
+		modulo: #asOrderedCollection
 ]

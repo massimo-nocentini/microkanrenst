@@ -6,5 +6,5 @@ Class {
 
 { #category : #running }
 Succeed >> onState: aState [
-	^ Chain with: aState
+	^ aState srfi41Singleton
 ]

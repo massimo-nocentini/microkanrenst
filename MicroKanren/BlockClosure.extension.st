@@ -1,7 +1,7 @@
 Extension { #name : #BlockClosure }
 
 { #category : #'*MicroKanren-core' }
-BlockClosure >> &&! args [
+BlockClosure >> !! args [
 	^ self valueWithArguments: args
 ]
 

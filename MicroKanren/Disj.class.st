@@ -14,11 +14,8 @@ Disj >> either: e [
 ]
 
 { #category : #running }
-Disj >> onState: aState [ 
-	| combinator |
-	combinator := [either onState: aState] suspended
-				mplus: [or onState: aState].
-	^ chainCombinationStrategy of: combinator
+Disj >> onState: aState [
+	^ (either onState: aState) + (or onState: aState)
 ]
 
 { #category : #accessing }

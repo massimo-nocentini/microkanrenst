@@ -15,14 +15,14 @@ ArithTheory >> addero [
 				, m positiveo , n zeroo
 		then: (m unifyo value: r);
 		 if: (b unifyo value: 1)
-			, m zeroo then: [self addero &&! {0. n. 1 asConsedBinaryRepr. r}] eta;
+			, m zeroo then: [self addero !! {0. n. 1 asConsedBinaryRepr. r}] eta;
 		 if: (b unifyo value: 1)
-			, m positiveo , n zeroo then: [self addero &&! {0. 1 asConsedBinaryRepr. m. r}] eta;
+			, m positiveo , n zeroo then: [self addero !! {0. 1 asConsedBinaryRepr. m. r}] eta;
 		 if: n oneo , m oneo then: [:a :c | ({a. c} asCons unifyo value: r)
-			, (self bitFullAddero &&! {b. 1. 1. a. c})] fresh;
-		 if: n oneo then: [self genAddero &&! {b. n. m. r}] eta;
-		 if: n greaterThanOneo , m oneo then: r greaterThanOneo , [self addero &&! {b. 1 asConsedBinaryRepr. n. r}] eta;
-		 if: n greaterThanOneo then: [self genAddero &&! {b. n. m. r}] eta;
+			, (self bitFullAddero !! {b. 1. 1. a. c})] fresh;
+		 if: n oneo then: [self genAddero !! {b. n. m. r}] eta;
+		 if: n greaterThanOneo , m oneo then: r greaterThanOneo , [self addero !! {b. 1 asConsedBinaryRepr. n. r}] eta;
+		 if: n greaterThanOneo then: [self genAddero !! {b. n. m. r}] eta;
 		 yourself]
 ]
 
@@ -37,12 +37,12 @@ ArithTheory >> bitAndo [
 
 { #category : #'as yet unclassified' }
 ArithTheory >> bitFullAddero [
-	^ [:b :x :y :r :c | [:w :xy :wz | self bitHalfAddero &&! {x. y. w. xy} , (self bitHalfAddero &&! {w. b. r. wz}) , (self bitXoro &&! {xy. wz. c})] fresh]
+	^ [:b :x :y :r :c | [:w :xy :wz | self bitHalfAddero !! {x. y. w. xy} , (self bitHalfAddero !! {w. b. r. wz}) , (self bitXoro !! {xy. wz. c})] fresh]
 ]
 
 { #category : #'as yet unclassified' }
 ArithTheory >> bitHalfAddero [
-	^ [:x :y :r :c | self bitXoro &&! {x. y. r} , (self bitAndo &&! {x. y. c})]
+	^ [:x :y :r :c | self bitXoro !! {x. y. r} , (self bitAndo !! {x. y. c})]
 ]
 
 { #category : #'as yet unclassified' }
@@ -58,7 +58,7 @@ ArithTheory >> bitXoro [
 ArithTheory >> genAddero [
 	| µ |
 	µ := Theory sexp.
-	^ [:b :n :m :r | [:a :c :d :e :x :y :z | µ conso &&! {a. x. n} , (µ conso &&! {d. y. m}) , y positiveo , (µ conso &&! {c. z. r}) , z positiveo , (self bitFullAddero &&! {b. a. d. c. e}) , [self addero &&! {e. x. y. z}] eta] fresh]
+	^ [:b :n :m :r | [:a :c :d :e :x :y :z | µ conso !! {a. x. n} , (µ conso !! {d. y. m}) , y positiveo , (µ conso !! {c. z. r}) , z positiveo , (self bitFullAddero !! {b. a. d. c. e}) , [self addero !! {e. x. y. z}] eta] fresh]
 ]
 
 { #category : #'as yet unclassified' }
@@ -69,7 +69,7 @@ ArithTheory >> greaterThanOneo [
 
 { #category : #'as yet unclassified' }
 ArithTheory >> minuso [
-	^ [:n :m :k | self pluso &&! {m. k. n}]
+	^ [:n :m :k | self pluso !! {m. k. n}]
 ]
 
 { #category : #'as yet unclassified' }
@@ -79,7 +79,7 @@ ArithTheory >> oneo [
 
 { #category : #'as yet unclassified' }
 ArithTheory >> pluso [
-	^ [:x :y :r | self addero &&! {0. x. y. r}]
+	^ [:x :y :r | self addero !! {0. x. y. r}]
 ]
 
 { #category : #'as yet unclassified' }
@@ -91,7 +91,7 @@ ArithTheory >> positiveo [
 { #category : #'as yet unclassified' }
 ArithTheory >> succo [
 	^ [:n :nSucc | Goal cond e if: n zeroo then: nSucc oneo;
-		 if: n positiveo then: nSucc greaterThanOneo , (self pluso &&! {1 asConsedBinaryRepr. n. nSucc});
+		 if: n positiveo then: nSucc greaterThanOneo , (self pluso !! {1 asConsedBinaryRepr. n. nSucc});
 		 yourself]
 ]
 

@@ -9,5 +9,5 @@ Class {
 
 { #category : #running }
 Fail >> onState: aState [
-	^ Chain bottom
+	^ {} asSrfi41Stream
 ]

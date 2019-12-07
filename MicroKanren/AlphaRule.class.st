@@ -9,16 +9,16 @@ Class {
 }
 
 { #category : #running }
-AlphaRule >> onState: aState [ 
+AlphaRule >> onState: aState [
 	^ (x isAlphaEquivalentTo: y inState: aState) asGoal onState: aState
 ]
 
 { #category : #accessing }
-AlphaRule >> x: anObj [ 
-	x:=anObj
+AlphaRule >> x: anObj [
+	x := anObj
 ]
 
 { #category : #accessing }
-AlphaRule >> y: anObj [ 
+AlphaRule >> y: anObj [
 	y := anObj
 ]

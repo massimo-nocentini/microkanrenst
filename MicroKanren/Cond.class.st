@@ -10,12 +10,12 @@ Class {
 
 { #category : #initializing }
 Cond >> e [
-	self ifPure: Sequential new
+	self ifPure: #,
 ]
 
 { #category : #'as yet unclassified' }
 Cond >> i [
-	self ifPure: Interleaved new
+	self ifPure: #+
 ]
 
 { #category : #initializing }

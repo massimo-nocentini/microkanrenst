@@ -8,8 +8,11 @@ Class {
 }
 
 { #category : #creating }
-Goal class >> alpha: anObj rule: anotherObj [ 
-	^ AlphaRule new x: anObj; y: anotherObj; yourself 
+Goal class >> alpha: anObj rule: anotherObj [
+	^ AlphaRule new
+		x: anObj;
+		y: anotherObj;
+		yourself
 ]
 
 { #category : #creating }
@@ -55,19 +58,21 @@ Goal class >> unify: anObj with: another [
 ]
 
 { #category : #combining }
-Goal >> , other [ 
-	^ Conj new both: self;
-		 and: other;
-		 chainCombinationStrategy: Interleaved new;
-		 yourself
+Goal >> , other [
+	^ Conj new
+		both: self;
+		and: other;
+		chainCombinationStrategy: #+;
+		yourself
 ]
 
 { #category : #combining }
-Goal >> ,, other [ 
-	^ Conj new both: self;
-		 and: other;
-		 chainCombinationStrategy: Sequential new;
-		 yourself
+Goal >> ,, other [
+	^ Conj new
+		both: self;
+		and: other;
+		chainCombinationStrategy: #,;
+		yourself
 ]
 
 { #category : #running }
@@ -77,10 +82,11 @@ Goal >> onState: aState [
 
 { #category : #running }
 Goal >> solutions [
-| g |
-	g := Run new goal: self;
-				 yourself.
-	^ g onState:  Dictionary new asState
+	| g |
+	g := Run new
+		goal: self;
+		yourself.
+	^ g onState: Dictionary new asState
 ]
 
 { #category : #reification }
@@ -89,9 +95,10 @@ Goal >> vars [
 ]
 
 { #category : #combining }
-Goal >> | other [ 
-	^ Disj new either: self;
-		 or: other;
-		 chainCombinationStrategy: Interleaved new;
-		 yourself
+Goal >> | other [
+	^ Disj new
+		either: self;
+		or: other;
+		chainCombinationStrategy: #+;
+		yourself
 ]

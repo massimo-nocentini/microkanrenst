@@ -5,10 +5,7 @@ Class {
 }
 
 { #category : #running }
-IfPure >> onState: aState [ 
-	| alpha beta |
-	alpha := [question , answer onState: aState] suspended.
-	beta := [otherwise onState: aState].
-	^ chainCombinationStrategy
-		of: (alpha mplus: beta)
+IfPure >> onState: aState [
+	^ [ question , answer onState: aState ] srfi41Stream
+		+ [ otherwise onState: aState ] srfi41Stream
 ]
