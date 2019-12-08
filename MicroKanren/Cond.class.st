@@ -45,4 +45,9 @@ Cond >> onState: aState [
 	^ [ | g |
 	g := clauses foldr: if init: false asGoal.
 	g onState: aState ] srfi41Stream
+
+	"^ [ [ :aGoal | aGoal onState: aState ]
+		>>=
+			(clauses collect: [ :anAssoc | anAssoc key , anAssoc value ])
+				asSrfi41Stream ] srfi41Stream"
 ]

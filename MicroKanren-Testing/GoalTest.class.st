@@ -248,7 +248,8 @@ GoalTest >> testConde [
 	Goal cond e
 		if: (self teacup: x) , (y unifyo value: true) then: true asGoal;
 		if: (x unifyo value: true) then: (y unifyo value: false);
-		if: true asGoal then: true asGoal ] fresh.
+		if: true asGoal then: true asGoal;
+		yourself ] fresh.
 	self
 		assert: g solutions
 		equals:
@@ -291,6 +292,9 @@ GoalTest >> testConj [
 	self assert: g solutions equals: {false} modulo: #asOrderedCollection.
 	g := [ :a | (3 unifyo value: a) , (4 unifyo value: a) ] fresh.
 	self assert: g solutions isEmpty.
+	g := [ :a | ((3 unifyo value: a) , (4 unifyo value: a)) | (a unifyo value: 0) ]
+		fresh.
+	self assert: g solutions equals: {0} modulo: #asOrderedCollection.
 	g := [ :a | (a unifyo value: 4) , (4 unifyo value: a) ] fresh.
 	self assert: g solutions equals: {4} modulo: #asOrderedCollection.
 	g := [ :a | (3 unifyo value: a) , [ :b | 4 unifyo value: b ] fresh ]

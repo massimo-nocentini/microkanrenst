@@ -25,11 +25,10 @@ SequenceableCollection >> foldr1: aBlock [
 ]
 
 { #category : #'*MicroKanren-core' }
-SequenceableCollection >> foldr: aBlock init: init [ 
+SequenceableCollection >> foldr: aBlock init: init [
 	| cell |
 	cell := init.
-	self
-		reverseDo: [:each | cell := aBlock value: each value: cell].
+	self reverseDo: [ :each | cell := aBlock value: each value: cell ].
 	^ cell
 ]
 
