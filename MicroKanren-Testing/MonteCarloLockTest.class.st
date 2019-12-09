@@ -5,20 +5,22 @@ Class {
 }
 
 { #category : #tests }
-MonteCarloLockTest >> testFirstMachine [
-	"McCulloch's first machine"
-
-	| g µ |
-	µ := Theory montecarloLock.
-	g := [ :a | µ mccullocho value: a value: a ] fresh.
+MonteCarloLockTest >> testMcCullochMachine [
+	| g  |
+	g := [ :a | Theory montecarloLock mccullocho value: a value: a ] fresh.
 	self
 		assert: (g solutions next: 1)
 		equals: {#(3 2 3) asCons}
 		modulo: #asOrderedCollection.
-	"Montecarlo lock"
-	g := [ :a | µ mclocko value: a value: a ] fresh.
+	
+]
+
+{ #category : #tests }
+MonteCarloLockTest >> testMontecarloLockMachine [
+	| g |
+	g := [ :a | Theory montecarloLock mclocko value: a value: a ] fresh.
 	self
-		assert: ((g solutions collect: #asOrderedCollection) next: 1)
+		assert: (g solutions next: 1)
 		equals: {#(5 4 6 4 2 5 4 6 4 2)}
 		modulo: #asOrderedCollection
 ]

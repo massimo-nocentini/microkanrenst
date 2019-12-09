@@ -11,14 +11,9 @@ CombinatoricsTheory >> dycko [
 	^ [ :alpha | 
 	Goal cond e
 		if: alpha nilo then: true asGoal;
-		if: true asGoal
-			then:
+		otherwise:
 			[ :beta :gamma | 
-			µ appendo
-				!!
-					{($( cons: beta).
-					($) cons: gamma).
-					alpha}
+			(µ appendo value: ($( cons: beta) value: ($) cons: gamma) value: alpha)
 				, ([ self dycko value: beta ] eta , [ self dycko value: gamma ] eta) ]
 				fresh;
 		yourself ]

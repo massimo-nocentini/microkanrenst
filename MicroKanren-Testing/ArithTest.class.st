@@ -1,6 +1,6 @@
 Class {
 	#name : #ArithTest,
-	#superclass : #TestCase,
+	#superclass : #Srfi41AbstractTest,
 	#category : #'MicroKanren-Testing'
 }
 
@@ -8,40 +8,43 @@ Class {
 ArithTest >> testAddero [
 	| g µ |
 	µ := Theory arith.
-	g := [:x :y :r | µ addero valueWithArguments: {0. x. y. r}] fresh.
-	self assert: {{0 asReifiedVar. 0 asConsedBinaryRepr. 0 asReifiedVar}. {0 asConsedBinaryRepr. 0 asReifiedVar cons: 1 asReifiedVar. 0 asReifiedVar cons: 1 asReifiedVar}. {1. 1. 2} collect: #asConsedBinaryRepr} equals: (g solutions next: 3) contents
+	g := [ :x :y :r | µ addero !! {0. x. y. r} ] fresh.
+	self
+		assert:
+			{{0 asReifiedVar. 0 asConsedBinaryRepr.	0 asReifiedVar}.
+			{0 asConsedBinaryRepr.	(0 asReifiedVar cons: 1 asReifiedVar). (0 asReifiedVar cons: 1 asReifiedVar)}.
+			({1 . 1 . 2} collect: #asConsedBinaryRepr)}
+		equals: (g solutions next: 3)
+		modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
 ArithTest >> testBitAndo [
 	| g µ |
 	µ := Theory arith.
-	g := [:x :y | µ bitAndo
-				value: x
-				value: y
-				value: 1] fresh.
-	self assert: {{1. 1}} equals: g solutions contents
+	g := [:x :y | µ bitAndo !!	{x . y . 1}] fresh.
+	self assert:  g solutions equals: {{1 . 1}} modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
 ArithTest >> testBitXoro [
 	| g µ |
 	µ := Theory arith.
-	g := [:x :y | µ bitXoro
-				value: x
-				value: y
-				value: 0] fresh.
-	self assert: {{0. 0}. {1. 1}} equals: g solutions contents
+	g := [:x :y | µ bitXoro !! {x . y . 0}] fresh.
+	self assert: g solutions equals: {{0. 0}. {1. 1}} modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
 ArithTest >> testFullAddero [
 	| g µ |
 	µ := Theory arith.
-	g := [:x :y | µ bitFullAddero valueWithArguments: {0. 1. 1. x. y}] fresh.
-	self assert: {{0. 1}} equals: g solutions contents.
+	g := [:x :y | µ bitFullAddero !! {0. 1. 1. x. y}] fresh.
+	self assert: g solutions equals: {{0. 1}} modulo: #asOrderedCollection .
 	g := µ bitFullAddero fresh.
-	self assert: {#(0 0 0 0 0). #(0 0 1 1 0). #(1 0 0 1 0). #(0 1 0 1 0). #(1 0 1 0 1). #(0 1 1 0 1). #(1 1 0 0 1). #(1 1 1 1 1)} equals: g solutions contents
+	self assert: g solutions 
+			equals: {#(0 0 0 0 0). #(0 0 1 1 0). #(1 0 0 1 0). #(0 1 0 1 0). 
+					  #(1 0 1 0 1). #(0 1 1 0 1). #(1 1 0 0 1). #(1 1 1 1 1)}
+			modulo: #asOrderedCollection 
 ]
 
 { #category : #'as yet unclassified' }

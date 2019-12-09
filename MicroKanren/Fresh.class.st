@@ -28,5 +28,5 @@ Fresh >> receiver: aBlockClosure [
 
 { #category : #reification }
 Fresh >> vars [
-	^ vars
+	^ vars copy
 ]

@@ -6,7 +6,7 @@ Class {
 
 { #category : #tests }
 CombinatoricsTheoryTest >> testDycko [
-	| g combTheory|
+	| g combTheory |
 	combTheory := CombinatoricsTheory new.
 	g := [ :alpha | combTheory dycko value: alpha ] fresh.
 	self
@@ -18,5 +18,5 @@ CombinatoricsTheoryTest >> testDycko [
 			'(())(()())' . '()()()(())' . '()()()(()())'} collect: #asCons).
 	g := [ :alpha | combTheory dycko value: '(()(())()(' asCons ] fresh.
 	"an invalid Dyck path"
-	self assert: g solutions contents equals: {}
+	self assert: g solutions isEmpty
 ]
