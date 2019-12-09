@@ -1,6 +1,6 @@
 Class {
 	#name : #CombinatoricsTheoryTest,
-	#superclass : #TestCase,
+	#superclass : #Srfi41AbstractTest,
 	#category : #'MicroKanren-Testing'
 }
 
@@ -10,12 +10,13 @@ CombinatoricsTheoryTest >> testDycko [
 	combTheory := CombinatoricsTheory new.
 	g := [ :alpha | combTheory dycko value: alpha ] fresh.
 	self
-		assert: (g solutions next: 20) contents
+		assert: (g solutions next: 20)
 		equals:
 			({nil . '()' . '(())' . '(()())' . '()()' . '()(())' . '()(()())'.
 			'(()()())' . '()()()' . '(())()' . '()()(())' . '()()(()())'.
 			'(())(())' . '()(()()())' . '()()()()' . '((()))' . '()(())()'.
-			'(())(()())' . '()()()(())' . '()()()(()())'} collect: #asCons).
+			'(())(()())' . '()()()(())' . '()()()(()())'} collect: #asCons)
+		modulo: #asOrderedCollection.
 	g := [ :alpha | combTheory dycko value: '(()(())()(' asCons ] fresh.
 	"an invalid Dyck path"
 	self assert: g solutions isEmpty
