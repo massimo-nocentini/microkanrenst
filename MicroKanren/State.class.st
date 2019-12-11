@@ -9,20 +9,21 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-State >> at: aVar put: aValue [ 
+State >> at: aVar put: aValue [
 	| s |
 	s := substitution copy.
 	s
 		at: aVar
-		ifPresent: [:v | "check that if a key already exists at aVar, then the values
+		ifPresent: [ :v | 
+			"check that if a key already exists at aVar, then the values
 			must be the same"
 			aValue = v
-				ifFalse: [
-					UnificationError signal]]
+				ifFalse: [ UnificationError signal ] ]
 		ifAbsentPut: aValue.
-	^ self class new birthdate: birthdate;
-		 substitution: s;
-		 yourself
+	^ self class new
+		birthdate: birthdate;
+		substitution: s;
+		yourself
 ]
 
 { #category : #accessing }
@@ -31,13 +32,13 @@ State >> birthdate: anInteger [
 ]
 
 { #category : #dispatching }
-State >> collectVars: aCollection forFresh: aFresh [ 
+State >> collectVars: aCollection forFresh: aFresh [
 	| nextState vars |
-	nextState := self class new substitution: substitution;
-				 birthdate: birthdate + aCollection size;
-				 yourself.
-	vars := aCollection
-				collect: #asVar.
+	nextState := self class new
+		substitution: substitution;
+		birthdate: birthdate + aCollection size;
+		yourself.
+	vars := aCollection collect: [ :each | (each + birthdate) asVar ].
 	^ aFresh onState: nextState withVars: vars
 ]
 

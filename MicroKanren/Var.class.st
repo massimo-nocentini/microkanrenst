@@ -10,8 +10,9 @@ Class {
 { #category : #creating }
 Var class >> id: anInteger [
 	^ self new
-		id: ('var_' , anInteger asString) asSymbol;
+		id: anInteger;
 		yourself
+	"id: ('var_' , anInteger asString) asSymbol;"
 ]
 
 { #category : #creating }
@@ -22,6 +23,13 @@ Var class >> tautology [
 { #category : #initializing }
 Var >> id: aString [
 	id := aString
+]
+
+{ #category : #printing }
+Var >> printOn: aStream [
+	aStream
+		nextPutAll: 'o';
+		nextPutAll: id printSubscriptString
 ]
 
 { #category : #dispatching }
