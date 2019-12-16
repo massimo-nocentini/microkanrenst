@@ -8,18 +8,27 @@ Class {
 	#category : #MicroKanren
 }
 
+{ #category : #'instance creation' }
+State class >> fromDictionary: aDictionary [
+	^ self new
+		birthdate: 0;
+		substitution: aDictionary;
+		yourself
+]
+
+{ #category : #'instance creation' }
+State class >> fromUnionFind: aUF [
+	^ self new
+		birthdate: 0;
+		substitution: aUF;
+		yourself
+]
+
 { #category : #'as yet unclassified' }
 State >> at: aVar put: aValue [
 	| s |
 	s := substitution copy.
-	s
-		at: aVar
-		ifPresent: [ :v | 
-			"check that if a key already exists at aVar, then the values
-			must be the same"
-			aValue = v
-				ifFalse: [ UnificationError signal ] ]
-		ifAbsentPut: aValue.
+	s at: aVar ifPresent: [ self error ] ifAbsentPut: [ aValue ].
 	^ self class new
 		birthdate: birthdate;
 		substitution: s;
@@ -53,10 +62,11 @@ State >> reifierWithVarCtor: aSymbol [
 ]
 
 { #category : #reification }
-State >> reifyVar: aVar withCtor: aCtor [ 
+State >> reifyVar: aVar withCtor: aCtor [
 	substitution
 		at: aVar
-		ifAbsentPut: [aCtor value: substitution size]
+		ifPresent: [ :v | self error ]
+		ifAbsentPut: [ aCtor value: substitution size ]
 ]
 
 { #category : #accessing }
@@ -75,13 +85,26 @@ State >> unifier [
 ]
 
 { #category : #'as yet unclassified' }
-State >> walk: anObj [ 
-	^ self walkIterative: anObj
+State >> walk: anObj [
+	^ substitution walk: anObj fromState: self
 ]
 
 { #category : #'as yet unclassified' }
-State >> walkIterative: anObj [ 
+State >> walk: anObj inDictionary: aDictionary [
+	^ self walkIterative: anObj inDictionary: aDictionary
+]
+
+{ #category : #'as yet unclassified' }
+State >> walk: anObj inUnionFind: aUF [
+	^ (aUF includesKey: anObj)
+		ifTrue: [ aUF at: anObj ]
+		ifFalse: [ anObj ]
+]
+
+{ #category : #'as yet unclassified' }
+State >> walkIterative: anObj inDictionary: aDictionary [
 	"searches for the value of `anObj` in substitution"
+
 	"^ substitution
 	at: anObj
 	ifPresent: [:v | 
@@ -89,24 +112,24 @@ State >> walkIterative: anObj [
 	w := self walk: v.
 	substitution at: anObj put: w]
 	ifAbsent: [anObj]"
+
 	| k |
 	k := anObj.
-	[k := substitution
-				at: k
-				ifAbsent: [^ k]] repeat
+	[ k := aDictionary at: k ifAbsent: [ ^ k ] ] repeat
 ]
 
 { #category : #'as yet unclassified' }
-State >> walkRecursive: anObj [ 
-	^ substitution
+State >> walkRecursive: anObj inDictionary: aDictionary [
+	^ aDictionary
 		at: anObj
-		ifPresent: [:v | 
-			
-			substitution at: anObj put: (self walk: v)]
-		ifAbsent: [anObj]
+		ifPresent: [ :v | 
+			aDictionary
+				at: anObj
+				put: (self walkRecursive: v inDictionary: aDictionary) ]
+		ifAbsent: [ anObj ]
 ]
 
 { #category : #'as yet unclassified' }
 State >> walker [
- ^Walker on: self
+	^ Walker on: self
 ]

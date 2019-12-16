@@ -36,26 +36,26 @@ Reifier >> forObject: anObj [
 ]
 
 { #category : #dispatched }
-Reifier >> forReifiedVar: aVar [ 
+Reifier >> forReifiedVar: aVar [
 	^ state
 ]
 
 { #category : #dispatched }
-Reifier >> forVar: aVar [ 
+Reifier >> forVar: aVar [
 	^ state reifyVar: aVar withCtor: varCtor
 ]
 
 { #category : #reification }
-Reifier >> reifyVars: vars [ 
+Reifier >> reifyVars: vars [
 	| walker reifier |
 	walker := state walker.
 	reifier := Dictionary new asState reifier.
 	^ vars
-		collect: [:v | 
+		collect: [ :v | 
 			| w s |
 			w := walker value: v.
 			s := reifier value: w.
-			s walker value: w]
+			s walker value: w ]
 ]
 
 { #category : #accessing }

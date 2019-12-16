@@ -28,13 +28,18 @@ Var >> id: aString [
 { #category : #printing }
 Var >> printOn: aStream [
 	aStream
-		nextPutAll: 'o';
+		nextPutAll: self symbol;
 		nextPutAll: id printSubscriptString
 ]
 
 { #category : #dispatching }
 Var >> reifyUsingReifier: aReifier [ 
 	^ aReifier forVar: self 
+]
+
+{ #category : #printing }
+Var >> symbol [
+	^ 'o'
 ]
 
 { #category : #dispatching }

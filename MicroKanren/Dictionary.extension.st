@@ -2,8 +2,10 @@ Extension { #name : #Dictionary }
 
 { #category : #'*MicroKanren-core' }
 Dictionary >> asState [
-	^ State new
-		birthdate: 0;
-		substitution: self;
-		yourself
+	^ State fromDictionary: self
+]
+
+{ #category : #'*MicroKanren-core' }
+Dictionary >> walk: anObj fromState: aState [
+	^ aState walk: anObj inDictionary: self
 ]

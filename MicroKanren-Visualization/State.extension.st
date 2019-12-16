@@ -14,7 +14,7 @@ State >> gtInspectorGraphViewIn: composite [
 						text: [ :aVertex | aVertex content ];
 						color: Color black ]
 				edge: [ :shape | shape arrowedBezier shortestDistanceAttachPointWithJump ]
-				layout: #tree ];
+				layout: [ :layout | layout tree verticalGap: 100; yourself ] ];
 		yourself
 ]
 
