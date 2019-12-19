@@ -11,14 +11,9 @@ UnionFind >> at: aVar ifPresent: presentBlock ifAbsentPut: absentBlock [
 		ifTrue: [ | v |
 			v := self at: aVar.
 			aVar == v
-				ifTrue: [ self union: aVar with: absentBlock value ]
+				ifTrue: [ self union: v with: absentBlock value ]
 				ifFalse: [ presentBlock cull: v ] ]
 		ifFalse: [ self union: aVar with: absentBlock value ]
-]
-
-{ #category : #'*MicroKanren' }
-UnionFind >> includesKey: aKey [
-	^ dict includesKey: aKey
 ]
 
 { #category : #'*MicroKanren' }
