@@ -28,7 +28,7 @@ State class >> fromUnionFind: aUF [
 State >> at: aVar put: aValue [
 	| s |
 	s := substitution copy.
-	s at: aVar ifPresent: [ self error ] ifAbsentPut: [ aValue ].
+	s at: aVar ifPresent: [ :v | self error ] ifAbsentPut: [ aValue ].
 	^ self class new
 		birthdate: birthdate;
 		substitution: s;
@@ -58,7 +58,10 @@ State >> reifier [
 
 { #category : #reification }
 State >> reifierWithVarCtor: aSymbol [
-	^ Reifier new state: self; varCtor: aSymbol; yourself
+	^ Reifier new
+		state: self;
+		varCtor: aSymbol;
+		yourself
 ]
 
 { #category : #reification }
@@ -97,7 +100,7 @@ State >> walk: anObj inDictionary: aDictionary [
 { #category : #'as yet unclassified' }
 State >> walk: anObj inUnionFind: aUF [
 	^ (aUF includesKey: anObj)
-		ifTrue: [ aUF at: anObj ]
+		ifTrue: [ aUF representativeAt: anObj ]
 		ifFalse: [ anObj ]
 ]
 

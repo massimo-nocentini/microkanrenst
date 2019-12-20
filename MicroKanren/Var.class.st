@@ -25,6 +25,11 @@ Var >> id: aString [
 	id := aString
 ]
 
+{ #category : #dispatched }
+Var >> isVar [
+	^ true
+]
+
 { #category : #printing }
 Var >> printOn: aStream [
 	aStream

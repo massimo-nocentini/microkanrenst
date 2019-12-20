@@ -7,13 +7,15 @@ UnionFind >> asState [
 
 { #category : #'*MicroKanren' }
 UnionFind >> at: aVar ifPresent: presentBlock ifAbsentPut: absentBlock [
-	^ (self includesKey: aVar)
-		ifTrue: [ | v |
-			v := self at: aVar.
-			aVar == v
-				ifTrue: [ self union: v with: absentBlock value ]
-				ifFalse: [ presentBlock cull: v ] ]
-		ifFalse: [ self union: aVar with: absentBlock value ]
+	^ self
+		union: aVar
+		with: absentBlock value
+		consistent: [ :root :reprs | 
+			reprs
+				ifEmpty: [ root ]
+				ifNotEmpty: [ reprs size = 1
+						ifTrue: [ reprs atRandom ]
+						ifFalse: [ UnificationError signal ] ] ]
 ]
 
 { #category : #'*MicroKanren' }

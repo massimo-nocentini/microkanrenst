@@ -1,11 +1,6 @@
 Extension { #name : #BlockClosure }
 
 { #category : #'*MicroKanren-core' }
-BlockClosure >> !! args [
-	^ self valueWithArguments: args
-]
-
-{ #category : #'*MicroKanren-core' }
 BlockClosure >> eta [
 	^ Goal eta: self fresh
 ]
