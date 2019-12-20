@@ -5,7 +5,7 @@ Class {
 		'sexpTheory',
 		'combTheory'
 	],
-	#category : #'MicroKanren-Testing'
+	#category : #'MicroKanren-Tests'
 }
 
 { #category : #'as yet unclassified' }

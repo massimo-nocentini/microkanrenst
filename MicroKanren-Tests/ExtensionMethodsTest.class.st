@@ -1,7 +1,7 @@
 Class {
 	#name : #ExtensionMethodsTest,
 	#superclass : #TestCase,
-	#category : #'MicroKanren-Testing'
+	#category : #'MicroKanren-Tests'
 }
 
 { #category : #'about linked lists' }

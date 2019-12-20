@@ -1,6 +1,6 @@
 Extension { #name : #State }
 
-{ #category : #'*MicroKanren-Visualization' }
+{ #category : #'*MicroKanren-Visualizations' }
 State >> gtInspectorGraphViewIn: composite [
 	<gtInspectorPresentationOrder: 10>
 	^ composite roassal2
@@ -18,7 +18,7 @@ State >> gtInspectorGraphViewIn: composite [
 		yourself
 ]
 
-{ #category : #'*MicroKanren-Visualization' }
+{ #category : #'*MicroKanren-Visualizations' }
 State >> gtInspectorWalkedVarsIn: composite [
 	<gtInspectorPresentationOrder: 11>
 	^ composite fastTable
