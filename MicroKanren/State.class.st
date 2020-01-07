@@ -100,7 +100,7 @@ State >> walk: anObj inDictionary: aDictionary [
 { #category : #'as yet unclassified' }
 State >> walk: anObj inUnionFind: aUF [
 	^ (aUF includesKey: anObj)
-		ifTrue: [ aUF representativeAt: anObj ]
+		ifTrue: [ aUF at: anObj ]
 		ifFalse: [ anObj ]
 ]
 
