@@ -9,29 +9,33 @@ Class {
 }
 
 { #category : #'instance creation' }
-State class >> fromDictionary: aDictionary [
+State class >> emptyWithSubstitution: aCollection [
 	^ self new
 		birthdate: 0;
-		substitution: aDictionary;
+		substitution: aCollection;
 		yourself
 ]
 
 { #category : #'instance creation' }
+State class >> fromDictionary: aDictionary [
+	^ self emptyWithSubstitution: aDictionary
+]
+
+{ #category : #'instance creation' }
+State class >> fromSBRAL: aSBRAL [
+	^ self emptyWithSubstitution: aSBRAL
+]
+
+{ #category : #'instance creation' }
 State class >> fromUnionFind: aUF [
-	^ self new
-		birthdate: 0;
-		substitution: aUF;
-		yourself
+	^ self emptyWithSubstitution: aUF
 ]
 
 { #category : #'as yet unclassified' }
 State >> at: aVar put: aValue [
-	| s |
-	s := substitution copy.
-	s at: aVar ifPresent: [ :v | self error ] ifAbsentPut: [ aValue ].
 	^ self class new
 		birthdate: birthdate;
-		substitution: s;
+		substitution: (substitution at: birthdate - aVar id + 1 put: (Maybe just: aValue));
 		yourself
 ]
 
@@ -42,12 +46,15 @@ State >> birthdate: anInteger [
 
 { #category : #dispatching }
 State >> collectVars: aCollection forFresh: aFresh [
-	| nextState vars |
+	| nextState vars extendedSubstitution |
+	vars := aCollection collect: [ :each | (each + birthdate) asVar ].
+	extendedSubstitution := vars
+		inject: substitution
+		into: [ :aSBRAL :each | aSBRAL add: Maybe nothing ].
 	nextState := self class new
-		substitution: substitution;
+		substitution: extendedSubstitution;
 		birthdate: birthdate + aCollection size;
 		yourself.
-	vars := aCollection collect: [ :each | (each + birthdate) asVar ].
 	^ aFresh onState: nextState withVars: vars
 ]
 
@@ -95,6 +102,19 @@ State >> walk: anObj [
 { #category : #'as yet unclassified' }
 State >> walk: anObj inDictionary: aDictionary [
 	^ self walkIterative: anObj inDictionary: aDictionary
+]
+
+{ #category : #'as yet unclassified' }
+State >> walk: anObj inSBRAL: aSBRAL [
+	| each |
+	each := anObj.
+	[ each isVar
+		ifTrue: [ | maybe |
+			maybe := aSBRAL at: birthdate - each id + 1.
+			maybe
+				ifNothing: [ ^ each ]
+				ifJust: [ :aJust | each := aJust content ] ]
+		ifFalse: [ ^ each ] ] repeat
 ]
 
 { #category : #'as yet unclassified' }

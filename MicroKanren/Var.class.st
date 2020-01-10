@@ -21,6 +21,11 @@ Var class >> tautology [
 ]
 
 { #category : #initializing }
+Var >> id [
+	^ id
+]
+
+{ #category : #initializing }
 Var >> id: aString [
 	id := aString
 ]

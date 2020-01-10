@@ -76,12 +76,7 @@ Goal >> solutions [
 	g := Run new
 		goal: self;
 		yourself.
-	^ g onState: Dictionary new asState
-	"^ g
-		onState:
-			(UnionFind empty
-				representativeBlock: [ :each | each isVar not ];
-				asState)"
+	^ g onState: SBRAL new asState
 ]
 
 { #category : #reification }
