@@ -50,10 +50,14 @@ Unifier >> forVar: aVar forObject: anObject [
 { #category : #dispatched }
 Unifier >> forVar: aVar forVar: anotherVar [
 	^ aVar = anotherVar
-		ifTrue: [state]
-		ifFalse: [self
-				forVar: aVar
-				forObject: anotherVar]
+		ifTrue: [ state ]
+		ifFalse: [ | v w |
+			v := aVar.
+			w := anotherVar.
+			w id < v id
+				ifTrue: [ w := aVar.
+					v := anotherVar ].
+			self forVar: w forObject: v ]
 ]
 
 { #category : #accessing }

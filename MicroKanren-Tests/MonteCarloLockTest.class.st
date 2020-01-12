@@ -21,8 +21,9 @@ MonteCarloLockTest >> testMontecarloLockMachine [
 	g := [ :a | Theory montecarloLock mclocko value: a value: a ] fresh.
 	self
 		assert: (g solutions next: 2)
-		equals: {	#(5 4 6 4 2 5 4 6 4 2) asCons . 
-					#(4 5 6 4 2 4 5 6 4 2) asCons}
+		equals:
+			{#(5 4 6 4 2 5 4 6 4 2) asCons.
+			#(4 5 6 4 2 4 5 6 4 2) asCons}
 		modulo: #asOrderedCollection
 ]
 
