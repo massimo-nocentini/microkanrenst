@@ -410,6 +410,7 @@ GoalTest >> testFives [
 { #category : #tests }
 GoalTest >> testLengtho [
 	| g µ |
+	self skip.
 	µ := Theory sexp.
 	g := µ lengtho value: {} asCons value: 0 asConsedBinaryRepr.
 	self
@@ -492,63 +493,86 @@ GoalTest >> testSucceed [
 { #category : #tests }
 GoalTest >> testTabling [
 	| g patho |
-	patho := self patho: {#a -> #b. #b -> #a. #b -> #d} asGraph asGoal.
-	g := [:x | patho value: #a value: x] fresh.
+	self skip.
+	patho := self
+		patho:
+			{(#a -> #b).
+			(#b -> #a).
+			(#b -> #d)} asGraph asGoal.
+	g := [ :x | patho value: #a value: x ] fresh.
 	self assert: g solutions contents equals: #(#b #a #d).
-	patho := self patho: {#a -> #b. #b -> #c. #c -> #d. #d -> #a. #d -> #b} asGraph asGoal.
-	g := [:x | patho value: #c value: x] fresh.
+	patho := self
+		patho:
+			{(#a -> #b).
+			(#b -> #c).
+			(#c -> #d).
+			(#d -> #a).
+			(#d -> #b)} asGraph asGoal.
+	g := [ :x | patho value: #c value: x ] fresh.
 	self assert: g solutions contents equals: #(#d #a #b #c)
 ]
 
 { #category : #tests }
 GoalTest >> testTablingAnswersInsteadOfSubstitutions [
 	| fº gº |
-	fº := [:z | z unifyo value: 6] tabled.
-	gº := [:x :y | Goal cond e
-				if: (x unifyo value: 5)
-				then: (fº value: y);
-				
-			if: true asGoal	then: (fº value: y)] fresh.
-	self assert: {{5. 6}. {0 asReifiedVar. 6}} equals: gº solutions contents
+	self skip.
+	fº := [ :z | z unifyo value: 6 ] tabled.
+	gº := [ :x :y | 
+	Goal cond e
+		if: (x unifyo value: 5) then: (fº value: y);
+		if: true asGoal then: (fº value: y) ] fresh.
+	self
+		assert:
+			{{5 . 6}.
+			{0 asReifiedVar.
+			6}}
+		equals: gº solutions contents
 ]
 
 { #category : #tests }
 GoalTest >> testTablingMutuallyRecursive [
 	| fº gº |
+	self skip.
 	gº := nil.
-	fº := [:x | Goal cond e if: (x unifyo value: 0) then: true asGoal;
-				
-				if: true asGoal then: (gº value: x);
-				 yourself].
-	gº := [:x | Goal cond e if: (x unifyo value: 1) then: true asGoal;
-				
-				if: true asGoal then: (fº value: x);
-				 yourself].
+	fº := [ :x | 
+	Goal cond e
+		if: (x unifyo value: 0) then: true asGoal;
+		if: true asGoal then: (gº value: x);
+		yourself ].
+	gº := [ :x | 
+	Goal cond e
+		if: (x unifyo value: 1) then: true asGoal;
+		if: true asGoal then: (fº value: x);
+		yourself ].
 	"self
 	assert: {0. 1}
 	equals: ([:q | fº value: q] fresh solutions next: 2) contents."
-	fº := [:x | Goal cond e if:( x unifyo value: 0) then: true asGoal;
-				
-				if: true asGoal then: (gº value: x);
-				 yourself] tabled.
-	gº := [:x | Goal cond e if:( x unifyo value: 1) then: true asGoal;
-				
-				if: true asGoal then: (fº value: x);
-				 yourself].
-	self assert: {0. 1} equals: [:q | fº value: q] fresh solutions contents.
-	fº := [:x | Goal cond e
-				if: (x unifyo value: 0)
-				then: true asGoal;
-				
-				if: true asGoal then: (gº value: x);
-				 yourself].
-	gº := [:x | Goal cond e
-				if: (x unifyo value: 1)
-				then: true asGoal;
-				
-				if: true asGoal then: (fº value: x);
-				 yourself] tabled.
-	self assert: {0. 1. 0} equals: [:q | fº value: q] fresh solutions contents
+	fº := [ :x | 
+	Goal cond e
+		if: (x unifyo value: 0) then: true asGoal;
+		if: true asGoal then: (gº value: x);
+		yourself ] tabled.
+	gº := [ :x | 
+	Goal cond e
+		if: (x unifyo value: 1) then: true asGoal;
+		if: true asGoal then: (fº value: x);
+		yourself ].
+	self
+		assert: {0 . 1}
+		equals: [ :q | fº value: q ] fresh solutions contents.
+	fº := [ :x | 
+	Goal cond e
+		if: (x unifyo value: 0) then: true asGoal;
+		if: true asGoal then: (gº value: x);
+		yourself ].
+	gº := [ :x | 
+	Goal cond e
+		if: (x unifyo value: 1) then: true asGoal;
+		if: true asGoal then: (fº value: x);
+		yourself ] tabled.
+	self
+		assert: {0 . 1 . 0}
+		equals: [ :q | fº value: q ] fresh solutions contents
 ]
 
 { #category : #'as yet unclassified' }
