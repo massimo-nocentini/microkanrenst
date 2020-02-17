@@ -18,6 +18,7 @@ BaselineOfMicroKanren >> baseline: spec [
 			"Packages"
 			spec
 				package: 'MicroKanren';
+				package: 'MicroKanren-Goals';
 				package: 'MicroKanren-Extensions'
 					with: [ spec requires: #('MicroKanren') ];
 				package: 'MicroKanren-Theories'

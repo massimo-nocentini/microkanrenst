@@ -14,6 +14,15 @@ GoalTest >> fives: x [
 ]
 
 { #category : #'as yet unclassified' }
+GoalTest >> foo: f foo: s foo: t [
+	^ ((f unifyo value: #a) , (s unifyo value: #b) , (t unifyo value: #c))
+		| ((f unifyo value: #a) , (s unifyo value: #b) , (t unifyo value: #d))
+		| ((f unifyo value: #b) , (s unifyo value: #c) , (t unifyo value: #e))
+		| ((f unifyo value: #b) , (s unifyo value: #c) , (t unifyo value: #f))
+		| ((f unifyo value: #c) , (s unifyo value: #c) , (t unifyo value: #g))
+]
+
+{ #category : #'as yet unclassified' }
 GoalTest >> nats: x [
 	^ self nats: x stage: 0
 ]
@@ -390,6 +399,14 @@ GoalTest >> testDisj [
 { #category : #'as yet unclassified' }
 GoalTest >> testFail [
 	self assert: false asGoal solutions isEmpty
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testFindAll [
+	| g |
+	g := [ :a :b :c | self foo: a foo: b foo: c ]
+		findAll: [ :a :b :c | c ].
+	self assert: g solutions equals: {} modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
