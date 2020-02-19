@@ -65,6 +65,27 @@ Goal >> , other [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+Goal >> bagOf: aCollection groupBy: gBlock template: tBlock value: aValue [
+	^ BagOf new
+		receiver: self;
+		groupBy: gBlock;
+		template: tBlock;
+		vars: aCollection;
+		value: aValue;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+Goal >> findAll: aCollection template: aBlock value: aValue [
+	^ FindAll new
+		receiver: self;
+		template: aBlock;
+		vars: aCollection;
+		value: aValue;
+		yourself
+]
+
 { #category : #running }
 Goal >> onState: aState [
 	self subclassResponsibility

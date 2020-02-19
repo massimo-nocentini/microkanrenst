@@ -60,23 +60,22 @@ State >> collectVars: aCollection forFresh: aFresh [
 
 { #category : #reification }
 State >> reifier [
-	^ self reifierWithVarCtor: #asReifiedVar
+	^ self reifierClass: Reifier
 ]
 
 { #category : #reification }
-State >> reifierWithVarCtor: aSymbol [
-	^ Reifier new
+State >> reifierClass: aClass [
+	^ aClass new
 		state: self;
-		varCtor: aSymbol;
 		yourself
 ]
 
 { #category : #reification }
-State >> reifyVar: aVar withCtor: aCtor [
+State >> reifyVar: aVar forReifier: aReifier [
 	substitution
 		at: aVar
 		ifPresent: [ :v | self error ]
-		ifAbsentPut: [ aCtor value: substitution size ]
+		ifAbsentPut: [ aReifier intToVar: substitution size ]
 ]
 
 { #category : #accessing }
@@ -86,7 +85,7 @@ State >> substitution: aCollection [
 
 { #category : #reification }
 State >> trasparentReifier [
-	^ self reifierWithVarCtor: #asVar
+	^ self reifierClass: TrasparentReifier
 ]
 
 { #category : #creating }

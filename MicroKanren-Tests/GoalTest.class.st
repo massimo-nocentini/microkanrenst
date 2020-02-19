@@ -37,6 +37,15 @@ GoalTest >> nats: x stage: i offset: o [
 	^ (x unifyo value: i) | [ self nats: x stage: i + o ] eta
 ]
 
+{ #category : #'as yet unclassified' }
+GoalTest >> onState: aState [
+	| aGoal aStream templateGoal |
+	aStream := Run new
+		goal: aGoal;
+		onState: aState.
+	[ :solState | templateGoal onState: solState ] >>= aStream
+]
+
 { #category : #tests }
 GoalTest >> patho: edgeo [
 	| patho |
@@ -130,6 +139,84 @@ GoalTest >> testAppendo [
 		value: (#(#d) asConsWithCdr: l)
 		value: (#(#a #b #c #d) asConsWithCdr: #e) ] fresh.
 	self assert: g solutions equals: {#e} modulo: #asOrderedCollection
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testBagOf [
+	| g |
+	g := [ :list | 
+	[ :mother :child | 
+	(DescendTestPredicate value: mother value: child)
+		bagOf:
+			{mother.
+			child}
+		groupBy: [ :m :c | m ]
+		template: [ :m :c | c ]
+		value: list ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals:
+			{(#martha -> #(#charlotte #caroline #laura #rose)).
+			(#caroline -> #(#rose #laura)).
+			(#laura -> #(#rose)).
+			(#charlotte -> #(#caroline #laura #rose))}
+		modulo: #asOrderedCollection.
+	g := [ :list | 
+	[ :mother :child | 
+	(DescendTestPredicate value: mother value: child)
+		bagOf:
+			{mother.
+			child}
+		groupBy: [ :m :c | #all ]
+		template: [ :m :c | c ]
+		value: list ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals:
+			{(#all
+				->
+					#(#charlotte #caroline #rose #rose #laura #laura #caroline #laura #rose #rose))}
+		modulo: #asOrderedCollection.
+	g := [ :list | 
+	[ :groups | 
+	| bagOfGoal |
+	bagOfGoal := [ :mother :child | 
+	(DescendTestPredicate value: mother value: child)
+		bagOf:
+			{mother.
+			child}
+		groupBy: [ :m :c | m ]
+		template: [ :m :c | c ]
+		value: groups ] fresh.
+	bagOfGoal
+		findAll: {groups}
+		template: [ :anAssoc | anAssoc value ]
+		value: list ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals:
+			#(#(#charlotte #caroline #laura #rose) #(#rose #laura) #(#rose) #(#caroline #laura #rose))
+				asCons
+		modulo: #asOrderedCollection
+	"g := [ :list | 
+	[ :groups :mother :child | 
+	((DescendTestPredicate value: mother value: child)
+		bagOf:
+			{mother.
+			child}
+		groupBy: [ :m :c | nil ]
+		template: [ :m :c | c ]
+		value: groups)
+		bagOf: {mother. child}
+		groupBy: [ :m :c | m -> c ]
+		template: [ :anAssoc :c| c ]
+		value: list ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals:
+			#(#(#charlotte #caroline #laura #rose) #(#rose #laura) #(#rose) #(#caroline #laura #rose))
+				asCons
+		modulo: #asOrderedCollection"
 ]
 
 { #category : #tests }
@@ -404,9 +491,68 @@ GoalTest >> testFail [
 { #category : #'as yet unclassified' }
 GoalTest >> testFindAll [
 	| g |
-	g := [ :a :b :c | self foo: a foo: b foo: c ]
-		findAll: [ :a :b :c | c ].
-	self assert: g solutions equals: {} modulo: #asOrderedCollection
+	g := [ :a :b :c | self foo: a foo: b foo: c ] fresh.
+	self
+		assert: g solutions
+		equals: #(#(#a #b #c) #(#c #c #g) #(#b #c #f) #(#b #c #e) #(#a #b #d))
+		modulo: #asOrderedCollection.
+	g := [ :b | DescendTestPredicate value: #martha value: b ] fresh.
+	self
+		assert: g solutions
+		equals: #(charlotte caroline laura rose)
+		modulo: #asOrderedCollection.
+	g := [ :list | 
+	[ :b | 
+	(DescendTestPredicate value: #martha value: b)
+		findAll: {b}
+		template: [ :_b | Array with: #fromMartha with: _b ]
+		value: list ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals:
+			#(#(#fromMartha #charlotte) #(#fromMartha #caroline) #(#fromMartha #laura) #(#fromMartha #rose))
+				asCons
+		modulo: #asOrderedCollection.
+	g := [ :list | 
+	[ :b :y | 
+	(DescendTestPredicate value: #martha value: b)
+		findAll: {y}
+		template: [ :_y | y ]
+		value: list ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals:
+			{0 asReifiedVar.
+			0 asReifiedVar.
+			0 asReifiedVar.
+			0 asReifiedVar} asCons
+		modulo: #asOrderedCollection.
+	g := [ :list | 
+	[ :b :cdr | 
+	((DescendTestPredicate value: #mary value: b)
+		findAll: {b}
+		template: [ :_b | b ]
+		value: cdr)
+		, (sexpTheory conso value: #empty value: cdr value: list) ] fresh ]
+		fresh.
+	self
+		assert: g solutions
+		equals: #(empty) asCons
+		modulo: #asOrderedCollection.
+	g := [ :list | 
+	[ :mother :child | 
+	(DescendTestPredicate value: mother value: child)
+		findAll:
+			{mother.
+			child}
+		template: [ :m :c | c ]
+		value: list ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals:
+			#(#charlotte #caroline #rose #rose #laura #laura #caroline #laura #rose #rose)
+				asCons
+		modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }

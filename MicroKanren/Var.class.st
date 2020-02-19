@@ -39,7 +39,7 @@ Var >> isVar [
 Var >> printOn: aStream [
 	aStream
 		nextPutAll: self symbol;
-		nextPutAll: id printSubscriptString
+		nextPutAll: id asString subscript
 ]
 
 { #category : #dispatching }

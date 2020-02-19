@@ -42,7 +42,12 @@ Reifier >> forReifiedVar: aVar [
 
 { #category : #dispatched }
 Reifier >> forVar: aVar [
-	^ state reifyVar: aVar withCtor: varCtor
+	^ state reifyVar: aVar forReifier: self
+]
+
+{ #category : #'as yet unclassified' }
+Reifier >> intToVar: anInteger [
+	^ anInteger asReifiedVar
 ]
 
 { #category : #reification }

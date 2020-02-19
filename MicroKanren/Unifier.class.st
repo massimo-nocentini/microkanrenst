@@ -29,10 +29,10 @@ Unifier >> forLinkedList: aCollection forLinkedList: anotherCollection [
 ]
 
 { #category : #unification }
-Unifier >> forObject: anObj forObject: anotherObj [ 
+Unifier >> forObject: anObj forObject: anotherObj [
 	^ anObj = anotherObj
-		ifTrue: [state]
-		ifFalse: [UnificationError signal]
+		ifTrue: [ state ]
+		ifFalse: [ UnificationError signal ]
 ]
 
 { #category : #unification }
