@@ -80,6 +80,7 @@ Goal >> bagOf: aCollection groupBy: gBlock template: tBlock value: aValue [
 Goal >> findAll: aCollection template: aBlock value: aValue [
 	^ FindAll new
 		receiver: self;
+		groupBy: BagOfGroupByAdapter new;
 		template: aBlock;
 		vars: aCollection;
 		value: aValue;

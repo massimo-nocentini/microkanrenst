@@ -187,8 +187,7 @@ GoalTest >> testBagOf [
 	self
 		assert: g solutions
 		equals:
-			#(#(#rose) #(#rose #laura) #(#charlotte #caroline #laura #rose) #(#caroline #laura #rose))
-				asCons
+			#(#(#(#rose) #(#rose #laura) #(#charlotte #caroline #laura #rose) #(#caroline #laura #rose)))
 		modulo: #asOrderedCollection.
 	g := [ :list | 
 	[ :groups :mother :child | 
@@ -499,8 +498,7 @@ GoalTest >> testFindAll [
 	self
 		assert: g solutions
 		equals:
-			#(#(#fromMartha #charlotte) #(#fromMartha #caroline) #(#fromMartha #laura) #(#fromMartha #rose))
-				asCons
+			#(#(#(#fromMartha #charlotte) #(#fromMartha #caroline) #(#fromMartha #laura) #(#fromMartha #rose)))
 		modulo: #asOrderedCollection.
 	g := [ :list | 
 	[ :b :y | 
@@ -513,16 +511,16 @@ GoalTest >> testFindAll [
 	self
 		assert: g solutions
 		equals:
-			{0 asReifiedVar.
+			{{0 asReifiedVar.
 			0 asReifiedVar.
 			0 asReifiedVar.
-			0 asReifiedVar} asCons
+			0 asReifiedVar}}
 		modulo: #asOrderedCollection.
 	g := [ :list | 
 	[ :b :cdr | 
 	((DescendTestPredicate value: #mary value: b)
 		findAll: {b}
-		template: [ :_b | b ]
+		template: [ :_b | _b ]
 		value: cdr)
 		, (sexpTheory conso value: #empty value: cdr value: list) ] fresh ]
 		fresh.
@@ -541,8 +539,7 @@ GoalTest >> testFindAll [
 	self
 		assert: g solutions
 		equals:
-			#(#charlotte #caroline #rose #rose #laura #laura #caroline #laura #rose #rose)
-				asCons
+			#(#(#charlotte #caroline #rose #rose #laura #laura #caroline #laura #rose #rose))
 		modulo: #asOrderedCollection
 ]
 
