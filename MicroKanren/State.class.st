@@ -11,7 +11,7 @@ Class {
 { #category : #'instance creation' }
 State class >> emptyWithSubstitution: aCollection [
 	^ self new
-		birthdate: 0;
+		birthdate: 1;
 		substitution: aCollection;
 		yourself
 ]
@@ -58,24 +58,36 @@ State >> collectVars: aCollection forFresh: aFresh [
 	^ aFresh onState: nextState withVars: vars
 ]
 
-{ #category : #reification }
-State >> reifier [
-	^ self reifierClass: Reifier
+{ #category : #'as yet unclassified' }
+State >> identityReifier [
+	^ self reifierOfClass: IdentityReifier
 ]
 
 { #category : #reification }
-State >> reifierClass: aClass [
+State >> reifier [
+	^ self reifierOfClass: Reifier
+]
+
+{ #category : #reification }
+State >> reifierOfClass: aClass [
 	^ aClass new
 		state: self;
 		yourself
 ]
 
 { #category : #reification }
+State >> reifyVar: aVar forIdentityReifier: aReifier [
+	substitution at: aVar ifPresent: [ :v | self error ]
+]
+
+{ #category : #reification }
 State >> reifyVar: aVar forReifier: aReifier [
-	substitution
-		at: aVar
-		ifPresent: [ :v | self error ]
-		ifAbsentPut: [ aReifier intToVar: substitution size ]
+	self var: substitution size asReifiedVar reifies: aVar
+]
+
+{ #category : #reification }
+State >> reifyVar: aVar forTransparentReifier: aReifier [
+	self var: substitution size asVar reifies: aVar
 ]
 
 { #category : #accessing }
@@ -85,12 +97,20 @@ State >> substitution: aCollection [
 
 { #category : #reification }
 State >> trasparentReifier [
-	^ self reifierClass: TrasparentReifier
+	^ self reifierOfClass: TrasparentReifier
 ]
 
 { #category : #creating }
 State >> unifier [
 	^ Unifier new state: self; yourself
+]
+
+{ #category : #reification }
+State >> var: aReifiedVar reifies: aVar [
+	substitution
+		at: aVar
+		ifPresent: [ :v | self error ]
+		ifAbsentPut: [ aReifiedVar ]
 ]
 
 { #category : #'as yet unclassified' }

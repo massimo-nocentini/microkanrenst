@@ -2,17 +2,21 @@ Class {
 	#name : #Reifier,
 	#superclass : #Object,
 	#instVars : [
-		'state',
-		'varCtor'
+		'state'
 	],
 	#category : #MicroKanren
 }
 
 { #category : #dispatched }
-Reifier >> _forCollection: aCollection [ 
+Reifier >> _forCollection: aCollection [
 	^ aCollection
 		inject: state
-		into: [:s :c | s reifier value: c]
+		into: [ :s :c | 
+			| r |
+			r := self class new
+				state: s;
+				yourself.
+			r value: c ]
 ]
 
 { #category : #dispatched }
@@ -45,16 +49,13 @@ Reifier >> forVar: aVar [
 	^ state reifyVar: aVar forReifier: self
 ]
 
-{ #category : #'as yet unclassified' }
-Reifier >> intToVar: anInteger [
-	^ anInteger asReifiedVar
-]
-
 { #category : #reification }
 Reifier >> reifyVars: vars [
 	| walker reifier |
 	walker := state walker.
-	reifier := Dictionary new asState reifier.
+	reifier := self class new
+		state: Dictionary new asState;
+		yourself.
 	^ vars
 		collect: [ :v | 
 			| w s |
@@ -72,9 +73,4 @@ Reifier >> state: aState [
 Reifier >> value: anObj [ 
 	^ (state walk: anObj)
 		reifyUsingReifier: self
-]
-
-{ #category : #accessing }
-Reifier >> varCtor: aSymbol [ 
-	varCtor := aSymbol
 ]

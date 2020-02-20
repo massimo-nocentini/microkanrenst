@@ -10,7 +10,7 @@ FindAll >> onState: aState [
 	aStream := (receiver onState: aState)
 		collect: [ :s | 
 			| args |
-			args := s trasparentReifier reifyVars: vars.
+			args := s identityReifier reifyVars: vars.
 			template valueWithArguments: args ].
 	^ (Goal unify: value with: aStream asOrderedCollection asCons)
 		onState: aState

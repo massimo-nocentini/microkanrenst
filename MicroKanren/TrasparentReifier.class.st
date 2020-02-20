@@ -5,6 +5,6 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-TrasparentReifier >> intToVar: anInteger [
-	^ anInteger asVar
+TrasparentReifier >> forVar: aVar [
+	^ state reifyVar: aVar forTransparentReifier: self
 ]
