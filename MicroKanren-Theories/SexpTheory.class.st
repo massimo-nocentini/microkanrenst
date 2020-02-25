@@ -11,9 +11,17 @@ SexpTheory >> alphaRuleo [
 
 { #category : #'as yet unclassified' }
 SexpTheory >> appendo [
-	^ [:aCollection :anotherCollection :aResult | Goal cond e if: aCollection nilo then: (aResult  unifyo value: anotherCollection);
-		 if: true asGoal then: [:a :d :rec | self conso !! {a. d. aCollection} , (self conso  !!{a. rec. aResult}) , [self appendo !! {d. anotherCollection. rec}] eta] fresh;
-		 yourself]
+	^ [ :aCollection :anotherCollection :aResult | 
+	Goal cond e
+		if: aCollection nilo
+			then: (aResult unifyo value: anotherCollection);
+		otherwise:
+			[ :a :d :rec | 
+			(self conso value: a value: d value: aCollection)
+				, (self conso value: a value: rec value: aResult)
+				, [ self appendo value: d value: anotherCollection value: rec ] eta ]
+				fresh;
+		yourself ]
 ]
 
 { #category : #'as yet unclassified' }

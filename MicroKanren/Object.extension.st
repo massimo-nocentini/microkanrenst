@@ -1,23 +1,8 @@
 Extension { #name : #Object }
 
 { #category : #'*MicroKanren-core' }
-Object >> asCons [
-	^ Cons fromObject: self
-]
-
-{ #category : #'*MicroKanren-core' }
-Object >> asConsWithCdr: aCdr [
-	^ Cons fromObject: self lastCdr: aCdr
-]
-
-{ #category : #'*MicroKanren-core' }
 Object >> cons: anObj [
 	^ anObj consedObject: self
-]
-
-{ #category : #'*MicroKanren-core' }
-Object >> consedObject: car [
-	^ Cons car: car  cdr: self 
 ]
 
 { #category : #'*MicroKanren-core' }

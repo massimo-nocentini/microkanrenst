@@ -1,8 +1,8 @@
 Extension { #name : #Cons }
 
 { #category : #'*MicroKanren' }
-Cons >> reifyUsingReifier: aReifier [ 
-	^ aReifier forCons: self 
+Cons >> reifyUsingReifier: aReifier [
+	^ aReifier forCons: self
 ]
 
 { #category : #'*MicroKanren' }
@@ -22,5 +22,5 @@ Cons >> unifyWithLinkedList: aCollection usingUnifier: anUnifier [
 
 { #category : #'*MicroKanren' }
 Cons >> walkStarUsingWalker: aWalker [
-	^ aWalker forCons: self 
+	^ aWalker forCons: self
 ]
