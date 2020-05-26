@@ -11,6 +11,22 @@ Class {
 RBProgramNodeIdentityVisitorTest >> testFirstExampleOfLittleProver [
 	self
 		assert:
+			([ :x | 
+			[ :a :b | 
+			| f |
+			#flapjack = (a ~~> x) isAtom ] ] sourceNode body
+				acceptVisitor: RBProgramNodeIdentityVisitor new)
+		equals:
+			[ :x | 
+			[ :a :b | 
+			| f |
+			#flapjack = (a ~~> x) isAtom ] ] sourceNode body
+]
+
+{ #category : #tests }
+RBProgramNodeIdentityVisitorTest >> testFirstExampleOfLittleProverWithLogicVars [
+	self
+		deny:
 			[ :x | 
 			[ :a :b | 
 			| f |
