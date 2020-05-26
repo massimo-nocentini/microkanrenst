@@ -10,7 +10,7 @@ BlockClosure >> context [
 						at: #x
 							put:
 							(RBMKVarNode new
-								logic_var: 3;
+								logicVar: 3;
 								yourself);
 						yourself);
 				yourself)

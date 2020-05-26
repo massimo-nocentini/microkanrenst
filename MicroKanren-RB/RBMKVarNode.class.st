@@ -2,12 +2,22 @@ Class {
 	#name : #RBMKVarNode,
 	#superclass : #RBVariableNode,
 	#instVars : [
-		'logic_var'
+		'logicVar'
 	],
 	#category : #'MicroKanren-RB'
 }
 
+{ #category : #visiting }
+RBMKVarNode >> acceptVisitor: aProgramNodeVisitor [
+	^ aProgramNodeVisitor visitLogicVariableNode: self
+]
+
 { #category : #accessing }
-RBMKVarNode >> logic_var: anObject [
-	logic_var := anObject
+RBMKVarNode >> logicVar [
+	^ logicVar
+]
+
+{ #category : #accessing }
+RBMKVarNode >> logicVar: anObject [
+	logicVar := anObject
 ]
