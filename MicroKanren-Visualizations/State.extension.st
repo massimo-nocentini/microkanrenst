@@ -1,24 +1,6 @@
 Extension { #name : #State }
 
 { #category : #'*MicroKanren-Visualizations' }
-State >> gtInspectorGraphViewIn: composite [
-	<gtInspectorPresentationOrder: 10>
-	^ composite roassal2
-		title: 'Substitution graph';
-		initializeView: [ RTMondrian new ];
-		painting: [ :mondrian | 
-			substitution associations asGraph
-				gtInspectorGraphViewUsingMondrianBuilder: mondrian
-				vertex: [ :shape | 
-					shape text
-						text: [ :aVertex | aVertex content ];
-						color: Color black ]
-				edge: [ :shape | shape arrowedBezier shortestDistanceAttachPointWithJump ]
-				layout: [ :layout | layout tree verticalGap: 100; yourself ] ];
-		yourself
-]
-
-{ #category : #'*MicroKanren-Visualizations' }
 State >> gtInspectorWalkedVarsIn: composite [
 	<gtInspectorPresentationOrder: 11>
 	^ composite fastTable

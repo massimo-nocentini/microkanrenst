@@ -8,14 +8,27 @@ Class {
 ArithTest >> testAddero [
 	| g µ |
 	µ := Theory arith.
-	g := [ :x :y :r | µ addero !! {0. x. y. r} ] fresh.
+	g := [ :x :y :r | 
+	µ addero
+		!!
+			{0.
+			x.
+			y.
+			r} ] fresh.
+	[ :_0 :_1 | 
 	self
 		assert:
-			{{0 asReifiedVar. 0 asConsedBinaryRepr.	0 asReifiedVar}.
-			{0 asConsedBinaryRepr.	(0 asReifiedVar cons: 1 asReifiedVar). 
-				(0 asReifiedVar cons: 1 asReifiedVar)}.	({1 . 1 . 2} collect: #asConsedBinaryRepr)}
+			{{_0.
+			0 asConsedBinaryRepr.
+			_0}.
+			{0 asConsedBinaryRepr.
+			(_0 cons: _1).
+			(_0 cons: _1)}.
+			({1.
+			1.
+			(1 + 1)} collect: #asConsedBinaryRepr)}
 		equals: (g solutions next: 3)
-		modulo: #asOrderedCollection
+		modulo: #asOrderedCollection ] withEnumeratedReifiedVars
 ]
 
 { #category : #'as yet unclassified' }
