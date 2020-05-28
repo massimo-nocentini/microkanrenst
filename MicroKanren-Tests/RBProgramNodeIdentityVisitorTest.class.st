@@ -37,3 +37,20 @@ RBProgramNodeIdentityVisitorTest >> testFirstExampleOfLittleProverWithLogicVars 
 			| f |
 			#flapjack = (a ~~> x) isAtom ] ] sourceNode body
 ]
+
+{ #category : #'as yet unclassified' }
+RBProgramNodeIdentityVisitorTest >> thm_atom_cons [
+	^ [ :x :y | 
+	[ :v :z | 
+	| match then |
+	match := x unifyo
+		value:
+			(RBMessageNode
+				receiver:
+					(RBMessageNode
+						receiver: v asRBMKVarNode
+						selector: #cons:
+						arguments: z asRBMKVarNode)
+				selector: #isAtom).
+	then := y unifyo value: (RBLiteralValueNode value: false) ] fresh ]
+]
