@@ -19,7 +19,7 @@ MKRealogTest >> contracto [
 	"The type information is checked against unification dispatched by each IDType."
 
 	^ [ :E | 
-	  | a b |
+	  | a b c |
 	  a := (MKRealogIDType contract: 1)
 		       type: #employment;
 		       employee: (MKRealogIDType employee: 123);
@@ -30,7 +30,12 @@ MKRealogTest >> contracto [
 		       employee: (MKRealogIDType employee: 124);
 		       company: (MKRealogIDType company: 1);
 		       yourself.
-	  (E unifyo value: a) | (E unifyo value: b) ]
+	  c := (MKRealogIDType contract: 3)
+		       type: #freelance;
+		       employee: (MKRealogIDType employee: 124);
+		       company: (MKRealogIDType company: 3);
+		       yourself.
+	  (E unifyo value: a) | (E unifyo value: b) | (E unifyo value: c) ]
 ]
 
 { #category : #predicates }
@@ -39,7 +44,7 @@ MKRealogTest >> employedo [
 	  [ :id | 
 	  | T |
 	  T := (MKRealogIDType contract: id)
-		       type: 'employment';
+		       type: #employment;
 		       employee: E;
 		       company: C;
 		       yourself.
@@ -58,9 +63,34 @@ MKRealogTest >> employeeo [
 ]
 
 { #category : #tests }
+MKRealogTest >> testContracto [
+	| g |
+	g := [ :E | self contracto value: E ] fresh.
+	self
+		assert: (g solutions collect: #id)
+		equals: { 1. 3. 2 }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+MKRealogTest >> testContracto1 [
+	| g |
+	g := [ :E | 
+	     [ :id :C | 
+	     self contracto value: ((MKRealogIDType contract: id)
+			      employee: E;
+			      company: C;
+			      type: #freelance;
+			      yourself) ] fresh ] fresh.
+	self
+		assert: (g solutions collect: #asString)
+		equals: { }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
 MKRealogTest >> testEmployedo [
-	| g µ |
-	µ := Theory arith.
+	| g |
 	g := [ :E :C | self employedo value: E value: C ] fresh.
 	self
 		assert: (g solutions collect: [ :pair | pair first id ])

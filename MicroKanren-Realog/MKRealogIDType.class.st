@@ -38,6 +38,14 @@ MKRealogIDType >> id: anObject [
 	id := anObject
 ]
 
+{ #category : #printing }
+MKRealogIDType >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPut: $(.
+	id printOn: aStream.
+	aStream nextPut: $)
+]
+
 { #category : #dispatching }
 MKRealogIDType >> unifyWith: another usingUnifier: anUnifier [
 	self subclassResponsibility
