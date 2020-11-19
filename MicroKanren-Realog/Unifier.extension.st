@@ -7,18 +7,10 @@ Unifier >> forRealogCompany: aCompany forRealogCompany: anotherCompany [
 
 { #category : #'*MicroKanren-Realog' }
 Unifier >> forRealogContract: aContract forRealogContract: anotherContract [
-	| refinedState |
-	refinedState := self value: aContract id value: anotherContract id.
-	refinedState := refinedState unifier
-		                value: aContract employee
-		                value: anotherContract employee.
-	refinedState := refinedState unifier
-		                value: aContract company
-		                value: anotherContract company.
-	refinedState := refinedState unifier
-		                value: aContract type
-		                value: anotherContract type.
-	^ refinedState
+	^ #( id employee company type ) inject: state into: [ :s :each | 
+		  s unifier
+			  value: (each value: aContract)
+			  value: (each value: anotherContract) ]
 ]
 
 { #category : #'*MicroKanren-Realog' }

@@ -16,26 +16,30 @@ MKRealogTest >> companyo [
 
 { #category : #predicates }
 MKRealogTest >> contracto [
-	"The type information is checked against unification dispatched by each IDType."
+	"Here we show that the collection of objects can be built at runtime,
+	 as the case as loading from a different source like a db."
 
+	| contracts |
+	contracts := { 
+		             ((MKRealogIDType contract: 1)
+			              type: #employment;
+			              employee: (MKRealogIDType employee: 123);
+			              company: (MKRealogIDType company: 3);
+			              yourself).
+		             ((MKRealogIDType contract: 2)
+			              type: #consulting;
+			              employee: (MKRealogIDType employee: 124);
+			              company: (MKRealogIDType company: 1);
+			              yourself).
+		             ((MKRealogIDType contract: 3)
+			              type: #consulting;
+			              employee: (MKRealogIDType employee: 124);
+			              company: (MKRealogIDType company: 3);
+			              yourself) }.
 	^ [ :E | 
-	  | a b c |
-	  a := (MKRealogIDType contract: 1)
-		       type: #employment;
-		       employee: (MKRealogIDType employee: 123);
-		       company: (MKRealogIDType company: 3);
-		       yourself.
-	  b := (MKRealogIDType contract: 2)
-		       type: #freelance;
-		       employee: (MKRealogIDType employee: 124);
-		       company: (MKRealogIDType company: 1);
-		       yourself.
-	  c := (MKRealogIDType contract: 3)
-		       type: #freelance;
-		       employee: (MKRealogIDType employee: 124);
-		       company: (MKRealogIDType company: 3);
-		       yourself.
-	  (E unifyo value: a) | (E unifyo value: b) | (E unifyo value: c) ]
+	  contracts
+		  inject: false asGoal
+		  into: [ :g :each | g | (E unifyo value: each) ] ]
 ]
 
 { #category : #predicates }
@@ -48,8 +52,7 @@ MKRealogTest >> employedo [
 		       employee: E;
 		       company: C;
 		       yourself.
-	  (self employeeo value: E) , (self companyo value: C)
-	  , (self contracto value: T) ] fresh ]
+	  self contracto value: T ] fresh ]
 ]
 
 { #category : #predicates }
@@ -63,38 +66,46 @@ MKRealogTest >> employeeo [
 ]
 
 { #category : #tests }
-MKRealogTest >> testContracto [
+MKRealogTest >> testCompaniesWithConsultants [
 	| g |
-	g := [ :E | self contracto value: E ] fresh.
+	g := [ :C | 
+	     [ :id :E | 
+	     | T |
+	     T := (MKRealogIDType contract: id)
+		          employee: E;
+		          company: C;
+		          type: #consulting;
+		          yourself.
+	     (self employeeo value: E) , (self companyo value: C)
+	     , (self contracto value: T) ] fresh ] fresh.
 	self
-		assert: (g solutions collect: #id)
-		equals: { 1. 3. 2 }
+		assert: (g solutions collect: #asString)
+		equals: { 'a MKRealogCompany(1)'. 'a MKRealogCompany(3)' }
 		modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
-MKRealogTest >> testContracto1 [
+MKRealogTest >> testContracto [
 	| g |
-	g := [ :E | 
-	     [ :id :C | 
-	     self contracto value: ((MKRealogIDType contract: id)
-			      employee: E;
-			      company: C;
-			      type: #freelance;
-			      yourself) ] fresh ] fresh.
+	g := [ :E | self contracto value: E ] fresh.
 	self
 		assert: (g solutions collect: #asString)
-		equals: { }
+		equals:
+			{ 'a MKRealogContract(1, #employment, a MKRealogEmployee(123), a MKRealogCompany(3))'.
+			'a MKRealogContract(3, #consulting, a MKRealogEmployee(124), a MKRealogCompany(3))'.
+			'a MKRealogContract(2, #consulting, a MKRealogEmployee(124), a MKRealogCompany(1))' }
 		modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
 MKRealogTest >> testEmployedo [
 	| g |
-	g := [ :E :C | self employedo value: E value: C ] fresh.
+	g := [ :E :C | 
+	     (self employeeo value: E) , (self companyo value: C)
+	     , (self employedo value: E value: C) ] fresh.
 	self
-		assert: (g solutions collect: [ :pair | pair first id ])
-		equals: { 123 }
+		assert: (g solutions collect: #asString)
+		equals: { 'an Array(a MKRealogEmployee(123) a MKRealogCompany(3))' }
 		modulo: #asOrderedCollection
 ]
 
@@ -103,7 +114,8 @@ MKRealogTest >> testEmployeeo [
 	| g |
 	g := [ :E | self employeeo value: E ] fresh.
 	self
-		assert: (g solutions collect: [ :pair | pair id ])
-		equals: { 123. 125. 124 }
+		assert: (g solutions collect: [ :pair | pair asString ])
+		equals: { 'a MKRealogEmployee(123)'. 'a MKRealogEmployee(125)'.
+			'a MKRealogEmployee(124)' }
 		modulo: #asOrderedCollection
 ]

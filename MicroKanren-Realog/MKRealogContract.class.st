@@ -9,6 +9,17 @@ Class {
 	#category : #'MicroKanren-Realog'
 }
 
+{ #category : #printing }
+MKRealogContract >> betweenParenthesisPrintOn: aStream [
+	super betweenParenthesisPrintOn: aStream.
+	aStream nextPutAll: ', '.
+	type printOn: aStream.
+	aStream nextPutAll: ', '.
+	employee printOn: aStream.
+	aStream nextPutAll: ', '.
+	company printOn: aStream
+]
+
 { #category : #accessing }
 MKRealogContract >> company [
 	^ company
@@ -27,6 +38,11 @@ MKRealogContract >> employee [
 { #category : #accessing }
 MKRealogContract >> employee: anObject [
 	employee := anObject
+]
+
+{ #category : #printing }
+MKRealogContract >> printOn: aStream [
+	super printOn: aStream
 ]
 
 { #category : #dispatching }

@@ -28,6 +28,11 @@ MKRealogIDType class >> employee: id [
 		  yourself
 ]
 
+{ #category : #printing }
+MKRealogIDType >> betweenParenthesisPrintOn: aStream [
+	id printOn: aStream
+]
+
 { #category : #accessing }
 MKRealogIDType >> id [
 	^ id
@@ -42,7 +47,7 @@ MKRealogIDType >> id: anObject [
 MKRealogIDType >> printOn: aStream [
 	super printOn: aStream.
 	aStream nextPut: $(.
-	id printOn: aStream.
+	self betweenParenthesisPrintOn: aStream.
 	aStream nextPut: $)
 ]
 
