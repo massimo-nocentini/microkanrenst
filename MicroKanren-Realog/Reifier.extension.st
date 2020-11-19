@@ -7,18 +7,12 @@ Reifier >> forRealogCompany: aCompany [
 
 { #category : #'*MicroKanren-Realog' }
 Reifier >> forRealogContract: aContract [
-	| refinedState reifier |
-	reifier := self class new
-		           state: state;
-		           yourself.
-	refinedState := reifier value: aContract id.
-	reifier state: refinedState.
-	refinedState := reifier value: aContract employee.
-	reifier state: refinedState.
-	refinedState := reifier value: aContract company.
-	reifier state: refinedState.
-	refinedState := reifier value: aContract type.
-	^ refinedState
+	^ #( id employee company type )
+		  inject: state
+		  into: [ :s :aSelector | 
+			  self class new
+				  state: s;
+				  value: (aSelector value: aContract) ]
 ]
 
 { #category : #'*MicroKanren-Realog' }
