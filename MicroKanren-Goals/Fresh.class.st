@@ -2,8 +2,7 @@ Class {
 	#name : #Fresh,
 	#superclass : #Goal,
 	#instVars : [
-		'receiver',
-		'vars'
+		'receiver'
 	],
 	#category : #'MicroKanren-Goals'
 }
@@ -17,32 +16,26 @@ Fresh >> onState: aState [
 { #category : #dispatched }
 Fresh >> onState: aState withVars: aCollection [
 	| g |
-	vars := aCollection.
-	g := receiver valueWithArguments: vars.
+	variables := aCollection.
+	g := receiver valueWithArguments: variables.
 	^ g onState: aState
 ]
 
 { #category : #printing }
 Fresh >> printOn: aStream [
-	| vs |
-	vs := vars ifNil: [ self halt.
-		      (1 to: receiver numArgs) collect: [ :each | each asVar ] ].
-	vs ifNotEmpty: [ 
+	variables ifNotEmpty: [ 
 		aStream nextPut: $!.
-		vs allButLastDo: [ :each | 
+		variables allButLastDo: [ :each | 
 			each printOn: aStream.
 			aStream nextPut: Character space ].
-		vs last printOn: aStream.
+		variables last printOn: aStream.
 		aStream nextPutAll: '. ' ].
-	(receiver valueWithArguments: vs) printOn: aStream
+	(receiver valueWithArguments: variables)
+		variables: innerVariables;
+		printOn: aStream
 ]
 
 { #category : #accessing }
 Fresh >> receiver: aBlockClosure [
 	receiver := aBlockClosure
-]
-
-{ #category : #reification }
-Fresh >> vars [
-	^ vars copy
 ]

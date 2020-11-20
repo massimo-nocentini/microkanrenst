@@ -4,6 +4,10 @@ I represent *goal* objects, namely a goal maps a `State` object to a `Chain` of 
 Class {
 	#name : #Goal,
 	#superclass : #Object,
+	#instVars : [
+		'variables',
+		'innerVariables'
+	],
 	#category : #'MicroKanren-Goals'
 }
 
@@ -87,6 +91,18 @@ Goal >> findAll: aCollection template: aBlock value: aValue [
 		yourself
 ]
 
+{ #category : #accessing }
+Goal >> innerVariables [
+	^ innerVariables
+]
+
+{ #category : #accessing }
+Goal >> innerVariables: anObject [
+	innerVariables
+		ifNil: [ innerVariables := anObject ]
+		ifNotNil: [ innerVariables = anObject ifFalse: [ Error signal ] ]
+]
+
 { #category : #running }
 Goal >> onState: aState [
 	aState pushGoal: self.
@@ -102,9 +118,14 @@ Goal >> solutions [
 	^ g onState: SBRAL new asState
 ]
 
-{ #category : #reification }
-Goal >> vars [
-	^ {}
+{ #category : #accessing }
+Goal >> variables [
+	^ variables
+]
+
+{ #category : #accessing }
+Goal >> variables: anObject [
+	variables := anObject
 ]
 
 { #category : #combining }

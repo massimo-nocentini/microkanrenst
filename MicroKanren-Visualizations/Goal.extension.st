@@ -5,6 +5,9 @@ Goal >> gtInspectorTreeUsingCanvas: aCanvas [
 	| states goals shapes edges assocs |
 	states := ((self onState: SBRAL new asState) next: 20)
 		          asOrderedCollection.
+	states do: [ :each | 
+		each path reversed asLinkedList overlappingPairsDo: [ :g :g_succ | 
+			g innerVariables: g_succ variables ] ].
 	goals := states
 		         flatCollect: [ :each | each path asLinkedList ]
 		         as: Set.
