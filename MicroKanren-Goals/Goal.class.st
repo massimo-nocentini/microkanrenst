@@ -29,7 +29,7 @@ Goal class >> eta: aGoal [
 
 { #category : #creating }
 Goal class >> fail [
-	^ Fail new
+	^ Failed new
 ]
 
 { #category : #creating }
@@ -89,7 +89,8 @@ Goal >> findAll: aCollection template: aBlock value: aValue [
 
 { #category : #running }
 Goal >> onState: aState [
-	self subclassResponsibility
+	aState pushGoal: self.
+	^ {  } asSrfi41Stream
 ]
 
 { #category : #running }

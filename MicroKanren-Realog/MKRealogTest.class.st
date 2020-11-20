@@ -218,15 +218,12 @@ MKRealogTest >> testWorkedHourso [
 				                  E.
 				                  D.
 				                  H }
-		                  groupBy: [ :e :d :h |  { h }  ]
-		                  template: [ :e :d :h | 
-			                  { 
-				                  d.
-				                  h } ]
-		                  value: cddr.
-	     bagOfGoal , (Theory sexp conso value: E value: cdr value: list)
-	     , (Theory sexp conso value: H value: cddr value: cdr) ] fresh ]
-		     fresh.
+		                  groupBy: [ :e :d :h | { e } ]
+		                  template: [ :e :d :h | h ]
+		                  value: list.
+	     bagOfGoal ", (Theory sexp conso value: E value: cdr value: list)
+	     , (Theory sexp conso value: H value: cddr value: cdr)" ]
+		     fresh ] fresh.
 	self
 		assert: (g solutions collect: #asString)
 		equals: { 'a MKRealogEmployee(123)'. 'a MKRealogEmployee(124)' }

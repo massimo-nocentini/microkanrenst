@@ -20,6 +20,18 @@ Conj >> both: aGoal [
 
 { #category : #running }
 Conj >> onState: aState [
-	^ [ :refinedState | and onState: refinedState ]
-		>>= (both onState: aState)
+	^ [ :refinedState | 
+	  refinedState path
+		  ifNil: [ Error signal: 'Not expected' ]
+		  ifNotNil: [ :path | refinedState path: path nextLink ].
+	  and onState: refinedState ] >>= (both onState: aState)
+]
+
+{ #category : #printing }
+Conj >> printOn: aStream [
+	aStream nextPut: $(.
+	both printOn: aStream.
+	aStream nextPutAll: ') ,° ('.
+	and printOn: aStream.
+	aStream nextPut: $)
 ]

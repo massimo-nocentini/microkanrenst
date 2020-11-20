@@ -40,11 +40,6 @@ MKRealogContract >> employee: anObject [
 	employee := anObject
 ]
 
-{ #category : #printing }
-MKRealogContract >> printOn: aStream [
-	super printOn: aStream
-]
-
 { #category : #dispatching }
 MKRealogContract >> reifyUsingReifier: aReifier [
 	^ aReifier forRealogContract: self

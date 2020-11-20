@@ -6,5 +6,10 @@ Class {
 
 { #category : #running }
 Succeed >> onState: aState [
-	^ aState srfi41Singleton
+	^ (super onState: aState) , aState srfi41Singleton
+]
+
+{ #category : #printing }
+Succeed >> printOn: aStream [
+	aStream nextPut: $✓
 ]
