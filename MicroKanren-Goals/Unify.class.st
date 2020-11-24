@@ -10,11 +10,19 @@ Class {
 
 { #category : #running }
 Unify >> onState: aState [
-	^ [ | extended_state |
-	extended_state := aState unifier value: this value: that.
-	true asGoal onState: extended_state ]
-		on: UnificationError
-		do: [ false asGoal onState: aState ]
+	^ (super onState: aState) , ([ 
+	   | extended_state |
+	   extended_state := aState unifier value: this value: that.
+	   true asGoal onState: extended_state ]
+		   on: UnificationError
+		   do: [ false asGoal onState: aState ])
+]
+
+{ #category : #printing }
+Unify >> printOn: aStream [
+	this printOn: aStream.
+	aStream nextPutAll: ' =° '.
+	that printOn: aStream
 ]
 
 { #category : #accessing }

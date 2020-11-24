@@ -25,7 +25,7 @@ GoalTest >> nats: x stage: i [
 
 { #category : #'as yet unclassified' }
 GoalTest >> nats: x stage: i offset: o [
-	^ (x unifyo value: i) | [ self nats: x stage: i + o ] eta
+	^ (x unifyo value: i) | [ self nats: x stage: i + o offset: o] eta
 ]
 
 { #category : #'as yet unclassified' }

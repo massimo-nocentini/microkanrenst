@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'substitution',
-		'birthdate'
+		'birthdate',
+		'path'
 	],
 	#category : #MicroKanren
 }
@@ -34,9 +35,13 @@ State class >> fromUnionFind: aUF [
 { #category : #'as yet unclassified' }
 State >> at: aVar put: aValue [
 	^ self class new
-		birthdate: birthdate;
-		substitution: (substitution at: birthdate - aVar id + 1 put: (Maybe just: aValue));
-		yourself
+		  birthdate: birthdate;
+		  substitution:
+			  (substitution
+				   at: birthdate - aVar id + 1
+				   put: (Maybe just: aValue));
+		  path: path;
+		  yourself
 ]
 
 { #category : #accessing }
@@ -49,18 +54,35 @@ State >> collectVars: aCollection forFresh: aFresh [
 	| nextState vars extendedSubstitution |
 	vars := aCollection collect: [ :each | (each + birthdate) asVar ].
 	extendedSubstitution := vars
-		inject: substitution
-		into: [ :aSBRAL :each | aSBRAL add: Maybe nothing ].
+		                        inject: substitution
+		                        into: [ :aSBRAL :each | 
+		                        aSBRAL add: Maybe nothing ].
 	nextState := self class new
-		substitution: extendedSubstitution;
-		birthdate: birthdate + aCollection size;
-		yourself.
+		             substitution: extendedSubstitution;
+		             birthdate: birthdate + aCollection size;
+		             path: path;
+		             yourself.
 	^ aFresh onState: nextState withVars: vars
 ]
 
 { #category : #'as yet unclassified' }
 State >> identityReifier [
 	^ self reifierOfClass: IdentityReifier
+]
+
+{ #category : #'as yet unclassified' }
+State >> path [
+	^ path
+]
+
+{ #category : #accessing }
+State >> path: anObject [
+	path := anObject
+]
+
+{ #category : #'as yet unclassified' }
+State >> pushGoal: aGoal [
+	path := aGoal ~~> path
 ]
 
 { #category : #reification }
