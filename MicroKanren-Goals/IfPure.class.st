@@ -6,7 +6,12 @@ Class {
 
 { #category : #running }
 IfPure >> onState: aState [
-	^ chainCombinationStrategy
-		value: (question , answer onState: aState)
-		value: (otherwise onState: aState)
+
+	| disj |
+	disj := chainCombinationStrategy value
+		        either: question , answer;
+		        or: otherwise;
+		        yourself.
+
+	^ (super onState: aState) , (disj onState: aState)
 ]

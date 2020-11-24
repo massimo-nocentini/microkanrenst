@@ -3,10 +3,36 @@ Class {
 	#superclass : #Goal,
 	#instVars : [
 		'either',
-		'or'
+		'or',
+		'combineBlock'
 	],
 	#category : #'MicroKanren-Goals'
 }
+
+{ #category : #'as yet unclassified' }
+Disj class >> appended [
+
+	^ self new combineBlock: [ :aStream :anotherStream | 
+		  aStream , anotherStream ]
+]
+
+{ #category : #'as yet unclassified' }
+Disj class >> interleaved [
+
+	^ self new combineBlock: [ :aStream :anotherStream | 
+		  aStream | anotherStream ]
+]
+
+{ #category : #accessing }
+Disj >> combine: anObject [
+	combineBlock := anObject
+]
+
+{ #category : #accessing }
+Disj >> combineBlock: aBlock [
+
+	combineBlock := aBlock
+]
 
 { #category : #accessing }
 Disj >> either: e [ 
@@ -15,11 +41,14 @@ Disj >> either: e [
 
 { #category : #running }
 Disj >> onState: aState [
-	| path |
+
+	| path aStream anotherStream |
 	path := aState path.
-	^ (either onState: aState) + (or onState: (aState
-			    path: path;
-			    yourself))
+	aStream := either onState: aState.
+	anotherStream := or onState: (aState
+			                  path: path;
+			                  yourself).
+	^ combineBlock value: aStream value: anotherStream
 ]
 
 { #category : #accessing }

@@ -67,10 +67,12 @@ GoalTest >> swappedfives: x [
 
 { #category : #'as yet unclassified' }
 GoalTest >> teacup: x [
+
 	^ Goal cond e
-		if: (x unifyo value: #tea) then: true asGoal;
-		if: (x unifyo value: #cup) then: true asGoal;
-		yourself
+		  if: (x unifyo value: #tea) then: true asGoal;
+		  if: (x unifyo value: #cup) then: true asGoal;
+		  if: (x unifyo value: #spoon) then: true asGoal;
+		  yourself
 ]
 
 { #category : #'as yet unclassified' }

@@ -20,11 +20,14 @@ Conj >> both: aGoal [
 
 { #category : #running }
 Conj >> onState: aState [
+
+	| bothStream |
+	bothStream := (super onState: aState) , (both onState: aState).
 	^ [ :refinedState | 
 	  refinedState path
 		  ifNil: [ Error signal: 'Not expected' ]
 		  ifNotNil: [ :path | refinedState path: path nextLink ].
-	  and onState: refinedState ] >>= (both onState: aState)
+	  and onState: refinedState ] >>= bothStream
 ]
 
 { #category : #printing }

@@ -130,8 +130,9 @@ Goal >> variables: anObject [
 
 { #category : #combining }
 Goal >> | other [
-	^ Disj new
-		either: self;
-		or: other;
-		yourself
+
+	^ Disj interleaved
+		  either: self;
+		  or: other;
+		  yourself
 ]

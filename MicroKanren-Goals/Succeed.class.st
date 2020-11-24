@@ -11,5 +11,6 @@ Succeed >> onState: aState [
 
 { #category : #printing }
 Succeed >> printOn: aStream [
-	aStream nextPut: $✓
+
+	aStream nextPutAll: '✓°'
 ]

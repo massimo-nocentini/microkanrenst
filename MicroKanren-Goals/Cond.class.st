@@ -10,12 +10,14 @@ Class {
 
 { #category : #initializing }
 Cond >> e [
-	self ifPure: #,
+
+	self ifPure: [ Disj appended ]
 ]
 
 { #category : #'as yet unclassified' }
 Cond >> i [
-	self ifPure: #+
+
+	self ifPure: [ Disj interleaved ]
 ]
 
 { #category : #initializing }
@@ -42,12 +44,33 @@ Cond >> initialize [
 
 { #category : #running }
 Cond >> onState: aState [
-	^ [ | g |
-	g := clauses foldr: if init: false asGoal.
-	g onState: aState ] srfi41Stream
+
+	^ [ 
+	  | g |
+	  g := clauses foldr: if init: false asGoal.
+	  (super onState: aState) , (g onState: aState) ] srfi41Stream
 ]
 
 { #category : #initializing }
 Cond >> otherwise: aGoal [
 	self if: true asGoal then: aGoal
+]
+
+{ #category : #printing }
+Cond >> printClause: anAssociation on: aStream [
+
+	aStream nextPut: $(.
+	anAssociation key printOn: aStream.
+	aStream nextPutAll: ' → '.
+	anAssociation value printOn: aStream.
+	aStream nextPut: $)
+]
+
+{ #category : #printing }
+Cond >> printOn: aStream [
+
+	clauses allButLastDo: [ :each | 
+		self printClause: each on: aStream.
+		aStream nextPutAll: ';° ' ].
+	self printClause: clauses last on: aStream
 ]

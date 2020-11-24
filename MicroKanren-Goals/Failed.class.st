@@ -6,5 +6,6 @@ Class {
 
 { #category : #printing }
 Failed >> printOn: aStream [
-	aStream nextPut: $Ø
+
+	aStream nextPutAll: 'Ø°'
 ]
