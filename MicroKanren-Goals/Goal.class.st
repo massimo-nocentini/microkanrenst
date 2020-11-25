@@ -26,9 +26,10 @@ Goal class >> cond [
 
 { #category : #creating }
 Goal class >> eta: aGoal [
+
 	^ Eta new
-		goal: aGoal;
-		yourself
+		  goal: aGoal;
+		  yourself
 ]
 
 { #category : #creating }
@@ -69,7 +70,13 @@ Goal >> , other [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #running }
+Goal >> asStatesStream [
+
+	^ self onState: SBRAL new asState
+]
+
+{ #category : #aggregating }
 Goal >> bagOf: aCollection groupBy: gBlock template: tBlock value: aValue [
 	^ BagOf new
 		receiver: self;
@@ -80,7 +87,7 @@ Goal >> bagOf: aCollection groupBy: gBlock template: tBlock value: aValue [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #aggregating }
 Goal >> findAll: aCollection template: aBlock value: aValue [
 	^ FindAll new
 		receiver: self;
@@ -111,11 +118,10 @@ Goal >> onState: aState [
 
 { #category : #running }
 Goal >> solutions [
-	| g |
-	g := Run new
-		goal: self;
-		yourself.
-	^ g onState: SBRAL new asState
+
+	^ Run new
+		  goal: self;
+		  asStatesStream
 ]
 
 { #category : #accessing }

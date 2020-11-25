@@ -36,6 +36,11 @@ Fresh >> printOn: aStream [
 ]
 
 { #category : #accessing }
+Fresh >> receiver [
+	^ receiver
+]
+
+{ #category : #accessing }
 Fresh >> receiver: aBlockClosure [
 	receiver := aBlockClosure
 ]

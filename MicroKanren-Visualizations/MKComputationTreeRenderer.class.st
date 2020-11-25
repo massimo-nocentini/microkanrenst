@@ -1,10 +1,20 @@
-Extension { #name : #Goal }
+"
+I represent a logic computation as a tree.
+"
+Class {
+	#name : #MKComputationTreeRenderer,
+	#superclass : #Object,
+	#instVars : [
+		'statesStream'
+	],
+	#category : #'MicroKanren-Visualizations'
+}
 
-{ #category : #'*MicroKanren-Visualizations' }
-Goal >> gtInspectorTreeUsingCanvas: aCanvas [
+{ #category : #visualization }
+MKComputationTreeRenderer >> gtInspectorTreeUsingCanvas: aCanvas [
+
 	| states goals shapes edges assocs |
-	states := ((self onState: SBRAL new asState) next: 20)
-		          asOrderedCollection.
+	states := statesStream asOrderedCollection.
 	states do: [ :each | 
 		each path reversed asLinkedList overlappingPairsDo: [ :g :g_succ | 
 			g innerVariables: g_succ variables ] ].
@@ -32,8 +42,8 @@ Goal >> gtInspectorTreeUsingCanvas: aCanvas [
 		  yourself
 ]
 
-{ #category : #'*MicroKanren-Visualizations' }
-Goal >> gtInspectorTreesViewIn: composite [
+{ #category : #visualization }
+MKComputationTreeRenderer >> gtInspectorTreesViewIn: composite [
 	<gtInspectorPresentationOrder: 20>
 	^ composite roassal3
 		  title: 'Tree';
@@ -41,4 +51,9 @@ Goal >> gtInspectorTreesViewIn: composite [
 			  (self gtInspectorTreeUsingCanvas: RSCanvas new)
 			  @ RSCanvasController ];
 		  yourself
+]
+
+{ #category : #accessing }
+MKComputationTreeRenderer >> statesStream: anObject [
+	statesStream := anObject
 ]

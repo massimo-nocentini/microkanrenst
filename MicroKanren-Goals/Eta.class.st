@@ -14,5 +14,13 @@ Eta >> goal: aGoal [
 
 { #category : #running }
 Eta >> onState: aState [
-	^ [ goal onState: aState ] srfi41Stream
+
+	^ [ (super onState: aState) , (goal onState: aState) ] srfi41Stream
+]
+
+{ #category : #printing }
+Eta >> printOn: aStream [
+
+	goal receiver printOn: aStream.
+	aStream nextPut: $°
 ]
