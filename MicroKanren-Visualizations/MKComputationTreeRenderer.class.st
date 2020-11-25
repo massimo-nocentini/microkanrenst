@@ -14,7 +14,8 @@ Class {
 { #category : #visualization }
 MKComputationTreeRenderer >> gtInspectorTreeUsingCanvas: aCanvas [
 
-	| states goals shapes edges assocs |
+	| states goals shapes edges assocs labelBuilder |
+	labelBuilder := RSMultilineLabelBuilder new.
 	innerVariables := IdentityDictionary new.
 	states := statesStream asOrderedCollection.
 	states do: [ :each | 
@@ -28,10 +29,10 @@ MKComputationTreeRenderer >> gtInspectorTreeUsingCanvas: aCanvas [
 		         as: Set.
 	shapes := goals
 		          collect: [ :each | 
-			          RSLabel new
-				          text: (self printGoal: each);
+			          (labelBuilder shapeFor: (self printGoal: each))
 				          model: each;
-				          draggable ]
+				          draggable;
+				          yourself ]
 		          as: RSGroup.
 	assocs := states flatCollect: [ :each | 
 		          each path asLinkedList overlappingPairsCollect: [ 
@@ -122,9 +123,9 @@ MKComputationTreeRenderer >> printOn: aStream aFresh: aGoal [
 			aStream nextPut: Character space ].
 		variables last printOn: aStream.
 		aStream nextPutAll: '. ' ].
-	aStream nextPutAll: 'aFresh'
-	"aGoal innerGoal
-		printOn: aStream
+	"aStream nextPutAll: 'aFresh'"
+	aGoal receiver
+		printOn: aStream"
 		variables: (innerVariables at: aGoal)
 		renderer: self"
 ]
