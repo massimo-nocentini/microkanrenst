@@ -5,8 +5,7 @@ Class {
 	#name : #Goal,
 	#superclass : #Object,
 	#instVars : [
-		'variables',
-		'innerVariables'
+		'variables'
 	],
 	#category : #'MicroKanren-Goals'
 }
@@ -98,16 +97,10 @@ Goal >> findAll: aCollection template: aBlock value: aValue [
 		yourself
 ]
 
-{ #category : #accessing }
-Goal >> innerVariables [
-	^ innerVariables
-]
+{ #category : #initialization }
+Goal >> initialize [
 
-{ #category : #accessing }
-Goal >> innerVariables: anObject [
-	innerVariables
-		ifNil: [ innerVariables := anObject ]
-		ifNotNil: [ innerVariables = anObject ifFalse: [ Error signal ] ]
+	variables := {  }
 ]
 
 { #category : #running }

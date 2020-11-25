@@ -3,9 +3,3 @@ Class {
 	#superclass : #Goal,
 	#category : #'MicroKanren-Goals'
 }
-
-{ #category : #printing }
-Failed >> printOn: aStream [
-
-	aStream nextPutAll: 'Ø°'
-]

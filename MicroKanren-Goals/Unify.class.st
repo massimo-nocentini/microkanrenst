@@ -18,16 +18,19 @@ Unify >> onState: aState [
 		   do: [ false asGoal onState: aState ])
 ]
 
-{ #category : #printing }
-Unify >> printOn: aStream [
-	this printOn: aStream.
-	aStream nextPutAll: ' =° '.
-	that printOn: aStream
+{ #category : #accessing }
+Unify >> that [
+	^ that
 ]
 
 { #category : #accessing }
 Unify >> that: anObj [
 	that := anObj
+]
+
+{ #category : #accessing }
+Unify >> this [
+	^ this
 ]
 
 { #category : #accessing }

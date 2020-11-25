@@ -35,6 +35,11 @@ Disj >> combineBlock: aBlock [
 ]
 
 { #category : #accessing }
+Disj >> either [
+	^ either
+]
+
+{ #category : #accessing }
 Disj >> either: e [ 
 	either := e
 ]
@@ -52,15 +57,11 @@ Disj >> onState: aState [
 ]
 
 { #category : #accessing }
-Disj >> or: o [ 
-	or := o
+Disj >> or [
+	^ or
 ]
 
-{ #category : #printing }
-Disj >> printOn: aStream [
-	aStream nextPut: $(.
-	either printOn: aStream.
-	aStream nextPutAll: ') v° ('.
-	or printOn: aStream.
-	aStream nextPut: $)
+{ #category : #accessing }
+Disj >> or: o [ 
+	or := o
 ]

@@ -8,9 +8,3 @@ Class {
 Succeed >> onState: aState [
 	^ (super onState: aState) , aState srfi41Singleton
 ]
-
-{ #category : #printing }
-Succeed >> printOn: aStream [
-
-	aStream nextPutAll: '✓°'
-]

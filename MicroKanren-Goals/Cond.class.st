@@ -8,6 +8,11 @@ Class {
 	#category : #'MicroKanren-Goals'
 }
 
+{ #category : #accessing }
+Cond >> clauses [
+	^ clauses
+]
+
 { #category : #initializing }
 Cond >> e [
 
@@ -54,23 +59,4 @@ Cond >> onState: aState [
 { #category : #initializing }
 Cond >> otherwise: aGoal [
 	self if: true asGoal then: aGoal
-]
-
-{ #category : #printing }
-Cond >> printClause: anAssociation on: aStream [
-
-	aStream nextPut: $(.
-	anAssociation key printOn: aStream.
-	aStream nextPutAll: ' → '.
-	anAssociation value printOn: aStream.
-	aStream nextPut: $)
-]
-
-{ #category : #printing }
-Cond >> printOn: aStream [
-
-	clauses allButLastDo: [ :each | 
-		self printClause: each on: aStream.
-		aStream nextPutAll: ';° ' ].
-	self printClause: clauses last on: aStream
 ]

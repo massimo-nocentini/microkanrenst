@@ -7,6 +7,11 @@ Class {
 	#category : #'MicroKanren-Goals'
 }
 
+{ #category : #accessing }
+Eta >> goal [
+	^ goal
+]
+
 { #category : #initializing }
 Eta >> goal: aGoal [
 	goal := aGoal
@@ -16,11 +21,4 @@ Eta >> goal: aGoal [
 Eta >> onState: aState [
 
 	^ [ (super onState: aState) , (goal onState: aState) ] srfi41Stream
-]
-
-{ #category : #printing }
-Eta >> printOn: aStream [
-
-	goal receiver printOn: aStream.
-	aStream nextPut: $°
 ]

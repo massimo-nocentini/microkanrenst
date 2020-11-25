@@ -9,8 +9,18 @@ Class {
 }
 
 { #category : #accessing }
+Conj >> and [
+	^ and
+]
+
+{ #category : #accessing }
 Conj >> and: anotherGoal [ 
 	and := anotherGoal
+]
+
+{ #category : #accessing }
+Conj >> both [
+	^ both
 ]
 
 { #category : #accessing }
@@ -28,13 +38,4 @@ Conj >> onState: aState [
 		  ifNil: [ Error signal: 'Not expected' ]
 		  ifNotNil: [ :path | refinedState path: path nextLink ].
 	  and onState: refinedState ] >>= bothStream
-]
-
-{ #category : #printing }
-Conj >> printOn: aStream [
-	aStream nextPut: $(.
-	both printOn: aStream.
-	aStream nextPutAll: ') ,° ('.
-	and printOn: aStream.
-	aStream nextPut: $)
 ]

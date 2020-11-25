@@ -21,20 +21,6 @@ Fresh >> onState: aState withVars: aCollection [
 	^ g onState: aState
 ]
 
-{ #category : #printing }
-Fresh >> printOn: aStream [
-	variables ifNotEmpty: [ 
-		aStream nextPut: $!.
-		variables allButLastDo: [ :each | 
-			each printOn: aStream.
-			aStream nextPut: Character space ].
-		variables last printOn: aStream.
-		aStream nextPutAll: '. ' ].
-	(receiver valueWithArguments: variables)
-		variables: innerVariables;
-		printOn: aStream
-]
-
 { #category : #accessing }
 Fresh >> receiver [
 	^ receiver

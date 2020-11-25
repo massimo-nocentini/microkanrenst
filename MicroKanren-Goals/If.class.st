@@ -9,9 +9,19 @@ Class {
 	#category : #'MicroKanren-Goals'
 }
 
+{ #category : #accessing }
+If >> answer [
+	^ answer
+]
+
 { #category : #initializing }
 If >> answer: anAnswerGoal [
 	answer := anAnswerGoal.
+]
+
+{ #category : #accessing }
+If >> otherwise [
+	^ otherwise
 ]
 
 { #category : #initializing }
@@ -19,15 +29,9 @@ If >> otherwise: anOtherwiseGoal [
 	otherwise := anOtherwiseGoal
 ]
 
-{ #category : #printing }
-If >> printOn: aStream [
-
-	aStream nextPutAll: 'if '.
-	question printOn: aStream.
-	aStream nextPutAll: ' then '.
-	answer printOn: aStream.
-	aStream nextPutAll: ' else '.
-	otherwise printOn: aStream
+{ #category : #accessing }
+If >> question [
+	^ question
 ]
 
 { #category : #initializing }
