@@ -47,13 +47,15 @@ Disj >> either: e [
 { #category : #running }
 Disj >> onState: aState [
 
-	| path aStream anotherStream |
+	| path aStream anotherStream disjStream superStream |
+	superStream := super onState: aState yourself.
 	path := aState path.
 	aStream := either onState: aState.
 	anotherStream := or onState: (aState
 			                  path: path;
 			                  yourself).
-	^ combineBlock value: aStream value: anotherStream
+	disjStream := combineBlock value: aStream value: anotherStream.
+	^ superStream , disjStream
 ]
 
 { #category : #accessing }

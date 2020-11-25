@@ -116,6 +116,7 @@ MKRealogTest >> sicko [
 
 { #category : #tests }
 MKRealogTest >> testCheckSingleEmployment [
+
 	| g |
 	g := [ 
 	     [ :id | 
