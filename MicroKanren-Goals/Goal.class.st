@@ -4,9 +4,6 @@ I represent *goal* objects, namely a goal maps a `State` object to a `Chain` of 
 Class {
 	#name : #Goal,
 	#superclass : #Object,
-	#instVars : [
-		'variables'
-	],
 	#category : #'MicroKanren-Goals'
 }
 
@@ -24,23 +21,18 @@ Goal class >> cond [
 ]
 
 { #category : #creating }
-Goal class >> eta: aGoal [
-
-	^ Eta new
-		  goal: aGoal;
-		  yourself
-]
-
-{ #category : #creating }
 Goal class >> fail [
 	^ Failed new
 ]
 
 { #category : #creating }
 Goal class >> fresh: aBlock [
-	^ Fresh new
-		receiver: aBlock;
-		yourself
+
+	^ (aBlock numArgs = 0
+	   ifTrue: [ Eta new ]
+	   ifFalse: [ Fresh new ])
+	  receiver: aBlock;
+	  yourself 
 ]
 
 { #category : #'as yet unclassified' }

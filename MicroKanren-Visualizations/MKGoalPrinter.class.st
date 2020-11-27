@@ -80,9 +80,7 @@ MKGoalPrinter >> printOn: aStream aFresh: aGoal [
 			aStream nextPut: Character space ].
 		variables last printOn: aStream.
 		aStream nextPutAll: '. ' ].
-	(aGoal receiver valueWithArguments: aGoal variables)
-		printOn: aStream
-		renderer: self
+	aGoal innerGoal printOn: aStream renderer: self
 	"aGoal receiver in: [ :aBlock | 
 		| mapping sourceCode |
 		mapping := Dictionary new.
@@ -145,7 +143,7 @@ MKGoalPrinter >> printOn: aWriteStream aVar: aVar [
 MKGoalPrinter >> printOn: aStream anEta: anEta [
 
 	aStream nextPut: $[.
-	anEta goal value printOn: aStream renderer: self.
+	anEta innerGoal printOn: aStream renderer: self.
 	aStream nextPutAll: ']°'
 ]
 

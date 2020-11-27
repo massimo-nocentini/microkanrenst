@@ -1,14 +1,15 @@
 Class {
 	#name : #Fresh,
-	#superclass : #Goal,
+	#superclass : #Suspended,
 	#instVars : [
-		'receiver'
+		'variables'
 	],
 	#category : #'MicroKanren-Goals'
 }
 
 { #category : #running }
 Fresh >> onState: aState [
+
 	^ (super onState: aState)
 	  , (aState collectVars: (1 to: receiver numArgs) forFresh: self)
 ]
@@ -22,16 +23,6 @@ Fresh >> onState: aState withVars: aCollection [
 		ifNotNil: [ aCollection = variables ifFalse: [ Error signal ] ].
 	g := receiver valueWithArguments: variables.
 	^ g onState: aState
-]
-
-{ #category : #accessing }
-Fresh >> receiver [
-	^ receiver
-]
-
-{ #category : #accessing }
-Fresh >> receiver: aBlockClosure [
-	receiver := aBlockClosure
 ]
 
 { #category : #accessing }

@@ -1,27 +1,12 @@
 Class {
 	#name : #Eta,
-	#superclass : #Goal,
-	#instVars : [
-		'goal'
-	],
+	#superclass : #Suspended,
 	#category : #'MicroKanren-Goals'
 }
-
-{ #category : #accessing }
-Eta >> goal [
-	^ goal
-]
-
-{ #category : #initializing }
-Eta >> goal: aGoal [
-	goal := aGoal
-]
 
 { #category : #running }
 Eta >> onState: aState [
 
-	^ [ 
-	  | g |
-	  g := goal value.
-	  (super onState: aState) , (g onState: aState) ] srfi41Stream
+	^ [ (super onState: aState) , (receiver value onState: aState) ]
+		  srfi41Stream
 ]
