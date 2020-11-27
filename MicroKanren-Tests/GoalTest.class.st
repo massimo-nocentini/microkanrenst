@@ -66,12 +66,21 @@ GoalTest >> swappedfives: x [
 ]
 
 { #category : #'as yet unclassified' }
-GoalTest >> teacup: x [
+GoalTest >> teaCupSpoon: x [
 
 	^ Goal cond e
 		  if: (x unifyo value: #tea) then: true asGoal;
 		  if: (x unifyo value: #cup) then: true asGoal;
 		  if: (x unifyo value: #spoon) then: true asGoal;
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> teacup: x [
+
+	^ Goal cond e
+		  if: (x unifyo value: #tea) then: true asGoal;
+		  if: (x unifyo value: #cup) then: true asGoal;
 		  yourself
 ]
 
@@ -216,29 +225,24 @@ GoalTest >> testBagOf [
 
 { #category : #tests }
 GoalTest >> testCaro [
+
 	| g µ |
 	µ := Theory sexp.
 	g := [ :r | µ caro value: 'acorn' asCons value: r ] fresh.
-	self assert: g solutions equals: {$a} modulo: #asOrderedCollection.
+	self assert: g solutions equals: { $a } modulo: #asOrderedCollection.
 	g := [ :r | 
-	[ :x :y | 
-	(µ caro value: {#grape . #raisin . #pear} asCons value: x)
-		,
-			(µ caro
-				value:
-					{(#a cons: nil).
-					(#b cons: nil).
-					(#c cons: nil)} asCons
-				value: y)
-		,
-			(µ conso
-				!!
-					{x.
-					y.
-					r}) ] fresh ] fresh.
+	     [ :x :y | 
+	     (µ caro value: { #grape. #raisin. #pear } asCons value: x)
+	     , (µ caro
+			      value: { 
+					      (#a cons: nil).
+					      (#b cons: nil).
+					      (#c cons: nil) } asCons
+			      value: y) , (µ conso value: x value: y value: r) ] fresh ]
+		     fresh.
 	self
 		assert: g solutions
-		equals: {{#grape . #a} asCons}
+		equals: { { #grape. #a } asCons }
 		modulo: #asOrderedCollection
 ]
 

@@ -97,12 +97,6 @@ Goal >> findAll: aCollection template: aBlock value: aValue [
 		yourself
 ]
 
-{ #category : #initialization }
-Goal >> initialize [
-
-	variables := {  }
-]
-
 { #category : #running }
 Goal >> onState: aState [
 	aState pushGoal: self.
@@ -119,12 +113,8 @@ Goal >> solutions [
 
 { #category : #accessing }
 Goal >> variables [
-	^ variables
-]
 
-{ #category : #accessing }
-Goal >> variables: anObject [
-	variables := anObject
+	^ {  }
 ]
 
 { #category : #combining }

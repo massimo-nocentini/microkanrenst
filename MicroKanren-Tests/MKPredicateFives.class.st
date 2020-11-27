@@ -5,11 +5,13 @@ Class {
 }
 
 { #category : #running }
-MKPredicateFives >> fives: x [
-	^ (5 unifyo value: x) | [ self fives: x ] eta
+MKPredicateFives >> goal [
+
+	^ (5 unifyo value: firstArgument) | [ self ] eta
 ]
 
-{ #category : #running }
-MKPredicateFives >> goal [
-	^ [ :x | self fives: x ] fresh
+{ #category : #accessing }
+MKPredicateFives >> name [
+
+	^ 'fivesº'
 ]
