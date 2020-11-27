@@ -5,8 +5,7 @@ Class {
 	#name : #MKComputationTreeRenderer,
 	#superclass : #Object,
 	#instVars : [
-		'statesStream',
-		'innerVariables'
+		'statesStream'
 	],
 	#category : #'MicroKanren-Visualizations'
 }
@@ -16,13 +15,11 @@ MKComputationTreeRenderer >> gtInspectorTreeUsingCanvas: aCanvas [
 
 	| states shapes edges assocs labelBuilder printers associations |
 	labelBuilder := RSMultilineLabelBuilder new.
-	innerVariables := IdentityDictionary new.
 	states := statesStream asOrderedCollection.
 	printers := states collect: [ :each | 
 		            MKGoalPrinter new
 			            state: each;
 			            value ].
-
 	associations := printers
 		                flatCollect: [ :each | each associations ]
 		                as: Set.

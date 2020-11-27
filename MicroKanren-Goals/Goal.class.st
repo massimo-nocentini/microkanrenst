@@ -109,6 +109,12 @@ Goal >> variables [
 	^ {  }
 ]
 
+{ #category : #accessing }
+Goal >> variables: aCollection [
+
+	
+]
+
 { #category : #combining }
 Goal >> | other [
 

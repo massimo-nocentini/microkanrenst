@@ -5,7 +5,8 @@ Class {
 		'unified',
 		'state',
 		'path',
-		'associations'
+		'associations',
+		'innerVariables'
 	],
 	#category : #'MicroKanren-Visualizations'
 }
@@ -19,7 +20,8 @@ MKGoalPrinter >> associations [
 { #category : #initialization }
 MKGoalPrinter >> initialize [
 
-	unified := IdentitySet new
+	unified := IdentitySet new.
+	innerVariables := IdentityDictionary new
 ]
 
 { #category : #printing }
@@ -49,7 +51,7 @@ MKGoalPrinter >> printOn: aStream aConj: aConj [
 
 	aStream nextPut: $(.
 	aConj both printOn: aStream renderer: self.
-	aStream nextPutAll: ') ,° ('.
+	aStream nextPutAll: ') &° ('.
 	aConj and printOn: aStream renderer: self.
 	aStream nextPut: $)
 ]
@@ -59,7 +61,7 @@ MKGoalPrinter >> printOn: aStream aDisj: aDisj [
 
 	aStream nextPut: $(.
 	aDisj either printOn: aStream renderer: self.
-	aStream nextPutAll: ') v° ('.
+	aStream nextPutAll: ') |° ('.
 	aDisj or printOn: aStream renderer: self.
 	aStream nextPut: $)
 ]
@@ -80,7 +82,9 @@ MKGoalPrinter >> printOn: aStream aFresh: aGoal [
 			aStream nextPut: Character space ].
 		variables last printOn: aStream.
 		aStream nextPutAll: '. ' ].
-	aGoal innerGoal printOn: aStream renderer: self
+	aGoal innerGoal
+		variables: (innerVariables at: aGoal);
+		printOn: aStream renderer: self
 	"aGoal receiver in: [ :aBlock | 
 		| mapping sourceCode |
 		mapping := Dictionary new.
@@ -186,13 +190,15 @@ MKGoalPrinter >> state: anObject [
 MKGoalPrinter >> value [
 
 	path := state path reversed asLinkedList.
+	path overlappingPairsDo: [ :g :g_succ | 
+		innerVariables at: g put: g_succ variables ].
 	associations := path collect: [ :aGoal | 
-		                   | aString |
-		                   aString := String streamContents: [ :aStream | 
-			                              aGoal printOn: aStream renderer: self ].
-		                   "Dispatch over aGoal in order to mark two subgoals 
+		                | aString |
+		                aString := String streamContents: [ :aStream | 
+			                           aGoal printOn: aStream renderer: self ].
+		                "Dispatch over aGoal in order to mark two subgoals 
 								  as unified if aGoal can do that."
-		                   aGoal addUnifiedSubgoalsInSet: unified.
-		                   "Finally return an association with the computed text"
-		                   aGoal -> aString ]
+		                aGoal addUnifiedSubgoalsInSet: unified.
+		                "Finally return an association with the computed text"
+		                aGoal -> aString ]
 ]
