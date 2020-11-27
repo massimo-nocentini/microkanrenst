@@ -106,6 +106,14 @@ MKGoalPrinter >> printOn: aStream aPredicateBinary: aPredicate [
 	aPredicate secondArgument printOn: aStream
 ]
 
+{ #category : #'as yet unclassified' }
+MKGoalPrinter >> printOn: aStream aPredicateTernary: aPredicate [
+
+	self printOn: aStream aPredicateBinary: aPredicate.
+	aStream nextPut: Character space.
+	aPredicate thirdArgument printOn: aStream
+]
+
 { #category : #printing }
 MKGoalPrinter >> printOn: aStream aPredicateUnary: aPredicate [
 
@@ -137,7 +145,7 @@ MKGoalPrinter >> printOn: aWriteStream aVar: aVar [
 MKGoalPrinter >> printOn: aStream anEta: anEta [
 
 	aStream nextPut: $[.
-	anEta goal printOn: aStream renderer: self.
+	anEta goal value printOn: aStream renderer: self.
 	aStream nextPutAll: ']°'
 ]
 

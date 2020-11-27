@@ -20,5 +20,8 @@ Eta >> goal: aGoal [
 { #category : #running }
 Eta >> onState: aState [
 
-	^ [ (super onState: aState) , (goal onState: aState) ] srfi41Stream
+	^ [ 
+	  | g |
+	  g := goal value.
+	  (super onState: aState) , (g onState: aState) ] srfi41Stream
 ]
