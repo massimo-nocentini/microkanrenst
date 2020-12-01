@@ -91,7 +91,7 @@ Goal >> findAll: aCollection template: aBlock value: aValue [
 
 { #category : #running }
 Goal >> onState: aState [
-	aState pushGoal: self.
+	aState pushGoal: self copy.
 	^ {  } asSrfi41Stream
 ]
 

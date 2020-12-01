@@ -32,14 +32,12 @@ Conj >> both: aGoal [
 Conj >> onState: aState [
 
 	| boundStream |
-	boundStream := [ :refinedState | 
-	               refinedState path
-		               ifNil: [ Error signal: 'Not expected' ]
-		               ifNotNil: [ :path | 
-			               ({ 
-				                Succeed.
-				                Failed } includes: path value class) ifTrue: [ 
-				               refinedState path: path nextLink ] ].
-	               and onState: refinedState ] >>= (both onState: aState).
-	^ (super onState: aState) , boundStream
+	boundStream := (super onState: aState) , (both onState: aState).
+	^ [ :refinedState | 
+	  refinedState path
+		  ifNil: [ Error signal: 'Not expected' ]
+		  ifNotNil: [ :path | 
+			  Succeed == path value class ifTrue: [ 
+				  refinedState path: path nextLink ] ].
+	  and onState: refinedState ] >>= boundStream
 ]

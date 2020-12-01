@@ -76,13 +76,18 @@ MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 MKGoalPrinter >> printOn: aStream aFresh: aGoal [
 
 	| variables |
-	variables := aGoal variables ifNil: [ aGoal receiver argumentNames ].
-	variables ifNotEmpty: [ 
-		aStream nextPut: $!.
-		variables allButLastDo: [ :each | 
-			each printOn: aStream.
+	variables := aGoal variables
+		             ifNil: [ 
+			             aStream nextPut: $¡.
+			             aGoal receiver argumentNames ]
+		             ifNotNil: [ :vars | 
+			             aStream nextPut: $!.
+			             vars ].
+	variables ifEmpty: [ Error signal ] ifNotEmpty: [ 
+		variables allButLastDo: [ :each | "each printOn: aStream."
+			aStream nextPutAll: each asString.
 			aStream nextPut: Character space ].
-		variables last printOn: aStream.
+		aStream nextPutAll: variables last asString.
 		aStream nextPutAll: '. ' ].
 	aGoal printOnNestedGoalOn: aStream renderer: self
 ]
@@ -120,14 +125,16 @@ MKGoalPrinter >> printOn: aStream aSucceed: aSucceed [
 { #category : #printing }
 MKGoalPrinter >> printOn: aWriteStream aVar: aVar [
 
-	(unified includes: aVar)
+	"(unified includes: aVar)
 		ifTrue: [ 
 			| walked |
 			walked := state walker value: aVar.
 			aVar == walked
 				ifTrue: [ self printOn: aWriteStream anObject: aVar ]
 				ifFalse: [ walked printOn: aWriteStream renderer: self ] ]
-		ifFalse: [ self printOn: aWriteStream anObject: aVar ]
+		ifFalse: [ self printOn: aWriteStream anObject: aVar ]"
+
+	self printOn: aWriteStream anObject: aVar
 ]
 
 { #category : #printing }
