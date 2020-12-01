@@ -75,6 +75,9 @@ MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 { #category : #printing }
 MKGoalPrinter >> printOn: aStream aFresh: aGoal [
 
+	aGoal variables ifNil: [ 
+		aGoal printOn: aStream.
+		^ self ].
 	aGoal variables ifNotEmpty: [ :variables | 
 		aStream nextPut: $!.
 		variables allButLastDo: [ :each | 
@@ -82,9 +85,8 @@ MKGoalPrinter >> printOn: aStream aFresh: aGoal [
 			aStream nextPut: Character space ].
 		variables last printOn: aStream.
 		aStream nextPutAll: '. ' ].
-	aGoal innerGoal
-		variables: (innerVariables at: aGoal);
-		printOn: aStream renderer: self
+	aGoal innerGoal printOn: aStream renderer: self
+	"variables: (innerVariables at: aGoal);"
 	"aGoal receiver in: [ :aBlock | 
 		| mapping sourceCode |
 		mapping := Dictionary new.

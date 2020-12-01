@@ -13,8 +13,7 @@ MKPredicateSexpAppendo >> goal [
 		  otherwise: [ :a :d :rec | 
 			  (MKPredicateSexpConso value: a value: d value: firstArgument)
 			  , (MKPredicateSexpConso value: a value: rec value: thirdArgument)
-			  , [ self class value: d value: secondArgument value: rec ] eta ]
-				  fresh;
+			  , (self class value: d value: secondArgument value: rec) ] fresh;
 		  yourself
 ]
 

@@ -2,7 +2,8 @@ Class {
 	#name : #Suspended,
 	#superclass : #Goal,
 	#instVars : [
-		'receiver'
+		'receiver',
+		'nestedGoal'
 	],
 	#category : #'MicroKanren-Goals'
 }

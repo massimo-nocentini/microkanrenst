@@ -7,6 +7,9 @@ Class {
 { #category : #running }
 Eta >> onState: aState [
 
-	^ [ (super onState: aState) , (receiver value onState: aState) ]
-		  srfi41Stream
+	nestedGoal
+		ifNil: [ nestedGoal := receiver valueWithArguments: self variables ]
+		ifNotNil: [ Error signal ].
+	^ (super onState: aState)
+	  , [ nestedGoal onState: aState ] srfi41Stream
 ]

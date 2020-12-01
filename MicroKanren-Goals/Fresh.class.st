@@ -17,13 +17,15 @@ Fresh >> onState: aState [
 { #category : #dispatched }
 Fresh >> onState: aState withVars: aCollection [
 
-	| g |
 	variables
 		ifNil: [ self variables: aCollection ]
-		ifNotNil: [ aCollection = variables ifFalse: [ Error signal ] ].
-	"	variables := aCollection."
-	g := receiver valueWithArguments: variables.
-	^ g onState: aState
+		ifNotNil: [ "aCollection = variables ifFalse: [ Error signal ] " 
+		Error signal ].
+	nestedGoal
+		ifNil: [ nestedGoal := receiver valueWithArguments: self variables ]
+		ifNotNil: [ Error signal ].
+	"g := receiver valueWithArguments: variables."
+	^ nestedGoal onState: aState
 ]
 
 { #category : #accessing }

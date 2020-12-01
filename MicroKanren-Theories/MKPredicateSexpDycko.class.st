@@ -1,6 +1,6 @@
 Class {
 	#name : #MKPredicateSexpDycko,
-	#superclass : #PredicateBinary,
+	#superclass : #PredicateUnary,
 	#category : #'MicroKanren-Theories-S-expressions'
 }
 
@@ -14,9 +14,7 @@ MKPredicateSexpDycko >> goal [
 				   value: ($( cons: beta)
 				   value: ($) cons: gamma)
 				   value: firstArgument)
-			  ,
-				  ([ self class value: beta ] eta
-				   , [ self class value: gamma ] eta) ] fresh;
+			  , ((self class value: beta) , (self class value: gamma)) ] fresh;
 		  yourself
 ]
 

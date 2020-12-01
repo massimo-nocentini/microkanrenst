@@ -112,6 +112,9 @@ Goal >> variables [
 { #category : #accessing }
 Goal >> variables: aCollection [
 
+	"Just ignore the given collection because a generic goal doesn't maintain 
+	 any variable collection, usually. Let subclasses to keep them if they need."
+
 	
 ]
 
