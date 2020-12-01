@@ -85,21 +85,7 @@ MKGoalPrinter >> printOn: aStream aFresh: aGoal [
 			aStream nextPut: Character space ].
 		variables last printOn: aStream.
 		aStream nextPutAll: '. ' ].
-	aGoal innerGoal printOn: aStream renderer: self
-	"variables: (innerVariables at: aGoal);"
-	"aGoal receiver in: [ :aBlock | 
-		| mapping sourceCode |
-		mapping := Dictionary new.
-		aGoal variables
-			with: aBlock argumentNames
-			do: [ :variable :name | mapping at: name put: variable ].
-		sourceCode := aBlock sourceNode body in: [ :bodyNode | 
-			              bodyNode allVariables do: [ :each | 
-				              mapping
-					              at: each name
-					              ifPresent: [ :aVar | each name: aVar asString ] ].
-			              bodyNode formattedCode ].
-		aStream nextPutAll: sourceCode ]"
+	aGoal printOnNestedGoalOn: aStream renderer: self
 ]
 
 { #category : #printing }
@@ -149,7 +135,7 @@ MKGoalPrinter >> printOn: aWriteStream aVar: aVar [
 MKGoalPrinter >> printOn: aStream anEta: anEta [
 
 	aStream nextPut: $[.
-	anEta innerGoal printOn: aStream renderer: self.
+	anEta printOnNestedGoalOn: aStream renderer: self.
 	aStream nextPutAll: ']°'
 ]
 

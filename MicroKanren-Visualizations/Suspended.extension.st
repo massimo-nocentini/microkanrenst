@@ -1,7 +1,9 @@
 Extension { #name : #Suspended }
 
 { #category : #'*MicroKanren-Visualizations' }
-Suspended >> innerGoal [
+Suspended >> printOnNestedGoalOn: aStream renderer: aRenderer [
 
-	^ nestedGoal
+	nestedGoal
+		ifNil: [ Error signal ]
+		ifNotNil: [ nestedGoal printOn: aStream renderer: aRenderer ]
 ]

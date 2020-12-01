@@ -10,8 +10,7 @@ Class {
 { #category : #running }
 Fresh >> onState: aState [
 
-	^ (super onState: aState)
-	  , (aState collectVars: (1 to: receiver numArgs) forFresh: self)
+	^ aState collectVars: (1 to: receiver numArgs) forFresh: self
 ]
 
 { #category : #dispatched }
@@ -25,7 +24,7 @@ Fresh >> onState: aState withVars: aCollection [
 		ifNil: [ nestedGoal := receiver valueWithArguments: self variables ]
 		ifNotNil: [ Error signal ].
 	"g := receiver valueWithArguments: variables."
-	^ nestedGoal onState: aState
+	^ (super onState: aState) , (nestedGoal onState: aState)
 ]
 
 { #category : #accessing }
