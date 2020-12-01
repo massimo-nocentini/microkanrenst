@@ -75,10 +75,9 @@ MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 { #category : #printing }
 MKGoalPrinter >> printOn: aStream aFresh: aGoal [
 
-	aGoal variables ifNil: [ 
-		aGoal printOn: aStream.
-		^ self ].
-	aGoal variables ifNotEmpty: [ :variables | 
+	| variables |
+	variables := aGoal variables ifNil: [ aGoal receiver argumentNames ].
+	variables ifNotEmpty: [ 
 		aStream nextPut: $!.
 		variables allButLastDo: [ :each | 
 			each printOn: aStream.

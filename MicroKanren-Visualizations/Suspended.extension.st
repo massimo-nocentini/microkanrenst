@@ -4,6 +4,6 @@ Extension { #name : #Suspended }
 Suspended >> printOnNestedGoalOn: aStream renderer: aRenderer [
 
 	nestedGoal
-		ifNil: [ Error signal ]
+		ifNil: [ aStream nextPutAll: receiver sourceNode body formattedCode ]
 		ifNotNil: [ nestedGoal printOn: aStream renderer: aRenderer ]
 ]

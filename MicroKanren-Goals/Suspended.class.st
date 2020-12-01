@@ -9,6 +9,12 @@ Class {
 }
 
 { #category : #accessing }
+Suspended >> receiver [
+
+	^ receiver
+]
+
+{ #category : #accessing }
 Suspended >> receiver: aBlockClosure [
 	receiver := aBlockClosure
 ]
