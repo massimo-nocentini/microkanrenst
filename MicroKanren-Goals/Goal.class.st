@@ -91,7 +91,11 @@ Goal >> asStatesStream [
 { #category : #combining }
 Goal >> not [
 
-	^ self | true asGoal ! false asGoal
+	"^ self | true asGoal ! false asGoal"
+
+	^ Not new
+		  cuttingGoal: self;
+		  yourself
 ]
 
 { #category : #running }
