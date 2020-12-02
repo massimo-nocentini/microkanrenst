@@ -1,7 +1,8 @@
 Class {
 	#name : #If,
-	#superclass : #GoalWithChainCombinationStrategy,
+	#superclass : #Goal,
 	#instVars : [
+		'chainCombinationStrategy',
 		'question',
 		'answer',
 		'otherwise'
@@ -17,6 +18,11 @@ If >> answer [
 { #category : #initializing }
 If >> answer: anAnswerGoal [
 	answer := anAnswerGoal.
+]
+
+{ #category : #'as yet unclassified' }
+If >> chainCombinationStrategy: aStrategy [ 
+	chainCombinationStrategy := aStrategy
 ]
 
 { #category : #accessing }
