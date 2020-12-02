@@ -25,6 +25,12 @@ Goal class >> fail [
 	^ Failed new
 ]
 
+{ #category : #'as yet unclassified' }
+Goal class >> findAllo [
+
+	^ PredicateFindAllo
+]
+
 { #category : #creating }
 Goal class >> fresh: aBlock [
 
@@ -82,17 +88,6 @@ Goal >> bagOf: aCollection groupBy: gBlock template: tBlock value: aValue [
 		receiver: self;
 		groupBy: gBlock;
 		template: tBlock;
-		vars: aCollection;
-		value: aValue;
-		yourself
-]
-
-{ #category : #aggregating }
-Goal >> findAll: aCollection template: aBlock value: aValue [
-	^ FindAll new
-		receiver: self;
-		groupBy: BagOfGroupByAdapter new;
-		template: aBlock;
 		vars: aCollection;
 		value: aValue;
 		yourself
