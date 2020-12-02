@@ -3,7 +3,6 @@ Class {
 	#superclass : #Goal,
 	#instVars : [
 		'cuttingGoal',
-		'restGoal',
 		'length'
 	],
 	#category : #'MicroKanren-Goals'
@@ -36,20 +35,7 @@ Cut >> length: anObject [
 { #category : #running }
 Cut >> onState: aState [
 
-	| cuttingStream initStream |
+	| cuttingStream |
 	cuttingStream := cuttingGoal onState: aState.
-	initStream := (super onState: aState) , (cuttingStream next: length).
-	^ [ :cutState | restGoal onState: cutState ] >>= initStream
-]
-
-{ #category : #accessing }
-Cut >> restGoal [
-
-	^ restGoal
-]
-
-{ #category : #accessing }
-Cut >> restGoal: anObject [
-
-	restGoal := anObject
+	^ (super onState: aState) , (cuttingStream next: length)
 ]

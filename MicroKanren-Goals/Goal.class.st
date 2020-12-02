@@ -56,11 +56,10 @@ Goal class >> unify: anObj with: another [
 { #category : #combining }
 Goal >> ! other [
 
-	^ Cut new
-		  cuttingGoal: self;
-		  restGoal: other;
-		  length: 1;
-		  yourself
+	^ (Cut new
+		   cuttingGoal: self;
+		   length: 1;
+		   yourself) , other
 ]
 
 { #category : #combining }
@@ -109,6 +108,16 @@ Goal >> not [
 Goal >> onState: aState [
 	aState pushGoal: self copy.
 	^ {  } asSrfi41Stream
+]
+
+{ #category : #'as yet unclassified' }
+Goal >> popGoalFromPathOfState: aState forConj: aGoal [
+
+	"No action for the generic goal because if I am the top of `aState`'s goal path,
+	 I have to remain there with respect to the computation step running in the
+	 conjunction `aGoal`."
+
+	
 ]
 
 { #category : #running }

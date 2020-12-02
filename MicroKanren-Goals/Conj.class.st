@@ -36,8 +36,9 @@ Conj >> onState: aState [
 	^ [ :refinedState | 
 	  refinedState path
 		  ifNil: [ Error signal: 'Not expected' ]
-		  ifNotNil: [ :path | 
-			  Succeed == path value class ifTrue: [ 
-				  refinedState path: path nextLink ] ].
+		  ifNotNil: [ :aValueLink | 
+			  aValueLink value
+				  popGoalFromPathOfState: refinedState
+				  forConj: self ].
 	  and onState: refinedState ] >>= boundStream
 ]

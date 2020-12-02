@@ -475,6 +475,44 @@ GoalTest >> testCut [
 ]
 
 { #category : #tests }
+GoalTest >> testCutAndFail [
+
+	"From https://stackoverflow.com/questions/15138706/cut-and-fail-in-prolog
+	
+	 a(X) :- b(X),!,c(X),fail.
+	 a(X) :- d(X).
+	 b(1).
+	 b(4).
+	 c(1).
+	 c(3).
+	 d(4)."
+
+	| g |
+	g := [ :x | 
+	     (x unifyo value: 1) | (x unifyo value: 4) | (x unifyo value: 4)
+	     ! ((x unifyo value: 1) | (x unifyo value: 3) , false asGoal) ]
+		     fresh.
+	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection.
+
+	g := [ :x | 
+	     (x unifyo value: 1) | (x unifyo value: 4) | (x unifyo value: 4)
+	     ! ((x unifyo value: 1) | (x unifyo value: 3)) ] fresh.
+	self assert: g solutions equals: #( 1 ) modulo: #asOrderedCollection.
+
+	g := [ :x | 
+	     (x unifyo value: 1) | (x unifyo value: 4)
+	     , ((x unifyo value: 1) | (x unifyo value: 3)) , false asGoal
+	     | (x unifyo value: 4) ] fresh.
+	self assert: g solutions equals: #( 4 ) modulo: #asOrderedCollection.
+
+	g := [ :x | 
+	     (x unifyo value: 1) | (x unifyo value: 4)
+	     , ((x unifyo value: 1) | (x unifyo value: 3)) , false asGoal
+	     | (x unifyo value: 4) ! true asGoal ] fresh.
+	self assert: g solutions equals: #( 4 ) modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
 GoalTest >> testCutOverMultipleRules [
 
 	"a(X) :- b(X), !, c(X).

@@ -61,8 +61,7 @@ MKGoalPrinter >> printOn: aStream aCut: aGoal [
 
 	aStream nextPut: $(.
 	aGoal cuttingGoal printOn: aStream renderer: self.
-	aStream nextPutAll: ') !°'.
-	aGoal restGoal printOn: aStream renderer: self
+	aStream nextPutAll: ') !°'
 ]
 
 { #category : #printing }
