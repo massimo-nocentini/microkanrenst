@@ -150,13 +150,14 @@ GoalTest >> testBagOf [
 	g := [ :list | 
 	     [ :mother :child :cdr :cddr | 
 	     | bagOfGoal |
-	     bagOfGoal := (DescendTestPredicate value: mother value: child)
-		                  bagOf: { 
-				                  mother.
-				                  child }
-		                  groupBy: [ :m :c | { m } ]
-		                  template: [ :m :c | c ]
-		                  value: cddr.
+	     bagOfGoal := (Goal bagOfo
+		                   value:
+			                   (DescendTestPredicate value: mother value: child)
+		                   value: child
+		                   value: cddr)
+		                  variables: (Array with: mother);
+		                  yourself.
+
 	     bagOfGoal
 	     , (sexpTheory conso value: mother value: cdr value: list)
 	     , (sexpTheory conso value: child value: cddr value: cdr) ] fresh ]
@@ -164,69 +165,67 @@ GoalTest >> testBagOf [
 	self
 		assert: g solutions
 		equals: { 
-				(#laura cons: (0 asReifiedVar cons: #( #rose ))).
-				(#caroline cons: (0 asReifiedVar cons: #( #rose #laura ))).
-				(#martha cons:
-					 (0 asReifiedVar cons: #( #charlotte #caroline #laura #rose ))).
+				(#laura cons: (0 asReifiedVar cons: #( #rose ) asCons)).
 				(#charlotte cons:
-					 (0 asReifiedVar cons: #( #caroline #laura #rose ))) }
+					 (0 asReifiedVar cons: #( #caroline #laura #rose ) asCons)).
+				(#martha cons:
+					 (0 asReifiedVar cons:
+						  #( #charlotte #caroline #laura #rose ) asCons)).
+				(#caroline cons: (0 asReifiedVar cons: #( #rose #laura ) asCons)) }
 		modulo: #asOrderedCollection.
+
 	g := [ :list | 
 	     [ :mother :child | 
-	     (DescendTestPredicate value: mother value: child)
-		     bagOf: { 
-				     mother.
-				     child }
-		     groupBy: [ :m :c | {  } ]
-		     template: [ :m :c | c ]
-		     value: list ] fresh ] fresh.
+	     (Goal bagOfo
+		      value: (DescendTestPredicate value: mother value: child)
+		      value: child
+		      value: list)
+		     variables: {  };
+		     yourself ] fresh ] fresh.
 	self
 		assert: g solutions
 		equals:
-			#( #( #charlotte #caroline #rose #rose #laura #laura #caroline
-			      #laura #rose #rose ) )
+			#( #charlotte #caroline #rose #rose #laura #laura #caroline
+			   #laura #rose #rose ) asCons
 		modulo: #asOrderedCollection.
+
 	g := [ :list | 
 	     [ :groups | 
 	     | bagOfGoal |
 	     bagOfGoal := [ :mother :child | 
-	                  (DescendTestPredicate value: mother value: child)
-		                  bagOf: { 
-				                  mother.
-				                  child }
-		                  groupBy: [ :m :c | { m } ]
-		                  template: [ :m :c | c ]
-		                  value: groups ] fresh.
+	                  (Goal bagOfo
+		                   value:
+			                   (DescendTestPredicate value: mother value: child)
+		                   value: child
+		                   value: groups)
+		                  variables: (Array with: mother);
+		                  yourself ] fresh.
 	     Goal findAllo value: bagOfGoal value: groups value: list ] fresh ]
 		     fresh.
 	self
 		assert: g solutions
-		equals:
-			(#( #( #( #rose ) #( #rose #laura ) #( #charlotte #caroline
-			          #laura #rose ) #( #caroline #laura #rose ) ) ) collect:
-				 #asCons)
+		equals: (#( #( #( #rose ) #( #caroline #laura #rose )
+			       #( #charlotte #caroline #laura #rose )
+			       #( #rose #laura ) ) ) collect: #asCons)
 		modulo: #asOrderedCollection.
 	g := [ :list | 
 	     [ :groups :mother :child | 
-	     ((DescendTestPredicate value: mother value: child)
-		      bagOf: { 
-				      mother.
-				      child }
-		      groupBy: [ :m :c | { m } ]
-		      template: [ :m :c | c ]
-		      value: groups)
-		     bagOf: { 
-				     mother.
-				     child.
-				     groups }
-		     groupBy: [ :m :c :gr | {  } ]
-		     template: [ :a :c :gr | gr ]
-		     value: list ] fresh ] fresh.
+	     | nested |
+	     nested := (Goal bagOfo
+		                value:
+			                (DescendTestPredicate value: mother value: child)
+		                value: child
+		                value: groups)
+		               variables: (Array with: mother);
+		               yourself.
+	     (Goal bagOfo value: nested value: groups value: list)
+		     variables: {  };
+		     yourself ] fresh ] fresh.
 	self
 		assert: g solutions
-		equals:
-			#( #( #( #rose ) #( #rose #laura ) #( #charlotte #caroline
-			         #laura #rose ) #( #caroline #laura #rose ) ) )
+		equals: (#( #( #( #rose ) #( #caroline #laura #rose )
+			       #( #charlotte #caroline #laura #rose )
+			       #( #rose #laura ) ) ) collect: #asCons)
 		modulo: #asOrderedCollection.
 
 	g := [ :list | 
@@ -239,7 +238,31 @@ GoalTest >> testBagOf [
 		     yourself ] fresh ] fresh.
 	self
 		assert: g solutions
-		equals: { #( #( #c #d ) #( #g ) #( #f #e ) ) asCons }
+		equals: ({ 
+				 #( #c #d ).
+				 #( #g ).
+				 #( #f #e ) } collect: #asCons)
+		modulo: #asOrderedCollection.
+
+	g := [ :list | 
+	     [ :a :b :c | 
+	     (Goal bagOfo
+		      value: (MKPredicateFooForBag value: a value: b value: c)
+		      value: c
+		      value: list)
+		     variables: { 
+				     a.
+				     b.
+				     c };
+		     yourself ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals: { 
+				#( #e ) asCons.
+				#( #c ) asCons.
+				#( #f ) asCons.
+				#( #d ) asCons.
+				#( #g ) asCons }
 		modulo: #asOrderedCollection
 ]
 
@@ -662,6 +685,19 @@ GoalTest >> testFindAll [
 		     value: (MKPredicateFooForBag value: a value: b value: c)
 		     value: c
 		     value: list ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals: { #( #c #g #f #e #d ) asCons }
+		modulo: #asOrderedCollection.
+
+	g := [ :list | 
+	     [ :a :b :c | 
+	     (Goal bagOfo
+		      value: (MKPredicateFooForBag value: a value: b value: c)
+		      value: c
+		      value: list)
+		     variables: {  };
+		     yourself ] fresh ] fresh.
 	self
 		assert: g solutions
 		equals: { #( #c #g #f #e #d ) asCons }

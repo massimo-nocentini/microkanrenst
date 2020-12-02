@@ -200,6 +200,7 @@ MKRealogTest >> testMaritalo [
 
 { #category : #predicates }
 MKRealogTest >> testWorkedHourso [
+
 	"[ :employee :date :period | 
 	  [ :hours | 
 	  (0 to: period - 1) inject: false asGoal into: [ :g :i | 
@@ -213,16 +214,13 @@ MKRealogTest >> testWorkedHourso [
 	| g |
 	g := [ :list | 
 	     [ :E :D :H :cdr :cddr | 
-	     | bagOfGoal |
-	     bagOfGoal := (self workedHourso value: E value: D value: H)
-		                  bagOf: { 
-				                  E.
-				                  D.
-				                  H }
-		                  groupBy: [ :e :d :h | { e } ]
-		                  template: [ :e :d :h | h ]
-		                  value: list.
-	     bagOfGoal ", (Theory sexp conso value: E value: cdr value: list)
+	     (Goal bagOfo
+		      value: (self workedHourso value: E value: D value: H)
+		      value: H
+		      value: list)
+		     variables: { E };
+		     yourself
+	     ", (Theory sexp conso value: E value: cdr value: list)
 	     , (Theory sexp conso value: H value: cddr value: cdr)" ]
 		     fresh ] fresh.
 	self

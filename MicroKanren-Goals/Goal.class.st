@@ -88,17 +88,6 @@ Goal >> asStatesStream [
 	^ self onState: SBRAL new asState
 ]
 
-{ #category : #aggregating }
-Goal >> bagOf: aCollection groupBy: gBlock template: tBlock value: aValue [
-	^ BagOf new
-		receiver: self;
-		groupBy: gBlock;
-		template: tBlock;
-		vars: aCollection;
-		value: aValue;
-		yourself
-]
-
 { #category : #combining }
 Goal >> not [
 
