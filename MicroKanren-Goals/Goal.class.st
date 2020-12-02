@@ -4,9 +4,6 @@ I represent *goal* objects, namely a goal maps a `State` object to a `Chain` of 
 Class {
 	#name : #Goal,
 	#superclass : #Object,
-	#instVars : [
-		'variables'
-	],
 	#category : #'MicroKanren-Goals'
 }
 
@@ -18,17 +15,15 @@ Goal class >> alpha: anObj rule: anotherObj [
 		yourself
 ]
 
-{ #category : #creating }
-Goal class >> cond [
-	^ Cond new
+{ #category : #'as yet unclassified' }
+Goal class >> bagOfo [
+
+	^ PredicateBagOfo
 ]
 
 { #category : #creating }
-Goal class >> eta: aGoal [
-
-	^ Eta new
-		  goal: aGoal;
-		  yourself
+Goal class >> cond [
+	^ Cond new
 ]
 
 { #category : #creating }
@@ -36,11 +31,20 @@ Goal class >> fail [
 	^ Failed new
 ]
 
+{ #category : #'as yet unclassified' }
+Goal class >> findAllo [
+
+	^ PredicateFindAllo
+]
+
 { #category : #creating }
 Goal class >> fresh: aBlock [
-	^ Fresh new
-		receiver: aBlock;
-		yourself
+
+	^ (aBlock numArgs = 0
+	   ifTrue: [ Eta new ]
+	   ifFalse: [ Fresh new ])
+	  receiver: aBlock;
+	  yourself 
 ]
 
 { #category : #'as yet unclassified' }
@@ -62,6 +66,15 @@ Goal class >> unify: anObj with: another [
 ]
 
 { #category : #combining }
+Goal >> ! other [
+
+	^ (Cut new
+		   cuttingGoal: self;
+		   length: 1;
+		   yourself) , other
+]
+
+{ #category : #combining }
 Goal >> , other [
 	^ Conj new
 		both: self;
@@ -75,38 +88,30 @@ Goal >> asStatesStream [
 	^ self onState: SBRAL new asState
 ]
 
-{ #category : #aggregating }
-Goal >> bagOf: aCollection groupBy: gBlock template: tBlock value: aValue [
-	^ BagOf new
-		receiver: self;
-		groupBy: gBlock;
-		template: tBlock;
-		vars: aCollection;
-		value: aValue;
-		yourself
-]
+{ #category : #combining }
+Goal >> not [
 
-{ #category : #aggregating }
-Goal >> findAll: aCollection template: aBlock value: aValue [
-	^ FindAll new
-		receiver: self;
-		groupBy: BagOfGroupByAdapter new;
-		template: aBlock;
-		vars: aCollection;
-		value: aValue;
-		yourself
-]
+	"^ self | true asGoal ! false asGoal"
 
-{ #category : #initialization }
-Goal >> initialize [
-
-	variables := {  }
+	^ Not new
+		  cuttingGoal: self;
+		  yourself
 ]
 
 { #category : #running }
 Goal >> onState: aState [
-	aState pushGoal: self.
+	aState pushGoal: self copy.
 	^ {  } asSrfi41Stream
+]
+
+{ #category : #'as yet unclassified' }
+Goal >> popGoalFromPathOfState: aState forConj: aGoal [
+
+	"No action for the generic goal because if I am the top of `aState`'s goal path,
+	 I have to remain there with respect to the computation step running in the
+	 conjunction `aGoal`."
+
+	
 ]
 
 { #category : #running }
@@ -119,12 +124,17 @@ Goal >> solutions [
 
 { #category : #accessing }
 Goal >> variables [
-	^ variables
+
+	^ {  }
 ]
 
 { #category : #accessing }
-Goal >> variables: anObject [
-	variables := anObject
+Goal >> variables: aCollection [
+
+	"Just ignore the given collection because a generic goal doesn't maintain 
+	 any variable collection, usually. Let subclasses to keep them if they need."
+
+	
 ]
 
 { #category : #combining }

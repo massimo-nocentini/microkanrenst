@@ -23,3 +23,9 @@ PredicateUnary >> firstArgument [
 PredicateUnary >> firstArgument: anObject [
 	firstArgument := anObject
 ]
+
+{ #category : #printing }
+PredicateUnary >> printOn: aStream renderer: aRenderer [
+
+	aRenderer printOn: aStream aPredicateUnary: self
+]

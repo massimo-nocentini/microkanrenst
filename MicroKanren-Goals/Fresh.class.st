@@ -1,32 +1,40 @@
 Class {
 	#name : #Fresh,
-	#superclass : #Goal,
+	#superclass : #Suspended,
 	#instVars : [
-		'receiver'
+		'variables'
 	],
 	#category : #'MicroKanren-Goals'
 }
 
 { #category : #running }
 Fresh >> onState: aState [
-	^ (super onState: aState)
-	  , (aState collectVars: (1 to: receiver numArgs) forFresh: self)
+
+	^ aState collectVars: (1 to: receiver numArgs) forFresh: self
 ]
 
 { #category : #dispatched }
 Fresh >> onState: aState withVars: aCollection [
-	| g |
-	variables := aCollection.
-	g := receiver valueWithArguments: variables.
-	^ g onState: aState
+
+	variables
+		ifNil: [ self variables: aCollection ]
+		ifNotNil: [ "aCollection = variables ifFalse: [ Error signal ] " 
+		Error signal ].
+	nestedGoal
+		ifNil: [ nestedGoal := receiver valueWithArguments: self variables ]
+		ifNotNil: [ Error signal ].
+	"g := receiver valueWithArguments: variables."
+	^ (super onState: aState) , (nestedGoal onState: aState)
 ]
 
 { #category : #accessing }
-Fresh >> receiver [
-	^ receiver
+Fresh >> variables [
+
+	^ variables
 ]
 
 { #category : #accessing }
-Fresh >> receiver: aBlockClosure [
-	receiver := aBlockClosure
+Fresh >> variables: aCollection [
+
+	variables := aCollection
 ]

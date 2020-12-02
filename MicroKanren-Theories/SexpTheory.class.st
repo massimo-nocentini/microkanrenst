@@ -11,33 +11,26 @@ SexpTheory >> alphaRuleo [
 
 { #category : #'as yet unclassified' }
 SexpTheory >> appendo [
-	^ [ :aCollection :anotherCollection :aResult | 
-	Goal cond e
-		if: aCollection nilo
-			then: (aResult unifyo value: anotherCollection);
-		otherwise:
-			[ :a :d :rec | 
-			(self conso value: a value: d value: aCollection)
-				, (self conso value: a value: rec value: aResult)
-				, [ self appendo value: d value: anotherCollection value: rec ] eta ]
-				fresh;
-		yourself ]
+
+	^ MKPredicateSexpAppendo
 ]
 
 { #category : #'as yet unclassified' }
 SexpTheory >> caro [
-	^ [:aCons :aCar | [:aCdr | self conso !! {aCar.aCdr.aCons}] fresh]
+
+	^ MKPredicateSexpCaro
 ]
 
 { #category : #'as yet unclassified' }
 SexpTheory >> cdro [
-	^ [:aCons :aCdr | [:aCar | self conso !! {aCar.aCdr.aCons}] fresh]
+
+	^ MKPredicateSexpCdro
 ]
 
 { #category : #'as yet unclassified' }
 SexpTheory >> conso [
-	^ [:aCar :aCdr :aCons | (aCar cons: aCdr)
-		unifyo value: aCons]
+
+	^ MKPredicateSexpConso
 ]
 
 { #category : #'as yet unclassified' }

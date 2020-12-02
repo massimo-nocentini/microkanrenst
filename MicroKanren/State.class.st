@@ -11,10 +11,11 @@ Class {
 
 { #category : #'instance creation' }
 State class >> emptyWithSubstitution: aCollection [
+
 	^ self new
-		birthdate: 1;
-		substitution: aCollection;
-		yourself
+		  birthdate: 0;
+		  substitution: aCollection;
+		  yourself
 ]
 
 { #category : #'instance creation' }

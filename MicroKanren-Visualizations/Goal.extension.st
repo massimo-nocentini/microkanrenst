@@ -1,18 +1,21 @@
 Extension { #name : #Goal }
 
 { #category : #'*MicroKanren-Visualizations' }
-Goal >> printOn: aStream renderer: aRenderer [
+Goal >> addUnifiedSubgoalsInSet: unified [
 
-	self subclassResponsibility
+	"Nothing to do here because a generic goal cannot unify anything."
+
+	
 ]
 
 { #category : #'*MicroKanren-Visualizations' }
-Goal >> printOn: aStream variables: vars renderer: aRenderer [
+Goal >> asLogicComputationTreeLimitedTo: n [
 
-	| bkp |
-	bkp := variables.
-	self
-		variables: vars;
-		printOn: aStream renderer: aRenderer;
-		variables: bkp
+	^ (self asStatesStream next: n) asLogicComputationTree
+]
+
+{ #category : #'*MicroKanren-Visualizations' }
+Goal >> printOn: aStream renderer: aRenderer [
+
+	self subclassResponsibility
 ]
