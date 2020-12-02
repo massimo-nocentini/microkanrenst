@@ -227,6 +227,19 @@ GoalTest >> testBagOf [
 		equals:
 			#( #( #( #rose ) #( #rose #laura ) #( #charlotte #caroline
 			         #laura #rose ) #( #caroline #laura #rose ) ) )
+		modulo: #asOrderedCollection.
+
+	g := [ :list | 
+	     [ :a :b :c | 
+	     (Goal bagOfo
+		      value: (MKPredicateFooForBag value: a value: b value: c)
+		      value: c
+		      value: list)
+		     variables: (Array with: a with: b);
+		     yourself ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals: { #( #( #c #d ) #( #g ) #( #f #e ) ) asCons }
 		modulo: #asOrderedCollection
 ]
 
@@ -641,6 +654,17 @@ GoalTest >> testFindAll [
 		equals:
 			{ #( #charlotte #caroline #rose #rose #laura #laura #caroline
 			   #laura #rose #rose ) asCons }
+		modulo: #asOrderedCollection.
+
+	g := [ :list | 
+	     [ :a :b :c | 
+	     Goal findAllo
+		     value: (MKPredicateFooForBag value: a value: b value: c)
+		     value: c
+		     value: list ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals: { #( #c #g #f #e #d ) asCons }
 		modulo: #asOrderedCollection
 ]
 

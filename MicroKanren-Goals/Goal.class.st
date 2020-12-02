@@ -15,6 +15,12 @@ Goal class >> alpha: anObj rule: anotherObj [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+Goal class >> bagOfo [
+
+	^ PredicateBagOfo
+]
+
 { #category : #creating }
 Goal class >> cond [
 	^ Cond new
