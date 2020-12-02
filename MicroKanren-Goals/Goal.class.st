@@ -54,6 +54,16 @@ Goal class >> unify: anObj with: another [
 ]
 
 { #category : #combining }
+Goal >> ! other [
+
+	^ Cut new
+		  cuttingGoal: self;
+		  restGoal: other;
+		  length: 1;
+		  yourself
+]
+
+{ #category : #combining }
 Goal >> , other [
 	^ Conj new
 		both: self;
@@ -87,6 +97,12 @@ Goal >> findAll: aCollection template: aBlock value: aValue [
 		vars: aCollection;
 		value: aValue;
 		yourself
+]
+
+{ #category : #combining }
+Goal >> not [
+
+	^ self | true asGoal ! false asGoal
 ]
 
 { #category : #running }

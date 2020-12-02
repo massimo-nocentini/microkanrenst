@@ -57,6 +57,15 @@ MKGoalPrinter >> printOn: aStream aConj: aConj [
 ]
 
 { #category : #printing }
+MKGoalPrinter >> printOn: aStream aCut: aGoal [
+
+	aStream nextPut: $(.
+	aGoal cuttingGoal printOn: aStream renderer: self.
+	aStream nextPutAll: ') !°'.
+	aGoal restGoal printOn: aStream renderer: self
+]
+
+{ #category : #printing }
 MKGoalPrinter >> printOn: aStream aDisj: aDisj [
 
 	aStream nextPut: $(.

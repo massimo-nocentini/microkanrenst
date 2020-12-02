@@ -459,6 +459,52 @@ GoalTest >> testConso [
 		modulo: #asOrderedCollection
 ]
 
+{ #category : #tests }
+GoalTest >> testCut [
+
+	| g |
+	g := [ :x :y | 
+	     (x unifyo value: 1) | (x unifyo value: 2) | (x unifyo value: 3)
+	     !
+	     ((y unifyo value: 1) | (y unifyo value: 2) | (y unifyo value: 3)) ]
+		     fresh.
+	self
+		assert: g solutions
+		equals: #( #( 1 1 ) #( 1 3 ) #( 1 2 ) )
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+GoalTest >> testCutOverMultipleRules [
+
+	"a(X) :- b(X), !, c(X).
+	 a(X) :- d(X).
+	 b(1).
+	 b(4).
+	 c(3).
+	 d(4)."
+
+	| g |
+	g := [ :x | 
+	     (x unifyo value: 1) | (x unifyo value: 4) | (x unifyo value: 4)
+	     ! (x unifyo value: 3) ] fresh.
+	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+GoalTest >> testCutUnifyThenFail [
+
+	| g |
+	g := [ :x | 
+	     (x unifyo value: 1) | (x unifyo value: 2) | (x unifyo value: 3)
+	     ! (x unifyo value: 2) ] fresh.
+	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection.
+	g := [ :x | 
+	     (x unifyo value: 1) | (x unifyo value: 2) | (x unifyo value: 3)
+	     , (x unifyo value: 2) ] fresh.
+	self assert: g solutions equals: #( 2 ) modulo: #asOrderedCollection
+]
+
 { #category : #'as yet unclassified' }
 GoalTest >> testDisj [
 	| g |
