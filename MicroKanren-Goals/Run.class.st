@@ -14,11 +14,13 @@ Run >> goal: aGoal [
 
 { #category : #'as yet unclassified' }
 Run >> onState: aState [
-	| states vars selector |
-	states := goal onState: aState.
-	vars := goal variables ifEmpty: [ LinkedList with: Var tautology ].
+
+	| aStream vars selector |
+	aStream := goal onState: aState.
+	vars := goal variables ifEmpty: [ { Var tautology } ].
 	selector := vars size = 1
-		            ifTrue: #first
-		            ifFalse: #yourself.
-	^ states collect: [ :s | selector value: (s reifier reifyVars: vars) ]
+		            ifTrue: [ #first ]
+		            ifFalse: [ #yourself ].
+	^ aStream collect: [ :s | 
+		  selector value: (s reifier reifyVars: vars) ]
 ]
