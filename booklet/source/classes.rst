@@ -9,3 +9,19 @@ Succeed
 -------
 
 .. pharo:autoclass:: Succeed
+
+
+s   fd fd ome other text.  some textfd s    df  di ome 
+kfjdkfjd
+
+
+kfjdkfj{
+fd
+
+fd
+fd
+fd
+
+fd{
+
+fd
