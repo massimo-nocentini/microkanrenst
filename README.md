@@ -12,4 +12,6 @@ Metacello new
     load.
 ```
 
+The companion documentation can be found at https://massimo-nocentini.github.io/microkanrenst/.
+
 [muk]:https://github.com/jasonhemann/microKanren
