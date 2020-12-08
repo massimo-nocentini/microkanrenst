@@ -17,12 +17,13 @@ properties.
    :maxdepth: 2
 
    overview.rst
-   classes.rst
+   goals.rst
+   messages.rst
 
 
+ 
 Indices and tables
 ==================
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`

@@ -12,7 +12,7 @@ import json
 with open('/Users/mn/Developer/snapshots/pharoes/90-microkanren/microkanren.json') as fp:
     pharoExportDict = json.load(fp)
 
-class PharoDirective(Directive):
+class PharoAutoClassDirective(Directive):
 
     required_arguments = 1
     optional_arguments = 0
@@ -21,11 +21,12 @@ class PharoDirective(Directive):
     has_content = False
 
     def run(self):
-        classDef = pharoExportDict['classes'][self.arguments[0]]
+        className = self.arguments[0]
+        classDef = pharoExportDict['classes'][className]
 
         rst = StringList()
 
-        dummySourceFilename = '{}.rst'.format(self.arguments[0])
+        dummySourceFilename = '{}.rst'.format(className)
         for i, l in enumerate(classDef['comment']):
             rst.append(l, dummySourceFilename, i)
 
@@ -35,7 +36,42 @@ class PharoDirective(Directive):
         # Parse the rst.
         nested_parse_with_titles(self.state, rst, node)
 
-        return node.children + [docutils.nodes.literal_block('', classDef['definition'], language='smalltalk')]
+        #title_node = docutils.nodes.title(text=className, refid=className)
+        definition_node = docutils.nodes.literal_block(text=classDef['definition'], language='smalltalk')
+
+        return [definition_node] + node.children
+
+class PharoAutoCompiledMethodDirective(Directive):
+
+    required_arguments = 1
+    optional_arguments = 0
+    final_argument_whitespace = False
+    option_spec = {}
+    has_content = False
+
+    def run(self):
+        fullSelector = self.arguments[0]
+        className, selector = fullSelector.split('>>')
+        messageDef = pharoExportDict['messages'][selector[1:]]
+        compiled_method = messageDef['implementors'][className]
+
+        rst = StringList()
+
+        dummySourceFilename = '{}.rst'.format(fullSelector)
+        rst.append('.. py:function:: {}({})\n'.format(fullSelector, ', '.join(compiled_method['argumentNames'])),
+                   dummySourceFilename, 0)
+        for i, l in enumerate(compiled_method['comment'], start=1):
+            rst.append('  ' + l, dummySourceFilename, i)
+
+        node = docutils.nodes.section()
+
+        # Parse the rst.
+        nested_parse_with_titles(self.state, rst, node)
+
+        #title_node = docutils.nodes.title(text=className, refid=className)
+        definition_node = docutils.nodes.literal_block(text='\n'.join(compiled_method['body']), language='smalltalk')
+
+        return node.children + [definition_node]
 
 class PharoDomain(Domain):
 
@@ -45,13 +81,14 @@ class PharoDomain(Domain):
         'ref': XRefRole()
     }
     directives = {
-        'autoclass': PharoDirective,
+        'autoclass': PharoAutoClassDirective,
+        'autocompiledmethod': PharoAutoCompiledMethodDirective,
     }
     indices = {
     }
     initial_data = {
         'classes': [],  # object list
-        #'recipe_ingredients': {},  # name -> object
+        'compiledMethods': [],  # object list
     }
 
     def get_full_qualified_name(self, node):
@@ -59,6 +96,8 @@ class PharoDomain(Domain):
 
     def get_objects(self):
         for obj in self.data['classes']:
+            yield(obj)
+        for obj in self.data['compiledMethods']:
             yield(obj)
 
     def resolve_xref(self, env, fromdocname, builder, typ, target, node, contnode):
@@ -75,14 +114,25 @@ class PharoDomain(Domain):
             print('Awww, found nothing')
             return None
 
-    def add_autoclass(self, signature, ingredients):
+    def add_autoClass(self, signature, ing):
         """Add a new autoclass to the domain."""
+        raise Exception
         name = '{}.{}'.format('pharo-class', signature)
         anchor = 'pharo-class-{}'.format(signature)
 
         # name, dispname, type, docname, anchor, priority
         self.data['classes'].append(
             (name, signature, 'Class', self.env.docname, anchor, 0))
+
+    def add_autoCompiledMethod(self, signature, ing):
+        """Add a new autoCompiledMethod to the domain."""
+        raise Exception
+        name = '{}.{}'.format('pharo-compiledMethod', signature)
+        anchor = 'pharo-compiledMethod-{}'.format(signature)
+
+        # name, dispname, type, docname, anchor, priority
+        self.data['compiledMethods'].append(
+            (name, signature, 'CompiledMethod', self.env.docname, anchor, 0))
 
 
 def setup(app):

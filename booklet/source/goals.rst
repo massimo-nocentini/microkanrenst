@@ -1,27 +1,24 @@
 
-Classes
-=======
+Goals
+=====
 
 In this chapter will introduce the basic classes that host behaviour of the logic system.
 
+
+Goal
+----
+
+.. pharo:autoclass:: Goal
 
 Succeed
 -------
 
 .. pharo:autoclass:: Succeed
 
+Failed
+------
 
-s   fd fd ome other text.  some textfd s    df  di ome 
-kfjdkfjd
+.. pharo:autoclass:: Failed
 
-
-kfjdkfj{
-fd
-
-fd
-fd
-fd
-
-fd{
-
+fdkjfdk
 fd
