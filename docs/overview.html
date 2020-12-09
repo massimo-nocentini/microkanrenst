@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overview &#8212; microkanrenst  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Classes" href="classes.html" />
+    <link rel="prev" title="Welcome to microkanrenst’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p>This document extends the presentation of $mu$Kanren shown at the last ESUG
+conference citep{ESUG2018} in two ways: (i)~it recaps existing literature
+on the subject and (ii)~it describes in more details our implementation coded
+in Smalltalk.</p>
+<p>It is a waste of time to repeat ourself on $mu$Kanren’s definition; on the
+contrary, we believe interesting to look up and to watch over the many
+implementations it has inspired since its seminal paper citep{Hemann:muKanren}
+and how programmers stretch the canonical implementation to take advantage of
+their favorite programming language’s features.</p>
+<p>Certainly the book citep{Friedman:Reasoned:Schemer} is the main reference
+written in the same style of the other emph{little books} of which Dan
+Friedman coauthors them all; moreover, Byrd’s dissertation citep{Byrd:PhD}
+shows advanced stuffs and techniques while the repository
+url{http://minikanren.org/} – updated regularly by Byrd himself – keeps
+pointers to implementations, articles and presentations.  $mu$Kanren is
+emph{purely functional} therefore any language that has the same power of the
+$lambda$-calculus is a candidate for implementing it, nonetheless its first
+definition has been written in Scheme; in parallel, the implementation with
+symbolic constraints has the same nature but uses macros and in some aspect it
+requires more effort to port it to other languages that haven’t macros.</p>
+<p>Another implementation using the emph{Clojure} dialect of Lisp is
+citep{clojure:core.logic} which targets the JVM and provides constraints and
+nominal logic programming; on the other hand, citep{sullivan:microkanrenhs}
+is a clean and concise implementation using Haskell, while many others simpler
+versions can be found, written for the sake of understanding and, ultimately,
+for fun.</p>
+<p>Finally, your humble authors believe that $mu$Kanren is a sophisticated
+textit{educational machine} because it concerns and mixes together unification,
+lazy streams, backtracking and optimization techniques; moreover, it allows
+programmers to write their own version according to their personal taste and
+style, ranging from implementations pretty imperative to ones built over
+categories.</p>
+<p>Our effort to understand $mu$Kanren started in citep{Nocentini:kanrens} using
+the emph{Python} programming language; we take advantage of native
+Verb|generator|s objects and we provide a emph{fair} enumeration strategy
+that the original implementation hasn’t; on the contrary, we experience
+computational limits because of texttt{RecursionError} exceptions. This
+implementation is complete and parallels the one shown in the reference book,
+accompanied by a unit test suite that provides answers to emph{all} questions
+proposed in the book and some new applications such as (i)~finding fixed points
+of a set of inference rules and (ii)~enumerating classes of combinatorial
+objects. Moreover, two textit{impure} operators, as the textit{cut}
+(Verb|!|) Prolog operator, had been coded too. However complete, the code is a
+mixture of the object orientation at the surface and functional at the core both
+supported by primitives of the underlying language, such as Verb|yield|
+expressions and magic methods; took note of this, we desire something more
+uniform and cohesive.</p>
+<p>The current work describes a Smalltalk implementation of the basic system with
+the aim to learn and experiment with a pure object environment, such as Pharo
+and Squeak. The work citep{evan:smallkanren} is another Smalltalk
+implementation of $mu$Kanren that currently supports disequality constraints
+and nominal logic; it is a more complete and complex version that we point it
+out for users requiring those features – hoping to be able to provide those
+features by ourselves.</p>
+<p>Starting small, the next example shows three different
+approaches to define the addition of three ct{SmallInteger} objects toward
+the introduction of the relational paradigm.
+begin{example}
+In math a relation $P$ is usually characterized by a statement such as</p>
+<div class="math notranslate nohighlight">
+\[\forall a,b,c.\,P(a,b,c) \leftrightarrow a + b = c \,\text{from which}\,
+        P(1,2,3) \,\text{can be proved.}\]</div>
+<p>The same check can be expressed in Smalltalk using either the
+textit{imperative style}</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nv">a</span> <span class="o">:=</span> <span class="m">1</span><span class="p">.</span>  <span class="nv">b</span> <span class="o">:=</span> <span class="m">2</span><span class="p">.</span>  <span class="nv">c</span> <span class="o">:=</span> <span class="nv">a</span> <span class="nf">+</span> <span class="nv">b</span><span class="p">.</span>  <span class="nc">Object</span> <span class="nf">assert:</span> [ <span class="nv">c</span> <span class="nf">=</span> <span class="m">3</span> ]
+</pre></div>
+</div>
+<p>or the textit{functional style}
+begin{minted}[fontsize=footnotesize]{smalltalk}
+Object assert: [ ([ :a :b | a + b ] value: 1 value: 2) = 3 ]
+end{minted}
+or, finally, the textit{declarative style}
+begin{minted}[fontsize=footnotesize]{smalltalk}
+Object assert: [ [ :a :b :c | a + b = c ] value: 1 value: 2 value: 3 ]
+end{minted}
+which closely resembles the mathematical statement.
+end{example}</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">microkanrenst</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classes.html">Classes</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to microkanrenst’s documentation!</a></li>
+      <li>Next: <a href="classes.html" title="next chapter">Classes</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Massimo Nocentini.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/overview.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

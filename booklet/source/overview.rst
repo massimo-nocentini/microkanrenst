@@ -1,0 +1,94 @@
+
+Overview
+========
+
+
+This document extends the presentation of $\mu$Kanren shown at the last ESUG
+conference \citep{ESUG2018} in two ways: (i)~it recaps existing literature 
+on the subject and (ii)~it describes in more details our implementation coded
+in Smalltalk.
+
+It is a waste of time to repeat ourself on $\mu$Kanren's definition; on the
+contrary, we believe interesting to look up and to watch over the many
+implementations it has inspired since its seminal paper \citep{Hemann:muKanren}
+and how programmers stretch the canonical implementation to take advantage of
+their favorite programming language's features.
+
+Certainly the book \citep{Friedman:Reasoned:Schemer} is the main reference
+written in the same style of the other \emph{little books} of which Dan
+Friedman coauthors them all; moreover, Byrd's dissertation \citep{Byrd:PhD}
+shows advanced stuffs and techniques while the repository
+\url{http://minikanren.org/} -- updated regularly by Byrd himself -- keeps
+pointers to implementations, articles and presentations.  $\mu$Kanren is
+\emph{purely functional} therefore any language that has the same power of the
+$\lambda$-calculus is a candidate for implementing it, nonetheless its first
+definition has been written in Scheme; in parallel, the implementation with
+symbolic constraints has the same nature but uses macros and in some aspect it
+requires more effort to port it to other languages that haven't macros.
+
+Another implementation using the \emph{Clojure} dialect of Lisp is
+\citep{clojure:core.logic} which targets the JVM and provides constraints and
+nominal logic programming; on the other hand, \citep{sullivan:microkanrenhs}
+is a clean and concise implementation using Haskell, while many others simpler
+versions can be found, written for the sake of understanding and, ultimately,
+for fun.
+
+Finally, your humble authors believe that $\mu$Kanren is a sophisticated
+\textit{educational machine} because it concerns and mixes together unification,
+lazy streams, backtracking and optimization techniques; moreover, it allows
+programmers to write their own version according to their personal taste and
+style, ranging from implementations pretty imperative to ones built over
+categories. 
+
+Our effort to understand $\mu$Kanren started in \citep{Nocentini:kanrens} using
+the \emph{Python} programming language; we take advantage of native
+\Verb|generator|s objects and we provide a \emph{fair} enumeration strategy
+that the original implementation hasn't; on the contrary, we experience
+computational limits because of \texttt{RecursionError} exceptions. This
+implementation is complete and parallels the one shown in the reference book,
+accompanied by a unit test suite that provides answers to \emph{all} questions
+proposed in the book and some new applications such as (i)~finding fixed points
+of a set of inference rules and (ii)~enumerating classes of combinatorial
+objects. Moreover, two \textit{impure} operators, as the \textit{cut}
+(\Verb|!|) Prolog operator, had been coded too. However complete, the code is a
+mixture of the object orientation at the surface and functional at the core both
+supported by primitives of the underlying language, such as \Verb|yield|
+expressions and magic methods; took note of this, we desire something more
+uniform and cohesive.
+
+The current work describes a Smalltalk implementation of the basic system with
+the aim to learn and experiment with a pure object environment, such as Pharo
+and Squeak. The work \citep{evan:smallkanren} is another Smalltalk
+implementation of $\mu$Kanren that currently supports disequality constraints
+and nominal logic; it is a more complete and complex version that we point it
+out for users requiring those features -- hoping to be able to provide those
+features by ourselves.
+
+Starting small, the next example shows three different
+approaches to define the addition of three \ct{SmallInteger} objects toward 
+the introduction of the relational paradigm.
+\begin{example}
+In math a relation $P$ is usually characterized by a statement such as
+
+.. math::
+
+	\forall a,b,c.\,P(a,b,c) \leftrightarrow a + b = c \,\text{from which}\,
+		P(1,2,3) \,\text{can be proved.}
+
+The same check can be expressed in Smalltalk using either the
+\textit{imperative style}
+
+.. code-block:: smalltalk
+
+        a := 1.  b := 2.  c := a + b.  Object assert: [ c = 3 ]
+
+or the \textit{functional style}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object assert: [ ([ :a :b | a + b ] value: 1 value: 2) = 3 ]
+\end{minted}
+or, finally, the \textit{declarative style}
+\begin{minted}[fontsize=\footnotesize]{smalltalk}
+Object assert: [ [ :a :b :c | a + b = c ] value: 1 value: 2 value: 3 ]
+\end{minted}
+which closely resembles the mathematical statement.
+\end{example}
