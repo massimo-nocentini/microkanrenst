@@ -59,10 +59,18 @@ Goal class >> tabledBlock: aBlockClosure withArgs: args withTable: aDictionary [
 
 { #category : #creating }
 Goal class >> unify: anObj with: another [
+
+	"
+:param Object anObj: the object that should be unified with `another`.
+:param Object another: the object that should be unified with `anObj`.
+:return: a goal that tries to perform unification.
+:rtype: Unify
+"
+
 	^ Unify new
-		this: anObj;
-		that: another;
-		yourself
+		  this: anObj;
+		  that: another;
+		  yourself
 ]
 
 { #category : #combining }
@@ -100,6 +108,8 @@ Goal >> not [
 
 { #category : #running }
 Goal >> onState: aState [
+
+	<doc: #Realog topic: #( Gaol onState )>
 	aState pushGoal: self copy.
 	^ {  } asSrfi41Stream
 ]

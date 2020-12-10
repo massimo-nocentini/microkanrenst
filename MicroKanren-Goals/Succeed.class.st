@@ -33,12 +33,14 @@ This is some textAsCode.
 
 this is even more explanations
 
->>> 3 + 5
-8
+>>> true asGoal
+a Succeed
+
+final thoughts.
 
 "
 
-	^ (super onState: aState) , aState srfi41Singleton
+	^ (super onState: aState) , aState srfi41Singleton "ehe"
 ]
 
 { #category : #'as yet unclassified' }

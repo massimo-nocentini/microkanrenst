@@ -18,12 +18,10 @@ Fresh >> onState: aState withVars: aCollection [
 
 	variables
 		ifNil: [ self variables: aCollection ]
-		ifNotNil: [ "aCollection = variables ifFalse: [ Error signal ] " 
-		Error signal ].
+		ifNotNil: [ Error signal ].
 	nestedGoal
 		ifNil: [ nestedGoal := receiver valueWithArguments: self variables ]
 		ifNotNil: [ Error signal ].
-	"g := receiver valueWithArguments: variables."
 	^ (super onState: aState) , (nestedGoal onState: aState)
 ]
 
