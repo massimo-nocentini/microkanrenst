@@ -36,6 +36,8 @@ Cut >> length: anObject [
 Cut >> onState: aState [
 
 	| cuttingStream |
-	cuttingStream := cuttingGoal onState: aState.
-	^ (super onState: aState) , (cuttingStream next: length)
+	cuttingStream := (cuttingGoal onState: aState)
+		                 ifEmpty: [ aState srfi41Singleton ]
+		                 ifNotEmpty: [ :aStream | aStream next: length ].
+	^ (super onState: aState) , cuttingStream
 ]
