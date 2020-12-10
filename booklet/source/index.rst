@@ -3,6 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+
 Welcome to microkanrenst's documentation!
 =========================================
 
@@ -19,7 +20,8 @@ properties.
    overview.rst
    goals.rst
    messages.rst
-
+   onState:
+   walk:
 
  
 Indices and tables

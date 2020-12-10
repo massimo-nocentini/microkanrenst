@@ -45,20 +45,23 @@ class PharoAutoCompiledMethodDirective(Directive):
 
     required_arguments = 1
     optional_arguments = 0
-    final_argument_whitespace = False
+    final_argument_whitespace = True
     option_spec = {}
     has_content = False
 
     def run(self):
         fullSelector = self.arguments[0]
         className, selector = fullSelector.split('>>')
+        className = ' '.join(className.split('_'))
+        fullSelector = '{}>>{}'.format(className, selector)
         messageDef = pharoExportDict['messages'][selector[1:]]
         compiled_method = messageDef['implementors'][className]
 
         rst = StringList()
 
         dummySourceFilename = '{}.rst'.format(fullSelector)
-        rst.append('.. py:function:: {}({})\n'.format(fullSelector, ', '.join(compiled_method['argumentNames'])),
+        rst.append('.. py:function:: {}({})'.format(
+                      fullSelector, ', '.join(compiled_method['argumentNames'])),
                    dummySourceFilename, 0)
         for i, l in enumerate(compiled_method['comment'], start=1):
             rst.append('  ' + l, dummySourceFilename, i)
@@ -69,9 +72,27 @@ class PharoAutoCompiledMethodDirective(Directive):
         nested_parse_with_titles(self.state, rst, node)
 
         #title_node = docutils.nodes.title(text=className, refid=className)
-        definition_node = docutils.nodes.literal_block(text='\n'.join(compiled_method['body']), language='smalltalk')
-
+        definition_node = docutils.nodes.literal_block(text='\n'.join(compiled_method['sourceCode']), language='smalltalk')
+        
         return node.children + [definition_node]
+        '''
+        field_comment = docutils.nodes.field()
+        field_comment += docutils.nodes.field_name(text='Comment')
+        field_comment_body = docutils.nodes.field_body()
+        field_comment_body += node
+        field_comment += field_comment_body
+        field_body = docutils.nodes.field()
+        field_body += docutils.nodes.field_name(text='Body')
+        field_body_body = docutils.nodes.field_body()
+        field_body_body += definition_node
+        field_body += field_body_body
+
+        field_list_node = docutils.nodes.field_list()
+        field_list_node += field_comment
+        field_list_node += field_body
+
+        return [field_list_node]
+        '''
 
 class PharoDomain(Domain):
 
