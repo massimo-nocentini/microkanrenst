@@ -45,20 +45,22 @@ class PharoAutoCompiledMethodDirective(Directive):
 
     required_arguments = 1
     optional_arguments = 0
-    final_argument_whitespace = False
+    final_argument_whitespace = True
     option_spec = {}
     has_content = False
 
     def run(self):
         fullSelector = self.arguments[0]
         className, selector = fullSelector.split('>>')
+        className = ' '.join(className.split('_'))
+        fullSelector = '{}>>{}'.format(className, selector)
         messageDef = pharoExportDict['messages'][selector[1:]]
         compiled_method = messageDef['implementors'][className]
 
         rst = StringList()
 
         dummySourceFilename = '{}.rst'.format(fullSelector)
-        rst.append('.. py:function:: {}({})\n'.format(fullSelector, ', '.join(compiled_method['argumentNames'])),
+        rst.append('.. py:function:: {}({})'.format(fullSelector, ', '.join(compiled_method['argumentNames'])),
                    dummySourceFilename, 0)
         for i, l in enumerate(compiled_method['comment'], start=1):
             rst.append('  ' + l, dummySourceFilename, i)
@@ -71,7 +73,10 @@ class PharoAutoCompiledMethodDirective(Directive):
         #title_node = docutils.nodes.title(text=className, refid=className)
         definition_node = docutils.nodes.literal_block(text='\n'.join(compiled_method['body']), language='smalltalk')
 
-        return node.children + [definition_node]
+        deflist_node = docutils.nodes.definition_list()
+        deflist_node_comment = docutils.nodes.definition_list_item('', docutils.nodes.term('', text='comment'), docutils.nodes.definition('', *node.children))
+        deflist_node += deflist_node_comment
+        return deflist_node + [definition_node]
 
 class PharoDomain(Domain):
 
