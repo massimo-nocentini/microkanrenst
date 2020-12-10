@@ -1,7 +1,7 @@
 
 
-onState:
-========
+``onState:`` message
+--------------------
 
 .. pharo:autocompiledmethod:: Goal>>#onState:
 .. pharo:autocompiledmethod:: Succeed>>#onState:

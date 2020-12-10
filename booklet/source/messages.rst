@@ -1,10 +1,12 @@
 
 Messages
-========
+********
 
 This page will describe some messages that are at the heart of the logic system.
 
 To check the representation of the content, we also use this simple Python function:
+
+
 
 :Date: 2001-08-16
 :Version: 1
