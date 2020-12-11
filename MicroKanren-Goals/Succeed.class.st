@@ -40,6 +40,7 @@ final thoughts.
 
 "
 
+	<doc: #Realog topic: #( Succeed onState )>
 	^ (super onState: aState) , aState srfi41Singleton "ehe"
 ]
 

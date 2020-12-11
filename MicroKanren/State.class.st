@@ -155,10 +155,14 @@ State >> walk: anObj inDictionary: aDictionary [
 
 { #category : #'as yet unclassified' }
 State >> walk: anObj inSBRAL: aSBRAL [
+
+	<doc: #Realog topic: #( State walk inSBRAL )>
 	| each |
 	each := anObj.
-	[ each isVar
-		ifTrue: [ | maybe |
+	[ 
+	each isVar
+		ifTrue: [ 
+			| maybe |
 			maybe := aSBRAL at: birthdate - each id + 1.
 			maybe
 				ifNothing: [ ^ each ]
