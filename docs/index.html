@@ -54,9 +54,33 @@ properties.</p>
 <li class="toctree-l2"><a class="reference internal" href="goals.html#failed">Failed</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="messages.html">Messages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="onState%3A.html"><code class="docutils literal notranslate"><span class="pre">onState:</span></code> message</a></li>
-<li class="toctree-l1"><a class="reference internal" href="walk%3A.html">walk:</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messages.html">Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="messages.html#onstate-message"><code class="docutils literal notranslate"><span class="pre">onState:</span></code> message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="messages.html#walk-message"><code class="docutils literal notranslate"><span class="pre">walk:</span></code> message</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="observations">
+<h2>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h2>
+<p>Some observations follow about how this manual has been compiled. We
+experimented with some approaches for documenting (possibly tricky) stuff about
+programming. In particular, we feel the need to describe a framework that
+allows us to do relational programming walking on a parallel track of the
+Prolog’s one. Such a system is implemented in Smalltalk, and we feel the
+necessity to collect three main points into a single whole, namely source code,
+visualizations, and documentation.</p>
+<p>We take the opportunity to experiment with three diverse approaches:</p>
+<ul class="simple">
+<li><p>using a <code class="docutils literal notranslate"><span class="pre">pragma</span></code>-oriented style that marks the messages we want to talk
+about to export their bare bone source code into markup files.</p></li>
+<li><p>Using a mixin-oriented style that writes the documenting comments typical of
+Smalltalk in <em>reStructuredText</em> format to fetch all the contents from within
+the image. This implies an extension of the Sphinx documenting system to
+interpret the content.</p></li>
+<li><p>Using GToolkit to render the documentation directly within the environment.
+In this case, there is no necessity to leave the working image and every
+content can be readily expressed as a comment of either a class or a method.</p></li>
 </ul>
 </div>
 </div>
@@ -77,7 +101,10 @@ properties.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to microkanrenst’s documentation!</a></li>
+<li><a class="reference internal" href="#">Welcome to microkanrenst’s documentation!</a><ul>
+<li><a class="reference internal" href="#observations">Observations</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 

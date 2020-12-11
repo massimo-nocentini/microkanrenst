@@ -20,6 +20,15 @@ To check the representation of the content, we also use this simple Python funct
 :Parameter i: integer
 
 
+parameterAbc
+   Condition: required, Type: string, Default: ''
+
+   Text describing parameterAbc ...
+
+parameterBcd
+   Condition: optional, Type: boolean, Default: false
+
+   Text describing parameterBcd ...
 
 .. py:function:: a(v)
   
@@ -32,4 +41,5 @@ To check the representation of the content, we also use this simple Python funct
   return 4
 
 
-
+.. include:: onState:.rst
+.. include::  walk:.rst
