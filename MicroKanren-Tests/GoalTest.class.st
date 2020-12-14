@@ -423,30 +423,39 @@ GoalTest >> testConde [
 
 { #category : #tests }
 GoalTest >> testConj [
+
 	| g |
+	self
+		assert: (true asGoal , true asGoal) solutions
+		equals: { Var tautology }
+		modulo: #asOrderedCollection.
 	g := [ :q | false asGoal , (true unifyo value: q) ] fresh.
 	self assert: g solutions isEmpty.
 	g := [ :q | true asGoal , (false unifyo value: q) ] fresh.
-	self assert: g solutions equals: {false} modulo: #asOrderedCollection.
+	self
+		assert: g solutions
+		equals: { false }
+		modulo: #asOrderedCollection.
 	g := [ :a | (3 unifyo value: a) , (4 unifyo value: a) ] fresh.
 	self assert: g solutions isEmpty.
-	g := [ :a | ((3 unifyo value: a) , (4 unifyo value: a)) | (a unifyo value: 0) ]
-		fresh.
-	self assert: g solutions equals: {0} modulo: #asOrderedCollection.
+	g := [ :a | 
+	     (3 unifyo value: a) , (4 unifyo value: a) | (a unifyo value: 0) ]
+		     fresh.
+	self assert: g solutions equals: { 0 } modulo: #asOrderedCollection.
 	g := [ :a | (a unifyo value: 4) , (4 unifyo value: a) ] fresh.
-	self assert: g solutions equals: {4} modulo: #asOrderedCollection.
+	self assert: g solutions equals: { 4 } modulo: #asOrderedCollection.
 	g := [ :a | (3 unifyo value: a) , [ :b | 4 unifyo value: b ] fresh ]
-		fresh.
-	self assert: g solutions equals: {3} modulo: #asOrderedCollection.
+		     fresh.
+	self assert: g solutions equals: { 3 } modulo: #asOrderedCollection.
 	g := [ :a :b | (3 unifyo value: a) , (4 unifyo value: b) ] fresh.
 	self
 		assert: g solutions
-		equals: {{3 . 4}}
+		equals: { { 3. 4 } }
 		modulo: #asOrderedCollection.
 	g := [ :x :y | (x unifyo value: 3) , (y unifyo value: 4) ] fresh.
 	self
 		assert: g solutions
-		equals: {{3 . 4}}
+		equals: { { 3. 4 } }
 		modulo: #asOrderedCollection
 ]
 
@@ -588,30 +597,55 @@ GoalTest >> testCutUnifyThenFail [
 
 { #category : #'as yet unclassified' }
 GoalTest >> testDisj [
+
 	| g |
-	g := [ :a | (3 unifyo value: a) | (4 unifyo value: a) ] fresh.
-	self assert: g solutions equals: {3 . 4} modulo: #asOrderedCollection.
-	g := [ :a | (4 unifyo value: a) | (3 unifyo value: a) ] fresh.
-	self assert: g solutions equals: {4 . 3} modulo: #asOrderedCollection.
-	g := [ :a | (3 unifyo value: a) | (3 unifyo value: a) ] fresh.
-	self assert: g solutions equals: {3 . 3} modulo: #asOrderedCollection.
-	g := [ :a | (3 unifyo value: a) | (4 unifyo value: a) | (5 unifyo value: a) ]
-		fresh.
 	self
-		assert: g solutions
-		equals: {3 . 5 . 4}
+		assert: (true asGoal | false asGoal) solutions
+		equals: { Var tautology }
 		modulo: #asOrderedCollection.
-	g := [ :a | (3 unifyo value: a) | ((4 unifyo value: a) | (5 unifyo value: a)) ]
-		fresh.
+	self
+		assert: (true asGoal | true asGoal) solutions
+		equals: { 
+				Var tautology.
+				Var tautology }
+		modulo: #asOrderedCollection.
+	g := [ :a | (3 unifyo value: a) | (4 unifyo value: a) ] fresh.
 	self
 		assert: g solutions
-		equals: {3 . 4 . 5}
+		equals: { 3. 4 }
+		modulo: #asOrderedCollection.
+	g := [ :a | (4 unifyo value: a) | (3 unifyo value: a) ] fresh.
+	self
+		assert: g solutions
+		equals: { 4. 3 }
+		modulo: #asOrderedCollection.
+	g := [ :a | (3 unifyo value: a) | (3 unifyo value: a) ] fresh.
+	self
+		assert: g solutions
+		equals: { 3. 3 }
+		modulo: #asOrderedCollection.
+	g := [ :a | 
+	     (3 unifyo value: a) | (4 unifyo value: a) | (5 unifyo value: a) ]
+		     fresh.
+	self
+		assert: g solutions
+		equals: { 3. 5. 4 }
+		modulo: #asOrderedCollection.
+	g := [ :a | 
+	     (3 unifyo value: a)
+	     | ((4 unifyo value: a) | (5 unifyo value: a)) ] fresh.
+	self
+		assert: g solutions
+		equals: { 3. 4. 5 }
 		modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
-GoalTest >> testFail [
-	self assert: false asGoal solutions isEmpty
+GoalTest >> testFailed [
+
+	self
+		assert: false asGoal class equals: Failed;
+		assert: false asGoal solutions isEmpty
 ]
 
 { #category : #'as yet unclassified' }
@@ -779,27 +813,34 @@ GoalTest >> testNats [
 
 { #category : #'as yet unclassified' }
 GoalTest >> testSucceed [
-	"A relation that can *always* be satisfied, regardless of free
-	variables that appear in it, is called _tautology_."
 
+	| g |
+	g := true asGoal.
+	self assert: g class equals: Succeed.
 	self
-		assert: true asGoal solutions
-		equals: {Var tautology}
-		modulo: #asOrderedCollection.
-	self
-		assert: (true asGoal | false asGoal) solutions
-		equals: {Var tautology}
-		modulo: #asOrderedCollection.
-	self
-		assert: (true asGoal | true asGoal) solutions
-		equals:
-			{Var tautology.
-			Var tautology}
-		modulo: #asOrderedCollection.
-	self
-		assert: (true asGoal , true asGoal) solutions
-		equals: {Var tautology}
+		assert: g solutions
+		equals: { Var tautology }
 		modulo: #asOrderedCollection
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testSucceedInvariant [
+
+	"
+A relation that can *always* be satisfied, regardless of free 
+variables that appear in it, is called *tautology*.
+"
+
+	SBRAL new asState in: [ :s | 
+		| ss |
+		ss := true asGoal onState: s.
+		self assert: ss car equals: s ].
+	SBRAL new asState in: [ :s | 
+		| ss |
+		ss := s srfi41Singleton
+			      zip: (true asGoal onState: s)
+			      with: [ :a :b | a == b ].
+		self assert: ss equals: { true } modulo: #asOrderedCollection ]
 ]
 
 { #category : #tests }

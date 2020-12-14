@@ -3,13 +3,12 @@
   single: goal; succeed
   pair: package; MicroKanren-Goals
 
-I represent a goal that always *succeeds*, namely it produces a not empty stream containing exactly one state.
+I am a goal that represent logical truth, in particular I encode the :token:`goalGrammar:succeed` production.
 
-.. math::
+Test cases
+----------
 
-  x + y
-
-hgello.
+.. pharo:autocompiledmethod:: GoalTest>>#testSucceed
 "
 Class {
 	#name : #Succeed,
@@ -21,27 +20,25 @@ Class {
 Succeed >> onState: aState [
 
 	"
-This is some textAsCode.	
 
-:param State aState: a state containing the substitution to refine.
-:return: a stream of states with (possibly) extended substitutions.
+:param State aState: a state containing a substitution that makes the top goal true.
+:return: a stream of exactly one state, namely ``aState``.
 :rtype: Srfi41Stream
 
-.. math::
+The invariant that governs me can be stated as follows:
 
-  x + f
+.. code-block:: smalltalk
 
-this is even more explanations
+  SBRAL new asState in: [:s | (true asGoal onState: s) car == s ] >>> true
 
->>> true asGoal
-a Succeed
+or even better with the test case
 
-final thoughts.
+.. pharo:autocompiledmethod:: GoalTest>>#testSucceedInvariant
 
 "
 
 	<doc: #Realog topic: #( Succeed onState )>
-	^ (super onState: aState) , aState srfi41Singleton "ehe"
+	^ (super onState: aState) , aState srfi41Singleton
 ]
 
 { #category : #'as yet unclassified' }

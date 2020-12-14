@@ -1,5 +1,14 @@
 "
-I represent a goal that always *fails*, namely it produces an empty stream regardless of the given state.
+.. index::
+  single: goal; failed
+  pair: package; MicroKanren-Goals
+
+I am a goal that represent logical falsehood, in particular I encode the :token:`goalGrammar:failed` production.
+
+Test cases
+----------
+
+.. pharo:autocompiledmethod:: GoalTest>>#testFailed
 "
 Class {
 	#name : #Failed,
