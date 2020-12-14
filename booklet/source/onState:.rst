@@ -1,4 +1,5 @@
 
+.. _onState-message-label:
 
 ``onState:`` message
 ====================
