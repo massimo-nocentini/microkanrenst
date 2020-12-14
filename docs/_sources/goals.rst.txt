@@ -20,5 +20,3 @@ Failed
 
 .. pharo:autoclass:: Failed
 
-fdkjfdk
-fd
