@@ -38,7 +38,7 @@ or even better with the test case
 "
 
 	<doc: #Realog topic: #( Succeed onState )>
-	^ (super onState: aState) , aState srfi41Singleton
+	^ (super onState: aState) , aState copy srfi41Singleton
 ]
 
 { #category : #'as yet unclassified' }

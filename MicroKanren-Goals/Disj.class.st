@@ -43,7 +43,7 @@ Disj >> either: e [
 Disj >> onState: aState [
 
 	| path aStream anotherStream disjStream superStream |
-	superStream := super onState: aState yourself.
+	superStream := super onState: aState.
 	path := aState path.
 	aStream := either onState: aState.
 	anotherStream := or onState: (aState

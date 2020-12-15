@@ -50,10 +50,10 @@ Cond >> initialize [
 { #category : #running }
 Cond >> onState: aState [
 
-	^ [ 
+	^ (super onState: aState) , [ 
 	  | g |
 	  g := clauses foldr: if init: false asGoal.
-	  (super onState: aState) , (g onState: aState) ] srfi41Stream
+	  g onState: aState ] srfi41Stream
 ]
 
 { #category : #initializing }
