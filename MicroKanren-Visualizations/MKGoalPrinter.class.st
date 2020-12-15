@@ -83,21 +83,17 @@ MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 { #category : #printing }
 MKGoalPrinter >> printOn: aStream aFresh: aGoal [
 
-	| variables |
-	variables := aGoal variables
-		             ifNil: [ 
-			             aStream nextPut: $¡.
-			             aGoal receiver argumentNames ]
-		             ifNotNil: [ :vars | 
-			             aStream nextPut: $!.
-			             vars ].
-	variables ifEmpty: [ Error signal ] ifNotEmpty: [ 
-		variables allButLastDo: [ :each | "each printOn: aStream."
-			aStream nextPutAll: each asString.
-			aStream nextPut: Character space ].
-		aStream nextPutAll: variables last asString.
-		aStream nextPutAll: '. ' ].
-	aGoal printOnNestedGoalOn: aStream renderer: self
+	aGoal variables
+		ifNil: [ aStream nextPutAll: '…º' ]
+		ifNotNil: [ :variables | 
+			aStream nextPut: $!.
+			variables ifEmpty: [ Error signal ] ifNotEmpty: [ 
+				variables allButLastDo: [ :each | 
+					each printOn: aStream.
+					aStream nextPut: Character space ].
+				aStream nextPutAll: variables last asString.
+				aStream nextPutAll: '. ' ].
+			aGoal printOnNestedGoalOn: aStream renderer: self ]
 ]
 
 { #category : #printing }
