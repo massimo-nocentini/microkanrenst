@@ -24,11 +24,6 @@ Disj class >> interleaved [
 ]
 
 { #category : #accessing }
-Disj >> combine: anObject [
-	combineBlock := anObject
-]
-
-{ #category : #accessing }
 Disj >> combineBlock: aBlock [
 
 	combineBlock := aBlock
