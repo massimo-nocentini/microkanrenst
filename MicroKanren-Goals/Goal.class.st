@@ -118,6 +118,17 @@ Goal >> asStatesStream [
 	^ self onState: SBRAL new asState
 ]
 
+{ #category : #visualization }
+Goal >> gtInspectorTreePresenterViewIn: composite [
+
+	<gtInspectorPresentationOrder: 30>
+	^ composite tree
+		  title: 'Tree';
+		  children: [ :aState | self halt ];
+		  value: (self onState: SBRAL new asState);
+		  yourself
+]
+
 { #category : #combining }
 Goal >> not [
 

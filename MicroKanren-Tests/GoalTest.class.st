@@ -800,6 +800,78 @@ GoalTest >> testLengtho [
 		modulo: #asOrderedCollection
 ]
 
+{ #category : #tests }
+GoalTest >> testListo [
+
+	| g |
+	g := [ :r | 
+	     MKPredicateSexpListo value: { 
+			     $a.
+			     $b.
+			     r.
+			     $d } asCons ] fresh.
+	self
+		assert: g solutions
+		equals: { 0 asReifiedVar }
+		modulo: #asOrderedCollection. " an Array(•₀)"
+	g := [ :r | 
+	     MKPredicateSexpListo value: ({ $a. $b. $c } asConsWithCdr: r) ]
+		     fresh.
+	self
+		assert: (g solutions next: 5)
+		equals: ((0 to: 4) collect: [ :each | 
+				 ((0 to: each - 1) collect: [ :i | i asReifiedVar ]) asCons ])
+		modulo: #asOrderedCollection " an Array(nil (•₀) (•₀ •₁) (•₀ •₁ •₂) (•₀ •₁ •₂ •₃))"
+]
+
+{ #category : #tests }
+GoalTest >> testLolo [
+
+	| g |
+	g := [ :r | MKPredicateSexpLolo value: r ] fresh.
+	self
+		assert: (g solutions next: 1)
+		equals: { nil asCons }
+		modulo: #asOrderedCollection.
+	g := [ 
+	     [ :x :y | 
+	     MKPredicateSexpLolo value: { 
+			     #( a b ).
+			     { 
+				     x.
+				     $c }.
+			     { 
+				     $d.
+				     y } } asCons ] fresh ] fresh.
+	self
+		assert: (g solutions next: 1)
+		equals: { Var tautology }
+		modulo: #asOrderedCollection.
+	g := [ 
+	     [ :x | 
+	     MKPredicateSexpLolo value: ({ #( a b ) } asConsWithCdr: x) ]
+		     fresh ] fresh.
+	self
+		assert: (g solutions next: 1)
+		equals: { Var tautology }
+		modulo: #asOrderedCollection.
+	g := [ :x | 
+	     MKPredicateSexpLolo value: ({ 
+			      #( a b ).
+			      #( c d ) } asConsWithCdr: x) ] fresh.
+	self
+		assert: (g solutions next: 5)
+		equals: { 
+				nil.
+				(nil cons: nil).
+				{ (0 asReifiedVar cons: nil) } asCons.
+				{ nil. nil } asCons.
+				({ 
+					 0 asReifiedVar.
+					 1 asReifiedVar } asCons cons: nil) }
+		modulo: #asOrderedCollection " an Array(nil (nil) ((•₀)) (nil nil) ((•₀ •₁)))"
+]
+
 { #category : #'as yet unclassified' }
 GoalTest >> testNats [
 	| g M |
