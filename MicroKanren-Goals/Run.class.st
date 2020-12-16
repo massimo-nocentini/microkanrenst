@@ -21,6 +21,7 @@ Run >> onState: aState [
 	selector := vars size = 1
 		            ifTrue: [ #first ]
 		            ifFalse: [ #yourself ].
-	^ aStream collect: [ :s | 
-		  selector value: (s reifier reifyVars: vars) ]
+	^ (aStream select: [ :each | 
+		   each ifCounterexampleFound: [ false ] otherwise: [ true ] ]) 
+		  collect: [ :s | selector value: (s reifier reifyVars: vars) ]
 ]
