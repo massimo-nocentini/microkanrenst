@@ -37,10 +37,9 @@ Conj >> onState: aState [
 	               refinedState path value in: [ :aGoal | 
 		               aGoal class = Failed
 			               ifTrue: [ refinedState srfi41Singleton ]
-			               ifFalse: [ 
-				               aGoal
+			               ifFalse: [ " aGoal
 					               popGoalFromPathOfState: refinedState
-					               forConj: self.
+					               forConj: self." 
 				               and onState: refinedState ] ] ]
 	               >>= (both onState: aState).
 	^ superStream , boundStream

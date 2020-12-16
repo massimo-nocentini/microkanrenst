@@ -23,6 +23,5 @@ Unify >> onState: aState [
 		  on: UnificationError
 		  do: [ :e | 
 			  extendedState := aState failedBecauseOfUnificationError: e.
-			false asGoal onState: extendedState "
-			  (Disequality value: e left value: e right) onState: extendedState" ]
+			  false asGoal onState: extendedState ]
 ]
