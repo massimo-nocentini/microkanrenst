@@ -1,7 +1,7 @@
 Class {
 	#name : #Predicate,
 	#superclass : #Goal,
-	#category : #'MicroKanren-Goals'
+	#category : #'MicroKanren-Predicates'
 }
 
 { #category : #running }

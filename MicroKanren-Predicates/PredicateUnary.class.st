@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'firstArgument'
 	],
-	#category : #'MicroKanren-Goals'
+	#category : #'MicroKanren-Predicates'
 }
 
 { #category : #accessing }

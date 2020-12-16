@@ -9,7 +9,15 @@ Class {
 
 { #category : #dispatched }
 Unifier >> forArray: anArray forArray: anotherArray [
-	^ self forCons: anArray asCons forCons: anotherArray asCons
+
+	^ anArray size = anotherArray size
+		  ifTrue: [ 
+		  self forCons: anArray asCons forCons: anotherArray asCons ]
+		  ifFalse: [ 
+			  UnificationError new
+				  left: anArray;
+				  right: anotherArray;
+				  signal: 'they have different sizes' ]
 ]
 
 { #category : #dispatched }
@@ -20,19 +28,30 @@ Unifier >> forCons: aCons forCons: anotherCons [
 ]
 
 { #category : #unification }
-Unifier >> forLinkedList: aCollection forLinkedList: anotherCollection [ 
+Unifier >> forLinkedList: aCollection forLinkedList: anotherCollection [
+
 	^ aCollection size = anotherCollection size
-		ifTrue: [(aCollection zip: anotherCollection)
-				inject: state
-				into: [:s :pair | s unifier value: pair key value: pair value]]
-		ifFalse: [UnificationError signal]
+		  ifTrue: [ 
+			  (aCollection zip: anotherCollection)
+				  inject: state
+				  into: [ :s :pair | s unifier value: pair key value: pair value ] ]
+		  ifFalse: [ 
+			  UnificationError new
+				  left: aCollection;
+				  right: anotherCollection;
+				  signal: 'they have different sizes' ]
 ]
 
 { #category : #unification }
 Unifier >> forObject: anObj forObject: anotherObj [
+
 	^ anObj = anotherObj
-		ifTrue: [ state ]
-		ifFalse: [ UnificationError signal ]
+		  ifTrue: [ state ]
+		  ifFalse: [ 
+			  UnificationError new
+				  left: anObj;
+				  right: anotherObj;
+				  signal ]
 ]
 
 { #category : #unification }

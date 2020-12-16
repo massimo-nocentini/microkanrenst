@@ -1,7 +1,7 @@
 Class {
 	#name : #PredicateFindAllo,
 	#superclass : #PredicateTernary,
-	#category : #'MicroKanren-Goals'
+	#category : #'MicroKanren-Predicates'
 }
 
 { #category : #running }

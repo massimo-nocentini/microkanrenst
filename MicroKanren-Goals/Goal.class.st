@@ -89,10 +89,7 @@ Goal class >> unify: anObj with: another [
 :rtype: Unify
 "
 
-	^ Unify new
-		  this: anObj;
-		  that: another;
-		  yourself
+	^ Unify value: anObj value: another
 ]
 
 { #category : #combining }
@@ -116,17 +113,6 @@ Goal >> , other [
 Goal >> asStatesStream [
 
 	^ self onState: SBRAL new asState
-]
-
-{ #category : #visualization }
-Goal >> gtInspectorTreePresenterViewIn: composite [
-
-	<gtInspectorPresentationOrder: 30>
-	^ composite tree
-		  title: 'Tree';
-		  children: [ :aState | self halt ];
-		  value: (self onState: SBRAL new asState);
-		  yourself
 ]
 
 { #category : #combining }

@@ -67,8 +67,25 @@ State >> collectVars: aCollection forFresh: aFresh [
 ]
 
 { #category : #'as yet unclassified' }
+State >> failedBecauseOfUnificationError: e [
+
+	^ FailedState new
+		  substitution: substitution;
+		  birthdate: birthdate;
+		  path: path;
+		  counterexample: e;
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
 State >> identityReifier [
 	^ self reifierOfClass: IdentityReifier
+]
+
+{ #category : #'as yet unclassified' }
+State >> ifCounterexampleFound: ceBlock otherwise: oBlock [
+
+	^ oBlock cull: self
 ]
 
 { #category : #'as yet unclassified' }

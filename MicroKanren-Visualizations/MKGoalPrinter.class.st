@@ -77,7 +77,15 @@ MKGoalPrinter >> printOn: aStream aDisj: aDisj [
 { #category : #printing }
 MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 
-	aStream nextPutAll: 'Ø°'
+	state
+		ifCounterexampleFound: [ :ce | 
+			state path value == aGoal
+				ifTrue: [ 
+					ce left printOn: aStream.
+					aStream nextPutAll: ' ≠º '.
+					ce right printOn: aStream ]
+				ifFalse: [ aStream nextPutAll: 'Ø°' ] ]
+		otherwise: [ aStream nextPutAll: 'Ø°' ]
 ]
 
 { #category : #printing }
@@ -168,14 +176,6 @@ MKGoalPrinter >> printOn: aStream anIfPure: anIfPure [
 MKGoalPrinter >> printOn: aWriteStream anObject: anObject [
 
 	anObject printOn: aWriteStream
-]
-
-{ #category : #printing }
-MKGoalPrinter >> printOn: aStream anUnify: anUnify [
-
-	anUnify this printOn: aStream renderer: self.
-	aStream nextPutAll: ' =° '.
-	anUnify that printOn: aStream renderer: self
 ]
 
 { #category : #accessing }

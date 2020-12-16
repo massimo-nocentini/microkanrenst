@@ -22,7 +22,8 @@ Fresh >> onState: aState withVars: aCollection [
 	nestedGoal
 		ifNil: [ nestedGoal := receiver valueWithArguments: self variables ]
 		ifNotNil: [ Error signal ].
-	^ (super onState: aState) , (nestedGoal onState: aState)
+	^ (super onState: aState)
+	  , [ nestedGoal onState: aState ] srfi41Stream
 ]
 
 { #category : #accessing }

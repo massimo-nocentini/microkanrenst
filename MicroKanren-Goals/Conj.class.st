@@ -34,12 +34,14 @@ Conj >> onState: aState [
 	| boundStream superStream |
 	superStream := super onState: aState.
 	boundStream := [ :refinedState | 
-	               refinedState path
-		               ifNil: [ Error signal: 'Not expected' ]
-		               ifNotNil: [ :aValueLink | 
-			               aValueLink value
-				               popGoalFromPathOfState: refinedState
-				               forConj: self ].
-	               and onState: refinedState ] >>= (both onState: aState).
+	               refinedState path value in: [ :aGoal | 
+		               aGoal class = Failed
+			               ifTrue: [ refinedState srfi41Singleton ]
+			               ifFalse: [ 
+				               aGoal
+					               popGoalFromPathOfState: refinedState
+					               forConj: self.
+				               and onState: refinedState ] ] ]
+	               >>= (both onState: aState).
 	^ superStream , boundStream
 ]

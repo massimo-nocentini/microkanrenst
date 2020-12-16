@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'variables'
 	],
-	#category : #'MicroKanren-Goals'
+	#category : #'MicroKanren-Predicates'
 }
 
 { #category : #running }

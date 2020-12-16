@@ -19,5 +19,5 @@ Class {
 { #category : #running }
 Failed >> onState: aState [
 
-	^ {  } asSrfi41Stream
+	^ (super onState: aState) , aState srfi41Singleton
 ]
