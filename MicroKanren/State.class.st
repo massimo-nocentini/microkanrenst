@@ -115,6 +115,13 @@ State >> reifierOfClass: aClass [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+State >> reifyTopmostVariables [
+
+	^ path reversed value variables in: [ :vars | 
+		  vars zip: (self reifier reifyVars: vars) ]
+]
+
 { #category : #reification }
 State >> reifyVar: aVar forIdentityReifier: aReifier [
 	substitution at: aVar ifPresent: [ :v | self error ]

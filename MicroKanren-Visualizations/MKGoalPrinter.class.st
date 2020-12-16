@@ -77,15 +77,16 @@ MKGoalPrinter >> printOn: aStream aDisj: aDisj [
 { #category : #printing }
 MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 
+	aStream nextPutAll: 'Ø°'.
 	state
 		ifCounterexampleFound: [ :ce | 
-			state path value == aGoal
-				ifTrue: [ 
-					ce left printOn: aStream.
-					aStream nextPutAll: ' ≠º '.
-					ce right printOn: aStream ]
-				ifFalse: [ aStream nextPutAll: 'Ø°' ] ]
-		otherwise: [ aStream nextPutAll: 'Ø°' ]
+			state path value == aGoal ifTrue: [ 
+				aStream crlf.
+				ce left printOn: aStream.
+				aStream nextPutAll: ' ≠º '.
+				ce right printOn: aStream ] ]
+		otherwise: [ "nothing to add because the failure has been explicitly introduced."
+			 ]
 ]
 
 { #category : #printing }
@@ -131,7 +132,19 @@ MKGoalPrinter >> printOn: aStream aPredicateUnary: aPredicate [
 { #category : #printing }
 MKGoalPrinter >> printOn: aStream aSucceed: aSucceed [
 
-	aStream nextPutAll: '✓°'
+	aStream nextPutAll: '✓°'.
+	state path value == aSucceed ifTrue: [ 
+		state reifyTopmostVariables
+			ifEmpty: [ "nothing to add because the top goal doesn't introduce variables, 
+							so it is just a tautology check"
+				 ]
+			ifNotEmpty: [ :assocs | 
+				assocs do: [ :each | 
+					aStream crlf.
+					each value printOn: aStream.
+					aStream nextPut: $/.
+					each key printOn: aStream.
+					aStream crlf ] ] ]
 ]
 
 { #category : #printing }
