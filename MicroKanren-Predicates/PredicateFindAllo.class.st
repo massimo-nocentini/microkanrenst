@@ -20,7 +20,8 @@ PredicateFindAllo >> name [
 PredicateFindAllo >> onState: aState [
 
 	| states aGoal aCons |
-	states := (firstArgument onState: aState) asOrderedCollection.
+	states := ((firstArgument onState: aState) select: [ :each | 
+		           each isSound ]) asOrderedCollection.
 
 	aCons := (states collect: [ :each | 
 		          each walker value: secondArgument ]) asCons.

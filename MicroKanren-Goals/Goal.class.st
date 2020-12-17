@@ -119,6 +119,12 @@ Goal >> asStatesStream [
 	^ self onState: SBRAL new asState
 ]
 
+{ #category : #testing }
+Goal >> isFailed [
+
+	^ false
+]
+
 { #category : #combining }
 Goal >> not [
 

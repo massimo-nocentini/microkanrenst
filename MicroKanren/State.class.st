@@ -88,6 +88,12 @@ State >> ifCounterexampleFound: ceBlock otherwise: oBlock [
 	^ oBlock cull: self
 ]
 
+{ #category : #testing }
+State >> isSound [
+
+	^ path value isFailed not
+]
+
 { #category : #'as yet unclassified' }
 State >> path [
 	^ path

@@ -171,7 +171,7 @@ GoalTest >> testBagOf [
 				(#martha cons:
 					 (0 asReifiedVar cons:
 						  #( #charlotte #caroline #laura #rose ) asCons)).
-				(#caroline cons: (0 asReifiedVar cons: #( #rose #laura ) asCons)) }
+				(#caroline cons: (0 asReifiedVar cons: #( #laura #rose ) asCons)) }
 		modulo: #asOrderedCollection.
 
 	g := [ :list | 
@@ -185,8 +185,8 @@ GoalTest >> testBagOf [
 	self
 		assert: g solutions
 		equals:
-			#( #charlotte #caroline #rose #rose #laura #laura #caroline
-			   #laura #rose #rose ) asCons
+			#( #charlotte #rose #laura #caroline #rose #caroline #laura #laura
+			   #rose #rose ) asCons
 		modulo: #asOrderedCollection.
 
 	g := [ :list | 
@@ -206,7 +206,7 @@ GoalTest >> testBagOf [
 		assert: g solutions
 		equals: (#( #( #( #rose ) #( #caroline #laura #rose )
 			       #( #charlotte #caroline #laura #rose )
-			       #( #rose #laura ) ) ) collect: #asCons)
+			       #( #laura #rose ) ) ) collect: #asCons)
 		modulo: #asOrderedCollection.
 	g := [ :list | 
 	     [ :groups :mother :child | 
@@ -225,7 +225,7 @@ GoalTest >> testBagOf [
 		assert: g solutions
 		equals: (#( #( #( #rose ) #( #caroline #laura #rose )
 			       #( #charlotte #caroline #laura #rose )
-			       #( #rose #laura ) ) ) collect: #asCons)
+			       #( #laura #rose ) ) ) collect: #asCons)
 		modulo: #asOrderedCollection.
 
 	g := [ :list | 
@@ -709,7 +709,7 @@ GoalTest >> testFindAll [
 	self
 		assert: g solutions
 		equals:
-			{ #( #charlotte #caroline #rose #rose #laura #laura #caroline
+			{ #( #charlotte #rose #laura #caroline #rose #caroline #laura
 			   #laura #rose #rose ) asCons }
 		modulo: #asOrderedCollection.
 
