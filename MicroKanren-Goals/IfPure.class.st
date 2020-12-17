@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #running }
-IfPure >> onState: aState [
+IfPure >> onState: aState afterPushingGoal: _ [
 
 	| disj |
 	disj := chainCombinationStrategy value
@@ -13,5 +13,5 @@ IfPure >> onState: aState [
 		        right: otherwise;
 		        yourself.
 
-	^ (super onState: aState) , (disj onState: aState)
+	^ disj onState: aState
 ]

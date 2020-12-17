@@ -48,9 +48,9 @@ Cond >> initialize [
 ]
 
 { #category : #running }
-Cond >> onState: aState [
+Cond >> onState: aState afterPushingGoal: _ [
 
-	^ (super onState: aState) , [ 
+	^ [ 
 	  | g |
 	  g := clauses foldr: if init: false asGoal.
 	  g onState: aState ] srfi41Stream
