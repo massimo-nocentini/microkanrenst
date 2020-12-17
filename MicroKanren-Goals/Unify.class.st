@@ -1,39 +1,18 @@
 Class {
 	#name : #Unify,
-	#superclass : #Goal,
-	#instVars : [
-		'this',
-		'that'
-	],
+	#superclass : #Binary,
 	#category : #'MicroKanren-Goals'
 }
 
 { #category : #running }
-Unify >> onState: aState [
-	^ (super onState: aState) , ([ 
-	   | extended_state |
-	   extended_state := aState unifier value: this value: that.
-	   true asGoal onState: extended_state ]
-		   on: UnificationError
-		   do: [ false asGoal onState: aState ])
-]
+Unify >> onState: aState afterPushingGoal: aGoal [
 
-{ #category : #accessing }
-Unify >> that [
-	^ that
-]
-
-{ #category : #accessing }
-Unify >> that: anObj [
-	that := anObj
-]
-
-{ #category : #accessing }
-Unify >> this [
-	^ this
-]
-
-{ #category : #accessing }
-Unify >> this: anObj [
-	this := anObj
+	| extendedState |
+	^ [ 
+	  extendedState := aState unifier value: left value: right.
+	  true asGoal onState: extendedState ]
+		  on: UnificationError
+		  do: [ :e | 
+			  extendedState := aState failedBecauseOfUnificationError: e.
+			  false asGoal onState: extendedState ]
 ]

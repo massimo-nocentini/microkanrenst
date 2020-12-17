@@ -1,7 +1,7 @@
 Class {
 	#name : #PredicateFindAllo,
 	#superclass : #PredicateTernary,
-	#category : #'MicroKanren-Goals'
+	#category : #'MicroKanren-Predicates'
 }
 
 { #category : #running }
@@ -20,7 +20,8 @@ PredicateFindAllo >> name [
 PredicateFindAllo >> onState: aState [
 
 	| states aGoal aCons |
-	states := (firstArgument onState: aState) asOrderedCollection.
+	states := ((firstArgument onState: aState) select: [ :each | 
+		           each isSound ]) asOrderedCollection.
 
 	aCons := (states collect: [ :each | 
 		          each walker value: secondArgument ]) asCons.

@@ -1,9 +1,7 @@
 Class {
 	#name : #Disj,
-	#superclass : #Goal,
+	#superclass : #Binary,
 	#instVars : [
-		'either',
-		'or',
 		'combineBlock'
 	],
 	#category : #'MicroKanren-Goals'
@@ -29,36 +27,11 @@ Disj >> combineBlock: aBlock [
 	combineBlock := aBlock
 ]
 
-{ #category : #accessing }
-Disj >> either [
-	^ either
-]
-
-{ #category : #accessing }
-Disj >> either: e [ 
-	either := e
-]
-
 { #category : #running }
-Disj >> onState: aState [
+Disj >> onState: aState afterPushingGoal: _ [
 
-	| path aStream anotherStream disjStream superStream |
-	superStream := super onState: aState.
-	path := aState path.
-	aStream := either onState: aState.
-	anotherStream := or onState: (aState
-			                  path: path;
-			                  yourself).
-	disjStream := combineBlock value: aStream value: anotherStream.
-	^ superStream , disjStream
-]
-
-{ #category : #accessing }
-Disj >> or [
-	^ or
-]
-
-{ #category : #accessing }
-Disj >> or: o [ 
-	or := o
+	| aStream anotherStream |
+	aStream := left onState: aState.
+	anotherStream := right onState: aState.
+	^ combineBlock value: aStream value: anotherStream
 ]

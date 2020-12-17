@@ -17,22 +17,16 @@ Fresh >> onState: aState [
 Fresh >> onState: aState withVars: aCollection [
 
 	variables
-		ifNil: [ self variables: aCollection ]
+		ifNil: [ variables := aCollection ]
 		ifNotNil: [ Error signal ].
 	nestedGoal
 		ifNil: [ nestedGoal := receiver valueWithArguments: self variables ]
 		ifNotNil: [ Error signal ].
-	^ (super onState: aState) , (nestedGoal onState: aState)
+	^ super onState: aState
 ]
 
 { #category : #accessing }
 Fresh >> variables [
 
 	^ variables
-]
-
-{ #category : #accessing }
-Fresh >> variables: aCollection [
-
-	variables := aCollection
 ]

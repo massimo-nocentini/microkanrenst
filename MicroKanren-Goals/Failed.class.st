@@ -12,12 +12,18 @@ Test cases
 "
 Class {
 	#name : #Failed,
-	#superclass : #Goal,
+	#superclass : #Atomic,
 	#category : #'MicroKanren-Goals'
 }
 
-{ #category : #running }
-Failed >> onState: aState [
+{ #category : #testing }
+Failed >> isFailed [
 
-	^ {  } asSrfi41Stream
+	^ true
+]
+
+{ #category : #'as yet unclassified' }
+Failed >> onState: refinedState forGoal: right fromConj: aConj [
+
+	^ refinedState srfi41Singleton
 ]

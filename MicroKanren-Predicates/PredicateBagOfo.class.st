@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'variables'
 	],
-	#category : #'MicroKanren-Goals'
+	#category : #'MicroKanren-Predicates'
 }
 
 { #category : #running }
@@ -23,7 +23,8 @@ PredicateBagOfo >> name [
 PredicateBagOfo >> onState: aState [
 
 	| aDictionary aGoal |
-	aDictionary := (firstArgument onState: aState)
+	aDictionary := ((firstArgument onState: aState) select: [ :each | 
+		                each isSound ])
 		               foldrStrict: [ :each :aDict | 
 			               | walker walkedTemplate key |
 			               walker := each walker.
@@ -40,11 +41,8 @@ PredicateBagOfo >> onState: aState [
 	aGoal := aDictionary ifEmpty: [ false asGoal ] ifNotEmpty: [ 
 		         aDictionary associations
 			         foldr: [ :each :aDisj | 
-				         | aConj |
-				         aConj := (variables unifyo value: each key)
-				                  ,
-				                  (each value asCons unifyo value: thirdArgument).
-				         aConj | aDisj ]
+				         (variables unifyo value: each key)
+				         , (each value asCons unifyo value: thirdArgument) | aDisj ]
 			         init: false asGoal ].
 
 	^ aGoal onState: aState

@@ -4,12 +4,12 @@ Extension { #name : #Unify }
 Unify >> addUnifiedSubgoalsInSet: unified [
 
 	unified
-		add: this;
-		add: that
+		add: left;
+		add: right
 ]
 
 { #category : #'*MicroKanren-Visualizations' }
-Unify >> printOn: aWriteStream renderer: aMKComputationTreeRenderer [
+Unify >> printOn: aStream renderer: aRenderer [
 
-	aMKComputationTreeRenderer printOn: aWriteStream anUnify: self
+	aRenderer printOn: aStream anUnify: self
 ]

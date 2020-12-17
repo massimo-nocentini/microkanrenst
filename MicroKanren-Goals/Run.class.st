@@ -21,6 +21,6 @@ Run >> onState: aState [
 	selector := vars size = 1
 		            ifTrue: [ #first ]
 		            ifFalse: [ #yourself ].
-	^ aStream collect: [ :s | 
+	^ (aStream select: [ :each | each isSound ]) collect: [ :s | 
 		  selector value: (s reifier reifyVars: vars) ]
 ]

@@ -5,13 +5,13 @@ Class {
 }
 
 { #category : #running }
-IfPure >> onState: aState [
+IfPure >> onState: aState afterPushingGoal: _ [
 
 	| disj |
 	disj := chainCombinationStrategy value
-		        either: question , answer;
-		        or: otherwise;
+		        left: question , answer;
+		        right: otherwise;
 		        yourself.
 
-	^ (super onState: aState) , (disj onState: aState)
+	^ disj onState: aState
 ]

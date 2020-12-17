@@ -50,9 +50,9 @@ MKGoalPrinter >> printOn: aStream aCond: aCond [
 MKGoalPrinter >> printOn: aStream aConj: aConj [
 
 	aStream nextPut: $(.
-	aConj both printOn: aStream renderer: self.
+	aConj left printOn: aStream renderer: self.
 	aStream nextPutAll: ') &° ('.
-	aConj and printOn: aStream renderer: self.
+	aConj right printOn: aStream renderer: self.
 	aStream nextPut: $)
 ]
 
@@ -68,16 +68,24 @@ MKGoalPrinter >> printOn: aStream aCut: aGoal [
 MKGoalPrinter >> printOn: aStream aDisj: aDisj [
 
 	aStream nextPut: $(.
-	aDisj either printOn: aStream renderer: self.
+	aDisj left printOn: aStream renderer: self.
 	aStream nextPutAll: ') |° ('.
-	aDisj or printOn: aStream renderer: self.
+	aDisj right printOn: aStream renderer: self.
 	aStream nextPut: $)
 ]
 
 { #category : #printing }
 MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 
-	aStream nextPutAll: 'Ø°'
+	state path value == aGoal
+		ifTrue: [ 
+			state
+				ifCounterexampleFound: [ :ce | 
+					ce left printOn: aStream.
+					aStream nextPutAll: ' ≠ '.
+					ce right printOn: aStream ]
+				otherwise: [ aStream nextPutAll: 'Ø°' ] ]
+		ifFalse: [ aStream nextPutAll: 'Ø°' ]
 ]
 
 { #category : #printing }
@@ -123,7 +131,17 @@ MKGoalPrinter >> printOn: aStream aPredicateUnary: aPredicate [
 { #category : #printing }
 MKGoalPrinter >> printOn: aStream aSucceed: aSucceed [
 
-	aStream nextPutAll: '✓°'
+	state path value == aSucceed
+		ifTrue: [ 
+			state reifyTopmostVariables
+				ifEmpty: [ aStream nextPutAll: '✓°' ]
+				ifNotEmpty: [ :assocs | 
+					assocs do: [ :each | 
+						each value printOn: aStream.
+						aStream nextPut: $/.
+						each key printOn: aStream.
+						aStream crlf ] ] ]
+		ifFalse: [ aStream nextPutAll: '✓°' ]
 ]
 
 { #category : #printing }
@@ -171,11 +189,11 @@ MKGoalPrinter >> printOn: aWriteStream anObject: anObject [
 ]
 
 { #category : #printing }
-MKGoalPrinter >> printOn: aStream anUnify: anUnify [
+MKGoalPrinter >> printOn: aStream anUnify: aGoal [
 
-	anUnify this printOn: aStream renderer: self.
+	aGoal left printOn: aStream renderer: self.
 	aStream nextPutAll: ' =° '.
-	anUnify that printOn: aStream renderer: self
+	aGoal right printOn: aStream renderer: self
 ]
 
 { #category : #accessing }

@@ -67,8 +67,31 @@ State >> collectVars: aCollection forFresh: aFresh [
 ]
 
 { #category : #'as yet unclassified' }
+State >> failedBecauseOfUnificationError: e [
+
+	^ FailedState new
+		  substitution: substitution;
+		  birthdate: birthdate;
+		  path: path;
+		  counterexample: e;
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
 State >> identityReifier [
 	^ self reifierOfClass: IdentityReifier
+]
+
+{ #category : #'as yet unclassified' }
+State >> ifCounterexampleFound: ceBlock otherwise: oBlock [
+
+	^ oBlock cull: self
+]
+
+{ #category : #testing }
+State >> isSound [
+
+	^ path value isFailed not
 ]
 
 { #category : #'as yet unclassified' }
@@ -83,7 +106,11 @@ State >> path: anObject [
 
 { #category : #'as yet unclassified' }
 State >> pushGoal: aGoal [
-	path := aGoal ~~> path
+
+	^ self copy in: [ :aState | 
+		  aState
+			  path: aGoal ~~> aState path;
+			  yourself ]
 ]
 
 { #category : #reification }
@@ -96,6 +123,13 @@ State >> reifierOfClass: aClass [
 	^ aClass new
 		state: self;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+State >> reifyTopmostVariables [
+
+	^ path reversed value variables in: [ :vars | 
+		  vars zip: (self reifier reifyVars: vars) ]
 ]
 
 { #category : #reification }

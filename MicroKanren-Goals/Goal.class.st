@@ -90,8 +90,8 @@ Goal class >> unify: anObj with: another [
 "
 
 	^ Unify new
-		  this: anObj;
-		  that: another;
+		  left: anObj;
+		  right: another;
 		  yourself
 ]
 
@@ -106,10 +106,11 @@ Goal >> ! other [
 
 { #category : #combining }
 Goal >> , other [
+
 	^ Conj new
-		both: self;
-		and: other;
-		yourself
+		  left: self;
+		  right: other;
+		  yourself
 ]
 
 { #category : #running }
@@ -118,15 +119,10 @@ Goal >> asStatesStream [
 	^ self onState: SBRAL new asState
 ]
 
-{ #category : #visualization }
-Goal >> gtInspectorTreePresenterViewIn: composite [
+{ #category : #testing }
+Goal >> isFailed [
 
-	<gtInspectorPresentationOrder: 30>
-	^ composite tree
-		  title: 'Tree';
-		  children: [ :aState | self halt ];
-		  value: (self onState: SBRAL new asState);
-		  yourself
+	^ false
 ]
 
 { #category : #combining }
@@ -147,8 +143,22 @@ I encode the basic behaviour to perform a step in a logic computation.
 "
 
 	<doc: #Realog topic: #( Gaol onState )>
-	aState pushGoal: self copy.
-	^ {  } asSrfi41Stream
+	| aGoal |
+	aGoal := self copy.
+	^ self onState: (aState pushGoal: aGoal) afterPushingGoal: aGoal
+]
+
+{ #category : #'as yet unclassified' }
+Goal >> onState: aState afterPushingGoal: aGoal [
+
+	self subclassResponsibility
+]
+
+{ #category : #'as yet unclassified' }
+Goal >> onState: refinedState forGoal: aGoal fromConj: aConj [
+
+	self popGoalFromPathOfState: refinedState forConj: aConj. "this message should be removed to be full explicit."
+	^ aGoal onState: refinedState
 ]
 
 { #category : #'as yet unclassified' }
@@ -175,20 +185,11 @@ Goal >> variables [
 	^ {  }
 ]
 
-{ #category : #accessing }
-Goal >> variables: aCollection [
-
-	"Just ignore the given collection because a generic goal doesn't maintain 
-	 any variable collection, usually. Let subclasses to keep them if they need."
-
-	
-]
-
 { #category : #combining }
 Goal >> | other [
 
 	^ Disj interleaved
-		  either: self;
-		  or: other;
+		  left: self;
+		  right: other;
 		  yourself
 ]
