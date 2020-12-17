@@ -50,9 +50,9 @@ MKGoalPrinter >> printOn: aStream aCond: aCond [
 MKGoalPrinter >> printOn: aStream aConj: aConj [
 
 	aStream nextPut: $(.
-	aConj both printOn: aStream renderer: self.
+	aConj left printOn: aStream renderer: self.
 	aStream nextPutAll: ') &° ('.
-	aConj and printOn: aStream renderer: self.
+	aConj right printOn: aStream renderer: self.
 	aStream nextPut: $)
 ]
 
@@ -68,9 +68,9 @@ MKGoalPrinter >> printOn: aStream aCut: aGoal [
 MKGoalPrinter >> printOn: aStream aDisj: aDisj [
 
 	aStream nextPut: $(.
-	aDisj either printOn: aStream renderer: self.
+	aDisj left printOn: aStream renderer: self.
 	aStream nextPutAll: ') |° ('.
-	aDisj or printOn: aStream renderer: self.
+	aDisj right printOn: aStream renderer: self.
 	aStream nextPut: $)
 ]
 

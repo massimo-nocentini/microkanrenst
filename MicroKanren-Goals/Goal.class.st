@@ -106,10 +106,11 @@ Goal >> ! other [
 
 { #category : #combining }
 Goal >> , other [
+
 	^ Conj new
-		both: self;
-		and: other;
-		yourself
+		  left: self;
+		  right: other;
+		  yourself
 ]
 
 { #category : #running }
@@ -175,7 +176,7 @@ Goal >> variables [
 Goal >> | other [
 
 	^ Disj interleaved
-		  either: self;
-		  or: other;
+		  left: self;
+		  right: other;
 		  yourself
 ]

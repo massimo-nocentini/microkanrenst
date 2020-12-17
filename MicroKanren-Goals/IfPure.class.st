@@ -9,8 +9,8 @@ IfPure >> onState: aState [
 
 	| disj |
 	disj := chainCombinationStrategy value
-		        either: question , answer;
-		        or: otherwise;
+		        left: question , answer;
+		        right: otherwise;
 		        yourself.
 
 	^ (super onState: aState) , (disj onState: aState)

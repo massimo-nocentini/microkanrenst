@@ -1,32 +1,8 @@
 Class {
 	#name : #Conj,
-	#superclass : #Goal,
-	#instVars : [
-		'both',
-		'and'
-	],
+	#superclass : #Binary,
 	#category : #'MicroKanren-Goals'
 }
-
-{ #category : #accessing }
-Conj >> and [
-	^ and
-]
-
-{ #category : #accessing }
-Conj >> and: anotherGoal [ 
-	and := anotherGoal
-]
-
-{ #category : #accessing }
-Conj >> both [
-	^ both
-]
-
-{ #category : #accessing }
-Conj >> both: aGoal [ 
-	both := aGoal
-]
 
 { #category : #running }
 Conj >> onState: aState afterPushingGoal: _ [
@@ -40,7 +16,7 @@ Conj >> onState: aState afterPushingGoal: _ [
 			               ifFalse: [ "aGoal
 					               popGoalFromPathOfState: refinedState
 					               forConj: self." 
-				               and onState: refinedState ] ] ]
-	               >>= (both onState: aState).
+				               left onState: refinedState ] ] ]
+	               >>= (right onState: aState).
 	^ superStream , boundStream
 ]
