@@ -8,6 +8,5 @@ Class {
 Atomic >> onState: aState afterPushingGoal: aGoal [
 
 	<doc: #Realog topic: #( Succeed onState )>
-	^ (super onState: aState afterPushingGoal: aGoal)
-	  , aState srfi41Singleton
+	^ aState srfi41Singleton
 ]

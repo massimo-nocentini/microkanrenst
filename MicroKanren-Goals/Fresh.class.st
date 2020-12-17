@@ -13,13 +13,6 @@ Fresh >> onState: aState [
 	^ aState collectVars: (1 to: receiver numArgs) forFresh: self
 ]
 
-{ #category : #running }
-Fresh >> onState: aState afterPushingGoal: _ [
-
-	^ (super onState: aState afterPushingGoal: _)
-	  , [ nestedGoal onState: aState ] srfi41Stream
-]
-
 { #category : #dispatched }
 Fresh >> onState: aState withVars: aCollection [
 

@@ -30,10 +30,8 @@ Disj >> combineBlock: aBlock [
 { #category : #running }
 Disj >> onState: aState afterPushingGoal: _ [
 
-	| aStream anotherStream disjStream superStream |
-	superStream := super onState: aState afterPushingGoal: _.
+	| aStream anotherStream |
 	aStream := left onState: aState.
 	anotherStream := right onState: aState.
-	disjStream := combineBlock value: aStream value: anotherStream.
-	^ superStream , disjStream
+	^ combineBlock value: aStream value: anotherStream
 ]

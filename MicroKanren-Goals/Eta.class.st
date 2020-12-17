@@ -12,9 +12,3 @@ Eta >> onState: aState [
 		ifNotNil: [ Error signal ].
 	^ super onState: aState
 ]
-
-{ #category : #running }
-Eta >> onState: aState afterPushingGoal: _ [
-
-	^ [ nestedGoal onState: aState ] srfi41Stream
-]

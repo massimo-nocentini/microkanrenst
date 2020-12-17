@@ -145,7 +145,7 @@ I encode the basic behaviour to perform a step in a logic computation.
 { #category : #'as yet unclassified' }
 Goal >> onState: aState afterPushingGoal: aGoal [
 
-	^ {  } asSrfi41Stream
+	self subclassResponsibility
 ]
 
 { #category : #'as yet unclassified' }
