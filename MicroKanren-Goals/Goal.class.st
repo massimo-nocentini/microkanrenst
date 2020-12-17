@@ -149,6 +149,13 @@ Goal >> onState: aState afterPushingGoal: aGoal [
 ]
 
 { #category : #'as yet unclassified' }
+Goal >> onState: refinedState forGoal: aGoal fromConj: aConj [
+
+	self popGoalFromPathOfState: refinedState forConj: aConj. "this message should be removed to be full explicit."
+	^ aGoal onState: refinedState
+]
+
+{ #category : #'as yet unclassified' }
 Goal >> popGoalFromPathOfState: aState forConj: aGoal [
 
 	"No action for the generic goal because if I am the top of `aState`'s goal path,

@@ -15,3 +15,9 @@ Class {
 	#superclass : #Atomic,
 	#category : #'MicroKanren-Goals'
 }
+
+{ #category : #'as yet unclassified' }
+Failed >> onState: refinedState forGoal: right fromConj: aConj [
+
+	^ refinedState srfi41Singleton
+]
