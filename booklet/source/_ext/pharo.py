@@ -18,16 +18,17 @@ class PharoAutoClassDirective(Directive):
     optional_arguments = 0
     final_argument_whitespace = False
     option_spec = {}
-    has_content = False
+    has_content = True
 
     def run(self):
         className = self.arguments[0]
         classDef = pharoExportDict['classes'][className]
+        classDef['description'] = [''] + [str(l) for l in self.content]
 
         rst = StringList()
 
         dummySourceFilename = '{}.rst'.format(className)
-        for i, l in enumerate(classDef['comment']):
+        for i, l in enumerate(classDef['description']):
             rst.append(l, dummySourceFilename, i)
 
         node = docutils.nodes.section()
@@ -47,7 +48,7 @@ class PharoAutoCompiledMethodDirective(Directive):
     optional_arguments = 0
     final_argument_whitespace = True
     option_spec = {}
-    has_content = False
+    has_content = True
 
     def run(self):
         fullSelector = self.arguments[0]
@@ -56,14 +57,14 @@ class PharoAutoCompiledMethodDirective(Directive):
         fullSelector = '{}>>{}'.format(className, selector)
         messageDef = pharoExportDict['messages'][selector[1:]]
         compiled_method = messageDef['implementors'][className]
-
+        compiled_method['description'] = [''] + [str(s) for s in self.content]
         rst = StringList()
 
         dummySourceFilename = '{}.rst'.format(fullSelector)
         rst.append('.. py:function:: {}({})'.format(
                       fullSelector, ', '.join(compiled_method['argumentNames'])),
                    dummySourceFilename, 0)
-        for i, l in enumerate(compiled_method['comment'], start=1):
+        for i, l in enumerate(compiled_method['description'], start=1):
             rst.append('  ' + l, dummySourceFilename, i)
 
         node = docutils.nodes.section()
