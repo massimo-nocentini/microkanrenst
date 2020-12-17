@@ -40,12 +40,12 @@ Disj >> either: e [
 ]
 
 { #category : #running }
-Disj >> onState: aState [
+Disj >> onState: aState afterPushingGoal: _ [
 
 	| aStream anotherStream disjStream superStream |
-	superStream := super onState: aState.
-	aStream := either onState: aState copy.
-	anotherStream := or onState: aState copy.
+	superStream := super onState: aState afterPushingGoal: _.
+	aStream := either onState: aState.
+	anotherStream := or onState: aState.
 	disjStream := combineBlock value: aStream value: anotherStream.
 	^ superStream , disjStream
 ]

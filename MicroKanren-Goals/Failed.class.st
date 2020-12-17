@@ -12,12 +12,6 @@ Test cases
 "
 Class {
 	#name : #Failed,
-	#superclass : #Goal,
+	#superclass : #Atomic,
 	#category : #'MicroKanren-Goals'
 }
-
-{ #category : #running }
-Failed >> onState: aState [
-
-	^ (super onState: aState) , aState srfi41Singleton
-]

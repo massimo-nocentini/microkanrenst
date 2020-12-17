@@ -12,15 +12,14 @@ Test cases
 "
 Class {
 	#name : #Succeed,
-	#superclass : #Goal,
+	#superclass : #Atomic,
 	#category : #'MicroKanren-Goals'
 }
 
 { #category : #running }
-Succeed >> onState: aState [
+Succeed >> onState: aState afterPushingGoal: aGoal [
 
 	"
-
 :param State aState: a state containing a substitution that makes the top goal true.
 :return: a stream of exactly one state, namely ``aState``.
 :rtype: Srfi41Stream
@@ -38,7 +37,7 @@ or even better with the test case
 "
 
 	<doc: #Realog topic: #( Succeed onState )>
-	^ (super onState: aState) , aState copy srfi41Singleton
+	^ super onState: aState afterPushingGoal: aGoal
 ]
 
 { #category : #'as yet unclassified' }

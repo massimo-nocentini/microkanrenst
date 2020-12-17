@@ -4,6 +4,12 @@ Extension { #name : #Unify }
 Unify >> addUnifiedSubgoalsInSet: unified [
 
 	unified
-		add: firstArgument;
-		add: secondArgument
+		add: left;
+		add: right
+]
+
+{ #category : #'*MicroKanren-Visualizations' }
+Unify >> printOn: aStream renderer: aRenderer [
+
+	aRenderer printOn: aStream anUnify: self
 ]

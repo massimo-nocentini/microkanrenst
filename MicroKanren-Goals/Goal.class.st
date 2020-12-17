@@ -89,7 +89,10 @@ Goal class >> unify: anObj with: another [
 :rtype: Unify
 "
 
-	^ Unify value: anObj value: another
+	^ Unify new
+		  left: anObj;
+		  right: another;
+		  yourself
 ]
 
 { #category : #combining }
@@ -133,7 +136,14 @@ I encode the basic behaviour to perform a step in a logic computation.
 "
 
 	<doc: #Realog topic: #( Gaol onState )>
-	aState pushGoal: self copy.
+	| aGoal |
+	aGoal := self copy.
+	^ self onState: (aState pushGoal: aGoal) afterPushingGoal: aGoal
+]
+
+{ #category : #'as yet unclassified' }
+Goal >> onState: aState afterPushingGoal: aGoal [
+
 	^ {  } asSrfi41Stream
 ]
 
@@ -159,15 +169,6 @@ Goal >> solutions [
 Goal >> variables [
 
 	^ {  }
-]
-
-{ #category : #accessing }
-Goal >> variables: aCollection [
-
-	"Just ignore the given collection because a generic goal doesn't maintain 
-	 any variable collection, usually. Let subclasses to keep them if they need."
-
-	
 ]
 
 { #category : #combining }

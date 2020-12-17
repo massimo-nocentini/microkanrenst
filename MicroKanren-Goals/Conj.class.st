@@ -29,18 +29,17 @@ Conj >> both: aGoal [
 ]
 
 { #category : #running }
-Conj >> onState: aState [
+Conj >> onState: aState afterPushingGoal: _ [
 
 	| boundStream superStream |
-	superStream := super onState: aState.
+	superStream := super onState: aState afterPushingGoal: _.
 	boundStream := [ :refinedState | 
 	               refinedState path value in: [ :aGoal | 
 		               aGoal class = Failed
 			               ifTrue: [ refinedState srfi41Singleton ]
-			               ifFalse: [ 
-				               aGoal
+			               ifFalse: [ "aGoal
 					               popGoalFromPathOfState: refinedState
-					               forConj: self.
+					               forConj: self." 
 				               and onState: refinedState ] ] ]
 	               >>= (both onState: aState).
 	^ superStream , boundStream

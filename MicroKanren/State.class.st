@@ -100,7 +100,11 @@ State >> path: anObject [
 
 { #category : #'as yet unclassified' }
 State >> pushGoal: aGoal [
-	path := aGoal ~~> path
+
+	^ self copy in: [ :aState | 
+		  aState
+			  path: aGoal ~~> aState path;
+			  yourself ]
 ]
 
 { #category : #reification }
