@@ -7,6 +7,5 @@ Class {
 { #category : #'as yet unclassified' }
 Atomic >> onState: aState afterPushingGoal: aGoal [
 
-	<doc: #Realog topic: #( Succeed onState )>
 	^ aState srfi41Singleton
 ]

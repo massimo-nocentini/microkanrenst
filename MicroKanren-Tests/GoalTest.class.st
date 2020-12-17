@@ -898,11 +898,6 @@ GoalTest >> testSucceed [
 { #category : #'as yet unclassified' }
 GoalTest >> testSucceedInvariant [
 
-	"
-A relation that can *always* be satisfied, regardless of free 
-variables that appear in it, is called *tautology*.
-"
-
 	SBRAL new asState in: [ :s | 
 		| ss |
 		ss := true asGoal onState: s.

@@ -1,28 +1,3 @@
-"
-I and my subclasses represent a small language to construct logical relations. Formally, I adhere to
-the following abstract grammar:
-
-.. productionlist:: goalGrammar
-   goal: `failed` | `succeed` | `binary_goal` |
-       : `fresh` | `eta` | `predicate`
-   failed: ""Ø""
-   succeed: ""✓""
-   binary_goal: `goal` (""|"" | ""&"" | ""!"") `goal`
-   fresh: ""fresh"" [`var`] +  ""."" `goal`
-   eta: ""eta"" ""."" `goal`
-   var: ""var"" `Integer`
-   predicate: `functor` [`var` | `value`] + ""."" `goal`
-   functor: `String`
-   value: `Object`
-
-My subclasses have the responsibility to encode combinations of arbitrary goals and, consequently, shouldn't be stateful with respect to a logical computation. It follows that their sole instance variables have to related to goal construction. 
-
-.. warning::
-
-  Any reference to external objects beyond this scope should be prohibited.
-
-To be polymorphic with me, the :ref:`onState-message-label` has to be implemented, as my subclasses have to; as the reader will understand following the referenced doc, it is the main message to respond to in order to get into a logic computation.
-"
 Class {
 	#name : #Goal,
 	#superclass : #Object,
@@ -137,10 +112,6 @@ Goal >> not [
 
 { #category : #running }
 Goal >> onState: aState [
-
-	"
-I encode the basic behaviour to perform a step in a logic computation.
-"
 
 	<doc: #Realog topic: #( Gaol onState )>
 	| aGoal |
