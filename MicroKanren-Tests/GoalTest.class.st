@@ -651,9 +651,17 @@ GoalTest >> testDisj [
 { #category : #'as yet unclassified' }
 GoalTest >> testFailed [
 
+	| g |
+	g := false asGoal.
 	self
-		assert: false asGoal class equals: Failed;
-		assert: false asGoal solutions isEmpty
+		assert: g class equals: Failed;
+		assert: g solutions equals: #(  ) modulo: #asOrderedCollection.
+
+	"Export it."
+	self
+		export: (g asLogicComputationTreeLimitedTo: -1)
+		pathSuffix: 'failed'
+		selector: #gtInspectorTreeUsingCanvas:
 ]
 
 { #category : #'as yet unclassified' }
@@ -759,6 +767,21 @@ GoalTest >> testFives [
 		assert: (g solutions next: 10)
 		equals: {5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}
 		modulo: #asOrderedCollection
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testFivesByPredicate [
+
+	| g |
+	g := [ :r | MKPredicateFives value: r ] fresh.
+	self
+		assert: (g solutions next: 10)
+		equals: { 5. 5. 5. 5. 5. 5. 5. 5. 5. 5 }
+		modulo: #asOrderedCollection.
+	self
+		export: (g asLogicComputationTreeLimitedTo: 20)
+		pathSuffix: 'fives-by-predicate'
+		selector: #gtInspectorTreeUsingCanvas:
 ]
 
 { #category : #tests }
@@ -900,7 +923,7 @@ GoalTest >> testSucceed [
 	self
 		assert: g solutions
 		equals: { Var tautology }
-		modulo: #asOrderedCollection.
+		modulo: #asOrderedCollection. " #(#tautology)"
 
 	"Export it."
 	self
@@ -1035,93 +1058,132 @@ GoalTest >> testTeaCup [
 
 { #category : #'as yet unclassified' }
 GoalTest >> testUnify [
+
 	| g |
-	g := 3 unifyo value: 3.
-	self
-		assert: g solutions
-		equals: {Var tautology}
-		modulo: #asOrderedCollection.
-	g := 4 unifyo value: 3.
-	self assert: g solutions isEmpty.
-	"symmetry"
-	g := [ :q | 4 unifyo value: q ] fresh.
-	self assert: g solutions equals: {4} modulo: #asOrderedCollection.
-	g := [ :q | q unifyo value: 4 ] fresh.
-	self assert: g solutions equals: {4} modulo: #asOrderedCollection.
 	"reification"
 	g := [ :q | true asGoal ] fresh.
 	self
 		assert: g solutions
-		equals: {0 asReifiedVar}
+		equals: { 0 asReifiedVar }
 		modulo: #asOrderedCollection.
 	g := [ :q :r | true asGoal ] fresh.
 	self
 		assert: g solutions
-		equals:
-			(Array
-				with:
-					{0 asReifiedVar.
-					1 asReifiedVar})
-		modulo: #asOrderedCollection.
-	g := [ :r | [ :x :y | r unifyo value: (Array with: x with: y) ] fresh ]
-		fresh.
-	self
-		assert: g solutions
-		equals:
-			(Array
-				with:
-					{0 asReifiedVar.
-					1 asReifiedVar})
-		modulo: #asOrderedCollection.
-	g := [ :r | [ :x :y | r unifyo value: (LinkedList with: x with: y) ] fresh ]
-		fresh.
-	self
-		assert: g solutions
-		equals:
-			(Array
-				with:
-					{0 asReifiedVar.
-					1 asReifiedVar})
-		modulo: #asOrderedCollection.
-	g := [ :r | [ :x :y | (LinkedList with: x with: y) unifyo value: r ] fresh ]
-		fresh.
-	self
-		assert: g solutions
-		equals:
-			(Array
-				with:
-					{0 asReifiedVar.
-					1 asReifiedVar})
+		equals: (Array with: { 
+					 0 asReifiedVar.
+					 1 asReifiedVar })
 		modulo: #asOrderedCollection.
 	g := [ :r | 
-	[ :x :y | 
-	(LinkedList
-		with: x
-		with: y
-		with: x
-		with: y) unifyo value: r ] fresh ] fresh.
+	     [ :x :y | r unifyo value: (Array with: x with: y) ] fresh ]
+		     fresh.
 	self
 		assert: g solutions
-		equals:
-			(Array
-				with:
-					{0 asReifiedVar.
-					1 asReifiedVar.
-					0 asReifiedVar.
-					1 asReifiedVar})
+		equals: (Array with: { 
+					 0 asReifiedVar.
+					 1 asReifiedVar })
 		modulo: #asOrderedCollection.
 	g := [ :r | 
-	[ :x :y | 
-	(LinkedList with: x with: r) unifyo
-		value: (LinkedList with: 1 with: y) ] fresh ].
+	     [ :x :y | r unifyo value: (LinkedList with: x with: y) ] fresh ]
+		     fresh.
+	self
+		assert: g solutions
+		equals: (Array with: { 
+					 0 asReifiedVar.
+					 1 asReifiedVar })
+		modulo: #asOrderedCollection.
+	g := [ :r | 
+	     [ :x :y | (LinkedList with: x with: y) unifyo value: r ] fresh ]
+		     fresh.
+	self
+		assert: g solutions
+		equals: (Array with: { 
+					 0 asReifiedVar.
+					 1 asReifiedVar })
+		modulo: #asOrderedCollection.
+	g := [ :r | 
+	     [ :x :y | 
+	     (LinkedList
+		      with: x
+		      with: y
+		      with: x
+		      with: y) unifyo value: r ] fresh ] fresh.
+	self
+		assert: g solutions
+		equals: (Array with: { 
+					 0 asReifiedVar.
+					 1 asReifiedVar.
+					 0 asReifiedVar.
+					 1 asReifiedVar })
+		modulo: #asOrderedCollection.
+	g := [ :r | 
+	     [ :x :y | 
+	     (LinkedList with: x with: r) unifyo value:
+		     (LinkedList with: 1 with: y) ] fresh ].
 	self
 		assert: g fresh solutions
-		equals: {0 asReifiedVar}
+		equals: { 0 asReifiedVar }
 		modulo: #asOrderedCollection.
 	"sharing"
-	g := [ :r | [ :x | (r unifyo value: x) , (x unifyo value: true) ] fresh ].
+	g := [ :r | 
+	     [ :x | (r unifyo value: x) , (x unifyo value: true) ] fresh ].
 	self
 		assert: g fresh solutions
-		equals: {true}
+		equals: { true }
 		modulo: #asOrderedCollection
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testUnifyFourWithThree [
+
+	| g |
+	g := 4 unifyo value: 3.
+	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection.
+
+	"Export it."
+	self
+		export: (g asLogicComputationTreeLimitedTo: -1)
+		pathSuffix: 'unify-four-with-three'
+		selector: #gtInspectorTreeUsingCanvas:
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testUnifySymmetry [
+
+	| g gSym |
+	g := [ :q | 4 unifyo value: q ] fresh.
+	gSym := [ :q | q unifyo value: 4 ] fresh.
+	self
+		assert: g solutions
+		equals: gSym solutions
+		modulo: #asOrderedCollection.
+	self assert: g solutions equals: { 4 } modulo: #asOrderedCollection.
+
+	"Export it."
+	self
+		export: (g asLogicComputationTreeLimitedTo: -1)
+		pathSuffix: 'unify-four-with-var'
+		selector: #gtInspectorTreeUsingCanvas:;
+		export: (gSym asLogicComputationTreeLimitedTo: -1)
+		pathSuffix: 'unify-var-with-four'
+		selector: #gtInspectorTreeUsingCanvas:;
+		export: (g , gSym asLogicComputationTreeLimitedTo: -1)
+		pathSuffix: 'unify-symmetry'
+		selector: #gtInspectorTreeUsingCanvas:
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testUnifyThreeWithThree [
+
+	| g |
+	g := 3 unifyo value: 3.
+	self
+		assert: g solutions
+		equals: { Var tautology }
+		modulo: #asOrderedCollection.
+
+	"Export it."
+	self
+		export: (g asLogicComputationTreeLimitedTo: -1)
+		pathSuffix: 'unify-three-with-three'
+		selector: #gtInspectorTreeUsingCanvas:
 ]
