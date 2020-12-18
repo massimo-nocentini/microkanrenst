@@ -17,7 +17,9 @@ Goal
          : `fresh` | `eta` | `predicate`
      failed: "Ø"
      succeed: "✓"
-     binary_goal: `goal` ("|" | "&" | "!") `goal`
+     binary_goal: `goal` (`disj` | "&" | `unify` | "!" | "≠") `goal`
+     disj: "|"
+     unify: "="
      fresh: "fresh" [`var`] +  "." `goal`
      eta: "eta" "." `goal`
      var: "var" `Integer`
@@ -47,7 +49,13 @@ Succeed
   I am a goal that represent logical truth, in particular I encode the
   :token:`goalGrammar:succeed` production.
 
+  When I am asked to extend a state to make it able to satisfy me, I just
+  return as it is.
+
   .. pharo:autocompiledmethod:: GoalTest>>#testSucceed
+    
+    .. image:: _images/succeed.svg
+      :align: center
 
 Failed
 ------
@@ -58,3 +66,57 @@ Failed
   :token:`goalGrammar:failed` production.
 
   .. pharo:autocompiledmethod:: GoalTest>>#testFailed
+
+    .. image:: _images/failed.svg
+      :align: center
+
+Unify
+-----
+
+.. pharo:autoclass:: Unify
+
+  I am a goal that represent logical equality, in particular I encode the
+  :token:`goalGrammar:unify` production.
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testUnifyThreeWithThree
+
+    .. image:: _images/unify-three-with-three.svg
+      :align: center
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testUnifyFourWithThree
+
+    .. image:: _images/unify-four-with-three.svg
+      :align: center
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testUnifySymmetry
+  
+    .. hlist::
+      :columns: 3
+
+      * .. image:: _images/unify-four-with-var.svg
+          :align: left
+
+      * .. image:: _images/unify-var-with-four.svg
+          :align: left
+
+      * .. image:: _images/unify-symmetry.svg
+          :align: left
+
+Disj
+----
+
+.. pharo:autoclass:: Disj
+
+  I am a goal that represent logical union, in particular I encode the
+  :token:`goalGrammar:disj` production.
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisj
+
+Predicates
+==========
+
+
+.. pharo:autocompiledmethod:: GoalTest>>#testFivesByPredicate
+
+  .. image:: _images/fives-by-predicate.svg
+    :align: center

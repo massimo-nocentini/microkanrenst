@@ -20,6 +20,7 @@ properties.
    overview.rst
    goals.rst
    messages.rst
+   theories.rst
 
 Observations
 ------------

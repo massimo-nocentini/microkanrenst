@@ -59,7 +59,9 @@ the following abstract grammar:</p>
                  <a class="reference internal" href="#grammar-token-goalGrammar-fresh"><code class="xref docutils literal notranslate"><span class="pre">fresh</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-eta"><code class="xref docutils literal notranslate"><span class="pre">eta</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-predicate"><code class="xref docutils literal notranslate"><span class="pre">predicate</span></code></a>
 <strong id="grammar-token-goalGrammar-failed"><span id="grammar-token-failed"></span>failed     </strong> ::=  &quot;Ø&quot;
 <strong id="grammar-token-goalGrammar-succeed"><span id="grammar-token-succeed"></span>succeed    </strong> ::=  &quot;✓&quot;
-<strong id="grammar-token-goalGrammar-binary_goal"><span id="grammar-token-binary-goal"></span>binary_goal</strong> ::=  <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a> (&quot;|&quot; | &quot;&amp;&quot; | &quot;!&quot;) <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a>
+<strong id="grammar-token-goalGrammar-binary_goal"><span id="grammar-token-binary-goal"></span>binary_goal</strong> ::=  <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a> (<a class="reference internal" href="#grammar-token-goalGrammar-disj"><code class="xref docutils literal notranslate"><span class="pre">disj</span></code></a> | &quot;&amp;&quot; | <a class="reference internal" href="#grammar-token-goalGrammar-unify"><code class="xref docutils literal notranslate"><span class="pre">unify</span></code></a> | &quot;!&quot; | &quot;≠&quot;) <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a>
+<strong id="grammar-token-goalGrammar-disj"><span id="grammar-token-disj"></span>disj       </strong> ::=  &quot;|&quot;
+<strong id="grammar-token-goalGrammar-unify"><span id="grammar-token-unify"></span>unify      </strong> ::=  &quot;=&quot;
 <strong id="grammar-token-goalGrammar-fresh"><span id="grammar-token-fresh"></span>fresh      </strong> ::=  &quot;fresh&quot; [<a class="reference internal" href="#grammar-token-goalGrammar-var"><code class="xref docutils literal notranslate"><span class="pre">var</span></code></a>] +  &quot;.&quot; <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a>
 <strong id="grammar-token-goalGrammar-eta"><span id="grammar-token-eta"></span>eta        </strong> ::=  &quot;eta&quot; &quot;.&quot; <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a>
 <strong id="grammar-token-goalGrammar-var"><span id="grammar-token-var"></span>var        </strong> ::=  &quot;var&quot; <code class="xref docutils literal notranslate"><span class="pre">Integer</span></code>
@@ -90,12 +92,9 @@ to get into a logic computation.</p>
 </div>
 <p>I am a goal that represent logical truth, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-succeed"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:succeed</span></code></a> production.</p>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">GoalTest&gt;&gt;#testSucceed()</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testSucceed</span>
+<p>When I am asked to extend a state to make it able to satisfy me, I just
+return as it is.</p>
+<strong class="literal">GoalTest&gt;&gt;#testSucceed</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testSucceed</span>
 
 	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
@@ -103,9 +102,17 @@ to get into a logic computation.</p>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; #(#tautology)&quot;</span>
+
+	<span class="c">&quot;Export it.&quot;</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;succeed&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/succeed.svg" class="align-center" src="_images/succeed.svg" /></div></blockquote>
 </div>
 <div class="section" id="failed">
 <h2>Failed<a class="headerlink" href="#failed" title="Permalink to this headline">¶</a></h2>
@@ -117,19 +124,178 @@ to get into a logic computation.</p>
 </div>
 <p>I am a goal that represent logical falsehood, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-failed"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:failed</span></code></a> production.</p>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">GoalTest&gt;&gt;#testFailed()</code></dt>
-<dd></dd></dl>
+<strong class="literal">GoalTest&gt;&gt;#testFailed</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testFailed</span>
 
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testFailed</span>
-
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
-		<span class="nf">assert:</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">class</span> <span class="nf">equals:</span> <span class="nc">Failed</span><span class="p">;</span>
-		<span class="nf">assert:</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">solutions</span> <span class="nf">isEmpty</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">class</span> <span class="nf">equals:</span> <span class="nc">Failed</span><span class="p">;</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="c">&quot;Export it.&quot;</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;failed&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/failed.svg" class="align-center" src="_images/failed.svg" /></div></blockquote>
+</div>
+<div class="section" id="unify">
+<h2>Unify<a class="headerlink" href="#unify" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Binary</span> <span class="nf">subclass:</span> <span class="ss">#Unify</span>
+	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;&#39;</span>
+	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
+	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
+</pre></div>
+</div>
+<p>I am a goal that represent logical equality, in particular I encode the
+<a class="reference internal" href="#grammar-token-goalGrammar-unify"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:unify</span></code></a> production.</p>
+<strong class="literal">GoalTest&gt;&gt;#testUnifyThreeWithThree</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testUnifyThreeWithThree</span>
+
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> <span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="c">&quot;Export it.&quot;</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;unify-three-with-three&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/unify-three-with-three.svg" class="align-center" src="_images/unify-three-with-three.svg" /></div></blockquote>
+<strong class="literal">GoalTest&gt;&gt;#testUnifyFourWithThree</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testUnifyFourWithThree</span>
+
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="c">&quot;Export it.&quot;</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;unify-four-with-three&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/unify-four-with-three.svg" class="align-center" src="_images/unify-four-with-three.svg" /></div></blockquote>
+<strong class="literal">GoalTest&gt;&gt;#testUnifySymmetry</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testUnifySymmetry</span>
+
+	<span class="o">|</span><span class="nv"> g gSym </span><span class="o">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="nv">gSym</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="nv">q</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> <span class="nv">gSym</span> <span class="nf">solutions</span>
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="c">&quot;Export it.&quot;</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;unify-four-with-var&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span><span class="p">;</span>
+		<span class="nf">export:</span> (<span class="nv">gSym</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;unify-var-with-four&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span><span class="p">;</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">,</span> <span class="nv">gSym</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;unify-symmetry&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><table class="hlist"><tr><td><ul>
+<li><img alt="_images/unify-four-with-var.svg" class="align-left" src="_images/unify-four-with-var.svg" /></li>
+</ul>
+</td><td><ul>
+<li><img alt="_images/unify-var-with-four.svg" class="align-left" src="_images/unify-var-with-four.svg" /></li>
+</ul>
+</td><td><ul>
+<li><img alt="_images/unify-symmetry.svg" class="align-left" src="_images/unify-symmetry.svg" /></li>
+</ul>
+</td></tr></table>
+</div></blockquote>
+</div>
+<div class="section" id="disj">
+<h2>Disj<a class="headerlink" href="#disj" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Binary</span> <span class="nf">subclass:</span> <span class="ss">#Disj</span>
+	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;combineBlock&#39;</span>
+	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
+	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
+</pre></div>
+</div>
+<p>I am a goal that represent logical union, in particular I encode the
+<a class="reference internal" href="#grammar-token-goalGrammar-disj"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:disj</span></code></a> production.</p>
+<strong class="literal">GoalTest&gt;&gt;#testDisj</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testDisj</span>
+
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> (<span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">false</span> <span class="nf">asGoal</span>) <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> (<span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span>) <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { 
+				<span class="nc">Var</span> <span class="nf">tautology</span><span class="p">.</span>
+				<span class="nc">Var</span> <span class="nf">tautology</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">4</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="m">4</span><span class="p">.</span> <span class="m">3</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">3</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
+	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ]
+		     <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">4</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
+	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)
+	     <span class="nf">|</span> ((<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)) ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">4</span><span class="p">.</span> <span class="m">5</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
 </pre></div>
 </div>
 </div>
+</div>
+<div class="section" id="predicates">
+<h1>Predicates<a class="headerlink" href="#predicates" title="Permalink to this headline">¶</a></h1>
+<strong class="literal">GoalTest&gt;&gt;#testFivesByPredicate</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testFivesByPredicate</span>
+
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateFives</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
+		<span class="nf">equals:</span> { <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">20</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;fives-by-predicate&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/fives-by-predicate.svg" class="align-center" src="_images/fives-by-predicate.svg" /></div></blockquote>
 </div>
 
 
@@ -145,8 +311,11 @@ to get into a logic computation.</p>
 <li><a class="reference internal" href="#goal">Goal</a></li>
 <li><a class="reference internal" href="#succeed">Succeed</a></li>
 <li><a class="reference internal" href="#failed">Failed</a></li>
+<li><a class="reference internal" href="#unify">Unify</a></li>
+<li><a class="reference internal" href="#disj">Disj</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#predicates">Predicates</a></li>
 </ul>
 
   <h4>Previous topic</h4>

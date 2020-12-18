@@ -39,6 +39,11 @@ the search space of both succeeding and failing states.
   
     .. pharo:autocompiledmethod:: Goal>>#popGoalFromPathOfState:forConj:
     .. pharo:autocompiledmethod:: Succeed>>#popGoalFromPathOfState:forConj:
+    
+      .. note::
+       
+        This is the sole message that perform a side-effect on the state of an object
+        without creating a new copy of it.
 
   .. pharo:autocompiledmethod:: Failed>>#onState:forGoal:fromConj:
 

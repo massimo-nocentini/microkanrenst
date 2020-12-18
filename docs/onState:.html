@@ -37,12 +37,7 @@
 <span id="onstate-message-label"></span><h1><code class="docutils literal notranslate"><span class="pre">onState:</span></code> message<a class="headerlink" href="#onstate-message" title="Permalink to this headline">¶</a></h1>
 <p>This is <em>the fundamental</em> message of the whole system because it allows us to explore
 the search space of both succeeding and failing states.</p>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Goal&gt;&gt;#onState:(aState)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span>
+<strong class="literal">Goal&gt;&gt;#onState:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span>
 
 	&lt;<span class="k">doc:</span> #Realog topic: #( Gaol onState )&gt;
 	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -50,38 +45,19 @@ the search space of both succeeding and failing states.</p>
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">onState:</span> (<span class="nv">aState</span> <span class="nf">pushGoal:</span> <span class="nv">aGoal</span>) <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 </pre></div>
 </div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Fresh&gt;&gt;#onState:(aState)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span>
+<strong class="literal">Fresh&gt;&gt;#onState:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span>
 
 	<span class="o">^</span> <span class="nv">aState</span> <span class="nf">collectVars:</span> (<span class="m">1</span> <span class="nf">to:</span> <span class="nv">receiver</span> <span class="nf">numArgs</span>) <span class="nf">forFresh:</span> <span class="bp">self</span>
 </pre></div>
 </div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Fresh&gt;&gt;#onState:withVars:(aState, aCollection)</code></dt>
-<dd></dd></dl>
+<strong class="literal">Fresh&gt;&gt;#onState:withVars:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span>
 
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span>
-
-	<span class="nv">variables</span>
-		<span class="nf">ifNil:</span> [ <span class="nv">variables</span> <span class="o">:=</span> <span class="nv">aCollection</span> ]
-		<span class="nf">ifNotNil:</span> [ <span class="nc">Error</span> <span class="nf">signal</span> ]<span class="p">.</span>
-	<span class="nv">nestedGoal</span>
-		<span class="nf">ifNil:</span> [ <span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">valueWithArguments:</span> <span class="bp">self</span> <span class="nf">variables</span> ]
-		<span class="nf">ifNotNil:</span> [ <span class="nc">Error</span> <span class="nf">signal</span> ]<span class="p">.</span>
+	<span class="nv">variables</span> <span class="o">:=</span> <span class="nv">aCollection</span><span class="p">.</span>
+	<span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">valueWithArguments:</span> <span class="bp">self</span> <span class="nf">variables</span><span class="p">.</span>
 	<span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span>
 </pre></div>
 </div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Eta&gt;&gt;#onState:(aState)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span>
+<strong class="literal">Eta&gt;&gt;#onState:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span>
 
 	<span class="nv">nestedGoal</span>
 		<span class="nf">ifNil:</span> [ <span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">value</span> ]
@@ -92,27 +68,26 @@ the search space of both succeeding and failing states.</p>
 </div>
 <div class="section" id="onstate-afterpushinggoal-message">
 <h1><code class="docutils literal notranslate"><span class="pre">onState:afterPushingGoal:</span></code> message<a class="headerlink" href="#onstate-afterpushinggoal-message" title="Permalink to this headline">¶</a></h1>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Goal&gt;&gt;#onState:afterPushingGoal:(aState, aGoal)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
+<strong class="literal">Goal&gt;&gt;#onState:afterPushingGoal:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 
 	<span class="bp">self</span> <span class="nf">subclassResponsibility</span>
 </pre></div>
 </div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Succeed&gt;&gt;#onState:afterPushingGoal:(aState, aGoal)</code></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>aState</strong> (<em>State</em>) – a state containing a substitution that makes the top goal true.</p>
+<strong class="literal">Succeed&gt;&gt;#onState:afterPushingGoal:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
+
+	&lt;<span class="k">doc:</span> #Realog topic: #( Succeed onState )&gt;
+	<span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
+</pre></div>
+</div>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param State aState</dt>
+<dd class="field-odd"><p>a state containing a substitution that makes the top goal true.</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">return</dt>
 <dd class="field-even"><p>a stream of exactly one state, namely <code class="docutils literal notranslate"><span class="pre">aState</span></code>.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">rtype</dt>
 <dd class="field-odd"><p>Srfi41Stream</p>
 </dd>
 </dl>
@@ -121,12 +96,7 @@ the search space of both succeeding and failing states.</p>
 </pre></div>
 </div>
 <p>or even better with the test case</p>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">GoalTest&gt;&gt;#testSucceedInvariant()</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testSucceedInvariant</span>
+<strong class="literal">GoalTest&gt;&gt;#testSucceedInvariant</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testSucceedInvariant</span>
 
 	<span class="nc">SBRAL</span> <span class="nb">new</span> <span class="nf">asState</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">s</span> <span class="o">|</span> 
 		<span class="o">|</span><span class="nv"> ss </span><span class="o">|</span>
@@ -140,20 +110,8 @@ the search space of both succeeding and failing states.</p>
 		<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">ss</span> <span class="nf">equals:</span> { <span class="bp">true</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span> ]
 </pre></div>
 </div>
-</dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
-
-	&lt;<span class="k">doc:</span> #Realog topic: #( Succeed onState )&gt;
-	<span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
-</pre></div>
-</div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Disj&gt;&gt;#onState:afterPushingGoal:(aState, _)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
+</div></blockquote>
+<strong class="literal">Disj&gt;&gt;#onState:afterPushingGoal:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">|</span><span class="nv"> aStream anotherStream </span><span class="o">|</span>
 	<span class="nv">aStream</span> <span class="o">:=</span> <span class="nv">left</span> <span class="nf">onState:</span> <span class="nv">aState</span><span class="p">.</span>
@@ -161,57 +119,7 @@ the search space of both succeeding and failing states.</p>
 	<span class="o">^</span> <span class="nv">combineBlock</span> <span class="nf">value:</span> <span class="nv">aStream</span> <span class="nf">value:</span> <span class="nv">anotherStream</span>
 </pre></div>
 </div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Conj&gt;&gt;#onState:afterPushingGoal:(aState, _)</code></dt>
-<dd><dl class="py function">
-<dt>
-<code class="sig-name descname">Goal&gt;&gt;#onState:forGoal:fromConj:(refinedState, aGoal, aConj)</code></dt>
-<dd><dl class="py function">
-<dt>
-<code class="sig-name descname">Goal&gt;&gt;#popGoalFromPathOfState:forConj:(aState, aGoal)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span>
-
-	<span class="c">&quot;No action for the generic goal because if I am the top of `aState`&#39;s goal path,</span>
-<span class="c">	 I have to remain there with respect to the computation step running in the</span>
-<span class="c">	 conjunction `aGoal`.&quot;</span>
-
-	
-</pre></div>
-</div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Succeed&gt;&gt;#popGoalFromPathOfState:forConj:(aState, aGoal)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span>
-
-	<span class="nv">aState</span> <span class="nf">path:</span> <span class="nv">aState</span> <span class="nf">path</span> <span class="nf">nextLink</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">aGoal</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span>
-
-	<span class="bp">self</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">refinedState</span> <span class="nf">forConj:</span> <span class="nv">aConj</span><span class="p">.</span> <span class="c">&quot;this message should be removed to be full explicit.&quot;</span>
-	<span class="o">^</span> <span class="nv">aGoal</span> <span class="nf">onState:</span> <span class="nv">refinedState</span>
-</pre></div>
-</div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Failed&gt;&gt;#onState:forGoal:fromConj:(refinedState, right, aConj)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">right</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span>
-
-	<span class="o">^</span> <span class="nv">refinedState</span> <span class="nf">srfi41Singleton</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
+<strong class="literal">Conj&gt;&gt;#onState:afterPushingGoal:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">^</span> [ <span class="o">:</span><span class="nv">refinedState</span> <span class="o">|</span> 
 	  <span class="nv">refinedState</span> <span class="nf">path</span> <span class="nf">value</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">aGoal</span> <span class="o">|</span> 
@@ -219,12 +127,43 @@ the search space of both succeeding and failing states.</p>
 	  <span class="nf">&gt;&gt;=</span> (<span class="nv">left</span> <span class="nf">onState:</span> <span class="nv">aState</span>)
 </pre></div>
 </div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Unify&gt;&gt;#onState:afterPushingGoal:(aState, aGoal)</code></dt>
-<dd></dd></dl>
+<blockquote>
+<div><strong class="literal">Goal&gt;&gt;#onState:forGoal:fromConj:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">aGoal</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span>
 
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
+	<span class="bp">self</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">refinedState</span> <span class="nf">forConj:</span> <span class="nv">aConj</span><span class="p">.</span> <span class="c">&quot;this message should be removed to be full explicit.&quot;</span>
+	<span class="o">^</span> <span class="nv">aGoal</span> <span class="nf">onState:</span> <span class="nv">refinedState</span>
+</pre></div>
+</div>
+<blockquote>
+<div><strong class="literal">Goal&gt;&gt;#popGoalFromPathOfState:forConj:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span>
+
+	<span class="c">&quot;No action for the generic goal because if I am the top of `aState`&#39;s goal path,</span>
+<span class="c">	 I have to remain there with respect to the computation running in the</span>
+<span class="c">	 conjunction goal `aGoal`.&quot;</span>
+
+	
+</pre></div>
+</div>
+<strong class="literal">Succeed&gt;&gt;#popGoalFromPathOfState:forConj:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span>
+
+	<span class="nv">aState</span> <span class="nf">path:</span> <span class="nv">aState</span> <span class="nf">path</span> <span class="nf">nextLink</span>
+</pre></div>
+</div>
+<blockquote>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is the sole message that perform a side-effect on the state of an object
+without creating a new copy of it.</p>
+</div>
+</div></blockquote>
+</div></blockquote>
+<strong class="literal">Failed&gt;&gt;#onState:forGoal:fromConj:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">right</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span>
+
+	<span class="o">^</span> <span class="nv">refinedState</span> <span class="nf">srfi41Singleton</span>
+</pre></div>
+</div>
+</div></blockquote>
+<strong class="literal">Unify&gt;&gt;#onState:afterPushingGoal:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 
 	<span class="o">|</span><span class="nv"> extendedState </span><span class="o">|</span>
 	<span class="o">^</span> [ 
@@ -236,12 +175,7 @@ the search space of both succeeding and failing states.</p>
 			  <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">onState:</span> <span class="nv">extendedState</span> ]
 </pre></div>
 </div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Cond&gt;&gt;#onState:afterPushingGoal:(aState, _)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
+<strong class="literal">Cond&gt;&gt;#onState:afterPushingGoal:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">^</span> [ 
 	  <span class="o">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -249,12 +183,7 @@ the search space of both succeeding and failing states.</p>
 	  <span class="nv">g</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
 </pre></div>
 </div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">IfPure&gt;&gt;#onState:afterPushingGoal:(aState, _)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
+<strong class="literal">IfPure&gt;&gt;#onState:afterPushingGoal:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">|</span><span class="nv"> disj </span><span class="o">|</span>
 	<span class="nv">disj</span> <span class="o">:=</span> <span class="nv">chainCombinationStrategy</span> <span class="nf">value</span>
@@ -265,23 +194,13 @@ the search space of both succeeding and failing states.</p>
 	<span class="o">^</span> <span class="nv">disj</span> <span class="nf">onState:</span> <span class="nv">aState</span>
 </pre></div>
 </div>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Suspended&gt;&gt;#onState:afterPushingGoal:(aState, _)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
+<strong class="literal">Suspended&gt;&gt;#onState:afterPushingGoal:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">^</span> [ <span class="nv">nestedGoal</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
 </pre></div>
 </div>
 <p>The following should be put in another file.</p>
-<dl class="py function">
-<dt>
-<code class="sig-name descname">Goal class&gt;&gt;#unify:with:(anObj, another)</code></dt>
-<dd></dd></dl>
-
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">unify:</span> <span class="nv">anObj</span> <span class="nf">with:</span> <span class="nv">another</span>
+<strong class="literal">Goal class&gt;&gt;#unify:with:</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">unify:</span> <span class="nv">anObj</span> <span class="nf">with:</span> <span class="nv">another</span>
 
 	<span class="c">&quot;</span>
 <span class="c">:param Object anObj: the object that should be unified with `another`.</span>

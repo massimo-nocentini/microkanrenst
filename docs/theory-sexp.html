@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>&lt;no title&gt; &#8212; µkanrenst  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">&lt;no title&gt;</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <strong class="literal">MKSexpTest&gt;&gt;#testACORN</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testACORN</span>
+
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateSexpCaro</span> <span class="nf">value:</span> <span class="s">&#39;acorn&#39;</span> <span class="nf">asCons</span> <span class="nf">value:</span> <span class="nv">r</span> ]
+		     <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="sc">$a</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="c">&quot;Export it.&quot;</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-acorn&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/sexp-acorn.svg" class="align-center" src="_images/sexp-acorn.svg" /></div></blockquote>
+<strong class="literal">MKSexpTest&gt;&gt;#testAppendoForward</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testAppendoForward</span>
+
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">|</span> 
+	     <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
+		     <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="nf">asCons</span>
+		     <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="nf">asCons</span>
+		     <span class="nf">value:</span> <span class="nv">l</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span>
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="c">&quot;Export it.&quot;</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-forward&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/sexp-appendo-forward.svg" class="align-center" src="_images/sexp-appendo-forward.svg" /></div></blockquote>
+<strong class="literal">MKSexpTest&gt;&gt;#testAppendoBackward</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testAppendoBackward</span>
+
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+	     <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
+		     <span class="nf">value:</span> <span class="nv">l</span>
+		     <span class="nf">value:</span> <span class="nv">r</span>
+		     <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> ({ 
+				 <span class="ss">#(</span> <span class="ss">nil</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">nil</span> <span class="ss">)</span> } <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">each</span> <span class="o">|</span> 
+				 <span class="nv">each</span> <span class="nf">collect:</span> <span class="ss">#asCons</span> ])
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="c">&quot;Export it.&quot;</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-backward&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/sexp-appendo-backward.svg" class="align-center" src="_images/sexp-appendo-backward.svg" /></div></blockquote>
+<strong class="literal">MKSexpTest&gt;&gt;#testDycko</strong><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nf">testDycko</span>
+
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">alpha</span> <span class="o">|</span> <span class="nc">MKPredicateSexpDycko</span> <span class="nf">value:</span> <span class="nv">alpha</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">20</span>)
+		<span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-dycko&#39;</span>
+		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/sexp-dycko.svg" class="align-center" src="_images/sexp-dycko.svg" /></div></blockquote>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/theory-sexp.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">&lt;no title&gt;</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Massimo Nocentini.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>
