@@ -11,6 +11,18 @@ Class {
 }
 
 { #category : #visualization }
+MKComputationTreeRenderer >> gtInspectorTreeInGLMCompositePresentation: composite [
+
+	<gtInspectorPresentationOrder: 20>
+	^ composite roassal3
+		  title: 'Tree';
+		  initializeCanvas: [ 
+			  (self gtInspectorTreeUsingCanvas: RSCanvas new)
+			  @ RSCanvasController ];
+		  yourself
+]
+
+{ #category : #visualization }
 MKComputationTreeRenderer >> gtInspectorTreeUsingCanvas: aCanvas [
 
 	| states shapes edges assocs labelBuilder printers associations |
@@ -42,17 +54,6 @@ MKComputationTreeRenderer >> gtInspectorTreeUsingCanvas: aCanvas [
 	^ aCanvas
 		  addAll: shapes;
 		  addAll: edges;
-		  yourself
-]
-
-{ #category : #visualization }
-MKComputationTreeRenderer >> gtInspectorTreesViewIn: composite [
-	<gtInspectorPresentationOrder: 20>
-	^ composite roassal3
-		  title: 'Tree';
-		  initializeCanvas: [ 
-			  (self gtInspectorTreeUsingCanvas: RSCanvas new)
-			  @ RSCanvasController ];
 		  yourself
 ]
 

@@ -136,8 +136,8 @@ Goal >> onState: refinedState forGoal: aGoal fromConj: aConj [
 Goal >> popGoalFromPathOfState: aState forConj: aGoal [
 
 	"No action for the generic goal because if I am the top of `aState`'s goal path,
-	 I have to remain there with respect to the computation step running in the
-	 conjunction `aGoal`."
+	 I have to remain there with respect to the computation running in the
+	 conjunction goal `aGoal`."
 
 	
 ]

@@ -1,6 +1,8 @@
 Class {
 	#name : #GoalTest,
 	#superclass : #Srfi41AbstractTest,
+	#traits : 'TIceImagesExporting',
+	#classTraits : 'TIceImagesExporting classTrait',
 	#instVars : [
 		'sexpTheory',
 		'combTheory'
@@ -11,6 +13,12 @@ Class {
 { #category : #'as yet unclassified' }
 GoalTest >> fives: x [
 	^ (5 unifyo value: x) | [ self fives: x ] eta
+]
+
+{ #category : #utilities }
+GoalTest >> imagesPath [
+
+	^ self iceWorkingDirectory / 'booklet' / 'source' / '_images'
 ]
 
 { #category : #'as yet unclassified' }
@@ -892,7 +900,13 @@ GoalTest >> testSucceed [
 	self
 		assert: g solutions
 		equals: { Var tautology }
-		modulo: #asOrderedCollection
+		modulo: #asOrderedCollection.
+
+	"Export it."
+	self
+		export: (g asLogicComputationTreeLimitedTo: -1)
+		pathSuffix: 'succeed'
+		selector: #gtInspectorTreeUsingCanvas:
 ]
 
 { #category : #'as yet unclassified' }
