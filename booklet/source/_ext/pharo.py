@@ -51,6 +51,7 @@ class PharoAutoCompiledMethodDirective(Directive):
     has_content = True
 
     def run(self):
+
         fullSelector = self.arguments[0]
         className, selector = fullSelector.split('>>')
         className = ' '.join(className.split('_'))
@@ -58,13 +59,11 @@ class PharoAutoCompiledMethodDirective(Directive):
         messageDef = pharoExportDict['messages'][selector[1:]]
         compiled_method = messageDef['implementors'][className]
         compiled_method['description'] = [''] + ['  ' + str(s) for s in self.content]
+        compiled_method['sourceCode'][0] = '{} >> {} '.format(className, compiled_method['sourceCode'][0])
+        #del compiled_method['sourceCode'][1]
+        #compiled_method['sourceCode'].append(']')
+
         rst = StringList()
-
-        signature = docutils.nodes.section()
-
-        signature_head = docutils.nodes.strong()
-        signature_head += docutils.nodes.literal(text=fullSelector) 
-        signature += docutils.nodes.strong(text=fullSelector, classes=['literal'])
 
         dummySourceFilename = '{}.rst'.format(fullSelector)
         #rst.append('.. py:function:: {}({})'.format(
@@ -76,16 +75,15 @@ class PharoAutoCompiledMethodDirective(Directive):
         node = docutils.nodes.section()
 
         # Parse the rst.
+        #nested_parse_with_titles(self.state, self.content, node)
         nested_parse_with_titles(self.state, rst, node)
 
         #title_node = docutils.nodes.title(text=className, refid=className)
-        definition_node = docutils.nodes.literal_block(text='\n' + '\n'.join(compiled_method['sourceCode']), language='smalltalk')
+        definition_node = docutils.nodes.literal_block(text=#'\n' + 
+                            '\n'.join(compiled_method['sourceCode']), language='smalltalk')
 
-        signature += definition_node
-        signature.extend(node.children)
-        
-        return signature.children
-        #return [signature, definition_node] + node.children
+        return [definition_node] + node.children
+
         '''
         field_comment = docutils.nodes.field()
         field_comment += docutils.nodes.field_name(text='Comment')

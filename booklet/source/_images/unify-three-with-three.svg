@@ -22,7 +22,7 @@
 </symbol>
 </g>
 </defs>
-<g id="surface7357031">
+<g id="surface7485961">
 <g style="fill:rgb(50.048876%,50.048876%,50.048876%);fill-opacity:1;">
   <use xlink:href="#glyph0-1" x="-0.146667" y="12.951"/>
   <use xlink:href="#glyph0-2" x="6.48" y="12.951"/>
@@ -32,8 +32,7 @@
   <use xlink:href="#glyph0-1" x="22.853333" y="12.951"/>
 </g>
 <g style="fill:rgb(50.048876%,50.048876%,50.048876%);fill-opacity:1;">
-  <use xlink:href="#glyph0-5" x="8.48" y="49.292"/>
-  <use xlink:href="#glyph0-4" x="16.64" y="49.292"/>
+  <use xlink:href="#glyph0-5" x="10.393333" y="49.292"/>
 </g>
 <path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke:rgb(50.048876%,50.048876%,50.048876%);stroke-opacity:1;stroke-miterlimit:10;" d="M 18.999219 21.341 L 18.999219 41.341 " transform="matrix(1,0,0,1,-4.8,-4.841)"/>
 </g>
