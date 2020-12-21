@@ -1,12 +1,6 @@
 Extension { #name : #BlockClosure }
 
 { #category : #'*MicroKanren-core' }
-BlockClosure >> eta [
-
-	^ self fresh
-]
-
-{ #category : #'*MicroKanren-core' }
 BlockClosure >> fresh [
 	^ Goal fresh: self
 ]

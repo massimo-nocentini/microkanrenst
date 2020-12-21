@@ -15,14 +15,14 @@ ArithTheory >> addero [
 				, m positiveo , n zeroo
 		then: (m unifyo value: r);
 		 if: (b unifyo value: 1)
-			, m zeroo then: [self addero !! {0. n. 1 asConsedBinaryRepr. r}] eta;
+			, m zeroo then: [self addero !! {0. n. 1 asConsedBinaryRepr. r}] fresh;
 		 if: (b unifyo value: 1)
-			, m positiveo , n zeroo then: [self addero !! {0. 1 asConsedBinaryRepr. m. r}] eta;
+			, m positiveo , n zeroo then: [self addero !! {0. 1 asConsedBinaryRepr. m. r}] fresh;
 		 if: n oneo , m oneo then: [:a :c | ({a. c} asCons unifyo value: r)
 			, (self bitFullAddero !! {b. 1. 1. a. c})] fresh;
-		 if: n oneo then: [self genAddero !! {b. n. m. r}] eta;
-		 if: n greaterThanOneo , m oneo then: r greaterThanOneo , [self addero !! {b. 1 asConsedBinaryRepr. n. r}] eta;
-		 if: n greaterThanOneo then: [self genAddero !! {b. n. m. r}] eta;
+		 if: n oneo then: [self genAddero !! {b. n. m. r}] fresh;
+		 if: n greaterThanOneo , m oneo then: r greaterThanOneo , [self addero !! {b. 1 asConsedBinaryRepr. n. r}] fresh;
+		 if: n greaterThanOneo then: [self genAddero !! {b. n. m. r}] fresh;
 		 yourself]
 ]
 
@@ -58,13 +58,13 @@ ArithTheory >> bitXoro [
 ArithTheory >> genAddero [
 	| µ |
 	µ := Theory sexp.
-	^ [:b :n :m :r | [:a :c :d :e :x :y :z | µ conso !! {a. x. n} , (µ conso !! {d. y. m}) , y positiveo , (µ conso !! {c. z. r}) , z positiveo , (self bitFullAddero !! {b. a. d. c. e}) , [self addero !! {e. x. y. z}] eta] fresh]
+	^ [:b :n :m :r | [:a :c :d :e :x :y :z | µ conso !! {a. x. n} , (µ conso !! {d. y. m}) , y positiveo , (µ conso !! {c. z. r}) , z positiveo , (self bitFullAddero !! {b. a. d. c. e}) , [self addero !! {e. x. y. z}] fresh] fresh]
 ]
 
 { #category : #'as yet unclassified' }
 ArithTheory >> greaterThanOneo [
 	^ [:x | [[:a :d :e | x
-		unifyo value: ({a. d} asConsWithCdr: e)] fresh] eta]
+		unifyo value: ({a. d} asConsWithCdr: e)] fresh] fresh]
 ]
 
 { #category : #'as yet unclassified' }
@@ -85,7 +85,7 @@ ArithTheory >> pluso [
 { #category : #'as yet unclassified' }
 ArithTheory >> positiveo [
 	^ [:x | [[:a :d | x unifyo
-		value: (a cons: d)] fresh] eta]
+		value: (a cons: d)] fresh] fresh]
 ]
 
 { #category : #'as yet unclassified' }

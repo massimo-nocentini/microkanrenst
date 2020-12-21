@@ -7,7 +7,7 @@ Class {
 { #category : #running }
 MKPredicateFives >> goal [
 
-	^ (5 unifyo value: firstArgument) | [ self ] eta
+	^ (5 unifyo value: firstArgument) | [ self ] fresh
 ]
 
 { #category : #accessing }

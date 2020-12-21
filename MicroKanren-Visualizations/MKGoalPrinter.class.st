@@ -84,8 +84,8 @@ MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 					ce left printOn: aStream.
 					aStream nextPutAll: ' ≠ '.
 					ce right printOn: aStream ]
-				otherwise: [ aStream nextPutAll: 'Ø°' ] ]
-		ifFalse: [ aStream nextPutAll: 'Ø°' ]
+				otherwise: [ aStream nextPutAll: 'Ø' ] ]
+		ifFalse: [ aStream nextPutAll: 'Ø' ]
 ]
 
 { #category : #printing }
@@ -134,14 +134,14 @@ MKGoalPrinter >> printOn: aStream aSucceed: aSucceed [
 	state path value == aSucceed
 		ifTrue: [ 
 			state reifyTopmostVariables
-				ifEmpty: [ aStream nextPutAll: '✓°' ]
+				ifEmpty: [ aStream nextPutAll: '✓' ]
 				ifNotEmpty: [ :assocs | 
 					assocs do: [ :each | 
 						each value printOn: aStream.
 						aStream nextPut: $/.
 						each key printOn: aStream.
 						aStream crlf ] ] ]
-		ifFalse: [ aStream nextPutAll: '✓°' ]
+		ifFalse: [ aStream nextPutAll: '✓' ]
 ]
 
 { #category : #printing }
