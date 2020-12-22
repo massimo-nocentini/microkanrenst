@@ -445,41 +445,119 @@ GoalTest >> testConde [
 ]
 
 { #category : #tests }
-GoalTest >> testConj [
+GoalTest >> testConjDisj [
 
 	| g |
-	self
-		assert: (true asGoal , true asGoal) solutions
-		equals: { Var tautology }
-		modulo: #asOrderedCollection.
-	g := [ :q | false asGoal , (true unifyo value: q) ] asGoal.
-	self assert: g solutions isEmpty.
-	g := [ :q | true asGoal , (false unifyo value: q) ] asGoal.
-	self
-		assert: g solutions
-		equals: { false }
-		modulo: #asOrderedCollection.
-	g := [ :a | (3 unifyo value: a) , (4 unifyo value: a) ] asGoal.
-	self assert: g solutions isEmpty.
 	g := [ :a | 
 	     (3 unifyo value: a) , (4 unifyo value: a) | (a unifyo value: 0) ]
 		     asGoal.
 	self assert: g solutions equals: { 0 } modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #tests }
+GoalTest >> testConjFailingSharing [
+
+	| g |
+	g := [ :x :y :z | 
+	     (3 unifyo value: x) , (z unifyo value: x) , (z unifyo value: 4) ]
+		     asGoal.
+	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #tests }
+GoalTest >> testConjFalseThreeWithVar [
+
+	| g |
+	g := [ :q | false asGoal , (3 unifyo value: q) ] asGoal.
+	self assert: g solutions isEmpty.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #tests }
+GoalTest >> testConjSucceedingSharing [
+
+	| g |
+	g := [ :z | 
+	     [ :x | (3 unifyo value: x) , (z unifyo value: x) ] asGoal ]
+		     asGoal.
+	self assert: g solutions equals: #( 3 ) modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #tests }
+GoalTest >> testConjSymmetry [
+
+	| g |
 	g := [ :a | (a unifyo value: 4) , (4 unifyo value: a) ] asGoal.
 	self assert: g solutions equals: { 4 } modulo: #asOrderedCollection.
-	g := [ :a | (3 unifyo value: a) , [ :b | 4 unifyo value: b ] asGoal ]
-		     asGoal.
-	self assert: g solutions equals: { 3 } modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #tests }
+GoalTest >> testConjThreeFour [
+
+	| g |
+	g := [ :a | (3 unifyo value: a) , (4 unifyo value: a) ] asGoal.
+	self assert: g solutions isEmpty.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #tests }
+GoalTest >> testConjThreeFourWithTwoVars [
+
+	| g |
 	g := [ :a :b | (3 unifyo value: a) , (4 unifyo value: b) ] asGoal.
 	self
 		assert: g solutions
 		equals: { { 3. 4 } }
 		modulo: #asOrderedCollection.
-	g := [ :x :y | (x unifyo value: 3) , (y unifyo value: 4) ] asGoal.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #tests }
+GoalTest >> testConjThreeFresh [
+
+	| g |
+	g := [ :a | (3 unifyo value: a) , [ :b | 4 unifyo value: b ] asGoal ]
+		     asGoal.
+	self assert: g solutions equals: { 3 } modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #tests }
+GoalTest >> testConjTrueThreeWithThree [
+
+	| g |
+	g := [ :q | true asGoal , (3 unifyo value: 3) ] asGoal.
 	self
 		assert: g solutions
-		equals: { { 3. 4 } }
-		modulo: #asOrderedCollection
+		equals: { 0 asReifiedVar }
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #tests }
+GoalTest >> testConjTrueTrue [
+
+	| g |
+	g := true asGoal , true asGoal.
+	self
+		assert: g solutions
+		equals: { Var tautology }
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
 { #category : #tests }
@@ -624,6 +702,19 @@ GoalTest >> testDisjFalseFalse [
 	| g |
 	g := false asGoal | false asGoal.
 	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testDisjFourWithVarOrThreeWithVar [
+
+	| g |
+	g := [ :a | (4 unifyo value: a) | (3 unifyo value: a) ] asGoal.
+	self
+		assert: g solutions
+		equals: { 4. 3 }
+		modulo: #asOrderedCollection.
 
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
