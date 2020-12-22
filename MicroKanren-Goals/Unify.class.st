@@ -7,12 +7,10 @@ Class {
 { #category : #running }
 Unify >> onState: aState afterPushingGoal: aGoal [
 
-	| extendedState |
-	^ [ 
-	  extendedState := aState unifier value: left value: right.
-	  true asGoal onState: extendedState ]
-		  on: UnificationError
-		  do: [ :e | 
-			  extendedState := aState failedBecauseOfUnificationError: e.
-			  false asGoal onState: extendedState ]
+	| aStateOrException |
+	aStateOrException := Continuation currentDo: [ :k | 
+		                     aState unifier
+			                     continuation: k;
+			                     value: left value: right ].
+	^ aStateOrException onState: aState afterUnificationByUnify: self
 ]

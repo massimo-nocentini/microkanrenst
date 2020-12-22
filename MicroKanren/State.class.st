@@ -95,6 +95,12 @@ State >> isSound [
 ]
 
 { #category : #'as yet unclassified' }
+State >> onState: aState afterUnificationByUnify: aGoal [
+
+	^ true asGoal onState: self
+]
+
+{ #category : #'as yet unclassified' }
 State >> path [
 	^ path
 ]

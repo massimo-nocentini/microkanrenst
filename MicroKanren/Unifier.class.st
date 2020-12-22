@@ -2,10 +2,17 @@ Class {
 	#name : #Unifier,
 	#superclass : #Object,
 	#instVars : [
-		'state'
+		'state',
+		'continuation'
 	],
 	#category : #MicroKanren
 }
+
+{ #category : #accessing }
+Unifier >> continuation: anObject [
+
+	continuation := anObject
+]
 
 { #category : #dispatched }
 Unifier >> forArray: anArray forArray: anotherArray [
@@ -14,17 +21,23 @@ Unifier >> forArray: anArray forArray: anotherArray [
 		  ifTrue: [ 
 		  self forCons: anArray asCons forCons: anotherArray asCons ]
 		  ifFalse: [ 
-			  UnificationError new
-				  left: anArray;
-				  right: anotherArray;
-				  signal: 'they have different sizes' ]
+			  | error |
+			  error := UnificationError new
+				           left: anArray;
+				           right: anotherArray;
+				           messageText: 'they have different sizes';
+				           yourself.
+			  continuation value: error ]
 ]
 
 { #category : #dispatched }
-Unifier >> forCons: aCons forCons: anotherCons [ 
+Unifier >> forCons: aCons forCons: anotherCons [
+
 	| carState |
-	carState := state unifier value: aCons car value: anotherCons car.
-	^ carState unifier value: aCons cdr value: anotherCons cdr
+	carState := self value: aCons car value: anotherCons car.
+	^ carState unifier
+		  continuation: continuation;
+		  value: aCons cdr value: anotherCons cdr
 ]
 
 { #category : #unification }
@@ -34,12 +47,18 @@ Unifier >> forLinkedList: aCollection forLinkedList: anotherCollection [
 		  ifTrue: [ 
 			  (aCollection zip: anotherCollection)
 				  inject: state
-				  into: [ :s :pair | s unifier value: pair key value: pair value ] ]
+				  into: [ :s :pair | 
+					  s unifier
+						  continuation: continuation;
+						  value: pair key value: pair value ] ]
 		  ifFalse: [ 
-			  UnificationError new
-				  left: aCollection;
-				  right: anotherCollection;
-				  signal: 'they have different sizes' ]
+			  | error |
+			  error := UnificationError new
+				           left: aCollection;
+				           right: anotherCollection;
+				           messageText: 'they have different sizes';
+				           yourself.
+			  continuation value: error ]
 ]
 
 { #category : #unification }
@@ -48,10 +67,12 @@ Unifier >> forObject: anObj forObject: anotherObj [
 	^ anObj = anotherObj
 		  ifTrue: [ state ]
 		  ifFalse: [ 
-			  UnificationError new
-				  left: anObj;
-				  right: anotherObj;
-				  signal ]
+			  | error |
+			  error := UnificationError new
+				           left: anObj;
+				           right: anotherObj;
+				           yourself.
+			  continuation value: error ]
 ]
 
 { #category : #unification }
@@ -85,11 +106,10 @@ Unifier >> state: aState [
 ]
 
 { #category : #dispatching }
-Unifier >> value: anObj value: anotherObj [ 
+Unifier >> value: anObj value: anotherObj [
+
 	| aWalkedObj anotherWalkedObj |
 	aWalkedObj := state walk: anObj.
 	anotherWalkedObj := state walk: anotherObj.
-	^ aWalkedObj
-		unifyWith: anotherWalkedObj
-		usingUnifier: self
+	^ aWalkedObj unifyWith: anotherWalkedObj usingUnifier: self
 ]
