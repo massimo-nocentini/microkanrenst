@@ -201,7 +201,7 @@ goal construction.</p>
 <p class="admonition-title">Warning</p>
 <p>Any reference to external objects beyond this scope should be prohibited.</p>
 </div>
-<p>To be polymorphic with me, the <a class="reference internal" href="onState%3A.html#onstate-message-label"><span class="std std-ref">onState: message</span></a> has to be
+<p>To be polymorphic with me, the <span class="xref std std-ref">onState-message-label</span> has to be
 implemented, as my subclasses have to; as the reader will understand
 following the referenced doc, it is the main message to respond to in order
 to get into a logic computation.</p>
@@ -227,23 +227,7 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>false</cite>, as f
 </pre></div>
 </div>
 <blockquote>
-<div><p>where</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>False &gt;&gt; asGoal 
-
-	^ Goal fail
-</pre></div>
-</div>
-<blockquote>
-<div><p>and, in turn, where</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>Goal class &gt;&gt; fail 
-
-	^ Failed new
-</pre></div>
-</div>
-</div></blockquote>
-</div></blockquote>
-<p>I am rendered as</p>
-<img alt="_images/GoalTest-testFailed.svg" class="align-center" src="_images/GoalTest-testFailed.svg" /><p>in computation tree visualizations.</p>
+<div><img alt="_images/GoalTest-testFailed.svg" class="align-center" src="_images/GoalTest-testFailed.svg" /></div></blockquote>
 </div>
 <div class="section" id="succeed">
 <h2>Succeed<a class="headerlink" href="#succeed" title="Permalink to this headline">¶</a></h2>
@@ -270,29 +254,13 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 </pre></div>
 </div>
 <blockquote>
-<div><p>where, on one hand,</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>True &gt;&gt; asGoal 
-
-	^ Goal succeed
-</pre></div>
-</div>
-<blockquote>
-<div><p>and, in turn, where</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>Goal class &gt;&gt; succeed 
-
-	^ Succeed new
-</pre></div>
-</div>
-</div></blockquote>
-<p>On the other hand,</p>
+<div><img alt="_images/GoalTest-testSucceed.svg" class="align-center" src="_images/GoalTest-testSucceed.svg" /><p>where</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>Var class &gt;&gt; tautology 
 
 	^ #tautology
 </pre></div>
 </div>
 </div></blockquote>
-<p>I am rendered as</p>
-<img alt="_images/GoalTest-testSucceed.svg" class="align-center" src="_images/GoalTest-testSucceed.svg" /><p>in computation tree visualizations.</p>
 </div>
 <div class="section" id="fresh">
 <h2>Fresh<a class="headerlink" href="#fresh" title="Permalink to this headline">¶</a></h2>
@@ -304,13 +272,13 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 </div>
 <p>I am a goal that represent logical falsehood, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-fresh"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:fresh</span></code></a> production.</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>GoalTest &gt;&gt; testFreshFailed 
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFreshFailed</span> 
 
-	| g |
-	g := [ :q | false asGoal ] fresh.
-	self assert: g solutions equals: {  } modulo: #asOrderedCollection. &quot; #()&quot;
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">false</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; #()&quot;</span>
 
-	^ self exportComputationTreeOfGoal: g limitedTo: -1
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -318,7 +286,7 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFreshSucceed</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
@@ -328,11 +296,19 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 </pre></div>
 </div>
 <blockquote>
-<div><img alt="_images/GoalTest-testFreshSucceed.svg" class="align-center" src="_images/GoalTest-testFreshSucceed.svg" /></div></blockquote>
+<div><img alt="_images/GoalTest-testFreshSucceed.svg" class="align-center" src="_images/GoalTest-testFreshSucceed.svg" /><p>where</p>
+<blockquote>
+<div><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>Integer &gt;&gt; asReifiedVar 
+
+	^ self asReifiedWithVarClass: ReifiedVar
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFreshMultipleVars</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> (<span class="nc">Array</span> <span class="nf">with:</span> { 
@@ -345,6 +321,8 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testFreshMultipleVars.svg" class="align-center" src="_images/GoalTest-testFreshMultipleVars.svg" /></div></blockquote>
+<p>Moreover, we can also use a block without arguments in order to
+postpone the computation, for instance to support recursive goals such as</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testEtaRaw</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -356,7 +334,7 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 <div><p>where</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nf">eternity:</span> <span class="nv">x</span> 
 
-	<span class="o">^</span> [ <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nv">x</span> ] <span class="nf">fresh</span>
+	<span class="o">^</span> [ <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -384,22 +362,28 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 </pre></div>
 </div>
 <blockquote>
-<div><img alt="_images/GoalTest-testUnifyThreeWithThree.svg" class="align-center" src="_images/GoalTest-testUnifyThreeWithThree.svg" /></div></blockquote>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyFourWithThree</span> 
+<div><img alt="_images/GoalTest-testUnifyThreeWithThree.svg" class="align-center" src="_images/GoalTest-testUnifyThreeWithThree.svg" /><p>where</p>
+<blockquote>
+<div><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>Object &gt;&gt; unifyo 
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
-	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
-
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+	^ [ :anObject | self unifyWith: anObject ]
 </pre></div>
 </div>
-<blockquote>
-<div><img alt="_images/GoalTest-testUnifyFourWithThree.svg" class="align-center" src="_images/GoalTest-testUnifyFourWithThree.svg" /></div></blockquote>
+<p>and</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Object</span> <span class="nf">&gt;&gt;</span> <span class="nf">unifyWith:</span> <span class="nv">another</span> 
+
+	<span class="o">^</span> <span class="nc">Unify</span> <span class="nb">new</span>
+		  <span class="nf">left:</span> <span class="bp">self</span><span class="p">;</span>
+		  <span class="nf">right:</span> <span class="nv">another</span><span class="p">;</span>
+		  <span class="nf">yourself</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifySymmetryFourWithVar</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
@@ -410,7 +394,7 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifySymmetryVarWithFour</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="nv">q</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="nv">q</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
@@ -422,8 +406,8 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> ] <span class="nf">fresh</span> ]
-		     <span class="nf">fresh</span><span class="p">.</span>
+	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> ]
+		     <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { 
@@ -436,6 +420,23 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyWithTopmostSharing.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostSharing.svg" /></div></blockquote>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyWithTopmostWithoutSharing</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
+	     (<span class="nc">LinkedList</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">r</span>) <span class="nf">asCons</span> <span class="nf">unifyo</span> <span class="nf">value:</span>
+		     (<span class="nc">LinkedList</span> <span class="nf">with:</span> <span class="m">1</span> <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> ] <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; an Array(•₀)&quot;</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testUnifyWithTopmostWithoutSharing.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostWithoutSharing.svg" /></div></blockquote>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyWithTopmostSharingWithRepetition</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -445,7 +446,7 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 		      <span class="nf">with:</span> <span class="nv">x</span>
 		      <span class="nf">with:</span> <span class="nv">y</span>
 		      <span class="nf">with:</span> <span class="nv">x</span>
-		      <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">fresh</span> ] <span class="nf">fresh</span><span class="p">.</span>
+		      <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { 
@@ -460,29 +461,12 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyWithTopmostSharingWithRepetition.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostSharingWithRepetition.svg" /></div></blockquote>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyWithTopmostWithoutSharing</span> 
-
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
-	     (<span class="nc">LinkedList</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">r</span>) <span class="nf">asCons</span> <span class="nf">unifyo</span> <span class="nf">value:</span>
-		     (<span class="nc">LinkedList</span> <span class="nf">with:</span> <span class="m">1</span> <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> ] <span class="nf">fresh</span> ] <span class="nf">fresh</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-		<span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; an Array(•₀)&quot;</span>
-
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
-</pre></div>
-</div>
-<blockquote>
-<div><img alt="_images/GoalTest-testUnifyWithTopmostWithoutSharing.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostWithoutSharing.svg" /></div></blockquote>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifySharing</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> (<span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="bp">true</span>) ] <span class="nf">fresh</span> ]
-		     <span class="nf">fresh</span><span class="p">.</span>
+	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> (<span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="bp">true</span>) ] <span class="nf">asGoal</span> ]
+		     <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { <span class="bp">true</span> }
@@ -493,6 +477,20 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifySharing.svg" class="align-center" src="_images/GoalTest-testUnifySharing.svg" /></div></blockquote>
+<p>The previous examples show unifications that can be satisfied; on the
+contrary, when two objects cannot be equal for any substitution we have
+a <cite>Failed</cite> goal holding the counterexample, such as</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyFourWithThree</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testUnifyFourWithThree.svg" class="align-center" src="_images/GoalTest-testUnifyFourWithThree.svg" /></div></blockquote>
 </div>
 <div class="section" id="disj">
 <h2>Disj<a class="headerlink" href="#disj" title="Permalink to this headline">¶</a></h2>
@@ -504,50 +502,123 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 </div>
 <p>I am a goal that represent logical union, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-disj"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:disj</span></code></a> production.</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisj</span> 
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjFalseFalse</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testDisjFalseFalse.svg" class="align-center" src="_images/GoalTest-testDisjFalseFalse.svg" /></div></blockquote>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjTrueFalse</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
-		<span class="nf">assert:</span> (<span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">false</span> <span class="nf">asGoal</span>) <span class="nf">solutions</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
 		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testDisjTrueFalse.svg" class="align-center" src="_images/GoalTest-testDisjTrueFalse.svg" /></div></blockquote>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjTrueTrue</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
-		<span class="nf">assert:</span> (<span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span>) <span class="nf">solutions</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { 
 				<span class="nc">Var</span> <span class="nf">tautology</span><span class="p">.</span>
 				<span class="nc">Var</span> <span class="nf">tautology</span> }
 		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">fresh</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testDisjTrueTrue.svg" class="align-center" src="_images/GoalTest-testDisjTrueTrue.svg" /></div></blockquote>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithThreeOrFourWithVar</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { 
+				<span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
+				<span class="m">4</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg" /></div></blockquote>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithVarOrFourWithVar</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">4</span> }
 		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">fresh</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-		<span class="nf">equals:</span> { <span class="m">4</span><span class="p">.</span> <span class="m">3</span> }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">fresh</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg" /></div></blockquote>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithVarOrThreeWithVar</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">3</span> }
 		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" /></div></blockquote>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeFourThenFive</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
 	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ]
-		     <span class="nf">fresh</span><span class="p">.</span>
+		     <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">4</span> }
 		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testDisjThreeFourThenFive.svg" class="align-center" src="_images/GoalTest-testDisjThreeFourThenFive.svg" /></div></blockquote>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeThenFourFive</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
 	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)
-	     <span class="nf">|</span> ((<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)) ] <span class="nf">fresh</span><span class="p">.</span>
+	     <span class="nf">|</span> ((<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">4</span><span class="p">.</span> <span class="m">5</span> }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/GoalTest-testDisjThreeThenFourFive.svg" class="align-center" src="_images/GoalTest-testDisjThreeThenFourFive.svg" /></div></blockquote>
 </div>
 </div>
 <div class="section" id="predicates">
@@ -555,7 +626,7 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFivesByPredicate</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateFives</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">fresh</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateFives</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
 		<span class="nf">equals:</span> { <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span> }

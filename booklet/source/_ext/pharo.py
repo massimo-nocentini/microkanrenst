@@ -59,7 +59,7 @@ class PharoAutoCompiledMethodDirective(Directive):
         messageDef = pharoExportDict['messages'][selector[1:]]
         compiled_method = messageDef['implementors'][className]
         compiled_method['description'] = [''] + ['  ' + str(s) for s in self.content]
-        compiled_method['sourceCode'][0] = '{} >> {} '.format(className, compiled_method['sourceCode'][0])
+        sourceCode = ['{} >> {} '.format(className, compiled_method['sourceCode'][0])] + compiled_method['sourceCode'][1:]
         #del compiled_method['sourceCode'][1]
         #compiled_method['sourceCode'].append(']')
 
@@ -80,7 +80,7 @@ class PharoAutoCompiledMethodDirective(Directive):
 
         #title_node = docutils.nodes.title(text=className, refid=className)
         definition_node = docutils.nodes.literal_block(text=#'\n' + 
-                            '\n'.join(compiled_method['sourceCode']), language='smalltalk')
+                            '\n'.join(sourceCode), language='smalltalk')
 
         return [definition_node] + node.children
 

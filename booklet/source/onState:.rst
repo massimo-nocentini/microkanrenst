@@ -1,6 +1,4 @@
 
-.. _onState-message-label:
-
 ``onState:`` message
 ====================
 
@@ -53,8 +51,4 @@ the search space of both succeeding and failing states.
 .. pharo:autocompiledmethod:: Suspended>>#onState:afterPushingGoal:
 
 
-
-The following should be put in another file.
-
-.. pharo:autocompiledmethod:: Goal_class>>#unify:with:
 

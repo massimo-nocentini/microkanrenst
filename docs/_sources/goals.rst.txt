@@ -56,20 +56,8 @@ Failed
 
   .. pharo:autocompiledmethod:: GoalTest>>#testFailed
 
-    where
-
-    .. pharo:autocompiledmethod:: False>>#asGoal
-
-      and, in turn, where
-
-      .. pharo:autocompiledmethod:: Goal_class>>#fail
-
-  I am rendered as
-
-  .. image:: _images/GoalTest-testFailed.svg
-    :align: center
-
-  in computation tree visualizations.
+    .. image:: _images/GoalTest-testFailed.svg
+      :align: center
 
 Succeed
 -------
@@ -82,24 +70,13 @@ Succeed
 
   .. pharo:autocompiledmethod:: GoalTest>>#testSucceed
     
-    where, on one hand,
+    .. image:: _images/GoalTest-testSucceed.svg
+      :align: center
 
-    .. pharo:autocompiledmethod:: True>>#asGoal
-
-      and, in turn, where
-
-      .. pharo:autocompiledmethod:: Goal_class>>#succeed
-
-    On the other hand,  
+    where
 
     .. pharo:autocompiledmethod:: Var_class>>#tautology
 
-  I am rendered as
-
-  .. image:: _images/GoalTest-testSucceed.svg
-    :align: center
-
-  in computation tree visualizations.
 
 Fresh
 -----
@@ -119,10 +96,17 @@ Fresh
     .. image:: _images/GoalTest-testFreshSucceed.svg
       :align: center
 
+    where
+
+      .. pharo:autocompiledmethod:: Integer>>#asReifiedVar
+
   .. pharo:autocompiledmethod:: GoalTest>>#testFreshMultipleVars
 
     .. image:: _images/GoalTest-testFreshMultipleVars.svg
       :align: center
+
+  Moreover, we can also use a block without arguments in order to 
+  postpone the computation, for instance to support recursive goals such as
 
   .. pharo:autocompiledmethod:: GoalTest>>#testEtaRaw
 
@@ -143,10 +127,13 @@ Unify
     .. image:: _images/GoalTest-testUnifyThreeWithThree.svg
       :align: center
 
-  .. pharo:autocompiledmethod:: GoalTest>>#testUnifyFourWithThree
+    where
 
-    .. image:: _images/GoalTest-testUnifyFourWithThree.svg
-      :align: center
+      .. pharo:autocompiledmethod:: Object>>#unifyo
+      
+      and
+
+      .. pharo:autocompiledmethod:: Object>>#unifyWith:
 
   .. pharo:autocompiledmethod:: GoalTest>>#testUnifySymmetryFourWithVar
 
@@ -163,19 +150,28 @@ Unify
     .. image:: _images/GoalTest-testUnifyWithTopmostSharing.svg
       :align: center
 
-  .. pharo:autocompiledmethod:: GoalTest>>#testUnifyWithTopmostSharingWithRepetition
-
-    .. image:: _images/GoalTest-testUnifyWithTopmostSharingWithRepetition.svg
-      :align: center
-
   .. pharo:autocompiledmethod:: GoalTest>>#testUnifyWithTopmostWithoutSharing
 
     .. image:: _images/GoalTest-testUnifyWithTopmostWithoutSharing.svg
       :align: center
 
+  .. pharo:autocompiledmethod:: GoalTest>>#testUnifyWithTopmostSharingWithRepetition
+
+    .. image:: _images/GoalTest-testUnifyWithTopmostSharingWithRepetition.svg
+      :align: center
+
   .. pharo:autocompiledmethod:: GoalTest>>#testUnifySharing
 
     .. image:: _images/GoalTest-testUnifySharing.svg
+      :align: center
+
+  The previous examples show unifications that can be satisfied; on the 
+  contrary, when two objects cannot be equal for any substitution we have
+  a `Failed` goal holding the counterexample, such as
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testUnifyFourWithThree
+
+    .. image:: _images/GoalTest-testUnifyFourWithThree.svg
       :align: center
 
 
@@ -187,7 +183,46 @@ Disj
   I am a goal that represent logical union, in particular I encode the
   :token:`goalGrammar:disj` production.
 
-  .. pharo:autocompiledmethod:: GoalTest>>#testDisj
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjFalseFalse
+
+    .. image:: _images/GoalTest-testDisjFalseFalse.svg
+      :align: center
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjTrueFalse
+
+    .. image:: _images/GoalTest-testDisjTrueFalse.svg
+      :align: center
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjTrueTrue
+
+    .. image:: _images/GoalTest-testDisjTrueTrue.svg
+      :align: center
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeWithThreeOrFourWithVar
+
+    .. image:: _images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg
+      :align: center
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeWithVarOrFourWithVar
+
+    .. image:: _images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg
+      :align: center
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeWithVarOrThreeWithVar
+
+    .. image:: _images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg
+      :align: center
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeFourThenFive
+
+    .. image:: _images/GoalTest-testDisjThreeFourThenFive.svg
+      :align: center
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeThenFourFive
+
+    .. image:: _images/GoalTest-testDisjThreeThenFourFive.svg
+      :align: center
+
 
 Predicates
 ==========

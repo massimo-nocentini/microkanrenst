@@ -88,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="goals.html">Goals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="goals.html#predicates">Predicates</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Messages</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#asgoal-message"><code class="docutils literal notranslate"><span class="pre">asGoal</span></code> message</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#onstate-message"><code class="docutils literal notranslate"><span class="pre">onState:</span></code> message</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#onstate-afterpushinggoal-message"><code class="docutils literal notranslate"><span class="pre">onState:afterPushingGoal:</span></code> message</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#walk-message"><code class="docutils literal notranslate"><span class="pre">walk:</span></code> message</a></li>
@@ -161,8 +162,30 @@
             
   <div class="section" id="messages">
 <h1>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="asgoal-message">
+<h2><code class="docutils literal notranslate"><span class="pre">asGoal</span></code> message<a class="headerlink" href="#asgoal-message" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>False &gt;&gt; asGoal 
+
+	^ Failed new
+</pre></div>
+</div>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>True &gt;&gt; asGoal 
+
+	^ Succeed new
+</pre></div>
+</div>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>BlockClosure &gt;&gt; asGoal 
+
+	^ (numArgs = 0
+		   ifTrue: [ Eta new ]
+		   ifFalse: [ Fresh new ])
+		  receiver: self;
+		  yourself
+</pre></div>
+</div>
+</div>
 <div class="section" id="onstate-message">
-<span id="onstate-message-label"></span><h2><code class="docutils literal notranslate"><span class="pre">onState:</span></code> message<a class="headerlink" href="#onstate-message" title="Permalink to this headline">¶</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">onState:</span></code> message<a class="headerlink" href="#onstate-message" title="Permalink to this headline">¶</a></h2>
 <p>This is <em>the fundamental</em> message of the whole system because it allows us to explore
 the search space of both succeeding and failing states.</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> 
@@ -187,10 +210,9 @@ the search space of both succeeding and failing states.</p>
 </div>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Eta</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> 
 
-	<span class="nv">nestedGoal</span>
-		<span class="nf">ifNil:</span> [ <span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">value</span> ]
-		<span class="nf">ifNotNil:</span> [ <span class="nc">Error</span> <span class="nf">signal</span> ]<span class="p">.</span>
-	<span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span>
+	<span class="o">^</span> [ 
+	  <span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">value</span><span class="p">.</span>
+	  <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
 </pre></div>
 </div>
 </div>
@@ -293,14 +315,12 @@ without creating a new copy of it.</p>
 </div></blockquote>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Unify</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span> 
 
-	<span class="o">|</span><span class="nv"> extendedState </span><span class="o">|</span>
-	<span class="o">^</span> [ 
-	  <span class="nv">extendedState</span> <span class="o">:=</span> <span class="nv">aState</span> <span class="nf">unifier</span> <span class="nf">value:</span> <span class="nv">left</span> <span class="nf">value:</span> <span class="nv">right</span><span class="p">.</span>
-	  <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">onState:</span> <span class="nv">extendedState</span> ]
-		  <span class="nf">on:</span> <span class="nc">UnificationError</span>
-		  <span class="nf">do:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> 
-			  <span class="nv">extendedState</span> <span class="o">:=</span> <span class="nv">aState</span> <span class="nf">failedBecauseOfUnificationError:</span> <span class="nv">e</span><span class="p">.</span>
-			  <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">onState:</span> <span class="nv">extendedState</span> ]
+	<span class="o">|</span><span class="nv"> aStateOrException </span><span class="o">|</span>
+	<span class="nv">aStateOrException</span> <span class="o">:=</span> <span class="nc">Continuation</span> <span class="nf">currentDo:</span> [ <span class="o">:</span><span class="nv">k</span> <span class="o">|</span> 
+		                     <span class="nv">aState</span> <span class="nf">unifier</span>
+			                     <span class="nf">continuation:</span> <span class="nv">k</span><span class="p">;</span>
+			                     <span class="nf">value:</span> <span class="nv">left</span> <span class="nf">value:</span> <span class="nv">right</span> ]<span class="p">.</span>
+	<span class="o">^</span> <span class="nv">aStateOrException</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterUnificationByUnify:</span> <span class="bp">self</span>
 </pre></div>
 </div>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Cond</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
@@ -325,22 +345,6 @@ without creating a new copy of it.</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Suspended</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
 
 	<span class="o">^</span> [ <span class="nv">nestedGoal</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
-</pre></div>
-</div>
-<p>The following should be put in another file.</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="nf">unify:</span> <span class="nv">anObj</span> <span class="nf">with:</span> <span class="nv">another</span> 
-
-	<span class="c">&quot;</span>
-<span class="c">:param Object anObj: the object that should be unified with `another`.</span>
-<span class="c">:param Object another: the object that should be unified with `anObj`.</span>
-<span class="c">:return: a goal that tries to perform unification.</span>
-<span class="c">:rtype: Unify</span>
-<span class="c">&quot;</span>
-
-	<span class="o">^</span> <span class="nc">Unify</span> <span class="nb">new</span>
-		  <span class="nf">left:</span> <span class="nv">anObj</span><span class="p">;</span>
-		  <span class="nf">right:</span> <span class="nv">another</span><span class="p">;</span>
-		  <span class="nf">yourself</span>
 </pre></div>
 </div>
 </div>
