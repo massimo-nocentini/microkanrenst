@@ -51,15 +51,6 @@ GoalTest >> nats: x stage: i offset: o [
 	^ (x unifyo value: i) | [ self nats: x stage: i + o offset: o] asGoal
 ]
 
-{ #category : #'as yet unclassified' }
-GoalTest >> onState: aState [
-	| aGoal aStream templateGoal |
-	aStream := Run new
-		goal: aGoal;
-		onState: aState.
-	[ :solState | templateGoal onState: solState ] >>= aStream
-]
-
 { #category : #tests }
 GoalTest >> patho: edgeo [
 	| patho |
@@ -940,6 +931,19 @@ GoalTest >> testFives [
 ]
 
 { #category : #'as yet unclassified' }
+GoalTest >> testFivesByNats [
+
+	| g |
+	g := [ :x | self repeat: x value: 5 ] asGoal.
+	self
+		assert: (g solutions next: 10)
+		equals: { 5. 5. 5. 5. 5. 5. 5. 5. 5. 5 }
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: 10
+]
+
+{ #category : #'as yet unclassified' }
 GoalTest >> testFivesByPredicate [
 
 	| g |
@@ -1124,13 +1128,16 @@ GoalTest >> testLolo [
 
 { #category : #'as yet unclassified' }
 GoalTest >> testNats [
+
 	| g M |
 	M := 1000.
 	g := [ :x | self nats: x ] asGoal.
 	self
 		assert: (g solutions next: M)
 		equals: (0 to: M - 1)
-		modulo: #asOrderedCollection
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: 10
 ]
 
 { #category : #'as yet unclassified' }
