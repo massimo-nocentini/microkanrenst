@@ -28,7 +28,7 @@
 </symbol>
 </g>
 </defs>
-<g id="surface7532454">
+<g id="surface7532798">
 <g style="fill:rgb(50.048876%,50.048876%,50.048876%);fill-opacity:1;">
   <use xlink:href="#glyph0-1" x="-1.066667" y="12.951"/>
   <use xlink:href="#glyph0-2" x="2.973333" y="12.951"/>
@@ -42,10 +42,10 @@
   <use xlink:href="#glyph0-3" x="41.026667" y="12.951"/>
 </g>
 <g style="fill:rgb(50.048876%,50.048876%,50.048876%);fill-opacity:1;">
-  <use xlink:href="#glyph0-7" x="23.146667" y="49.292"/>
+  <use xlink:href="#glyph0-2" x="12.6" y="49.292"/>
 </g>
 <g style="fill:rgb(50.048876%,50.048876%,50.048876%);fill-opacity:1;">
-  <use xlink:href="#glyph0-2" x="12.6" y="49.292"/>
+  <use xlink:href="#glyph0-7" x="23.146667" y="49.292"/>
 </g>
 <path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke:rgb(50.048876%,50.048876%,50.048876%);stroke-opacity:1;stroke-miterlimit:10;" d="M 26.000677 21.341 L 26.000677 31.341 L 21.000677 31.341 L 21.000677 41.341 " transform="matrix(1,0,0,1,-4.973333,-4.841)"/>
 <path style="fill:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke:rgb(50.048876%,50.048876%,50.048876%);stroke-opacity:1;stroke-miterlimit:10;" d="M 26.000677 21.341 L 26.000677 31.341 L 32.000677 31.341 L 32.000677 41.341 " transform="matrix(1,0,0,1,-4.973333,-4.841)"/>

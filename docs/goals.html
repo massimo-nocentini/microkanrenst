@@ -37,7 +37,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Messages" href="messages.html" />
+    <link rel="next" title="Predicates" href="predicates.html" />
     <link rel="prev" title="Overview" href="overview.html" /> 
 </head>
 
@@ -92,9 +92,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#fresh">Fresh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#unify">Unify</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#disj">Disj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conj">Conj</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#predicates">Predicates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicates.html">Predicates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="messages.html">Messages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="theories.html">Theories</a></li>
 </ul>
@@ -183,8 +184,9 @@ the following abstract grammar:</p>
                  <a class="reference internal" href="#grammar-token-goalGrammar-fresh"><code class="xref docutils literal notranslate"><span class="pre">fresh</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-eta"><code class="xref docutils literal notranslate"><span class="pre">eta</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-predicate"><code class="xref docutils literal notranslate"><span class="pre">predicate</span></code></a>
 <strong id="grammar-token-goalGrammar-failed"><span id="grammar-token-failed"></span>failed     </strong> ::=  &quot;Ø&quot;
 <strong id="grammar-token-goalGrammar-succeed"><span id="grammar-token-succeed"></span>succeed    </strong> ::=  &quot;✓&quot;
-<strong id="grammar-token-goalGrammar-binary_goal"><span id="grammar-token-binary-goal"></span>binary_goal</strong> ::=  <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a> (<a class="reference internal" href="#grammar-token-goalGrammar-disj"><code class="xref docutils literal notranslate"><span class="pre">disj</span></code></a> | &quot;&amp;&quot; | <a class="reference internal" href="#grammar-token-goalGrammar-unify"><code class="xref docutils literal notranslate"><span class="pre">unify</span></code></a> | &quot;!&quot; | &quot;≠&quot;) <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a>
+<strong id="grammar-token-goalGrammar-binary_goal"><span id="grammar-token-binary-goal"></span>binary_goal</strong> ::=  <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a> (<a class="reference internal" href="#grammar-token-goalGrammar-disj"><code class="xref docutils literal notranslate"><span class="pre">disj</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-conj"><code class="xref docutils literal notranslate"><span class="pre">conj</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-unify"><code class="xref docutils literal notranslate"><span class="pre">unify</span></code></a> | &quot;!&quot; | &quot;≠&quot;) <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a>
 <strong id="grammar-token-goalGrammar-disj"><span id="grammar-token-disj"></span>disj       </strong> ::=  &quot;|º&quot;
+<strong id="grammar-token-goalGrammar-conj"><span id="grammar-token-conj"></span>conj       </strong> ::=  &quot;&amp;º&quot;
 <strong id="grammar-token-goalGrammar-unify"><span id="grammar-token-unify"></span>unify      </strong> ::=  &quot;=º&quot;
 <strong id="grammar-token-goalGrammar-fresh"><span id="grammar-token-fresh"></span>fresh      </strong> ::=  &quot;fresh&quot; [<a class="reference internal" href="#grammar-token-goalGrammar-var"><code class="xref docutils literal notranslate"><span class="pre">var</span></code></a>] +  &quot;.&quot; <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a>
 <strong id="grammar-token-goalGrammar-eta"><span id="grammar-token-eta"></span>eta        </strong> ::=  &quot;eta&quot; &quot;.&quot; <a class="reference internal" href="#grammar-token-goalGrammar-goal"><code class="xref docutils literal notranslate"><span class="pre">goal</span></code></a>
@@ -502,6 +504,8 @@ a <cite>Failed</cite> goal holding the counterexample, such as</p>
 </div>
 <p>I am a goal that represent logical union, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-disj"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:disj</span></code></a> production.</p>
+<p>On the one hand, <cite>false asGoal</cite> is the neutral element for disjunction, so
+that both</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjFalseFalse</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -513,6 +517,7 @@ a <cite>Failed</cite> goal holding the counterexample, such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjFalseFalse.svg" class="align-center" src="_images/GoalTest-testDisjFalseFalse.svg" /></div></blockquote>
+<p>and</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjTrueFalse</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -527,6 +532,7 @@ a <cite>Failed</cite> goal holding the counterexample, such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjTrueFalse.svg" class="align-center" src="_images/GoalTest-testDisjTrueFalse.svg" /></div></blockquote>
+<p>behave as usual in logic. On the other hand,</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjTrueTrue</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -543,6 +549,23 @@ a <cite>Failed</cite> goal holding the counterexample, such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjTrueTrue.svg" class="align-center" src="_images/GoalTest-testDisjTrueTrue.svg" /></div></blockquote>
+<p>surprises with <em>two</em> solutions instead of one because <cite>true asGoal |º b</cite> doesn’t bypass
+the exploration of the goal <cite>b</cite>. For the sake of clarity, two solutions are provided both by</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithVarOrThreeWithVar</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">3</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" /></div></blockquote>
+<p>and</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithThreeOrFourWithVar</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -559,6 +582,8 @@ a <cite>Failed</cite> goal holding the counterexample, such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg" /></div></blockquote>
+<p>which leaves the variable unbound in the leftmost path.  Disjunction is
+<em>commutative</em>, so that both</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithVarOrFourWithVar</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -573,20 +598,24 @@ a <cite>Failed</cite> goal holding the counterexample, such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg" /></div></blockquote>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithVarOrThreeWithVar</span> 
+<p>and</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjFourWithVarOrThreeWithVar</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-		<span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">3</span> }
+		<span class="nf">equals:</span> { <span class="m">4</span><span class="p">.</span> <span class="m">3</span> }
 		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
-<div><img alt="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" /></div></blockquote>
+<div><img alt="_images/GoalTest-testDisjFourWithVarOrThreeWithVar.svg" class="align-center" src="_images/GoalTest-testDisjFourWithVarOrThreeWithVar.svg" /></div></blockquote>
+<p>are satisfied by the same set of substitutions or, in other words, have the
+same paths connecting the leaves to the roots.  Disjunction is <em>associative</em>,
+so that both trees</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeFourThenFive</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -603,6 +632,7 @@ a <cite>Failed</cite> goal holding the counterexample, such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeFourThenFive.svg" class="align-center" src="_images/GoalTest-testDisjThreeFourThenFive.svg" /></div></blockquote>
+<p>and</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeThenFourFive</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -619,26 +649,162 @@ a <cite>Failed</cite> goal holding the counterexample, such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeThenFourFive.svg" class="align-center" src="_images/GoalTest-testDisjThreeThenFourFive.svg" /></div></blockquote>
+<p>have the same set of leaves but different branching structures.</p>
 </div>
+<div class="section" id="conj">
+<h2>Conj<a class="headerlink" href="#conj" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Binary</span> <span class="nf">subclass:</span> <span class="ss">#Conj</span>
+	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;&#39;</span>
+	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
+	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
+</pre></div>
 </div>
-<div class="section" id="predicates">
-<h1>Predicates<a class="headerlink" href="#predicates" title="Permalink to this headline">¶</a></h1>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFivesByPredicate</span> 
+<p>I am a goal that represent logical intersection, in particular I encode the
+<a class="reference internal" href="#grammar-token-goalGrammar-conj"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:conj</span></code></a> production.</p>
+<p>On the one hand, <cite>true asGoal</cite> is the neutral element for disjunction, so
+that both</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjTrueTrue</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateFives</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">,</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
-		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
-		<span class="nf">equals:</span> { <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span> }
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
 		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">20</span>)
-		<span class="nf">pathSuffix:</span> <span class="s">&#39;fives-by-predicate&#39;</span>
-		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
-<div><img alt="_images/fives-by-predicate.svg" class="align-center" src="_images/fives-by-predicate.svg" /></div></blockquote>
+<div><img alt="_images/GoalTest-testConjTrueTrue.svg" class="align-center" src="_images/GoalTest-testConjTrueTrue.svg" /></div></blockquote>
+<p>and</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjTrueThreeWithThree</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">,</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testConjTrueThreeWithThree.svg" class="align-center" src="_images/GoalTest-testConjTrueThreeWithThree.svg" /></div></blockquote>
+<p>are succeeding goals. On the other hand, <cite>false asGoal</cite> makes a conjunction
+<cite>false asGoal &amp;º b</cite> failing for any goal <cite>b</cite>, as in</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjFalseThreeWithVar</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">,</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">isEmpty</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testConjFalseThreeWithVar.svg" class="align-center" src="_images/GoalTest-testConjFalseThreeWithVar.svg" /></div></blockquote>
+<p>Conjunctions essentially propagates unified values by the left hand side
+subgoal into the right hand side one; for the sake of clarity, the following
+examples attempts to unify the same variable with two different values yielding
+no solution (but providing the corresponding counterexample)</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjThreeFour</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">isEmpty</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testConjThreeFour.svg" class="align-center" src="_images/GoalTest-testConjThreeFour.svg" /></div></blockquote>
+<p>while the following one succeeds and also shows the commutativity of the operator</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjSymmetry</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="nv">a</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testConjSymmetry.svg" class="align-center" src="_images/GoalTest-testConjSymmetry.svg" /></div></blockquote>
+<p>In the same spirit, the following examples shows two succeeding conjunctions, the
+former introduces a variable in a nested goal,</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjThreeFresh</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> [ <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span> ] <span class="nf">asGoal</span> ]
+		     <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">3</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testConjThreeFresh.svg" class="align-center" src="_images/GoalTest-testConjThreeFresh.svg" /></div></blockquote>
+<p>the latter, introduces both variables in the topmost goal</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjThreeFourWithTwoVars</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { { <span class="m">3</span><span class="p">.</span> <span class="m">4</span> } }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testConjThreeFourWithTwoVars.svg" class="align-center" src="_images/GoalTest-testConjThreeFourWithTwoVars.svg" /></div></blockquote>
+<p>Sharing among variables can be shown with both a succeeding example</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjSucceedingSharing</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">z</span> <span class="o">|</span> 
+	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) ] <span class="nf">asGoal</span> ]
+		     <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span> <span class="m">3</span> <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testConjSucceedingSharing.svg" class="align-center" src="_images/GoalTest-testConjSucceedingSharing.svg" /></div></blockquote>
+<p>and a failing one</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjFailingSharing</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">:</span><span class="nv">z</span> <span class="o">|</span> 
+	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span>) ]
+		     <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testConjFailingSharing.svg" class="align-center" src="_images/GoalTest-testConjFailingSharing.svg" /></div></blockquote>
+<p>Finally, the combination of a failing conjunction with a succeeding
+disjunction produces the following computation</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjDisj</span> 
+
+	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
+	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="nv">a</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">0</span>) ]
+		     <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">0</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/GoalTest-testConjDisj.svg" class="align-center" src="_images/GoalTest-testConjDisj.svg" /></div></blockquote>
+</div>
 </div>
 
 
@@ -649,7 +815,7 @@ a <cite>Failed</cite> goal holding the counterexample, such as</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="messages.html" class="btn btn-neutral float-right" title="Messages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="predicates.html" class="btn btn-neutral float-right" title="Predicates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

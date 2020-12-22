@@ -20,6 +20,7 @@ properties.
 
    overview.rst
    goals.rst
+   predicates.rst
    messages.rst
    theories.rst
 

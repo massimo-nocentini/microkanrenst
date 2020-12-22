@@ -20,8 +20,9 @@ Goal
          : `fresh` | `eta` | `predicate`
      failed: "Ø"
      succeed: "✓"
-     binary_goal: `goal` (`disj` | "&" | `unify` | "!" | "≠") `goal`
+     binary_goal: `goal` (`disj` | `conj` | `unify` | "!" | "≠") `goal`
      disj: "|º"
+     conj: "&º"
      unify: "=º"
      fresh: "fresh" [`var`] +  "." `goal`
      eta: "eta" "." `goal`
@@ -181,54 +182,161 @@ Disj
 .. pharo:autoclass:: Disj
 
   I am a goal that represent logical union, in particular I encode the
-  :token:`goalGrammar:disj` production.
+  :token:`goalGrammar:disj` production. 
+  
+  On the one hand, `false asGoal` is the neutral element for disjunction, so
+  that both
 
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjFalseFalse
 
     .. image:: _images/GoalTest-testDisjFalseFalse.svg
       :align: center
 
+  and
+
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjTrueFalse
 
     .. image:: _images/GoalTest-testDisjTrueFalse.svg
       :align: center
+
+  behave as usual in logic. On the other hand,
 
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjTrueTrue
 
     .. image:: _images/GoalTest-testDisjTrueTrue.svg
       :align: center
 
+  surprises with *two* solutions instead of one because `true asGoal |º b` doesn't bypass
+  the exploration of the goal `b`. For the sake of clarity, two solutions are provided both by
+  
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeWithVarOrThreeWithVar
+
+    .. image:: _images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg
+      :align: center
+
+  and 
+
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeWithThreeOrFourWithVar
 
     .. image:: _images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg
       :align: center
+
+  which leaves the variable unbound in the leftmost path.  Disjunction is
+  *commutative*, so that both
 
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeWithVarOrFourWithVar
 
     .. image:: _images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg
       :align: center
 
-  .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeWithVarOrThreeWithVar
+  and
 
-    .. image:: _images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjFourWithVarOrThreeWithVar
+
+    .. image:: _images/GoalTest-testDisjFourWithVarOrThreeWithVar.svg
       :align: center
+
+  are satisfied by the same set of substitutions or, in other words, have the
+  same paths connecting the leaves to the roots.  Disjunction is *associative*,
+  so that both trees
 
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeFourThenFive
 
     .. image:: _images/GoalTest-testDisjThreeFourThenFive.svg
       :align: center
 
+  and
+
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeThenFourFive
 
     .. image:: _images/GoalTest-testDisjThreeThenFourFive.svg
       :align: center
 
-
-Predicates
-==========
+  have the same set of leaves but different branching structures. 
 
 
-.. pharo:autocompiledmethod:: GoalTest>>#testFivesByPredicate
 
-  .. image:: _images/fives-by-predicate.svg
-    :align: center
+Conj
+----
+
+.. pharo:autoclass:: Conj
+
+  I am a goal that represent logical intersection, in particular I encode the
+  :token:`goalGrammar:conj` production. 
+  
+  On the one hand, `true asGoal` is the neutral element for disjunction, so
+  that both
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjTrueTrue
+
+    .. image:: _images/GoalTest-testConjTrueTrue.svg
+      :align: center
+
+  and
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjTrueThreeWithThree
+
+    .. image:: _images/GoalTest-testConjTrueThreeWithThree.svg
+      :align: center
+
+  are succeeding goals. On the other hand, `false asGoal` makes a conjunction
+  `false asGoal &º b` failing for any goal `b`, as in
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjFalseThreeWithVar
+
+    .. image:: _images/GoalTest-testConjFalseThreeWithVar.svg
+      :align: center
+
+  Conjunctions essentially propagates unified values by the left hand side
+  subgoal into the right hand side one; for the sake of clarity, the following
+  examples attempts to unify the same variable with two different values yielding
+  no solution (but providing the corresponding counterexample)
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjThreeFour
+
+    .. image:: _images/GoalTest-testConjThreeFour.svg
+      :align: center
+
+  while the following one succeeds and also shows the commutativity of the operator
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjSymmetry
+
+    .. image:: _images/GoalTest-testConjSymmetry.svg
+      :align: center
+
+  In the same spirit, the following examples shows two succeeding conjunctions, the 
+  former introduces a variable in a nested goal,
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjThreeFresh
+
+    .. image:: _images/GoalTest-testConjThreeFresh.svg
+      :align: center
+
+  the latter, introduces both variables in the topmost goal
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjThreeFourWithTwoVars
+
+    .. image:: _images/GoalTest-testConjThreeFourWithTwoVars.svg
+      :align: center
+
+  Sharing among variables can be shown with both a succeeding example
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjSucceedingSharing
+
+    .. image:: _images/GoalTest-testConjSucceedingSharing.svg
+      :align: center
+
+  and a failing one
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjFailingSharing
+
+    .. image:: _images/GoalTest-testConjFailingSharing.svg
+      :align: center
+
+  Finally, the combination of a failing conjunction with a succeeding
+  disjunction produces the following computation
+
+  .. pharo:autocompiledmethod:: GoalTest>>#testConjDisj
+
+    .. image:: _images/GoalTest-testConjDisj.svg
+      :align: center
