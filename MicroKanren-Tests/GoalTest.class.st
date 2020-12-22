@@ -928,17 +928,15 @@ GoalTest >> testFindAll [
 
 { #category : #'as yet unclassified' }
 GoalTest >> testFives [
+
 	| g |
 	g := [ :x | self fives: x ] asGoal.
 	self
 		assert: (g solutions next: 10)
-		equals: {5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}
+		equals: { 5. 5. 5. 5. 5. 5. 5. 5. 5. 5 }
 		modulo: #asOrderedCollection.
-	g := [ :x | self swappedfives: x ] asGoal.
-	self
-		assert: (g solutions next: 10)
-		equals: {5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}
-		modulo: #asOrderedCollection
+
+	^ self exportComputationTreeOfGoal: g limitedTo: 10
 ]
 
 { #category : #'as yet unclassified' }
@@ -950,10 +948,21 @@ GoalTest >> testFivesByPredicate [
 		assert: (g solutions next: 10)
 		equals: { 5. 5. 5. 5. 5. 5. 5. 5. 5. 5 }
 		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: 10
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testFivesSwapped [
+
+	| g |
+	g := [ :x | self swappedfives: x ] asGoal.
 	self
-		export: (g asLogicComputationTreeLimitedTo: 20)
-		pathSuffix: 'fives-by-predicate'
-		selector: #gtInspectorTreeUsingCanvas:
+		assert: (g solutions next: 10)
+		equals: { 5. 5. 5. 5. 5. 5. 5. 5. 5. 5 }
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: 10
 ]
 
 { #category : #'as yet unclassified' }
