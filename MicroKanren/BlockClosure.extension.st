@@ -1,8 +1,13 @@
 Extension { #name : #BlockClosure }
 
 { #category : #'*MicroKanren-core' }
-BlockClosure >> fresh [
-	^ Goal fresh: self
+BlockClosure >> asGoal [
+
+	^ (numArgs = 0
+		   ifTrue: [ Eta new ]
+		   ifFalse: [ Fresh new ])
+		  receiver: self;
+		  yourself
 ]
 
 { #category : #'*MicroKanren-core' }

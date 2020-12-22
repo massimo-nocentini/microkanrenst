@@ -54,7 +54,11 @@ Object >> reifyUsingReifier: aReifier [
 
 { #category : #'*MicroKanren-core' }
 Object >> unifyWith: another [
-	^ Goal unify: self with: another
+
+	^ Unify new
+		  left: self;
+		  right: another;
+		  yourself
 ]
 
 { #category : #'*MicroKanren-core' }

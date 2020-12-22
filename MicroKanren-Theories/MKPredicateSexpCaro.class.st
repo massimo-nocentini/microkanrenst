@@ -11,7 +11,7 @@ MKPredicateSexpCaro >> goal [
 	  MKPredicateSexpConso
 		  value: secondArgument
 		  value: aCdr
-		  value: firstArgument ] fresh
+		  value: firstArgument ] asGoal
 ]
 
 { #category : #accessing }

@@ -11,7 +11,7 @@ MKPredicateSexpListo >> goal [
 		  if: firstArgument nilo then: true asGoal;
 		  otherwise: [ :d | 
 			  (MKPredicateSexpCdro value: firstArgument value: d)
-			  , (self class value: d) ] fresh
+			  , (self class value: d) ] asGoal
 ]
 
 { #category : #accessing }

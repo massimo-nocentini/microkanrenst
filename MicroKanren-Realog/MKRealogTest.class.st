@@ -52,7 +52,7 @@ MKRealogTest >> employedo [
 		       employee: E;
 		       company: C;
 		       yourself.
-	  self contracto value: T ] fresh ]
+	  self contracto value: T ] asGoal ]
 ]
 
 { #category : #predicates }
@@ -126,7 +126,7 @@ MKRealogTest >> testCheckSingleEmployment [
 		          company: (MKRealogIDType company: 3);
 		          type: #employment;
 		          yourself.
-	     self contracto value: T ] fresh ] fresh.
+	     self contracto value: T ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: { Var tautology }
@@ -145,7 +145,7 @@ MKRealogTest >> testCompaniesWithConsultants [
 		          type: #consulting;
 		          yourself.
 	     (self employeeo value: E) , (self companyo value: C)
-	     , (self contracto value: T) ] fresh ] fresh.
+	     , (self contracto value: T) ] asGoal ] asGoal.
 	self
 		assert: (g solutions collect: #asString)
 		equals: { 'a MKRealogCompany(1)'. 'a MKRealogCompany(3)' }
@@ -155,7 +155,7 @@ MKRealogTest >> testCompaniesWithConsultants [
 { #category : #tests }
 MKRealogTest >> testContracto [
 	| g |
-	g := [ :E | self contracto value: E ] fresh.
+	g := [ :E | self contracto value: E ] asGoal.
 	self
 		assert: (g solutions collect: #asString)
 		equals:
@@ -170,7 +170,7 @@ MKRealogTest >> testEmployedo [
 	| g |
 	g := [ :E :C | 
 	     (self employeeo value: E) , (self companyo value: C)
-	     , (self employedo value: E value: C) ] fresh.
+	     , (self employedo value: E value: C) ] asGoal.
 	self
 		assert: (g solutions collect: #asString)
 		equals: { 'an Array(a MKRealogEmployee(123) a MKRealogCompany(3))' }
@@ -180,7 +180,7 @@ MKRealogTest >> testEmployedo [
 { #category : #tests }
 MKRealogTest >> testEmployeeo [
 	| g |
-	g := [ :E | self employeeo value: E ] fresh.
+	g := [ :E | self employeeo value: E ] asGoal.
 	self
 		assert: (g solutions collect: [ :pair | pair asString ])
 		equals: { 'a MKRealogEmployee(123)'. 'a MKRealogEmployee(125)'.
@@ -191,7 +191,7 @@ MKRealogTest >> testEmployeeo [
 { #category : #tests }
 MKRealogTest >> testMaritalo [
 	| g |
-	g := [ :E | self maritalo value: #'de-DE' value: E ] fresh.
+	g := [ :E | self maritalo value: #'de-DE' value: E ] asGoal.
 	self
 		assert: g solutions
 		equals: #( ledig geschieden verwitwet verheiratet )
@@ -222,7 +222,7 @@ MKRealogTest >> testWorkedHourso [
 		     yourself
 	     ", (Theory sexp conso value: E value: cdr value: list)
 	     , (Theory sexp conso value: H value: cddr value: cdr)" ]
-		     fresh ] fresh.
+		     asGoal ] asGoal.
 	self
 		assert: (g solutions collect: #asString)
 		equals: { 'a MKRealogEmployee(123)'. 'a MKRealogEmployee(124)' }
@@ -234,7 +234,7 @@ MKRealogTest >> testWorkedo [
 	| g |
 	g := [ :E | 
 	     self workedo value: E value: '06/01/2019' asDate value: 3 ]
-		     fresh.
+		     asGoal.
 	self
 		assert: (g solutions collect: #asString)
 		equals: { 'a MKRealogEmployee(123)'. 'a MKRealogEmployee(124)' }

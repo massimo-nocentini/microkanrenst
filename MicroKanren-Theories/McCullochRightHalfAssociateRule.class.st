@@ -10,5 +10,5 @@ McCullochRightHalfAssociateRule >> relateo [
 		value: (6 cons: beta))
 		, ((half_associate
 				unifyo value:  (2 cons: gamma))
-				, (machine relateo value: beta value: gamma))] fresh]
+				, (machine relateo value: beta value: gamma))] asGoal]
 ]

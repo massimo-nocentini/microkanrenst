@@ -14,7 +14,7 @@ ArithTest >> testAddero [
 			{0.
 			x.
 			y.
-			r} ] fresh.
+			r} ] asGoal.
 	[ :_0 :_1 | 
 	self
 		assert:
@@ -35,7 +35,7 @@ ArithTest >> testAddero [
 ArithTest >> testBitAndo [
 	| g µ |
 	µ := Theory arith.
-	g := [:x :y | µ bitAndo !!	{x . y . 1}] fresh.
+	g := [:x :y | µ bitAndo !!	{x . y . 1}] asGoal.
 	self assert:  g solutions equals: {{1 . 1}} modulo: #asOrderedCollection
 ]
 
@@ -43,7 +43,7 @@ ArithTest >> testBitAndo [
 ArithTest >> testBitXoro [
 	| g µ |
 	µ := Theory arith.
-	g := [:x :y | µ bitXoro !! {x . y . 0}] fresh.
+	g := [:x :y | µ bitXoro !! {x . y . 0}] asGoal.
 	self assert: g solutions equals: {{0. 0}. {1. 1}} modulo: #asOrderedCollection
 ]
 
@@ -51,9 +51,9 @@ ArithTest >> testBitXoro [
 ArithTest >> testFullAddero [
 	| g µ |
 	µ := Theory arith.
-	g := [:x :y | µ bitFullAddero !! {0. 1. 1. x. y}] fresh.
+	g := [:x :y | µ bitFullAddero !! {0. 1. 1. x. y}] asGoal.
 	self assert: g solutions equals: {{0. 1}} modulo: #asOrderedCollection .
-	g := µ bitFullAddero fresh.
+	g := µ bitFullAddero asGoal.
 	self 
 		assert: g solutions 
 			equals: {#(0 0 0 0 0). #(0 0 1 1 0). #(1 0 0 1 0). #(0 1 0 1 0). 
@@ -74,7 +74,7 @@ ArithTest >> testGreaterThanOneo [
 	self assert: g solutions isEmpty.
 	g := µ greaterThanOneo value: 0 asConsedBinaryRepr.
 	self assert: g solutions isEmpty.
-	g := µ greaterThanOneo fresh.
+	g := µ greaterThanOneo asGoal.
 	self
 		assert: g solutions
 		equals: {((0 cons: (1 cons: 2)) collect: #asReifiedVar)}
@@ -85,9 +85,9 @@ ArithTest >> testGreaterThanOneo [
 ArithTest >> testHalfAddero [
 	| g µ |
 	µ := Theory arith.
-	g := [:x :y | µ bitHalfAddero !! { x . 1 . y . 1 }] fresh.
+	g := [:x :y | µ bitHalfAddero !! { x . 1 . y . 1 }] asGoal.
 	self assert: g solutions  equals: {{1. 0}} modulo: #asOrderedCollection.
-	g := µ bitHalfAddero fresh.
+	g := µ bitHalfAddero asGoal.
 	self 
 		assert: g solutions 
 		equals: {#(0 0 0 0). #(0 1 1 0). #(1 0 1 0). #(1 1 0 1)}  
@@ -98,9 +98,9 @@ ArithTest >> testHalfAddero [
 ArithTest >> testMinuso [
 	| g µ |
 	µ := Theory arith.
-	g := [:x | µ minuso !! { 8 asConsedBinaryRepr . 5 asConsedBinaryRepr . x }] fresh.
+	g := [:x | µ minuso !! { 8 asConsedBinaryRepr . 5 asConsedBinaryRepr . x }] asGoal.
 	self assert: g solutions equals: {3 asConsedBinaryRepr} modulo: #asOrderedCollection.
-	g := [:x | µ minuso !! { 6 asConsedBinaryRepr . 8 asConsedBinaryRepr . x}] fresh.
+	g := [:x | µ minuso !! { 6 asConsedBinaryRepr . 8 asConsedBinaryRepr . x}] asGoal.
 	self assert: g solutions isEmpty
 ]
 
@@ -108,7 +108,7 @@ ArithTest >> testMinuso [
 ArithTest >> testPluso [
 	| g µ |
 	µ := Theory arith.
-	g := [:x :y | µ pluso valueWithArguments: {x. y. 5 asConsedBinaryRepr}] fresh.
+	g := [:x :y | µ pluso valueWithArguments: {x. y. 5 asConsedBinaryRepr}] asGoal.
 	self
 		assert: g solutions
 		equals: ({{5. 0}. {0. 5}. {1. 4}. {4. 1}. {2. 3}. {3. 2}}

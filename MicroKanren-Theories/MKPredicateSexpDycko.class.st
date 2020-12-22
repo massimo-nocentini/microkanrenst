@@ -14,7 +14,7 @@ MKPredicateSexpDycko >> goal [
 				   value: ($( cons: beta)
 				   value: ($) cons: gamma)
 				   value: firstArgument)
-			  , ((self class value: beta) , (self class value: gamma)) ] fresh;
+			  , ((self class value: beta) , (self class value: gamma)) ] asGoal;
 		  yourself
 ]
 

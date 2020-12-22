@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 MonteCarloLockTest >> testMcCullochMachine [
 	| g  |
-	g := [ :a | Theory montecarloLock mccullocho value: a value: a ] fresh.
+	g := [ :a | Theory montecarloLock mccullocho value: a value: a ] asGoal.
 	self
 		assert: (g solutions next: 1)
 		equals: {#(3 2 3) asCons}
@@ -18,7 +18,7 @@ MonteCarloLockTest >> testMcCullochMachine [
 { #category : #tests }
 MonteCarloLockTest >> testMontecarloLockMachine [
 	| g |
-	g := [ :a | Theory montecarloLock mclocko value: a value: a ] fresh.
+	g := [ :a | Theory montecarloLock mclocko value: a value: a ] asGoal.
 	self
 		assert: (g solutions next: 2)
 		equals:

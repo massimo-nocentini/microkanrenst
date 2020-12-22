@@ -17,7 +17,7 @@ MKSexpTest >> testACORN [
 
 	| g |
 	g := [ :r | MKPredicateSexpCaro value: 'acorn' asCons value: r ]
-		     fresh.
+		     asGoal.
 	self assert: g solutions equals: { $a } modulo: #asOrderedCollection.
 
 	"Export it."
@@ -35,7 +35,7 @@ MKSexpTest >> testAppendoBackward [
 	     SexpTheory new appendo
 		     value: l
 		     value: r
-		     value: #( a b c d e ) asCons ] fresh.
+		     value: #( a b c d e ) asCons ] asGoal.
 	self
 		assert: g solutions
 		equals: ({ 
@@ -63,7 +63,7 @@ MKSexpTest >> testAppendoForward [
 	     SexpTheory new appendo
 		     value: #( #a #b #c ) asCons
 		     value: #( #d #e ) asCons
-		     value: l ] fresh.
+		     value: l ] asGoal.
 	self
 		assert: g solutions
 		equals: #( a b c d e ) asCons
@@ -80,7 +80,7 @@ MKSexpTest >> testAppendoForward [
 MKSexpTest >> testDycko [
 
 	| g |
-	g := [ :alpha | MKPredicateSexpDycko value: alpha ] fresh.
+	g := [ :alpha | MKPredicateSexpDycko value: alpha ] asGoal.
 	self
 		export: (g asLogicComputationTreeLimitedTo: 20)
 		pathSuffix: 'sexp-dycko'

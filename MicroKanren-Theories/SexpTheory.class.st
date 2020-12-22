@@ -47,7 +47,7 @@ SexpTheory >> lengtho [
 					recº := [ self lengtho
 						!!
 							{cdr.
-							res} ] fresh.
+							res} ] asGoal.
 					self cdro
 						!!
 							{lst.
@@ -56,7 +56,7 @@ SexpTheory >> lengtho [
 							(µ succo
 								!!
 									{res.
-									n}) , recº ] fresh) ]
+									n}) , recº ] asGoal) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -66,11 +66,11 @@ SexpTheory >> nilo [
 
 { #category : #'as yet unclassified' }
 SexpTheory >> pairo [
-	^ [:lst | [:a :d | self conso !! {a. d. lst}] fresh]
+	^ [:lst | [:a :d | self conso !! {a. d. lst}] asGoal]
 ]
 
 { #category : #'as yet unclassified' }
 SexpTheory >> reverseo [
 	^ [:reversing :reversed | Goal cond e if: reversing nilo then: reversed nilo;
-		 if: true asGoal then: [:car :cdr :res | self conso !! {car. cdr. reversing} , (self appendo !! {res. {car} asCons. reversed}) , [self reverseo !! {cdr.res}] fresh] fresh]
+		 if: true asGoal then: [:car :cdr :res | self conso !! {car. cdr. reversing} , (self appendo !! {res. {car} asCons. reversed}) , [self reverseo !! {cdr.res}] asGoal] asGoal]
 ]

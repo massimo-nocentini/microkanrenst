@@ -13,7 +13,7 @@ Class {
 { #category : #'as yet unclassified' }
 GoalTest >> eternity: x [
 
-	^ [ self eternity: x ] fresh
+	^ [ self eternity: x ] asGoal
 ]
 
 { #category : #'as yet unclassified' }
@@ -27,7 +27,7 @@ GoalTest >> exportComputationTreeOfGoal: g limitedTo: n [
 
 { #category : #'as yet unclassified' }
 GoalTest >> fives: x [
-	^ (5 unifyo value: x) | [ self fives: x ] fresh
+	^ (5 unifyo value: x) | [ self fives: x ] asGoal
 ]
 
 { #category : #utilities }
@@ -48,7 +48,7 @@ GoalTest >> nats: x stage: i [
 
 { #category : #'as yet unclassified' }
 GoalTest >> nats: x stage: i offset: o [
-	^ (x unifyo value: i) | [ self nats: x stage: i + o offset: o] fresh
+	^ (x unifyo value: i) | [ self nats: x stage: i + o offset: o] asGoal
 ]
 
 { #category : #'as yet unclassified' }
@@ -67,7 +67,7 @@ GoalTest >> patho: edgeo [
 	patho := [ :x :y | 
 	(edgeo value: x value: y)
 		|
-			[ :z | (edgeo value: x value: z) , (patho value: z value: y) ] fresh ]
+			[ :z | (edgeo value: x value: z) , (patho value: z value: y) ] asGoal ]
 		tabled.
 	^ patho
 ]
@@ -85,7 +85,7 @@ GoalTest >> setUp [
 
 { #category : #'as yet unclassified' }
 GoalTest >> swappedfives: x [
-	^ [ self fives: x ] fresh | (5 unifyo value: x)
+	^ [ self fives: x ] asGoal | (5 unifyo value: x)
 ]
 
 { #category : #'as yet unclassified' }
@@ -111,21 +111,21 @@ GoalTest >> teacup: x [
 GoalTest >> testAlphaRuleo [
 	| g µ |
 	µ := Theory sexp.
-	g := [ :x :y | µ alphaRuleo value: x value: y ] fresh.
+	g := [ :x :y | µ alphaRuleo value: x value: y ] asGoal.
 	self assert: g solutions isEmpty.
 	g := [ [ :x :y | 
 	(x unifyo value: 3) , (y unifyo value: 3)
-		, (µ alphaRuleo value: x value: y) ] fresh ] fresh.
+		, (µ alphaRuleo value: x value: y) ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: {Var tautology}
 		modulo: #asOrderedCollection.
 	g := [ [ :x :y | 
 	(x unifyo value: 3) , (y unifyo value: 4)
-		, (µ alphaRuleo value: x value: y) ] fresh ] fresh.
+		, (µ alphaRuleo value: x value: y) ] asGoal ] asGoal.
 	self assert: g solutions isEmpty.
 	g := [ :x :y | (x unifyo value: y) , (µ alphaRuleo value: x value: y) ]
-		fresh.
+		asGoal.
 	self
 		assert: g solutions
 		equals:
@@ -133,7 +133,7 @@ GoalTest >> testAlphaRuleo [
 			0 asReifiedVar}}
 		modulo: #asOrderedCollection.
 	g := [ :x :y | (µ alphaRuleo value: x value: y) , (x unifyo value: y) ]
-		fresh.
+		asGoal.
 	self assert: g solutions isEmpty
 ]
 
@@ -144,7 +144,7 @@ GoalTest >> testAppendo [
 	sexpTheory appendo
 		value: #(#a #b #c) asCons
 		value: #(#d #e) asCons
-		value: l ] fresh.
+		value: l ] asGoal.
 	self
 		assert: g solutions
 		equals: {#(#a #b #c #d #e) asCons}
@@ -153,7 +153,7 @@ GoalTest >> testAppendo [
 	sexpTheory appendo
 		value: #(#a #b #c) asCons
 		value: (#(#d) asConsWithCdr: l)
-		value: #(#a #b #c #d #e) asCons ] fresh.
+		value: #(#a #b #c #d #e) asCons ] asGoal.
 	self
 		assert: g solutions
 		equals: {(#e cons: nil)}
@@ -162,7 +162,7 @@ GoalTest >> testAppendo [
 	sexpTheory appendo
 		value: #(#a #b #c) asCons
 		value: (#(#d) asConsWithCdr: l)
-		value: (#(#a #b #c #d) asConsWithCdr: #e) ] fresh.
+		value: (#(#a #b #c #d) asConsWithCdr: #e) ] asGoal.
 	self assert: g solutions equals: {#e} modulo: #asOrderedCollection
 ]
 
@@ -183,8 +183,8 @@ GoalTest >> testBagOf [
 
 	     bagOfGoal
 	     , (sexpTheory conso value: mother value: cdr value: list)
-	     , (sexpTheory conso value: child value: cddr value: cdr) ] fresh ]
-		     fresh.
+	     , (sexpTheory conso value: child value: cddr value: cdr) ] asGoal ]
+		     asGoal.
 	self
 		assert: g solutions
 		equals: { 
@@ -204,7 +204,7 @@ GoalTest >> testBagOf [
 		      value: child
 		      value: list)
 		     variables: {  };
-		     yourself ] fresh ] fresh.
+		     yourself ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals:
@@ -222,9 +222,9 @@ GoalTest >> testBagOf [
 		                   value: child
 		                   value: groups)
 		                  variables: (Array with: mother);
-		                  yourself ] fresh.
-	     Goal findAllo value: bagOfGoal value: groups value: list ] fresh ]
-		     fresh.
+		                  yourself ] asGoal.
+	     Goal findAllo value: bagOfGoal value: groups value: list ] asGoal ]
+		     asGoal.
 	self
 		assert: g solutions
 		equals: (#( #( #( #rose ) #( #caroline #laura #rose )
@@ -243,7 +243,7 @@ GoalTest >> testBagOf [
 		               yourself.
 	     (Goal bagOfo value: nested value: groups value: list)
 		     variables: {  };
-		     yourself ] fresh ] fresh.
+		     yourself ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: (#( #( #( #rose ) #( #caroline #laura #rose )
@@ -258,7 +258,7 @@ GoalTest >> testBagOf [
 		      value: c
 		      value: list)
 		     variables: (Array with: a with: b);
-		     yourself ] fresh ] fresh.
+		     yourself ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: ({ 
@@ -277,7 +277,7 @@ GoalTest >> testBagOf [
 				     a.
 				     b.
 				     c };
-		     yourself ] fresh ] fresh.
+		     yourself ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: { 
@@ -294,7 +294,7 @@ GoalTest >> testCaro [
 
 	| g µ |
 	µ := Theory sexp.
-	g := [ :r | µ caro value: 'acorn' asCons value: r ] fresh.
+	g := [ :r | µ caro value: 'acorn' asCons value: r ] asGoal.
 	self assert: g solutions equals: { $a } modulo: #asOrderedCollection.
 	g := [ :r | 
 	     [ :x :y | 
@@ -304,8 +304,8 @@ GoalTest >> testCaro [
 					      (#a cons: nil).
 					      (#b cons: nil).
 					      (#c cons: nil) } asCons
-			      value: y) , (µ conso value: x value: y value: r) ] fresh ]
-		     fresh.
+			      value: y) , (µ conso value: x value: y value: r) ] asGoal ]
+		     asGoal.
 	self
 		assert: g solutions
 		equals: { { #grape. #a } asCons }
@@ -318,7 +318,7 @@ GoalTest >> testCdro [
 	µ := Theory sexp.
 	g := [ :r | 
 	[ :d | (µ cdro value: 'acorn' asCons value: d) , (µ caro value: d value: r) ]
-		fresh ] fresh.
+		asGoal ] asGoal.
 	self assert: g solutions equals: {$c} modulo: #asOrderedCollection.
 	g := [ :r | 
 	[ :x :y | 
@@ -329,20 +329,20 @@ GoalTest >> testCdro [
 					{(#a cons: nil).
 					(#b cons: nil).
 					(#c cons: nil)} asCons
-				value: y) , (µ conso value: x value: y value: r) ] fresh ] fresh.
+				value: y) , (µ conso value: x value: y value: r) ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals:
 			{{{#raisin . #pear}.
 			#a} asCons}
 		modulo: #asOrderedCollection.
-	g := [ µ cdro value: 'acorn' asCons value: 'corn' asCons ] fresh.
+	g := [ µ cdro value: 'acorn' asCons value: 'corn' asCons ] asGoal.
 	self
 		assert: g solutions
 		equals: {Var tautology}
 		modulo: #asOrderedCollection.
 	g := [ :r | µ cdro value: 'acorn' asCons value: 'acorn' asCons ]
-		fresh.
+		asGoal.
 	self assert: g solutions isEmpty.
 	g := [ :r | 
 	µ cdro
@@ -350,11 +350,11 @@ GoalTest >> testCdro [
 		value:
 			{r.
 			$r.
-			$n} asCons ] fresh.
+			$n} asCons ] asGoal.
 	self assert: g solutions equals: {$o} modulo: #asOrderedCollection.
 	g := [ :l | 
 	[ :x | (µ caro value: l value: $a) , (µ cdro value: l value: 'corn' asCons) ]
-		fresh ] fresh.
+		asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: {'acorn' asCons}
@@ -381,7 +381,7 @@ GoalTest >> testConde [
 		add: (x unifyo value: #olive) -> true asGoal;
 		add: (x unifyo value: #apple) -> false asGoal;
 		add: (x unifyo value: #oil) -> true asGoal;
-		yourself) cond e ] fresh.
+		yourself) cond e ] asGoal.
 	self
 		assert: g solutions
 		equals: {#olive . #oil}
@@ -391,7 +391,7 @@ GoalTest >> testConde [
 		add: (x unifyo value: #olive) -> true asGoal;
 		add: (x unifyo value: #apple) -> false asGoal;
 		add: (x unifyo value: #oil) -> true asGoal;
-		yourself) cond e ] fresh.
+		yourself) cond e ] asGoal.
 	self
 		assert: (g solutions next: 1)
 		equals: {#olive}
@@ -400,7 +400,7 @@ GoalTest >> testConde [
 	(LinkedList new
 		add: (x unifyo value: #split) -> (y unifyo value: #pea);
 		add: (x unifyo value: #navy) -> (y unifyo value: #bean);
-		yourself) cond e ] fresh.
+		yourself) cond e ] asGoal.
 	self
 		assert: g solutions
 		equals: (Array with: {#split . #pea} with: {#navy . #bean})
@@ -410,7 +410,7 @@ GoalTest >> testConde [
 		if: (self teacup: x) , (y unifyo value: true) then: true asGoal;
 		if: (x unifyo value: true) then: (y unifyo value: false);
 		if: true asGoal then: true asGoal;
-		yourself ] fresh.
+		yourself ] asGoal.
 	self
 		assert: g solutions
 		equals:
@@ -427,7 +427,7 @@ GoalTest >> testConde [
 		add: (x unifyo value: #olive) -> true asGoal;
 		add: (x unifyo value: 5) -> (self fives: x);
 		add: (x unifyo value: #oil) -> true asGoal;
-		yourself) cond e ] fresh.
+		yourself) cond e ] asGoal.
 	self
 		assert: (g solutions next: 10)
 		equals: {#olive . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}
@@ -438,7 +438,7 @@ GoalTest >> testConde [
 		add: (self fives: x) -> false asGoal;
 		add: (x unifyo value: #oil) -> true asGoal;
 		yourself) cond e
-	"this line makes cond a divergent goal" ] fresh
+	"this line makes cond a divergent goal" ] asGoal
 	"self
 	assert: (g solutions next: 10)
 	equals: {#olive . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}"
@@ -452,30 +452,30 @@ GoalTest >> testConj [
 		assert: (true asGoal , true asGoal) solutions
 		equals: { Var tautology }
 		modulo: #asOrderedCollection.
-	g := [ :q | false asGoal , (true unifyo value: q) ] fresh.
+	g := [ :q | false asGoal , (true unifyo value: q) ] asGoal.
 	self assert: g solutions isEmpty.
-	g := [ :q | true asGoal , (false unifyo value: q) ] fresh.
+	g := [ :q | true asGoal , (false unifyo value: q) ] asGoal.
 	self
 		assert: g solutions
 		equals: { false }
 		modulo: #asOrderedCollection.
-	g := [ :a | (3 unifyo value: a) , (4 unifyo value: a) ] fresh.
+	g := [ :a | (3 unifyo value: a) , (4 unifyo value: a) ] asGoal.
 	self assert: g solutions isEmpty.
 	g := [ :a | 
 	     (3 unifyo value: a) , (4 unifyo value: a) | (a unifyo value: 0) ]
-		     fresh.
+		     asGoal.
 	self assert: g solutions equals: { 0 } modulo: #asOrderedCollection.
-	g := [ :a | (a unifyo value: 4) , (4 unifyo value: a) ] fresh.
+	g := [ :a | (a unifyo value: 4) , (4 unifyo value: a) ] asGoal.
 	self assert: g solutions equals: { 4 } modulo: #asOrderedCollection.
-	g := [ :a | (3 unifyo value: a) , [ :b | 4 unifyo value: b ] fresh ]
-		     fresh.
+	g := [ :a | (3 unifyo value: a) , [ :b | 4 unifyo value: b ] asGoal ]
+		     asGoal.
 	self assert: g solutions equals: { 3 } modulo: #asOrderedCollection.
-	g := [ :a :b | (3 unifyo value: a) , (4 unifyo value: b) ] fresh.
+	g := [ :a :b | (3 unifyo value: a) , (4 unifyo value: b) ] asGoal.
 	self
 		assert: g solutions
 		equals: { { 3. 4 } }
 		modulo: #asOrderedCollection.
-	g := [ :x :y | (x unifyo value: 3) , (y unifyo value: 4) ] fresh.
+	g := [ :x :y | (x unifyo value: 3) , (y unifyo value: 4) ] asGoal.
 	self
 		assert: g solutions
 		equals: { { 3. 4 } }
@@ -492,7 +492,7 @@ GoalTest >> testConso [
 		value: 'abcde' asCons.
 	self assert: g solutions equals: {} modulo: #asOrderedCollection.
 	g := [ :l | µ conso value: 'abc' asCons value: 'de' asCons value: l ]
-		fresh.
+		asGoal.
 	self
 		assert: g solutions
 		equals:
@@ -501,7 +501,7 @@ GoalTest >> testConso [
 			$e} asCons}
 		modulo: #asOrderedCollection.
 	g := [ :l | µ conso value: #(#a #b #c) asCons value: #(#(#d #e)) asCons value: l ]
-		fresh.
+		asGoal.
 	self
 		assert: g solutions
 		equals: {#(#(#a #b #c) #(#d #e)) asCons}
@@ -510,7 +510,7 @@ GoalTest >> testConso [
 	µ conso
 		value: l
 		value: #(#b #c #d) asCons
-		value: #(#a #b #c #d) asCons ] fresh.
+		value: #(#a #b #c #d) asCons ] asGoal.
 	self assert: g solutions equals: {#a} modulo: #asOrderedCollection.
 	g := [ :l | 
 	[ :x :y :z | 
@@ -527,7 +527,7 @@ GoalTest >> testConso [
 					{#a.
 					z.
 					#c} asCons
-				value: l) ] fresh ] fresh.
+				value: l) ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: {#(#e #a #d #c) asCons}
@@ -542,7 +542,7 @@ GoalTest >> testCut [
 	     (x unifyo value: 1) | (x unifyo value: 2) | (x unifyo value: 3)
 	     !
 	     ((y unifyo value: 1) | (y unifyo value: 2) | (y unifyo value: 3)) ]
-		     fresh.
+		     asGoal.
 	self
 		assert: g solutions
 		equals: #( #( 1 1 ) #( 1 3 ) #( 1 2 ) )
@@ -566,24 +566,24 @@ GoalTest >> testCutAndFail [
 	g := [ :x | 
 	     (x unifyo value: 1) | (x unifyo value: 4) | (x unifyo value: 4)
 	     ! ((x unifyo value: 1) | (x unifyo value: 3) , false asGoal) ]
-		     fresh.
+		     asGoal.
 	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection.
 
 	g := [ :x | 
 	     (x unifyo value: 1) | (x unifyo value: 4) | (x unifyo value: 4)
-	     ! ((x unifyo value: 1) | (x unifyo value: 3)) ] fresh.
+	     ! ((x unifyo value: 1) | (x unifyo value: 3)) ] asGoal.
 	self assert: g solutions equals: #( 1 ) modulo: #asOrderedCollection.
 
 	g := [ :x | 
 	     (x unifyo value: 1) | (x unifyo value: 4)
 	     , ((x unifyo value: 1) | (x unifyo value: 3)) , false asGoal
-	     | (x unifyo value: 4) ] fresh.
+	     | (x unifyo value: 4) ] asGoal.
 	self assert: g solutions equals: #( 4 ) modulo: #asOrderedCollection.
 
 	g := [ :x | 
 	     (x unifyo value: 1) | (x unifyo value: 4)
 	     , ((x unifyo value: 1) | (x unifyo value: 3)) , false asGoal
-	     | (x unifyo value: 4) ! true asGoal ] fresh.
+	     | (x unifyo value: 4) ! true asGoal ] asGoal.
 	self assert: g solutions equals: #( 4 ) modulo: #asOrderedCollection
 ]
 
@@ -600,7 +600,7 @@ GoalTest >> testCutOverMultipleRules [
 	| g |
 	g := [ :x | 
 	     (x unifyo value: 1) | (x unifyo value: 4) | (x unifyo value: 4)
-	     ! (x unifyo value: 3) ] fresh.
+	     ! (x unifyo value: 3) ] asGoal.
 	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection
 ]
 
@@ -610,57 +610,121 @@ GoalTest >> testCutUnifyThenFail [
 	| g |
 	g := [ :x | 
 	     (x unifyo value: 1) | (x unifyo value: 2) | (x unifyo value: 3)
-	     ! (x unifyo value: 2) ] fresh.
+	     ! (x unifyo value: 2) ] asGoal.
 	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection.
 	g := [ :x | 
 	     (x unifyo value: 1) | (x unifyo value: 2) | (x unifyo value: 3)
-	     , (x unifyo value: 2) ] fresh.
+	     , (x unifyo value: 2) ] asGoal.
 	self assert: g solutions equals: #( 2 ) modulo: #asOrderedCollection
 ]
 
 { #category : #'as yet unclassified' }
-GoalTest >> testDisj [
+GoalTest >> testDisjFalseFalse [
 
 	| g |
-	self
-		assert: (true asGoal | false asGoal) solutions
-		equals: { Var tautology }
-		modulo: #asOrderedCollection.
-	self
-		assert: (true asGoal | true asGoal) solutions
-		equals: { 
-				Var tautology.
-				Var tautology }
-		modulo: #asOrderedCollection.
-	g := [ :a | (3 unifyo value: a) | (4 unifyo value: a) ] fresh.
-	self
-		assert: g solutions
-		equals: { 3. 4 }
-		modulo: #asOrderedCollection.
-	g := [ :a | (4 unifyo value: a) | (3 unifyo value: a) ] fresh.
-	self
-		assert: g solutions
-		equals: { 4. 3 }
-		modulo: #asOrderedCollection.
-	g := [ :a | (3 unifyo value: a) | (3 unifyo value: a) ] fresh.
-	self
-		assert: g solutions
-		equals: { 3. 3 }
-		modulo: #asOrderedCollection.
+	g := false asGoal | false asGoal.
+	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testDisjThreeFourThenFive [
+
+	| g |
 	g := [ :a | 
 	     (3 unifyo value: a) | (4 unifyo value: a) | (5 unifyo value: a) ]
-		     fresh.
+		     asGoal.
 	self
 		assert: g solutions
 		equals: { 3. 5. 4 }
 		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testDisjThreeThenFourFive [
+
+	| g |
 	g := [ :a | 
 	     (3 unifyo value: a)
-	     | ((4 unifyo value: a) | (5 unifyo value: a)) ] fresh.
+	     | ((4 unifyo value: a) | (5 unifyo value: a)) ] asGoal.
 	self
 		assert: g solutions
 		equals: { 3. 4. 5 }
-		modulo: #asOrderedCollection
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testDisjThreeWithThreeOrFourWithVar [
+
+	| g |
+	g := [ :a | (3 unifyo value: 3) | (4 unifyo value: a) ] asGoal.
+	self
+		assert: g solutions
+		equals: { 
+				0 asReifiedVar.
+				4 }
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testDisjThreeWithVarOrFourWithVar [
+
+	| g |
+	g := [ :a | (3 unifyo value: a) | (4 unifyo value: a) ] asGoal.
+	self
+		assert: g solutions
+		equals: { 3. 4 }
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testDisjThreeWithVarOrThreeWithVar [
+
+	| g |
+	g := [ :a | (3 unifyo value: a) | (3 unifyo value: a) ] asGoal.
+	self
+		assert: g solutions
+		equals: { 3. 3 }
+		modulo: #asOrderedCollection.
+		
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testDisjTrueFalse [
+
+	| g |
+	g := true asGoal | false asGoal.
+	self
+		assert: g solutions
+		equals: { Var tautology }
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #'as yet unclassified' }
+GoalTest >> testDisjTrueTrue [
+
+	| g |
+	g := true asGoal | true asGoal.
+	self
+		assert: g solutions
+		equals: { 
+				Var tautology.
+				Var tautology }
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
 { #category : #'as yet unclassified' }
@@ -685,7 +749,7 @@ GoalTest >> testFailed [
 GoalTest >> testFindAll [
 
 	| g |
-	g := [ :b | DescendTestPredicate value: #martha value: b ] fresh.
+	g := [ :b | DescendTestPredicate value: #martha value: b ] asGoal.
 	self
 		assert: g solutions
 		equals: #( charlotte caroline laura rose )
@@ -696,7 +760,7 @@ GoalTest >> testFindAll [
 	     Goal findAllo
 		     value: (DescendTestPredicate value: #martha value: b)
 		     value: (Array with: #fromMartha with: b) asCons
-		     value: list ] fresh ] fresh.
+		     value: list ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals:
@@ -710,7 +774,7 @@ GoalTest >> testFindAll [
 	     Goal findAllo
 		     value: (DescendTestPredicate value: #martha value: b)
 		     value: y
-		     value: list ] fresh ] fresh.
+		     value: list ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: { { 
@@ -727,7 +791,7 @@ GoalTest >> testFindAll [
 		      value: b
 		      value: cdr)
 	     , (sexpTheory conso value: #empty value: cdr value: list) ]
-		     fresh ] fresh.
+		     asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: #( empty ) asCons
@@ -738,7 +802,7 @@ GoalTest >> testFindAll [
 	     Goal findAllo
 		     value: (DescendTestPredicate value: mother value: child)
 		     value: child
-		     value: list ] fresh ] fresh.
+		     value: list ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals:
@@ -751,7 +815,7 @@ GoalTest >> testFindAll [
 	     Goal findAllo
 		     value: (MKPredicateFooForBag value: a value: b value: c)
 		     value: c
-		     value: list ] fresh ] fresh.
+		     value: list ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: { #( #c #g #f #e #d ) asCons }
@@ -764,7 +828,7 @@ GoalTest >> testFindAll [
 		      value: c
 		      value: list)
 		     variables: {  };
-		     yourself ] fresh ] fresh.
+		     yourself ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: { #( #c #g #f #e #d ) asCons }
@@ -774,12 +838,12 @@ GoalTest >> testFindAll [
 { #category : #'as yet unclassified' }
 GoalTest >> testFives [
 	| g |
-	g := [ :x | self fives: x ] fresh.
+	g := [ :x | self fives: x ] asGoal.
 	self
 		assert: (g solutions next: 10)
 		equals: {5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}
 		modulo: #asOrderedCollection.
-	g := [ :x | self swappedfives: x ] fresh.
+	g := [ :x | self swappedfives: x ] asGoal.
 	self
 		assert: (g solutions next: 10)
 		equals: {5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}
@@ -790,7 +854,7 @@ GoalTest >> testFives [
 GoalTest >> testFivesByPredicate [
 
 	| g |
-	g := [ :r | MKPredicateFives value: r ] fresh.
+	g := [ :r | MKPredicateFives value: r ] asGoal.
 	self
 		assert: (g solutions next: 10)
 		equals: { 5. 5. 5. 5. 5. 5. 5. 5. 5. 5 }
@@ -805,8 +869,8 @@ GoalTest >> testFivesByPredicate [
 GoalTest >> testFreshFailed [
 
 	| g |
-	g := [ :q | false asGoal ] fresh.
-	self assert: g solutions equals: {  } modulo: #asOrderedCollection. " #()"
+	g := [ :q | false asGoal ] asGoal.
+	self assert: g solutions equals: #(  ) modulo: #asOrderedCollection. " #()"
 
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
@@ -815,7 +879,7 @@ GoalTest >> testFreshFailed [
 GoalTest >> testFreshMultipleVars [
 
 	| g |
-	g := [ :q :r | true asGoal ] fresh.
+	g := [ :q :r | true asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: (Array with: { 
@@ -830,7 +894,7 @@ GoalTest >> testFreshMultipleVars [
 GoalTest >> testFreshSucceed [
 
 	| g |
-	g := [ :q | true asGoal ] fresh.
+	g := [ :q | true asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: { 0 asReifiedVar }
@@ -849,7 +913,7 @@ GoalTest >> testLengtho [
 		assert: g solutions
 		equals: {Var tautology}
 		modulo: #asOrderedCollection.
-	g := [ :n | µ lengtho value: {#anElement} asCons value: n ] fresh.
+	g := [ :n | µ lengtho value: {#anElement} asCons value: n ] asGoal.
 	self
 		assert: (g solutions next: 1)
 		equals: {1 asConsedBinaryRepr}
@@ -866,7 +930,7 @@ GoalTest >> testLengtho [
 	µ lengtho
 		!!
 			{lst.
-			3 asConsedBinaryRepr} ] fresh.
+			3 asConsedBinaryRepr} ] asGoal.
 	self
 		assert: g solutions
 		equals:
@@ -879,7 +943,7 @@ GoalTest >> testLengtho [
 	µ lengtho
 		!!
 			{(1 to: 10) asCons.
-			n} ] fresh.
+			n} ] asGoal.
 	self
 		assert: (g solutions next: 1)
 		equals: {10 asConsedBinaryRepr}
@@ -895,14 +959,14 @@ GoalTest >> testListo [
 			     $a.
 			     $b.
 			     r.
-			     $d } asCons ] fresh.
+			     $d } asCons ] asGoal.
 	self
 		assert: g solutions
 		equals: { 0 asReifiedVar }
 		modulo: #asOrderedCollection. " an Array(•₀)"
 	g := [ :r | 
 	     MKPredicateSexpListo value: ({ $a. $b. $c } asConsWithCdr: r) ]
-		     fresh.
+		     asGoal.
 	self
 		assert: (g solutions next: 5)
 		equals: ((0 to: 4) collect: [ :each | 
@@ -914,7 +978,7 @@ GoalTest >> testListo [
 GoalTest >> testLolo [
 
 	| g |
-	g := [ :r | MKPredicateSexpLolo value: r ] fresh.
+	g := [ :r | MKPredicateSexpLolo value: r ] asGoal.
 	self
 		assert: (g solutions next: 1)
 		equals: { nil asCons }
@@ -928,7 +992,7 @@ GoalTest >> testLolo [
 				     $c }.
 			     { 
 				     $d.
-				     y } } asCons ] fresh ] fresh.
+				     y } } asCons ] asGoal ] asGoal.
 	self
 		assert: (g solutions next: 1)
 		equals: { Var tautology }
@@ -936,7 +1000,7 @@ GoalTest >> testLolo [
 	g := [ 
 	     [ :x | 
 	     MKPredicateSexpLolo value: ({ #( a b ) } asConsWithCdr: x) ]
-		     fresh ] fresh.
+		     asGoal ] asGoal.
 	self
 		assert: (g solutions next: 1)
 		equals: { Var tautology }
@@ -944,7 +1008,7 @@ GoalTest >> testLolo [
 	g := [ :x | 
 	     MKPredicateSexpLolo value: ({ 
 			      #( a b ).
-			      #( c d ) } asConsWithCdr: x) ] fresh.
+			      #( c d ) } asConsWithCdr: x) ] asGoal.
 	self
 		assert: (g solutions next: 5)
 		equals: { 
@@ -962,7 +1026,7 @@ GoalTest >> testLolo [
 GoalTest >> testNats [
 	| g M |
 	M := 1000.
-	g := [ :x | self nats: x ] fresh.
+	g := [ :x | self nats: x ] asGoal.
 	self
 		assert: (g solutions next: M)
 		equals: (0 to: M - 1)
@@ -1007,7 +1071,7 @@ GoalTest >> testTabling [
 			{(#a -> #b).
 			(#b -> #a).
 			(#b -> #d)} asGraph asGoal.
-	g := [ :x | patho value: #a value: x ] fresh.
+	g := [ :x | patho value: #a value: x ] asGoal.
 	self assert: g solutions contents equals: #(#b #a #d).
 	patho := self
 		patho:
@@ -1016,7 +1080,7 @@ GoalTest >> testTabling [
 			(#c -> #d).
 			(#d -> #a).
 			(#d -> #b)} asGraph asGoal.
-	g := [ :x | patho value: #c value: x ] fresh.
+	g := [ :x | patho value: #c value: x ] asGoal.
 	self assert: g solutions contents equals: #(#d #a #b #c)
 ]
 
@@ -1028,7 +1092,7 @@ GoalTest >> testTablingAnswersInsteadOfSubstitutions [
 	gº := [ :x :y | 
 	Goal cond e
 		if: (x unifyo value: 5) then: (fº value: y);
-		if: true asGoal then: (fº value: y) ] fresh.
+		if: true asGoal then: (fº value: y) ] asGoal.
 	self
 		assert:
 			{{5 . 6}.
@@ -1067,7 +1131,7 @@ GoalTest >> testTablingMutuallyRecursive [
 		yourself ].
 	self
 		assert: {0 . 1}
-		equals: [ :q | fº value: q ] fresh solutions contents.
+		equals: [ :q | fº value: q ] asGoal solutions contents.
 	fº := [ :x | 
 	Goal cond e
 		if: (x unifyo value: 0) then: true asGoal;
@@ -1080,19 +1144,19 @@ GoalTest >> testTablingMutuallyRecursive [
 		yourself ] tabled.
 	self
 		assert: {0 . 1 . 0}
-		equals: [ :q | fº value: q ] fresh solutions contents
+		equals: [ :q | fº value: q ] asGoal solutions contents
 ]
 
 { #category : #'as yet unclassified' }
 GoalTest >> testTeaCup [
 	| g |
-	g := [ :x | self teacup: x ] fresh.
+	g := [ :x | self teacup: x ] asGoal.
 	self
 		assert: g solutions
 		equals: {#tea . #cup}
 		modulo: #asOrderedCollection.
 	g := [ :x :y :z | (self teacup: x) , ((self teacup: y) , (self teacup: z)) ]
-		fresh.
+		asGoal.
 	self
 		assert: g solutions
 		equals:
@@ -1122,8 +1186,8 @@ GoalTest >> testUnifySharing [
 
 	| g |
 	g := [ :r | 
-	     [ :x | (r unifyo value: x) , (x unifyo value: true) ] fresh ]
-		     fresh.
+	     [ :x | (r unifyo value: x) , (x unifyo value: true) ] asGoal ]
+		     asGoal.
 	self
 		assert: g solutions
 		equals: { true }
@@ -1136,7 +1200,7 @@ GoalTest >> testUnifySharing [
 GoalTest >> testUnifySymmetryFourWithVar [
 
 	| g |
-	g := [ :q | 4 unifyo value: q ] fresh.
+	g := [ :q | 4 unifyo value: q ] asGoal.
 	self assert: g solutions equals: { 4 } modulo: #asOrderedCollection.
 
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
@@ -1146,7 +1210,7 @@ GoalTest >> testUnifySymmetryFourWithVar [
 GoalTest >> testUnifySymmetryVarWithFour [
 
 	| g |
-	g := [ :q | q unifyo value: 4 ] fresh.
+	g := [ :q | q unifyo value: 4 ] asGoal.
 	self assert: g solutions equals: { 4 } modulo: #asOrderedCollection.
 
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
@@ -1170,8 +1234,8 @@ GoalTest >> testUnifyWithTopmostSharing [
 
 	| g |
 	g := [ :r | 
-	     [ :x :y | r unifyo value: (Array with: x with: y) asCons ] fresh ]
-		     fresh.
+	     [ :x :y | r unifyo value: (Array with: x with: y) asCons ] asGoal ]
+		     asGoal.
 	self
 		assert: g solutions
 		equals: { 
@@ -1192,7 +1256,7 @@ GoalTest >> testUnifyWithTopmostSharingWithRepetition [
 		      with: x
 		      with: y
 		      with: x
-		      with: y) asCons unifyo value: r ] fresh ] fresh.
+		      with: y) asCons unifyo value: r ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: { 
@@ -1212,7 +1276,7 @@ GoalTest >> testUnifyWithTopmostWithoutSharing [
 	g := [ :r | 
 	     [ :x :y | 
 	     (LinkedList with: x with: r) asCons unifyo value:
-		     (LinkedList with: 1 with: y) asCons ] fresh ] fresh.
+		     (LinkedList with: 1 with: y) asCons ] asGoal ] asGoal.
 	self
 		assert: g solutions
 		equals: { 0 asReifiedVar }

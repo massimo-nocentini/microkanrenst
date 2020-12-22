@@ -14,5 +14,5 @@ McCullochAssociateRule >> relateo [
 				value: gamma
 				value: (2 cons: gamma)
 				value: gamma_2_gamma)
-		, (machine relateo value: beta value: gamma)] fresh]
+		, (machine relateo value: beta value: gamma)] asGoal]
 ]

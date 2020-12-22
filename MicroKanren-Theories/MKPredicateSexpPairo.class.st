@@ -8,7 +8,7 @@ Class {
 MKPredicateSexpPairo >> goal [
 
 	^ [ :a :d | 
-	  MKPredicateSexpConso value: a value: d value: firstArgument ] fresh
+	  MKPredicateSexpConso value: a value: d value: firstArgument ] asGoal
 ]
 
 { #category : #accessing }

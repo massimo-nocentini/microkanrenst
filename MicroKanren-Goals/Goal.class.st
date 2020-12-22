@@ -23,11 +23,6 @@ Goal class >> cond [
 	^ Cond new
 ]
 
-{ #category : #creating }
-Goal class >> fail [
-	^ Failed new
-]
-
 { #category : #'as yet unclassified' }
 Goal class >> findAllo [
 
@@ -35,39 +30,8 @@ Goal class >> findAllo [
 ]
 
 { #category : #creating }
-Goal class >> fresh: aBlock [
-
-	^ (aBlock numArgs = 0
-	   ifTrue: [ Eta new ]
-	   ifFalse: [ Fresh new ])
-	  receiver: aBlock;
-	  yourself 
-]
-
-{ #category : #'as yet unclassified' }
-Goal class >> succeed [
-	^ Succeed new
-]
-
-{ #category : #creating }
 Goal class >> tabledBlock: aBlockClosure withArgs: args withTable: aDictionary [ 
 	^ Tabled new block: aBlockClosure; args: args; table: aDictionary; yourself
-]
-
-{ #category : #creating }
-Goal class >> unify: anObj with: another [
-
-	"
-:param Object anObj: the object that should be unified with `another`.
-:param Object another: the object that should be unified with `anObj`.
-:return: a goal that tries to perform unification.
-:rtype: Unify
-"
-
-	^ Unify new
-		  left: anObj;
-		  right: another;
-		  yourself
 ]
 
 { #category : #combining }

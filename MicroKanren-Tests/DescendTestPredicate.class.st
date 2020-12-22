@@ -10,5 +10,5 @@ DescendTestPredicate >> goal [
 		|
 			[ :z | 
 			(ChildTestPredicate value: firstArgument value: z)
-				, (self class value: z value: secondArgument) ] fresh
+				, (self class value: z value: secondArgument) ] asGoal
 ]

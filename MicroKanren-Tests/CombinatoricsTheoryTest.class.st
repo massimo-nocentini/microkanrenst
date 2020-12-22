@@ -8,7 +8,7 @@ Class {
 CombinatoricsTheoryTest >> testDycko [
 	| g combTheory |
 	combTheory := CombinatoricsTheory new.
-	g := [ :alpha | combTheory dycko value: alpha ] fresh.
+	g := [ :alpha | combTheory dycko value: alpha ] asGoal.
 	self
 		assert: (g solutions next: 20)
 		equals:
@@ -17,7 +17,7 @@ CombinatoricsTheoryTest >> testDycko [
 			'(()())()' . '(())()()' . '()(()())' . '(()()()()())' . '((())()())'.
 			'(()()())()' . '((()))()'} collect: #asCons)
 		modulo: #asOrderedCollection.
-	g := [ :alpha | combTheory dycko value: '(()(())()(' asCons ] fresh.
+	g := [ :alpha | combTheory dycko value: '(()(())()(' asCons ] asGoal.
 	"an invalid Dyck path"
 	self assert: g solutions isEmpty
 ]

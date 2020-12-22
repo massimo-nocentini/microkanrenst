@@ -12,7 +12,7 @@ MKPredicateSexpLolo >> goal [
 		  otherwise: [ :a :d | 
 			  (MKPredicateSexpConso value: a value: d value: firstArgument)
 			  , ((MKPredicateSexpListo value: a) , (self class value: d)) ]
-				  fresh
+				  asGoal
 ]
 
 { #category : #accessing }
