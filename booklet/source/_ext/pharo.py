@@ -8,6 +8,12 @@ from sphinx.util.nodes import nested_parse_with_titles
 from docutils.statemachine import StringList
 import json
 
+def doctree_resolved_handler(app,):#, fromdocname):
+   with open(app.config.pharo_json_export_filename) as fp:
+       app.builder.env.pharo_json_export = json.load(fp)
+       print('json loaded succeessfully')
+
+
 class PharoAutoClassDirective(Directive):
 
     required_arguments = 1
@@ -17,15 +23,11 @@ class PharoAutoClassDirective(Directive):
     has_content = True
 
     def run(self):
-
-        if not hasattr(self, 'pharo_json_export'):
-            print('hello from Pharo class directive')
-            config = self.state.document.settings.env.config
-            with open(config['pharo_json_export_filename']) as fp:
-                self.pharo_json_export = json.load(fp)
+        
+        pharo_json_export = self.state.document.settings.env.pharo_json_export
 
         className = self.arguments[0]
-        classDef = self.pharo_json_export['classes'][className]
+        classDef = pharo_json_export['classes'][className]
         classDef['description'] = [''] + [str(l) for l in self.content]
 
         rst = StringList()
@@ -55,17 +57,13 @@ class PharoAutoCompiledMethodDirective(Directive):
 
     def run(self):
 
-        if not hasattr(self, 'pharo_json_export'):
-            print('hello from Pharo message directive')
-            config = self.state.document.settings.env.config
-            with open(config['pharo_json_export_filename']) as fp:
-                self.pharo_json_export = json.load(fp)
+        pharo_json_export = self.state.document.settings.env.pharo_json_export
                 
         fullSelector = self.arguments[0]
         className, selector = fullSelector.split('>>')
         className = ' '.join(className.split('_'))
         fullSelector = '{}>>{}'.format(className, selector)
-        messageDef = self.pharo_json_export['messages'][selector[1:]]
+        messageDef = pharo_json_export['messages'][selector[1:]]
         compiled_method = messageDef['implementors'][className]
         compiled_method['description'] = [''] + ['  ' + str(s) for s in self.content]
         sourceCode = ['{} >> {} '.format(className, compiled_method['sourceCode'][0])] + compiled_method['sourceCode'][1:]
@@ -155,6 +153,7 @@ class PharoDomain(Domain):
 
 def setup(app):
     app.add_config_value('pharo_json_export_filename', None, 'html')
+    app.connect('builder-inited', doctree_resolved_handler)
     app.add_domain(PharoDomain)
 
     return {
