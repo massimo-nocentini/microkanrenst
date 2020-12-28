@@ -8,10 +8,6 @@ from sphinx.util.nodes import nested_parse_with_titles
 from docutils.statemachine import StringList
 import json
 
-# for now hardcore absolute file reference.
-with open('/Users/mn/Developer/snapshots/pharoes/90-microkanren/microkanren.json') as fp:
-    pharoExportDict = json.load(fp)
-
 class PharoAutoClassDirective(Directive):
 
     required_arguments = 1
@@ -21,8 +17,15 @@ class PharoAutoClassDirective(Directive):
     has_content = True
 
     def run(self):
+
+        if not hasattr(self, 'pharo_json_export'):
+            print('hello from Pharo class directive')
+            config = self.state.document.settings.env.config
+            with open(config['pharo_json_export_filename']) as fp:
+                self.pharo_json_export = json.load(fp)
+
         className = self.arguments[0]
-        classDef = pharoExportDict['classes'][className]
+        classDef = self.pharo_json_export['classes'][className]
         classDef['description'] = [''] + [str(l) for l in self.content]
 
         rst = StringList()
@@ -52,11 +55,17 @@ class PharoAutoCompiledMethodDirective(Directive):
 
     def run(self):
 
+        if not hasattr(self, 'pharo_json_export'):
+            print('hello from Pharo message directive')
+            config = self.state.document.settings.env.config
+            with open(config['pharo_json_export_filename']) as fp:
+                self.pharo_json_export = json.load(fp)
+                
         fullSelector = self.arguments[0]
         className, selector = fullSelector.split('>>')
         className = ' '.join(className.split('_'))
         fullSelector = '{}>>{}'.format(className, selector)
-        messageDef = pharoExportDict['messages'][selector[1:]]
+        messageDef = self.pharo_json_export['messages'][selector[1:]]
         compiled_method = messageDef['implementors'][className]
         compiled_method['description'] = [''] + ['  ' + str(s) for s in self.content]
         sourceCode = ['{} >> {} '.format(className, compiled_method['sourceCode'][0])] + compiled_method['sourceCode'][1:]
@@ -143,27 +152,6 @@ class PharoDomain(Domain):
         else:
             print('Awww, found nothing')
             return None
-
-    def add_autoClass(self, signature, ing):
-        """Add a new autoclass to the domain."""
-        raise Exception
-        name = '{}.{}'.format('pharo-class', signature)
-        anchor = 'pharo-class-{}'.format(signature)
-
-        # name, dispname, type, docname, anchor, priority
-        self.data['classes'].append(
-            (name, signature, 'Class', self.env.docname, anchor, 0))
-
-    def add_autoCompiledMethod(self, signature, ing):
-        """Add a new autoCompiledMethod to the domain."""
-        raise Exception
-        name = '{}.{}'.format('pharo-compiledMethod', signature)
-        anchor = 'pharo-compiledMethod-{}'.format(signature)
-
-        # name, dispname, type, docname, anchor, priority
-        self.data['compiledMethods'].append(
-            (name, signature, 'CompiledMethod', self.env.docname, anchor, 0))
-
 
 def setup(app):
     app.add_config_value('pharo_json_export_filename', None, 'html')
