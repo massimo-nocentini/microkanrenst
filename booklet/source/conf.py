@@ -36,8 +36,11 @@ extensions = [
 ]
 
 # The following configuation values concerns the Pharo domain.
-pharo_json_export_filename='/Users/mn/Developer/snapshots/pharoes/90-microkanren/microkanren.json'
-pharo_json_export_filename='source/microkanren.json'
+pharo_json_export_filenames = [
+        'source/microkanren-core-messages.json',
+        'source/microkanren-core-tests.json',
+        'source/microkanren-sexp-tests.json',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

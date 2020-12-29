@@ -9,9 +9,19 @@ from docutils.statemachine import StringList
 import json
 
 def doctree_resolved_handler(app,):#, fromdocname):
-   with open(app.config.pharo_json_export_filename) as fp:
-       app.builder.env.pharo_json_export = json.load(fp)
-       print('json loaded succeessfully')
+
+    # D will contain the whole content, collecting from each json file.
+    D = {'classes': {}, 'messages': {}}
+
+    for filename in app.config.pharo_json_export_filenames:
+        with open(filename) as fp:
+            d = json.load(fp)
+            D['classes'] |= d['classes']
+            D['messages'] |= d['messages']
+
+    app.builder.env.pharo_json_export = D
+    print('json loaded succeessfully, with {} messages and {} classes.'.format(
+        len(D['messages']), len(D['classes'])))
 
 
 class PharoAutoClassDirective(Directive):
@@ -152,7 +162,7 @@ class PharoDomain(Domain):
             return None
 
 def setup(app):
-    app.add_config_value('pharo_json_export_filename', None, 'html')
+    app.add_config_value('pharo_json_export_filenames', [], 'html')
     app.connect('builder-inited', doctree_resolved_handler)
     app.add_domain(PharoDomain)
 
