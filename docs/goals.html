@@ -164,10 +164,9 @@
             
   <div class="section" id="goals">
 <h1>Goals<a class="headerlink" href="#goals" title="Permalink to this headline">¶</a></h1>
-<p>This chapter introduces the basic classes that host the behaviour of the logic system.
-We proceed in increasing order of complexity for the concepts that will be introduced,
-starting from a formal and abstract definition of a language that drives the companion
-implementation.</p>
+<p>This chapter introduces the basic classes that host the behaviour of the logic
+system; for the sake of clarity, we proceed in increasing order of complexity,
+explaining more complex concepts by using simpler ones.</p>
 <div class="section" id="goal">
 <h2>Goal<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Object</span> <span class="nf">subclass:</span> <span class="ss">#Goal</span>
@@ -176,8 +175,8 @@ implementation.</p>
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
 </pre></div>
 </div>
-<p>I and my subclasses represent a small language to construct logical relations. Formally, I adhere to
-the following abstract grammar:</p>
+<p>I and my subclasses represent a small language to construct logical
+relations. Formally, I adhere to the abstract grammar:</p>
 <pre>
 <strong id="grammar-token-goalGrammar-goal"><span id="grammar-token-goal"></span>goal       </strong> ::=  <a class="reference internal" href="#grammar-token-goalGrammar-failed"><code class="xref docutils literal notranslate"><span class="pre">failed</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-succeed"><code class="xref docutils literal notranslate"><span class="pre">succeed</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-binary_goal"><code class="xref docutils literal notranslate"><span class="pre">binary_goal</span></code></a> |
                  <a class="reference internal" href="#grammar-token-goalGrammar-fresh"><code class="xref docutils literal notranslate"><span class="pre">fresh</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-eta"><code class="xref docutils literal notranslate"><span class="pre">eta</span></code></a> | <a class="reference internal" href="#grammar-token-goalGrammar-predicate"><code class="xref docutils literal notranslate"><span class="pre">predicate</span></code></a>
@@ -195,17 +194,21 @@ the following abstract grammar:</p>
 <strong id="grammar-token-goalGrammar-value"><span id="grammar-token-value"></span>value      </strong> ::=  <a class="reference internal" href="#grammar-token-goalGrammar-var"><code class="xref docutils literal notranslate"><span class="pre">var</span></code></a> | <code class="xref docutils literal notranslate"><span class="pre">Object</span></code>
 </pre>
 <p>My subclasses have the responsibility to encode combinations of arbitrary
-goals and, consequently, shouldn’t be stateful with respect to a logical
-computation. It follows that their sole instance variables have to related to
-goal construction.</p>
+goals. In a pure world, they shouldn’t be stateful with respect to a logical
+computation. In reality, and more important to build visualizations, we will
+see that some of them keep references to logic objects, variables in
+particular.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Any reference to external objects beyond this scope should be prohibited.</p>
+<p>Although some goals are stateful, their state is related to a computation
+branch and modified according to the exploration process that looks for
+substitutions. For any side process that inspects a particular aspect, a
+copy of the goal has to be made.</p>
 </div>
-<p>To be polymorphic with me, the <span class="xref std std-ref">onState-message-label</span> has to be
-implemented, as my subclasses have to; as the reader will understand
-following the referenced doc, it is the main message to respond to in order
-to get into a logic computation.</p>
+<p>To be polymorphic with me, the <a class="reference internal" href="messages.html#onstate-message-label"><span class="std std-ref">onState: message</span></a> has to be
+implemented, as my subclasses have to; moreover, the reader will understand
+during the reading of this doc that it is the main message to respond to to
+drop into a logic computation.</p>
 </div>
 <div class="section" id="failed">
 <h2>Failed<a class="headerlink" href="#failed" title="Permalink to this headline">¶</a></h2>
@@ -271,7 +274,7 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
 </pre></div>
 </div>
-<p>I am a goal that represent logical falsehood, in particular I encode the
+<p>I am a goal that introduces logic variables, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-fresh"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:fresh</span></code></a> production.</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFreshFailed</span> 
 
@@ -304,6 +307,16 @@ is to send the adapting message <cite>#asGoal</cite> to <cite>true</cite>, as fo
 	^ self asReifiedWithVarClass: ReifiedVar
 </pre></div>
 </div>
+<blockquote>
+<div><p>and</p>
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Integer</span> <span class="nf">&gt;&gt;</span> <span class="nf">asReifiedWithVarClass:</span> <span class="nv">aClass</span> 
+
+	<span class="o">^</span> <span class="nv">aClass</span> <span class="nb">new</span>
+		  <span class="nf">id:</span> <span class="bp">self</span><span class="p">;</span>
+		  <span class="nf">yourself</span>
+</pre></div>
+</div>
+</div></blockquote>
 </div></blockquote>
 </div></blockquote>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFreshMultipleVars</span> 
@@ -517,10 +530,10 @@ that both</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjFalseFalse.svg" class="align-center" src="_images/GoalTest-testDisjFalseFalse.svg" /></div></blockquote>
 <p>and</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjTrueFalse</span> 
+<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjFalseTrue</span> 
 
 	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
 		<span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
@@ -530,7 +543,7 @@ that both</p>
 </pre></div>
 </div>
 <blockquote>
-<div><img alt="_images/GoalTest-testDisjTrueFalse.svg" class="align-center" src="_images/GoalTest-testDisjTrueFalse.svg" /></div></blockquote>
+<div><img alt="_images/GoalTest-testDisjFalseTrue.svg" class="align-center" src="_images/GoalTest-testDisjFalseTrue.svg" /></div></blockquote>
 <p>behave as usual in logic. On the other hand,</p>
 <div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjTrueTrue</span> 
 

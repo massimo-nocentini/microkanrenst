@@ -1,18 +1,17 @@
 Goals
 =====
 
-This chapter introduces the basic classes that host the behaviour of the logic system.
-We proceed in increasing order of complexity for the concepts that will be introduced,
-starting from a formal and abstract definition of a language that drives the companion
-implementation.
+This chapter introduces the basic classes that host the behaviour of the logic
+system; for the sake of clarity, we proceed in increasing order of complexity,
+explaining more complex concepts by using simpler ones. 
 
 Goal
 ----
 
 .. pharo:autoclass:: Goal
 
-  I and my subclasses represent a small language to construct logical relations. Formally, I adhere to
-  the following abstract grammar:
+  I and my subclasses represent a small language to construct logical
+  relations. Formally, I adhere to the abstract grammar:
   
   .. productionlist:: goalGrammar
      goal: `failed` | `succeed` | `binary_goal` |
@@ -31,18 +30,22 @@ Goal
      value: `var` | `Object`
   
   My subclasses have the responsibility to encode combinations of arbitrary
-  goals and, consequently, shouldn't be stateful with respect to a logical
-  computation. It follows that their sole instance variables have to related to
-  goal construction.
+  goals. In a pure world, they shouldn't be stateful with respect to a logical
+  computation. In reality, and more important to build visualizations, we will
+  see that some of them keep references to logic objects, variables in
+  particular.
 
   .. warning::
   
-    Any reference to external objects beyond this scope should be prohibited.
+    Although some goals are stateful, their state is related to a computation
+    branch and modified according to the exploration process that looks for 
+    substitutions. For any side process that inspects a particular aspect, a
+    copy of the goal has to be made.
   
   To be polymorphic with me, the :ref:`onState-message-label` has to be
-  implemented, as my subclasses have to; as the reader will understand
-  following the referenced doc, it is the main message to respond to in order
-  to get into a logic computation.
+  implemented, as my subclasses have to; moreover, the reader will understand
+  during the reading of this doc that it is the main message to respond to to
+  drop into a logic computation.
 
 
 Failed
@@ -83,7 +86,7 @@ Fresh
 
 .. pharo:autoclass:: Fresh
 
-  I am a goal that represent logical falsehood, in particular I encode the
+  I am a goal that introduces logic variables, in particular I encode the
   :token:`goalGrammar:fresh` production.
 
   .. pharo:autocompiledmethod:: GoalTest>>#testFreshFailed
@@ -99,6 +102,10 @@ Fresh
     where
 
       .. pharo:autocompiledmethod:: Integer>>#asReifiedVar
+
+        and
+
+        .. pharo:autocompiledmethod:: Integer>>#asReifiedWithVarClass:
 
   .. pharo:autocompiledmethod:: GoalTest>>#testFreshMultipleVars
 
@@ -193,9 +200,9 @@ Disj
 
   and
 
-  .. pharo:autocompiledmethod:: GoalTest>>#testDisjTrueFalse
+  .. pharo:autocompiledmethod:: GoalTest>>#testDisjFalseTrue
 
-    .. image:: _images/GoalTest-testDisjTrueFalse.svg
+    .. image:: _images/GoalTest-testDisjFalseTrue.svg
       :align: center
 
   behave as usual in logic. On the other hand,
