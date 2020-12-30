@@ -698,6 +698,19 @@ GoalTest >> testDisjFalseFalse [
 ]
 
 { #category : #'as yet unclassified' }
+GoalTest >> testDisjFalseTrue [
+
+	| g |
+	g := false asGoal | true asGoal.
+	self
+		assert: g solutions
+		equals: { Var tautology }
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: g limitedTo: -1
+]
+
+{ #category : #'as yet unclassified' }
 GoalTest >> testDisjFourWithVarOrThreeWithVar [
 
 	| g |
@@ -778,19 +791,6 @@ GoalTest >> testDisjThreeWithVarOrThreeWithVar [
 		equals: { 3. 3 }
 		modulo: #asOrderedCollection.
 		
-	^ self exportComputationTreeOfGoal: g limitedTo: -1
-]
-
-{ #category : #'as yet unclassified' }
-GoalTest >> testDisjTrueFalse [
-
-	| g |
-	g := true asGoal | false asGoal.
-	self
-		assert: g solutions
-		equals: { Var tautology }
-		modulo: #asOrderedCollection.
-
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 

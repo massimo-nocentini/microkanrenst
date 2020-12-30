@@ -30,40 +30,6 @@ BaselineOfMicroKanren >> baseline: spec [
 ]
 
 { #category : #export }
-BaselineOfMicroKanren >> exportForDocScript [
-
-	<script: 'BaselineOfMicroKanren new exportForDocScript'>
-	^ MetaSTExporter new
-		  selectors:
-			  #( onState: walk: asGoal fail tautology unifyo asReifiedVar
-			     unifyWith: #onState:withVars: #onState:afterPushingGoal:
-			     #onState:forGoal:fromConj: #popGoalFromPathOfState:forConj:
-			     testSucceed testSucceedInvariant testFailed testFreshSucceed
-			     testFreshFailed testFreshMultipleVars testUnifyWithTopmostSharing
-			     testUnifyWithTopmostSharingWithRepetition
-			     testUnifySharing testUnifyWithTopmostWithoutSharing
-			     testUnifySymmetryFourWithVar testUnifySymmetryVarWithFour
-			     testUnifyThreeWithThree testUnifyFourWithThree
-			     testACORN testAppendoForward testAppendoBackward
-			     testDycko testEtaRaw eternity: testDisjFalseFalse
-			     testDisjTrueFalse testDisjTrueTrue testDisjThreeWithThreeOrFourWithVar
-			     testDisjThreeWithVarOrFourWithVar
-			     testDisjThreeWithVarOrThreeWithVar
-			     testDisjThreeFourThenFive testDisjThreeThenFourFive
-			     testDisjFourWithVarOrThreeWithVar
-			     testConjDisj testConjFalseThreeWithVar
-			     testConjSymmetry testConjThreeFour testConjThreeFourWithTwoVars
-			     testConjThreeFresh testConjTrueThreeWithThree
-			     testConjTrueTrue testConjFailingSharing testConjSucceedingSharing
-			     testFives testFivesByPredicate testFivesSwapped
-			     fives: testFivesByNats #repeat:value: testNats nats: #nats:stage:
-			     #nats:stage:offset: );
-		  exportWithRepositoryPath: [ :aPath | 
-			  aPath / 'booklet' / 'source' / 'microkanren.json' ]
-		  ofPackage: self class package
-]
-
-{ #category : #export }
 BaselineOfMicroKanren >> scriptExportCoreMessagesForDoc [
 
 	<script: 'BaselineOfMicroKanren new scriptExportCoreMessagesForDoc'>
@@ -71,7 +37,8 @@ BaselineOfMicroKanren >> scriptExportCoreMessagesForDoc [
 		  selectors:
 			  #( onState: walk: asGoal fail tautology unifyo asReifiedVar
 			     unifyWith: #onState:withVars: #onState:afterPushingGoal:
-			     #onState:forGoal:fromConj: #popGoalFromPathOfState:forConj: );
+			     #onState:forGoal:fromConj: #popGoalFromPathOfState:forConj:
+			     asReifiedWithVarClass: );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source' / 'microkanren-core-messages.json' ]
 		  ofPackage: self class package
@@ -89,7 +56,7 @@ BaselineOfMicroKanren >> scriptExportCoreTestsForDoc [
 			     testUnifySharing testUnifyWithTopmostWithoutSharing
 			     testUnifySymmetryFourWithVar testUnifySymmetryVarWithFour
 			     testUnifyThreeWithThree testUnifyFourWithThree
-			     testEtaRaw eternity: testDisjFalseFalse testDisjTrueFalse
+			     testEtaRaw eternity: testDisjFalseFalse #testDisjFalseTrue
 			     testDisjTrueTrue testDisjThreeWithThreeOrFourWithVar
 			     testDisjThreeWithVarOrFourWithVar
 			     testDisjThreeWithVarOrThreeWithVar
