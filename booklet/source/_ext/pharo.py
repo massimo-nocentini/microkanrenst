@@ -5,6 +5,7 @@ from docutils.statemachine import ViewList
 from sphinx.domains import Domain
 from sphinx.roles import XRefRole
 from sphinx.util.nodes import nested_parse_with_titles
+from sphinx import addnodes
 from docutils.statemachine import StringList
 import json
 
@@ -99,7 +100,12 @@ class PharoAutoCompiledMethodDirective(Directive):
         definition_node = docutils.nodes.literal_block(text=#'\n' + 
                             '\n'.join(sourceCode), language='smalltalk')
 
-        return [definition_node] + node.children
+        indexnode = addnodes.index()
+        indexnode['entries'] = [
+            ('single', 'Protocol {}; {}'.format(compiled_method['category'], fullSelector), fullSelector, False, None)
+        ]
+
+        return [indexnode, definition_node] + node.children
 
         '''
         field_comment = docutils.nodes.field()

@@ -193,7 +193,10 @@ Disj
   On the one hand, `false asGoal` is the neutral element for disjunction, so
   that both
 
+  .. index:: Protocol testing; testDisjFalseTrue 
+
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjFalseFalse
+
 
     .. image:: _images/GoalTest-testDisjFalseFalse.svg
       :align: center

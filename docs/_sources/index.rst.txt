@@ -16,7 +16,7 @@ language such as Smalltalk it is possible to appreciate and benefit from both
 properties.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    overview.rst
    goals.rst
