@@ -13,8 +13,6 @@
 import os
 import sys
 # sys.path.insert(0, os.path.abspath('.'))
- 
-sys.path.append(os.path.abspath("./_ext"))
 
 # -- Project information -----------------------------------------------------
 
@@ -31,7 +29,7 @@ author = 'Massimo Nocentini'
 extensions = [
         'sphinx.ext.mathjax',
         'sphinx.ext.githubpages',
-        'pharo',
+        'sphinxcontrib.pharodomain',
         #'sphinx_rtd_theme',
 ]
 
