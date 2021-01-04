@@ -163,17 +163,17 @@
 <h1>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="asgoal-message">
 <h2><code class="docutils literal notranslate"><span class="pre">asGoal</span></code> message<a class="headerlink" href="#asgoal-message" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>False &gt;&gt; asGoal 
+<span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>False &gt;&gt; asGoal 
 
 	^ Failed new
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>True &gt;&gt; asGoal 
+<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>True &gt;&gt; asGoal 
 
 	^ Succeed new
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>BlockClosure &gt;&gt; asGoal 
+<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>BlockClosure &gt;&gt; asGoal 
 
 	^ (numArgs = 0
 		   ifTrue: [ Eta new ]
@@ -187,7 +187,7 @@
 <span id="onstate-message-label"></span><h2><code class="docutils literal notranslate"><span class="pre">onState:</span></code> message<a class="headerlink" href="#onstate-message" title="Permalink to this headline">¶</a></h2>
 <p>This is <em>the fundamental</em> message of the whole system because it allows us to explore
 the search space of both succeeding and failing states.</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> 
+<span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> 
 
 	&lt;<span class="k">doc:</span> #Realog topic: #( Gaol onState )&gt;
 	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -195,19 +195,19 @@ the search space of both succeeding and failing states.</p>
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">onState:</span> (<span class="nv">aState</span> <span class="nf">pushGoal:</span> <span class="nv">aGoal</span>) <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Fresh</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> 
+<span class="target" id="compiledMethod-4"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Fresh</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> 
 
 	<span class="o">^</span> <span class="nv">aState</span> <span class="nf">collectVars:</span> (<span class="m">1</span> <span class="nf">to:</span> <span class="nv">receiver</span> <span class="nf">numArgs</span>) <span class="nf">forFresh:</span> <span class="bp">self</span>
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Fresh</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span> 
+<span class="target" id="compiledMethod-5"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Fresh</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span> 
 
 	<span class="nv">variables</span> <span class="o">:=</span> <span class="nv">aCollection</span><span class="p">.</span>
 	<span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">valueWithArguments:</span> <span class="bp">self</span> <span class="nf">variables</span><span class="p">.</span>
 	<span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span>
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Eta</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> 
+<span class="target" id="compiledMethod-6"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Eta</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> 
 
 	<span class="o">^</span> [ 
 	  <span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">value</span><span class="p">.</span>
@@ -217,12 +217,12 @@ the search space of both succeeding and failing states.</p>
 </div>
 <div class="section" id="onstate-afterpushinggoal-message">
 <h2><code class="docutils literal notranslate"><span class="pre">onState:afterPushingGoal:</span></code> message<a class="headerlink" href="#onstate-afterpushinggoal-message" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span> 
+<span class="target" id="compiledMethod-7"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span> 
 
 	<span class="bp">self</span> <span class="nf">subclassResponsibility</span>
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Succeed</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span> 
+<span class="target" id="compiledMethod-9"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Succeed</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span> 
 
 	&lt;<span class="k">doc:</span> #Realog topic: #( Succeed onState )&gt;
 	<span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
@@ -245,7 +245,7 @@ the search space of both succeeding and failing states.</p>
 </pre></div>
 </div>
 <p>or even better with the test case</p>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testSucceedInvariant</span> 
+<span class="target" id="compiledMethod-8"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testSucceedInvariant</span> 
 
 	<span class="nf">SBRAL</span> <span class="nb">new</span> <span class="nf">asState</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">s</span> <span class="o">|</span> 
 		<span class="o">|</span><span class="nv"> ss </span><span class="o">|</span>
@@ -260,7 +260,7 @@ the search space of both succeeding and failing states.</p>
 </pre></div>
 </div>
 </div></blockquote>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Disj</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
+<span class="target" id="compiledMethod-10"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Disj</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
 
 	<span class="o">|</span><span class="nv"> aStream anotherStream </span><span class="o">|</span>
 	<span class="nv">aStream</span> <span class="o">:=</span> <span class="nv">left</span> <span class="nf">onState:</span> <span class="nv">aState</span><span class="p">.</span>
@@ -268,7 +268,7 @@ the search space of both succeeding and failing states.</p>
 	<span class="o">^</span> <span class="nv">combineBlock</span> <span class="nf">value:</span> <span class="nv">aStream</span> <span class="nf">value:</span> <span class="nv">anotherStream</span>
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Conj</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
+<span class="target" id="compiledMethod-15"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Conj</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
 
 	<span class="o">^</span> [ <span class="o">:</span><span class="nv">refinedState</span> <span class="o">|</span> 
 	  <span class="nv">refinedState</span> <span class="nf">path</span> <span class="nf">value</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">aGoal</span> <span class="o">|</span> 
@@ -277,14 +277,14 @@ the search space of both succeeding and failing states.</p>
 </pre></div>
 </div>
 <blockquote>
-<div><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">aGoal</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span> 
+<div><span class="target" id="compiledMethod-13"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">aGoal</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span> 
 
 	<span class="bp">self</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">refinedState</span> <span class="nf">forConj:</span> <span class="nv">aConj</span><span class="p">.</span> <span class="c">&quot;this message should be removed to be full explicit.&quot;</span>
 	<span class="o">^</span> <span class="nv">aGoal</span> <span class="nf">onState:</span> <span class="nv">refinedState</span>
 </pre></div>
 </div>
 <blockquote>
-<div><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">&gt;&gt;</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span> 
+<div><span class="target" id="compiledMethod-11"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Goal</span> <span class="nf">&gt;&gt;</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span> 
 
 	<span class="c">&quot;No action for the generic goal because if I am the top of `aState`&#39;s goal path,</span>
 <span class="c">	 I have to remain there with respect to the computation running in the</span>
@@ -293,7 +293,7 @@ the search space of both succeeding and failing states.</p>
 	
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Succeed</span> <span class="nf">&gt;&gt;</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span> 
+<span class="target" id="compiledMethod-12"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Succeed</span> <span class="nf">&gt;&gt;</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span> 
 
 	<span class="nv">aState</span> <span class="nf">path:</span> <span class="nv">aState</span> <span class="nf">path</span> <span class="nf">nextLink</span>
 </pre></div>
@@ -306,13 +306,13 @@ without creating a new copy of it.</p>
 </div>
 </div></blockquote>
 </div></blockquote>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Failed</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">right</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span> 
+<span class="target" id="compiledMethod-14"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Failed</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">right</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span> 
 
 	<span class="o">^</span> <span class="nv">refinedState</span> <span class="nf">srfi41Singleton</span>
 </pre></div>
 </div>
 </div></blockquote>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Unify</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span> 
+<span class="target" id="compiledMethod-16"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Unify</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span> 
 
 	<span class="o">|</span><span class="nv"> aStateOrException </span><span class="o">|</span>
 	<span class="nv">aStateOrException</span> <span class="o">:=</span> <span class="nc">Continuation</span> <span class="nf">currentDo:</span> [ <span class="o">:</span><span class="nv">k</span> <span class="o">|</span> 
@@ -322,7 +322,7 @@ without creating a new copy of it.</p>
 	<span class="o">^</span> <span class="nv">aStateOrException</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterUnificationByUnify:</span> <span class="bp">self</span>
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Cond</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
+<span class="target" id="compiledMethod-17"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Cond</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
 
 	<span class="o">^</span> [ 
 	  <span class="o">|</span> <span class="nv">g</span> <span class="nf">|</span>
@@ -330,7 +330,7 @@ without creating a new copy of it.</p>
 	  <span class="nv">g</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">IfPure</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
+<span class="target" id="compiledMethod-18"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">IfPure</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
 
 	<span class="o">|</span><span class="nv"> disj </span><span class="o">|</span>
 	<span class="nv">disj</span> <span class="o">:=</span> <span class="nv">chainCombinationStrategy</span> <span class="nf">value</span>
@@ -341,7 +341,7 @@ without creating a new copy of it.</p>
 	<span class="o">^</span> <span class="nv">disj</span> <span class="nf">onState:</span> <span class="nv">aState</span>
 </pre></div>
 </div>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Suspended</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
+<span class="target" id="compiledMethod-19"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Suspended</span> <span class="nf">&gt;&gt;</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span> 
 
 	<span class="o">^</span> [ <span class="nv">nestedGoal</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
 </pre></div>
@@ -349,7 +349,7 @@ without creating a new copy of it.</p>
 </div>
 <div class="section" id="walk-message">
 <h2><code class="docutils literal notranslate"><span class="pre">walk:</span></code> message<a class="headerlink" href="#walk-message" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">State</span> <span class="nf">&gt;&gt;</span> <span class="nf">walk:</span> <span class="nv">anObj</span> 
+<span class="target" id="compiledMethod-20"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">State</span> <span class="nf">&gt;&gt;</span> <span class="nf">walk:</span> <span class="nv">anObj</span> 
 
 	<span class="c">&quot;main API for ....&quot;</span>
 
