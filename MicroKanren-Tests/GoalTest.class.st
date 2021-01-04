@@ -10,7 +10,7 @@ Class {
 	#category : #'MicroKanren-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 GoalTest >> eternity: x [
 
 	^ [ self eternity: x ] asGoal
@@ -25,7 +25,7 @@ GoalTest >> exportComputationTreeOfGoal: g limitedTo: n [
 		  selector: #gtInspectorTreeUsingCanvas:
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 GoalTest >> fives: x [
 	^ (5 unifyo value: x) | [ self fives: x ] asGoal
 ]
@@ -36,17 +36,17 @@ GoalTest >> imagesPath [
 	^ self iceWorkingDirectory / 'booklet' / 'source' / '_images'
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 GoalTest >> nats: x [
 	^ self nats: x stage: 0
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 GoalTest >> nats: x stage: i [
 	^ self nats: x stage: i offset: 1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 GoalTest >> nats: x stage: i offset: o [
 	^ (x unifyo value: i) | [ self nats: x stage: i + o offset: o] asGoal
 ]
@@ -74,12 +74,12 @@ GoalTest >> setUp [
 	combTheory := CombinatoricsTheory new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 GoalTest >> swappedfives: x [
 	^ [ self fives: x ] asGoal | (5 unifyo value: x)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 GoalTest >> teaCupSpoon: x [
 
 	^ Goal cond e
@@ -89,7 +89,7 @@ GoalTest >> teaCupSpoon: x [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #utilities }
 GoalTest >> teacup: x [
 
 	^ Goal cond e
@@ -98,7 +98,7 @@ GoalTest >> teacup: x [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testAlphaRuleo [
 	| g µ |
 	µ := Theory sexp.
@@ -157,7 +157,7 @@ GoalTest >> testAppendo [
 	self assert: g solutions equals: {#e} modulo: #asOrderedCollection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testBagOf [
 
 	| g |
@@ -352,7 +352,7 @@ GoalTest >> testCdro [
 		modulo: #asOrderedCollection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testConde [
 	| g |
 	g := (LinkedList new
@@ -687,7 +687,7 @@ GoalTest >> testCutUnifyThenFail [
 	self assert: g solutions equals: #( 2 ) modulo: #asOrderedCollection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testDisjFalseFalse [
 
 	| g |
@@ -697,7 +697,7 @@ GoalTest >> testDisjFalseFalse [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testDisjFalseTrue [
 
 	| g |
@@ -710,7 +710,7 @@ GoalTest >> testDisjFalseTrue [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testDisjFourWithVarOrThreeWithVar [
 
 	| g |
@@ -723,7 +723,7 @@ GoalTest >> testDisjFourWithVarOrThreeWithVar [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testDisjThreeFourThenFive [
 
 	| g |
@@ -738,7 +738,7 @@ GoalTest >> testDisjThreeFourThenFive [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testDisjThreeThenFourFive [
 
 	| g |
@@ -753,7 +753,7 @@ GoalTest >> testDisjThreeThenFourFive [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testDisjThreeWithThreeOrFourWithVar [
 
 	| g |
@@ -768,7 +768,7 @@ GoalTest >> testDisjThreeWithThreeOrFourWithVar [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testDisjThreeWithVarOrFourWithVar [
 
 	| g |
@@ -781,7 +781,7 @@ GoalTest >> testDisjThreeWithVarOrFourWithVar [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testDisjThreeWithVarOrThreeWithVar [
 
 	| g |
@@ -794,7 +794,7 @@ GoalTest >> testDisjThreeWithVarOrThreeWithVar [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testDisjTrueTrue [
 
 	| g |
@@ -809,7 +809,7 @@ GoalTest >> testDisjTrueTrue [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testEtaRaw [
 
 	| g |
@@ -817,7 +817,7 @@ GoalTest >> testEtaRaw [
 	self assert: g class equals: Eta
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testFailed [
 
 	| g |
@@ -827,7 +827,7 @@ GoalTest >> testFailed [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testFindAll [
 
 	| g |
@@ -917,7 +917,7 @@ GoalTest >> testFindAll [
 		modulo: #asOrderedCollection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testFives [
 
 	| g |
@@ -930,7 +930,7 @@ GoalTest >> testFives [
 	^ self exportComputationTreeOfGoal: g limitedTo: 10
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testFivesByNats [
 
 	| g |
@@ -943,7 +943,7 @@ GoalTest >> testFivesByNats [
 	^ self exportComputationTreeOfGoal: g limitedTo: 10
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testFivesByPredicate [
 
 	| g |
@@ -956,7 +956,7 @@ GoalTest >> testFivesByPredicate [
 	^ self exportComputationTreeOfGoal: g limitedTo: 10
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testFivesSwapped [
 
 	| g |
@@ -969,7 +969,7 @@ GoalTest >> testFivesSwapped [
 	^ self exportComputationTreeOfGoal: g limitedTo: 10
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testFreshFailed [
 
 	| g |
@@ -979,7 +979,7 @@ GoalTest >> testFreshFailed [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testFreshMultipleVars [
 
 	| g |
@@ -994,7 +994,7 @@ GoalTest >> testFreshMultipleVars [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testFreshSucceed [
 
 	| g |
@@ -1126,7 +1126,7 @@ GoalTest >> testLolo [
 		modulo: #asOrderedCollection " an Array(nil (nil) ((•₀)) (nil nil) ((•₀ •₁)))"
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testNats [
 
 	| g M |
@@ -1140,7 +1140,7 @@ GoalTest >> testNats [
 	^ self exportComputationTreeOfGoal: g limitedTo: 10
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testSucceed [
 
 	| g |
@@ -1154,7 +1154,7 @@ GoalTest >> testSucceed [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testSucceedInvariant [
 
 	SBRAL new asState in: [ :s | 
@@ -1254,7 +1254,7 @@ GoalTest >> testTablingMutuallyRecursive [
 		equals: [ :q | fº value: q ] asGoal solutions contents
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testTeaCup [
 	| g |
 	g := [ :x | self teacup: x ] asGoal.
@@ -1278,7 +1278,7 @@ GoalTest >> testTeaCup [
 		modulo: #asOrderedCollection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testUnifyFourWithThree [
 
 	| g |
@@ -1288,7 +1288,7 @@ GoalTest >> testUnifyFourWithThree [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testUnifySharing [
 
 	| g |
@@ -1303,7 +1303,7 @@ GoalTest >> testUnifySharing [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testUnifySymmetryFourWithVar [
 
 	| g |
@@ -1313,7 +1313,7 @@ GoalTest >> testUnifySymmetryFourWithVar [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testUnifySymmetryVarWithFour [
 
 	| g |
@@ -1323,7 +1323,7 @@ GoalTest >> testUnifySymmetryVarWithFour [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testUnifyThreeWithThree [
 
 	| g |
@@ -1336,7 +1336,7 @@ GoalTest >> testUnifyThreeWithThree [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testUnifyWithTopmostSharing [
 
 	| g |
@@ -1353,7 +1353,7 @@ GoalTest >> testUnifyWithTopmostSharing [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testUnifyWithTopmostSharingWithRepetition [
 
 	| g |
@@ -1376,7 +1376,7 @@ GoalTest >> testUnifyWithTopmostSharingWithRepetition [
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #tests }
 GoalTest >> testUnifyWithTopmostWithoutSharing [
 
 	| g |
