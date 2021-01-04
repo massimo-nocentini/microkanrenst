@@ -55,7 +55,7 @@ Failed
 
   I am a goal that represent logical falsehood, in particular I encode the
   :token:`goalGrammar:failed` production. The simpler way to create me
-  is to send the adapting message `#asGoal` to `false`, as follows
+  is to send the adapting message ``#asGoal`` to ``false``, as follows
 
   .. pharo:autocompiledmethod:: GoalTest>>#testFailed
 
@@ -69,7 +69,7 @@ Succeed
 
   I am a goal that represent logical truth, in particular I encode the
   :token:`goalGrammar:succeed` production. The simpler way to create me
-  is to send the adapting message `#asGoal` to `true`, as follows
+  is to send the adapting message ``#asGoal`` to ``true``, as follows
 
   .. pharo:autocompiledmethod:: GoalTest>>#testSucceed
     
@@ -174,7 +174,7 @@ Unify
 
   The previous examples show unifications that can be satisfied; on the 
   contrary, when two objects cannot be equal for any substitution we have
-  a `Failed` goal holding the counterexample, such as
+  a ``Failed`` goal holding the counterexample, such as
 
   .. pharo:autocompiledmethod:: GoalTest>>#testUnifyFourWithThree
 
@@ -190,13 +190,10 @@ Disj
   I am a goal that represent logical union, in particular I encode the
   :token:`goalGrammar:disj` production. 
   
-  On the one hand, `false asGoal` is the neutral element for disjunction, so
+  On the one hand, ``false asGoal`` is the neutral element for disjunction, so
   that both
 
-  .. index:: Protocol testing; testDisjFalseTrue 
-
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjFalseFalse
-
 
     .. image:: _images/GoalTest-testDisjFalseFalse.svg
       :align: center
@@ -215,8 +212,8 @@ Disj
     .. image:: _images/GoalTest-testDisjTrueTrue.svg
       :align: center
 
-  surprises with *two* solutions instead of one because `true asGoal |º b` doesn't bypass
-  the exploration of the goal `b`. For the sake of clarity, two solutions are provided both by
+  surprises with *two* solutions instead of one because ``true asGoal |º b`` doesn't bypass
+  the exploration of the goal ``b``. For the sake of clarity, two solutions are provided both by
   
   .. pharo:autocompiledmethod:: GoalTest>>#testDisjThreeWithVarOrThreeWithVar
 
@@ -273,7 +270,7 @@ Conj
   I am a goal that represent logical intersection, in particular I encode the
   :token:`goalGrammar:conj` production. 
   
-  On the one hand, `true asGoal` is the neutral element for disjunction, so
+  On the one hand, ``true asGoal`` is the neutral element for disjunction, so
   that both
 
   .. pharo:autocompiledmethod:: GoalTest>>#testConjTrueTrue
@@ -288,8 +285,8 @@ Conj
     .. image:: _images/GoalTest-testConjTrueThreeWithThree.svg
       :align: center
 
-  are succeeding goals. On the other hand, `false asGoal` makes a conjunction
-  `false asGoal &º b` failing for any goal `b`, as in
+  are succeeding goals. On the other hand, ``false asGoal`` makes a conjunction
+  ``false asGoal &º b`` failing for any goal ``b``, as in
 
   .. pharo:autocompiledmethod:: GoalTest>>#testConjFalseThreeWithVar
 
