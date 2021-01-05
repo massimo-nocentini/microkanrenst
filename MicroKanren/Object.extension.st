@@ -47,6 +47,12 @@ Object >> positiveo [
 	^ Theory arith positiveo value: self
 ]
 
+{ #category : #'*MicroKanren' }
+Object >> pruning: aPruningStrategyMaxDepth [
+
+	^ self
+]
+
 { #category : #'*MicroKanren-core' }
 Object >> reifyUsingReifier: aReifier [
 	^ aReifier forObject: self 
