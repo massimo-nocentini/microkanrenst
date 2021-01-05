@@ -129,6 +129,16 @@ MKGoalPrinter >> printOn: aStream aPredicateUnary: aPredicate [
 ]
 
 { #category : #printing }
+MKGoalPrinter >> printOn: aStream aPruning: aGoal [
+
+	aStream nextPut: $⌊.
+	aGoal printOn: aStream renderer: self.
+	aStream
+		nextPut: $⌋;
+		nextPutAll: 3 asString subscripts
+]
+
+{ #category : #printing }
 MKGoalPrinter >> printOn: aStream aSucceed: aSucceed [
 
 	state path value == aSucceed

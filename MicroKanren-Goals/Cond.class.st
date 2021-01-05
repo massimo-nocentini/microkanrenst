@@ -60,3 +60,13 @@ Cond >> onState: aState afterPushingGoal: _ [
 Cond >> otherwise: aGoal [
 	self if: true asGoal then: aGoal
 ]
+
+{ #category : #running }
+Cond >> pruning: aPruningStrategy [
+
+	clauses := clauses collect: [ :each | 
+		           | k v |
+		           k := each key pruning: aPruningStrategy.
+		           v := each value pruning: aPruningStrategy.
+		           k -> v ]
+]

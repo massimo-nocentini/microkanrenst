@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+Suspended >> nestedGoal: aMKPredicateSexpDycko [ 
+	nestedGoal := aMKPredicateSexpDycko
+]
+
+{ #category : #'as yet unclassified' }
 Suspended >> onState: aState afterPushingGoal: _ [
 
 	^ [ nestedGoal onState: aState ] srfi41Stream

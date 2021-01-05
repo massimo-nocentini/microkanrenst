@@ -20,6 +20,18 @@ Binary >> left: anObject [
 	left := anObject
 ]
 
+{ #category : #'as yet unclassified' }
+Binary >> pruning: aPruningStrategy [
+
+	left := left pruning: aPruningStrategy.
+	right := right pruning: aPruningStrategy.
+
+	^ Pruning new
+		  receiver: aPruningStrategy;
+		  nestedGoal: self;
+		  yourself
+]
+
 { #category : #accessing }
 Binary >> right [
 

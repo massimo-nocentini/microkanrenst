@@ -19,3 +19,9 @@ Predicate >> name [
 Predicate >> onState: aState [
 	^ self goal onState: aState
 ]
+
+{ #category : #'as yet unclassified' }
+Predicate >> pruning: aPruningStrategy [
+
+	^ self goal pruning: aPruningStrategy
+]

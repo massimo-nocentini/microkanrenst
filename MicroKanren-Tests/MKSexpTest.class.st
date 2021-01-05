@@ -16,7 +16,8 @@ MKSexpTest >> imagesPath [
 MKSexpTest >> testACORN [
 
 	| g |
-	g := [ :r | MKPredicateSexpCaro value: 'acorn' asCons value: r ]
+	g := [ :r | (MKPredicateSexpCaro value: 'acorn' asCons value: r)  pruning:
+		     (Pruning maxDepth: 3) ]
 		     asGoal.
 	self assert: g solutions equals: { $a } modulo: #asOrderedCollection.
 
@@ -84,5 +85,18 @@ MKSexpTest >> testDycko [
 	self
 		export: (g asLogicComputationTreeLimitedTo: 20)
 		pathSuffix: 'sexp-dycko'
+		selector: #gtInspectorTreeUsingCanvas:
+]
+
+{ #category : #tests }
+MKSexpTest >> testDyckoBounded [
+
+	| g |
+	g := [ :alpha | 
+	     (MKPredicateSexpDycko value: alpha) pruning:
+		     (Pruning maxDepth: 10) ] asGoal.
+	self
+		export: (g asLogicComputationTreeLimitedTo: 20)
+		pathSuffix: 'sexp-dycko-bounded'
 		selector: #gtInspectorTreeUsingCanvas:
 ]

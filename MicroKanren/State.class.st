@@ -95,6 +95,12 @@ State >> isSound [
 ]
 
 { #category : #'as yet unclassified' }
+State >> onState: aState afterPruning: aPruning [
+
+	^ aPruning continueOnState: aState
+]
+
+{ #category : #'as yet unclassified' }
 State >> onState: aState afterUnificationByUnify: aGoal [
 
 	^ true asGoal onState: self

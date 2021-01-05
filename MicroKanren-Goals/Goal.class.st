@@ -106,6 +106,14 @@ Goal >> popGoalFromPathOfState: aState forConj: aGoal [
 	
 ]
 
+{ #category : #'as yet unclassified' }
+Goal >> pruning: aPruningStrategy [
+
+	^ PruningWaiting new
+		  goal: self;
+		  yourself
+]
+
 { #category : #running }
 Goal >> solutions [
 
