@@ -161,9 +161,10 @@
 <h1>Predicates<a class="headerlink" href="#predicates" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="fives">
 <h2>Fives<a class="headerlink" href="#fives" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFives</span> 
+<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testFives</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">fives:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
@@ -176,16 +177,18 @@
 <blockquote>
 <div><img alt="_images/GoalTest-testFives.svg" class="align-center" src="_images/GoalTest-testFives.svg" /><p>where</p>
 <blockquote>
-<div><span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nf">fives:</span> <span class="nv">x</span> 
+<div><span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
+<span class="nf">fives:</span> <span class="nv">x</span>
 
 	<span class="o">^</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">|</span> [ <span class="bp">self</span> <span class="nf">fives:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span>
 </pre></div>
 </div>
 </div></blockquote>
 </div></blockquote>
-<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFivesByPredicate</span> 
+<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testFivesByPredicate</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateFives</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
@@ -200,9 +203,10 @@
 </div>
 <div class="section" id="nats">
 <h2>Nats<a class="headerlink" href="#nats" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="compiledMethod-6"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testNats</span> 
+<span class="target" id="compiledMethod-6"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testNats</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">M</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g M </span><span class="o">|</span>
 	<span class="nc">M</span> <span class="o">:=</span> <span class="m">1000</span><span class="p">.</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
@@ -216,17 +220,20 @@
 <blockquote>
 <div><img alt="_images/GoalTest-testNats.svg" class="align-center" src="_images/GoalTest-testNats.svg" /><p>where</p>
 <blockquote>
-<div><span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nf">nats:</span> <span class="nv">x</span> 
+<div><span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
+<span class="nf">nats:</span> <span class="nv">x</span>
 
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="m">0</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-4"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> 
+<span class="target" id="compiledMethod-4"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
+<span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span>
 
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">offset:</span> <span class="m">1</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-5"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">offset:</span> <span class="nv">o</span> 
+<span class="target" id="compiledMethod-5"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
+<span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">offset:</span> <span class="nv">o</span>
 
 	<span class="o">^</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">i</span>)
 	  <span class="nf">|</span> [ <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">+</span> <span class="nv">o</span> <span class="nf">offset:</span> <span class="nv">o</span> ] <span class="nf">asGoal</span>
@@ -235,9 +242,10 @@
 </div></blockquote>
 </div></blockquote>
 <p>Indeed, the enumeration of 5s can also be achieved with:</p>
-<span class="target" id="compiledMethod-8"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFivesByNats</span> 
+<span class="target" id="compiledMethod-8"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testFivesByNats</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">repeat:</span> <span class="nv">x</span> <span class="nf">value:</span> <span class="m">5</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
@@ -250,7 +258,8 @@
 <blockquote>
 <div><img alt="_images/GoalTest-testFivesByNats.svg" class="align-center" src="_images/GoalTest-testFivesByNats.svg" /><p>where</p>
 <blockquote>
-<div><span class="target" id="compiledMethod-7"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nf">repeat:</span> <span class="nv">x</span> <span class="nf">value:</span> <span class="nv">i</span> 
+<div><span class="target" id="compiledMethod-7"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol accessing structure variables&quot;</span>
+<span class="nf">repeat:</span> <span class="nv">x</span> <span class="nf">value:</span> <span class="nv">i</span>
 
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">offset:</span> <span class="m">0</span>
 </pre></div>

@@ -159,9 +159,10 @@
 <h1>Theories<a class="headerlink" href="#theories" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="s-expressions">
 <h2>S-expressions<a class="headerlink" href="#s-expressions" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">MKSexpTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testACORN</span> 
+<span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
+<span class="nf">testACORN</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateSexpCaro</span> <span class="nf">value:</span> <span class="s">&#39;acorn&#39;</span> <span class="nf">asCons</span> <span class="nf">value:</span> <span class="nv">r</span> ]
 		     <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="sc">$a</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
@@ -175,9 +176,10 @@
 </div>
 <blockquote>
 <div><img alt="_images/sexp-acorn.svg" class="align-center" src="_images/sexp-acorn.svg" /></div></blockquote>
-<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">MKSexpTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testAppendoForward</span> 
+<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
+<span class="nf">testAppendoForward</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">|</span> 
 	     <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
 		     <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="nf">asCons</span>
@@ -197,9 +199,10 @@
 </div>
 <blockquote>
 <div><img alt="_images/sexp-appendo-forward.svg" class="align-center" src="_images/sexp-appendo-forward.svg" /></div></blockquote>
-<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">MKSexpTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testAppendoBackward</span> 
+<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
+<span class="nf">testAppendoBackward</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
 	     <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
 		     <span class="nf">value:</span> <span class="nv">l</span>
@@ -226,9 +229,10 @@
 </div>
 <blockquote>
 <div><img alt="_images/sexp-appendo-backward.svg" class="align-center" src="_images/sexp-appendo-backward.svg" /></div></blockquote>
-<span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">MKSexpTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDycko</span> 
+<span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
+<span class="nf">testDycko</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">alpha</span> <span class="o">|</span> <span class="nc">MKPredicateSexpDycko</span> <span class="nf">value:</span> <span class="nv">alpha</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">20</span>)

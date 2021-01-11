@@ -221,9 +221,10 @@ drop into a logic computation.</p>
 <p>I am a goal that represent logical falsehood, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-failed"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:failed</span></code></a> production. The simpler way to create me
 is to send the adapting message <code class="docutils literal notranslate"><span class="pre">#asGoal</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>, as follows</p>
-<span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFailed</span> 
+<span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testFailed</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
@@ -244,9 +245,10 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <p>I am a goal that represent logical truth, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-succeed"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:succeed</span></code></a> production. The simpler way to create me
 is to send the adapting message <code class="docutils literal notranslate"><span class="pre">#asGoal</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>, as follows</p>
-<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testSucceed</span> 
+<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testSucceed</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
 
 	<span class="bp">self</span>
@@ -259,9 +261,10 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testSucceed.svg" class="align-center" src="_images/GoalTest-testSucceed.svg" /><p>where</p>
-<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>Var class &gt;&gt; tautology 
+<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Var class, protocol creating&quot;</span>
+<span class="nf">tautology</span>
 
-	^ #tautology
+	<span class="o">^</span> <span class="ss">#tautology</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -276,9 +279,10 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 </div>
 <p>I am a goal that introduces logic variables, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-fresh"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:fresh</span></code></a> production.</p>
-<span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFreshFailed</span> 
+<span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testFreshFailed</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">false</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; #()&quot;</span>
 
@@ -287,9 +291,10 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testFreshFailed.svg" class="align-center" src="_images/GoalTest-testFreshFailed.svg" /></div></blockquote>
-<span class="target" id="compiledMethod-6"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFreshSucceed</span> 
+<span class="target" id="compiledMethod-6"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testFreshSucceed</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -302,14 +307,16 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <blockquote>
 <div><img alt="_images/GoalTest-testFreshSucceed.svg" class="align-center" src="_images/GoalTest-testFreshSucceed.svg" /><p>where</p>
 <blockquote>
-<div><span class="target" id="compiledMethod-5"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>Integer &gt;&gt; asReifiedVar 
+<div><span class="target" id="compiledMethod-5"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Integer, protocol *MicroKanren-core&quot;</span>
+<span class="nf">asReifiedVar</span>
 
-	^ self asReifiedWithVarClass: ReifiedVar
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">asReifiedWithVarClass:</span> <span class="nc">ReifiedVar</span>
 </pre></div>
 </div>
 <blockquote>
 <div><p>and</p>
-<span class="target" id="compiledMethod-4"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Integer</span> <span class="nf">&gt;&gt;</span> <span class="nf">asReifiedWithVarClass:</span> <span class="nv">aClass</span> 
+<span class="target" id="compiledMethod-4"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Integer, protocol *MicroKanren-core&quot;</span>
+<span class="nf">asReifiedWithVarClass:</span> <span class="nv">aClass</span>
 
 	<span class="o">^</span> <span class="nv">aClass</span> <span class="nb">new</span>
 		  <span class="nf">id:</span> <span class="bp">self</span><span class="p">;</span>
@@ -319,9 +326,10 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
-<span class="target" id="compiledMethod-7"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testFreshMultipleVars</span> 
+<span class="target" id="compiledMethod-7"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testFreshMultipleVars</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -337,16 +345,18 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <div><img alt="_images/GoalTest-testFreshMultipleVars.svg" class="align-center" src="_images/GoalTest-testFreshMultipleVars.svg" /></div></blockquote>
 <p>Moreover, we can also use a block without arguments in order to
 postpone the computation, for instance to support recursive goals such as</p>
-<span class="target" id="compiledMethod-9"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testEtaRaw</span> 
+<span class="target" id="compiledMethod-9"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testEtaRaw</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nc">Object</span> <span class="nb">new</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">class</span> <span class="nf">equals:</span> <span class="nc">Eta</span>
 </pre></div>
 </div>
 <blockquote>
 <div><p>where</p>
-<span class="target" id="compiledMethod-8"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nf">eternity:</span> <span class="nv">x</span> 
+<span class="target" id="compiledMethod-8"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
+<span class="nf">eternity:</span> <span class="nv">x</span>
 
 	<span class="o">^</span> [ <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span>
 </pre></div>
@@ -363,9 +373,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 </div>
 <p>I am a goal that represent logical equality, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-unify"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:unify</span></code></a> production.</p>
-<span class="target" id="compiledMethod-12"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyThreeWithThree</span> 
+<span class="target" id="compiledMethod-12"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testUnifyThreeWithThree</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -378,13 +389,15 @@ postpone the computation, for instance to support recursive goals such as</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyThreeWithThree.svg" class="align-center" src="_images/GoalTest-testUnifyThreeWithThree.svg" /><p>where</p>
 <blockquote>
-<div><span class="target" id="compiledMethod-10"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span>Object &gt;&gt; unifyo 
+<div><span class="target" id="compiledMethod-10"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
+<span class="nf">unifyo</span>
 
-	^ [ :anObject | self unifyWith: anObject ]
+	<span class="o">^</span> [ <span class="o">:</span><span class="nv">anObject</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">unifyWith:</span> <span class="nv">anObject</span> ]
 </pre></div>
 </div>
 <p>and</p>
-<span class="target" id="compiledMethod-11"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">Object</span> <span class="nf">&gt;&gt;</span> <span class="nf">unifyWith:</span> <span class="nv">another</span> 
+<span class="target" id="compiledMethod-11"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
+<span class="nf">unifyWith:</span> <span class="nv">another</span>
 
 	<span class="o">^</span> <span class="nc">Unify</span> <span class="nb">new</span>
 		  <span class="nf">left:</span> <span class="bp">self</span><span class="p">;</span>
@@ -394,9 +407,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 </div>
 </div></blockquote>
 </div></blockquote>
-<span class="target" id="compiledMethod-13"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifySymmetryFourWithVar</span> 
+<span class="target" id="compiledMethod-13"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testUnifySymmetryFourWithVar</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
@@ -405,9 +419,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifySymmetryFourWithVar.svg" class="align-center" src="_images/GoalTest-testUnifySymmetryFourWithVar.svg" /></div></blockquote>
-<span class="target" id="compiledMethod-14"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifySymmetryVarWithFour</span> 
+<span class="target" id="compiledMethod-14"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testUnifySymmetryVarWithFour</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="nv">q</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
@@ -416,9 +431,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifySymmetryVarWithFour.svg" class="align-center" src="_images/GoalTest-testUnifySymmetryVarWithFour.svg" /></div></blockquote>
-<span class="target" id="compiledMethod-15"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyWithTopmostSharing</span> 
+<span class="target" id="compiledMethod-15"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testUnifyWithTopmostSharing</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
 	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> ]
 		     <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
@@ -434,9 +450,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyWithTopmostSharing.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostSharing.svg" /></div></blockquote>
-<span class="target" id="compiledMethod-16"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyWithTopmostWithoutSharing</span> 
+<span class="target" id="compiledMethod-16"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testUnifyWithTopmostWithoutSharing</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
 	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
 	     (<span class="nc">LinkedList</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">r</span>) <span class="nf">asCons</span> <span class="nf">unifyo</span> <span class="nf">value:</span>
@@ -451,9 +468,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyWithTopmostWithoutSharing.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostWithoutSharing.svg" /></div></blockquote>
-<span class="target" id="compiledMethod-17"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyWithTopmostSharingWithRepetition</span> 
+<span class="target" id="compiledMethod-17"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testUnifyWithTopmostSharingWithRepetition</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
 	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
 	     (<span class="nc">LinkedList</span>
@@ -475,9 +493,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 </div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyWithTopmostSharingWithRepetition.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostSharingWithRepetition.svg" /></div></blockquote>
-<span class="target" id="compiledMethod-18"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifySharing</span> 
+<span class="target" id="compiledMethod-18"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testUnifySharing</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
 	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> (<span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="bp">true</span>) ] <span class="nf">asGoal</span> ]
 		     <span class="nf">asGoal</span><span class="p">.</span>
@@ -494,9 +513,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 <p>The previous examples show unifications that can be satisfied; on the
 contrary, when two objects cannot be equal for any substitution we have
 a <code class="docutils literal notranslate"><span class="pre">Failed</span></code> goal holding the counterexample, such as</p>
-<span class="target" id="compiledMethod-19"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testUnifyFourWithThree</span> 
+<span class="target" id="compiledMethod-19"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testUnifyFourWithThree</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
@@ -518,9 +538,10 @@ a <code class="docutils literal notranslate"><span class="pre">Failed</span></co
 <a class="reference internal" href="#grammar-token-goalGrammar-disj"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:disj</span></code></a> production.</p>
 <p>On the one hand, <code class="docutils literal notranslate"><span class="pre">false</span> <span class="pre">asGoal</span></code> is the neutral element for disjunction, so
 that both</p>
-<span class="target" id="compiledMethod-20"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjFalseFalse</span> 
+<span class="target" id="compiledMethod-20"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testDisjFalseFalse</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
@@ -530,9 +551,10 @@ that both</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjFalseFalse.svg" class="align-center" src="_images/GoalTest-testDisjFalseFalse.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="compiledMethod-21"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjFalseTrue</span> 
+<span class="target" id="compiledMethod-21"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testDisjFalseTrue</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -545,9 +567,10 @@ that both</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjFalseTrue.svg" class="align-center" src="_images/GoalTest-testDisjFalseTrue.svg" /></div></blockquote>
 <p>behave as usual in logic. On the other hand,</p>
-<span class="target" id="compiledMethod-22"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjTrueTrue</span> 
+<span class="target" id="compiledMethod-22"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testDisjTrueTrue</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -563,9 +586,10 @@ that both</p>
 <div><img alt="_images/GoalTest-testDisjTrueTrue.svg" class="align-center" src="_images/GoalTest-testDisjTrueTrue.svg" /></div></blockquote>
 <p>surprises with <em>two</em> solutions instead of one because <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">asGoal</span> <span class="pre">|º</span> <span class="pre">b</span></code> doesn’t bypass
 the exploration of the goal <code class="docutils literal notranslate"><span class="pre">b</span></code>. For the sake of clarity, two solutions are provided both by</p>
-<span class="target" id="compiledMethod-23"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithVarOrThreeWithVar</span> 
+<span class="target" id="compiledMethod-23"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testDisjThreeWithVarOrThreeWithVar</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -578,9 +602,10 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="compiledMethod-24"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithThreeOrFourWithVar</span> 
+<span class="target" id="compiledMethod-24"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testDisjThreeWithThreeOrFourWithVar</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -596,9 +621,10 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 <div><img alt="_images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg" /></div></blockquote>
 <p>which leaves the variable unbound in the leftmost path.  Disjunction is
 <em>commutative</em>, so that both</p>
-<span class="target" id="compiledMethod-25"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeWithVarOrFourWithVar</span> 
+<span class="target" id="compiledMethod-25"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testDisjThreeWithVarOrFourWithVar</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -611,9 +637,10 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="compiledMethod-26"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjFourWithVarOrThreeWithVar</span> 
+<span class="target" id="compiledMethod-26"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testDisjFourWithVarOrThreeWithVar</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -628,9 +655,10 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 <p>are satisfied by the same set of substitutions or, in other words, have the
 same paths connecting the leaves to the roots.  Disjunction is <em>associative</em>,
 so that both trees</p>
-<span class="target" id="compiledMethod-27"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeFourThenFive</span> 
+<span class="target" id="compiledMethod-27"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testDisjThreeFourThenFive</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
 	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ]
 		     <span class="nf">asGoal</span><span class="p">.</span>
@@ -645,9 +673,10 @@ so that both trees</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeFourThenFive.svg" class="align-center" src="_images/GoalTest-testDisjThreeFourThenFive.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="compiledMethod-28"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testDisjThreeThenFourFive</span> 
+<span class="target" id="compiledMethod-28"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testDisjThreeThenFourFive</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
 	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)
 	     <span class="nf">|</span> ((<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)) ] <span class="nf">asGoal</span><span class="p">.</span>
@@ -675,9 +704,10 @@ so that both trees</p>
 <a class="reference internal" href="#grammar-token-goalGrammar-conj"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:conj</span></code></a> production.</p>
 <p>On the one hand, <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">asGoal</span></code> is the neutral element for disjunction, so
 that both</p>
-<span class="target" id="compiledMethod-29"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjTrueTrue</span> 
+<span class="target" id="compiledMethod-29"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjTrueTrue</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">,</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -690,9 +720,10 @@ that both</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjTrueTrue.svg" class="align-center" src="_images/GoalTest-testConjTrueTrue.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="compiledMethod-30"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjTrueThreeWithThree</span> 
+<span class="target" id="compiledMethod-30"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjTrueThreeWithThree</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">,</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -706,9 +737,10 @@ that both</p>
 <div><img alt="_images/GoalTest-testConjTrueThreeWithThree.svg" class="align-center" src="_images/GoalTest-testConjTrueThreeWithThree.svg" /></div></blockquote>
 <p>are succeeding goals. On the other hand, <code class="docutils literal notranslate"><span class="pre">false</span> <span class="pre">asGoal</span></code> makes a conjunction
 <code class="docutils literal notranslate"><span class="pre">false</span> <span class="pre">asGoal</span> <span class="pre">&amp;º</span> <span class="pre">b</span></code> failing for any goal <code class="docutils literal notranslate"><span class="pre">b</span></code>, as in</p>
-<span class="target" id="compiledMethod-31"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjFalseThreeWithVar</span> 
+<span class="target" id="compiledMethod-31"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjFalseThreeWithVar</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">,</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">isEmpty</span><span class="p">.</span>
 
@@ -721,9 +753,10 @@ that both</p>
 subgoal into the right hand side one; for the sake of clarity, the following
 examples attempts to unify the same variable with two different values yielding
 no solution (but providing the corresponding counterexample)</p>
-<span class="target" id="compiledMethod-32"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjThreeFour</span> 
+<span class="target" id="compiledMethod-32"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjThreeFour</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">isEmpty</span><span class="p">.</span>
 
@@ -733,9 +766,10 @@ no solution (but providing the corresponding counterexample)</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjThreeFour.svg" class="align-center" src="_images/GoalTest-testConjThreeFour.svg" /></div></blockquote>
 <p>while the following one succeeds and also shows the commutativity of the operator</p>
-<span class="target" id="compiledMethod-33"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjSymmetry</span> 
+<span class="target" id="compiledMethod-33"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjSymmetry</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="nv">a</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
@@ -746,9 +780,10 @@ no solution (but providing the corresponding counterexample)</p>
 <div><img alt="_images/GoalTest-testConjSymmetry.svg" class="align-center" src="_images/GoalTest-testConjSymmetry.svg" /></div></blockquote>
 <p>In the same spirit, the following examples shows two succeeding conjunctions, the
 former introduces a variable in a nested goal,</p>
-<span class="target" id="compiledMethod-34"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjThreeFresh</span> 
+<span class="target" id="compiledMethod-34"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjThreeFresh</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> [ <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span> ] <span class="nf">asGoal</span> ]
 		     <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">3</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
@@ -759,9 +794,10 @@ former introduces a variable in a nested goal,</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjThreeFresh.svg" class="align-center" src="_images/GoalTest-testConjThreeFresh.svg" /></div></blockquote>
 <p>the latter, introduces both variables in the topmost goal</p>
-<span class="target" id="compiledMethod-35"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjThreeFourWithTwoVars</span> 
+<span class="target" id="compiledMethod-35"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjThreeFourWithTwoVars</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
@@ -774,9 +810,10 @@ former introduces a variable in a nested goal,</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjThreeFourWithTwoVars.svg" class="align-center" src="_images/GoalTest-testConjThreeFourWithTwoVars.svg" /></div></blockquote>
 <p>Sharing among variables can be shown with both a succeeding example</p>
-<span class="target" id="compiledMethod-36"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjSucceedingSharing</span> 
+<span class="target" id="compiledMethod-36"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjSucceedingSharing</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">z</span> <span class="o">|</span> 
 	     [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) ] <span class="nf">asGoal</span> ]
 		     <span class="nf">asGoal</span><span class="p">.</span>
@@ -788,9 +825,10 @@ former introduces a variable in a nested goal,</p>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjSucceedingSharing.svg" class="align-center" src="_images/GoalTest-testConjSucceedingSharing.svg" /></div></blockquote>
 <p>and a failing one</p>
-<span class="target" id="compiledMethod-37"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjFailingSharing</span> 
+<span class="target" id="compiledMethod-37"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjFailingSharing</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">:</span><span class="nv">z</span> <span class="o">|</span> 
 	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span>) ]
 		     <span class="nf">asGoal</span><span class="p">.</span>
@@ -803,9 +841,10 @@ former introduces a variable in a nested goal,</p>
 <div><img alt="_images/GoalTest-testConjFailingSharing.svg" class="align-center" src="_images/GoalTest-testConjFailingSharing.svg" /></div></blockquote>
 <p>Finally, the combination of a failing conjunction with a succeeding
 disjunction produces the following computation</p>
-<span class="target" id="compiledMethod-38"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="nc">GoalTest</span> <span class="nf">&gt;&gt;</span> <span class="nv">testConjDisj</span> 
+<span class="target" id="compiledMethod-38"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="nf">testConjDisj</span>
 
-	<span class="nf">|</span> <span class="nv">g</span> <span class="nf">|</span>
+	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
 	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
 	     (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="nv">a</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">0</span>) ]
 		     <span class="nf">asGoal</span><span class="p">.</span>
