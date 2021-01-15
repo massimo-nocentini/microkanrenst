@@ -9,9 +9,8 @@ Class {
 
 { #category : #visiting }
 RBProgramNodeIdentityVisitor >> visitArgumentNode: anArgumentNode [
-	^ RBArgumentNode
-		named: anArgumentNode name
-		start: anArgumentNode start
+
+	self shouldBeImplemented
 ]
 
 { #category : #visiting }
@@ -31,13 +30,18 @@ RBProgramNodeIdentityVisitor >> visitAssignmentNode: anAssignmentNode [
 
 { #category : #visiting }
 RBProgramNodeIdentityVisitor >> visitBlockNode: aBlockNode [
-	^ RBBlockNode
-		arguments: aBlockNode arguments
-		body: (aBlockNode body acceptVisitor: self)
+
+	self shouldBeImplemented
 ]
 
 { #category : #visiting }
 RBProgramNodeIdentityVisitor >> visitCascadeNode: aCascadeNode [
+	self shouldBeImplemented
+]
+
+{ #category : #visiting }
+RBProgramNodeIdentityVisitor >> visitEnglobingErrorNode: anEnglobingErrorNode [
+
 	self shouldBeImplemented
 ]
 
@@ -63,11 +67,14 @@ RBProgramNodeIdentityVisitor >> visitLiteralNode: aLiteralNode [
 
 { #category : #visiting }
 RBProgramNodeIdentityVisitor >> visitLiteralValueNode: aRBLiteralValueNode [
-	^ RBLiteralValueNode
-		value: aRBLiteralValueNode value
-		start: aRBLiteralValueNode start
-		stop: aRBLiteralValueNode stop
-		source: aRBLiteralValueNode source
+
+	^ aRBLiteralValueNode
+]
+
+{ #category : #visiting }
+RBProgramNodeIdentityVisitor >> visitLogicVariableNode: aRBMKVarNode [
+
+	self shouldNotImplement
 ]
 
 { #category : #visiting }
@@ -123,11 +130,12 @@ RBProgramNodeIdentityVisitor >> visitSelfNode: aSelfNode [
 
 { #category : #visiting }
 RBProgramNodeIdentityVisitor >> visitSequenceNode: aSequenceNode [
+
 	^ RBSequenceNode
-		temporaries: aSequenceNode temporaries
-		statements:
-			(aSequenceNode statements
-				collect: [ :aNode | aNode acceptVisitor: self ])
+		  temporaries: (aSequenceNode temporaries collect: [ :aNode | 
+				   aNode acceptVisitor: self ])
+		  statements: (aSequenceNode statements collect: [ :aNode | 
+				   aNode acceptVisitor: self ])
 ]
 
 { #category : #visiting }

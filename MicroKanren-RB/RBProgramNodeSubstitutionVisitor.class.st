@@ -13,12 +13,9 @@ RBProgramNodeSubstitutionVisitor >> substitution: anObject [
 ]
 
 { #category : #visiting }
-RBProgramNodeSubstitutionVisitor >> visitArgumentNode: anArgumentNode [
-	| node |
-	node := substitution
-		at: anArgumentNode name
-		ifAbsent: [ RBArgumentNode new ].
-	^ node
-		named: anArgumentNode name start: anArgumentNode start;
-		yourself
+RBProgramNodeSubstitutionVisitor >> visitTemporaryNode: aNode [
+
+	^ aNode isVariable
+		  ifTrue: [ substitution at: aNode name ]
+		  ifFalse: [ aNode ]
 ]

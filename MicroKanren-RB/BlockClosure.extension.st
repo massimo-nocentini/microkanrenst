@@ -9,7 +9,7 @@ BlockClosure >> context [
 					(Dictionary new
 						at: #x
 							put:
-							(RBMKVarNode new
+							(RBLogicVariableNode new
 								logicVar: 3;
 								yourself);
 						yourself);
