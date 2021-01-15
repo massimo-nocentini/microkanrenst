@@ -11,13 +11,8 @@ RBNodePredicatesTest >> testSendero [
 
 	self
 		assert: [ :selector | 
-			| cm visitor |
-			visitor := RBProgramNodeSenderoVisitor new
-				           selectorVar: selector;
-				           yourself.
-			cm := RBProgramNodeSenderoVisitor >> #visitMessageNode:.
-			cm sourceNode body acceptVisitor: visitor.
-			visitor asGoal ] asGoal solutions
+			(RBProgramNodeSendsoVisitor >> #visitMessageNode:) sendso value:
+				selector ] asGoal solutions
 		equals: { 
 				(RBSelectorNode value: #visitMessageNode:).
 				(RBSelectorNode value: #unifyo).

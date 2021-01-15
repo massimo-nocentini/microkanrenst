@@ -1,5 +1,5 @@
 Class {
-	#name : #RBProgramNodeSenderoVisitor,
+	#name : #RBProgramNodeSendsoVisitor,
 	#superclass : #RBProgramNodeVisitor,
 	#instVars : [
 		'goals',
@@ -9,13 +9,13 @@ Class {
 }
 
 { #category : #initialization }
-RBProgramNodeSenderoVisitor >> asGoal [
+RBProgramNodeSendsoVisitor >> asGoal [
 
 	^ goals foldr: [ :each :g | each | g ] init: false asGoal
 ]
 
 { #category : #initialization }
-RBProgramNodeSenderoVisitor >> initialize [
+RBProgramNodeSendsoVisitor >> initialize [
 
 	super initialize.
 
@@ -23,13 +23,13 @@ RBProgramNodeSenderoVisitor >> initialize [
 ]
 
 { #category : #accessing }
-RBProgramNodeSenderoVisitor >> selectorVar: anObject [
+RBProgramNodeSendsoVisitor >> selectorVar: anObject [
 
 	selectorVar := anObject
 ]
 
 { #category : #visiting }
-RBProgramNodeSenderoVisitor >> visitMessageNode: aMessageNode [
+RBProgramNodeSendsoVisitor >> visitMessageNode: aMessageNode [
 
 	super visitMessageNode: aMessageNode.
 
