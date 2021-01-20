@@ -29,6 +29,20 @@ RBProgramNodeSendsoVisitor >> selectorVar: anObject [
 ]
 
 { #category : #visiting }
+RBProgramNodeSendsoVisitor >> visitLogicVariableNode: aNode [
+
+	super visitLogicVariableNode: aNode.
+
+	Symbol selectorTable
+		select: [ :each | each isUnary ]
+		thenDo: [ :each | 
+			goals add: [ :receiver | 
+				selectorVar unifyo value: (RBMessageNode
+						 receiver: (receiver asRBLogicVariableNamed: 'x')
+						 selector: each) ] asGoal ]
+]
+
+{ #category : #visiting }
 RBProgramNodeSendsoVisitor >> visitMessageNode: aMessageNode [
 
 	super visitMessageNode: aMessageNode.

@@ -17,6 +17,23 @@ BlockClosure >> context [
 ]
 
 { #category : #'*MicroKanren-RB' }
+BlockClosure >> rbo [
+
+	^ FreshRB new
+		  receiver: self;
+		  yourself
+]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> rbo: aBlock [
+
+	^ FreshRB new
+		  receiver: self;
+		  nodeBlock: aBlock;
+		  yourself
+]
+
+{ #category : #'*MicroKanren-RB' }
 BlockClosure >> sendso [
 
 	^ self sourceNode body sendso

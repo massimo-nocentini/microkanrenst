@@ -7,6 +7,32 @@ Class {
 }
 
 { #category : #tests }
+RBNodePredicatesTest >> testSenderoBackwards [
+
+	self
+		assert: ([ :aSend | 
+			 [ :o | o ] rbo: [ :ast | [ :o | ast sendso value: aSend ] ] ]
+				 asGoal solutions next: 5)
+		equals: { 
+				(RBMessageNode
+					 receiver: (RBVariableNode named: #x)
+					 selector: #numberOfEdges).
+				(RBMessageNode
+					 receiver: (RBVariableNode named: #x)
+					 selector: #testStackedVertically).
+				(RBMessageNode
+					 receiver: (RBVariableNode named: #x)
+					 selector: #iconicHaloSpecifications).
+				(RBMessageNode
+					 receiver: (RBVariableNode named: #x)
+					 selector: #packageModels).
+				(RBMessageNode
+					 receiver: (RBVariableNode named: #x)
+					 selector: #testReversed) }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
 RBNodePredicatesTest >> testSenderoForBlockClosure [
 
 	| aBlock |
