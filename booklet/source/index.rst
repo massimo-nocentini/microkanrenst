@@ -22,7 +22,8 @@ properties.
    goals.rst
    predicates.rst
    messages.rst
-   theories.rst
+   theory-sexp.rst
+   theory-rbnodes.rst
 
 Observations
 ------------

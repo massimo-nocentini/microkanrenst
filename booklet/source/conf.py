@@ -38,6 +38,7 @@ pharo_json_export_filenames = [
         'source/microkanren-core-messages.json',
         'source/microkanren-core-tests.json',
         'source/microkanren-sexp-tests.json',
+        'source/microkanren-RBNodes-theory.json',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
