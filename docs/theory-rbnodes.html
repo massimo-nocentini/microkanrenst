@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RBNode theory &#8212; µkanrenst  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="S-expressions" href="theory-sexp.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="theory-sexp.html" title="S-expressions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rbnode-theory">
+<h1><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory<a class="headerlink" href="#rbnode-theory" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="sendso-predicate">
+<h2><code class="docutils literal notranslate"><span class="pre">sendso</span></code> predicate<a class="headerlink" href="#sendso-predicate" title="Permalink to this headline">¶</a></h2>
+<p>Consider the message</p>
+<span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBProgramNodeSendsoVisitor, protocol visiting&quot;</span>
+<span class="nf">visitMessageNode:</span> <span class="nv">aMessageNode</span>
+
+	<span class="bp">super</span> <span class="nf">visitMessageNode:</span> <span class="nv">aMessageNode</span><span class="p">.</span>
+
+	<span class="nv">goals</span> <span class="nf">add:</span> (<span class="nv">selectorVar</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">aMessageNode</span> <span class="nf">selectorNode</span>)
+</pre></div>
+</div>
+<p>We list the selectors that it sends with</p>
+<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="nf">testSenderoForCompiledMethod</span>
+
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> [ <span class="o">:</span><span class="nv">selector</span> <span class="o">|</span> 
+			(<span class="nc">RBProgramNodeSendsoVisitor</span> <span class="nf">&gt;&gt;</span> <span class="ss">#visitMessageNode:</span>) <span class="nf">sendso</span> <span class="nf">value:</span>
+				<span class="nv">selector</span> ] <span class="nf">asGoal</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { 
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#visitMessageNode:</span>)<span class="p">.</span>
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#unifyo</span>)<span class="p">.</span>
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#selectorNode</span>)<span class="p">.</span>
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#value:</span>)<span class="p">.</span>
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#add:</span>) }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+</pre></div>
+</div>
+<p>where</p>
+<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;CompiledMethod, protocol *MicroKanren-RB&quot;</span>
+<span class="nf">sendso</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">sourceNode</span> <span class="nf">body</span> <span class="nf">sendso</span>
+</pre></div>
+</div>
+<p>delegates to</p>
+<span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNode, protocol *MicroKanren-RB&quot;</span>
+<span class="nf">sendso</span>
+
+	<span class="o">^</span> [ <span class="o">:</span><span class="nv">anObject</span> <span class="o">|</span> 
+	  <span class="nc">RBProgramNodeSendsoVisitor</span> <span class="nb">new</span>
+		  <span class="nf">selectorVar:</span> <span class="nv">anObject</span><span class="p">;</span>
+		  <span class="nf">visitNode:</span> <span class="bp">self</span><span class="p">;</span>
+		  <span class="nf">asGoal</span> ]
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">BlockClosure</span></code> objects also allow us to retrieve their own representation in
+terms of <code class="docutils literal notranslate"><span class="pre">RBNode</span></code> objects, therefore they respond to</p>
+<span class="target" id="compiledMethod-4"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="nf">sendso</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">sourceNode</span> <span class="nf">body</span> <span class="nf">sendso</span>
+</pre></div>
+</div>
+<p>as <code class="docutils literal notranslate"><span class="pre">CompiledMethod</span></code> objects do, so the initial test can be rephrased for them as</p>
+<span class="target" id="compiledMethod-5"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="nf">testSenderoForBlockClosure</span>
+
+	<span class="o">|</span><span class="nv"> aBlock </span><span class="o">|</span>
+	<span class="nv">aBlock</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">aMessageNode</span> <span class="o">:</span><span class="nv">goals</span> <span class="o">:</span><span class="nv">selectorVar</span> <span class="o">|</span> 
+	          <span class="bp">super</span> <span class="nf">visitMessageNode:</span> <span class="nv">aMessageNode</span><span class="p">.</span>
+	          <span class="nv">goals</span> <span class="nf">add:</span>
+		          (<span class="nv">selectorVar</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">aMessageNode</span> <span class="nf">selectorNode</span>) ]<span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span>
+		[ <span class="o">:</span><span class="nv">selector</span> <span class="o">|</span> <span class="nv">aBlock</span> <span class="nf">sendso</span> <span class="nf">value:</span> <span class="nv">selector</span> ] <span class="nf">asGoal</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { 
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#visitMessageNode:</span>)<span class="p">.</span>
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#unifyo</span>)<span class="p">.</span>
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#selectorNode</span>)<span class="p">.</span>
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#value:</span>)<span class="p">.</span>
+				(<span class="nc">RBSelectorNode</span> <span class="nf">value:</span> <span class="ss">#add:</span>) }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="bp">self</span> <span class="nf">deny:</span> (<span class="bp">super</span> <span class="nf">respondsTo:</span> <span class="ss">#visitMessageNode:</span>)
+</pre></div>
+</div>
+<p>Observe that <code class="docutils literal notranslate"><span class="pre">aBlock</span></code> sends <code class="docutils literal notranslate"><span class="pre">#visitMessageNode:</span></code> to <code class="docutils literal notranslate"><span class="pre">super</span></code> even though
+<code class="docutils literal notranslate"><span class="pre">RBNodePredicatesTest</span> <span class="pre">superclass</span></code> doesn’t implement <code class="docutils literal notranslate"><span class="pre">#visitMessageNode:</span></code>,
+as the last <code class="docutils literal notranslate"><span class="pre">#deny:</span></code> checks. This shows that we use the block <code class="docutils literal notranslate"><span class="pre">aBlock</span></code> just
+for its own AST discarding its computation.</p>
+<p>Because we are training on a logic engine, it makes sense trying to use
+<code class="docutils literal notranslate"><span class="pre">#sendso</span></code> backwards, as the following test shows</p>
+<span class="target" id="compiledMethod-6"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="nf">testSenderoBackwards</span>
+
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> ([ <span class="o">:</span><span class="nv">aSend</span> <span class="o">|</span> 
+			 [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">rbo:</span> [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">ast</span> <span class="nf">sendso</span> <span class="nf">value:</span> <span class="nv">aSend</span> ] ] ]
+				 <span class="nf">asGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">5</span>)
+		<span class="nf">equals:</span> { 
+				(<span class="nc">RBMessageNode</span>
+					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
+					 <span class="nf">selector:</span> <span class="ss">#numberOfEdges</span>)<span class="p">.</span>
+				(<span class="nc">RBMessageNode</span>
+					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
+					 <span class="nf">selector:</span> <span class="ss">#testStackedVertically</span>)<span class="p">.</span>
+				(<span class="nc">RBMessageNode</span>
+					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
+					 <span class="nf">selector:</span> <span class="ss">#iconicHaloSpecifications</span>)<span class="p">.</span>
+				(<span class="nc">RBMessageNode</span>
+					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
+					 <span class="nf">selector:</span> <span class="ss">#packageModels</span>)<span class="p">.</span>
+				(<span class="nc">RBMessageNode</span>
+					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
+					 <span class="nf">selector:</span> <span class="ss">#testReversed</span>) }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a><ul>
+<li><a class="reference internal" href="#sendso-predicate"><code class="docutils literal notranslate"><span class="pre">sendso</span></code> predicate</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="theory-sexp.html"
+                        title="previous chapter">S-expressions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/theory-rbnodes.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="theory-sexp.html" title="S-expressions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Massimo Nocentini.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>

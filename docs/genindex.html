@@ -173,6 +173,17 @@
 </li>
       </ul></li>
       <li>
+    #sendso is understood by
+
+      <ul>
+        <li><a href="theory-rbnodes.html#compiledMethod-4">BlockClosure&gt;&gt;#sendso</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-2">CompiledMethod&gt;&gt;#sendso</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-3">RBNode&gt;&gt;#sendso</a>
+</li>
+      </ul></li>
+      <li>
     #tautology is understood by
 
       <ul>
@@ -194,6 +205,13 @@
 </li>
       </ul></li>
       <li>
+    #visitMessageNode: is understood by
+
+      <ul>
+        <li><a href="theory-rbnodes.html#compiledMethod-0">RBProgramNodeSendsoVisitor&gt;&gt;#visitMessageNode:</a>
+</li>
+      </ul></li>
+      <li>
     #walk: is understood by
 
       <ul>
@@ -211,6 +229,15 @@
 
       <ul>
         <li><a href="asGoal.html#compiledMethod-2">#asGoal</a>, <a href="messages.html#compiledMethod-2">[1]</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-4">#sendso</a>
+</li>
+      </ul></li>
+      <li>
+    a CompiledMethod understands
+
+      <ul>
+        <li><a href="theory-rbnodes.html#compiledMethod-2">#sendso</a>
 </li>
       </ul></li>
       <li>
@@ -392,13 +419,13 @@
     a MKSexpTest understands
 
       <ul>
-        <li><a href="theories.html#compiledMethod-0">#testACORN</a>, <a href="theory-sexp.html#compiledMethod-0">[1]</a>
+        <li><a href="theory-sexp.html#compiledMethod-0">#testACORN</a>
 </li>
-        <li><a href="theories.html#compiledMethod-2">#testAppendoBackward</a>, <a href="theory-sexp.html#compiledMethod-2">[1]</a>
+        <li><a href="theory-sexp.html#compiledMethod-2">#testAppendoBackward</a>
 </li>
-        <li><a href="theories.html#compiledMethod-1">#testAppendoForward</a>, <a href="theory-sexp.html#compiledMethod-1">[1]</a>
+        <li><a href="theory-sexp.html#compiledMethod-1">#testAppendoForward</a>
 </li>
-        <li><a href="theories.html#compiledMethod-3">#testDycko</a>, <a href="theory-sexp.html#compiledMethod-3">[1]</a>
+        <li><a href="theory-sexp.html#compiledMethod-3">#testDycko</a>
 </li>
       </ul></li>
       <li>
@@ -408,6 +435,31 @@
         <li><a href="goals.html#compiledMethod-10">#unifyo</a>
 </li>
         <li><a href="goals.html#compiledMethod-11">#unifyWith:</a>
+</li>
+      </ul></li>
+      <li>
+    a RBNode understands
+
+      <ul>
+        <li><a href="theory-rbnodes.html#compiledMethod-3">#sendso</a>
+</li>
+      </ul></li>
+      <li>
+    a RBNodePredicatesTest understands
+
+      <ul>
+        <li><a href="theory-rbnodes.html#compiledMethod-6">#testSenderoBackwards</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-5">#testSenderoForBlockClosure</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-1">#testSenderoForCompiledMethod</a>
+</li>
+      </ul></li>
+      <li>
+    a RBProgramNodeSendsoVisitor understands
+
+      <ul>
+        <li><a href="theory-rbnodes.html#compiledMethod-0">#visitMessageNode:</a>
 </li>
       </ul></li>
       <li>
@@ -496,6 +548,17 @@
         <li><a href="goals.html#compiledMethod-11">Object&gt;&gt;#unifyWith:</a>
 </li>
         <li><a href="asGoal.html#compiledMethod-1">True&gt;&gt;#asGoal</a>, <a href="messages.html#compiledMethod-1">[1]</a>
+</li>
+      </ul></li>
+      <li>
+    Protocol *MicroKanren-RB
+
+      <ul>
+        <li><a href="theory-rbnodes.html#compiledMethod-4">BlockClosure&gt;&gt;#sendso</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-2">CompiledMethod&gt;&gt;#sendso</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-3">RBNode&gt;&gt;#sendso</a>
 </li>
       </ul></li>
       <li>
@@ -641,13 +704,19 @@
 </li>
         <li><a href="goals.html#compiledMethod-16">GoalTest&gt;&gt;#testUnifyWithTopmostWithoutSharing</a>
 </li>
-        <li><a href="theories.html#compiledMethod-0">MKSexpTest&gt;&gt;#testACORN</a>, <a href="theory-sexp.html#compiledMethod-0">[1]</a>
+        <li><a href="theory-sexp.html#compiledMethod-0">MKSexpTest&gt;&gt;#testACORN</a>
 </li>
-        <li><a href="theories.html#compiledMethod-2">MKSexpTest&gt;&gt;#testAppendoBackward</a>, <a href="theory-sexp.html#compiledMethod-2">[1]</a>
+        <li><a href="theory-sexp.html#compiledMethod-2">MKSexpTest&gt;&gt;#testAppendoBackward</a>
 </li>
-        <li><a href="theories.html#compiledMethod-1">MKSexpTest&gt;&gt;#testAppendoForward</a>, <a href="theory-sexp.html#compiledMethod-1">[1]</a>
+        <li><a href="theory-sexp.html#compiledMethod-1">MKSexpTest&gt;&gt;#testAppendoForward</a>
 </li>
-        <li><a href="theories.html#compiledMethod-3">MKSexpTest&gt;&gt;#testDycko</a>, <a href="theory-sexp.html#compiledMethod-3">[1]</a>
+        <li><a href="theory-sexp.html#compiledMethod-3">MKSexpTest&gt;&gt;#testDycko</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-6">RBNodePredicatesTest&gt;&gt;#testSenderoBackwards</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-5">RBNodePredicatesTest&gt;&gt;#testSenderoForBlockClosure</a>
+</li>
+        <li><a href="theory-rbnodes.html#compiledMethod-1">RBNodePredicatesTest&gt;&gt;#testSenderoForCompiledMethod</a>
 </li>
       </ul></li>
   </ul></td>
@@ -665,6 +734,13 @@
         <li><a href="predicates.html#compiledMethod-4">GoalTest&gt;&gt;#nats:stage:</a>
 </li>
         <li><a href="predicates.html#compiledMethod-5">GoalTest&gt;&gt;#nats:stage:offset:</a>
+</li>
+      </ul></li>
+      <li>
+    Protocol visiting
+
+      <ul>
+        <li><a href="theory-rbnodes.html#compiledMethod-0">RBProgramNodeSendsoVisitor&gt;&gt;#visitMessageNode:</a>
 </li>
       </ul></li>
   </ul></td>
