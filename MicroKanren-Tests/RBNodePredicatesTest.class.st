@@ -7,7 +7,29 @@ Class {
 }
 
 { #category : #tests }
-RBNodePredicatesTest >> testSendero [
+RBNodePredicatesTest >> testSenderoForBlockClosure [
+
+	| aBlock |
+	aBlock := [ :aMessageNode :goals :selectorVar | 
+	          super visitMessageNode: aMessageNode.
+	          goals add:
+		          (selectorVar unifyo value: aMessageNode selectorNode) ].
+	self
+		assert:
+		[ :selector | aBlock sendso value: selector ] asGoal solutions
+		equals: { 
+				(RBSelectorNode value: #visitMessageNode:).
+				(RBSelectorNode value: #unifyo).
+				(RBSelectorNode value: #selectorNode).
+				(RBSelectorNode value: #value:).
+				(RBSelectorNode value: #add:) }
+		modulo: #asOrderedCollection.
+
+	self deny: (super respondsTo: #visitMessageNode:)
+]
+
+{ #category : #tests }
+RBNodePredicatesTest >> testSenderoForCompiledMethod [
 
 	self
 		assert: [ :selector | 

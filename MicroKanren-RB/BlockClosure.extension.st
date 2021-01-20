@@ -15,3 +15,9 @@ BlockClosure >> context [
 						yourself);
 				yourself)
 ]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> sendso [
+
+	^ self sourceNode body sendso
+]

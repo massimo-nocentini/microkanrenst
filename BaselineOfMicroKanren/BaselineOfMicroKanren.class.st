@@ -78,6 +78,19 @@ BaselineOfMicroKanren >> scriptExportCoreTestsForDoc [
 ]
 
 { #category : #export }
+BaselineOfMicroKanren >> scriptExportRBTheoryForDoc [
+
+	<script: 'BaselineOfMicroKanren new scriptExportRBTheoryForDoc'>
+	^ MetaSTExporter new
+		  selectors:
+			  #( #testSenderoForCompiledMethod testSenderoForBlockClosure
+			     visitMessageNode: sendso );
+		  exportWithRepositoryPath: [ :aPath | 
+			  aPath / 'booklet' / 'source' / 'microkanren-RBNodes-theory.json' ]
+		  ofPackage: self class package
+]
+
+{ #category : #export }
 BaselineOfMicroKanren >> scriptExportSexpTestsForDoc [
 
 	<script: 'BaselineOfMicroKanren new scriptExportSexpTestsForDoc'>
