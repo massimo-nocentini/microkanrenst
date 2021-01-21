@@ -121,32 +121,69 @@ terms of <code class="docutils literal notranslate"><span class="pre">RBNode</sp
 <code class="docutils literal notranslate"><span class="pre">RBNodePredicatesTest</span> <span class="pre">superclass</span></code> doesn’t implement <code class="docutils literal notranslate"><span class="pre">#visitMessageNode:</span></code>,
 as the last <code class="docutils literal notranslate"><span class="pre">#deny:</span></code> checks. This shows that we use the block <code class="docutils literal notranslate"><span class="pre">aBlock</span></code> just
 for its own AST discarding its computation.</p>
-<p>Because we are training on a logic engine, it makes sense trying to use
-<code class="docutils literal notranslate"><span class="pre">#sendso</span></code> backwards, as the following test shows</p>
+<p>As corner cases, both for the empty block</p>
 <span class="target" id="compiledMethod-6"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="nf">testSenderoForEmptyBlockClosure</span>
+
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> [ <span class="o">:</span><span class="nv">selector</span> <span class="o">|</span> [  ] <span class="nf">sendso</span> <span class="nf">value:</span> <span class="nv">selector</span> ] <span class="nf">asGoal</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span>
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+</pre></div>
+</div>
+<p>and for the identity block</p>
+<span class="target" id="compiledMethod-7"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="nf">testSenderoForIdentityBlockClosure</span>
+
+	<span class="bp">self</span>
+		<span class="nf">assert:</span>
+		[ <span class="o">:</span><span class="nv">selector</span> <span class="o">|</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">sendso</span> <span class="nf">value:</span> <span class="nv">selector</span> ] <span class="nf">asGoal</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span>
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sendso</span></code> yields no solutions at all.</p>
+<p>Because we are training on a logic engine, it makes sense to use <code class="docutils literal notranslate"><span class="pre">#sendso</span></code>
+backwards, as the following test shows</p>
+<span class="target" id="compiledMethod-8"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
 <span class="nf">testSenderoBackwards</span>
+
+	<span class="o">|</span><span class="nv"> receiverNode messageNodes </span><span class="o">|</span>
+	<span class="c">&quot;Preparing expected objects.&quot;</span>
+	<span class="nv">receiverNode</span> <span class="o">:=</span> <span class="m">0</span> <span class="nf">asReifiedVar</span> <span class="nf">asRBLogicVariableNamed:</span> <span class="s">&#39;•&#39;</span><span class="p">.</span>
+	<span class="nv">messageNodes</span> <span class="o">:=</span> { 
+		                (<span class="nc">RBMessageNode</span>
+			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
+			                 <span class="nf">selector:</span> <span class="ss">#numberOfEdges</span>)<span class="p">.</span>
+		                (<span class="nc">RBMessageNode</span>
+			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
+			                 <span class="nf">selector:</span> <span class="ss">#testStackedVertically</span>)<span class="p">.</span>
+		                (<span class="nc">RBMessageNode</span>
+			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
+			                 <span class="nf">selector:</span> <span class="ss">#iconicHaloSpecifications</span>)<span class="p">.</span>
+		                (<span class="nc">RBMessageNode</span>
+			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
+			                 <span class="nf">selector:</span> <span class="ss">#packageModels</span>)<span class="p">.</span>
+		                (<span class="nc">RBMessageNode</span>
+			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
+			                 <span class="nf">selector:</span> <span class="ss">#testReversed</span>) }<span class="p">.</span>
 
 	<span class="bp">self</span>
 		<span class="nf">assert:</span> ([ <span class="o">:</span><span class="nv">aSend</span> <span class="o">|</span> 
-			 [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">rbo:</span> [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">ast</span> <span class="nf">sendso</span> <span class="nf">value:</span> <span class="nv">aSend</span> ] ] ]
+			 [ <span class="o">:</span><span class="nv">o</span> <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> <span class="nv">ast</span> <span class="nf">sendso</span> <span class="nf">value:</span> <span class="nv">aSend</span> ] <span class="nf">asGoalWithASTof:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] ]
 				 <span class="nf">asGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">5</span>)
-		<span class="nf">equals:</span> { 
-				(<span class="nc">RBMessageNode</span>
-					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
-					 <span class="nf">selector:</span> <span class="ss">#numberOfEdges</span>)<span class="p">.</span>
-				(<span class="nc">RBMessageNode</span>
-					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
-					 <span class="nf">selector:</span> <span class="ss">#testStackedVertically</span>)<span class="p">.</span>
-				(<span class="nc">RBMessageNode</span>
-					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
-					 <span class="nf">selector:</span> <span class="ss">#iconicHaloSpecifications</span>)<span class="p">.</span>
-				(<span class="nc">RBMessageNode</span>
-					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
-					 <span class="nf">selector:</span> <span class="ss">#packageModels</span>)<span class="p">.</span>
-				(<span class="nc">RBMessageNode</span>
-					 <span class="nf">receiver:</span> (<span class="nc">RBVariableNode</span> <span class="nf">named:</span> <span class="ss">#x</span>)
-					 <span class="nf">selector:</span> <span class="ss">#testReversed</span>) }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+		<span class="nf">equals:</span> <span class="nv">messageNodes</span>
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+	<span class="c">&quot;Checking the corresponding string representations.&quot;</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">receiverNode</span> <span class="nf">asString</span> <span class="nf">equals:</span> <span class="s">&#39;RBLogicVariableNode(•₀)&#39;</span><span class="p">;</span>
+		<span class="nf">assert:</span> (<span class="nv">messageNodes</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">each</span> <span class="o">|</span> <span class="nv">each</span> <span class="nf">asString</span> ])
+		<span class="nf">equals:</span>
+			{ <span class="s">&#39;RBMessageNode(•₀ numberOfEdges)&#39;</span><span class="p">.</span>
+			<span class="s">&#39;RBMessageNode(•₀ testStackedVertically)&#39;</span><span class="p">.</span>
+			<span class="s">&#39;RBMessageNode(•₀ iconicHaloSpecifications)&#39;</span><span class="p">.</span>
+			<span class="s">&#39;RBMessageNode(•₀ packageModels)&#39;</span><span class="p">.</span> <span class="s">&#39;RBMessageNode(•₀ testReversed)&#39;</span> }
 </pre></div>
 </div>
 </div>

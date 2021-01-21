@@ -36,7 +36,17 @@ Observe that ``aBlock`` sends ``#visitMessageNode:`` to ``super`` even though
 as the last ``#deny:`` checks. This shows that we use the block ``aBlock`` just
 for its own AST discarding its computation.
 
-Because we are training on a logic engine, it makes sense trying to use
-``#sendso`` backwards, as the following test shows
+As corner cases, both for the empty block
+
+.. pharo:autocompiledmethod:: RBNodePredicatesTest>>#testSenderoForEmptyBlockClosure
+
+and for the identity block
+
+.. pharo:autocompiledmethod:: RBNodePredicatesTest>>#testSenderoForIdentityBlockClosure
+
+``sendso`` yields no solutions at all.
+
+Because we are training on a logic engine, it makes sense to use ``#sendso``
+backwards, as the following test shows
 
 .. pharo:autocompiledmethod:: RBNodePredicatesTest>>#testSenderoBackwards
