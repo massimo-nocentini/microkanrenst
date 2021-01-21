@@ -7,7 +7,7 @@ Class {
 }
 
 { #category : #tests }
-RBNodePredicatesTest >> testSenderoBackwards [
+RBNodePredicatesTest >> arguments_testSenderoBackwards [
 
 	| receiverNode messageNodes |
 	"Preparing expected objects."
@@ -36,15 +36,21 @@ RBNodePredicatesTest >> testSenderoBackwards [
 		equals: messageNodes
 		modulo: #asOrderedCollection.
 
-	"Checking the corresponding string representations."
-	self
-		assert: receiverNode asString equals: 'RBLogicVariableNode(•₀)';
-		assert: (messageNodes collect: [ :each | each asString ])
-		equals:
-			{ 'RBMessageNode(•₀ numberOfEdges)'.
-			'RBMessageNode(•₀ testStackedVertically)'.
-			'RBMessageNode(•₀ iconicHaloSpecifications)'.
-			'RBMessageNode(•₀ packageModels)'. 'RBMessageNode(•₀ testReversed)' }
+	^ { 
+		  receiverNode.
+		  messageNodes }
+]
+
+{ #category : #tests }
+RBNodePredicatesTest >> testSenderoBackwards [
+
+	self arguments_testSenderoBackwards bind: [ :receiverNode :messageNodes | 
+		self
+			assert: ([ :aSend | 
+				 [ :o :ast | ast sendso value: aSend ] asGoalWithASTof: [ :o | o ] ]
+					 asGoal solutions next: messageNodes size)
+			equals: messageNodes
+			modulo: #asOrderedCollection ]
 ]
 
 { #category : #tests }

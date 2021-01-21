@@ -86,7 +86,7 @@ BaselineOfMicroKanren >> scriptExportRBTheoryForDoc [
 			  #( #testSenderoForCompiledMethod testSenderoForBlockClosure
 			     testSenderoForEmptyBlockClosure
 			     visitMessageNode: sendso testSenderoBackwards
-			     testSenderoForIdentityBlockClosure );
+			     arguments_testSenderoBackwards testSenderoForIdentityBlockClosure );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source' / 'microkanren-RBNodes-theory.json' ]
 		  ofPackage: self class package
