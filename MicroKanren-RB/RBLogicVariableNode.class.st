@@ -29,10 +29,3 @@ RBLogicVariableNode >> logicVar [
 RBLogicVariableNode >> logicVar: anObject [
 	logicVar := anObject
 ]
-
-{ #category : #printing }
-RBLogicVariableNode >> printOn: aStream [
-
-	super printOn: aStream.
-	aStream nextPutAll: logicVar id asString subscript
-]

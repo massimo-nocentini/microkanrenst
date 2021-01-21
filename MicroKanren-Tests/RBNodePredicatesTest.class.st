@@ -9,26 +9,24 @@ Class {
 { #category : #tests }
 RBNodePredicatesTest >> testSenderoBackwards [
 
+	| receiverNode |
+	receiverNode := 0 asReifiedVar asRBLogicVariableNamed: '•'.
+	self assert: receiverNode asString equals: 'RBLogicVariableNode(•₀)'.
+
 	self
 		assert: ([ :aSend | 
 			 [ :o | o ] rbo: [ :ast | [ :o | ast sendso value: aSend ] ] ]
 				 asGoal solutions next: 5)
 		equals: { 
+				(RBMessageNode receiver: receiverNode selector: #numberOfEdges).
 				(RBMessageNode
-					 receiver: (RBVariableNode named: #x)
-					 selector: #numberOfEdges).
-				(RBMessageNode
-					 receiver: (RBVariableNode named: #x)
+					 receiver: receiverNode
 					 selector: #testStackedVertically).
 				(RBMessageNode
-					 receiver: (RBVariableNode named: #x)
+					 receiver: receiverNode
 					 selector: #iconicHaloSpecifications).
-				(RBMessageNode
-					 receiver: (RBVariableNode named: #x)
-					 selector: #packageModels).
-				(RBMessageNode
-					 receiver: (RBVariableNode named: #x)
-					 selector: #testReversed) }
+				(RBMessageNode receiver: receiverNode selector: #packageModels).
+				(RBMessageNode receiver: receiverNode selector: #testReversed) }
 		modulo: #asOrderedCollection
 ]
 
@@ -67,5 +65,24 @@ RBNodePredicatesTest >> testSenderoForCompiledMethod [
 				(RBSelectorNode value: #selectorNode).
 				(RBSelectorNode value: #value:).
 				(RBSelectorNode value: #add:) }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+RBNodePredicatesTest >> testSenderoForEmptyBlockClosure [
+
+	self
+		assert: [ :selector | [  ] sendso value: selector ] asGoal solutions
+		equals: #(  )
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+RBNodePredicatesTest >> testSenderoForIdentityBlockClosure [
+
+	self
+		assert:
+		[ :selector | [ :o | o ] sendso value: selector ] asGoal solutions
+		equals: #(  )
 		modulo: #asOrderedCollection
 ]
