@@ -15,6 +15,12 @@ ReifiedVar >> = anObject [
 	^ anObject equalReifiedVar: self
 ]
 
+{ #category : #converting }
+ReifiedVar >> asRBLogicVariable [
+
+	^ RBLogicVariableNode named: self symbol logicVar: self
+]
+
 { #category : #comparing }
 ReifiedVar >> equalReifiedVar: anotherReifiedVar [
 	^ id = anotherReifiedVar id

@@ -38,6 +38,14 @@ Walker >> forObject: anObj [
 	^ state walk: anObj
 ]
 
+{ #category : #'as yet unclassified' }
+Walker >> forRBNode: aNode [
+
+	^ aNode acceptVisitor: (RBProgramNodeWalkVisitor new
+			   walker: self;
+			   yourself)
+]
+
 { #category : #accessing }
 Walker >> state: aState [ 
 	state := aState

@@ -21,9 +21,7 @@ FreshRB >> onState: aState withVars: aCollection [
 	logicVariableNodes := receiver argumentNames
 		                      with: aCollection
 		                      collect: [ :aName :aVar | 
-			                      dict
-				                      at: aName
-				                      put: (aVar asRBLogicVariableNamed: aName) ].
+		                      dict at: aName put: aVar asRBLogicVariable ].
 
 	node := receiver sourceNode body substituteVariablesUsingDictionary:
 		        dict.

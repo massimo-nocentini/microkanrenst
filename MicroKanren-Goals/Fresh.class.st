@@ -10,7 +10,7 @@ Class {
 { #category : #running }
 Fresh >> onState: aState [
 
-	^ aState collectVars: (1 to: receiver numArgs) forFresh: self
+	^ aState collectVars: receiver argumentNames forFresh: self
 ]
 
 { #category : #dispatched }

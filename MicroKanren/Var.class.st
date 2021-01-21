@@ -2,7 +2,8 @@ Class {
 	#name : #Var,
 	#superclass : #Object,
 	#instVars : [
-		'id'
+		'id',
+		'named'
 	],
 	#category : #MicroKanren
 }
@@ -33,6 +34,12 @@ Var >> id: aString [
 { #category : #dispatched }
 Var >> isVar [
 	^ true
+]
+
+{ #category : #accessing }
+Var >> named: anObject [
+
+	named := anObject
 ]
 
 { #category : #printing }

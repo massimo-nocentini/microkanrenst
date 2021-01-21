@@ -39,6 +39,15 @@ Reifier >> forObject: anObj [
 	^ state
 ]
 
+{ #category : #'as yet unclassified' }
+Reifier >> forRBNode: aNode [
+
+	^ RBProgramNodeReifyVisitor new
+		  state: state;
+		  visitNode: aNode;
+		  state
+]
+
 { #category : #dispatched }
 Reifier >> forReifiedVar: aVar [
 	^ state

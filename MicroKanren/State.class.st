@@ -52,8 +52,12 @@ State >> birthdate: anInteger [
 
 { #category : #dispatching }
 State >> collectVars: aCollection forFresh: aFresh [
+
 	| nextState vars extendedSubstitution |
-	vars := aCollection collect: [ :each | (each + birthdate) asVar ].
+	vars := aCollection withIndexCollect: [ :aName :each | 
+		        (each + birthdate) asVar
+			        named: aName;
+			        yourself ].
 	extendedSubstitution := vars
 		                        inject: substitution
 		                        into: [ :aSBRAL :each | 

@@ -11,7 +11,7 @@ RBNodePredicatesTest >> testSenderoBackwards [
 
 	| receiverNode messageNodes |
 	"Preparing expected objects."
-	receiverNode := 0 asReifiedVar asRBLogicVariableNamed: '•'.
+	receiverNode := 0 asReifiedVar asRBLogicVariable.
 	messageNodes := { 
 		                (RBMessageNode
 			                 receiver: receiverNode
@@ -32,7 +32,7 @@ RBNodePredicatesTest >> testSenderoBackwards [
 	self
 		assert: ([ :aSend | 
 			 [ :o :ast | ast sendso value: aSend ] asGoalWithASTof: [ :o | o ] ]
-				 asGoal solutions next: 5)
+				 asGoal solutions next: messageNodes size)
 		equals: messageNodes
 		modulo: #asOrderedCollection.
 

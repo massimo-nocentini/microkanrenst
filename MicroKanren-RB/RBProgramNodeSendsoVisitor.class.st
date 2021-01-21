@@ -37,8 +37,9 @@ RBProgramNodeSendsoVisitor >> visitLogicVariableNode: aNode [
 		select: [ :each | each isUnary ]
 		thenDo: [ :each | 
 			goals add: [ :receiver | 
-				selectorVar unifyo value: (RBMessageNode
-						 receiver: (receiver asRBLogicVariableNamed: '•')
+				selectorVar unifyo value:
+					(RBMessageNode
+						 receiver: receiver asRBLogicVariable
 						 selector: each) ] asGoal ]
 ]
 

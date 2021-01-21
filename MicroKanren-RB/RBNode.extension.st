@@ -1,6 +1,12 @@
 Extension { #name : #RBNode }
 
 { #category : #'*MicroKanren-RB' }
+RBNode >> reifyUsingReifier: aReifier [
+
+	^ aReifier forRBNode: self
+]
+
+{ #category : #'*MicroKanren-RB' }
 RBNode >> sendso [
 
 	^ [ :anObject | 
@@ -16,4 +22,10 @@ RBNode >> substituteVariablesUsingDictionary: aDict [
 	^ self acceptVisitor: (RBProgramNodeSubstitutionVisitor new
 			   substitution: aDict;
 			   yourself)
+]
+
+{ #category : #'*MicroKanren-RB' }
+RBNode >> walkStarUsingWalker: aWalker [
+
+	^ aWalker forRBNode: self
 ]
