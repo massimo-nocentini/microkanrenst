@@ -1,6 +1,15 @@
 Extension { #name : #BlockClosure }
 
 { #category : #'*MicroKanren-RB' }
+BlockClosure >> asGoalWithASTof: aBlock [
+
+	^ FreshRB new
+		  receiver: aBlock;
+		  nodeBlock: self;
+		  yourself
+]
+
+{ #category : #'*MicroKanren-RB' }
 BlockClosure >> context [
 	^ self sourceNode body
 		acceptVisitor:
@@ -14,23 +23,6 @@ BlockClosure >> context [
 								yourself);
 						yourself);
 				yourself)
-]
-
-{ #category : #'*MicroKanren-RB' }
-BlockClosure >> rbo [
-
-	^ FreshRB new
-		  receiver: self;
-		  yourself
-]
-
-{ #category : #'*MicroKanren-RB' }
-BlockClosure >> rbo: aBlock [
-
-	^ FreshRB new
-		  receiver: self;
-		  nodeBlock: aBlock;
-		  yourself
 ]
 
 { #category : #'*MicroKanren-RB' }

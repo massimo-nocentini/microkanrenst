@@ -28,7 +28,8 @@ FreshRB >> onState: aState withVars: aCollection [
 	node := receiver sourceNode body substituteVariablesUsingDictionary:
 		        dict.
 
-	receiver := nodeBlock value: node.
+	receiver := nodeBlock valueWithArguments:
+		            logicVariableNodes , { node }.
 
 	^ super onState: aState withVars: logicVariableNodes
 ]

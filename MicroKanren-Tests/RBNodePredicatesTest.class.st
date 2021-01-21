@@ -9,25 +9,42 @@ Class {
 { #category : #tests }
 RBNodePredicatesTest >> testSenderoBackwards [
 
-	| receiverNode |
+	| receiverNode messageNodes |
+	"Preparing expected objects."
 	receiverNode := 0 asReifiedVar asRBLogicVariableNamed: '•'.
-	self assert: receiverNode asString equals: 'RBLogicVariableNode(•₀)'.
+	messageNodes := { 
+		                (RBMessageNode
+			                 receiver: receiverNode
+			                 selector: #numberOfEdges).
+		                (RBMessageNode
+			                 receiver: receiverNode
+			                 selector: #testStackedVertically).
+		                (RBMessageNode
+			                 receiver: receiverNode
+			                 selector: #iconicHaloSpecifications).
+		                (RBMessageNode
+			                 receiver: receiverNode
+			                 selector: #packageModels).
+		                (RBMessageNode
+			                 receiver: receiverNode
+			                 selector: #testReversed) }.
 
 	self
 		assert: ([ :aSend | 
-			 [ :o | o ] rbo: [ :ast | [ :o | ast sendso value: aSend ] ] ]
+			 [ :o :ast | ast sendso value: aSend ] asGoalWithASTof: [ :o | o ] ]
 				 asGoal solutions next: 5)
-		equals: { 
-				(RBMessageNode receiver: receiverNode selector: #numberOfEdges).
-				(RBMessageNode
-					 receiver: receiverNode
-					 selector: #testStackedVertically).
-				(RBMessageNode
-					 receiver: receiverNode
-					 selector: #iconicHaloSpecifications).
-				(RBMessageNode receiver: receiverNode selector: #packageModels).
-				(RBMessageNode receiver: receiverNode selector: #testReversed) }
-		modulo: #asOrderedCollection
+		equals: messageNodes
+		modulo: #asOrderedCollection.
+
+	"Checking the corresponding string representations."
+	self
+		assert: receiverNode asString equals: 'RBLogicVariableNode(•₀)';
+		assert: (messageNodes collect: [ :each | each asString ])
+		equals:
+			{ 'RBMessageNode(•₀ numberOfEdges)'.
+			'RBMessageNode(•₀ testStackedVertically)'.
+			'RBMessageNode(•₀ iconicHaloSpecifications)'.
+			'RBMessageNode(•₀ packageModels)'. 'RBMessageNode(•₀ testReversed)' }
 ]
 
 { #category : #tests }
