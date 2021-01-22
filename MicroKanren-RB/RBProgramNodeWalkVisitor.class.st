@@ -8,6 +8,13 @@ Class {
 }
 
 { #category : #visiting }
+RBProgramNodeWalkVisitor >> visitLiteralValueNode: aLiteralNode [
+
+	^ RBLiteralValueNode value:
+		  (aLiteralNode value walkStarUsingWalker: walker)
+]
+
+{ #category : #visiting }
 RBProgramNodeWalkVisitor >> visitLogicVariableNode: aNode [
 
 	^ (aNode logicVar walkStarUsingWalker: walker) asRBLogicVariable

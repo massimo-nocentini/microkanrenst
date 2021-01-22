@@ -20,6 +20,12 @@ RBProgramNodeReifyVisitor >> state: anObject [
 ]
 
 { #category : #visiting }
+RBProgramNodeReifyVisitor >> visitLiteralValueNode: aLiteralNode [
+
+	^ state reifier value: aLiteralNode value
+]
+
+{ #category : #visiting }
 RBProgramNodeReifyVisitor >> visitLogicVariableNode: aNode [
 
 	^ state := state reifier value: aNode logicVar

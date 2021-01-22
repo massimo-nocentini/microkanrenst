@@ -1,6 +1,12 @@
 Extension { #name : #RBNode }
 
 { #category : #'*MicroKanren-RB' }
+RBNode >> asRBLogicVariable [
+
+	^ self
+]
+
+{ #category : #'*MicroKanren-RB' }
 RBNode >> reifyUsingReifier: aReifier [
 
 	^ aReifier forRBNode: self
