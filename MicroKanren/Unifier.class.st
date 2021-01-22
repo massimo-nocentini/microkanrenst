@@ -15,22 +15,6 @@ Unifier >> continuation: anObject [
 ]
 
 { #category : #dispatched }
-Unifier >> forArray: anArray forArray: anotherArray [
-
-	^ anArray size = anotherArray size
-		  ifTrue: [ 
-		  self forCons: anArray asCons forCons: anotherArray asCons ]
-		  ifFalse: [ 
-			  | error |
-			  error := UnificationError new
-				           left: anArray;
-				           right: anotherArray;
-				           messageText: 'they have different sizes';
-				           yourself.
-			  continuation value: error ]
-]
-
-{ #category : #dispatched }
 Unifier >> forCons: aCons forCons: anotherCons [
 
 	| carState |
@@ -38,27 +22,6 @@ Unifier >> forCons: aCons forCons: anotherCons [
 	^ carState unifier
 		  continuation: continuation;
 		  value: aCons cdr value: anotherCons cdr
-]
-
-{ #category : #unification }
-Unifier >> forLinkedList: aCollection forLinkedList: anotherCollection [
-
-	^ aCollection size = anotherCollection size
-		  ifTrue: [ 
-			  (aCollection zip: anotherCollection)
-				  inject: state
-				  into: [ :s :pair | 
-					  s unifier
-						  continuation: continuation;
-						  value: pair key value: pair value ] ]
-		  ifFalse: [ 
-			  | error |
-			  error := UnificationError new
-				           left: aCollection;
-				           right: anotherCollection;
-				           messageText: 'they have different sizes';
-				           yourself.
-			  continuation value: error ]
 ]
 
 { #category : #unification }
@@ -80,6 +43,27 @@ Unifier >> forObject: anObj forVar: aVar [
 	^ self
 		forVar: aVar
 		forObject: anObj
+]
+
+{ #category : #'as yet unclassified' }
+Unifier >> forSequenceableCollection: aCollection forSequenceableCollection: anotherCollection [
+
+	^ aCollection size = anotherCollection size
+		  ifTrue: [ 
+			  (aCollection zip: anotherCollection)
+				  inject: state
+				  into: [ :s :pair | 
+					  s unifier
+						  continuation: continuation;
+						  value: pair key value: pair value ] ]
+		  ifFalse: [ 
+			  | error |
+			  error := UnificationError new
+				           left: aCollection;
+				           right: anotherCollection;
+				           messageText: 'they have different sizes';
+				           yourself.
+			  continuation value: error ]
 ]
 
 { #category : #unification }

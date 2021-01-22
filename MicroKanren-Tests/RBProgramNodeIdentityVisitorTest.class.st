@@ -8,6 +8,19 @@ Class {
 }
 
 { #category : #tests }
+RBProgramNodeIdentityVisitorTest >> atomConsº [
+
+	"
+	(dethm atom/cons (x y)
+	  (equal (atom (cons x y)) 'nil))"
+
+	^ [ :a :b | 
+	  ([ :x :y :ast | ast unifyo value: a ] asGoalWithASTof: [ :x :y | 
+		   (x cons: y) isAtom ])
+	  , ([ :ast | ast unifyo value: b ] asGoalWithASTof: [ false ]) ]
+]
+
+{ #category : #tests }
 RBProgramNodeIdentityVisitorTest >> carConso [
 
 	^ [ :a :b | 
@@ -240,10 +253,28 @@ RBProgramNodeIdentityVisitorTest >> testFirstExampleOfLittleProverWithLogicVars 
 { #category : #tests }
 RBProgramNodeIdentityVisitorTest >> testFlapjackIsAtomConso [
 
+	self
+		assert: [ :aSend | 
+			[ :o :ast | ast sendso value: aSend ] asGoalWithASTof: [ :o | o ] ]
+				asGoal solutions
+		equals: {  }
+		modulo: #asOrderedCollection.
+
 	[ :a :b | #flapjack = (a cons: b) isAtom ] acl: [ :theory | 
 		theory
 			focus: [ :o | #flapjack = o ]
 			do: [ :a :b | self isAtom: a conso: b ];
 			focus: [ :o | o ] do: #flapjackFalseo;
-			yourself ].
+			yourself ]
+]
+
+{ #category : #tests }
+RBProgramNodeIdentityVisitorTest >> test_atomConsº [
+
+	self
+		assert: [ :rewrite | 
+			self atomConsº
+				value: [ :cdr | (3 cons: cdr) isAtom ] sourceNode body
+				value: rewrite ] asGoal solutions asOrderedCollection
+		equals: { [ false ] sourceNode body }
 ]

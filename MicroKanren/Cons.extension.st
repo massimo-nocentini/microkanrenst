@@ -2,6 +2,7 @@ Extension { #name : #Cons }
 
 { #category : #'*MicroKanren' }
 Cons >> reifyUsingReifier: aReifier [
+
 	^ aReifier forCons: self
 ]
 
@@ -16,8 +17,9 @@ Cons >> unifyWithCons: aCons usingUnifier: anUnifier [
 ]
 
 { #category : #'*MicroKanren' }
-Cons >> unifyWithLinkedList: aCollection usingUnifier: anUnifier [ 
-	^ self unifyWith: aCollection asCons usingUnifier: anUnifier
+Cons >> unifyWithSequenceableCollection: aCollection usingUnifier: anUnifier [
+
+	^ aCollection asCons unifyWithCons: self usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren' }

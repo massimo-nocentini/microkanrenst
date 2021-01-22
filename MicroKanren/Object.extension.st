@@ -49,7 +49,8 @@ Object >> positiveo [
 
 { #category : #'*MicroKanren-core' }
 Object >> reifyUsingReifier: aReifier [
-	^ aReifier forObject: self 
+
+	^ aReifier forObject: self
 ]
 
 { #category : #'*MicroKanren-core' }
@@ -72,18 +73,38 @@ Object >> unifyWithCons: aCons usingUnifier: anUnifier [
 ]
 
 { #category : #'*MicroKanren-core' }
-Object >> unifyWithLinkedList: aCollection usingUnifier: anUnifier [
-	self subclassResponsibility
-]
-
-{ #category : #'*MicroKanren-core' }
 Object >> unifyWithObject: anObj usingUnifier: anUnifier [
 	^ anUnifier forObject: self forObject: anObj
 ]
 
 { #category : #'*MicroKanren-core' }
-Object >> unifyWithVar: aVar usingUnifier: anUnifier [ 
-	^ anUnifier forObject: self forVar: aVar 
+Object >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
+
+	^ anUnifier forObject: self forObject: aNode
+]
+
+{ #category : #'*MicroKanren' }
+Object >> unifyWithRBSelectorNode: aRBSelectorNode usingUnifier: anUnifier [
+
+	^ anUnifier forObject: self forObject: aRBSelectorNode
+]
+
+{ #category : #'*MicroKanren' }
+Object >> unifyWithRBVariableNode: aNode usingUnifier: anUnifier [
+
+	^ anUnifier forObject: self forObject: aNode
+]
+
+{ #category : #'*MicroKanren-core' }
+Object >> unifyWithSequenceableCollection: aCollection usingUnifier: anUnifier [
+
+	^ anUnifier forObject: self forObject: aCollection
+]
+
+{ #category : #'*MicroKanren-core' }
+Object >> unifyWithVar: aVar usingUnifier: anUnifier [
+
+	^ anUnifier forObject: self forVar: aVar
 ]
 
 { #category : #'*MicroKanren-core' }

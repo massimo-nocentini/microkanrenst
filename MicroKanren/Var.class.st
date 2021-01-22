@@ -70,13 +70,13 @@ Var >> unifyWithCons: aCons usingUnifier: anUnifier [
 ]
 
 { #category : #dispatched }
-Var >> unifyWithLinkedList: aCollection usingUnifier: anUnifier [
-	^ self unifyWithObject: aCollection usingUnifier: anUnifier
+Var >> unifyWithObject: anObject usingUnifier: anUnifier [
+	^ anUnifier forVar: self forObject: anObject
 ]
 
 { #category : #dispatched }
-Var >> unifyWithObject: anObject usingUnifier: anUnifier [
-	^ anUnifier forVar: self forObject: anObject
+Var >> unifyWithSequenceableCollection: aCollection usingUnifier: anUnifier [
+	^ self unifyWithObject: aCollection usingUnifier: anUnifier
 ]
 
 { #category : #dispatched }

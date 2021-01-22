@@ -25,6 +25,12 @@ RBNode >> substituteVariablesUsingDictionary: aDict [
 ]
 
 { #category : #'*MicroKanren-RB' }
+RBNode >> unifyWith: anObject usingUnifier: anUnifier [
+
+	self subclassResponsibility
+]
+
+{ #category : #'*MicroKanren-RB' }
 RBNode >> walkStarUsingWalker: aWalker [
 
 	^ aWalker forRBNode: self

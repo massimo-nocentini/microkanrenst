@@ -13,24 +13,9 @@ Walker class >> on: aState [
 ]
 
 { #category : #dispatched }
-Walker >> _forCollection: aCollection [ 
-	^ aCollection
-		collect: [:each | self value: each]
-]
+Walker >> forCons: aCons [
 
-{ #category : #dispatched }
-Walker >> forArray: aCollection [ 
-	^ self _forCollection: aCollection
-]
-
-{ #category : #dispatched }
-Walker >> forCons: aCons [ 
-	^ self _forCollection: aCons
-]
-
-{ #category : #dispatched }
-Walker >> forLinkedList: aCollection [ 
-	^ self _forCollection: aCollection
+	^ (self value: aCons car) cons: (self value: aCons cdr)
 ]
 
 { #category : #dispatched }
@@ -44,6 +29,12 @@ Walker >> forRBNode: aNode [
 	^ aNode acceptVisitor: (RBProgramNodeWalkVisitor new
 			   walker: self;
 			   yourself)
+]
+
+{ #category : #dispatched }
+Walker >> forSequenceableCollection: aCollection [
+
+	^ aCollection collect: [ :each | self value: each ]
 ]
 
 { #category : #accessing }
