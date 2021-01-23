@@ -6,7 +6,7 @@ Object >> cons: anObj [
 ]
 
 { #category : #'*MicroKanren-core' }
-Object >> equalReifiedVar: aReifiedVar [
+Object >> equalVar: aReifiedVar [
 	^ false
 ]
 
@@ -75,6 +75,12 @@ Object >> unifyWithCons: aCons usingUnifier: anUnifier [
 { #category : #'*MicroKanren-core' }
 Object >> unifyWithObject: anObj usingUnifier: anUnifier [
 	^ anUnifier forObject: self forObject: anObj
+]
+
+{ #category : #'*MicroKanren' }
+Object >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
+
+	^ anUnifier forObject: self forObject: aNode
 ]
 
 { #category : #'*MicroKanren-core' }

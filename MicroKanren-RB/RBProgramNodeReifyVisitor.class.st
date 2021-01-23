@@ -22,7 +22,7 @@ RBProgramNodeReifyVisitor >> state: anObject [
 { #category : #visiting }
 RBProgramNodeReifyVisitor >> visitLiteralValueNode: aLiteralNode [
 
-	^ state reifier value: aLiteralNode value
+	^ state := state reifier value: aLiteralNode value
 ]
 
 { #category : #visiting }
@@ -43,13 +43,13 @@ RBProgramNodeReifyVisitor >> visitMessageNode: aNode [
 { #category : #visiting }
 RBProgramNodeReifyVisitor >> visitSelectorNode: aNode [
 
-	^ state reifier value: aNode value
+	^ state := state reifier value: aNode value
 ]
 
 { #category : #visiting }
 RBProgramNodeReifyVisitor >> visitSequenceNode: aSequenceNode [
 
-	^ aSequenceNode statements
-		  inject: state
-		  into: [ :aState :each | aState reifier value: each ]
+	^ state := aSequenceNode statements
+		           inject: state
+		           into: [ :aState :each | aState reifier value: each ]
 ]

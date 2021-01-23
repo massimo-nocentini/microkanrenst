@@ -1,6 +1,12 @@
 Extension { #name : #Unifier }
 
 { #category : #'*MicroKanren-RB' }
+Unifier >> forRBLiteralValueNode: aNode forRBLiteralValueNode: anotherNode [
+
+	^ aNode value unifyWith: anotherNode value usingUnifier: self
+]
+
+{ #category : #'*MicroKanren-RB' }
 Unifier >> forRBMessageNode: aRBMessageNode forRBMessageNode: anotherRBMessageNode [
 
 	state := aRBMessageNode receiver

@@ -21,6 +21,29 @@ Var class >> tautology [
 	^ #tautology
 ]
 
+{ #category : #comparing }
+Var >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ anObject equalVar: self
+]
+
+{ #category : #comparing }
+Var >> equalVar: anotherReifiedVar [
+	^ id = anotherReifiedVar id
+]
+
+{ #category : #comparing }
+Var >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ id hash
+]
+
 { #category : #initializing }
 Var >> id [
 	^ id

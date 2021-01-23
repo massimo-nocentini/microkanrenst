@@ -17,6 +17,25 @@ RBNodeTheoryTest >> imagesPath [
 ]
 
 { #category : #tests }
+RBNodeTheoryTest >> testUnifyConsIsAtomBlock [
+
+	self
+		assert: [ :v :a | 
+			[ :o :ast | (a unifyo value: o) , (v unifyo value: ast) ] 
+				asGoalWithASTof: [ :cdr | (3 cons: cdr) isAtom ] ] asGoal
+				solutions
+		equals: { { 
+				(RBSequenceNode statements: { (RBMessageNode
+						  receiver: (RBMessageNode
+								   receiver: (RBLiteralValueNode value: 3)
+								   selector: #cons:
+								   arguments: { 0 asReifiedVar asRBNode })
+						  selector: #isAtom) }).
+				0 asReifiedVar asRBNode } }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
 RBNodeTheoryTest >> testUnifyEmptyBlock [
 
 	self

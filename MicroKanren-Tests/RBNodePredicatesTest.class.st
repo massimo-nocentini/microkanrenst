@@ -11,7 +11,7 @@ RBNodePredicatesTest >> arguments_testSenderoBackwards [
 
 	| receiverNode messageNodes |
 	"Preparing expected objects."
-	receiverNode := 0 asReifiedVar asRBLogicVariable.
+	receiverNode := 0 asReifiedVar asRBNode.
 	messageNodes := { 
 		                (RBMessageNode
 			                 receiver: receiverNode

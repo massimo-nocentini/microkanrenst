@@ -15,9 +15,21 @@ RBLogicVariableNode class >> named: aString logicVar: aVar [
 		  yourself
 ]
 
+{ #category : #comparing }
+RBLogicVariableNode >> = anObject [
+
+	^ anObject equalRBLogicVariableNode: self
+]
+
 { #category : #visiting }
 RBLogicVariableNode >> acceptVisitor: aProgramNodeVisitor [
 	^ aProgramNodeVisitor visitLogicVariableNode: self
+]
+
+{ #category : #comparing }
+RBLogicVariableNode >> equalRBLogicVariableNode: aNode [
+
+	^ logicVar = aNode logicVar
 ]
 
 { #category : #accessing }
@@ -33,5 +45,5 @@ RBLogicVariableNode >> logicVar: anObject [
 { #category : #'*MicroKanren-RB' }
 RBLogicVariableNode >> unifyWith: anObject usingUnifier: anUnifier [
 
-	^ logicVar unifyWith: anObject usingUnifier: anUnifier
+	^ anObject unifyWithRBLogicVariableNode: self usingUnifier: anUnifier
 ]

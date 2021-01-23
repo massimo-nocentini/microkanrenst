@@ -271,10 +271,11 @@ RBProgramNodeIdentityVisitorTest >> testFlapjackIsAtomConso [
 { #category : #tests }
 RBProgramNodeIdentityVisitorTest >> test_atomConsº [
 
+	| aGoal |
+	aGoal := [ :rewrite | 
+	         [ :cdr :ast | self atomConsº value: ast value: rewrite ] 
+		         asGoalWithASTof: [ :cdr | (3 cons: cdr) isAtom ] ] asGoal.
 	self
-		assert: [ :rewrite | 
-			self atomConsº
-				value: [ :cdr | (3 cons: cdr) isAtom ] sourceNode body
-				value: rewrite ] asGoal solutions asOrderedCollection
+		assert: aGoal solutions asOrderedCollection
 		equals: { [ false ] sourceNode body }
 ]

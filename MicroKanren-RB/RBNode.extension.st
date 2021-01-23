@@ -1,7 +1,7 @@
 Extension { #name : #RBNode }
 
 { #category : #'*MicroKanren-RB' }
-RBNode >> asRBLogicVariable [
+RBNode >> asRBNode [
 
 	^ self
 ]

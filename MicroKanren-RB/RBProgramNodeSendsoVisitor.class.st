@@ -39,7 +39,7 @@ RBProgramNodeSendsoVisitor >> visitLogicVariableNode: aNode [
 			goals add: [ :receiver | 
 				selectorVar unifyo value:
 					(RBMessageNode
-						 receiver: receiver asRBLogicVariable
+						 receiver: receiver asRBNode
 						 selector: each) ] asGoal ]
 ]
 
