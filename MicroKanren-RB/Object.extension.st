@@ -9,11 +9,11 @@ Object >> equalRBLogicVariableNode: aNode [
 { #category : #'*MicroKanren-RB' }
 Object >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
 
-	^ aNode logicVar unifyWith: self usingUnifier: anUnifier
+	^ aNode logicVar unifyWith: aNode usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-RB' }
-Object >> unifyWithRBSequenceNode: aRBSequenceNode usingUnifier: anUnifier [
+Object >> unifyWithRBSequenceNode: aNode usingUnifier: anUnifier [
 
-	^ anUnifier forObject: self forObject: aRBSequenceNode
+	^ self unifyWithObject: aNode usingUnifier: anUnifier
 ]

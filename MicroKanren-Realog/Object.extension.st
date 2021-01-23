@@ -2,15 +2,18 @@ Extension { #name : #Object }
 
 { #category : #'*MicroKanren-Realog' }
 Object >> unifyWithRealogCompany: aCompany usingUnifier: anUnifier [
-	^ anUnifier forObject: self forObject: aCompany
+
+	^ self unifyWithObject: aCompany usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-Realog' }
 Object >> unifyWithRealogContract: aContract usingUnifier: anUnifier [
-	^ anUnifier forObject: self forObject: aContract
+
+	^ self unifyWithObject: aContract usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-Realog' }
 Object >> unifyWithRealogEmployee: anEmployee usingUnifier: anUnifier [
-	^ anUnifier forObject: self forObject: anEmployee
+
+	^ self unifyWithObject: anEmployee usingUnifier: anUnifier
 ]

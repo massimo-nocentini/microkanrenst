@@ -19,7 +19,8 @@ Walker >> forCons: aCons [
 ]
 
 { #category : #dispatched }
-Walker >> forObject: anObj [ 
+Walker >> forObject: anObj [
+
 	^ state walk: anObj
 ]
 

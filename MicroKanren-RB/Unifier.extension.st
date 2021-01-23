@@ -3,34 +3,35 @@ Extension { #name : #Unifier }
 { #category : #'*MicroKanren-RB' }
 Unifier >> forRBLiteralValueNode: aNode forRBLiteralValueNode: anotherNode [
 
-	^ aNode value unifyWith: anotherNode value usingUnifier: self
+	^ self value: aNode value value: anotherNode value
 ]
 
 { #category : #'*MicroKanren-RB' }
 Unifier >> forRBMessageNode: aRBMessageNode forRBMessageNode: anotherRBMessageNode [
 
-	state := aRBMessageNode receiver
-		         unifyWith: anotherRBMessageNode receiver
-		         usingUnifier: self.
-	state := aRBMessageNode selectorNode
-		         unifyWith: anotherRBMessageNode selectorNode
-		         usingUnifier: self.
-	state := aRBMessageNode arguments
-		         unifyWith: anotherRBMessageNode arguments
-		         usingUnifier: self.
-	^ state
+	| aState |
+	aState := self
+		          value: aRBMessageNode receiver
+		          value: anotherRBMessageNode receiver.
+	aState := aState unifier
+		          continuation: continuation;
+		          value: aRBMessageNode selectorNode
+		          value: anotherRBMessageNode selectorNode.
+	aState := aState unifier
+		          continuation: continuation;
+		          value: aRBMessageNode arguments
+		          value: anotherRBMessageNode arguments.
+	^ aState
 ]
 
 { #category : #'*MicroKanren-RB' }
 Unifier >> forRBSelectorNode: aNode forRBSelectorNode: anotherNode [
 
-	state := aNode value unifyWith: anotherNode value usingUnifier: self.
-	^ state
+	^ self value: aNode value value: anotherNode value
 ]
 
 { #category : #'*MicroKanren-RB' }
-Unifier >> forRBVariableNode: aNode forRBVariableNode: anotherNode [
+Unifier >> forRBSequenceNode: aNode forRBSequenceNode: anotherNode [
 
-	state := aNode name unifyWith: anotherNode name usingUnifier: self.
-	^ state
+	^ self value: aNode statements value: anotherNode statements
 ]

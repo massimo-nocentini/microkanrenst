@@ -21,7 +21,7 @@ RBNodeTheoryTest >> testUnifyConsIsAtomBlock [
 
 	self
 		assert: [ :v :a | 
-			[ :o :ast | (a unifyo value: o) , (v unifyo value: ast) ] 
+			[ :o :ast | (a unifyo value: o asRBNode) , (v unifyo value: ast) ] 
 				asGoalWithASTof: [ :cdr | (3 cons: cdr) isAtom ] ] asGoal
 				solutions
 		equals: { { 
@@ -49,12 +49,14 @@ RBNodeTheoryTest >> testUnifyEmptyBlock [
 { #category : #tests }
 RBNodeTheoryTest >> testUnifyLiteralBlock [
 
+	| aGoal |
+	aGoal := [ :v | 
+	         [ :o :ast | 
+	         (o unifyo value: (RBLiteralValueNode value: nil))
+	         , (v unifyo value: ast) ] asGoalWithASTof: [ :o | 3 cons: o ] ]
+		         asGoal.
 	self
-		assert: [ :v | 
-			[ :o :ast | 
-			(o unifyo value: (RBLiteralValueNode value: nil))
-			, (v unifyo value: ast) ] asGoalWithASTof: [ :o | 3 cons: o ] ]
-				asGoal solutions
+		assert: aGoal solutions
 		equals: { [ 3 cons: nil ] sourceNode body }
 		modulo: #asOrderedCollection
 ]

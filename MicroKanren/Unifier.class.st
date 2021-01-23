@@ -40,9 +40,8 @@ Unifier >> forObject: anObj forObject: anotherObj [
 
 { #category : #unification }
 Unifier >> forObject: anObj forVar: aVar [
-	^ self
-		forVar: aVar
-		forObject: anObj
+
+	^ self forVar: aVar forObject: anObj
 ]
 
 { #category : #'as yet unclassified' }

@@ -15,7 +15,8 @@ Reifier >> forCons: aCons [
 ]
 
 { #category : #dispatched }
-Reifier >> forObject: anObj [ 
+Reifier >> forObject: anObj [
+
 	^ state
 ]
 
@@ -30,6 +31,7 @@ Reifier >> forRBNode: aNode [
 
 { #category : #dispatched }
 Reifier >> forReifiedVar: aVar [
+
 	^ state
 ]
 
@@ -46,22 +48,23 @@ Reifier >> forSequenceableCollection: aCollection [
 
 { #category : #dispatched }
 Reifier >> forVar: aVar [
+
 	^ state reifyVar: aVar forReifier: self
 ]
 
 { #category : #reification }
 Reifier >> reifyVars: vars [
+
 	| walker reifier |
 	walker := state walker.
 	reifier := self class new
-		state: Dictionary new asState;
-		yourself.
-	^ vars
-		collect: [ :v | 
-			| w s |
-			w := walker value: v.
-			s := reifier value: w.
-			s walker value: w ]
+		           state: Dictionary new asState;
+		           yourself.
+	^ vars collect: [ :v | 
+		  | w s |
+		  w := walker value: v.
+		  s := reifier value: w.
+		  s walker value: w ]
 ]
 
 { #category : #accessing }

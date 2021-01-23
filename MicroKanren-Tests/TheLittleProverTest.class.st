@@ -2,13 +2,13 @@
 A RBProgramNodeIdentityVisitorTest is a test class for testing the behavior of RBProgramNodeIdentityVisitor
 "
 Class {
-	#name : #RBProgramNodeIdentityVisitorTest,
-	#superclass : #TestCase,
+	#name : #TheLittleProverTest,
+	#superclass : #Srfi41AbstractTest,
 	#category : #'MicroKanren-Tests'
 }
 
-{ #category : #tests }
-RBProgramNodeIdentityVisitorTest >> atomConsº [
+{ #category : #predicates }
+TheLittleProverTest >> atomConsº [
 
 	"
 	(dethm atom/cons (x y)
@@ -21,7 +21,7 @@ RBProgramNodeIdentityVisitorTest >> atomConsº [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> carConso [
+TheLittleProverTest >> carConso [
 
 	^ [ :a :b | 
 	  ([ :x :y | (x cons: y) car ] unifyo value: a)
@@ -29,7 +29,7 @@ RBProgramNodeIdentityVisitorTest >> carConso [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> cdrConso [
+TheLittleProverTest >> cdrConso [
 
 	^ [ :a :b | 
 	  ([ :x :y | (x cons: y) cdr ] unifyo value: a)
@@ -37,7 +37,7 @@ RBProgramNodeIdentityVisitorTest >> cdrConso [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> cons: x carcdr: y [
+TheLittleProverTest >> cons: x carcdr: y [
 
 	^ [ :a :b | 
 	  ([ 
@@ -50,7 +50,7 @@ RBProgramNodeIdentityVisitorTest >> cons: x carcdr: y [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> consCarCdro [
+TheLittleProverTest >> consCarCdro [
 
 	^ [ :a :b | 
 	  ([ :x :y | 
@@ -63,7 +63,7 @@ RBProgramNodeIdentityVisitorTest >> consCarCdro [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> equal: x if: y else: z [
+TheLittleProverTest >> equal: x if: y else: z [
 
 	^ [ :a :b | 
 	  ([ 
@@ -76,21 +76,21 @@ RBProgramNodeIdentityVisitorTest >> equal: x if: y else: z [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> equal: x swap: y [
+TheLittleProverTest >> equal: x swap: y [
 
 	^ [ :a :b | 
 	  ([ x = y ] unifyo value: a) , ([ y = x ] unifyo value: b) ]
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> equalSameo [
+TheLittleProverTest >> equalSameo [
 
 	^ [ :a :b | 
 	  ([ :x | x = x ] unifyo value: a) , ([ true ] unifyo value: b) ]
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> flapjackFalseo [
+TheLittleProverTest >> flapjackFalseo [
 
 	^ [ :a :b | 
 	  ([ #flapjack = false ] unifyo value: a)
@@ -98,7 +98,7 @@ RBProgramNodeIdentityVisitorTest >> flapjackFalseo [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> if: x false: y [
+TheLittleProverTest >> if: x false: y [
 
 	^ [ :a :b | 
 	  ([ 
@@ -108,7 +108,7 @@ RBProgramNodeIdentityVisitorTest >> if: x false: y [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> if: x nest: y answer: z else: w [
+TheLittleProverTest >> if: x nest: y answer: z else: w [
 
 	^ [ :a :b | 
 	  ([ 
@@ -124,7 +124,7 @@ RBProgramNodeIdentityVisitorTest >> if: x nest: y answer: z else: w [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> if: x nest: y otherwise: z else: w [
+TheLittleProverTest >> if: x nest: y otherwise: z else: w [
 
 	^ [ :a :b | 
 	  ([ 
@@ -140,7 +140,7 @@ RBProgramNodeIdentityVisitorTest >> if: x nest: y otherwise: z else: w [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> if: x same: y [
+TheLittleProverTest >> if: x same: y [
 
 	^ [ :a :b | 
 	  ([ 
@@ -150,7 +150,7 @@ RBProgramNodeIdentityVisitorTest >> if: x same: y [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> if: x true: y [
+TheLittleProverTest >> if: x true: y [
 
 	^ [ :a :b | 
 	  ([ 
@@ -160,7 +160,7 @@ RBProgramNodeIdentityVisitorTest >> if: x true: y [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> isAtom: x conso: y [
+TheLittleProverTest >> isAtom: x conso: y [
 
 	^ [ :a :b | 
 	  ([ (x cons: y) isAtom ] unifyo value: a)
@@ -168,7 +168,7 @@ RBProgramNodeIdentityVisitorTest >> isAtom: x conso: y [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> isAtomConso [
+TheLittleProverTest >> isAtomConso [
 
 	^ [ :a :b | 
 	  ([ :x :y | (x cons: y) isAtom ] unifyo value: a)
@@ -176,14 +176,14 @@ RBProgramNodeIdentityVisitorTest >> isAtomConso [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> nilIsNilo [
+TheLittleProverTest >> nilIsNilo [
 
 	^ [ :a :b | 
 	  ([ nil isNil ] unifyo value: a) , ([ true ] unifyo value: b) ]
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> testFirstExampleOfLittleProver [
+TheLittleProverTest >> testFirstExampleOfLittleProver [
 
 	[ :a :b | #flapjack = (a cons: b) isAtom ] acl: [ :theory | 
 		theory
@@ -236,7 +236,7 @@ RBProgramNodeIdentityVisitorTest >> testFirstExampleOfLittleProver [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> testFirstExampleOfLittleProverWithLogicVars [
+TheLittleProverTest >> testFirstExampleOfLittleProverWithLogicVars [
 	self
 		deny:
 			[ :x | 
@@ -251,7 +251,7 @@ RBProgramNodeIdentityVisitorTest >> testFirstExampleOfLittleProverWithLogicVars 
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> testFlapjackIsAtomConso [
+TheLittleProverTest >> testFlapjackIsAtomConso [
 
 	self
 		assert: [ :aSend | 
@@ -269,13 +269,14 @@ RBProgramNodeIdentityVisitorTest >> testFlapjackIsAtomConso [
 ]
 
 { #category : #tests }
-RBProgramNodeIdentityVisitorTest >> test_atomConsº [
+TheLittleProverTest >> test_atomConsº [
 
 	| aGoal |
 	aGoal := [ :rewrite | 
 	         [ :cdr :ast | self atomConsº value: ast value: rewrite ] 
 		         asGoalWithASTof: [ :cdr | (3 cons: cdr) isAtom ] ] asGoal.
 	self
-		assert: aGoal solutions asOrderedCollection
+		assert: aGoal solutions
 		equals: { [ false ] sourceNode body }
+		modulo: #asOrderedCollection
 ]

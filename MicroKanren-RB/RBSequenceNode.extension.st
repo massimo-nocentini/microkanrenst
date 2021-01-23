@@ -7,9 +7,7 @@ RBSequenceNode >> unifyWith: anObject usingUnifier: anUnifier [
 ]
 
 { #category : #'*MicroKanren-RB' }
-RBSequenceNode >> unifyWithRBSequenceNode: aRBSequenceNode usingUnifier: anUnifier [
+RBSequenceNode >> unifyWithRBSequenceNode: aNode usingUnifier: anUnifier [
 
-	^ self statements
-		  unifyWith: aRBSequenceNode statements
-		  usingUnifier: anUnifier
+	^ anUnifier forRBSequenceNode: self forRBSequenceNode: aNode
 ]

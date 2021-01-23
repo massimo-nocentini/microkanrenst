@@ -64,47 +64,44 @@ Object >> unifyWith: another [
 
 { #category : #'*MicroKanren-core' }
 Object >> unifyWith: another usingUnifier: anUnifier [
+
 	^ another unifyWithObject: self usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-core' }
 Object >> unifyWithCons: aCons usingUnifier: anUnifier [
-	^ anUnifier forObject: self forObject: aCons
+
+	^ self unifyWithObject: aCons usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-core' }
 Object >> unifyWithObject: anObj usingUnifier: anUnifier [
+
 	^ anUnifier forObject: self forObject: anObj
 ]
 
 { #category : #'*MicroKanren' }
 Object >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
 
-	^ anUnifier forObject: self forObject: aNode
+	^ self unifyWithObject: aNode usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-core' }
 Object >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
 
-	^ anUnifier forObject: self forObject: aNode
+	^ self unifyWithObject: aNode usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren' }
-Object >> unifyWithRBSelectorNode: aRBSelectorNode usingUnifier: anUnifier [
+Object >> unifyWithRBSelectorNode: aNode usingUnifier: anUnifier [
 
-	^ anUnifier forObject: self forObject: aRBSelectorNode
-]
-
-{ #category : #'*MicroKanren' }
-Object >> unifyWithRBVariableNode: aNode usingUnifier: anUnifier [
-
-	^ anUnifier forObject: self forObject: aNode
+	^ self unifyWithObject: aNode usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-core' }
 Object >> unifyWithSequenceableCollection: aCollection usingUnifier: anUnifier [
 
-	^ anUnifier forObject: self forObject: aCollection
+	^ self unifyWithObject: aCollection usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-core' }

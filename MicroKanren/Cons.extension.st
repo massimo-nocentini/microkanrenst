@@ -13,6 +13,7 @@ Cons >> unifyWith: another usingUnifier: anUnifier [
 
 { #category : #'*MicroKanren' }
 Cons >> unifyWithCons: aCons usingUnifier: anUnifier [
+
 	^ anUnifier forCons: self forCons: aCons
 ]
 
