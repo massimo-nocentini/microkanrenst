@@ -280,3 +280,27 @@ TheLittleProverTest >> test_atomConsº [
 		equals: { [ false ] sourceNode body }
 		modulo: #asOrderedCollection
 ]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_11 [
+
+	"(atom '())"
+
+	self assert: nil isAtom equals: true
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_14 [
+
+	"(atom (cons 'ham '(eggs)))"
+
+	self assert: (#ham cons: (#eggs cons: nil)) isAtom equals: false
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_6 [
+
+	"(car (cons 'ham '(eggs)))"
+
+	self assert: (#ham cons: (#eggs cons: nil)) car equals: #ham
+]
