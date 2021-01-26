@@ -184,7 +184,7 @@ TheLittleProverTest >> nilIsNilo [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> proof: a frame21: b ast: ast [
+TheLittleProverTest >> proofStep1: a frame21: b ast: ast [
 
 	^ [ :o :ast1 | 
 	  [ :r :v | 
@@ -197,12 +197,91 @@ TheLittleProverTest >> proof: a frame21: b ast: ast [
 ]
 
 { #category : #tests }
+TheLittleProverTest >> proofStep1: a frame29: b ast: ast [
+
+	^ [ :o :ast1 | 
+	  [ :r :v | 
+	  | g g1 |
+	  g := theory carConsº value: o value: r.
+	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
+		        unifyo value: v.
+	  g , g1 , (self proofStep2: a frame29: b ast: ast) ] asGoal ] 
+		  asGoalWithASTof: [ :o | (o cons: nil) cdr isAtom ]
+]
+
+{ #category : #tests }
+TheLittleProverTest >> proofStep1: a frame33: b ast: ast [
+
+	^ [ :o :ast1 | 
+	  [ :r :v | 
+	  | g g1 |
+	  g := theory cdrConsº value: o value: r.
+	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
+		        unifyo value: v.
+	  g , g1 , (self proofStep3: a frame29: b ast: ast) ] asGoal ] 
+		  asGoalWithASTof: [ :o | o isAtom ]
+]
+
+{ #category : #tests }
+TheLittleProverTest >> proofStep1: a frame44: b ast: ast [
+
+	^ [ :o :ast1 | 
+	  [ :r :v | 
+	  | g g1 |
+	  g := theory equalSameº value: o value: r.
+	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
+		        unifyo value: v.
+	  g , g1 , (self proofStep2: a frame44: b ast: ast) ] asGoal ] 
+		  asGoalWithASTof: [ :o | 
+		  (o cons: (#and cons: (#crumpets cons: nil))) car ]
+]
+
+{ #category : #tests }
 TheLittleProverTest >> proofStep2: a frame21: b ast: ast [
 
 	^ [ :o :ast1 | 
 	  [ :r :v | 
 	  | g g1 |
 	  g := self flapjackNilFalseº value: o value: r.
+	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
+		        unifyo value: v.
+	  g , g1 , (r unifyo value: ast) ] asGoal ] asGoalWithASTof: [ :o | 
+		  o ]
+]
+
+{ #category : #tests }
+TheLittleProverTest >> proofStep2: a frame29: b ast: ast [
+
+	^ [ :o :ast1 | 
+	  [ :r :v | 
+	  | g g1 |
+	  g := theory cdrConsº value: o value: r.
+	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
+		        unifyo value: v.
+	  g , g1 , (self proofStep3: a frame29: b ast: ast) ] asGoal ] 
+		  asGoalWithASTof: [ :o | o isAtom ]
+]
+
+{ #category : #tests }
+TheLittleProverTest >> proofStep2: a frame44: b ast: ast [
+
+	^ [ :o :ast1 | 
+	  [ :r :v | 
+	  | g g1 |
+	  g := theory carConsº value: o value: r.
+	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
+		        unifyo value: v.
+	  g , g1 , (r unifyo value: ast) ] asGoal ] asGoalWithASTof: [ :o | 
+		  o ]
+]
+
+{ #category : #tests }
+TheLittleProverTest >> proofStep3: a frame29: b ast: ast [
+
+	^ [ :o :ast1 | 
+	  [ :r :v | 
+	  | g g1 |
+	  g := theory atomNilº value: o value: r.
 	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
 		        unifyo value: v.
 	  g , g1 , (r unifyo value: ast) ] asGoal ] asGoalWithASTof: [ :o | 
@@ -398,12 +477,65 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21_vanilla [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
-	         [ :a :b :ast | self proof: a frame21: b ast: rewritten ] 
+	         [ :a :b :ast | 
+	         self proofStep1: a frame21: b ast: rewritten ] 
 		         asGoalWithASTof: [ :a :b | #flapjack = (a cons: b) isAtom ] ]
 		         asGoal.
 	self
 		assert: aGoal solutions
 		equals: { [ false ] sourceNode body statements first }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_29_vanilla [
+
+	"(atom (cdr (cons (car (cons p q)) '())))"
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :ast | self proofStep1: a frame29: b ast: rewritten ] 
+		         asGoalWithASTof: [ :p :q | 
+		         ((p cons: q) car cons: nil) cdr isAtom ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ true ] sourceNode body statements first }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_33_vanilla [
+
+	"(atom (cdr (cons (car (cons p q)) '())))"
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :ast | 
+	         self proofStep1: a frame33: b ast: rewritten ] 
+		         asGoalWithASTof: [ :p :q | 
+		         ((p cons: q) car cons: nil) cdr isAtom ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ true ] sourceNode body statements first }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44 [
+
+	"(car
+		(cons (equal (cons x y) (cons x y))
+		'(and crumpets)))"
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :ast | self proofStep1: a frame44: b ast: rewritten ] 
+		         asGoalWithASTof: [ :x :y | 
+			         ((x cons: y) = (x cons: y) cons:
+				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ true ] sourceNode body statements first }
 		modulo: #asOrderedCollection
 ]
 
