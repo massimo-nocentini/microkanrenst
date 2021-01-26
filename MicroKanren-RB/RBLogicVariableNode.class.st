@@ -47,3 +47,9 @@ RBLogicVariableNode >> unifyWith: anObject usingUnifier: anUnifier [
 
 	^ anObject unifyWithRBLogicVariableNode: self usingUnifier: anUnifier
 ]
+
+{ #category : #'*MicroKanren-RB' }
+RBLogicVariableNode >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
+
+	^ logicVar unifyWithRBMessageNode: aNode usingUnifier: anUnifier
+]

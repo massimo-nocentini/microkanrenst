@@ -4,21 +4,11 @@ A RBProgramNodeIdentityVisitorTest is a test class for testing the behavior of R
 Class {
 	#name : #TheLittleProverTest,
 	#superclass : #Srfi41AbstractTest,
+	#instVars : [
+		'theory'
+	],
 	#category : #'MicroKanren-Tests'
 }
-
-{ #category : #predicates }
-TheLittleProverTest >> atomConsº [
-
-	"
-	(dethm atom/cons (x y)
-	  (equal (atom (cons x y)) 'nil))"
-
-	^ [ :a :b | 
-	  ([ :x :y :ast | ast unifyo value: a ] asGoalWithASTof: [ :x :y | 
-		   (x cons: y) isAtom ])
-	  , ([ :ast | ast unifyo value: b ] asGoalWithASTof: [ false ]) ]
-]
 
 { #category : #tests }
 TheLittleProverTest >> carConso [
@@ -95,6 +85,17 @@ TheLittleProverTest >> flapjackFalseo [
 	^ [ :a :b | 
 	  ([ #flapjack = false ] unifyo value: a)
 	  , ([ false ] unifyo value: b) ]
+]
+
+{ #category : #tests }
+TheLittleProverTest >> flapjackNilFalseº [
+
+	^ [ :a :b | 
+	  ([ :ast | a unifyo value: ast statements first ] asGoalWithASTof: [ 
+		   #flapjack = nil ])
+	  ,
+		  ([ :ast | b unifyo value: ast statements first ] asGoalWithASTof: [ 
+			   false ]) ]
 ]
 
 { #category : #tests }
@@ -180,6 +181,14 @@ TheLittleProverTest >> nilIsNilo [
 
 	^ [ :a :b | 
 	  ([ nil isNil ] unifyo value: a) , ([ true ] unifyo value: b) ]
+]
+
+{ #category : #running }
+TheLittleProverTest >> setUp [
+
+	super setUp.
+
+	theory := TheLittleProver new
 ]
 
 { #category : #tests }
@@ -273,7 +282,7 @@ TheLittleProverTest >> test_atomConsº [
 
 	| aGoal |
 	aGoal := [ :rewrite | 
-	         [ :cdr :ast | self atomConsº value: ast value: rewrite ] 
+	         [ :cdr :ast | theory atomConsº value: ast value: rewrite ] 
 		         asGoalWithASTof: [ :cdr | (3 cons: cdr) isAtom ] ] asGoal.
 	self
 		assert: aGoal solutions
@@ -295,6 +304,65 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_14 [
 	"(atom (cons 'ham '(eggs)))"
 
 	self assert: (#ham cons: (#eggs cons: nil)) isAtom equals: false
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_16 [
+
+	| aGoal |
+	aGoal := [ :rewrite | 
+	         [ :a :b :ast | 
+	         theory atomConsº value: ast statements first value: rewrite ] 
+		         asGoalWithASTof: [ :a :b | (a cons: b) isAtom ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ false ] sourceNode body statements first }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21 [
+
+	"(equal 'flapjack (atom (cons a b)))"
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :ast | 
+	         ast acl: [ :rewrite | 
+		         rewrite
+			         focus: [ :o | #flapjack = o ]
+			         do: [ :o :r | theory atomConsº value: o value: r ].
+		         "rewrite
+			         focus: [ :o | o ]
+			         do: [ :o :r | self flapjackNilFalseº value: o value: r ]."
+		         rewrite
+			         focus: [ :o | o ]
+			         do: [ :o :r | rewritten unifyo value: o ] ] ] 
+		         asGoalWithASTof: [ :a :b | #flapjack = (a cons: b) isAtom ] ]
+		         asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ false ] sourceNode body }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21_understanding [
+
+	"(equal 'flapjack (atom (cons a b)))"
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :ast | 
+	         [ :o :fast | 
+	         (ast unifyo value: fast) , (rewritten unifyo value: o) ] 
+		         asGoalWithASTof: [ :o | #flapjack = o ] ] asGoalWithASTof: [ 
+		         :a 
+		         :b | #flapjack = (a cons: b) isAtom ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ false ] sourceNode body }
+		modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
