@@ -92,7 +92,7 @@ TheLittleProverTest >> flapjackNilFalseº [
 
 	^ [ :a :b | 
 	  ([ :ast | a unifyo value: ast statements first ] asGoalWithASTof: [ 
-		   #flapjack = nil ])
+		   #flapjack = false ])
 	  ,
 		  ([ :ast | b unifyo value: ast statements first ] asGoalWithASTof: [ 
 			   false ]) ]
@@ -181,6 +181,32 @@ TheLittleProverTest >> nilIsNilo [
 
 	^ [ :a :b | 
 	  ([ nil isNil ] unifyo value: a) , ([ true ] unifyo value: b) ]
+]
+
+{ #category : #tests }
+TheLittleProverTest >> proof: a frame21: b ast: ast [
+
+	^ [ :o :ast1 | 
+	  [ :r :v | 
+	  | g g1 |
+	  g := theory atomConsº value: o value: r.
+	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
+		        unifyo value: v.
+	  g , g1 , (self proofStep2: a frame21: b ast: ast) ] asGoal ] 
+		  asGoalWithASTof: [ :o | #flapjack = o ]
+]
+
+{ #category : #tests }
+TheLittleProverTest >> proofStep2: a frame21: b ast: ast [
+
+	^ [ :o :ast1 | 
+	  [ :r :v | 
+	  | g g1 |
+	  g := self flapjackNilFalseº value: o value: r.
+	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
+		        unifyo value: v.
+	  g , g1 , (r unifyo value: ast) ] asGoal ] asGoalWithASTof: [ :o | 
+		  o ]
 ]
 
 { #category : #running }
@@ -362,6 +388,22 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21_understanding [
 	self
 		assert: aGoal solutions
 		equals: { [ false ] sourceNode body }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21_vanilla [
+
+	"(equal 'flapjack (atom (cons a b)))"
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :ast | self proof: a frame21: b ast: rewritten ] 
+		         asGoalWithASTof: [ :a :b | #flapjack = (a cons: b) isAtom ] ]
+		         asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ false ] sourceNode body statements first }
 		modulo: #asOrderedCollection
 ]
 
