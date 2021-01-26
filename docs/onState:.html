@@ -38,7 +38,7 @@
 <h1><code class="docutils literal notranslate"><span class="pre">onState:</span></code> message<a class="headerlink" href="#onstate-message" title="Permalink to this headline">¶</a></h1>
 <p>This is <em>the fundamental</em> message of the whole system because it allows us to explore
 the search space of both succeeding and failing states.</p>
-<span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol running&quot;</span>
+<span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goal-onstate"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span>
 
 	&lt;<span class="k">doc:</span> #Realog topic: #( Gaol onState )&gt;
@@ -47,13 +47,13 @@ the search space of both succeeding and failing states.</p>
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">onState:</span> (<span class="nv">aState</span> <span class="nf">pushGoal:</span> <span class="nv">aGoal</span>) <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Fresh, protocol running&quot;</span>
+<span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-fresh-onstate"><div class="highlight"><pre><span></span><span class="c">&quot;Fresh, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span>
 
 	<span class="o">^</span> <span class="nv">aState</span> <span class="nf">collectVars:</span> (<span class="m">1</span> <span class="nf">to:</span> <span class="nv">receiver</span> <span class="nf">numArgs</span>) <span class="nf">forFresh:</span> <span class="bp">self</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Fresh, protocol dispatched&quot;</span>
+<span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-fresh-onstate-withvars"><div class="highlight"><pre><span></span><span class="c">&quot;Fresh, protocol dispatched&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span>
 
 	<span class="nv">variables</span> <span class="o">:=</span> <span class="nv">aCollection</span><span class="p">.</span>
@@ -61,7 +61,7 @@ the search space of both succeeding and failing states.</p>
 	<span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Eta, protocol running&quot;</span>
+<span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-eta-onstate"><div class="highlight"><pre><span></span><span class="c">&quot;Eta, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span>
 
 	<span class="o">^</span> [ 
@@ -72,13 +72,13 @@ the search space of both succeeding and failing states.</p>
 </div>
 <div class="section" id="onstate-afterpushinggoal-message">
 <h1><code class="docutils literal notranslate"><span class="pre">onState:afterPushingGoal:</span></code> message<a class="headerlink" href="#onstate-afterpushinggoal-message" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="compiledMethod-4"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol as yet unclassified&quot;</span>
+<span class="target" id="pharo-compiledMethod-4"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goal-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol as yet unclassified&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 
 	<span class="bp">self</span> <span class="nf">subclassResponsibility</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-6"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Succeed, protocol running&quot;</span>
+<span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-succeed-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Succeed, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 
 	&lt;<span class="k">doc:</span> #Realog topic: #( Succeed onState )&gt;
@@ -102,7 +102,7 @@ the search space of both succeeding and failing states.</p>
 </pre></div>
 </div>
 <p>or even better with the test case</p>
-<span class="target" id="compiledMethod-5"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-5"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testsucceedinvariant"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testSucceedInvariant</span>
 
 	<span class="nc">SBRAL</span> <span class="nb">new</span> <span class="nf">asState</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">s</span> <span class="o">|</span> 
@@ -118,7 +118,7 @@ the search space of both succeeding and failing states.</p>
 </pre></div>
 </div>
 </div></blockquote>
-<span class="target" id="compiledMethod-7"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Disj, protocol running&quot;</span>
+<span class="target" id="pharo-compiledMethod-7"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-disj-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Disj, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">|</span><span class="nv"> aStream anotherStream </span><span class="o">|</span>
@@ -127,7 +127,7 @@ the search space of both succeeding and failing states.</p>
 	<span class="o">^</span> <span class="nv">combineBlock</span> <span class="nf">value:</span> <span class="nv">aStream</span> <span class="nf">value:</span> <span class="nv">anotherStream</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-12"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Conj, protocol running&quot;</span>
+<span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-conj-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Conj, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">^</span> [ <span class="o">:</span><span class="nv">refinedState</span> <span class="o">|</span> 
@@ -137,7 +137,7 @@ the search space of both succeeding and failing states.</p>
 </pre></div>
 </div>
 <blockquote>
-<div><span class="target" id="compiledMethod-10"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol as yet unclassified&quot;</span>
+<div><span class="target" id="pharo-compiledMethod-10"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goal-onstate-forgoal-fromconj"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol as yet unclassified&quot;</span>
 <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">aGoal</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span>
 
 	<span class="bp">self</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">refinedState</span> <span class="nf">forConj:</span> <span class="nv">aConj</span><span class="p">.</span> <span class="c">&quot;this message should be removed to be full explicit.&quot;</span>
@@ -145,7 +145,7 @@ the search space of both succeeding and failing states.</p>
 </pre></div>
 </div>
 <blockquote>
-<div><span class="target" id="compiledMethod-8"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol as yet unclassified&quot;</span>
+<div><span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goal-popgoalfrompathofstate-forconj"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol as yet unclassified&quot;</span>
 <span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span>
 
 	<span class="c">&quot;No action for the generic goal because if I am the top of `aState`&#39;s goal path,</span>
@@ -155,7 +155,7 @@ the search space of both succeeding and failing states.</p>
 	
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-9"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Succeed, protocol as yet unclassified&quot;</span>
+<span class="target" id="pharo-compiledMethod-9"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-succeed-popgoalfrompathofstate-forconj"><div class="highlight"><pre><span></span><span class="c">&quot;Succeed, protocol as yet unclassified&quot;</span>
 <span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span>
 
 	<span class="nv">aState</span> <span class="nf">path:</span> <span class="nv">aState</span> <span class="nf">path</span> <span class="nf">nextLink</span>
@@ -169,14 +169,14 @@ without creating a new copy of it.</p>
 </div>
 </div></blockquote>
 </div></blockquote>
-<span class="target" id="compiledMethod-11"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Failed, protocol as yet unclassified&quot;</span>
+<span class="target" id="pharo-compiledMethod-11"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-failed-onstate-forgoal-fromconj"><div class="highlight"><pre><span></span><span class="c">&quot;Failed, protocol as yet unclassified&quot;</span>
 <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">right</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span>
 
 	<span class="o">^</span> <span class="nv">refinedState</span> <span class="nf">srfi41Singleton</span>
 </pre></div>
 </div>
 </div></blockquote>
-<span class="target" id="compiledMethod-13"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Unify, protocol running&quot;</span>
+<span class="target" id="pharo-compiledMethod-13"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-unify-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Unify, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 
 	<span class="o">|</span><span class="nv"> aStateOrException </span><span class="o">|</span>
@@ -187,7 +187,7 @@ without creating a new copy of it.</p>
 	<span class="o">^</span> <span class="nv">aStateOrException</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterUnificationByUnify:</span> <span class="bp">self</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-14"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Cond, protocol running&quot;</span>
+<span class="target" id="pharo-compiledMethod-14"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-cond-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Cond, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">^</span> [ 
@@ -196,7 +196,7 @@ without creating a new copy of it.</p>
 	  <span class="nv">g</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-15"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;IfPure, protocol running&quot;</span>
+<span class="target" id="pharo-compiledMethod-15"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-ifpure-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;IfPure, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">|</span><span class="nv"> disj </span><span class="o">|</span>
@@ -208,7 +208,7 @@ without creating a new copy of it.</p>
 	<span class="o">^</span> <span class="nv">disj</span> <span class="nf">onState:</span> <span class="nv">aState</span>
 </pre></div>
 </div>
-<span class="target" id="compiledMethod-16"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;Suspended, protocol as yet unclassified&quot;</span>
+<span class="target" id="pharo-compiledMethod-16"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-suspended-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Suspended, protocol as yet unclassified&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
 	<span class="o">^</span> [ <span class="nv">nestedGoal</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>

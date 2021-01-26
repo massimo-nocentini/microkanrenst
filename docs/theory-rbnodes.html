@@ -43,7 +43,7 @@
 <div class="section" id="sendso-predicate">
 <h2><code class="docutils literal notranslate"><span class="pre">sendso</span></code> predicate<a class="headerlink" href="#sendso-predicate" title="Permalink to this headline">¶</a></h2>
 <p>Consider the message</p>
-<span class="target" id="compiledMethod-0"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBProgramNodeSendsoVisitor, protocol visiting&quot;</span>
+<span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbprogramnodesendsovisitor-visitmessagenode"><div class="highlight"><pre><span></span><span class="c">&quot;RBProgramNodeSendsoVisitor, protocol visiting&quot;</span>
 <span class="nf">visitMessageNode:</span> <span class="nv">aMessageNode</span>
 
 	<span class="bp">super</span> <span class="nf">visitMessageNode:</span> <span class="nv">aMessageNode</span><span class="p">.</span>
@@ -52,7 +52,7 @@
 </pre></div>
 </div>
 <p>We list the selectors that it sends with</p>
-<span class="target" id="compiledMethod-1"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnodepredicatestest-testsenderoforcompiledmethod"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
 <span class="nf">testSenderoForCompiledMethod</span>
 
 	<span class="bp">self</span>
@@ -69,14 +69,14 @@
 </pre></div>
 </div>
 <p>where</p>
-<span class="target" id="compiledMethod-2"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;CompiledMethod, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-compiledmethod-sendso"><div class="highlight"><pre><span></span><span class="c">&quot;CompiledMethod, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">sendso</span>
 
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">sourceNode</span> <span class="nf">body</span> <span class="nf">sendso</span>
 </pre></div>
 </div>
 <p>delegates to</p>
-<span class="target" id="compiledMethod-3"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNode, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnode-sendso"><div class="highlight"><pre><span></span><span class="c">&quot;RBNode, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">sendso</span>
 
 	<span class="o">^</span> [ <span class="o">:</span><span class="nv">anObject</span> <span class="o">|</span> 
@@ -88,14 +88,14 @@
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">BlockClosure</span></code> objects also allow us to retrieve their own representation in
 terms of <code class="docutils literal notranslate"><span class="pre">RBNode</span></code> objects, therefore they respond to</p>
-<span class="target" id="compiledMethod-4"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-4"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-sendso"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">sendso</span>
 
 	<span class="o">^</span> <span class="bp">self</span> <span class="nf">sourceNode</span> <span class="nf">body</span> <span class="nf">sendso</span>
 </pre></div>
 </div>
 <p>as <code class="docutils literal notranslate"><span class="pre">CompiledMethod</span></code> objects do, so the initial test can be rephrased for them as</p>
-<span class="target" id="compiledMethod-5"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-5"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnodepredicatestest-testsenderoforblockclosure"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
 <span class="nf">testSenderoForBlockClosure</span>
 
 	<span class="o">|</span><span class="nv"> aBlock </span><span class="o">|</span>
@@ -122,7 +122,7 @@ terms of <code class="docutils literal notranslate"><span class="pre">RBNode</sp
 as the last <code class="docutils literal notranslate"><span class="pre">#deny:</span></code> checks. This shows that we use the block <code class="docutils literal notranslate"><span class="pre">aBlock</span></code> just
 for its own AST discarding its computation.</p>
 <p>As corner cases, both for the empty block</p>
-<span class="target" id="compiledMethod-6"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnodepredicatestest-testsenderoforemptyblockclosure"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
 <span class="nf">testSenderoForEmptyBlockClosure</span>
 
 	<span class="bp">self</span>
@@ -132,7 +132,7 @@ for its own AST discarding its computation.</p>
 </pre></div>
 </div>
 <p>and for the identity block</p>
-<span class="target" id="compiledMethod-7"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-7"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnodepredicatestest-testsenderoforidentityblockclosure"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
 <span class="nf">testSenderoForIdentityBlockClosure</span>
 
 	<span class="bp">self</span>
@@ -145,7 +145,7 @@ for its own AST discarding its computation.</p>
 <p><code class="docutils literal notranslate"><span class="pre">sendso</span></code> yields no solutions at all.</p>
 <p>Because we are training on a logic engine, it makes sense to use <code class="docutils literal notranslate"><span class="pre">#sendso</span></code>
 backwards, as the following test shows</p>
-<span class="target" id="compiledMethod-8"></span><div class="highlight-smalltalk notranslate"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnodepredicatestest-testsenderobackwards"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
 <span class="nf">testSenderoBackwards</span>
 
 	<span class="o">|</span><span class="nv"> receiverNode messageNodes </span><span class="o">|</span>
@@ -186,6 +186,7 @@ backwards, as the following test shows</p>
 			<span class="s">&#39;RBMessageNode(•₀ packageModels)&#39;</span><span class="p">.</span> <span class="s">&#39;RBMessageNode(•₀ testReversed)&#39;</span> }
 </pre></div>
 </div>
+<p>This should be a link <a class="reference internal" href="goals.html#pharo-class-succeed"><span class="std std-ref">Succeed</span></a>. and <a class="reference internal" href="onState%3A.html#pharo-compiledmethod-goal-onstate"><span class="std std-ref">onState:</span></a>.</p>
 </div>
 </div>
 
