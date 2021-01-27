@@ -555,12 +555,12 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning [
 	aGoal := [ :rewritten | 
 	         [ :a :b :ast | 
 	         [ :o :oast | 
-	         (ast unifyo value: oast) , { o } projectº
-	         , (theory equalSameº value: o value: rewritten)
-	         , { o } projectº ] asGoalWithASTof: [ :o | 
+	         (ast statements first unifyo value: oast statements first)
+	         , (theory equalSameº value: o value: rewritten) ] 
+		         asGoalWithASTof: [ :o | 
 		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] 
 		         asGoalWithASTof: [ :x :y | 
-			         ((x cons: #a) = (x cons: nil) cons:
+			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
 	self
 		assert: aGoal solutions

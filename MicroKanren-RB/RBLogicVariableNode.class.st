@@ -32,6 +32,12 @@ RBLogicVariableNode >> equalRBLogicVariableNode: aNode [
 	^ logicVar = aNode logicVar
 ]
 
+{ #category : #comparing }
+RBLogicVariableNode >> hash [
+
+	^ logicVar hash
+]
+
 { #category : #accessing }
 RBLogicVariableNode >> logicVar [
 	^ logicVar
@@ -57,5 +63,5 @@ RBLogicVariableNode >> unifyWithObject: anObject usingUnifier: anUnifier [
 { #category : #'*MicroKanren-RB' }
 RBLogicVariableNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
 
-	^ logicVar unifyWith: aNode usingUnifier: anUnifier
+	^ logicVar unifyWithVar: aNode logicVar usingUnifier: anUnifier
 ]

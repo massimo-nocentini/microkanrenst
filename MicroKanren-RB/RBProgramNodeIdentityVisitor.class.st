@@ -137,11 +137,9 @@ RBProgramNodeIdentityVisitor >> visitSelfNode: aSelfNode [
 { #category : #visiting }
 RBProgramNodeIdentityVisitor >> visitSequenceNode: aSequenceNode [
 
-	^ RBSequenceNode
-		  temporaries: (aSequenceNode temporaries collect: [ :aNode | 
-				   aNode acceptVisitor: self ])
-		  statements: (aSequenceNode statements collect: [ :aNode | 
-				   aNode acceptVisitor: self ])
+	^ RBSequenceNode statements:
+		  (aSequenceNode statements collect: [ :aNode | 
+			   aNode acceptVisitor: self ])
 ]
 
 { #category : #visiting }

@@ -13,7 +13,7 @@ MKGoalProjector >> onState: aState [
 	| walker |
 	walker := aState walker.
 	(variables collect: [ :each | 
-		 each -> (Dictionary new
+		 each -> (OrderedDictionary new
 			  at: #walk put: (aState walk: each);
 			  at: #walkStar put: (walker value: each);
 			  yourself) ]) asDictionary inspect.
