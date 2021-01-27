@@ -577,12 +577,12 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning1 [
 			         focus: [ :o | 
 				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
 			         do: theory equalSameº;
-			         focus: [ :o | o ] do: theory carConsº;
 			         focus: [ :o | o ]
-			         do: [ :o :_ | o unifyo value: rewritten ] ] ] 
-		         asGoalWithASTof: [ :x :y | 
-			         ((x cons: y) = (x cons: y) cons:
-				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
+			         do: [ :o :_ | 
+				         (theory carConsº value: o value: rewritten)
+				         , HaltGoal new ] ] ] asGoalWithASTof: [ :x :y | 
+		         ((x cons: y) = (x cons: y) cons:
+			          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
 	self
 		assert: aGoal solutions
 		equals: { [ true ] sourceNode body statements first }

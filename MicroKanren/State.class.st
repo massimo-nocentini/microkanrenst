@@ -183,10 +183,6 @@ State >> var: aReifiedVar reifies: aVar [
 { #category : #'as yet unclassified' }
 State >> walk: anObj [
 
-	"main API for ...."
-
-	<doc: #Realog topic: #( State walk )>
-	<doc: #Realog topic: #( State walk overview )>
 	^ substitution walk: anObj fromState: self
 ]
 
