@@ -7,7 +7,6 @@ Class {
 { #category : #running }
 HaltGoal >> onState: aState [
 
-	self halt.
-
+	aState inspect.
 	^ super onState: aState
 ]

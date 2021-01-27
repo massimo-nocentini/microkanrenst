@@ -10,6 +10,14 @@ SequenceableCollection >> cond [
 ]
 
 { #category : #'*MicroKanren' }
+SequenceableCollection >> projectº [
+
+	^ MKGoalProjector new
+		  variables: self;
+		  yourself
+]
+
+{ #category : #'*MicroKanren' }
 SequenceableCollection >> reifyUsingReifier: aReifier [
 
 	^ aReifier forSequenceableCollection: self

@@ -17,10 +17,12 @@ State >> gtInspectorItemsInGLMPresentation: composite [
 		  width: 50;
 		  column: 'Value'
 		  evaluated: [ :value | 
-			  GTObjectPrinter asTruncatedTextFrom: (self walk: value) ];
+			  GTObjectPrinter asTruncatedTextFrom: (self walk: value) ]
+		  width: 300;
 		  column: 'Walked Value'
 		  evaluated: [ :value | 
-			  GTObjectPrinter asTruncatedTextFrom: (walker value: value) ];
+			  GTObjectPrinter asTruncatedTextFrom: (walker value: value) ]
+		  width: 300;
 		  send: [ :result | "withSmalltalkSearch;
 		showOnly: 50;
 		helpMessage: 'Quick selection field. Given your INPUT, it executes: self select: [:each | INPUT ]'."
