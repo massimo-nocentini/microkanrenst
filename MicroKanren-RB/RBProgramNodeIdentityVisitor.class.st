@@ -123,6 +123,12 @@ RBProgramNodeIdentityVisitor >> visitReturnNode: aReturnNode [
 	self shouldBeImplemented
 ]
 
+{ #category : #'*MicroKanren-RB' }
+RBProgramNodeIdentityVisitor >> visitSelectorNode: aNode [
+
+	self shouldBeImplemented
+]
+
 { #category : #visiting }
 RBProgramNodeIdentityVisitor >> visitSelfNode: aSelfNode [
 	self shouldBeImplemented

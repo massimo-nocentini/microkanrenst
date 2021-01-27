@@ -268,7 +268,7 @@ TheLittleProverTest >> proofStep2: a frame44: b ast: ast [
 	^ [ :o :ast1 | 
 	  [ :r :v | 
 	  | g g1 |
-	  g := theory carConsº value: o value: r.
+	  g := theory carConsº value: o value: v.
 	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
 		        unifyo value: v.
 	  g , g1 , (r unifyo value: ast) ] asGoal ] asGoalWithASTof: [ :o | 
@@ -393,6 +393,14 @@ TheLittleProverTest >> test_atomConsº [
 		assert: aGoal solutions
 		equals: { [ false ] sourceNode body }
 		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_06 [
+
+	"(car (cons 'ham '(eggs)))"
+
+	self assert: (#ham cons: (#eggs cons: nil)) car equals: #ham
 ]
 
 { #category : #tests }
@@ -540,9 +548,69 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44 [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_6 [
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning [
 
-	"(car (cons 'ham '(eggs)))"
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :ast | 
+	         [ :o :oast | 
+	         (ast unifyo value: oast) , (theory equalSameº value: o value: rewritten ) ", (rewritten unifyo value: o) "] 
+		         asGoalWithASTof: [ :o | 
+		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] 
+		         asGoalWithASTof: [ :x :y | 
+			         ((x cons: y) = (x cons: y) cons:
+				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ true ] sourceNode body statements first }
+		modulo: #asOrderedCollection
+]
 
-	self assert: (#ham cons: (#eggs cons: nil)) car equals: #ham
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning1 [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :ast | 
+	         ast acl: [ :rewriter | 
+		         rewriter
+			         focus: [ :o | 
+				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
+			         do: theory equalSameº;
+			         focus: [ :o | o ] do: theory carConsº;
+			         focus: [ :o | o ]
+			         do: [ :o :_ | o unifyo value: rewritten ] ] ] 
+		         asGoalWithASTof: [ :x :y | 
+			         ((x cons: y) = (x cons: y) cons:
+				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ true ] sourceNode body statements first }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning2 [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :ast | 
+	         [ :o :oast | 
+	         [ :r | 
+	         (ast unifyo value: oast)
+	         , (theory equalSameº value: o value: r)
+	         , ((oast substituteVariablesUsingDictionary:
+			           { (o -> r asRBNode) } asDictionary) unifyo value:
+			          rewritten) ] asGoal ", (rewritten unifyo value: o) " ] 
+		         asGoalWithASTof: [ :o | 
+		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] 
+		         asGoalWithASTof: [ :x :y | 
+			         ((x cons: y) = (x cons: y) cons:
+				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals:
+			{ [ (true cons: (#and cons: (#crumpets cons: nil))) car ]
+				sourceNode body }
+		modulo: #asOrderedCollection
 ]

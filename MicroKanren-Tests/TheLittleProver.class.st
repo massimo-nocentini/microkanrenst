@@ -81,3 +81,15 @@ TheLittleProver >> equalSameº [
 		        asGoalWithASTof: [ true ].
 	  g1 , g2 ] asGoalWithASTof: [ :x | x = x ] ]
 ]
+
+{ #category : #predicates }
+TheLittleProver >> equalSwapº [
+
+	^ [ :a :b | 
+	  [ :x :y :ast | 
+	  | g1 g2 |
+	  g1 := ast statements first unifyo value: a.
+	  g2 := [ :ast2 | ast2 statements first unifyo value: b ] 
+		        asGoalWithASTof: [ y = x ].
+	  g1 , g2 ] asGoalWithASTof: [ :x :y | x = y ] ]
+]
