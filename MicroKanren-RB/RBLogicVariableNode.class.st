@@ -49,7 +49,13 @@ RBLogicVariableNode >> unifyWith: anObject usingUnifier: anUnifier [
 ]
 
 { #category : #'*MicroKanren-RB' }
-RBLogicVariableNode >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
+RBLogicVariableNode >> unifyWithObject: anObject usingUnifier: anUnifier [
 
-	^ logicVar unifyWithRBMessageNode: aNode usingUnifier: anUnifier
+	^ logicVar unifyWithObject: anObject usingUnifier: anUnifier
+]
+
+{ #category : #'*MicroKanren-RB' }
+RBLogicVariableNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
+
+	^ logicVar unifyWith: aNode usingUnifier: anUnifier
 ]

@@ -387,11 +387,12 @@ TheLittleProverTest >> test_atomConsº [
 
 	| aGoal |
 	aGoal := [ :rewrite | 
-	         [ :cdr :ast | theory atomConsº value: ast value: rewrite ] 
+	         [ :cdr :ast | 
+	         theory atomConsº value: ast statements first value: rewrite ] 
 		         asGoalWithASTof: [ :cdr | (3 cons: cdr) isAtom ] ] asGoal.
 	self
 		assert: aGoal solutions
-		equals: { [ false ] sourceNode body }
+		equals: { [ false ] sourceNode body statements first }
 		modulo: #asOrderedCollection
 ]
 
@@ -555,8 +556,8 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning [
 	         [ :a :b :ast | 
 	         [ :o :oast | 
 	         (ast unifyo value: oast) , { o } projectº
-	         , (theory equalSameº value: o value: rewritten) ", (rewritten unifyo value: o) " ] 
-		         asGoalWithASTof: [ :o | 
+	         , (theory equalSameº value: o value: rewritten)
+	         , { o } projectº ] asGoalWithASTof: [ :o | 
 		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] 
 		         asGoalWithASTof: [ :x :y | 
 			         ((x cons: #a) = (x cons: nil) cons:

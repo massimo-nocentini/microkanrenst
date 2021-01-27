@@ -10,14 +10,14 @@ Class {
 { #category : #running }
 MKGoalProjector >> onState: aState [
 
-	| array walker |
+	| walker |
 	walker := aState walker.
-	array := Array with: aState with: (variables collect: [ :each | 
-			          each -> (Dictionary new
-				           at: #walk put: (aState walk: each);
-				           at: #walkStar put: (walker value: each);
-				           yourself) ]) asDictionary.
-	array inspect.
+	(variables collect: [ :each | 
+		 each -> (Dictionary new
+			  at: #walk put: (aState walk: each);
+			  at: #walkStar put: (walker value: each);
+			  yourself) ]) asDictionary inspect.
+
 	^ super onState: aState
 ]
 
