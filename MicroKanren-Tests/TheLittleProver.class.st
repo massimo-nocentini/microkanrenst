@@ -76,12 +76,12 @@ TheLittleProver >> equalSameº [
 	^ [ :a :b | 
 	  [ :x :ast | 
 	  | g1 g2 |
-	  g1 := ast statements first unifyo value: a.
-	  g2 := [ :ast2 | ast2 statements first unifyo value: b ] 
-		        asGoalWithASTof: [ true ].
+	  g1 := ast unifyo value: a.
+	  g2 := [ :ast2 | ast2 unifyo value: b ] asGoalWithUnaryASTof: [ 
+		        true ].
 	  { 
 		  a.
-		  ast } projectº , g1 , g2 ] asGoalWithASTof: [ :x | x = x ] ]
+		  ast } projectº , g1 , g2 ] asGoalWithUnaryASTof: [ :x | x = x ] ]
 ]
 
 { #category : #predicates }

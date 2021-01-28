@@ -555,11 +555,11 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning [
 	aGoal := [ :rewritten | 
 	         [ :a :b :ast | 
 	         [ :o :oast | 
-	         (ast statements first unifyo value: oast statements first)
+	         (ast unifyo value: oast)
 	         , (theory equalSameº value: o value: rewritten) ] 
-		         asGoalWithASTof: [ :o | 
+		         asGoalWithUnaryASTof: [ :o | 
 		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] 
-		         asGoalWithASTof: [ :x :y | 
+		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
 	self
@@ -577,9 +577,10 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning1 [
 	         ast acl: [ :rewriter | 
 		         rewriter
 			         focus: [ :o | 
-				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
-			         do: theory equalSameº;
-			         focus: [ :o | o ] do: theory carConsº;
+			         (o cons: (#and cons: (#crumpets cons: nil))) car ]
+			         do: theory equalSameº.
+		         rewriter focus: [ :o | o ] do: theory carConsº.
+		         rewriter
 			         focus: [ :o | o ]
 			         do: [ :o :_ | (o unifyo value: rewritten) , HaltGoal new ] ] ] 
 		         asGoalWithASTof: [ :x :y | 

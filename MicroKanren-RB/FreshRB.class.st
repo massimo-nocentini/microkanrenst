@@ -2,7 +2,8 @@ Class {
 	#name : #FreshRB,
 	#superclass : #Fresh,
 	#instVars : [
-		'nodeBlock'
+		'nodeBlock',
+		'selectBlock'
 	],
 	#category : #'MicroKanren-RB'
 }
@@ -23,10 +24,18 @@ FreshRB >> onState: aState withVars: aCollection [
 		                      collect: [ :aName :aVar | 
 		                      dict at: aName put: aVar asRBNode ].
 
-	node := receiver sourceNode body substituteVariablesUsingDictionary:
-		        dict.
+	node := receiver sourceNode body in: [ :aSequenceNode | 
+		        | aNode |
+		        aNode := selectBlock value: aSequenceNode.
+		        aNode substituteVariablesUsingDictionary: dict ].
 
 	receiver := nodeBlock valueWithArguments: aCollection , { node }.
 
 	^ super onState: aState withVars: aCollection
+]
+
+{ #category : #accessing }
+FreshRB >> selectBlock: anObject [
+
+	selectBlock := anObject
 ]

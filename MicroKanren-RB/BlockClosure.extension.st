@@ -3,10 +3,30 @@ Extension { #name : #BlockClosure }
 { #category : #'*MicroKanren-RB' }
 BlockClosure >> asGoalWithASTof: aBlock [
 
+	^ self asGoalWithASTof: aBlock select: #yourself
+]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> asGoalWithASTof: aBlock select: selectBlock [
+
 	^ FreshRB new
 		  receiver: aBlock;
 		  nodeBlock: self;
+		  selectBlock: selectBlock;
 		  yourself
+]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> asGoalWithUnaryASTof: aBlock [
+
+	^ self asGoalWithASTof: aBlock select: [ :aSequenceNode | 
+		  aSequenceNode statements in: [ :statements | 
+			  statements size = 1
+				  ifTrue: [ statements first ]
+				  ifFalse: [ 
+					  Error signal:
+						  ('Assumption that {} has 1 statement only is violated.' 
+							   format: { aSequenceNode }) ] ] ]
 ]
 
 { #category : #'*MicroKanren-RB' }

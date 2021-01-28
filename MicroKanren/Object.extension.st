@@ -65,6 +65,7 @@ Object >> unifyWith: another [
 { #category : #'*MicroKanren-core' }
 Object >> unifyWith: another usingUnifier: anUnifier [
 
+	self halt.
 	^ another unifyWithObject: self usingUnifier: anUnifier
 ]
 
