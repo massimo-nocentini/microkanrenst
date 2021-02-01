@@ -12,12 +12,13 @@ TheLittleProver >> atomConsº [
 	  (equal (atom (cons x y)) 'nil))"
 
 	^ [ :a :b | 
-	  [ :x :y :astA | 
+	  [ :astA | 
+	  [ :x :y | 
 	  | g1 g2 |
 	  g1 := astA statements first unifyo value: a.
-	  g2 := [ :astB | astB statements first unifyo value: b ] 
+	  g2 := [ :astB | [ astB statements first unifyo value: b ] ] 
 		        asGoalWithASTof: [ false ].
-	  g1 , g2 ] asGoalWithASTof: [ :x :y | (x cons: y) isAtom ] ]
+	  g1 , g2 ] ] asGoalWithASTof: [ :x :y | (x cons: y) isAtom ] ]
 ]
 
 { #category : #predicates }
@@ -74,14 +75,13 @@ TheLittleProver >> chapter_1_OldGamesNewRules_frame_21: a value: b [
 TheLittleProver >> equalSameº [
 
 	^ [ :a :b | 
-	  [ :x :ast | 
+	  [ :ast | 
+	  [ :x | 
 	  | g1 g2 |
 	  g1 := ast unifyo value: a.
-	  g2 := [ :ast2 | ast2 unifyo value: b ] asGoalWithUnaryASTof: [ 
+	  g2 := [ :ast2 | [ ast2 unifyo value: b ] ] asGoalWithUnaryASTof: [ 
 		        true ].
-	  { 
-		  a.
-		  ast } projectº , g1 , g2 ] asGoalWithUnaryASTof: [ :x | x = x ] ]
+	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x | x = x ] ]
 ]
 
 { #category : #predicates }

@@ -29,7 +29,7 @@ FreshRB >> onState: aState withVars: aCollection [
 		        aNode := selectBlock value: aSequenceNode.
 		        aNode substituteVariablesUsingDictionary: dict ].
 
-	receiver := nodeBlock valueWithArguments: aCollection , { node }.
+	receiver := nodeBlock value: node.
 
 	^ super onState: aState withVars: aCollection
 ]

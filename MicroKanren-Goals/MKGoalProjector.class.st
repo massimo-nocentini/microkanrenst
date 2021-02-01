@@ -16,7 +16,7 @@ MKGoalProjector >> onState: aState [
 		 each -> (OrderedDictionary new
 			  at: #walk put: (aState walk: each);
 			  at: #walkStar put: (walker value: each);
-			  yourself) ]) asDictionary inspect.
+			  yourself) ]) asDictionary inspect halt.
 
 	^ super onState: aState
 ]

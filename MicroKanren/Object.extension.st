@@ -65,7 +65,6 @@ Object >> unifyWith: another [
 { #category : #'*MicroKanren-core' }
 Object >> unifyWith: another usingUnifier: anUnifier [
 
-	self halt.
 	^ another unifyWithObject: self usingUnifier: anUnifier
 ]
 
@@ -84,11 +83,17 @@ Object >> unifyWithObject: anObj usingUnifier: anUnifier [
 { #category : #'*MicroKanren' }
 Object >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
 
-	^ self unifyWithObject: aNode usingUnifier: anUnifier
+	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-core' }
 Object >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
+
+	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
+]
+
+{ #category : #'*MicroKanren' }
+Object >> unifyWithRBNode: aNode usingUnifier: anUnifier [
 
 	^ self unifyWithObject: aNode usingUnifier: anUnifier
 ]
@@ -96,7 +101,7 @@ Object >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
 { #category : #'*MicroKanren' }
 Object >> unifyWithRBSelectorNode: aNode usingUnifier: anUnifier [
 
-	^ self unifyWithObject: aNode usingUnifier: anUnifier
+	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-core' }

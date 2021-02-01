@@ -10,6 +10,7 @@ Unifier >> forRBLiteralValueNode: aNode forRBLiteralValueNode: anotherNode [
 Unifier >> forRBMessageNode: aRBMessageNode forRBMessageNode: anotherRBMessageNode [
 
 	| aState |
+	
 	aState := self
 		          value: aRBMessageNode receiver
 		          value: anotherRBMessageNode receiver.

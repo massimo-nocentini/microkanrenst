@@ -91,11 +91,13 @@ TheLittleProverTest >> flapjackFalseo [
 TheLittleProverTest >> flapjackNilFalseº [
 
 	^ [ :a :b | 
-	  ([ :ast | a unifyo value: ast statements first ] asGoalWithASTof: [ 
-		   #flapjack = false ])
-	  ,
-		  ([ :ast | b unifyo value: ast statements first ] asGoalWithASTof: [ 
-			   false ]) ]
+	  [ :ast1 | 
+	  [ 
+	  | g1 g2 |
+	  g1 := a unifyo value: ast1.
+	  g2 := [ :ast2 | [ b unifyo value: ast2 ] ] asGoalWithUnaryASTof: [ 
+		        false ].
+	  g1 , g2 ] ] asGoalWithUnaryASTof: [ #flapjack = false ] ]
 ]
 
 { #category : #tests }
@@ -425,9 +427,10 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_16 [
 
 	| aGoal |
 	aGoal := [ :rewrite | 
-	         [ :a :b :ast | 
-	         theory atomConsº value: ast statements first value: rewrite ] 
-		         asGoalWithASTof: [ :a :b | (a cons: b) isAtom ] ] asGoal.
+	         [ :ast | 
+	         [ :a :b | theory atomConsº value: ast value: rewrite ] ] 
+		         asGoalWithUnaryASTof: [ :a :b | (a cons: b) isAtom ] ]
+		         asGoal.
 	self
 		assert: aGoal solutions
 		equals: { [ false ] sourceNode body statements first }
@@ -441,22 +444,21 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21 [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
-	         [ :a :b :ast | 
+	         [ :ast | 
+	         [ :a :b | 
 	         ast acl: [ :rewrite | 
-		         rewrite
-			         focus: [ :o | #flapjack = o ]
-			         do: [ :o :r | theory atomConsº value: o value: r ].
-		         "rewrite
-			         focus: [ :o | o ]
-			         do: [ :o :r | self flapjackNilFalseº value: o value: r ]."
+		         rewrite focus: [ :o | #flapjack = o ] do: theory atomConsº.
 		         rewrite
 			         focus: [ :o | o ]
-			         do: [ :o :r | rewritten unifyo value: o ] ] ] 
-		         asGoalWithASTof: [ :a :b | #flapjack = (a cons: b) isAtom ] ]
-		         asGoal.
+			         do: [ :o :r | self flapjackNilFalseº value: o value: r ].
+		         rewrite
+			         focus: [ :o | o ]
+			         do: [ :o :r | rewritten unifyo value: o ] ] ] ] 
+		         asGoalWithUnaryASTof: [ :a :b | 
+		         #flapjack = (a cons: b) isAtom ] ] asGoal.
 	self
 		assert: aGoal solutions
-		equals: { [ false ] sourceNode body }
+		equals: { [ false ] sourceNode body statements first }
 		modulo: #asOrderedCollection
 ]
 
@@ -553,12 +555,14 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
-	         [ :a :b :ast | 
-	         [ :o :oast | 
+	         [ :ast | 
+	         [ :a :b | 
+	         [ :oast | 
+	         [ :o | 
 	         (ast unifyo value: oast)
-	         , (theory equalSameº value: o value: rewritten) ] 
+	         , (theory equalSameº value: o value: rewritten) ] ] 
 		         asGoalWithUnaryASTof: [ :o | 
-		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] 
+		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] ] 
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
@@ -573,16 +577,19 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning1 [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
-	         [ :a :b :ast | 
+	         [ :ast | 
+	         [ :a :b | 
 	         ast acl: [ :rewriter | 
 		         rewriter
 			         focus: [ :o | 
 			         (o cons: (#and cons: (#crumpets cons: nil))) car ]
 			         do: theory equalSameº.
-		         rewriter focus: [ :o | o ] do: theory carConsº.
 		         rewriter
 			         focus: [ :o | o ]
-			         do: [ :o :_ | (o unifyo value: rewritten) , HaltGoal new ] ] ] 
+			         do: [ :o :r | theory carConsº value: o value: rewritten ]
+		         " rewriter
+			         focus: [ :o | o ]
+			         do: [ :o :_ | (o unifyo value: rewritten) , HaltGoal new ]" ] ] ] 
 		         asGoalWithASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
@@ -615,5 +622,23 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning2 [
 		equals:
 			{ [ (true cons: (#and cons: (#crumpets cons: nil))) car ]
 				sourceNode body }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_equalSameº [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :d | 
+	         [ :r | 
+	         (theory equalSameº value: ast value: rewritten)
+	         , (r unifyo value: (a cons: d)) ] asGoal ] ] 
+		         asGoalWithUnaryASTof: [ :a :d | 
+		         (#and cons: d) = (a cons: nil) ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ true ] sourceNode body statements first }
 		modulo: #asOrderedCollection
 ]
