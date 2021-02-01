@@ -446,14 +446,18 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21 [
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b | 
-	         ast acl: [ :rewrite | 
-		         rewrite focus: [ :o | #flapjack = o ] do: theory atomConsº.
-		         rewrite
-			         focus: [ :o | o ]
-			         do: [ :o :r | self flapjackNilFalseº value: o value: r ].
-		         rewrite
-			         focus: [ :o | o ]
-			         do: [ :o :r | rewritten unifyo value: o ] ] ] ] 
+	         [ :ast1 | 
+	         [ :o1 | 
+	         [ :r1 :o2 :r2 :d | 
+	         | fast |
+	         fast := ast1 substituteVariablesUsingDictionary:
+		                 { (o1 -> r1 asRBNode) } asDictionary.
+	         (ast unifyo value: ast1)
+	         , (theory atomConsº value: o1 value: r1)
+	         , (fast unifyo value: o2)
+	         , (self flapjackNilFalseº value: o2 value: d)
+	         , (d unifyo value: rewritten) ] asGoal ] ] 
+		         asGoalWithUnaryASTof: [ :o | #flapjack = o ] ] ] 
 		         asGoalWithUnaryASTof: [ :a :b | 
 		         #flapjack = (a cons: b) isAtom ] ] asGoal.
 	self
@@ -559,8 +563,15 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning [
 	         [ :a :b | 
 	         [ :oast | 
 	         [ :o | 
-	         (ast unifyo value: oast)
-	         , (theory equalSameº value: o value: rewritten) ] ] 
+	         [ :r :c :d | 
+	         | fast |
+	         fast := oast substituteVariablesUsingDictionary:
+		                 { (o -> r asRBNode) } asDictionary.
+	         (ast unifyo value: oast) "to bind `o`"
+	         , (theory equalSameº value: o value: r)
+	         , (fast unifyo value: c) "to bind `c`"
+	         , (theory carConsº value: c value: d)
+	         , (d unifyo value: rewritten) ] asGoal ] ] 
 		         asGoalWithUnaryASTof: [ :o | 
 		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] ] 
 		         asGoalWithUnaryASTof: [ :x :y | 
@@ -584,13 +595,11 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning1 [
 			         focus: [ :o | 
 			         (o cons: (#and cons: (#crumpets cons: nil))) car ]
 			         do: theory equalSameº.
+		         rewriter focus: [ :o | o ] do: theory carConsº.
 		         rewriter
 			         focus: [ :o | o ]
-			         do: [ :o :r | theory carConsº value: o value: rewritten ]
-		         " rewriter
-			         focus: [ :o | o ]
-			         do: [ :o :_ | (o unifyo value: rewritten) , HaltGoal new ]" ] ] ] 
-		         asGoalWithASTof: [ :x :y | 
+			         do: [ :o :_ | o unifyo value: rewritten ] ] ] ] 
+		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
 	self
@@ -622,6 +631,39 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning2 [
 		equals:
 			{ [ (true cons: (#and cons: (#crumpets cons: nil))) car ]
 				sourceNode body }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_49 [
+
+	"
+	the term (equal (cons x y) (cons 'bagels '(and lox)))
+	rewrites (equal (cons 'bagels '(and lox)) (cons x y))
+	"
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :b | 
+	         [ :oast | 
+	         [ :o | 
+	         [ :r :c :d | 
+	         | fast |
+	         fast := oast substituteVariablesUsingDictionary:
+		                 { (o -> r asRBNode) } asDictionary.
+	         (ast unifyo value: oast)
+	         , (theory equalSwapº value: o value: r)
+	         , (fast unifyo value: c) , (c unifyo value: rewritten) ]
+		         asGoal ] ] asGoalWithUnaryASTof: [ :o | o ] ] ] 
+		         asGoalWithUnaryASTof: [ :x :y | 
+		         (x cons: y) = (#bagels cons: (#and cons: (#lox cons: nil))) ] ]
+		         asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ :x :y | 
+			(#bagels cons: (#and cons: (#lox cons: nil))) = (x cons: y) ]
+				sourceNode body statements first }
 		modulo: #asOrderedCollection
 ]
 
