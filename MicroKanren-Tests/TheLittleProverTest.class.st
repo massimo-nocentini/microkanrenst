@@ -11,22 +11,6 @@ Class {
 }
 
 { #category : #tests }
-TheLittleProverTest >> carConso [
-
-	^ [ :a :b | 
-	  ([ :x :y | (x cons: y) car ] unifyo value: a)
-	  , ([ :x | x ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> cdrConso [
-
-	^ [ :a :b | 
-	  ([ :x :y | (x cons: y) cdr ] unifyo value: a)
-	  , ([ :y | y ] unifyo value: b) ]
-]
-
-{ #category : #tests }
 TheLittleProverTest >> cons: x carcdr: y [
 
 	^ [ :a :b | 
@@ -389,9 +373,10 @@ TheLittleProverTest >> test_atomConsº [
 
 	| aGoal |
 	aGoal := [ :rewrite | 
-	         [ :cdr :ast | 
-	         theory atomConsº value: ast statements first value: rewrite ] 
-		         asGoalWithASTof: [ :cdr | (3 cons: cdr) isAtom ] ] asGoal.
+	         [ :ast | 
+	         [ :cdr | theory atomConsº value: ast value: rewrite ] ] 
+		         asGoalWithUnaryASTof: [ :cdr | (3 cons: cdr) isAtom ] ]
+		         asGoal.
 	self
 		assert: aGoal solutions
 		equals: { [ false ] sourceNode body statements first }
@@ -467,95 +452,7 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21 [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21_understanding [
-
-	"(equal 'flapjack (atom (cons a b)))"
-
-	| aGoal |
-	aGoal := [ :rewritten | 
-	         [ :a :b :ast | 
-	         [ :o :fast | 
-	         (ast unifyo value: fast) , (rewritten unifyo value: o) ] 
-		         asGoalWithASTof: [ :o | #flapjack = o ] ] asGoalWithASTof: [ 
-		         :a 
-		         :b | #flapjack = (a cons: b) isAtom ] ] asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ false ] sourceNode body }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_21_vanilla [
-
-	"(equal 'flapjack (atom (cons a b)))"
-
-	| aGoal |
-	aGoal := [ :rewritten | 
-	         [ :a :b :ast | 
-	         self proofStep1: a frame21: b ast: rewritten ] 
-		         asGoalWithASTof: [ :a :b | #flapjack = (a cons: b) isAtom ] ]
-		         asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ false ] sourceNode body statements first }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_29_vanilla [
-
-	"(atom (cdr (cons (car (cons p q)) '())))"
-
-	| aGoal |
-	aGoal := [ :rewritten | 
-	         [ :a :b :ast | self proofStep1: a frame29: b ast: rewritten ] 
-		         asGoalWithASTof: [ :p :q | 
-		         ((p cons: q) car cons: nil) cdr isAtom ] ] asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ true ] sourceNode body statements first }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_33_vanilla [
-
-	"(atom (cdr (cons (car (cons p q)) '())))"
-
-	| aGoal |
-	aGoal := [ :rewritten | 
-	         [ :a :b :ast | 
-	         self proofStep1: a frame33: b ast: rewritten ] 
-		         asGoalWithASTof: [ :p :q | 
-		         ((p cons: q) car cons: nil) cdr isAtom ] ] asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ true ] sourceNode body statements first }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
 TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44 [
-
-	"(car
-		(cons (equal (cons x y) (cons x y))
-		'(and crumpets)))"
-
-	| aGoal |
-	aGoal := [ :rewritten | 
-	         [ :a :b :ast | self proofStep1: a frame44: b ast: rewritten ] 
-		         asGoalWithASTof: [ :x :y | 
-			         ((x cons: y) = (x cons: y) cons:
-				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ true ] sourceNode body statements first }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
@@ -567,12 +464,12 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning [
 	         | fast |
 	         fast := oast substituteVariablesUsingDictionary:
 		                 { (o -> r asRBNode) } asDictionary.
-	         (ast unifyo value: oast) "to bind `o`"
+	         (ast unifyo value: oast)
 	         , (theory equalSameº value: o value: r)
-	         , (fast unifyo value: c) "to bind `c`"
+	         , (fast unifyo value: c)
 	         , (theory carConsº value: c value: d)
-	         , (d unifyo value: rewritten) ] asGoal ] ] 
-		         asGoalWithUnaryASTof: [ :o | 
+	         , (d unifyo value: rewritten) "to bind `o`" "to bind `c`" ]
+		         asGoal ] ] asGoalWithUnaryASTof: [ :o | 
 		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] ] 
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
@@ -580,57 +477,6 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning [
 	self
 		assert: aGoal solutions
 		equals: { [ true ] sourceNode body statements first }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning1 [
-
-	| aGoal |
-	aGoal := [ :rewritten | 
-	         [ :ast | 
-	         [ :a :b | 
-	         ast acl: [ :rewriter | 
-		         rewriter
-			         focus: [ :o | 
-			         (o cons: (#and cons: (#crumpets cons: nil))) car ]
-			         do: theory equalSameº.
-		         rewriter focus: [ :o | o ] do: theory carConsº.
-		         rewriter
-			         focus: [ :o | o ]
-			         do: [ :o :_ | o unifyo value: rewritten ] ] ] ] 
-		         asGoalWithUnaryASTof: [ :x :y | 
-			         ((x cons: y) = (x cons: y) cons:
-				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ true ] sourceNode body statements first }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_learning2 [
-
-	| aGoal |
-	aGoal := [ :rewritten | 
-	         [ :a :b :ast | 
-	         [ :o :oast | 
-	         [ :r | 
-	         (ast unifyo value: oast)
-	         , (theory equalSameº value: o value: r)
-	         , ((oast substituteVariablesUsingDictionary:
-			           { (o -> r asRBNode) } asDictionary) unifyo value:
-			          rewritten) ] asGoal ", (rewritten unifyo value: o) " ] 
-		         asGoalWithASTof: [ :o | 
-		         (o cons: (#and cons: (#crumpets cons: nil))) car ] ] 
-		         asGoalWithASTof: [ :x :y | 
-			         ((x cons: y) = (x cons: y) cons:
-				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
-	self
-		assert: aGoal solutions
-		equals:
-			{ [ (true cons: (#and cons: (#crumpets cons: nil))) car ]
-				sourceNode body }
 		modulo: #asOrderedCollection
 ]
 
