@@ -7,6 +7,12 @@ Unifier >> forRBLiteralValueNode: aNode forRBLiteralValueNode: anotherNode [
 ]
 
 { #category : #'*MicroKanren-RB' }
+Unifier >> forRBLogicVariableNode: aNode forRBLogicVariableNode: anotherNode [
+
+	^ self value: aNode logicVar value: anotherNode logicVar
+]
+
+{ #category : #'*MicroKanren-RB' }
 Unifier >> forRBMessageNode: aRBMessageNode forRBMessageNode: anotherRBMessageNode [
 
 	| aState |

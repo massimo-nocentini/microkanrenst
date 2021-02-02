@@ -51,14 +51,15 @@ RBLogicVariableNode >> logicVar: anObject [
 { #category : #'*MicroKanren-RB' }
 RBLogicVariableNode >> unifyWith: anObject usingUnifier: anUnifier [
 
-	^ logicVar unifyWith: anObject usingUnifier: anUnifier
+	^ anObject unifyWithRBLogicVariableNode: self usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-RB' }
 RBLogicVariableNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
 
-	self halt.
-	^ self unifyWithVar: aNode logicVar usingUnifier: anUnifier
+	^ anUnifier
+		  forRBLogicVariableNode: self
+		  forRBLogicVariableNode: aNode
 ]
 
 { #category : #'as yet unclassified' }
@@ -67,8 +68,8 @@ RBLogicVariableNode >> unifyWithRBNode: aNode usingUnifier: anUnifier [
 	^ logicVar unifyWithRBNode: aNode usingUnifier: anUnifier
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : #dispatched }
 RBLogicVariableNode >> unifyWithVar: aVar usingUnifier: anUnifier [
 
-	^ logicVar unifyWith: aVar usingUnifier: anUnifier
+	^ logicVar unifyWithVar: aVar usingUnifier: anUnifier
 ]

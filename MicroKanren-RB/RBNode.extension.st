@@ -37,6 +37,42 @@ RBNode >> unifyWith: anObject usingUnifier: anUnifier [
 ]
 
 { #category : #'*MicroKanren-RB' }
+RBNode >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
+
+	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
+]
+
+{ #category : #'*MicroKanren-RB' }
+RBNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
+
+	^ aNode logicVar unifyWithRBNode: self usingUnifier: anUnifier
+]
+
+{ #category : #'*MicroKanren-RB' }
+RBNode >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
+
+	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
+]
+
+{ #category : #'*MicroKanren-RB' }
+RBNode >> unifyWithRBNode: aNode usingUnifier: anUnifier [
+
+	^ self unifyWithObject: aNode usingUnifier: anUnifier
+]
+
+{ #category : #'*MicroKanren-RB' }
+RBNode >> unifyWithRBSelectorNode: aNode usingUnifier: anUnifier [
+
+	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
+]
+
+{ #category : #'*MicroKanren-RB' }
+RBNode >> unifyWithRBSequenceNode: aNode usingUnifier: anUnifier [
+
+	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
+]
+
+{ #category : #'*MicroKanren-RB' }
 RBNode >> walkStarUsingWalker: aWalker [
 
 	^ aWalker forRBNode: self

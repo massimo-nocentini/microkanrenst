@@ -98,8 +98,9 @@ TheLittleProver >> equalSwapº [
 	  g1 := ast unifyo value: a.
 	  g2 := [ :ast2 | 
 	        [ :x1 :y1 | 
-	        (x1 unifyo value: x) , (y1 unifyo value: y)
-	        , (ast2 unifyo value: b) ] ] asGoalWithUnaryASTof: [ :x1 :y1 | 
-		        y1 = x1 ].
+	        (x1 unifyo value: x) , (y1 unifyo value: y) , { 
+		        x.
+		        y } projectº , (ast2 unifyo value: b) ] ] 
+		        asGoalWithUnaryASTof: [ :x1 :y1 | y1 = x1 ].
 	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x :y | x = y ] ]
 ]

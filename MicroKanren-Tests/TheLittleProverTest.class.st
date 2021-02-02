@@ -493,8 +493,7 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_focus [
 			         (o cons: (#and cons: (#crumpets cons: nil))) car ]
 			         do: theory equalSameº.
 		         rewrite
-			         focus: [ :o | o ]
-			         do: [ :o :r | theory carConsº value: o value: r ];
+			         focus: [ :o | o ] do: theory carConsº;
 			         then: [ :o | o unifyo value: rewritten ] ] ] ] 
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
@@ -527,6 +526,33 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_49 [
 	         , (theory equalSwapº value: o value: r)
 	         , (fast unifyo value: c) , (c unifyo value: rewritten) ]
 		         asGoal ] ] asGoalWithUnaryASTof: [ :o | o ] ] ] 
+		         asGoalWithUnaryASTof: [ :x :y | 
+		         (x cons: y) = (#bagels cons: (#and cons: (#lox cons: nil))) ] ]
+		         asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ :x :y | 
+			(#bagels cons: (#and cons: (#lox cons: nil))) = (x cons: y) ]
+				sourceNode body statements first }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_49_focus [
+
+	"
+	the term (equal (cons x y) (cons 'bagels '(and lox)))
+	rewrites (equal (cons 'bagels '(and lox)) (cons x y))
+	"
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :b | 
+	         ast acl: [ :rewrite | 
+		         rewrite
+			         focus: [ :o | o ] do: theory equalSwapº;
+			         then: [ :o | o unifyo value: rewritten ] ] ] ] 
 		         asGoalWithUnaryASTof: [ :x :y | 
 		         (x cons: y) = (#bagels cons: (#and cons: (#lox cons: nil))) ] ]
 		         asGoal.

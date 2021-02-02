@@ -80,30 +80,6 @@ Object >> unifyWithObject: anObj usingUnifier: anUnifier [
 	^ anUnifier forObject: self forObject: anObj
 ]
 
-{ #category : #'*MicroKanren' }
-Object >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
-
-	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
-]
-
-{ #category : #'*MicroKanren-core' }
-Object >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
-
-	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
-]
-
-{ #category : #'*MicroKanren' }
-Object >> unifyWithRBNode: aNode usingUnifier: anUnifier [
-
-	^ self unifyWithObject: aNode usingUnifier: anUnifier
-]
-
-{ #category : #'*MicroKanren' }
-Object >> unifyWithRBSelectorNode: aNode usingUnifier: anUnifier [
-
-	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
-]
-
 { #category : #'*MicroKanren-core' }
 Object >> unifyWithSequenceableCollection: aCollection usingUnifier: anUnifier [
 
