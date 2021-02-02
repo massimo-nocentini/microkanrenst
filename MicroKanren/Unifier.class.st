@@ -38,12 +38,6 @@ Unifier >> forObject: anObj forObject: anotherObj [
 			  continuation value: error ]
 ]
 
-{ #category : #unification }
-Unifier >> forObject: anObj forVar: aVar [
-
-	^ self forVar: aVar forObject: anObj
-]
-
 { #category : #'as yet unclassified' }
 Unifier >> forSequenceableCollection: aCollection forSequenceableCollection: anotherCollection [
 

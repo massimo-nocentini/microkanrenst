@@ -17,12 +17,12 @@ FreshRB >> nodeBlock: anObject [
 { #category : #dispatched }
 FreshRB >> onState: aState withVars: aCollection [
 
-	| dict node logicVariableNodes |
+	| dict node |
 	dict := Dictionary new.
-	logicVariableNodes := receiver argumentNames
-		                      with: aCollection
-		                      collect: [ :aName :aVar | 
-		                      dict at: aName put: aVar asRBNode ].
+
+	receiver argumentNames
+		with: aCollection
+		do: [ :aName :aVar | dict at: aName put: aVar asRBNode ].
 
 	node := receiver sourceNode body in: [ :aSequenceNode | 
 		        | aNode |

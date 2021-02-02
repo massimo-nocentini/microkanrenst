@@ -113,7 +113,7 @@ Object >> unifyWithSequenceableCollection: aCollection usingUnifier: anUnifier [
 { #category : #'*MicroKanren-core' }
 Object >> unifyWithVar: aVar usingUnifier: anUnifier [
 
-	^ anUnifier forObject: self forVar: aVar
+	^ anUnifier forVar: aVar forObject: self
 ]
 
 { #category : #'*MicroKanren-core' }

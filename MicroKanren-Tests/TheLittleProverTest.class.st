@@ -481,6 +481,31 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44 [
 ]
 
 { #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_focus [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :b | 
+	         ast acl: [ :rewrite | 
+		         rewrite
+			         focus: [ :o | 
+			         (o cons: (#and cons: (#crumpets cons: nil))) car ]
+			         do: theory equalSameº.
+		         rewrite
+			         focus: [ :o | o ]
+			         do: [ :o :r | theory carConsº value: o value: r ];
+			         then: [ :o | o unifyo value: rewritten ] ] ] ] 
+		         asGoalWithUnaryASTof: [ :x :y | 
+			         ((x cons: y) = (x cons: y) cons:
+				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ true ] sourceNode body statements first }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
 TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_49 [
 
 	"
