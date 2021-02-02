@@ -45,7 +45,7 @@ RBNode >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
 { #category : #'*MicroKanren-RB' }
 RBNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
 
-	^ aNode logicVar unifyWithRBNode: self usingUnifier: anUnifier
+	^ aNode unifyWithRBNode: self usingUnifier: anUnifier
 ]
 
 { #category : #'*MicroKanren-RB' }

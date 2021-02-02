@@ -52,15 +52,9 @@ TheLittleProver >> carConsº [
 { #category : #predicates }
 TheLittleProver >> cdrConsº [
 
-	"
-	(dethm atom/cons (x y)
-	  (equal (atom (cons x y)) 'nil))"
-
 	^ [ :a :b | 
-	  [ :x :y :ast | 
-	  (ast statements first unifyo value: a)
-	  , (y asRBNode unifyo value: b) ] asGoalWithASTof: [ :x :y | 
-		  (x cons: y) cdr ] ]
+	  [ :ast | [ :x :y | (ast unifyo value: a) , (y unifyo value: b) ] ] 
+		  asGoalWithUnaryASTof: [ :x :y | (x cons: y) cdr ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -96,11 +90,7 @@ TheLittleProver >> equalSwapº [
 	  [ :x :y | 
 	  | g1 g2 |
 	  g1 := ast unifyo value: a.
-	  g2 := [ :ast2 | 
-	        [ :x1 :y1 | 
-	        (x1 unifyo value: x) , (y1 unifyo value: y) , { 
-		        x.
-		        y } projectº , (ast2 unifyo value: b) ] ] 
-		        asGoalWithUnaryASTof: [ :x1 :y1 | y1 = x1 ].
+	  g2 := (RBMessageNode receiver: y selector: #= arguments: { x })
+		        unifyo value: b.
 	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x :y | x = y ] ]
 ]

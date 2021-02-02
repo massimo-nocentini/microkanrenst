@@ -65,11 +65,5 @@ RBLogicVariableNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifi
 { #category : #'as yet unclassified' }
 RBLogicVariableNode >> unifyWithRBNode: aNode usingUnifier: anUnifier [
 
-	^ logicVar unifyWithRBNode: aNode usingUnifier: anUnifier
-]
-
-{ #category : #dispatched }
-RBLogicVariableNode >> unifyWithVar: aVar usingUnifier: anUnifier [
-
-	^ logicVar unifyWithVar: aVar usingUnifier: anUnifier
+	^ logicVar unifyWithObject: aNode usingUnifier: anUnifier
 ]

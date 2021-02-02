@@ -15,7 +15,7 @@ RBProgramNodeSubstitutionVisitor >> substitution: anObject [
 { #category : #visiting }
 RBProgramNodeSubstitutionVisitor >> visitLogicVariableNode: aNode [
 
-	^ substitution at: aNode logicVar
+	^ substitution at: aNode
 ]
 
 { #category : #visiting }
