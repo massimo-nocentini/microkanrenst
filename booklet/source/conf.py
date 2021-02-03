@@ -39,6 +39,7 @@ pharo_json_export_filenames = [
         'source/microkanren-core-tests.json',
         'source/microkanren-sexp-tests.json',
         'source/microkanren-RBNodes-theory.json',
+        'source/microkanren-the-little-prover.json',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -63,3 +64,11 @@ html_theme = 'classic'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_theme_options = {
+    "sidebarwidth": "20%",
+    "body_max_width": "80%",
+    "globaltoc_collapse": False,
+    "stickysidebar": True,
+}
+

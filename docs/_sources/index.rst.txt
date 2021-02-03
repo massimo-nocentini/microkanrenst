@@ -24,6 +24,8 @@ properties.
    messages.rst
    theory-sexp.rst
    theory-rbnodes.rst
+   
+   the-little-prover.rst
 
 Observations
 ------------

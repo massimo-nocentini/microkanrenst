@@ -50,7 +50,7 @@ the search space of both succeeding and failing states.</p>
 <span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-fresh-onstate"><div class="highlight"><pre><span></span><span class="c">&quot;Fresh, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span>
 
-	<span class="o">^</span> <span class="nv">aState</span> <span class="nf">collectVars:</span> (<span class="m">1</span> <span class="nf">to:</span> <span class="nv">receiver</span> <span class="nf">numArgs</span>) <span class="nf">forFresh:</span> <span class="bp">self</span>
+	<span class="o">^</span> <span class="nv">aState</span> <span class="nf">collectVars:</span> <span class="nv">receiver</span> <span class="nf">argumentNames</span> <span class="nf">forFresh:</span> <span class="bp">self</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-fresh-onstate-withvars"><div class="highlight"><pre><span></span><span class="c">&quot;Fresh, protocol dispatched&quot;</span>

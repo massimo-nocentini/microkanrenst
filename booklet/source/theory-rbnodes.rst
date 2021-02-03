@@ -52,5 +52,5 @@ backwards, as the following test shows
 .. pharo:autocompiledmethod:: RBNodePredicatesTest>>#testSenderoBackwards
 
 
-This should be a link :ref:`Succeed <pharo-class-succeed>`. and :ref:`onState: <pharo-compiledMethod-Goal>>#onState->`.
+This should be a link :ref:`Succeed <pharo-class-succeed>`. and :ref:`onState: <pharo-compiledMethod-Goal-onState->`.
 

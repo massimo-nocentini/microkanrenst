@@ -17,6 +17,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="The Little Prover" href="the-little-prover.html" />
     <link rel="prev" title="S-expressions" href="theory-sexp.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -25,6 +26,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="the-little-prover.html" title="The Little Prover"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="theory-sexp.html" title="S-expressions"
              accesskey="P">previous</a> |</li>
@@ -148,42 +152,13 @@ backwards, as the following test shows</p>
 <span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnodepredicatestest-testsenderobackwards"><div class="highlight"><pre><span></span><span class="c">&quot;RBNodePredicatesTest, protocol tests&quot;</span>
 <span class="nf">testSenderoBackwards</span>
 
-	<span class="o">|</span><span class="nv"> receiverNode messageNodes </span><span class="o">|</span>
-	<span class="c">&quot;Preparing expected objects.&quot;</span>
-	<span class="nv">receiverNode</span> <span class="o">:=</span> <span class="m">0</span> <span class="nf">asReifiedVar</span> <span class="nf">asRBLogicVariableNamed:</span> <span class="s">&#39;•&#39;</span><span class="p">.</span>
-	<span class="nv">messageNodes</span> <span class="o">:=</span> { 
-		                (<span class="nc">RBMessageNode</span>
-			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
-			                 <span class="nf">selector:</span> <span class="ss">#numberOfEdges</span>)<span class="p">.</span>
-		                (<span class="nc">RBMessageNode</span>
-			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
-			                 <span class="nf">selector:</span> <span class="ss">#testStackedVertically</span>)<span class="p">.</span>
-		                (<span class="nc">RBMessageNode</span>
-			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
-			                 <span class="nf">selector:</span> <span class="ss">#iconicHaloSpecifications</span>)<span class="p">.</span>
-		                (<span class="nc">RBMessageNode</span>
-			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
-			                 <span class="nf">selector:</span> <span class="ss">#packageModels</span>)<span class="p">.</span>
-		                (<span class="nc">RBMessageNode</span>
-			                 <span class="nf">receiver:</span> <span class="nv">receiverNode</span>
-			                 <span class="nf">selector:</span> <span class="ss">#testReversed</span>) }<span class="p">.</span>
-
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> ([ <span class="o">:</span><span class="nv">aSend</span> <span class="o">|</span> 
-			 [ <span class="o">:</span><span class="nv">o</span> <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> <span class="nv">ast</span> <span class="nf">sendso</span> <span class="nf">value:</span> <span class="nv">aSend</span> ] <span class="nf">asGoalWithASTof:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] ]
-				 <span class="nf">asGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">5</span>)
-		<span class="nf">equals:</span> <span class="nv">messageNodes</span>
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
-
-	<span class="c">&quot;Checking the corresponding string representations.&quot;</span>
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> <span class="nv">receiverNode</span> <span class="nf">asString</span> <span class="nf">equals:</span> <span class="s">&#39;RBLogicVariableNode(•₀)&#39;</span><span class="p">;</span>
-		<span class="nf">assert:</span> (<span class="nv">messageNodes</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">each</span> <span class="o">|</span> <span class="nv">each</span> <span class="nf">asString</span> ])
-		<span class="nf">equals:</span>
-			{ <span class="s">&#39;RBMessageNode(•₀ numberOfEdges)&#39;</span><span class="p">.</span>
-			<span class="s">&#39;RBMessageNode(•₀ testStackedVertically)&#39;</span><span class="p">.</span>
-			<span class="s">&#39;RBMessageNode(•₀ iconicHaloSpecifications)&#39;</span><span class="p">.</span>
-			<span class="s">&#39;RBMessageNode(•₀ packageModels)&#39;</span><span class="p">.</span> <span class="s">&#39;RBMessageNode(•₀ testReversed)&#39;</span> }
+	<span class="bp">self</span> <span class="nf">arguments_testSenderoBackwards</span> <span class="nf">bind:</span> [ <span class="o">:</span><span class="nv">receiverNode</span> <span class="o">:</span><span class="nv">messageNodes</span> <span class="o">|</span> 
+		<span class="bp">self</span>
+			<span class="nf">assert:</span> ([ <span class="o">:</span><span class="nv">aSend</span> <span class="o">|</span> 
+				 [ <span class="o">:</span><span class="nv">o</span> <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> <span class="nv">ast</span> <span class="nf">sendso</span> <span class="nf">value:</span> <span class="nv">aSend</span> ] <span class="nf">asGoalWithASTof:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] ]
+					 <span class="nf">asGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="nv">messageNodes</span> <span class="nf">size</span>)
+			<span class="nf">equals:</span> <span class="nv">messageNodes</span>
+			<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span> ]
 </pre></div>
 </div>
 <p>This should be a link <a class="reference internal" href="goals.html#pharo-class-succeed"><span class="std std-ref">Succeed</span></a>. and <a class="reference internal" href="onState%3A.html#pharo-compiledmethod-goal-onstate"><span class="std std-ref">onState:</span></a>.</p>
@@ -208,6 +183,9 @@ backwards, as the following test shows</p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="theory-sexp.html"
                         title="previous chapter">S-expressions</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="the-little-prover.html"
+                        title="next chapter">The Little Prover</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -235,6 +213,9 @@ backwards, as the following test shows</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="the-little-prover.html" title="The Little Prover"
+             >next</a> |</li>
         <li class="right" >
           <a href="theory-sexp.html" title="S-expressions"
              >previous</a> |</li>

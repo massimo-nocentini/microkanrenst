@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Little Prover &#8212; µkanrenst  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="RBNode theory" href="theory-rbnodes.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="theory-rbnodes.html" title="RBNode theory"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">The Little Prover</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-little-prover">
+<h1>The Little Prover<a class="headerlink" href="#the-little-prover" title="Permalink to this headline">¶</a></h1>
+<p><em>Salutations. What are salutations? Salutations are a fancy way of saying hello
+or good morning.</em> Thank you, D. Friedman and C. Eastlung.</p>
+<div class="section" id="old-games-new-rules">
+<h2>Old Games, New Rules<a class="headerlink" href="#old-games-new-rules" title="Permalink to this headline">¶</a></h2>
+<p>It is a known fact that</p>
+<span class="target" id="pharo-compiledMethod-0"><span id="index-0"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-06"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_06</span>
+
+	<span class="c">&quot;(car (cons &#39;ham &#39;(eggs)))&quot;</span>
+
+	<span class="bp">self</span> <span class="nf">assert:</span> (<span class="ss">#ham</span> <span class="nf">cons:</span> (<span class="ss">#eggs</span> <span class="nf">cons:</span> <span class="bp">nil</span>)) <span class="nf">car</span> <span class="nf">equals:</span> <span class="ss">#ham</span>
+</pre></div>
+</div>
+<p>holds. On one hand,</p>
+<span class="target" id="pharo-compiledMethod-2"><span id="index-1"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-11"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_11</span>
+
+	<span class="c">&quot;(atom &#39;())&quot;</span>
+
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="bp">nil</span> <span class="nf">isAtom</span> <span class="nf">equals:</span> <span class="bp">true</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>where</p>
+<span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-isatom"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *Collections-Sequenceable-Cons&quot;</span>
+<span class="nf">isAtom</span>
+
+	<span class="o">^</span> <span class="bp">true</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>On the other hand,</p>
+<span class="target" id="pharo-compiledMethod-4"><span id="index-2"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-14"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_14</span>
+
+	<span class="c">&quot;(atom (cons &#39;ham &#39;(eggs)))&quot;</span>
+
+	<span class="bp">self</span> <span class="nf">assert:</span> (<span class="ss">#ham</span> <span class="nf">cons:</span> (<span class="ss">#eggs</span> <span class="nf">cons:</span> <span class="bp">nil</span>)) <span class="nf">isAtom</span> <span class="nf">equals:</span> <span class="bp">false</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>where</p>
+<span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-cons-isatom"><div class="highlight"><pre><span></span><span class="c">&quot;Cons, protocol testing&quot;</span>
+<span class="nf">isAtom</span>
+
+	<span class="o">^</span> <span class="bp">false</span>
+</pre></div>
+</div>
+<p>together with the corresponding class definition</p>
+<span class="target" id="pharo-class-0"></span><div class="highlight-smalltalk notranslate" id="pharo-class-cons"><div class="highlight"><pre><span></span><span class="nc">Object</span> <span class="nf">subclass:</span> <span class="ss">#Cons</span>
+	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;car cdr&#39;</span>
+	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
+	<span class="nf">package:</span> <span class="s">&#39;Collections-Sequenceable-Cons&#39;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Of course,</p>
+<blockquote>
+<div><p>“No matter what values the variables <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> have, <code class="docutils literal notranslate"><span class="pre">#cons:</span></code> cannot produce an atom.”</p>
+</div></blockquote>
+<span class="target" id="pharo-compiledMethod-5"><span id="index-3"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-bygoalwithblock"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewrite</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	         <span class="nv">theory</span> <span class="nf">isAtomConsº</span> <span class="nf">value:</span> <span class="nv">ast</span> <span class="nf">value:</span> <span class="nv">rewrite</span> <span class="nf">asRBNode</span> ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span> ] ]
+		         <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { [ <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+</pre></div>
+</div>
+<p>Wait. Many new things pop up here, so digest one at the time. In order of occurrence:</p>
+<ul>
+<li><p>the message</p>
+<span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-asgoalwithunaryastof"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="nf">asGoalWithUnaryASTof:</span> <span class="nv">aBlock</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">asGoalWithASTof:</span> <span class="nv">aBlock</span> <span class="nf">select:</span> [ <span class="o">:</span><span class="nv">aSequenceNode</span> <span class="o">|</span> 
+		  <span class="nv">aSequenceNode</span> <span class="nf">statements</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">statements</span> <span class="o">|</span> 
+			  <span class="nv">statements</span> <span class="nf">size</span> <span class="nf">=</span> <span class="m">1</span>
+				  <span class="nb">ifTrue:</span> [ <span class="nv">statements</span> <span class="nf">first</span> ]
+				  <span class="nb">ifFalse:</span> [ 
+					  <span class="nc">Error</span> <span class="nf">signal:</span>
+						  (<span class="s">&#39;Assumption that {} has 1 statement only is violated.&#39;</span> 
+							   <span class="nf">format:</span> { <span class="nv">aSequenceNode</span> }) ] ] ]
+</pre></div>
+</div>
+<p>forwards, after ensuring that <code class="docutils literal notranslate"><span class="pre">aBlock</span></code> has exactly one statement, to</p>
+<span class="target" id="pharo-compiledMethod-7"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-asgoalwithastof-select"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="nf">asGoalWithASTof:</span> <span class="nv">aBlock</span> <span class="nf">select:</span> <span class="nv">selectBlock</span>
+
+	<span class="o">^</span> <span class="nc">FreshRB</span> <span class="nb">new</span>
+		  <span class="nf">receiver:</span> <span class="nv">aBlock</span><span class="p">;</span>
+		  <span class="nf">nodeBlock:</span> <span class="bp">self</span><span class="p">;</span>
+		  <span class="nf">selectBlock:</span> <span class="nv">selectBlock</span><span class="p">;</span>
+		  <span class="nf">yourself</span>
+</pre></div>
+</div>
+<p>in order to produce a <code class="docutils literal notranslate"><span class="pre">FreshRB</span></code> goal that, overriding the message</p>
+<span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-freshrb-onstate-withvars"><div class="highlight"><pre><span></span><span class="c">&quot;FreshRB, protocol dispatched&quot;</span>
+<span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span>
+
+	<span class="o">|</span><span class="nv"> dict node rbLogicVariables </span><span class="o">|</span>
+	<span class="nv">dict</span> <span class="o">:=</span> <span class="nc">Dictionary</span> <span class="nb">new</span><span class="p">.</span>
+
+	<span class="nv">rbLogicVariables</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">argumentNames</span>
+		                    <span class="nf">with:</span> <span class="nv">aCollection</span>
+		                    <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">aName</span> <span class="o">:</span><span class="nv">aVar</span> <span class="o">|</span> 
+		                    <span class="nv">dict</span> <span class="nf">at:</span> <span class="nv">aName</span> <span class="nf">put:</span> <span class="nv">aVar</span> <span class="nf">asRBNode</span> ]<span class="p">.</span>
+
+	<span class="nv">node</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">sourceNode</span> <span class="nf">body</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">aSequenceNode</span> <span class="o">|</span> 
+		        <span class="o">|</span><span class="nv"> aNode </span><span class="o">|</span>
+		        <span class="nv">aNode</span> <span class="o">:=</span> <span class="nv">selectBlock</span> <span class="nf">value:</span> <span class="nv">aSequenceNode</span><span class="p">.</span>
+		        <span class="nv">aNode</span> <span class="nf">substituteVariablesUsingDictionary:</span> <span class="nv">dict</span> ]<span class="p">.</span>
+
+	<span class="nv">receiver</span> <span class="o">:=</span> <span class="nv">nodeBlock</span> <span class="nf">value:</span> <span class="nv">node</span><span class="p">.</span>
+
+	<span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">rbLogicVariables</span>
+</pre></div>
+</div>
+<p>has the responsibility to lift block’s code variables</p>
+<span class="target" id="pharo-compiledMethod-9"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnode-substitutevariablesusingdictionary"><div class="highlight"><pre><span></span><span class="c">&quot;RBNode, protocol *MicroKanren-RB&quot;</span>
+<span class="nf">substituteVariablesUsingDictionary:</span> <span class="nv">aDict</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">acceptVisitor:</span> (<span class="nc">RBProgramNodeSubstitutionVisitor</span> <span class="nb">new</span>
+			   <span class="nf">substitution:</span> <span class="nv">aDict</span><span class="p">;</span>
+			   <span class="nf">yourself</span>)
+</pre></div>
+</div>
+<span class="target" id="pharo-compiledMethod-10"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbprogramnodesubstitutionvisitor-visittemporarynode"><div class="highlight"><pre><span></span><span class="c">&quot;RBProgramNodeSubstitutionVisitor, protocol visiting&quot;</span>
+<span class="nf">visitTemporaryNode:</span> <span class="nv">aNode</span>
+
+	<span class="o">^</span> <span class="nv">aNode</span> <span class="nf">isVariable</span>
+		  <span class="nb">ifTrue:</span> [ <span class="nv">substitution</span> <span class="nf">at:</span> <span class="nv">aNode</span> <span class="nf">name</span> ]
+		  <span class="nb">ifFalse:</span> [ <span class="nv">aNode</span> ]
+</pre></div>
+</div>
+<p>to <code class="docutils literal notranslate"><span class="pre">RBNode</span></code> objects that support unification</p>
+<span class="target" id="pharo-class-1"></span><div class="highlight-smalltalk notranslate" id="pharo-class-rblogicvariablenode"><div class="highlight"><pre><span></span><span class="nc">RBVariableNode</span> <span class="nf">subclass:</span> <span class="ss">#RBLogicVariableNode</span>
+	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;logicVar&#39;</span>
+	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
+	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-RB&#39;</span>
+</pre></div>
+</div>
+<p>via</p>
+<span class="target" id="pharo-compiledMethod-11"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-var-asrbnode"><div class="highlight"><pre><span></span><span class="c">&quot;Var, protocol *MicroKanren-RB&quot;</span>
+<span class="nf">asRBNode</span>
+
+	<span class="o">^</span> <span class="nc">RBLogicVariableNode</span> <span class="nf">named:</span> <span class="nv">named</span> <span class="nf">logicVar:</span> <span class="bp">self</span>
+</pre></div>
+</div>
+<p>lying on <code class="xref pharo pharo-cref docutils literal notranslate"><span class="pre">Var</span></code> eventually.</p>
+</li>
+<li><p>the predicate</p>
+<span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<span class="nf">isAtomConsº</span>
+
+	<span class="c">&quot;</span>
+<span class="c">	(dethm atom/cons (x y)</span>
+<span class="c">	  (equal (atom (cons x y)) &#39;nil))&quot;</span>
+
+	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	  [ <span class="o">:</span><span class="nv">astA</span> <span class="o">|</span> 
+	  [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
+	  <span class="o">|</span><span class="nv"> g1 g2 </span><span class="o">|</span>
+	  <span class="nv">g1</span> <span class="o">:=</span> <span class="nv">astA</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span><span class="p">.</span>
+	  <span class="nv">g2</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span><span class="p">.</span>
+	  <span class="nv">g1</span> <span class="nf">,</span> <span class="nv">g2</span> ] ] <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">isAtom</span> ] ]
+</pre></div>
+</div>
+<p>allows us to perform the rewriting, where</p>
+<span class="target" id="pharo-compiledMethod-13"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-asliteralrbnode"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-RB&quot;</span>
+<span class="nf">asLiteralRBNode</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">isLiteral</span>
+		  <span class="nb">ifTrue:</span> [ <span class="nc">RBLiteralValueNode</span> <span class="nf">value:</span> <span class="bp">self</span> ]
+		  <span class="nb">ifFalse:</span> [ <span class="nc">Error</span> <span class="nf">signal:</span> <span class="s">&#39;I am not a literal value&#39;</span> ]
+</pre></div>
+</div>
+</li>
+<li><p>the message</p>
+<span class="target" id="pharo-compiledMethod-14"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-unaryrbnode"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="nf">unaryRBNode</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">sourceNode</span> <span class="nf">body</span> <span class="nf">statements</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">statements</span> <span class="o">|</span> 
+		  <span class="nv">statements</span> <span class="nf">size</span> <span class="nf">=</span> <span class="m">1</span>
+			  <span class="nb">ifTrue:</span> [ <span class="nv">statements</span> <span class="nf">first</span> ]
+			  <span class="nb">ifFalse:</span> [ 
+				  <span class="nc">Error</span> <span class="nf">signal:</span>
+					  (<span class="s">&#39;Assumption that {} has 1 statement only is violated.&#39;</span> 
+						   <span class="nf">format:</span> { <span class="bp">self</span> }) ] ]
+</pre></div>
+</div>
+<p>is helpful to use a <code class="docutils literal notranslate"><span class="pre">BlockClosure</span></code> object as a container of its own code.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since a <code class="docutils literal notranslate"><span class="pre">CompiledMethod</span></code> responds to</p>
+<span class="target" id="pharo-compiledMethod-15"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-compiledmethod-sourcenode"><div class="highlight"><pre><span></span><span class="c">&quot;CompiledMethod, protocol *opalcompiler-core&quot;</span>
+<span class="nf">sourceNode</span>
+
+	<span class="o">^</span> <span class="bp">self</span> <span class="nf">ast</span>
+</pre></div>
+</div>
+<p>the initial test
+<a class="reference internal" href="#pharo-compiledmethod-thelittleprovertest-test_chapter_01_oldgamesnewrules_frame_16_bygoalwithblock" title="pharo-compiledmethod-thelittleprovertest-test_chapter_01_oldgamesnewrules_frame_16_bygoalwithblock"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProverTest&gt;&gt;#test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock</span></code></a>
+can also be written as</p>
+<span class="target" id="pharo-compiledMethod-16"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-bygoal"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_16_byGoal</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewrite</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	         <span class="nv">theory</span> <span class="nf">isAtomConsº</span> <span class="nf">value:</span> <span class="nv">ast</span> <span class="nf">value:</span> <span class="nv">rewrite</span> <span class="nf">asRBNode</span> ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> <span class="bp">self</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="ss">#ª:consIsAtom:</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { [ <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+</pre></div>
+</div>
+<p>where, on one hand, code as data is</p>
+<span class="target" id="pharo-compiledMethod-17"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-a-consisatom"><div class="highlight"><pre><span></span>&quot;TheLittleProverTest, protocol code as data&quot;
+ª: a consIsAtom: b
+
+	(a cons: b) isAtom
+</pre></div>
+</div>
+<p>on the other hand, the rewriting is</p>
+<span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-consisatom"><div class="highlight"><pre><span></span>&quot;TheLittleProverTest, protocol code as data&quot;
+ˆ: ast consIsAtom: rewritten
+
+	^ [ :a :b | theory isAtomConsº value: ast value: rewritten ]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Little Prover</a><ul>
+<li><a class="reference internal" href="#old-games-new-rules">Old Games, New Rules</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="theory-rbnodes.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/the-little-prover.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="theory-rbnodes.html" title="RBNode theory"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">The Little Prover</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Massimo Nocentini.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
+    </div>
+  </body>
+</html>
