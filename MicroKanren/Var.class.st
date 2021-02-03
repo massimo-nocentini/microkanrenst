@@ -99,3 +99,9 @@ Var >> unifyWithVar: aVar usingUnifier: anUnifier [
 
 	^ anUnifier forVar: self forVar: aVar
 ]
+
+{ #category : #'as yet unclassified' }
+Var >> walkSBRAL: aSBRAL forState: aState [
+
+	^ aState walkVar: self inSBRAL: aSBRAL
+]

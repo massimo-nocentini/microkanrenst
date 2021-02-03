@@ -311,108 +311,6 @@ TheLittleProverTest >> setUp [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> testFirstExampleOfLittleProver [
-
-	[ :a :b | #flapjack = (a cons: b) isAtom ] acl: [ :theory | 
-		theory
-			focus: [ :o | #flapjack = o ]
-			do: [ :a :b | self isAtom: a conso: b ];
-			focus: [ :o | o ] do: #flapjackFalseo;
-			yourself ].
-
-	[ :a :b | #flapjack = (a cons: b) isAtom ] acl: [ :theory | 
-		theory
-			focus: [ :o | #flapjack = o ] do: #isAtomConso;
-			focus: [ :o | o ] do: #flapjackFalseo;
-			yourself ].
-
-	"’(atom (cdr (cons (car (cons p q)) ’())))"
-	[ :p :q | ((p cons: q) car cons: nil) cdr isNil ] acl: [ :theory | 
-		theory
-			focus: [ :o | (o cons: nil) cdr isNil ] do: #carConso;
-			focus: [ :o | o isNil ] do: #cdrConso;
-			focus: [ :o | o ] do: #nilIsNilo ].
-
-	[ :p :q | ((p cons: q) car cons: nil) cdr isNil ] acl: [ :theory | 
-		theory
-			focus: [ :o | o isNil ]
-			do: [ 
-				self cdrConso value: [ :p :q | (p cons: q) car ] value: [ nil ] ];
-			focus: [ :o | o ] do: #nilIsNilo ].
-
-	"’(car (cons (equal (cons x y) (cons x y)) ’(and crumpets)))"
-	[ :x :y | 
-	((x cons: y) = (x cons: y) cons: (#and cons: (#crumpets cons: nil)))
-		car ] acl: [ :theory | 
-		theory
-			focus: [ :o | (o cons: (#and cons: (#crumpets cons: nil))) car ]
-			do: [ self equalSameo value: [ :x :y | x cons: y ] ];
-			focus: [ :o | o ] do: [ 
-				self carConso
-					value: [ true ]
-					value: [ #and cons: (#crumpets cons: nil) ] ] ].
-
-
-	self
-		assert:
-			([ :x | [ :a :b | #flapjack = (a cons: b) isAtom ] ] sourceNode
-				 body acceptVisitor: RBProgramNodeIdentityVisitor new)
-		equals: [ :x | 
-			[ :a :b | 
-			| f |
-			#flapjack = (a ~~> x) isAtom ] ] sourceNode body
-]
-
-{ #category : #tests }
-TheLittleProverTest >> testFirstExampleOfLittleProverWithLogicVars [
-	self
-		deny:
-			[ :x | 
-			[ :a :b | 
-			| f |
-			#flapjack = (a ~~> x) isAtom ] ] context
-		equals:
-			[ :x | 
-			[ :a :b | 
-			| f |
-			#flapjack = (a ~~> x) isAtom ] ] sourceNode body
-]
-
-{ #category : #tests }
-TheLittleProverTest >> testFlapjackIsAtomConso [
-
-	self
-		assert: [ :aSend | 
-			[ :o :ast | ast sendso value: aSend ] asGoalWithASTof: [ :o | o ] ]
-				asGoal solutions
-		equals: {  }
-		modulo: #asOrderedCollection.
-
-	[ :a :b | #flapjack = (a cons: b) isAtom ] acl: [ :theory | 
-		theory
-			focus: [ :o | #flapjack = o ]
-			do: [ :a :b | self isAtom: a conso: b ];
-			focus: [ :o | o ] do: #flapjackFalseo;
-			yourself ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_atomConsº [
-
-	| aGoal |
-	aGoal := [ :rewrite | 
-	         [ :ast | 
-	         [ :cdr | 
-	         theory isAtomConsº value: ast value: rewrite asRBNode ] ] 
-		         asGoalWithUnaryASTof: [ :cdr | (3 cons: cdr) isAtom ] ]
-		         asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ false ] sourceNode body statements first }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
 TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_06 [
 
 	"(car (cons 'ham '(eggs)))"
@@ -489,12 +387,13 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_19 [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
-	         [ :ast | self flapjackEqualsConsº: ast isAtomº: rewritten ] 
+	         [ :ast | 
+	         self flapjackEqualsConsº: ast isAtomº: rewritten asRBNode ] 
 		         asGoalWithUnaryASTof:
 		         self class >> #flapjackEqualsConsª:isAtomª: ] asGoal.
 	self
 		assert: aGoal solutions
-		equals: { [ false ] unaryRBNode }
+		equals: { [ #flapjack = false ] unaryRBNode }
 		modulo: #asOrderedCollection
 ]
 

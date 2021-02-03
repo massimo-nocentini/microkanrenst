@@ -97,6 +97,12 @@ Object >> unifyo [
 	^ [:anObject | self unifyWith: anObject]
 ]
 
+{ #category : #'*MicroKanren' }
+Object >> walkSBRAL: aSBRAL forState: aState [
+
+	^ aState walkObject: self inSBRAL: aSBRAL
+]
+
 { #category : #'*MicroKanren-core' }
 Object >> walkStarUsingWalker: aWalker [
 	^ aWalker forObject: self 

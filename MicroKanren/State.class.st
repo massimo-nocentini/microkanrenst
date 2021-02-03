@@ -196,17 +196,7 @@ State >> walk: anObj inDictionary: aDictionary [
 { #category : #'as yet unclassified' }
 State >> walk: anObj inSBRAL: aSBRAL [
 
-	| each |
-	each := anObj.
-	[ 
-	each isVar
-		ifTrue: [ 
-			| maybe |
-			maybe := aSBRAL at: birthdate - each id + 1.
-			maybe
-				ifNothing: [ ^ each ]
-				ifJust: [ :aJust | each := aJust content ] ]
-		ifFalse: [ ^ each ] ] repeat
+	^ anObj walkSBRAL: aSBRAL forState: self
 ]
 
 { #category : #'as yet unclassified' }
@@ -233,6 +223,12 @@ State >> walkIterative: anObj inDictionary: aDictionary [
 	[ k := aDictionary at: k ifAbsent: [ ^ k ] ] repeat
 ]
 
+{ #category : #dispatched }
+State >> walkObject: anObject inSBRAL: aSBRAL [
+
+	^ anObject
+]
+
 { #category : #'as yet unclassified' }
 State >> walkRecursive: anObj inDictionary: aDictionary [
 	^ aDictionary
@@ -242,6 +238,16 @@ State >> walkRecursive: anObj inDictionary: aDictionary [
 				at: anObj
 				put: (self walkRecursive: v inDictionary: aDictionary) ]
 		ifAbsent: [ anObj ]
+]
+
+{ #category : #dispatched }
+State >> walkVar: aVar inSBRAL: aSBRAL [
+
+	| maybe |
+	maybe := aSBRAL at: birthdate - aVar id + 1.
+	^ maybe
+		  ifNothing: [ aVar ]
+		  ifJust: [ :aJust | self walk: aJust content inSBRAL: aSBRAL ]
 ]
 
 { #category : #'as yet unclassified' }

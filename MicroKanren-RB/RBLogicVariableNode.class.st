@@ -85,3 +85,9 @@ RBLogicVariableNode >> unifyWithVar: aVar usingUnifier: anUnifier [
 
 	self shouldNotImplement
 ]
+
+{ #category : #'as yet unclassified' }
+RBLogicVariableNode >> walkSBRAL: aSBRAL forState: aState [
+
+	^ (aState walkVar: logicVar inSBRAL: aSBRAL) asRBNode
+]
