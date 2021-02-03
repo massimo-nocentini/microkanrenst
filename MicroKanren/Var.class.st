@@ -54,11 +54,6 @@ Var >> id: aString [
 	id := aString
 ]
 
-{ #category : #dispatched }
-Var >> isVar [
-	^ true
-]
-
 { #category : #accessing }
 Var >> named: anObject [
 

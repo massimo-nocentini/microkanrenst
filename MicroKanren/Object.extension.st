@@ -23,11 +23,6 @@ Object >> isAlphaEquivalentTo: y inState: aState [
 ]
 
 { #category : #'*MicroKanren-core' }
-Object >> isVar [
-	^ false
-]
-
-{ #category : #'*MicroKanren-core' }
 Object >> nilo [
 	^ Theory sexp nilo value: self
 ]

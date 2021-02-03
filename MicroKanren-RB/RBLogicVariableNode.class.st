@@ -44,12 +44,6 @@ RBLogicVariableNode >> id [
 	^ logicVar id
 ]
 
-{ #category : #testing }
-RBLogicVariableNode >> isVar [
-
-	^ true
-]
-
 { #category : #accessing }
 RBLogicVariableNode >> logicVar [
 	^ logicVar
