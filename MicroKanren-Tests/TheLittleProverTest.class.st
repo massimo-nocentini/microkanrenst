@@ -614,19 +614,28 @@ TheLittleProverTest >> test_equalSameº [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
-	         [ :ast | 
-	         [ :a :d | 
-	         [ :r | 
-	         (theory equalSameº value: ast value: r asRBNode)
-	         , (rewritten unifyo value:
-			          (RBMessageNode
-				           receiver: a
-				           selector: #cons:
-				           arguments: { d })) ] asGoal ] ] asGoalWithUnaryASTof: [ 
-		         :a 
-		         :d | (#and cons: d) = (a cons: nil) ] ] asGoal.
+	         [ :ast | self ˆandCons: ast equalNilConsed: rewritten ] 
+		         asGoalWithUnaryASTof:
+		         self class >> #ªandCons:equalNilConsed: ] asGoal.
 	self
-		assert: aGoal solutions
+		assert: aGoal solutions asArray
 		equals: { [ #and cons: nil ] unaryRBNode }
-		modulo: #asOrderedCollection
+]
+
+{ #category : #'code as data' }
+TheLittleProverTest >> ªandCons: d equalNilConsed: a [
+
+	(#and cons: d) = (a cons: nil)
+]
+
+{ #category : #rewriting }
+TheLittleProverTest >> ˆandCons: ast equalNilConsed: rewritten [
+
+	^ [ :d :a | 
+	  [ :r | 
+	  | g1 g2 |
+	  g1 := theory equalSameº value: ast value: r asRBNode.
+	  g2 := rewritten unifyo value:
+		        (RBMessageNode receiver: a selector: #cons: arguments: { d }).
+	  g1 , g2 ] asGoal ]
 ]
