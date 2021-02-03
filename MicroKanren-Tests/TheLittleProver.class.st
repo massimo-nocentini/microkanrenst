@@ -83,7 +83,8 @@ TheLittleProver >> isAtomConsº [
 
 	"
 	(dethm atom/cons (x y)
-	  (equal (atom (cons x y)) 'nil))"
+	  (equal (atom (cons x y)) 'nil))
+	"
 
 	^ [ :a :b | 
 	  [ :astA | 

@@ -76,6 +76,22 @@ TheLittleProverTest >> equalSameo [
 ]
 
 { #category : #tests }
+TheLittleProverTest >> flapjackEqualsConsª: a isAtomª: b [
+
+	#flapjack = (a cons: b) isAtom
+]
+
+{ #category : #tests }
+TheLittleProverTest >> flapjackEqualsConsº: ast isAtomº: rewritten [
+
+	^ [ :a :b | 
+	  ast acl: [ :prover | 
+		  prover
+			  focus: [ :o | #flapjack = o ] do: theory isAtomConsº;
+			  then: [ :o | o unifyo value: rewritten ] ] ]
+]
+
+{ #category : #tests }
 TheLittleProverTest >> flapjackFalseo [
 
 	^ [ :a :b | 
@@ -421,6 +437,24 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_14 [
 ]
 
 { #category : #tests }
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_backward [
+
+	| aGoal node |
+	aGoal := [ :ast | 
+	         [ :a | 
+	         theory isAtomConsº value: ast value: false asLiteralRBNode ] ] 
+		         asGoalWithUnaryASTof: [ :a | a isAtom ].
+
+	node := RBMessageNode
+		        receiver: 0 asReifiedVar asRBNode
+		        selector: #cons:
+		        arguments: { 1 asReifiedVar asRBNode }.
+	self
+		assert: aGoal solutions asArray equals: { node };
+		assert: node asString equals: 'RBMessageNode(•₀ cons: •₁)'
+]
+
+{ #category : #tests }
 TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure [
 
 	| aGoal |
@@ -444,6 +478,20 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byCompiledMetho
 	         [ :ast | self consº: ast isAtomº: rewrite asRBNode ] 
 		         asGoalWithUnaryASTof: self class >> #consª:isAtomª: ]
 		         asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ false ] unaryRBNode }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_19 [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | self flapjackEqualsConsº: ast isAtomº: rewritten ] 
+		         asGoalWithUnaryASTof:
+		         self class >> #flapjackEqualsConsª:isAtomª: ] asGoal.
 	self
 		assert: aGoal solutions
 		equals: { [ false ] unaryRBNode }
