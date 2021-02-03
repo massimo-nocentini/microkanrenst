@@ -48,7 +48,7 @@ Of course,
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 16
 
-.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure
 
 Wait. Many new things pop up here, so digest one at the time. In order of occurrence:
 
@@ -100,15 +100,75 @@ Wait. Many new things pop up here, so digest one at the time. In order of occurr
   .. pharo:autocompiledmethod:: CompiledMethod>>#sourceNode
 
   the initial test
-  :pharo:mref:`TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock`
+  :pharo:mref:`TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure`
   can also be written as
 
-  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_byGoal
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_byCompiledMethod
 
   where, on one hand, code as data is
 
-  .. pharo:autocompiledmethod:: TheLittleProverTest>>#ª:consIsAtom:
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#consª:isAtomª:
 
   on the other hand, the rewriting is 
 
-  .. pharo:autocompiledmethod:: TheLittleProverTest>>#ˆ:consIsAtom:
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#consº:isAtomº:
+
+  Observe that the previous two messages allow us to establish a nomenclature
+  for when we use a ``CompiledMethod`` both for its source code and for
+  evaluating (a predicate ``BlockClosure`` in this case) by appending a ``ª``
+  and ``º`` to each keyword in the selector, respectively. This scheme has the
+  advantage to use the same words while being able to discriminate their usage.
+  We mix the two approaches freely from now on.
+ 
+As usual in logic, we can run a computation backward. The following test case
+shows how to use ``#isAtomConsº`` to generate the receiver of ``#isAtom`` under
+the constraint that the whole expression yields ``false`` when evaluated:
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_backward
+
+.. index::
+   single: The Little Prover; 01. Old Games, New Rules: frame 19
+
+We want to focus on ``(a cons: b) isAtom`` in the context of the outer ``=`` message send
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_19
+
+  where
+
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#flapjackEqualsConsª:isAtomª:
+
+  and
+
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#flapjackEqualsConsº:isAtomº:
+
+.. index::
+   single: The Little Prover; 01. Old Games, New Rules: frame 21
+
+Precisely. In that case, what value is ``#flapjack = false`` equal to?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_21
+
+  where
+
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#flapjackNilFalseº
+
+.. index::
+   single: The Little Prover; 01. Old Games, New Rules: frame 28
+
+What value is the expression ``((p cons: q) car cons: nil) cdr isAtom`` equal to?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_28
+
+  where
+
+  .. pharo:autocompiledmethod:: TheLittleProver>>#carConsº
+  .. pharo:autocompiledmethod:: TheLittleProver>>#cdrConsº
+  .. pharo:autocompiledmethod:: TheLittleProver>>#isAtomNilº
+
+.. index::
+   single: The Little Prover; 01. Old Games, New Rules: frame 32
+
+That took three steps. Can we do it in fewer?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_32
+

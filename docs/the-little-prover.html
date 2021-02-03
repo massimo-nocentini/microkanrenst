@@ -100,8 +100,8 @@ or good morning.</em> Thank you, D. Friedman and C. Eastlung.</p>
 <blockquote>
 <div><p>“No matter what values the variables <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> have, <code class="docutils literal notranslate"><span class="pre">#cons:</span></code> cannot produce an atom.”</p>
 </div></blockquote>
-<span class="target" id="pharo-compiledMethod-5"><span id="index-3"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-bygoalwithblock"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
-<span class="nf">test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock</span>
+<span class="target" id="pharo-compiledMethod-5"><span id="index-3"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-byblockclosure"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure</span>
 
 	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
 	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewrite</span> <span class="o">|</span> 
@@ -111,9 +111,8 @@ or good morning.</em> Thank you, D. Friedman and C. Eastlung.</p>
 		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span> ] ]
 		         <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
-		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
 		<span class="nf">equals:</span> { [ <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
 </pre></div>
 </div>
 <p>Wait. Many new things pop up here, so digest one at the time. In order of occurrence:</p>
@@ -204,7 +203,8 @@ or good morning.</em> Thank you, D. Friedman and C. Eastlung.</p>
 
 	<span class="c">&quot;</span>
 <span class="c">	(dethm atom/cons (x y)</span>
-<span class="c">	  (equal (atom (cons x y)) &#39;nil))&quot;</span>
+<span class="c">	  (equal (atom (cons x y)) &#39;nil))</span>
+<span class="c">	&quot;</span>
 
 	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
 	  [ <span class="o">:</span><span class="nv">astA</span> <span class="o">|</span> 
@@ -251,37 +251,212 @@ or good morning.</em> Thank you, D. Friedman and C. Eastlung.</p>
 </pre></div>
 </div>
 <p>the initial test
-<a class="reference internal" href="#pharo-compiledmethod-thelittleprovertest-test_chapter_01_oldgamesnewrules_frame_16_bygoalwithblock" title="pharo-compiledmethod-thelittleprovertest-test_chapter_01_oldgamesnewrules_frame_16_bygoalwithblock"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProverTest&gt;&gt;#test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock</span></code></a>
+<a class="reference internal" href="#pharo-compiledmethod-thelittleprovertest-test_chapter_01_oldgamesnewrules_frame_16_byblockclosure" title="pharo-compiledmethod-thelittleprovertest-test_chapter_01_oldgamesnewrules_frame_16_byblockclosure"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProverTest&gt;&gt;#test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure</span></code></a>
 can also be written as</p>
-<span class="target" id="pharo-compiledMethod-16"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-bygoal"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
-<span class="nf">test_chapter_01_OldGamesNewRules_frame_16_byGoal</span>
+<span class="target" id="pharo-compiledMethod-16"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-bycompiledmethod"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_16_byCompiledMethod</span>
 
 	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
 	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewrite</span> <span class="o">|</span> 
-	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
-	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
-	         <span class="nv">theory</span> <span class="nf">isAtomConsº</span> <span class="nf">value:</span> <span class="nv">ast</span> <span class="nf">value:</span> <span class="nv">rewrite</span> <span class="nf">asRBNode</span> ] ] 
-		         <span class="nf">asGoalWithUnaryASTof:</span> <span class="bp">self</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="ss">#ª:consIsAtom:</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">consº:</span> <span class="nv">ast</span> <span class="nf">isAtomº:</span> <span class="nv">rewrite</span> <span class="nf">asRBNode</span> ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> <span class="bp">self</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="ss">#consª:isAtomª:</span> ]
+		         <span class="nf">asGoal</span><span class="p">.</span>
 	<span class="bp">self</span>
-		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
 		<span class="nf">equals:</span> { [ <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
 </pre></div>
 </div>
 <p>where, on one hand, code as data is</p>
-<span class="target" id="pharo-compiledMethod-17"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-a-consisatom"><div class="highlight"><pre><span></span>&quot;TheLittleProverTest, protocol code as data&quot;
-ª: a consIsAtom: b
+<span class="target" id="pharo-compiledMethod-17"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-consa-isatoma"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol code as data&quot;</span>
+<span class="nf">consª:</span> <span class="nv">a</span> <span class="nf">isAtomª:</span> <span class="nv">b</span>
 
-	(a cons: b) isAtom
+	(<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span>
 </pre></div>
 </div>
 <p>on the other hand, the rewriting is</p>
-<span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-consisatom"><div class="highlight"><pre><span></span>&quot;TheLittleProverTest, protocol code as data&quot;
-ˆ: ast consIsAtom: rewritten
+<span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-conso-isatomo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol code as data&quot;</span>
+<span class="nf">consº:</span> <span class="nv">ast</span> <span class="nf">isAtomº:</span> <span class="nv">rewritten</span>
 
-	^ [ :a :b | theory isAtomConsº value: ast value: rewritten ]
+	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">theory</span> <span class="nf">isAtomConsº</span> <span class="nf">value:</span> <span class="nv">ast</span> <span class="nf">value:</span> <span class="nv">rewritten</span> ]
 </pre></div>
 </div>
+<p>Observe that the previous two messages allow us to establish a nomenclature
+for when we use a <code class="docutils literal notranslate"><span class="pre">CompiledMethod</span></code> both for its source code and for
+evaluating (a predicate <code class="docutils literal notranslate"><span class="pre">BlockClosure</span></code> in this case) by appending a <code class="docutils literal notranslate"><span class="pre">ª</span></code>
+and <code class="docutils literal notranslate"><span class="pre">º</span></code> to each keyword in the selector, respectively. This scheme has the
+advantage to use the same words while being able to discriminate their usage.
+We mix the two approaches freely from now on.</p>
+</div>
+<p>As usual in logic, we can run a computation backward. The following test case
+shows how to use <code class="docutils literal notranslate"><span class="pre">#isAtomConsº</span></code> to generate the receiver of <code class="docutils literal notranslate"><span class="pre">#isAtom</span></code> under
+the constraint that the whole expression yields <code class="docutils literal notranslate"><span class="pre">false</span></code> when evaluated:</p>
+<span class="target" id="pharo-compiledMethod-19"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-backward"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_16_backward</span>
+
+	<span class="o">|</span><span class="nv"> aGoal node </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
+	         <span class="nv">theory</span> <span class="nf">isAtomConsº</span> <span class="nf">value:</span> <span class="nv">ast</span> <span class="nf">value:</span> <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> <span class="nv">a</span> <span class="nf">isAtom</span> ]<span class="p">.</span>
+
+	<span class="nv">node</span> <span class="o">:=</span> <span class="nc">RBMessageNode</span>
+		        <span class="nf">receiver:</span> <span class="m">0</span> <span class="nf">asReifiedVar</span> <span class="nf">asRBNode</span>
+		        <span class="nf">selector:</span> <span class="ss">#cons:</span>
+		        <span class="nf">arguments:</span> { <span class="m">1</span> <span class="nf">asReifiedVar</span> <span class="nf">asRBNode</span> }<span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
+		<span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">asString</span> <span class="nf">equals:</span> <span class="s">&#39;RBMessageNode(•₀ cons: •₁)&#39;</span>
+</pre></div>
+</div>
+<p id="index-4">We want to focus on <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">cons:</span> <span class="pre">b)</span> <span class="pre">isAtom</span></code> in the context of the outer <code class="docutils literal notranslate"><span class="pre">=</span></code> message send</p>
+<span class="target" id="pharo-compiledMethod-22"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-19"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_19</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         <span class="bp">self</span> <span class="nf">flapjackEqualsConsº:</span> <span class="nv">ast</span> <span class="nf">isAtomº:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span>
+		         <span class="bp">self</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="ss">#flapjackEqualsConsª:isAtomª:</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+		<span class="nf">equals:</span> { [ <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }
+</pre></div>
+</div>
+<blockquote>
+<div><p>where</p>
+<span class="target" id="pharo-compiledMethod-20"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-flapjackequalsconsa-isatoma"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">flapjackEqualsConsª:</span> <span class="nv">a</span> <span class="nf">isAtomª:</span> <span class="nv">b</span>
+
+	<span class="ss">#flapjack</span> <span class="nf">=</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span>
+</pre></div>
+</div>
+<p>and</p>
+<span class="target" id="pharo-compiledMethod-21"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-flapjackequalsconso-isatomo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">flapjackEqualsConsº:</span> <span class="nv">ast</span> <span class="nf">isAtomº:</span> <span class="nv">rewritten</span>
+
+	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	  <span class="nv">ast</span> <span class="nf">acl:</span> [ <span class="o">:</span><span class="nv">prover</span> <span class="o">|</span> 
+		  <span class="nv">prover</span>
+			  <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">isAtomConsº</span><span class="p">;</span>
+			  <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">rewritten</span> ] ] ]
+</pre></div>
+</div>
+</div></blockquote>
+<p id="index-5">Precisely. In that case, what value is <code class="docutils literal notranslate"><span class="pre">#flapjack</span> <span class="pre">=</span> <span class="pre">false</span></code> equal to?</p>
+<span class="target" id="pharo-compiledMethod-24"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-21"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_21</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	         <span class="nv">ast</span> <span class="nf">acl:</span> [ <span class="o">:</span><span class="nv">prover</span> <span class="o">|</span> 
+		         <span class="nv">prover</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">isAtomConsº</span><span class="p">;</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="bp">self</span> <span class="nf">flapjackNilFalseº</span><span class="p">;</span>
+			         <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] ] ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+		         <span class="ss">#flapjack</span> <span class="nf">=</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span> ] ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+		<span class="nf">equals:</span> { [ <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }
+</pre></div>
+</div>
+<blockquote>
+<div><p>where</p>
+<span class="target" id="pharo-compiledMethod-23"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-flapjacknilfalseo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">flapjackNilFalseº</span>
+
+	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	  [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">|</span> 
+	  [ 
+	  <span class="o">|</span> <span class="nv">g1</span> <span class="nf">g2</span> <span class="nf">|</span>
+	  <span class="nv">g1</span> <span class="o">:=</span> <span class="nv">a</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">ast1</span><span class="p">.</span>
+	  <span class="nv">g2</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">ast2</span> <span class="o">|</span> [ <span class="nv">b</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">ast2</span> ] ] <span class="nf">asGoalWithUnaryASTof:</span> [ 
+		        <span class="bp">false</span> ]<span class="p">.</span>
+	  <span class="nv">g1</span> <span class="nf">,</span> <span class="nv">g2</span> ] ] <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="bp">false</span> ] ]
+</pre></div>
+</div>
+</div></blockquote>
+<p id="index-6">What value is the expression <code class="docutils literal notranslate"><span class="pre">((p</span> <span class="pre">cons:</span> <span class="pre">q)</span> <span class="pre">car</span> <span class="pre">cons:</span> <span class="pre">nil)</span> <span class="pre">cdr</span> <span class="pre">isAtom</span></code> equal to?</p>
+<span class="target" id="pharo-compiledMethod-28"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-28"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_28</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	         <span class="nv">ast</span> <span class="nf">acl:</span> [ <span class="o">:</span><span class="nv">prover</span> <span class="o">|</span> 
+		         <span class="nv">prover</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> (<span class="nv">o</span> <span class="nf">cons:</span> <span class="bp">nil</span>) <span class="nf">cdr</span> <span class="nf">isAtom</span> ]
+			         <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">carConsº</span><span class="p">;</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">isAtom</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">cdrConsº</span><span class="p">;</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">isAtomNilº</span><span class="p">;</span>
+			         <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] ] ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">p</span> <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> 
+		         ((<span class="nv">p</span> <span class="nf">cons:</span> <span class="nv">q</span>) <span class="nf">car</span> <span class="nf">cons:</span> <span class="bp">nil</span>) <span class="nf">cdr</span> <span class="nf">isAtom</span> ] ] <span class="nf">asGoal</span><span class="p">.</span>
+
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { [ <span class="bp">true</span> ] <span class="nf">unaryRBNode</span> }
+</pre></div>
+</div>
+<blockquote>
+<div><p>where</p>
+<span class="target" id="pharo-compiledMethod-25"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-carconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<span class="nf">carConsº</span>
+
+	<span class="c">&quot;</span>
+<span class="c">	(dethm atom/cons (x y)</span>
+<span class="c">	  (equal (atom (cons x y)) &#39;nil))&quot;</span>
+
+	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	  [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">ast</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span>) ] ] 
+		  <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">car</span> ] ]
+</pre></div>
+</div>
+<span class="target" id="pharo-compiledMethod-26"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-cdrconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<span class="nf">cdrConsº</span>
+
+	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	  [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">ast</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="nv">y</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span>) ] ] 
+		  <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">cdr</span> ] ]
+</pre></div>
+</div>
+<span class="target" id="pharo-compiledMethod-27"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomnilo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<span class="nf">isAtomNilº</span>
+
+	<span class="c">&quot;</span>
+<span class="c">	(dethm atom/cons (x y)</span>
+<span class="c">	  (equal (atom (cons x y)) &#39;nil))&quot;</span>
+
+	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	  [ <span class="o">:</span><span class="nv">astA</span> <span class="o">|</span> 
+	  [ 
+	  <span class="o">|</span> <span class="nv">g1</span> <span class="nf">g2</span> <span class="nf">|</span>
+	  <span class="nv">g1</span> <span class="o">:=</span> <span class="nv">astA</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span><span class="p">.</span>
+	  <span class="nv">g2</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span><span class="p">.</span>
+	  <span class="nv">g1</span> <span class="nf">,</span> <span class="nv">g2</span> ] ] <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="bp">nil</span> <span class="nf">isAtom</span> ] ]
+</pre></div>
+</div>
+</div></blockquote>
+<p id="index-7">That took three steps. Can we do it in fewer?</p>
+<span class="target" id="pharo-compiledMethod-29"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-32"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_32</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	         <span class="nv">ast</span> <span class="nf">acl:</span> [ <span class="o">:</span><span class="nv">prover</span> <span class="o">|</span> 
+		         <span class="nv">prover</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">isAtom</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">cdrConsº</span><span class="p">;</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">isAtomNilº</span><span class="p">;</span>
+			         <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] ] ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">p</span> <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> 
+		         ((<span class="nv">p</span> <span class="nf">cons:</span> <span class="nv">q</span>) <span class="nf">car</span> <span class="nf">cons:</span> <span class="bp">nil</span>) <span class="nf">cdr</span> <span class="nf">isAtom</span> ] ] <span class="nf">asGoal</span><span class="p">.</span>
+
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { [ <span class="bp">true</span> ] <span class="nf">unaryRBNode</span> }
+</pre></div>
 </div>
 </div>
 </div>

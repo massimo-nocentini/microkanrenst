@@ -14,7 +14,6 @@ the search space of both succeeding and failing states.
 =====================================
 
 .. pharo:autocompiledmethod:: Goal>>#onState:afterPushingGoal:
-.. pharo:autocompiledmethod:: Succeed>>#onState:afterPushingGoal:
 
   :param State aState: a state containing a substitution that makes the top goal true.
   :return: a stream of exactly one state, namely ``aState``.
