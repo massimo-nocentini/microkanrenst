@@ -50,3 +50,15 @@ BlockClosure >> sendso [
 
 	^ self sourceNode body sendso
 ]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> unaryRBNode [
+
+	^ self sourceNode body statements in: [ :statements | 
+		  statements size = 1
+			  ifTrue: [ statements first ]
+			  ifFalse: [ 
+				  Error signal:
+					  ('Assumption that {} has 1 statement only is violated.' 
+						   format: { self }) ] ]
+]

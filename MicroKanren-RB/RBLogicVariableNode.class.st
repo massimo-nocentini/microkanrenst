@@ -38,6 +38,18 @@ RBLogicVariableNode >> hash [
 	^ logicVar hash
 ]
 
+{ #category : #testing }
+RBLogicVariableNode >> id [
+
+	^ logicVar id
+]
+
+{ #category : #testing }
+RBLogicVariableNode >> isVar [
+
+	^ true
+]
+
 { #category : #accessing }
 RBLogicVariableNode >> logicVar [
 	^ logicVar
@@ -66,4 +78,10 @@ RBLogicVariableNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifi
 RBLogicVariableNode >> unifyWithRBNode: aNode usingUnifier: anUnifier [
 
 	^ logicVar unifyWithObject: aNode usingUnifier: anUnifier
+]
+
+{ #category : #dispatched }
+RBLogicVariableNode >> unifyWithVar: aVar usingUnifier: anUnifier [
+
+	self shouldNotImplement
 ]

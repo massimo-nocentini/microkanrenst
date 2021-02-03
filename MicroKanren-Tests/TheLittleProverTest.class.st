@@ -517,7 +517,9 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_44_focus [
 			         (o cons: (#and cons: (#crumpets cons: nil))) car ]
 			         do: theory equalSameº.
 		         rewrite
-			         focus: [ :o | o ] do: theory carConsº;
+			         focus: [ :o | o ] do: [ :c :r | 
+				         (theory carConsº value: c value: r)
+				         , { r logicVar } projectº ];
 			         then: [ :o | o unifyo value: rewritten asRBNode ] ] ] ] 
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
@@ -589,6 +591,25 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_49_focus [
 ]
 
 { #category : #tests }
+TheLittleProverTest >> test_chapter_1_OldGamesNewRules_test [
+
+	"(equal 'flapjack (atom (cons a b)))"
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :b | 
+	         (rewritten asRBNode unifyo value:
+		          (RBMessageNode receiver: a selector: #even))
+	         , ((RBLiteralValueNode value: 3) unifyo value: a) ] ] 
+		         asGoalWithUnaryASTof: [ :a :b | a + b ] ] asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ 3 even ] unaryRBNode }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
 TheLittleProverTest >> test_equalSameº [
 
 	| aGoal |
@@ -596,12 +617,16 @@ TheLittleProverTest >> test_equalSameº [
 	         [ :ast | 
 	         [ :a :d | 
 	         [ :r | 
-	         (theory equalSameº value: ast value: rewritten)
-	         , (r unifyo value: (a cons: d)) ] asGoal ] ] 
-		         asGoalWithUnaryASTof: [ :a :d | 
-		         (#and cons: d) = (a cons: nil) ] ] asGoal.
+	         (theory equalSameº value: ast value: r asRBNode)
+	         , (rewritten unifyo value:
+			          (RBMessageNode
+				           receiver: a
+				           selector: #cons:
+				           arguments: { d })) ] asGoal ] ] asGoalWithUnaryASTof: [ 
+		         :a 
+		         :d | (#and cons: d) = (a cons: nil) ] ] asGoal.
 	self
 		assert: aGoal solutions
-		equals: { [ true ] sourceNode body statements first }
+		equals: { [ #and cons: nil ] unaryRBNode }
 		modulo: #asOrderedCollection
 ]
