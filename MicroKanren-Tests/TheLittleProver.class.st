@@ -5,23 +5,6 @@ Class {
 }
 
 { #category : #predicates }
-TheLittleProver >> atomConsº [
-
-	"
-	(dethm atom/cons (x y)
-	  (equal (atom (cons x y)) 'nil))"
-
-	^ [ :a :b | 
-	  [ :astA | 
-	  [ :x :y | 
-	  | g1 g2 |
-	  g1 := astA unifyo value: a.
-	  g2 := [ :astB | [ astB unifyo value: b ] ] asGoalWithUnaryASTof: [ 
-		        false ].
-	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x :y | (x cons: y) isAtom ] ]
-]
-
-{ #category : #predicates }
 TheLittleProver >> atomNilº [
 
 	"
@@ -93,4 +76,21 @@ TheLittleProver >> equalSwapº [
 	  g2 := (RBMessageNode receiver: y selector: #= arguments: { x })
 		        unifyo value: b.
 	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x :y | x = y ] ]
+]
+
+{ #category : #predicates }
+TheLittleProver >> isAtomConsº [
+
+	"
+	(dethm atom/cons (x y)
+	  (equal (atom (cons x y)) 'nil))"
+
+	^ [ :a :b | 
+	  [ :astA | 
+	  [ :x :y | 
+	  | g1 g2 |
+	  g1 := astA unifyo value: a.
+	  g2 := [ :astB | [ astB unifyo value: b ] ] asGoalWithUnaryASTof: [ 
+		        false ].
+	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x :y | (x cons: y) isAtom ] ]
 ]

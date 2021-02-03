@@ -39,8 +39,9 @@ BaselineOfMicroKanren >> scriptExportCoreMessagesForDoc [
 	^ MetaSTExporter new
 		  selectors:
 			  #( onState: walk: asGoal fail tautology unifyo asReifiedVar
-			     unifyWith: #onState:withVars: #onState:afterPushingGoal:
-			     #onState:forGoal:fromConj: #popGoalFromPathOfState:forConj:
+			     unifyWith: #unifyWith:usingUnifier: #onState:withVars:
+			     #onState:afterPushingGoal: #onState:forGoal:fromConj:
+			     #popGoalFromPathOfState:forConj:
 			     asReifiedWithVarClass: );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source' / 'microkanren-core-messages.json' ]
@@ -83,8 +84,10 @@ BaselineOfMicroKanren >> scriptExportRBTheoryForDoc [
 	<script: 'BaselineOfMicroKanren new scriptExportRBTheoryForDoc'>
 	^ MetaSTExporter new
 		  selectors:
-			  #( #testSenderoForCompiledMethod testSenderoForBlockClosure
-			     testSenderoForEmptyBlockClosure
+			  #( asGoalWithUnaryASTof: substituteVariablesUsingDictionary:
+			     visitLogicVariableNode: visitTemporaryNode:
+			     asRBNode #asGoalWithASTof:select: testSenderoForCompiledMethod
+			     testSenderoForBlockClosure testSenderoForEmptyBlockClosure
 			     visitMessageNode: sendso testSenderoBackwards
 			     arguments_testSenderoBackwards testSenderoForIdentityBlockClosure );
 		  exportWithRepositoryPath: [ :aPath | 
@@ -101,5 +104,23 @@ BaselineOfMicroKanren >> scriptExportSexpTestsForDoc [
 			     testDycko );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source' / 'microkanren-sexp-tests.json' ]
+		  ofPackage: self class package
+]
+
+{ #category : #export }
+BaselineOfMicroKanren >> scriptExportTheLittleProverForDoc [
+
+	<script:
+	'BaselineOfMicroKanren new scriptExportTheLittleProverForDoc'>
+	^ MetaSTExporter new
+		  selectors:
+			  #( isAtom #isAtomConsº test_chapter_01_OldGamesNewRules_frame_06
+			     test_chapter_01_OldGamesNewRules_frame_11
+			     test_chapter_01_OldGamesNewRules_frame_14
+			     test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock
+			     test_chapter_01_OldGamesNewRules_frame_16_byGoal );
+		  exportWithRepositoryPath: [ :aPath | 
+			  aPath / 'booklet' / 'source'
+			  / 'microkanren-the-little-prover.json' ]
 		  ofPackage: self class package
 ]
