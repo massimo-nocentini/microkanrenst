@@ -86,7 +86,8 @@ BaselineOfMicroKanren >> scriptExportRBTheoryForDoc [
 		  selectors:
 			  #( asGoalWithUnaryASTof: substituteVariablesUsingDictionary:
 			     visitLogicVariableNode: visitTemporaryNode:
-			     asRBNode #asGoalWithASTof:select: testSenderoForCompiledMethod
+			     asRBNode asLiteralRBNode #asGoalWithASTof:select:
+			     unaryRBNode sourceNode testSenderoForCompiledMethod
 			     testSenderoForBlockClosure testSenderoForEmptyBlockClosure
 			     visitMessageNode: sendso testSenderoBackwards
 			     arguments_testSenderoBackwards testSenderoForIdentityBlockClosure );
@@ -114,7 +115,8 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverForDoc [
 	'BaselineOfMicroKanren new scriptExportTheLittleProverForDoc'>
 	^ MetaSTExporter new
 		  selectors:
-			  #( isAtom #isAtomConsº test_chapter_01_OldGamesNewRules_frame_06
+			  #( isAtom #isAtomConsº #ª:consIsAtom: #ˆ:consIsAtom:
+			     test_chapter_01_OldGamesNewRules_frame_06
 			     test_chapter_01_OldGamesNewRules_frame_11
 			     test_chapter_01_OldGamesNewRules_frame_14
 			     test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock

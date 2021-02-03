@@ -90,7 +90,6 @@ TheLittleProver >> isAtomConsº [
 	  [ :x :y | 
 	  | g1 g2 |
 	  g1 := astA unifyo value: a.
-	  g2 := [ :astB | [ astB unifyo value: b ] ] asGoalWithUnaryASTof: [ 
-		        false ].
+	  g2 := false asLiteralRBNode unifyo value: b.
 	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x :y | (x cons: y) isAtom ] ]
 ]

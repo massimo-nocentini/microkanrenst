@@ -428,9 +428,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byGoal [
 
 	| aGoal |
 	aGoal := [ :rewrite | 
-	         [ :ast | 
-	         [ :a :b | 
-	         theory isAtomConsº value: ast value: rewrite asRBNode ] ] 
+	         [ :ast | self ˆ: ast consIsAtom: rewrite asRBNode ] 
 		         asGoalWithUnaryASTof: self class >> #ª:consIsAtom: ] asGoal.
 	self
 		assert: aGoal solutions
@@ -662,6 +660,12 @@ TheLittleProverTest >> ª: a consIsAtom: b [
 TheLittleProverTest >> ªandCons: d equalNilConsed: a [
 
 	(#and cons: d) = (a cons: nil)
+]
+
+{ #category : #'code as data' }
+TheLittleProverTest >> ˆ: ast consIsAtom: rewritten [
+
+	^ [ :a :b | theory isAtomConsº value: ast value: rewritten ]
 ]
 
 { #category : #rewriting }
