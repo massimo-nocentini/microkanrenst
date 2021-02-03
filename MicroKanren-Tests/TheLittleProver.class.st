@@ -5,22 +5,6 @@ Class {
 }
 
 { #category : #predicates }
-TheLittleProver >> atomNilº [
-
-	"
-	(dethm atom/cons (x y)
-	  (equal (atom (cons x y)) 'nil))"
-
-	^ [ :a :b | 
-	  [ :ast1 | 
-	  | g1 g2 |
-	  g1 := ast1 statements first unifyo value: a.
-	  g2 := [ :ast2 | ast2 statements first unifyo value: b ] 
-		        asGoalWithASTof: [ true ].
-	  g1 , g2 ] asGoalWithASTof: [ nil isAtom ] ]
-]
-
-{ #category : #predicates }
 TheLittleProver >> carConsº [
 
 	"
@@ -93,4 +77,20 @@ TheLittleProver >> isAtomConsº [
 	  g1 := astA unifyo value: a.
 	  g2 := false asLiteralRBNode unifyo value: b.
 	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x :y | (x cons: y) isAtom ] ]
+]
+
+{ #category : #predicates }
+TheLittleProver >> isAtomNilº [
+
+	"
+	(dethm atom/cons (x y)
+	  (equal (atom (cons x y)) 'nil))"
+
+	^ [ :a :b | 
+	  [ :astA | 
+	  [ 
+	  | g1 g2 |
+	  g1 := astA unifyo value: a.
+	  g2 := true asLiteralRBNode unifyo value: b.
+	  g1 , g2 ] ] asGoalWithUnaryASTof: [ nil isAtom ] ]
 ]

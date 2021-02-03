@@ -116,14 +116,17 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverForDoc [
 	^ MetaSTExporter new
 		  selectors:
 			  #( isAtom #isAtomConsº #consª:isAtomª: #consº:isAtomº:
-			     test_chapter_01_OldGamesNewRules_frame_06
+			     flapjackNilFalseº carConsº cdrConsº isAtomNilº test_chapter_01_OldGamesNewRules_frame_06
 			     test_chapter_01_OldGamesNewRules_frame_11
 			     test_chapter_01_OldGamesNewRules_frame_14
 			     #test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure
 			     test_chapter_01_OldGamesNewRules_frame_16_byCompiledMethod
 			     test_chapter_01_OldGamesNewRules_frame_16_backward
 			     #flapjackEqualsConsº:isAtomº: #flapjackEqualsConsª:isAtomª:
-			     #test_chapter_01_OldGamesNewRules_frame_19 );
+			     test_chapter_01_OldGamesNewRules_frame_19
+			     test_chapter_01_OldGamesNewRules_frame_21
+			     test_chapter_01_OldGamesNewRules_frame_28
+			     test_chapter_01_OldGamesNewRules_frame_32 );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover.json' ]
