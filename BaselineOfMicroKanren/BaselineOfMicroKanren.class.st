@@ -115,12 +115,12 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverForDoc [
 	'BaselineOfMicroKanren new scriptExportTheLittleProverForDoc'>
 	^ MetaSTExporter new
 		  selectors:
-			  #( isAtom #isAtomConsº #ª:consIsAtom: #ˆ:consIsAtom:
+			  #( isAtom #isAtomConsº #consª:isAtomª: #consº:isAtomº:
 			     test_chapter_01_OldGamesNewRules_frame_06
 			     test_chapter_01_OldGamesNewRules_frame_11
 			     test_chapter_01_OldGamesNewRules_frame_14
-			     test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock
-			     test_chapter_01_OldGamesNewRules_frame_16_byGoal );
+			     #test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure
+			     test_chapter_01_OldGamesNewRules_frame_16_byCompiledMethod );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover.json' ]

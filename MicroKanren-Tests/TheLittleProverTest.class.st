@@ -36,6 +36,18 @@ TheLittleProverTest >> consCarCdro [
 		   ifFalse: [ w ] ] unifyo value: b) ]
 ]
 
+{ #category : #'code as data' }
+TheLittleProverTest >> consª: a isAtomª: b [
+
+	(a cons: b) isAtom
+]
+
+{ #category : #'code as data' }
+TheLittleProverTest >> consº: ast isAtomº: rewritten [
+
+	^ [ :a :b | theory isAtomConsº value: ast value: rewritten ]
+]
+
 { #category : #tests }
 TheLittleProverTest >> equal: x if: y else: z [
 
@@ -409,35 +421,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_14 [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16 [
-
-	| aGoal |
-	aGoal := [ :rewrite | 
-	         [ :ast | 
-	         [ :a :b | 
-	         theory isAtomConsº value: ast value: rewrite asRBNode ] ] 
-		         asGoalWithUnaryASTof: self class >> #ª:consIsAtom: ] asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ false ] unaryRBNode }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byGoal [
-
-	| aGoal |
-	aGoal := [ :rewrite | 
-	         [ :ast | self ˆ: ast consIsAtom: rewrite asRBNode ] 
-		         asGoalWithUnaryASTof: self class >> #ª:consIsAtom: ] asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ false ] unaryRBNode }
-		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock [
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure [
 
 	| aGoal |
 	aGoal := [ :rewrite | 
@@ -445,6 +429,20 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byGoalWithBlock
 	         [ :a :b | 
 	         theory isAtomConsº value: ast value: rewrite asRBNode ] ] 
 		         asGoalWithUnaryASTof: [ :a :b | (a cons: b) isAtom ] ]
+		         asGoal.
+	self
+		assert: aGoal solutions
+		equals: { [ false ] unaryRBNode }
+		modulo: #asOrderedCollection
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byCompiledMethod [
+
+	| aGoal |
+	aGoal := [ :rewrite | 
+	         [ :ast | self consº: ast isAtomº: rewrite asRBNode ] 
+		         asGoalWithUnaryASTof: self class >> #consª:isAtomª: ]
 		         asGoal.
 	self
 		assert: aGoal solutions
@@ -660,12 +658,6 @@ TheLittleProverTest >> ª: a consIsAtom: b [
 TheLittleProverTest >> ªandCons: d equalNilConsed: a [
 
 	(#and cons: d) = (a cons: nil)
-]
-
-{ #category : #'code as data' }
-TheLittleProverTest >> ˆ: ast consIsAtom: rewritten [
-
-	^ [ :a :b | theory isAtomConsº value: ast value: rewritten ]
 ]
 
 { #category : #rewriting }
