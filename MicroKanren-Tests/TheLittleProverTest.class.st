@@ -461,6 +461,30 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_44 [
 	         ast acl: [ :rewrite | 
 		         rewrite
 			         focus: [ :o | 
+				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
+			         do: theory equalSameº;
+			         then: [ :o | o unifyo value: rewritten asRBNode ] ] ] ] 
+		         asGoalWithUnaryASTof: [ :x :y | 
+			         ((x cons: y) = (x cons: y) cons:
+				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
+
+	self
+		assert: aGoal solutions asArray
+		equals:
+		{ [ (true cons: (#and cons: (#crumpets cons: nil))) car ]
+			unaryRBNode }
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46 [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :b | 
+	         ast acl: [ :rewrite | 
+		         rewrite
+			         focus: [ :o | 
 			         (o cons: (#and cons: (#crumpets cons: nil))) car ]
 			         do: theory equalSameº.
 		         rewrite
@@ -469,52 +493,54 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_44 [
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
-		
+
 	self assert: aGoal solutions asArray equals: { [ true ] unaryRBNode }
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_49 [
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº [
 
-	"
-	the term (equal (cons x y) (cons 'bagels '(and lox)))
-	rewrites (equal (cons 'bagels '(and lox)) (cons x y))
-	"
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :car :cdr | 
+	         [ :r | 
+	         | g1 g2 |
+	         g1 := theory equalSameº value: ast value: r asRBNode.
+	         g2 := rewritten asRBNode unifyo value:
+		               (RBMessageNode
+			                receiver: car
+			                selector: #cons:
+			                arguments: { cdr }).
+	         g1 , g2 ] asGoal ] ] asGoalWithUnaryASTof: [ :a :d | 
+		         (#and cons: d) = (a cons: nil) ] ] asGoal.
+
+	self
+		assert: aGoal solutions asArray
+		equals: { [ #and cons: nil ] unaryRBNode }
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b | 
-	         [ :oast | 
-	         [ :o | 
-	         [ :r :c :d | 
-	         | fast |
-	         fast := oast substituteVariablesUsingDictionary:
-		                 { (o -> r asRBNode) } asDictionary.
-	         (ast unifyo value: oast)
-	         , (theory equalSwapº value: o value: r)
-	         , (fast unifyo value: c) , (c unifyo value: rewritten) ]
-		         asGoal ] ] asGoalWithUnaryASTof: [ :o | o ] ] ] 
-		         asGoalWithUnaryASTof: [ :x :y | 
-		         (x cons: y) = (#bagels cons: (#and cons: (#lox cons: nil))) ] ]
-		         asGoal.
+	         (rewritten asRBNode unifyo value:
+		          (RBMessageNode receiver: a selector: #even))
+	         , ((RBLiteralValueNode value: 3) unifyo value: a) ] ] 
+		         asGoalWithUnaryASTof: [ :a :b | a + b ] ] asGoal.
 	self
 		assert: aGoal solutions
-		equals: { [ :x :y | 
-			(#bagels cons: (#and cons: (#lox cons: nil))) = (x cons: y) ]
-				sourceNode body statements first }
+		equals: { [ 3 even ] unaryRBNode }
 		modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_49_focus [
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 
-	"
-	the term (equal (cons x y) (cons 'bagels '(and lox)))
-	rewrites (equal (cons 'bagels '(and lox)) (cons x y))
-	"
-
-	| aGoal |
+	| aGoal node |
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b | 
@@ -525,12 +551,21 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_frame_49_focus [
 		         asGoalWithUnaryASTof: [ :x :y | 
 		         (x cons: y) = (#bagels cons: (#and cons: (#lox cons: nil))) ] ]
 		         asGoal.
+
+	node := RBMessageNode
+		        receiver:
+		        [ #bagels cons: (#and cons: (#lox cons: nil)) ] unaryRBNode
+		        selector: #=
+		        arguments: { (RBMessageNode
+				         receiver: 0 asReifiedVar asRBNode
+				         selector: #cons:
+				         arguments: { 1 asReifiedVar asRBNode }) }.
+
 	self
-		assert: aGoal solutions
-		equals: { [ :x :y | 
-			(#bagels cons: (#and cons: (#lox cons: nil))) = (x cons: y) ]
-				sourceNode body statements first }
-		modulo: #asOrderedCollection
+		assert: aGoal solutions asArray equals: { node };
+		assert: node asString
+		equals:
+			'RBMessageNode((#bagels cons: (#and cons: (#lox cons: nil))) = (•₀ cons: •₁))'
 ]
 
 { #category : #tests }
@@ -550,38 +585,4 @@ TheLittleProverTest >> test_chapter_1_OldGamesNewRules_test [
 		assert: aGoal solutions
 		equals: { [ 3 even ] unaryRBNode }
 		modulo: #asOrderedCollection
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_equalSameº [
-
-	| aGoal |
-	aGoal := [ :rewritten | 
-	         [ :ast | self ˆandCons: ast equalNilConsed: rewritten ] 
-		         asGoalWithUnaryASTof:
-		         self class >> #ªandCons:equalNilConsed: ] asGoal.
-	self
-		assert: aGoal solutions asArray
-		equals: { [ #and cons: nil ] unaryRBNode }
-]
-
-{ #category : #'code as data' }
-TheLittleProverTest >> ªandCons: d equalNilConsed: a [
-
-	(#and cons: d) = (a cons: nil)
-]
-
-{ #category : #rewriting }
-TheLittleProverTest >> ˆandCons: ast equalNilConsed: rewritten [
-
-	^ [ :cdr :car | 
-	  [ :r | 
-	  | g1 g2 |
-	  g1 := theory equalSameº value: ast value: r asRBNode.
-	  g2 := rewritten unifyo value:
-		        (RBMessageNode
-			         receiver: car
-			         selector: #cons:
-			         arguments: { cdr }).
-	  g1 , g2 ] asGoal ]
 ]

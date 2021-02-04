@@ -87,7 +87,7 @@ BaselineOfMicroKanren >> scriptExportRBTheoryForDoc [
 			  #( asGoalWithUnaryASTof: substituteVariablesUsingDictionary:
 			     visitLogicVariableNode: visitTemporaryNode:
 			     asRBNode asLiteralRBNode #asGoalWithASTof:select:
-			     unaryRBNode sourceNode testSenderoForCompiledMethod
+			     unaryRBNode sourceNode ·> ··> ···> testSenderoForCompiledMethod
 			     testSenderoForBlockClosure testSenderoForEmptyBlockClosure
 			     visitMessageNode: sendso testSenderoBackwards
 			     arguments_testSenderoBackwards testSenderoForIdentityBlockClosure );
@@ -116,7 +116,8 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverForDoc [
 	^ MetaSTExporter new
 		  selectors:
 			  #( isAtom #isAtomConsº #consª:isAtomª: #consº:isAtomº:
-			     flapjackNilFalseº carConsº cdrConsº isAtomNilº test_chapter_01_OldGamesNewRules_frame_06
+			     flapjackNilFalseº carConsº cdrConsº isAtomNilº equalSwapº
+			     test_chapter_01_OldGamesNewRules_frame_06
 			     test_chapter_01_OldGamesNewRules_frame_11
 			     test_chapter_01_OldGamesNewRules_frame_14
 			     #test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure
@@ -126,7 +127,12 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverForDoc [
 			     test_chapter_01_OldGamesNewRules_frame_19
 			     test_chapter_01_OldGamesNewRules_frame_21
 			     test_chapter_01_OldGamesNewRules_frame_28
-			     test_chapter_01_OldGamesNewRules_frame_32 );
+			     test_chapter_01_OldGamesNewRules_frame_32
+			     test_chapter_01_OldGamesNewRules_frame_44
+			     test_chapter_01_OldGamesNewRules_frame_46
+			     test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº
+			     test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually
+			     test_chapter_01_OldGamesNewRules_frame_49 );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover.json' ]
