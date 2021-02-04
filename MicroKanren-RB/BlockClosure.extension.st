@@ -62,3 +62,39 @@ BlockClosure >> unaryRBNode [
 					  ('Assumption that {} has 1 statement only is violated.' 
 						   format: { self }) ] ]
 ]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> ·> aBlock [
+
+	^ [ :a :b | 
+	  [ :ast | 
+	  [ :x | 
+	  | z |
+	  z := aBlock value: x.
+	  (ast unifyo value: a) , (z unifyo value: b) ] ] 
+		  asGoalWithUnaryASTof: self ]
+]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> ··> aBlock [
+
+	^ [ :a :b | 
+	  [ :ast | 
+	  [ :x :y | 
+	  | z |
+	  z := aBlock value: x value: y.
+	  (ast unifyo value: a) , (z unifyo value: b) ] ] 
+		  asGoalWithUnaryASTof: self ]
+]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> ···> aBlock [
+
+	^ [ :a :b | 
+	  [ :ast | 
+	  [ :x :y :w | 
+	  | z |
+	  z := aBlock value: x value: y value: w.
+	  (ast unifyo value: a) , (z unifyo value: b) ] ] 
+		  asGoalWithUnaryASTof: self ]
+]

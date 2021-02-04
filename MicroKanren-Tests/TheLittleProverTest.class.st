@@ -469,10 +469,8 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_44 [
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ true ] sourceNode body statements first }
-		modulo: #asOrderedCollection
+		
+	self assert: aGoal solutions asArray equals: { [ true ] unaryRBNode }
 ]
 
 { #category : #tests }

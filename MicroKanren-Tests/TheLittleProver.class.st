@@ -7,27 +7,19 @@ Class {
 { #category : #predicates }
 TheLittleProver >> carConsº [
 
-	"
-	(dethm atom/cons (x y)
-	  (equal (atom (cons x y)) 'nil))"
+	"(dethm car/cons (x y)
+		(equal (car (cons x y)) x))"
 
-	^ [ :a :b | 
-	  [ :ast | [ :x :y | (ast unifyo value: a) , (x unifyo value: b) ] ] 
-		  asGoalWithUnaryASTof: [ :x :y | (x cons: y) car ] ]
+	^ [ :x :y | (x cons: y) car ] ··> [ :x :y | x ]
 ]
 
 { #category : #predicates }
 TheLittleProver >> cdrConsº [
 
-	^ [ :a :b | 
-	  [ :ast | [ :x :y | (ast unifyo value: a) , (y unifyo value: b) ] ] 
-		  asGoalWithUnaryASTof: [ :x :y | (x cons: y) cdr ] ]
-]
+	"(dethm cdr/cons (x y)
+		(equal (cdr (cons x y)) y))"
 
-{ #category : #'as yet unclassified' }
-TheLittleProver >> chapter_1_OldGamesNewRules_frame_21: a value: b [
-
-	^ #flapjack = (a cons: b) isAtom
+	^ [ :x :y | (x cons: y) cdr ] ··> [ :x :y | y ]
 ]
 
 { #category : #predicates }
@@ -36,14 +28,7 @@ TheLittleProver >> equalSameº [
 	"(dethm equal-same (x)
 		(equal (equal x x) 't))"
 
-	^ [ :a :b | 
-	  [ :ast | 
-	  [ :x | 
-	  | g1 g2 |
-	  g1 := ast unifyo value: a.
-	  g2 := [ :ast2 | [ ast2 unifyo value: b ] ] asGoalWithUnaryASTof: [ 
-		        true ].
-	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x | x = x ] ]
+	^ [ :x | x = x ] ·> [ :x | true asLiteralRBNode ]
 ]
 
 { #category : #predicates }
@@ -52,45 +37,27 @@ TheLittleProver >> equalSwapº [
 	"(dethm equal-swap (x y)
 		(equal (equal x y) (equal y x)))"
 
-	^ [ :a :b | 
-	  [ :ast | 
-	  [ :x :y | 
-	  | g1 g2 |
-	  g1 := ast unifyo value: a.
-	  g2 := (RBMessageNode receiver: y selector: #= arguments: { x })
-		        unifyo value: b.
-	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x :y | x = y ] ]
+	^ [ :x :y | x = y ]
+	  ··> [ :x :y | 
+	  RBMessageNode receiver: y selector: #= arguments: { x } ]
 ]
 
 { #category : #predicates }
 TheLittleProver >> isAtomConsº [
 
-	"
-	(dethm atom/cons (x y)
-	  (equal (atom (cons x y)) 'nil))
-	"
+	"(dethm atom/cons (x y)
+	  (equal (atom (cons x y)) 'nil))"
 
-	^ [ :a :b | 
-	  [ :astA | 
-	  [ :x :y | 
-	  | g1 g2 |
-	  g1 := astA unifyo value: a.
-	  g2 := false asLiteralRBNode unifyo value: b.
-	  g1 , g2 ] ] asGoalWithUnaryASTof: [ :x :y | (x cons: y) isAtom ] ]
+	^ [ :x :y | (x cons: y) isAtom ]
+	  ··> [ :x :y | false asLiteralRBNode ]
 ]
 
 { #category : #predicates }
 TheLittleProver >> isAtomNilº [
 
 	"
-	(dethm atom/cons (x y)
-	  (equal (atom (cons x y)) 'nil))"
+	(dethm atom/nil (x y)
+	  (equal (atom 'nil) 't))"
 
-	^ [ :a :b | 
-	  [ :astA | 
-	  [ 
-	  | g1 g2 |
-	  g1 := astA unifyo value: a.
-	  g2 := true asLiteralRBNode unifyo value: b.
-	  g1 , g2 ] ] asGoalWithUnaryASTof: [ nil isAtom ] ]
+	^ [ :_ | nil isAtom ] ·> [ :_ | true asLiteralRBNode ]
 ]
