@@ -172,3 +172,39 @@ That took three steps. Can we do it in fewer?
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_32
 
+.. index::
+   single: The Little Prover; 01. Old Games, New Rules: frame 44
+
+What is the value of the context ``((x cons: y) = (x cons: y) cons: (#and cons:
+(#crumpets cons: nil))) car`` with focus on ``(x cons: y) = (x cons: y)``?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_44
+
+.. index::
+   single: The Little Prover; 01. Old Games, New Rules: frame 46
+
+And, of course, the second step is easy.
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_46
+
+.. note::
+
+  Please note that ``#equalSameº`` also binds variables during its evaluation
+
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº
+
+  morever, variables binding can be performed manually as in
+
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually
+
+.. index::
+   single: The Little Prover; 01. Old Games, New Rules: frame 49
+
+Does the order of the arguments to equal matter?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_49
+
+where
+
+  .. pharo:autocompiledmethod:: TheLittleProver>>#equalSwapº
+

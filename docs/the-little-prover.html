@@ -198,21 +198,14 @@ or good morning.</em> Thank you, D. Friedman and C. Eastlung.</p>
 <p>lying on <code class="xref pharo pharo-cref docutils literal notranslate"><span class="pre">Var</span></code> eventually.</p>
 </li>
 <li><p>the predicate</p>
-<span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
-<span class="nf">isAtomConsº</span>
+<span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomconso"><div class="highlight"><pre><span></span>&quot;TheLittleProver, protocol predicates&quot;
+isAtomConsº
 
-	<span class="c">&quot;</span>
-<span class="c">	(dethm atom/cons (x y)</span>
-<span class="c">	  (equal (atom (cons x y)) &#39;nil))</span>
-<span class="c">	&quot;</span>
+	&quot;(dethm atom/cons (x y)
+	  (equal (atom (cons x y)) &#39;nil))&quot;
 
-	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
-	  [ <span class="o">:</span><span class="nv">astA</span> <span class="o">|</span> 
-	  [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
-	  <span class="o">|</span><span class="nv"> g1 g2 </span><span class="o">|</span>
-	  <span class="nv">g1</span> <span class="o">:=</span> <span class="nv">astA</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span><span class="p">.</span>
-	  <span class="nv">g2</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span><span class="p">.</span>
-	  <span class="nv">g1</span> <span class="nf">,</span> <span class="nv">g2</span> ] ] <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">isAtom</span> ] ]
+	^ [ :x :y | (x cons: y) isAtom ]
+	  ··&gt; [ :x :y | false asLiteralRBNode ]
 </pre></div>
 </div>
 <p>allows us to perform the rewriting, where</p>
@@ -274,7 +267,7 @@ can also be written as</p>
 </pre></div>
 </div>
 <p>on the other hand, the rewriting is</p>
-<span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-conso-isatomo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol code as data&quot;</span>
+<span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-conso-isatomo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol predicates&quot;</span>
 <span class="nf">consº:</span> <span class="nv">ast</span> <span class="nf">isAtomº:</span> <span class="nv">rewritten</span>
 
 	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">theory</span> <span class="nf">isAtomConsº</span> <span class="nf">value:</span> <span class="nv">ast</span> <span class="nf">value:</span> <span class="nv">rewritten</span> ]
@@ -365,7 +358,7 @@ the constraint that the whole expression yields <code class="docutils literal no
 </div>
 <blockquote>
 <div><p>where</p>
-<span class="target" id="pharo-compiledMethod-23"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-flapjacknilfalseo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-23"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-flapjacknilfalseo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol predicates&quot;</span>
 <span class="nf">flapjackNilFalseº</span>
 
 	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
@@ -402,40 +395,32 @@ the constraint that the whole expression yields <code class="docutils literal no
 </div>
 <blockquote>
 <div><p>where</p>
-<span class="target" id="pharo-compiledMethod-25"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-carconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
-<span class="nf">carConsº</span>
+<span class="target" id="pharo-compiledMethod-25"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-carconso"><div class="highlight"><pre><span></span>&quot;TheLittleProver, protocol predicates&quot;
+carConsº
 
-	<span class="c">&quot;</span>
-<span class="c">	(dethm atom/cons (x y)</span>
-<span class="c">	  (equal (atom (cons x y)) &#39;nil))&quot;</span>
+	&quot;(dethm car/cons (x y)
+		(equal (car (cons x y)) x))&quot;
 
-	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
-	  [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">ast</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span>) ] ] 
-		  <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">car</span> ] ]
+	^ [ :x :y | (x cons: y) car ] ··&gt; [ :x :y | x ]
 </pre></div>
 </div>
-<span class="target" id="pharo-compiledMethod-26"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-cdrconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
-<span class="nf">cdrConsº</span>
+<span class="target" id="pharo-compiledMethod-26"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-cdrconso"><div class="highlight"><pre><span></span>&quot;TheLittleProver, protocol predicates&quot;
+cdrConsº
 
-	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
-	  [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">ast</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="nv">y</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span>) ] ] 
-		  <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">cdr</span> ] ]
+	&quot;(dethm cdr/cons (x y)
+		(equal (cdr (cons x y)) y))&quot;
+
+	^ [ :x :y | (x cons: y) cdr ] ··&gt; [ :x :y | y ]
 </pre></div>
 </div>
-<span class="target" id="pharo-compiledMethod-27"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomnilo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
-<span class="nf">isAtomNilº</span>
+<span class="target" id="pharo-compiledMethod-27"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomnilo"><div class="highlight"><pre><span></span>&quot;TheLittleProver, protocol predicates&quot;
+isAtomNilº
 
-	<span class="c">&quot;</span>
-<span class="c">	(dethm atom/cons (x y)</span>
-<span class="c">	  (equal (atom (cons x y)) &#39;nil))&quot;</span>
+	&quot;
+	(dethm atom/nil (x y)
+	  (equal (atom &#39;nil) &#39;t))&quot;
 
-	<span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
-	  [ <span class="o">:</span><span class="nv">astA</span> <span class="o">|</span> 
-	  [ 
-	  <span class="o">|</span> <span class="nv">g1</span> <span class="nf">g2</span> <span class="nf">|</span>
-	  <span class="nv">g1</span> <span class="o">:=</span> <span class="nv">astA</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span><span class="p">.</span>
-	  <span class="nv">g2</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span><span class="p">.</span>
-	  <span class="nv">g1</span> <span class="nf">,</span> <span class="nv">g2</span> ] ] <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="bp">nil</span> <span class="nf">isAtom</span> ] ]
+	^ [ :_ | nil isAtom ] ·&gt; [ :_ | true asLiteralRBNode ]
 </pre></div>
 </div>
 </div></blockquote>
@@ -458,6 +443,147 @@ the constraint that the whole expression yields <code class="docutils literal no
 	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { [ <span class="bp">true</span> ] <span class="nf">unaryRBNode</span> }
 </pre></div>
 </div>
+<p id="index-8">What is the value of the context <code class="docutils literal notranslate"><span class="pre">((x</span> <span class="pre">cons:</span> <span class="pre">y)</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">cons:</span> <span class="pre">y)</span> <span class="pre">cons:</span> <span class="pre">(#and</span> <span class="pre">cons:</span>
+<span class="pre">(#crumpets</span> <span class="pre">cons:</span> <span class="pre">nil)))</span> <span class="pre">car</span></code> with focus on <code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">cons:</span> <span class="pre">y)</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">cons:</span> <span class="pre">y)</span></code>?</p>
+<span class="target" id="pharo-compiledMethod-30"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-44"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_44</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	         <span class="nv">ast</span> <span class="nf">acl:</span> [ <span class="o">:</span><span class="nv">rewrite</span> <span class="o">|</span> 
+		         <span class="nv">rewrite</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> 
+				         (<span class="nv">o</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
+			         <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">equalSameº</span><span class="p">;</span>
+			         <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] ] ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
+			         ((<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">=</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">cons:</span>
+				          (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ] ] <span class="nf">asGoal</span><span class="p">.</span>
+
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+		<span class="nf">equals:</span>
+		{ [ (<span class="bp">true</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
+			<span class="nf">unaryRBNode</span> }
+</pre></div>
+</div>
+<p id="index-9">And, of course, the second step is easy.</p>
+<span class="target" id="pharo-compiledMethod-31"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_46</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	         <span class="nv">ast</span> <span class="nf">acl:</span> [ <span class="o">:</span><span class="nv">rewrite</span> <span class="o">|</span> 
+		         <span class="nv">rewrite</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> 
+			         (<span class="nv">o</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
+			         <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">equalSameº</span><span class="p">.</span>
+		         <span class="nv">rewrite</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">carConsº</span><span class="p">;</span>
+			         <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] ] ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
+			         ((<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">=</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">cons:</span>
+				          (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ] ] <span class="nf">asGoal</span><span class="p">.</span>
+
+	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { [ <span class="bp">true</span> ] <span class="nf">unaryRBNode</span> }
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that <code class="docutils literal notranslate"><span class="pre">#equalSameº</span></code> also binds variables during its evaluation</p>
+<span class="target" id="pharo-compiledMethod-32"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46-variablesbindingbyequalsameo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">car</span> <span class="o">:</span><span class="nv">cdr</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+	         <span class="o">|</span><span class="nv"> g1 g2 </span><span class="o">|</span>
+	         <span class="nv">g1</span> <span class="o">:=</span> <span class="nv">theory</span> <span class="nf">equalSameº</span> <span class="nf">value:</span> <span class="nv">ast</span> <span class="nf">value:</span> <span class="nv">r</span> <span class="nf">asRBNode</span><span class="p">.</span>
+	         <span class="nv">g2</span> <span class="o">:=</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> <span class="nf">unifyo</span> <span class="nf">value:</span>
+		               (<span class="nc">RBMessageNode</span>
+			                <span class="nf">receiver:</span> <span class="nv">car</span>
+			                <span class="nf">selector:</span> <span class="ss">#cons:</span>
+			                <span class="nf">arguments:</span> { <span class="nv">cdr</span> })<span class="p">.</span>
+	         <span class="nv">g1</span> <span class="nf">,</span> <span class="nv">g2</span> ] <span class="nf">asGoal</span> ] ] <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">d</span> <span class="o">|</span> 
+		         (<span class="ss">#and</span> <span class="nf">cons:</span> <span class="nv">d</span>) <span class="nf">=</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="bp">nil</span>) ] ] <span class="nf">asGoal</span><span class="p">.</span>
+
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+		<span class="nf">equals:</span> { [ <span class="ss">#and</span> <span class="nf">cons:</span> <span class="bp">nil</span> ] <span class="nf">unaryRBNode</span> }
+</pre></div>
+</div>
+<p>morever, variables binding can be performed manually as in</p>
+<span class="target" id="pharo-compiledMethod-33"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46-variablesbindingmanually"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually</span>
+
+	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	         (<span class="nv">rewritten</span> <span class="nf">asRBNode</span> <span class="nf">unifyo</span> <span class="nf">value:</span>
+		          (<span class="nc">RBMessageNode</span> <span class="nf">receiver:</span> <span class="nv">a</span> <span class="nf">selector:</span> <span class="ss">#even</span>))
+	         <span class="nf">,</span> ((<span class="nc">RBLiteralValueNode</span> <span class="nf">value:</span> <span class="m">3</span>) <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">a</span> <span class="nf">+</span> <span class="nv">b</span> ] ] <span class="nf">asGoal</span><span class="p">.</span>
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span>
+		<span class="nf">equals:</span> { [ <span class="m">3</span> <span class="nf">even</span> ] <span class="nf">unaryRBNode</span> }
+		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+</pre></div>
+</div>
+</div>
+<p id="index-10">Does the order of the arguments to equal matter?</p>
+<span class="target" id="pharo-compiledMethod-34"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-49"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_49</span>
+
+	<span class="o">|</span><span class="nv"> aGoal node </span><span class="o">|</span>
+	<span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
+	         [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+	         <span class="nv">ast</span> <span class="nf">acl:</span> [ <span class="o">:</span><span class="nv">rewrite</span> <span class="o">|</span> 
+		         <span class="nv">rewrite</span>
+			         <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">equalSwapº</span><span class="p">;</span>
+			         <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] ] ] ] 
+		         <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
+		         (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">=</span> (<span class="ss">#bagels</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#lox</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) ] ]
+		         <span class="nf">asGoal</span><span class="p">.</span>
+
+	<span class="nv">node</span> <span class="o">:=</span> <span class="nc">RBMessageNode</span>
+		        <span class="nf">receiver:</span>
+		        [ (<span class="ss">#bagels</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#lox</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) ]
+			        <span class="nf">unaryRBNode</span>
+		        <span class="nf">selector:</span> <span class="ss">#=</span>
+		        <span class="nf">arguments:</span> { (<span class="nc">RBMessageNode</span>
+				         <span class="nf">receiver:</span> <span class="m">0</span> <span class="nf">asReifiedVar</span> <span class="nf">asRBNode</span>
+				         <span class="nf">selector:</span> <span class="ss">#cons:</span>
+				         <span class="nf">arguments:</span> { <span class="m">1</span> <span class="nf">asReifiedVar</span> <span class="nf">asRBNode</span> }) }<span class="p">.</span>
+
+	<span class="bp">self</span>
+		<span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
+		<span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">asString</span>
+		<span class="nf">equals:</span>
+			<span class="s">&#39;RBMessageNode((#bagels cons: (#and cons: (#lox cons: nil))) = (•₀ cons: •₁))&#39;</span>
+</pre></div>
+</div>
+<p>where</p>
+<blockquote>
+<div><span class="target" id="pharo-compiledMethod-35"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-equalswapo"><div class="highlight"><pre><span></span>&quot;TheLittleProver, protocol predicates&quot;
+equalSwapº
+
+	&quot;(dethm equal-swap (x y)
+		(equal (equal x y) (equal y x)))&quot;
+
+	^ [ :x :y | x = y ]
+	  ··&gt; [ :x :y | 
+	  RBMessageNode receiver: y selector: #= arguments: { x } ]
+</pre></div>
+</div>
+</div></blockquote>
 </div>
 </div>
 
