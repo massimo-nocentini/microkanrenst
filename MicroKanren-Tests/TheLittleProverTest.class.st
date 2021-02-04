@@ -569,20 +569,22 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_1_OldGamesNewRules_test [
-
-	"(equal 'flapjack (atom (cons a b)))"
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_54 [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
 	         [ :ast | 
-	         [ :a :b | 
-	         (rewritten asRBNode unifyo value:
-		          (RBMessageNode receiver: a selector: #even))
-	         , ((RBLiteralValueNode value: 3) unifyo value: a) ] ] 
-		         asGoalWithUnaryASTof: [ :a :b | a + b ] ] asGoal.
-	self
-		assert: aGoal solutions
-		equals: { [ 3 even ] unaryRBNode }
-		modulo: #asOrderedCollection
+	         [ :x :y | 
+	         ast
+		         acl: [ :rewrite | 
+			         rewrite
+				         focus: [ :o | y cons: o = (x isAtom = false) ]
+				         do: [ :o :r | theory carConsº value: r value: o ];
+				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
+		         contextVariables: (Array with: x with: y) ] ] 
+		         asGoalWithUnaryASTof: [ :x :y | 
+		         y cons: (x cdr cons: y car) car = (x isAtom = false) ] ]
+		         asGoal.
+	'RBMessageNode(•₀ cons: (•₁ cons: •₂) car = (•₃ isAtom = false))'.
+	self assert: aGoal solutions asArray equals: { [ true ] unaryRBNode }
 ]

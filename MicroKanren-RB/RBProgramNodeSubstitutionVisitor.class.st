@@ -15,7 +15,7 @@ RBProgramNodeSubstitutionVisitor >> substitution: anObject [
 { #category : #visiting }
 RBProgramNodeSubstitutionVisitor >> visitLogicVariableNode: aNode [
 
-	^ substitution at: aNode
+	^ substitution at: aNode "ifAbsent: [ self halt. aNode ]"
 ]
 
 { #category : #visiting }

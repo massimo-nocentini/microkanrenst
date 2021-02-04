@@ -7,26 +7,45 @@ BlockClosure >> asGoalWithASTof: aBlock [
 ]
 
 { #category : #'*MicroKanren-RB' }
-BlockClosure >> asGoalWithASTof: aBlock select: selectBlock [
+BlockClosure >> asGoalWithASTof: aBlock contextVariables: aCollection select: selectBlock [
 
 	^ FreshRB new
 		  receiver: aBlock;
 		  nodeBlock: self;
 		  selectBlock: selectBlock;
+		  contextVariables: aCollection;
 		  yourself
+]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> asGoalWithASTof: aBlock select: selectBlock [
+
+	^ self
+		  asGoalWithASTof: aBlock
+		  contextVariables: #(  )
+		  select: selectBlock
 ]
 
 { #category : #'*MicroKanren-RB' }
 BlockClosure >> asGoalWithUnaryASTof: aBlock [
 
-	^ self asGoalWithASTof: aBlock select: [ :aSequenceNode | 
-		  aSequenceNode statements in: [ :statements | 
-			  statements size = 1
-				  ifTrue: [ statements first ]
-				  ifFalse: [ 
-					  Error signal:
-						  ('Assumption that {} has 1 statement only is violated.' 
-							   format: { aSequenceNode }) ] ] ]
+	^ self asGoalWithUnaryASTof: aBlock contextVariables: #(  )
+]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> asGoalWithUnaryASTof: aBlock contextVariables: aCollection [
+
+	^ self
+		  asGoalWithASTof: aBlock
+		  contextVariables: aCollection
+		  select: [ :aSequenceNode | 
+			  aSequenceNode statements in: [ :statements | 
+				  statements size = 1
+					  ifTrue: [ statements first ]
+					  ifFalse: [ 
+						  Error signal:
+							  ('Assumption that {} has 1 statement only is violated.' 
+								   format: { aSequenceNode }) ] ] ]
 ]
 
 { #category : #'*MicroKanren-RB' }
