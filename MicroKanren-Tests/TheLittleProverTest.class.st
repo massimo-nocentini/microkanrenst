@@ -75,6 +75,40 @@ TheLittleProverTest >> equalSameo [
 	  ([ :x | x = x ] unifyo value: a) , ([ true ] unifyo value: b) ]
 ]
 
+{ #category : #helpers }
+TheLittleProverTest >> expectedRBNode_frame_55 [
+
+	^ RBMessageNode
+		  receiver: 0 asReifiedVar asRBNode
+		  selector: #cons:
+		  arguments: { (RBMessageNode
+				   receiver: (RBMessageNode
+						    receiver: (RBMessageNode
+								     receiver: (RBMessageNode
+										      receiver: (RBMessageNode
+												       receiver:
+												       (RBMessageNode
+													        receiver: 1 asReifiedVar asRBNode
+													        selector: #cdr)
+												       selector: #cons:
+												       arguments:
+												       { (RBMessageNode
+													        receiver: 0 asReifiedVar asRBNode
+													        selector: #car) })
+										      selector: #car)
+								     selector: #cons:
+								     arguments: { 2 asReifiedVar asRBNode })
+						    selector: #car)
+				   selector: #=
+				   arguments: { (RBMessageNode
+						    receiver:
+						    (RBMessageNode
+							     receiver: 1 asReifiedVar asRBNode
+							     selector: #isAtom)
+						    selector: #=
+						    arguments: { (RBLiteralValueNode value: false) }) }) }
+]
+
 { #category : #tests }
 TheLittleProverTest >> flapjackEqualsConsª: a isAtomª: b [
 
@@ -569,9 +603,9 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_54 [
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_55 [
 
-	| aGoal |
+	| aGoal node |
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :x :y | 
@@ -585,6 +619,11 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_54 [
 		         asGoalWithUnaryASTof: [ :x :y | 
 		         y cons: (x cdr cons: y car) car = (x isAtom = false) ] ]
 		         asGoal.
-	'RBMessageNode(•₀ cons: (•₁ cons: •₂) car = (•₃ isAtom = false))'.
-	self assert: aGoal solutions asArray equals: { [ true ] unaryRBNode }
+
+	node := self expectedRBNode_frame_55.
+
+	self
+		assert: aGoal solutions asArray equals: { node };
+		assert: node asString equals: 'RBMessageNode(•₀ cons:
+	((•₁ cdr cons: •₀ car) car cons: •₂) car = (•₁ isAtom = false))'
 ]

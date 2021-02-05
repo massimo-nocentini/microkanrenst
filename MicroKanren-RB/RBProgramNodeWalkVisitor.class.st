@@ -17,7 +17,7 @@ RBProgramNodeWalkVisitor >> visitLiteralValueNode: aLiteralNode [
 { #category : #visiting }
 RBProgramNodeWalkVisitor >> visitLogicVariableNode: aNode [
 
-	^ (aNode logicVar walkStarUsingWalker: walker) asRBNode
+	^ (walker value: aNode logicVar) asRBNode
 ]
 
 { #category : #visiting }
