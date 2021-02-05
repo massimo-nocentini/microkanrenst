@@ -170,10 +170,12 @@ TheLittleProverTest >> flapjackEqualsConsª: a isAtomª: b [
 TheLittleProverTest >> flapjackEqualsConsº: ast isAtomº: rewritten [
 
 	^ [ :a :b | 
-	  ast acl: [ :prover | 
-		  prover
-			  focus: [ :o | #flapjack = o ] do: theory isAtomConsº;
-			  then: [ :o | o unifyo value: rewritten ] ] ]
+	  ast
+		  acl: [ :prover | 
+			  prover
+				  focus: [ :o | #flapjack = o ] do: theory isAtomConsº;
+				  then: [ :o | o unifyo value: rewritten ] ]
+		  contextVariables: #(  ) ]
 ]
 
 { #category : #tests }
@@ -486,12 +488,13 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_21 [
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b | 
-	         ast acl: [ :prover | 
-		         prover
-			         focus: [ :o | #flapjack = o ] do: theory isAtomConsº;
-			         focus: [ :o | o ] do: self flapjackNilFalseº;
-			         then: [ :o | o unifyo value: rewritten asRBNode ] ] ] ] 
-		         asGoalWithUnaryASTof: [ :a :b | 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | #flapjack = o ] do: theory isAtomConsº;
+				         focus: [ :o | o ] do: self flapjackNilFalseº;
+				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
+		         contextVariables: #(  ) ] ] asGoalWithUnaryASTof: [ :a :b | 
 		         #flapjack = (a cons: b) isAtom ] ] asGoal.
 	self
 		assert: aGoal solutions asArray
@@ -505,14 +508,15 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_28 [
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b | 
-	         ast acl: [ :prover | 
-		         prover
-			         focus: [ :o | (o cons: nil) cdr isAtom ]
-			         do: theory carConsº;
-			         focus: [ :o | o isAtom ] do: theory cdrConsº;
-			         focus: [ :o | o ] do: theory isAtomNilº;
-			         then: [ :o | o unifyo value: rewritten asRBNode ] ] ] ] 
-		         asGoalWithUnaryASTof: [ :p :q | 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | (o cons: nil) cdr isAtom ]
+				         do: theory carConsº;
+				         focus: [ :o | o isAtom ] do: theory cdrConsº;
+				         focus: [ :o | o ] do: theory isAtomNilº;
+				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
+		         contextVariables: #(  ) ] ] asGoalWithUnaryASTof: [ :p :q | 
 		         ((p cons: q) car cons: nil) cdr isAtom ] ] asGoal.
 
 	self assert: aGoal solutions asArray equals: { [ true ] unaryRBNode }
@@ -525,12 +529,13 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_32 [
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b | 
-	         ast acl: [ :prover | 
-		         prover
-			         focus: [ :o | o isAtom ] do: theory cdrConsº;
-			         focus: [ :o | o ] do: theory isAtomNilº;
-			         then: [ :o | o unifyo value: rewritten asRBNode ] ] ] ] 
-		         asGoalWithUnaryASTof: [ :p :q | 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | o isAtom ] do: theory cdrConsº;
+				         focus: [ :o | o ] do: theory isAtomNilº;
+				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
+		         contextVariables: #(  ) ] ] asGoalWithUnaryASTof: [ :p :q | 
 		         ((p cons: q) car cons: nil) cdr isAtom ] ] asGoal.
 
 	self assert: aGoal solutions asArray equals: { [ true ] unaryRBNode }
@@ -543,15 +548,16 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_44 [
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b | 
-	         ast acl: [ :rewrite | 
-		         rewrite
-			         focus: [ :o | 
-				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
-			         do: theory equalSameº;
-			         then: [ :o | o unifyo value: rewritten asRBNode ] ] ] ] 
-		         asGoalWithUnaryASTof: [ :x :y | 
-			         ((x cons: y) = (x cons: y) cons:
-				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
+	         ast
+		         acl: [ :rewrite | 
+			         rewrite
+				         focus: [ :o | 
+					         (o cons: (#and cons: (#crumpets cons: nil))) car ]
+				         do: theory equalSameº;
+				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
+		         contextVariables: #(  ) ] ] asGoalWithUnaryASTof: [ :x :y | 
+		         ((x cons: y) = (x cons: y) cons:
+			          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
 
 	self
 		assert: aGoal solutions asArray
@@ -567,17 +573,18 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46 [
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b | 
-	         ast acl: [ :rewrite | 
-		         rewrite
-			         focus: [ :o | 
-			         (o cons: (#and cons: (#crumpets cons: nil))) car ]
-			         do: theory equalSameº.
-		         rewrite
-			         focus: [ :o | o ] do: theory carConsº;
-			         then: [ :o | o unifyo value: rewritten asRBNode ] ] ] ] 
-		         asGoalWithUnaryASTof: [ :x :y | 
-			         ((x cons: y) = (x cons: y) cons:
-				          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
+	         ast
+		         acl: [ :rewrite | 
+			         rewrite
+				         focus: [ :o | 
+				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
+				         do: theory equalSameº.
+			         rewrite
+				         focus: [ :o | o ] do: theory carConsº;
+				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
+		         contextVariables: #(  ) ] ] asGoalWithUnaryASTof: [ :x :y | 
+		         ((x cons: y) = (x cons: y) cons:
+			          (#and cons: (#crumpets cons: nil))) car ] ] asGoal.
 
 	self assert: aGoal solutions asArray equals: { [ true ] unaryRBNode }
 ]
@@ -629,11 +636,12 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b | 
-	         ast acl: [ :rewrite | 
-		         rewrite
-			         focus: [ :o | o ] do: theory equalSwapº;
-			         then: [ :o | o unifyo value: rewritten asRBNode ] ] ] ] 
-		         asGoalWithUnaryASTof: [ :x :y | 
+	         ast
+		         acl: [ :rewrite | 
+			         rewrite
+				         focus: [ :o | o ] do: theory equalSwapº;
+				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
+		         contextVariables: #(  ) ] ] asGoalWithUnaryASTof: [ :x :y | 
 		         (x cons: y) = (#bagels cons: (#and cons: (#lox cons: nil))) ] ]
 		         asGoal.
 
@@ -713,7 +721,8 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
 						         = (x isAtom = (b isAtom cons: o) isAtom) ]
 				         do: [ :o :r | theory equalSwapº value: o value: r ].
 
-			         rewrite then: [ :o | o unifyo value: rewritten asRBNode ] ]
+			         rewrite then: [ :o | 
+				         theory unifyº value: o value: rewritten asRBNode ] ]
 		         contextVariables: (OrderedCollection new
 				          add: x;
 				          add: y;

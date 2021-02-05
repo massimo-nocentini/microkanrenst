@@ -73,3 +73,9 @@ TheLittleProver >> isAtomNilº [
 
 	^ [ :_ | nil isAtom ] ·> [ :_ | true asLiteralRBNode ]
 ]
+
+{ #category : #'as yet unclassified' }
+TheLittleProver >> unifyº [
+
+	^ [ :a :b | a unifyo value: b ]
+]
