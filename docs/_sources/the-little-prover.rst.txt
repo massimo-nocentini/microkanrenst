@@ -2,20 +2,19 @@
 The Little Prover
 =================
 
-*Salutations. What are salutations? Salutations are a fancy way of saying hello
-or good morning.* Thank you, D. Friedman and C. Eastlung.
 
 Old Games, New Rules
 --------------------
 
-It is a known fact that
+*Salutations. What are salutations? Salutations are a fancy way of saying hello
+or good morning.* Thank you, D. Friedman and C. Eastlung.
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 06
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_06
 
-holds. On one hand,
+On one hand,
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 11
@@ -200,7 +199,7 @@ And, of course, the second step is easy.
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 49
 
-Does the order of the arguments to equal matter?
+Does the order of the arguments to ``#=`` matter?
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_49
 
@@ -208,3 +207,42 @@ where
 
   .. pharo:autocompiledmethod:: TheLittleProver>>#equalSwapº
 
+.. index::
+   single: The Little Prover; 01. Old Games, New Rules: frame 55
+
+What else the context ``y cons: (x cdr cons: y car) car = (x isAtom = false)``
+equal to with focus on ``(x cdr cons: y car) car`` according to ``#carConsº``?
+Recall that “is equal to” works in both directions.
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_55
+
+.. index::
+   single: The Little Prover; 01. Old Games, New Rules: frame 56
+
+Can we use :pharo:mref:`TheLittleProver>>#carConsº`, then
+:pharo:mref:`TheLittleProver>>#isAtomConsº` and finally then
+:pharo:mref:`TheLittleProver>>#cdrConsº`? And what value is the final expression equal to?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_56
+
+That is a good question. We do not know, but we have had fun playing with it so far!
+
+Even Older Games
+----------------
+
+.. index::
+   single: The Little Prover; 02. Even Older Games: frame 5
+
+What is this expression *obviously* equal to?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_5
+
+.. index::
+   single: The Little Prover; 02. Even Older Games: frame 7
+
+If :pharo:mref:`TheLittleProver>>#ifSameº` can start with an if expression and
+end with a variable, then it *must* also be able to start with a variable and
+end with an if expression. So ... what else is ``c`` equal to, according to
+:pharo:mref:`TheLittleProver>>#ifSameº`?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_7
