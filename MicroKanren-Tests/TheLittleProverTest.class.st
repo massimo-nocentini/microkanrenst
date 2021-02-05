@@ -109,6 +109,57 @@ TheLittleProverTest >> expectedRBNode_frame_55 [
 						    arguments: { (RBLiteralValueNode value: false) }) }) }
 ]
 
+{ #category : #helpers }
+TheLittleProverTest >> expectedRBNode_frame_56 [
+
+	^ RBMessageNode
+		  receiver: 0 asReifiedVar asRBNode
+		  selector: #cons:
+		  arguments: { (RBMessageNode
+				   receiver: (RBMessageNode
+						    receiver: (RBMessageNode
+								     receiver: (RBMessageNode
+										      receiver: (RBMessageNode
+												       receiver:
+												       (RBMessageNode
+													        receiver: 1 asReifiedVar asRBNode
+													        selector: #cdr)
+												       selector: #cons:
+												       arguments:
+												       { (RBMessageNode
+													        receiver: 0 asReifiedVar asRBNode
+													        selector: #car) })
+										      selector: #car)
+								     selector: #cons:
+								     arguments: { (RBMessageNode
+										      receiver: (RBLiteralValueNode value: #oats)
+										      selector: #cons:
+										      arguments: { (RBLiteralValueNode value: nil) }) })
+						    selector: #car)
+				   selector: #=
+				   arguments: { (RBMessageNode
+						    receiver:
+						    (RBMessageNode
+							     receiver: 1 asReifiedVar asRBNode
+							     selector: #isAtom)
+						    selector: #=
+						    arguments: { (RBMessageNode
+								     receiver: (RBMessageNode
+										      receiver:
+										      (RBMessageNode
+											       receiver: 2 asReifiedVar asRBNode
+											       selector: #isAtom)
+										      selector: #cons:
+										      arguments: { (RBMessageNode
+												       receiver: 3 asReifiedVar asRBNode
+												       selector: #=
+												       arguments: { (RBMessageNode
+														        receiver: 4 asReifiedVar asRBNode
+														        selector: #cons:
+														        arguments: { 2 asReifiedVar asRBNode }) }) })
+								     selector: #isAtom) }) }) }
+]
+
 { #category : #tests }
 TheLittleProverTest >> flapjackEqualsConsª: a isAtomª: b [
 
@@ -626,4 +677,59 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_55 [
 		assert: aGoal solutions asArray equals: { node };
 		assert: node asString equals: 'RBMessageNode(•₀ cons:
 	((•₁ cdr cons: •₀ car) car cons: •₂) car = (•₁ isAtom = false))'
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
+
+	| aGoal node |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :x :y :a :b :c | 
+	         ast
+		         acl: [ :rewrite | 
+			         rewrite
+				         focus: [ :o | y cons: o = (x isAtom = false) ]
+				         do: [ :o :r | theory carConsº value: r value: o ].
+
+			         rewrite
+				         focus: [ :o | 
+					         y cons:
+						         ((x cdr cons: y car) car cons: (#oats cons: nil)) car
+						         = (x isAtom = o) ]
+				         do: [ :o :r | theory isAtomConsº value: r value: o ].
+
+			         rewrite
+				         focus: [ :o | 
+					         y cons:
+						         ((x cdr cons: y car) car cons: (#oats cons: nil)) car
+						         = (x isAtom = (o isAtom cons: (a cons: b) = c) isAtom) ]
+				         do: [ :o :r | theory cdrConsº value: o value: r ].
+
+			         rewrite
+				         focus: [ :o | 
+					         y cons:
+						         ((x cdr cons: y car) car cons: (#oats cons: nil)) car
+						         = (x isAtom = (b isAtom cons: o) isAtom) ]
+				         do: [ :o :r | theory equalSwapº value: o value: r ].
+
+			         rewrite then: [ :o | o unifyo value: rewritten asRBNode ] ]
+		         contextVariables: (OrderedCollection new
+				          add: x;
+				          add: y;
+				          add: a;
+				          add: b;
+				          add: c;
+				          yourself) ] ] asGoalWithUnaryASTof: [ :x :y :a :b :c | 
+		         y cons: (x cdr cons: y car) car = (x isAtom = false) ] ]
+		         asGoal.
+
+	node := self expectedRBNode_frame_56.
+
+	self
+		assert: aGoal solutions asArray equals: { node };
+		assert: node asString
+		equals:
+			'RBMessageNode(•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car
+	= (•₁ isAtom = (•₂ isAtom cons: •₃ = (•₄ cons: •₂)) isAtom))'
 ]

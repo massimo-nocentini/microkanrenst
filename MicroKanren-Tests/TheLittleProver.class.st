@@ -22,6 +22,18 @@ TheLittleProver >> cdrConsº [
 	^ [ :x :y | (x cons: y) cdr ] ··> [ :x :y | y ]
 ]
 
+{ #category : #'as yet unclassified' }
+TheLittleProver >> cdrOfConsº [
+
+	^ [ :c :d | 
+	  [ :a | 
+	  c unifyo value:
+		  (RBMessageNode
+			   receiver: a asRBNode
+			   selector: #cons:
+			   arguments: { d }) ] asGoal ]
+]
+
 { #category : #predicates }
 TheLittleProver >> equalSameº [
 

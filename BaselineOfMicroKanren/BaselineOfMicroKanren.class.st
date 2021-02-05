@@ -133,7 +133,8 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverForDoc [
 			     test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº
 			     test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually
 			     test_chapter_01_OldGamesNewRules_frame_49
-			     test_chapter_01_OldGamesNewRules_frame_55 );
+			     test_chapter_01_OldGamesNewRules_frame_55
+			     test_chapter_01_OldGamesNewRules_frame_56 );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover.json' ]
