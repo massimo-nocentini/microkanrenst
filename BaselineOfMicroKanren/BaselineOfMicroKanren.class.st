@@ -109,10 +109,10 @@ BaselineOfMicroKanren >> scriptExportSexpTestsForDoc [
 ]
 
 { #category : #export }
-BaselineOfMicroKanren >> scriptExportTheLittleProverForDoc [
+BaselineOfMicroKanren >> scriptExportTheLittleProverChapter01ForDoc [
 
 	<script:
-	'BaselineOfMicroKanren new scriptExportTheLittleProverForDoc'>
+	'BaselineOfMicroKanren new scriptExportTheLittleProverChapter01ForDoc'>
 	^ MetaSTExporter new
 		  selectors:
 			  #( isAtom #isAtomConsº #consª:isAtomª: #consº:isAtomº:
@@ -137,6 +137,20 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverForDoc [
 			     test_chapter_01_OldGamesNewRules_frame_56 );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
-			  / 'microkanren-the-little-prover.json' ]
+			  / 'microkanren-the-little-prover-chapter-01.json' ]
+		  ofPackage: self class package
+]
+
+{ #category : #export }
+BaselineOfMicroKanren >> scriptExportTheLittleProverChapter02ForDoc [
+
+	<script:
+	'BaselineOfMicroKanren new scriptExportTheLittleProverChapter02ForDoc'>
+	^ MetaSTExporter new
+		  selectors: #( test_chapter_02_EvenOlderGames_frame_5
+			     test_chapter_02_EvenOlderGames_frame_7 );
+		  exportWithRepositoryPath: [ :aPath | 
+			  aPath / 'booklet' / 'source'
+			  / 'microkanren-the-little-prover-chapter-02.json' ]
 		  ofPackage: self class package
 ]

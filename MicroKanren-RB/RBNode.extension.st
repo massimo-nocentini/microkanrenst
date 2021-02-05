@@ -37,6 +37,12 @@ RBNode >> unifyWith: anObject usingUnifier: anUnifier [
 ]
 
 { #category : #'*MicroKanren-RB' }
+RBNode >> unifyWithRBBlockNode: aNode usingUnifier: anUnifier [
+
+	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
+]
+
+{ #category : #'*MicroKanren-RB' }
 RBNode >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
 
 	^ self unifyWithRBNode: aNode usingUnifier: anUnifier

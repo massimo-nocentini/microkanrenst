@@ -31,7 +31,10 @@ RBProgramNodeIdentityVisitor >> visitAssignmentNode: anAssignmentNode [
 { #category : #visiting }
 RBProgramNodeIdentityVisitor >> visitBlockNode: aBlockNode [
 
-	self shouldBeImplemented
+	^ RBBlockNode
+		  arguments:
+		  (aBlockNode arguments collect: [ :each | each acceptVisitor: self ])
+		  body: (aBlockNode body acceptVisitor: self)
 ]
 
 { #category : #visiting }

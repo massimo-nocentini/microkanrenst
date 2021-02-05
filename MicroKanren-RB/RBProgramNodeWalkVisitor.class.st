@@ -8,6 +8,15 @@ Class {
 }
 
 { #category : #visiting }
+RBProgramNodeWalkVisitor >> visitBlockNode: aNode [
+
+	^ RBBlockNode
+		  arguments:
+		  (aNode arguments collect: [ :each | each acceptVisitor: self ])
+		  body: (aNode body acceptVisitor: self)
+]
+
+{ #category : #visiting }
 RBProgramNodeWalkVisitor >> visitLiteralValueNode: aLiteralNode [
 
 	^ RBLiteralValueNode value:

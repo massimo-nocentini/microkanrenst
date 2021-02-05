@@ -20,6 +20,16 @@ RBProgramNodeReifyVisitor >> state: anObject [
 ]
 
 { #category : #visiting }
+RBProgramNodeReifyVisitor >> visitBlockNode: aNode [
+
+	state := aNode arguments
+		         inject: state
+		         into: [ :aState :each | aState reifier value: each ].
+
+	state := state reifier value: aNode body
+]
+
+{ #category : #visiting }
 RBProgramNodeReifyVisitor >> visitLiteralValueNode: aLiteralNode [
 
 	state := state reifier value: aLiteralNode value

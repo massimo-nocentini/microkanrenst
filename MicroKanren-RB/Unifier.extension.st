@@ -1,6 +1,19 @@
 Extension { #name : #Unifier }
 
 { #category : #'*MicroKanren-RB' }
+Unifier >> forRBBlockNode: aRBBlockNode forRBBlockNode: anotherRBBlockNode [
+
+	| aState |
+	aState := self
+		          value: aRBBlockNode arguments
+		          value: anotherRBBlockNode arguments.
+	aState := aState unifier
+		          continuation: continuation;
+		          value: aRBBlockNode body value: anotherRBBlockNode body.
+	^ aState
+]
+
+{ #category : #'*MicroKanren-RB' }
 Unifier >> forRBLiteralValueNode: aNode forRBLiteralValueNode: anotherNode [
 
 	^ self value: aNode value value: anotherNode value

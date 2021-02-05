@@ -76,7 +76,7 @@ TheLittleProverTest >> equalSameo [
 ]
 
 { #category : #helpers }
-TheLittleProverTest >> expectedRBNode_frame_55 [
+TheLittleProverTest >> expectedRBNode_chapter_01_frame_55 [
 
 	^ RBMessageNode
 		  receiver: 0 asReifiedVar asRBNode
@@ -110,7 +110,7 @@ TheLittleProverTest >> expectedRBNode_frame_55 [
 ]
 
 { #category : #helpers }
-TheLittleProverTest >> expectedRBNode_frame_56 [
+TheLittleProverTest >> expectedRBNode_chapter_01_frame_56 [
 
 	^ RBMessageNode
 		  receiver: 0 asReifiedVar asRBNode
@@ -158,6 +158,45 @@ TheLittleProverTest >> expectedRBNode_frame_56 [
 														        selector: #cons:
 														        arguments: { 2 asReifiedVar asRBNode }) }) })
 								     selector: #isAtom) }) }) }
+]
+
+{ #category : #tests }
+TheLittleProverTest >> expectedRBNode_chapter_02_frame_7 [
+
+	^ RBMessageNode
+		  receiver: 0 asReifiedVar asRBNode
+		  selector: #ifTrue:ifFalse:
+		  arguments: { 
+				  (RBBlockNode body: (RBSequenceNode statements: { (RBMessageNode
+							     receiver: (RBMessageNode
+									      receiver: (RBMessageNode
+											       receiver: (RBLiteralValueNode value: 3)
+											       selector: #cons:
+											       arguments: { (RBLiteralValueNode value: nil) })
+									      selector: #isAtom)
+							     selector: #ifTrue:ifFalse:
+							     arguments: { 
+									     (RBBlockNode body:
+										      (RBSequenceNode statements:
+											       { 1 asReifiedVar asRBNode })).
+									     (RBBlockNode body:
+										      (RBSequenceNode statements:
+											       { 2 asReifiedVar asRBNode })) }) })).
+				  (RBBlockNode body: (RBSequenceNode statements: { (RBMessageNode
+							     receiver: (RBMessageNode
+									      receiver: (RBMessageNode
+											       receiver: (RBLiteralValueNode value: 3)
+											       selector: #cons:
+											       arguments: { (RBLiteralValueNode value: nil) })
+									      selector: #isAtom)
+							     selector: #ifTrue:ifFalse:
+							     arguments: { 
+									     (RBBlockNode body:
+										      (RBSequenceNode statements:
+											       { 1 asReifiedVar asRBNode })).
+									     (RBBlockNode body:
+										      (RBSequenceNode statements:
+											       { 2 asReifiedVar asRBNode })) }) })) }
 ]
 
 { #category : #tests }
@@ -679,7 +718,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_55 [
 		         y cons: (x cdr cons: y car) car = (x isAtom = false) ] ]
 		         asGoal.
 
-	node := self expectedRBNode_frame_55.
+	node := self expectedRBNode_chapter_01_frame_55.
 
 	self
 		assert: aGoal solutions asArray equals: { node };
@@ -733,7 +772,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
 		         y cons: (x cdr cons: y car) car = (x isAtom = false) ] ]
 		         asGoal.
 
-	node := self expectedRBNode_frame_56.
+	node := self expectedRBNode_chapter_01_frame_56.
 
 	self
 		assert: aGoal solutions asArray equals: { node };
@@ -741,4 +780,79 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
 		equals:
 			'RBMessageNode(•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car
 	= (•₁ isAtom = (•₂ isAtom cons: •₃ = (•₄ cons: •₂)) isAtom))'
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_5 [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :c | 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | o ] do: theory ifSameº;
+				         then: [ :o | 
+					         theory unifyº value: o value: rewritten asRBNode ] ]
+		         contextVariables: #(  ) ] ] asGoalWithUnaryASTof: [ :a :c | 
+		         a
+			         ifTrue: [ 3 ]
+			         ifFalse: [ c ] ] ] asGoal.
+
+	self assert: aGoal solutions asArray equals: { 3 asLiteralRBNode }
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_5_rewriting_unbound [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :c | 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | o ] do: theory ifSameº;
+				         then: [ :o | 
+					         theory unifyº value: o value: rewritten asRBNode ] ]
+		         contextVariables: #(  ) ] ] asGoalWithUnaryASTof: [ :a :c | 
+		         a
+			         ifTrue: [ c ]
+			         ifFalse: [ c ] ] ] asGoal.
+
+	self assert: aGoal solutions asArray equals: { 3 asLiteralRBNode }
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_7 [
+
+	| aGoal node |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :c | 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | o ]
+				         do: [ :o :r | theory ifSameº value: r value: o ];
+				         then: [ :o | 
+					         theory unifyº value: o value: rewritten asRBNode ] ]
+		         contextVariables: #(  ) ] ] asGoalWithUnaryASTof: [ :a :c | 
+		         (3 cons: nil) isAtom
+			         ifTrue: [ a ]
+			         ifFalse: [ c ] ] ] asGoal.
+
+	node := self expectedRBNode_chapter_02_frame_7.
+	self
+		assert: aGoal solutions asArray equals: { node };
+		assert: node formattedCode equals: '•₀
+	ifTrue: [ 
+		(3 cons: nil) isAtom
+			ifTrue: [ •₁ ]
+			ifFalse: [ •₂ ] ]
+	ifFalse: [ 
+		(3 cons: nil) isAtom
+			ifTrue: [ •₁ ]
+			ifFalse: [ •₂ ] ]'
 ]
