@@ -161,6 +161,39 @@ TheLittleProverTest >> expectedRBNode_chapter_01_frame_56 [
 ]
 
 { #category : #tests }
+TheLittleProverTest >> expectedRBNode_chapter_02_frame_12 [
+
+	^ RBMessageNode
+		  receiver: (RBMessageNode
+				   receiver: (RBMessageNode
+						    receiver: 0 asReifiedVar asRBNode
+						    selector: #=
+						    arguments: { (RBLiteralValueNode value: true) })
+				   selector: #ifTrue:ifFalse:
+				   arguments: { 
+						   (RBBlockNode body:
+							    (RBSequenceNode statements:
+								     { (RBLiteralValueNode value: true) })).
+						   (RBBlockNode body:
+							    (RBSequenceNode statements: { (RBMessageNode
+									      receiver: (RBLiteralValueNode value: #or)
+									      selector: #=
+									      arguments: { (RBMessageNode
+											       receiver: (RBLiteralValueNode value: #black)
+											       selector: #cons:
+											       arguments: { (RBMessageNode
+													        receiver: (RBLiteralValueNode value: #coffee)
+													        selector: #cons:
+													        arguments: { (RBLiteralValueNode value: nil) }) }) }) })) })
+		  selector: #ifTrue:ifFalse:
+		  arguments: { 
+				  (RBBlockNode body:
+					   (RBSequenceNode statements: { 1 asReifiedVar asRBNode })).
+				  (RBBlockNode body:
+					   (RBSequenceNode statements: { 1 asReifiedVar asRBNode })) }
+]
+
+{ #category : #tests }
 TheLittleProverTest >> expectedRBNode_chapter_02_frame_7 [
 
 	^ RBMessageNode
@@ -780,6 +813,67 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
 		equals:
 			'RBMessageNode(•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car
 	= (•₁ isAtom = (•₂ isAtom cons: •₃ = (•₄ cons: •₂)) isAtom))'
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_12 [
+
+	| aGoal node |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a :b :c | 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | 
+					         (a = true
+						          ifTrue: [ 
+							          o
+								          ifTrue: [ a ]
+								          ifFalse: [ b ] ]
+						          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
+						         ifTrue: [ c ]
+						         ifFalse: [ c ] ]
+				         do: theory equalSameº.
+
+			         prover
+				         focus: [ :o | 
+					         (a = true
+						          ifTrue: [ o ]
+						          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
+						         ifTrue: [ c ]
+						         ifFalse: [ c ] ]
+				         do: theory ifTrueº.
+
+			         prover
+				         focus: [ :o | 
+					         o
+						         ifTrue: [ c ]
+						         ifFalse: [ c ] ]
+				         do: theory equalIfº.
+
+			         prover then: [ :o | 
+				         theory unifyº value: o value: rewritten asRBNode ] ]
+		         contextVariables: (Array with: a with: b with: c) ] ] 
+		         asGoalWithUnaryASTof: [ :a :b :c | 
+			         (a = true
+				          ifTrue: [ 
+					          nil = nil
+						          ifTrue: [ a ]
+						          ifFalse: [ b ] ]
+				          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
+				         ifTrue: [ c ]
+				         ifFalse: [ c ] ] ] asGoal.
+
+	node := self expectedRBNode_chapter_02_frame_12.
+	
+	self
+		assert: aGoal solutions asArray equals: { node };
+		assert: node formattedCode equals: '(•₀ = true
+	 ifTrue: [ true ]
+	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₁ ]'
 ]
 
 { #category : #tests }
