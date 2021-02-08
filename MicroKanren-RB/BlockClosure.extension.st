@@ -71,6 +71,13 @@ BlockClosure >> sendso [
 ]
 
 { #category : #'*MicroKanren-RB' }
+BlockClosure >> substituteVariablesUsingSequenceableCollection: rbVariables [
+
+	^ self unaryRBNode substituteVariablesUsingDictionary:
+		  (self argumentNames with: rbVariables collect: #->) asDictionary
+]
+
+{ #category : #'*MicroKanren-RB' }
 BlockClosure >> unaryRBNode [
 
 	^ self sourceNode body statements in: [ :statements | 
@@ -89,7 +96,8 @@ BlockClosure >> ·> aBlock [
 	  [ :ast | 
 	  [ :x | 
 	  | z |
-	  z := aBlock value: x.
+	  z := aBlock substituteVariablesUsingSequenceableCollection:
+		       (Array with: x).
 	  (ast unifyo value: a) , (z unifyo value: b) ] ] 
 		  asGoalWithUnaryASTof: self ]
 ]
@@ -101,7 +109,8 @@ BlockClosure >> ··> aBlock [
 	  [ :ast | 
 	  [ :x :y | 
 	  | z |
-	  z := aBlock value: x value: y.
+	  z := aBlock substituteVariablesUsingSequenceableCollection:
+		       (Array with: x with: y).
 	  (ast unifyo value: a) , (z unifyo value: b) ] ] 
 		  asGoalWithUnaryASTof: self ]
 ]
@@ -113,7 +122,8 @@ BlockClosure >> ···> aBlock [
 	  [ :ast | 
 	  [ :x :y :w | 
 	  | z |
-	  z := aBlock value: x value: y value: w.
+	  z := aBlock substituteVariablesUsingSequenceableCollection:
+		       (Array with: x with: y with: w).
 	  (ast unifyo value: a) , (z unifyo value: b) ] ] 
 		  asGoalWithUnaryASTof: self ]
 ]
