@@ -60,6 +60,7 @@ exclude_patterns = []
 #
 html_theme = 'sphinxdoc'
 html_theme = 'classic'
+html_theme = 'alabaster'
 #html_theme = 'python_docs_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -71,6 +72,14 @@ html_theme_options = {
     "sidebarwidth": "20%",
     "body_max_width": "80%",
     "globaltoc_collapse": False,
-    "stickysidebar": True,
+    'github_user': 'massimo-nocentini',
+    'github_repo': 'microkanrenst',
+    'code_font_family': 'Monaco',
+    'code_font_size': '0.8em',
+    'show_relbars': True,
+    'fixed_sidebar':True,
+    'page_width':'80%',
+    'pre_bg':'white transparent',
+    'note_bg':'white',
 }
 

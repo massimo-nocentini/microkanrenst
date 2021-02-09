@@ -7,148 +7,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>S-expressions &#8212; µkanrenst  documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="RBNode theory" href="theory-rbnodes.html" />
-    <link rel="prev" title="Messages" href="messages.html" /> 
+    <link rel="prev" title="Messages" href="messages.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="theory-rbnodes.html" title="RBNode theory"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="messages.html" title="Messages"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">S-expressions</a></li> 
-      </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="s-expressions">
-<h1>S-expressions<a class="headerlink" href="#s-expressions" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testacorn"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
-<span class="nf">testACORN</span>
-
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateSexpCaro</span> <span class="nf">value:</span> <span class="s">&#39;acorn&#39;</span> <span class="nf">asCons</span> <span class="nf">value:</span> <span class="nv">r</span> ]
-         <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="sc">$a</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
-
-  <span class="c">&quot;Export it.&quot;</span>
-  <span class="bp">self</span>
-    <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
-    <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-acorn&#39;</span>
-    <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
-</pre></div>
-</div>
-<blockquote>
-<div><img alt="_images/sexp-acorn.svg" class="align-center" src="_images/sexp-acorn.svg" /></div></blockquote>
-<span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testappendoforward"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
-<span class="nf">testAppendoForward</span>
-
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">|</span> 
-       <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
-         <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="nf">asCons</span>
-         <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="nf">asCons</span>
-         <span class="nf">value:</span> <span class="nv">l</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span>
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
-
-  <span class="c">&quot;Export it.&quot;</span>
-  <span class="bp">self</span>
-    <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
-    <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-forward&#39;</span>
-    <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
-</pre></div>
-</div>
-<blockquote>
-<div><img alt="_images/sexp-appendo-forward.svg" class="align-center" src="_images/sexp-appendo-forward.svg" /></div></blockquote>
-<span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testappendobackward"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
-<span class="nf">testAppendoBackward</span>
-
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-       <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
-         <span class="nf">value:</span> <span class="nv">l</span>
-         <span class="nf">value:</span> <span class="nv">r</span>
-         <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> ({ 
-         <span class="ss">#(</span> <span class="ss">nil</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">nil</span> <span class="ss">)</span> } <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">each</span> <span class="o">|</span> 
-         <span class="nv">each</span> <span class="nf">collect:</span> <span class="ss">#asCons</span> ])
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
-
-  <span class="c">&quot;Export it.&quot;</span>
-  <span class="bp">self</span>
-    <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
-    <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-backward&#39;</span>
-    <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
-</pre></div>
-</div>
-<blockquote>
-<div><img alt="_images/sexp-appendo-backward.svg" class="align-center" src="_images/sexp-appendo-backward.svg" /></div></blockquote>
-<span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testdycko"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
-<span class="nf">testDycko</span>
-
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">alpha</span> <span class="o">|</span> <span class="nc">MKPredicateSexpDycko</span> <span class="nf">value:</span> <span class="nv">alpha</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">20</span>)
-    <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-dycko&#39;</span>
-    <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
-</pre></div>
-</div>
-<blockquote>
-<div><img alt="_images/sexp-dycko.svg" class="align-center" src="_images/sexp-dycko.svg" /></div></blockquote>
-</div>
-
-
-            <div class="clearer"></div>
-          </div>
-        </div>
-      </div>
+  <div class="document">
+    
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="messages.html"
-                        title="previous chapter">Messages</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="theory-rbnodes.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/theory-sexp.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
+<h1 class="logo"><a href="index.html">µkanrenst</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=massimo-nocentini&repo=microkanrenst&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="goals.html">Goals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">S-expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory-rbnodes.html"><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-little-prover.html">The Little Prover</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="messages.html" title="previous chapter">Messages</a></li>
+      <li>Next: <a href="theory-rbnodes.html" title="next chapter"><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a></li>
+  </ul></li>
+</ul>
+</div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
@@ -159,29 +74,160 @@
     </div>
 </div>
 <script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
-      <div class="clearer"></div>
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="messages.html" title="Previous document">Messages</a>
+        </li>
+        <li>
+          <a href="theory-rbnodes.html" title="Next document"><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="s-expressions">
+<h1>S-expressions<a class="headerlink" href="#s-expressions" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testacorn"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
+<span class="nf">testACORN</span>
+
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateSexpCaro</span> <span class="nf">value:</span> <span class="s">&#39;acorn&#39;</span> <span class="nf">asCons</span> <span class="nf">value:</span> <span class="nv">r</span> ]
+           <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="sc">$a</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+   <span class="c">&quot;Export it.&quot;</span>
+   <span class="bp">self</span>
+      <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+      <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-acorn&#39;</span>
+      <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/sexp-acorn.svg" class="align-center" src="_images/sexp-acorn.svg" /></div></blockquote>
+<span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testappendoforward"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
+<span class="nf">testAppendoForward</span>
+
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">|</span> 
+        <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
+           <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="nf">asCons</span>
+           <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="nf">asCons</span>
+           <span class="nf">value:</span> <span class="nv">l</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span>
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+   <span class="c">&quot;Export it.&quot;</span>
+   <span class="bp">self</span>
+      <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+      <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-forward&#39;</span>
+      <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/sexp-appendo-forward.svg" class="align-center" src="_images/sexp-appendo-forward.svg" /></div></blockquote>
+<span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testappendobackward"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
+<span class="nf">testAppendoBackward</span>
+
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+        <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
+           <span class="nf">value:</span> <span class="nv">l</span>
+           <span class="nf">value:</span> <span class="nv">r</span>
+           <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> ({ 
+             <span class="ss">#(</span> <span class="ss">nil</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+             <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+             <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+             <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+             <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+             <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">nil</span> <span class="ss">)</span> } <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">each</span> <span class="o">|</span> 
+             <span class="nv">each</span> <span class="nf">collect:</span> <span class="ss">#asCons</span> ])
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+   <span class="c">&quot;Export it.&quot;</span>
+   <span class="bp">self</span>
+      <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+      <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-backward&#39;</span>
+      <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/sexp-appendo-backward.svg" class="align-center" src="_images/sexp-appendo-backward.svg" /></div></blockquote>
+<span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testdycko"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
+<span class="nf">testDycko</span>
+
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">alpha</span> <span class="o">|</span> <span class="nc">MKPredicateSexpDycko</span> <span class="nf">value:</span> <span class="nv">alpha</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">20</span>)
+      <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-dycko&#39;</span>
+      <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/sexp-dycko.svg" class="align-center" src="_images/sexp-dycko.svg" /></div></blockquote>
+</div>
+
+
+          </div>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="messages.html" title="Previous document">Messages</a>
+        </li>
+        <li>
+          <a href="theory-rbnodes.html" title="Next document"><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+        </div>
+      </div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2020, Massimo Nocentini.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/theory-sexp.rst.txt"
+          rel="nofollow">Page source</a>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="theory-rbnodes.html" title="RBNode theory"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="messages.html" title="Messages"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">S-expressions</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Massimo Nocentini.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
-    </div>
+
+    
+
+    
   </body>
 </html>

@@ -7,39 +7,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Goals &#8212; µkanrenst  documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Predicates" href="predicates.html" />
-    <link rel="prev" title="Overview" href="overview.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="predicates.html" title="Predicates"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="overview.html" title="Overview"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Goals</a></li> 
-      </ul>
-    </div>  
+    <link rel="prev" title="Overview" href="overview.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
 
-    <div class="document">
+  </head><body>
+  <div class="document">
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">µkanrenst</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=massimo-nocentini&repo=microkanrenst&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Goals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#goal">Goal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#failed">Failed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#succeed">Succeed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fresh">Fresh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unify">Unify</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#disj">Disj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conj">Conj</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="predicates.html">Predicates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="messages.html">Messages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory-sexp.html">S-expressions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="theory-rbnodes.html"><code class="docutils literal notranslate"><span class="pre">RBNode</span></code> theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="the-little-prover.html">The Little Prover</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="overview.html" title="previous chapter">Overview</a></li>
+      <li>Next: <a href="predicates.html" title="next chapter">Predicates</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
       <div class="documentwrapper">
         <div class="bodywrapper">
+              <div class="related top">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="overview.html" title="Previous document">Overview</a>
+        </li>
+        <li>
+          <a href="predicates.html" title="Next document">Predicates</a>
+          &rarr;
+        </li>
+    </ul>
+  </nav>
+              </div>
+          
+
           <div class="body" role="main">
             
   <div class="section" id="goals">
@@ -104,11 +176,11 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfailed"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFailed</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -128,15 +200,15 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testsucceed"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testSucceed</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
 
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; #(#tautology)&quot;</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; #(#tautology)&quot;</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -144,7 +216,7 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-var-class-tautology"><div class="highlight"><pre><span></span><span class="c">&quot;Var class, protocol creating&quot;</span>
 <span class="nf">tautology</span>
 
-  <span class="o">^</span> <span class="ss">#tautology</span>
+   <span class="o">^</span> <span class="ss">#tautology</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -162,11 +234,11 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfreshfailed"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFreshFailed</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">false</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; #()&quot;</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">false</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; #()&quot;</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -174,14 +246,14 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfreshsucceed"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFreshSucceed</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; an Array(•₀)&quot;</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; an Array(•₀)&quot;</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -190,7 +262,7 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <div><span class="target" id="pharo-compiledMethod-5"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-integer-asreifiedvar"><div class="highlight"><pre><span></span><span class="c">&quot;Integer, protocol *MicroKanren-core&quot;</span>
 <span class="nf">asReifiedVar</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">asReifiedWithVarClass:</span> <span class="nc">ReifiedVar</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">asReifiedWithVarClass:</span> <span class="nc">ReifiedVar</span>
 </pre></div>
 </div>
 <blockquote>
@@ -198,9 +270,9 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <span class="target" id="pharo-compiledMethod-4"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-integer-asreifiedwithvarclass"><div class="highlight"><pre><span></span><span class="c">&quot;Integer, protocol *MicroKanren-core&quot;</span>
 <span class="nf">asReifiedWithVarClass:</span> <span class="nv">aClass</span>
 
-  <span class="o">^</span> <span class="nv">aClass</span> <span class="nb">new</span>
-      <span class="nf">id:</span> <span class="bp">self</span><span class="p">;</span>
-      <span class="nf">yourself</span>
+   <span class="o">^</span> <span class="nv">aClass</span> <span class="nb">new</span>
+        <span class="nf">id:</span> <span class="bp">self</span><span class="p">;</span>
+        <span class="nf">yourself</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -209,16 +281,16 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 <span class="target" id="pharo-compiledMethod-7"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfreshmultiplevars"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFreshMultipleVars</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> (<span class="nc">Array</span> <span class="nf">with:</span> { 
-           <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
-           <span class="m">1</span> <span class="nf">asReifiedVar</span> })
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; an Array(an Array(•₀ •₁))&quot;</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> (<span class="nc">Array</span> <span class="nf">with:</span> { 
+                <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
+                <span class="m">1</span> <span class="nf">asReifiedVar</span> })
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; an Array(an Array(•₀ •₁))&quot;</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -228,9 +300,9 @@ postpone the computation, for instance to support recursive goals such as</p>
 <span class="target" id="pharo-compiledMethod-9"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testetaraw"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testEtaRaw</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nc">Object</span> <span class="nb">new</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">class</span> <span class="nf">equals:</span> <span class="nc">Eta</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nc">Object</span> <span class="nb">new</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">class</span> <span class="nf">equals:</span> <span class="nc">Eta</span>
 </pre></div>
 </div>
 <blockquote>
@@ -238,7 +310,7 @@ postpone the computation, for instance to support recursive goals such as</p>
 <span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-eternity"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
 <span class="nf">eternity:</span> <span class="nv">x</span>
 
-  <span class="o">^</span> [ <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span>
+   <span class="o">^</span> [ <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -256,14 +328,14 @@ postpone the computation, for instance to support recursive goals such as</p>
 <span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifythreewiththree"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyThreeWithThree</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> <span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> <span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -272,17 +344,17 @@ postpone the computation, for instance to support recursive goals such as</p>
 <div><span class="target" id="pharo-compiledMethod-10"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-unifyo"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
 <span class="nf">unifyo</span>
 
-  <span class="o">^</span> [ <span class="o">:</span><span class="nv">anObject</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">unifyWith:</span> <span class="nv">anObject</span> ]
+   <span class="o">^</span> [ <span class="o">:</span><span class="nv">anObject</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">unifyWith:</span> <span class="nv">anObject</span> ]
 </pre></div>
 </div>
 <p>and</p>
 <span class="target" id="pharo-compiledMethod-11"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-unifywith"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
 <span class="nf">unifyWith:</span> <span class="nv">another</span>
 
-  <span class="o">^</span> <span class="nc">Unify</span> <span class="nb">new</span>
-      <span class="nf">left:</span> <span class="bp">self</span><span class="p">;</span>
-      <span class="nf">right:</span> <span class="nv">another</span><span class="p">;</span>
-      <span class="nf">yourself</span>
+   <span class="o">^</span> <span class="nc">Unify</span> <span class="nb">new</span>
+        <span class="nf">left:</span> <span class="bp">self</span><span class="p">;</span>
+        <span class="nf">right:</span> <span class="nv">another</span><span class="p">;</span>
+        <span class="nf">yourself</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -290,11 +362,11 @@ postpone the computation, for instance to support recursive goals such as</p>
 <span class="target" id="pharo-compiledMethod-13"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifysymmetryfourwithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifySymmetryFourWithVar</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -302,11 +374,11 @@ postpone the computation, for instance to support recursive goals such as</p>
 <span class="target" id="pharo-compiledMethod-14"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifysymmetryvarwithfour"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifySymmetryVarWithFour</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="nv">q</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="nv">q</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -314,18 +386,18 @@ postpone the computation, for instance to support recursive goals such as</p>
 <span class="target" id="pharo-compiledMethod-15"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifywithtopmostsharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyWithTopmostSharing</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-       [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> ]
-         <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { 
-        <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
-        <span class="m">1</span> <span class="nf">asReifiedVar</span> } <span class="nf">asCons</span>
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; (•₀ •₁)&quot;</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+        [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> ]
+           <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { 
+            <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
+            <span class="m">1</span> <span class="nf">asReifiedVar</span> } <span class="nf">asCons</span>
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; (•₀ •₁)&quot;</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -333,17 +405,17 @@ postpone the computation, for instance to support recursive goals such as</p>
 <span class="target" id="pharo-compiledMethod-16"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifywithtopmostwithoutsharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyWithTopmostWithoutSharing</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-       [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
-       (<span class="nc">LinkedList</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">r</span>) <span class="nf">asCons</span> <span class="nf">unifyo</span> <span class="nf">value:</span>
-         (<span class="nc">LinkedList</span> <span class="nf">with:</span> <span class="m">1</span> <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> ] <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; an Array(•₀)&quot;</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+        [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
+        (<span class="nc">LinkedList</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">r</span>) <span class="nf">asCons</span> <span class="nf">unifyo</span> <span class="nf">value:</span>
+           (<span class="nc">LinkedList</span> <span class="nf">with:</span> <span class="m">1</span> <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> ] <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; an Array(•₀)&quot;</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -351,24 +423,24 @@ postpone the computation, for instance to support recursive goals such as</p>
 <span class="target" id="pharo-compiledMethod-17"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifywithtopmostsharingwithrepetition"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyWithTopmostSharingWithRepetition</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-       [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
-       (<span class="nc">LinkedList</span>
-          <span class="nf">with:</span> <span class="nv">x</span>
-          <span class="nf">with:</span> <span class="nv">y</span>
-          <span class="nf">with:</span> <span class="nv">x</span>
-          <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { 
-        <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
-        <span class="m">1</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
-        <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
-        <span class="m">1</span> <span class="nf">asReifiedVar</span> } <span class="nf">asCons</span>
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; (•₀ •₁ •₀ •₁)&quot;</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+        [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
+        (<span class="nc">LinkedList</span>
+            <span class="nf">with:</span> <span class="nv">x</span>
+            <span class="nf">with:</span> <span class="nv">y</span>
+            <span class="nf">with:</span> <span class="nv">x</span>
+            <span class="nf">with:</span> <span class="nv">y</span>) <span class="nf">asCons</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">asGoal</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { 
+            <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
+            <span class="m">1</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
+            <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
+            <span class="m">1</span> <span class="nf">asReifiedVar</span> } <span class="nf">asCons</span>
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; (•₀ •₁ •₀ •₁)&quot;</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -376,16 +448,16 @@ postpone the computation, for instance to support recursive goals such as</p>
 <span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifysharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifySharing</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-       [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> (<span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="bp">true</span>) ] <span class="nf">asGoal</span> ]
-         <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="bp">true</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; #(true)&quot;</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+        [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> (<span class="nv">r</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="bp">true</span>) ] <span class="nf">asGoal</span> ]
+           <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="bp">true</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span> <span class="c">&quot; #(true)&quot;</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -396,11 +468,11 @@ a <code class="docutils literal notranslate"><span class="pre">Failed</span></co
 <span class="target" id="pharo-compiledMethod-19"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifyfourwiththree"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyFourWithThree</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -421,11 +493,11 @@ that both</p>
 <span class="target" id="pharo-compiledMethod-20"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjfalsefalse"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjFalseFalse</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -434,14 +506,14 @@ that both</p>
 <span class="target" id="pharo-compiledMethod-21"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjfalsetrue"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjFalseTrue</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -450,16 +522,16 @@ that both</p>
 <span class="target" id="pharo-compiledMethod-22"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjtruetrue"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjTrueTrue</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { 
-        <span class="nc">Var</span> <span class="nf">tautology</span><span class="p">.</span>
-        <span class="nc">Var</span> <span class="nf">tautology</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">|</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { 
+            <span class="nc">Var</span> <span class="nf">tautology</span><span class="p">.</span>
+            <span class="nc">Var</span> <span class="nf">tautology</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -469,14 +541,14 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 <span class="target" id="pharo-compiledMethod-23"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreewithvarorthreewithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeWithVarOrThreeWithVar</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">3</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">3</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -485,16 +557,16 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 <span class="target" id="pharo-compiledMethod-24"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreewiththreeorfourwithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeWithThreeOrFourWithVar</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { 
-        <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
-        <span class="m">4</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { 
+            <span class="m">0</span> <span class="nf">asReifiedVar</span><span class="p">.</span>
+            <span class="m">4</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -504,14 +576,14 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 <span class="target" id="pharo-compiledMethod-25"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreewithvarorfourwithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeWithVarOrFourWithVar</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">4</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">4</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -520,14 +592,14 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 <span class="target" id="pharo-compiledMethod-26"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjfourwithvarorthreewithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjFourWithVarOrThreeWithVar</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="m">4</span><span class="p">.</span> <span class="m">3</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="m">4</span><span class="p">.</span> <span class="m">3</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -538,16 +610,16 @@ so that both trees</p>
 <span class="target" id="pharo-compiledMethod-27"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreefourthenfive"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeFourThenFive</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
-       (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ]
-         <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">4</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
+        (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ]
+           <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">4</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -556,16 +628,16 @@ so that both trees</p>
 <span class="target" id="pharo-compiledMethod-28"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreethenfourfive"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeThenFourFive</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
-       (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)
-       <span class="nf">|</span> ((<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">4</span><span class="p">.</span> <span class="m">5</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
+        (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)
+        <span class="nf">|</span> ((<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>)) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="m">3</span><span class="p">.</span> <span class="m">4</span><span class="p">.</span> <span class="m">5</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -587,14 +659,14 @@ that both</p>
 <span class="target" id="pharo-compiledMethod-29"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjtruetrue"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjTrueTrue</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">,</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">,</span> <span class="bp">true</span> <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="nc">Var</span> <span class="nf">tautology</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -603,14 +675,14 @@ that both</p>
 <span class="target" id="pharo-compiledMethod-30"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjtruethreewiththree"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjTrueThreeWithThree</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">,</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">,</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">3</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { <span class="m">0</span> <span class="nf">asReifiedVar</span> }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -620,11 +692,11 @@ that both</p>
 <span class="target" id="pharo-compiledMethod-31"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjfalsethreewithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjFalseThreeWithVar</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">,</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">isEmpty</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> <span class="bp">false</span> <span class="nf">asGoal</span> <span class="nf">,</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">q</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">isEmpty</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -636,11 +708,11 @@ no solution (but providing the corresponding counterexample)</p>
 <span class="target" id="pharo-compiledMethod-32"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjthreefour"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjThreeFour</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">isEmpty</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">isEmpty</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -649,11 +721,11 @@ no solution (but providing the corresponding counterexample)</p>
 <span class="target" id="pharo-compiledMethod-33"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjsymmetry"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjSymmetry</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="nv">a</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="nv">a</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">4</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -663,12 +735,12 @@ former introduces a variable in a nested goal,</p>
 <span class="target" id="pharo-compiledMethod-34"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjthreefresh"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjThreeFresh</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> [ <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span> ] <span class="nf">asGoal</span> ]
-         <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">3</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> [ <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span> ] <span class="nf">asGoal</span> ]
+           <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">3</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -677,14 +749,14 @@ former introduces a variable in a nested goal,</p>
 <span class="target" id="pharo-compiledMethod-35"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjthreefourwithtwovars"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjThreeFourWithTwoVars</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span>
-    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-    <span class="nf">equals:</span> { { <span class="m">3</span><span class="p">.</span> <span class="m">4</span> } }
-    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+      <span class="nf">equals:</span> { { <span class="m">3</span><span class="p">.</span> <span class="m">4</span> } }
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -693,13 +765,13 @@ former introduces a variable in a nested goal,</p>
 <span class="target" id="pharo-compiledMethod-36"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjsucceedingsharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjSucceedingSharing</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">z</span> <span class="o">|</span> 
-       [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) ] <span class="nf">asGoal</span> ]
-         <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span> <span class="m">3</span> <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">z</span> <span class="o">|</span> 
+        [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) ] <span class="nf">asGoal</span> ]
+           <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span> <span class="m">3</span> <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -708,13 +780,13 @@ former introduces a variable in a nested goal,</p>
 <span class="target" id="pharo-compiledMethod-37"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjfailingsharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjFailingSharing</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">:</span><span class="nv">z</span> <span class="o">|</span> 
-       (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span>) ]
-         <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">:</span><span class="nv">z</span> <span class="o">|</span> 
+        (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">4</span>) ]
+           <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> <span class="ss">#(</span>  <span class="ss">)</span> <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -724,13 +796,13 @@ disjunction produces the following computation</p>
 <span class="target" id="pharo-compiledMethod-38"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjdisj"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjDisj</span>
 
-  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
-       (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="nv">a</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">0</span>) ]
-         <span class="nf">asGoal</span><span class="p">.</span>
-  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">0</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+   <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+   <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
+        (<span class="m">3</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="m">4</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">|</span> (<span class="nv">a</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="m">0</span>) ]
+           <span class="nf">asGoal</span><span class="p">.</span>
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="m">0</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -739,72 +811,41 @@ disjunction produces the following computation</p>
 </div>
 
 
-            <div class="clearer"></div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Goals</a><ul>
-<li><a class="reference internal" href="#goal">Goal</a></li>
-<li><a class="reference internal" href="#failed">Failed</a></li>
-<li><a class="reference internal" href="#succeed">Succeed</a></li>
-<li><a class="reference internal" href="#fresh">Fresh</a></li>
-<li><a class="reference internal" href="#unify">Unify</a></li>
-<li><a class="reference internal" href="#disj">Disj</a></li>
-<li><a class="reference internal" href="#conj">Conj</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="overview.html"
-                        title="previous chapter">Overview</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="predicates.html"
-                        title="next chapter">Predicates</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/goals.rst.txt"
-            rel="nofollow">Show Source</a></li>
+              <div class="related bottom">
+                &nbsp;
+  <nav id="rellinks">
+    <ul>
+        <li>
+          &larr;
+          <a href="overview.html" title="Previous document">Overview</a>
+        </li>
+        <li>
+          <a href="predicates.html" title="Next document">Predicates</a>
+          &rarr;
+        </li>
     </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+  </nav>
+              </div>
+          
         </div>
       </div>
-      <div class="clearer"></div>
+    <div class="clearer"></div>
+  </div>
+    <div class="footer">
+      &copy;2020, Massimo Nocentini.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/goals.rst.txt"
+          rel="nofollow">Page source</a>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="predicates.html" title="Predicates"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="overview.html" title="Overview"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">µkanrenst  documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Goals</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Massimo Nocentini.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.1.
-    </div>
+
+    
+
+    
   </body>
 </html>
