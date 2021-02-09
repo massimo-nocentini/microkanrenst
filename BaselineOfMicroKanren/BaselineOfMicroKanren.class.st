@@ -148,9 +148,27 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverChapter02ForDoc [
 	'BaselineOfMicroKanren new scriptExportTheLittleProverChapter02ForDoc'>
 	^ MetaSTExporter new
 		  selectors: #( #test_chapter_02_EvenOlderGames_frame_05
-			     #test_chapter_02_EvenOlderGames_frame_07 );
+			     #test_chapter_02_EvenOlderGames_frame_07
+			     #test_chapter_02_EvenOlderGames_frame_15 );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover-chapter-02.json' ]
+		  ofPackage: self class package
+]
+
+{ #category : #export }
+BaselineOfMicroKanren >> scriptExportTheLittleProverPredicatesForDoc [
+
+	<script:
+	'BaselineOfMicroKanren new scriptExportTheLittleProverPredicatesForDoc'>
+	^ MetaSTExporter new
+		  selectors:
+			  #( isAtom #isAtomConsº #consª:isAtomª: #consº:isAtomº:
+			     flapjackNilFalseº carConsº cdrConsº isAtomNilº equalSwapº
+			     #flapjackEqualsConsº:isAtomº: #flapjackEqualsConsª:isAtomª:
+			     ifSameº ifTrueº ifFalseº equalIfº );
+		  exportWithRepositoryPath: [ :aPath | 
+			  aPath / 'booklet' / 'source'
+			  / 'microkanren-the-little-prover-predicates.json' ]
 		  ofPackage: self class package
 ]

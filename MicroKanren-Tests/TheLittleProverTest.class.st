@@ -891,7 +891,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_07 [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_12 [
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 
 	| aGoal node |
 	aGoal := [ :rewritten | 
