@@ -6,7 +6,7 @@ This is an annotated version of :cite:`10.5555:2815652`, with examples coded in
 Smalltalk on top of the logic language *µKanren*. To drive the reader through
 the text, please keep in mind that the *main flow* is taken from the original
 text, the smallest amount of text to give it sense and I don't deserve any
-merit for that.  My own notes and additions will be enphasized in *note boxes*.
+merit for that.  My own notes and additions will be emphasized in *note boxes*.
 Therefore, if you would like to stick to the book be free to skip notes,
 otherwise dig into them to get a deeper understanding of what's new from our
 side.
@@ -19,88 +19,96 @@ Salutations.
 What are salutations? Salutations are a fancy way of saying hello
 or good morning. *Thank you, D. Friedman and C. Eastlung.*
 
+What is ``(#ham cons: (#eggs cons: nil))`` equal to?
+
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 06
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_06
 
-On one hand,
+What value is the expression ``nil isAtom`` equal to?
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 11
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_11
 
-  where 
-
-  .. pharo:autocompiledmethod:: Object>>#isAtom
-
-On the other hand,
+Can we find a value for the expression ``(#ham cons: (#eggs cons: nil)) isAtom``?
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 14
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_14
 
-  where 
+.. note::
+
+  The selector ``#isAtom`` has two implementors, both
+
+  .. pharo:autocompiledmethod:: Object>>#isAtom
+
+  and
 
   .. pharo:autocompiledmethod:: Cons>>#isAtom
 
-  together with the corresponding class definition 
+  precisely, with the corresponding class definition 
 
   .. pharo:autoclass:: Cons
 
-Of course,
-
-  "No matter what values the variables ``a`` and ``b`` have, ``#cons:`` cannot produce an atom."
+No matter what values the variables ``a`` and ``b`` have, ``#cons:`` cannot
+produce an object ``c`` such that ``c isAtom`` evaluates to ``true``.
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 16
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure
 
-Wait. Many new things pop up here, so digest one at the time. In order of occurrence:
-
-- the message
-
-  .. pharo:autocompiledmethod:: BlockClosure>>#asGoalWithUnaryASTof:
-
-  forwards, after ensuring that ``aBlock`` has exactly one statement, to
-
-  .. pharo:autocompiledmethod:: BlockClosure>>#asGoalWithASTof:select:
-
-  in order to produce a ``FreshRB`` goal that, overriding the message 
-  
-  .. pharo:autocompiledmethod:: FreshRB>>#onState:withVars:
-
-  has the responsibility to lift block's code variables 
-   
-  .. pharo:autocompiledmethod:: RBNode>>#substituteVariablesUsingDictionary:
-  .. pharo:autocompiledmethod:: RBProgramNodeSubstitutionVisitor>>#visitTemporaryNode:
-   
-  to ``RBNode`` objects that support unification
-
-  .. pharo:autoclass:: RBLogicVariableNode
-
-  via
-
-  .. pharo:autocompiledmethod:: Var>>#asRBNode
-
-  lying on :pharo:cref:`Var` eventually.
-
-- the predicate
+where 
 
   .. pharo:autocompiledmethod:: TheLittleProver>>#isAtomConsº
 
-  allows us to perform the rewriting, where
+.. note::
 
-  .. pharo:autocompiledmethod:: Object>>#asLiteralRBNode
+  Wait. Many new things pop up here, so digest one at the time. In order of occurrence:
 
-- the message
+  - the message
 
-  .. pharo:autocompiledmethod:: BlockClosure>>#unaryRBNode
+    .. pharo:autocompiledmethod:: BlockClosure>>#asGoalWithUnaryASTof:contextVariables:
 
-  is helpful to use a ``BlockClosure`` object as a container of its own code. 
+    forwards, after ensuring that ``aBlock`` has exactly one statement, to
+
+    .. pharo:autocompiledmethod:: BlockClosure>>#asGoalWithASTof:contextVariables:select:
+
+    in order to produce a ``FreshRB`` goal that, overriding the message 
+  
+    .. pharo:autocompiledmethod:: FreshRB>>#onState:withVars:
+
+    has the responsibility to lift block's code variables 
+   
+    .. pharo:autocompiledmethod:: RBNode>>#substituteVariablesUsingDictionary:
+    .. pharo:autocompiledmethod:: RBProgramNodeSubstitutionVisitor>>#visitTemporaryNode:
+   
+    to ``RBNode`` objects that support unification
+
+    .. pharo:autoclass:: RBLogicVariableNode
+
+    via
+
+    .. pharo:autocompiledmethod:: Var>>#asRBNode
+
+    lying on :pharo:cref:`Var` eventually.
+
+  - the message
+
+    .. pharo:autocompiledmethod:: Object>>#asLiteralRBNode
+
+    allows us to lift a literal *value* to a literal *node*.
+
+  - the message
+
+    .. pharo:autocompiledmethod:: BlockClosure>>#··>
+
+    is syntactic sugar to define a rewriting rule.
+
 
 .. note::
 
@@ -135,10 +143,11 @@ the constraint that the whole expression yields ``false`` when evaluated:
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_backward
 
+
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 19
 
-We want to focus on ``(a cons: b) isAtom`` in the context of the outer ``=`` message send
+We want to focus on ``(a cons: b) isAtom`` in the context of the outer ``#=`` message send
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_19
 
@@ -149,6 +158,14 @@ We want to focus on ``(a cons: b) isAtom`` in the context of the outer ``=`` mes
   and
 
   .. pharo:autocompiledmethod:: TheLittleProverTest>>#flapjackEqualsConsº:isAtomº:
+
+.. note::
+
+  The message
+
+  .. pharo:autocompiledmethod:: BlockClosure>>#unaryRBNode
+
+  is helpful to use a ``BlockClosure`` object as a container of its own code. 
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 21
