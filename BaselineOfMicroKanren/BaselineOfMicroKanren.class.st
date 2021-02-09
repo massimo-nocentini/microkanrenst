@@ -114,10 +114,7 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverChapter01ForDoc [
 	<script:
 	'BaselineOfMicroKanren new scriptExportTheLittleProverChapter01ForDoc'>
 	^ MetaSTExporter new
-		  selectors:
-			  #( isAtom #isAtomConsº #consª:isAtomª: #consº:isAtomº:
-			     flapjackNilFalseº carConsº cdrConsº isAtomNilº equalSwapº
-			     test_chapter_01_OldGamesNewRules_frame_06
+		  selectors: #( test_chapter_01_OldGamesNewRules_frame_06
 			     test_chapter_01_OldGamesNewRules_frame_11
 			     test_chapter_01_OldGamesNewRules_frame_14
 			     #test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure

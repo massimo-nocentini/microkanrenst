@@ -10,32 +10,6 @@ Class {
 	#category : #'MicroKanren-Tests'
 }
 
-{ #category : #tests }
-TheLittleProverTest >> cons: x carcdr: y [
-
-	^ [ :a :b | 
-	  ([ 
-	   x isAtom
-		   ifTrue: [ y ]
-		   ifFalse: [ x car cons: x cdr ] ] unifyo value: a) , ([ 
-	   x isAtom
-		   ifTrue: [ y ]
-		   ifFalse: [ x ] ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> consCarCdro [
-
-	^ [ :a :b | 
-	  ([ :x :y | 
-	   x isAtom
-		   ifTrue: [ y ]
-		   ifFalse: [ x car cons: x cdr ] ] unifyo value: a) , ([ :w :z | 
-	   w isAtom
-		   ifTrue: [ z ]
-		   ifFalse: [ w ] ] unifyo value: b) ]
-]
-
 { #category : #'code as data' }
 TheLittleProverTest >> consª: a isAtomª: b [
 
@@ -46,33 +20,6 @@ TheLittleProverTest >> consª: a isAtomª: b [
 TheLittleProverTest >> consº: ast isAtomº: rewritten [
 
 	^ [ :a :b | theory isAtomConsº value: ast value: rewritten ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> equal: x if: y else: z [
-
-	^ [ :a :b | 
-	  ([ 
-	   x = y
-		   ifTrue: [ x ]
-		   ifFalse: [ z ] ] unifyo value: a) , ([ 
-	   x = y
-		   ifTrue: [ y ]
-		   ifFalse: [ z ] ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> equal: x swap: y [
-
-	^ [ :a :b | 
-	  ([ x = y ] unifyo value: a) , ([ y = x ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> equalSameo [
-
-	^ [ :a :b | 
-	  ([ :x | x = x ] unifyo value: a) , ([ true ] unifyo value: b) ]
 ]
 
 { #category : #helpers }
@@ -250,14 +197,6 @@ TheLittleProverTest >> flapjackEqualsConsº: ast isAtomº: rewritten [
 		  contextVariables: #(  ) ]
 ]
 
-{ #category : #tests }
-TheLittleProverTest >> flapjackFalseo [
-
-	^ [ :a :b | 
-	  ([ #flapjack = false ] unifyo value: a)
-	  , ([ false ] unifyo value: b) ]
-]
-
 { #category : #predicates }
 TheLittleProverTest >> flapjackNilFalseº [
 
@@ -269,196 +208,6 @@ TheLittleProverTest >> flapjackNilFalseº [
 	  g2 := [ :ast2 | [ b unifyo value: ast2 ] ] asGoalWithUnaryASTof: [ 
 		        false ].
 	  g1 , g2 ] ] asGoalWithUnaryASTof: [ #flapjack = false ] ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> if: x false: y [
-
-	^ [ :a :b | 
-	  ([ 
-	   false
-		   ifTrue: [ x ]
-		   ifFalse: [ y ] ] unifyo value: a) , ([ y ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> if: x nest: y answer: z else: w [
-
-	^ [ :a :b | 
-	  ([ 
-	   x
-		   ifTrue: [ 
-			   x
-				   ifTrue: [ y ]
-				   ifFalse: [ z ] ]
-		   ifFalse: [ w ] ] unifyo value: a) , ([ 
-	   x
-		   ifTrue: [ y ]
-		   ifFalse: [ w ] ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> if: x nest: y otherwise: z else: w [
-
-	^ [ :a :b | 
-	  ([ 
-	   x
-		   ifTrue: [ w ]
-		   ifFalse: [ 
-			   x
-				   ifTrue: [ y ]
-				   ifFalse: [ z ] ] ] unifyo value: a) , ([ 
-	   x
-		   ifTrue: [ w ]
-		   ifFalse: [ z ] ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> if: x same: y [
-
-	^ [ :a :b | 
-	  ([ 
-	   x
-		   ifTrue: [ y ]
-		   ifFalse: [ y ] ] unifyo value: a) , ([ y ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> if: x true: y [
-
-	^ [ :a :b | 
-	  ([ 
-	   true
-		   ifTrue: [ x ]
-		   ifFalse: [ y ] ] unifyo value: a) , ([ x ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> isAtom: x conso: y [
-
-	^ [ :a :b | 
-	  ([ (x cons: y) isAtom ] unifyo value: a)
-	  , ([ false ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> isAtomConso [
-
-	^ [ :a :b | 
-	  ([ :x :y | (x cons: y) isAtom ] unifyo value: a)
-	  , ([ false ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> nilIsNilo [
-
-	^ [ :a :b | 
-	  ([ nil isNil ] unifyo value: a) , ([ true ] unifyo value: b) ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> proofStep1: a frame21: b ast: ast [
-
-	^ [ :o :ast1 | 
-	  [ :r :v | 
-	  | g g1 |
-	  g := theory isAtomConsº value: o value: r.
-	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
-		        unifyo value: v.
-	  g , g1 , (self proofStep2: a frame21: b ast: ast) ] asGoal ] 
-		  asGoalWithASTof: [ :o | #flapjack = o ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> proofStep1: a frame29: b ast: ast [
-
-	^ [ :o :ast1 | 
-	  [ :r :v | 
-	  | g g1 |
-	  g := theory carConsº value: o value: r.
-	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
-		        unifyo value: v.
-	  g , g1 , (self proofStep2: a frame29: b ast: ast) ] asGoal ] 
-		  asGoalWithASTof: [ :o | (o cons: nil) cdr isAtom ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> proofStep1: a frame33: b ast: ast [
-
-	^ [ :o :ast1 | 
-	  [ :r :v | 
-	  | g g1 |
-	  g := theory cdrConsº value: o value: r.
-	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
-		        unifyo value: v.
-	  g , g1 , (self proofStep3: a frame29: b ast: ast) ] asGoal ] 
-		  asGoalWithASTof: [ :o | o isAtom ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> proofStep1: a frame44: b ast: ast [
-
-	^ [ :o :ast1 | 
-	  [ :r :v | 
-	  | g g1 |
-	  g := theory equalSameº value: o value: r.
-	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
-		        unifyo value: v.
-	  g , g1 , (self proofStep2: a frame44: b ast: ast) ] asGoal ] 
-		  asGoalWithASTof: [ :o | 
-		  (o cons: (#and cons: (#crumpets cons: nil))) car ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> proofStep2: a frame21: b ast: ast [
-
-	^ [ :o :ast1 | 
-	  [ :r :v | 
-	  | g g1 |
-	  g := self flapjackNilFalseº value: o value: r.
-	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
-		        unifyo value: v.
-	  g , g1 , (r unifyo value: ast) ] asGoal ] asGoalWithASTof: [ :o | 
-		  o ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> proofStep2: a frame29: b ast: ast [
-
-	^ [ :o :ast1 | 
-	  [ :r :v | 
-	  | g g1 |
-	  g := theory cdrConsº value: o value: r.
-	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
-		        unifyo value: v.
-	  g , g1 , (self proofStep3: a frame29: b ast: ast) ] asGoal ] 
-		  asGoalWithASTof: [ :o | o isAtom ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> proofStep2: a frame44: b ast: ast [
-
-	^ [ :o :ast1 | 
-	  [ :r :v | 
-	  | g g1 |
-	  g := theory carConsº value: o value: v.
-	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
-		        unifyo value: v.
-	  g , g1 , (r unifyo value: ast) ] asGoal ] asGoalWithASTof: [ :o | 
-		  o ]
-]
-
-{ #category : #tests }
-TheLittleProverTest >> proofStep3: a frame29: b ast: ast [
-
-	^ [ :o :ast1 | 
-	  [ :r :v | 
-	  | g g1 |
-	  g := theory isAtomNilº value: o value: r.
-	  g1 := (ast1 copy replaceNode: o asRBNode withNode: r asRBNode)
-		        unifyo value: v.
-	  g , g1 , (r unifyo value: ast) ] asGoal ] asGoalWithASTof: [ :o | 
-		  o ]
 ]
 
 { #category : #running }
