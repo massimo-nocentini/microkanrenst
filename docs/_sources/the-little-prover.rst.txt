@@ -231,18 +231,39 @@ Even Older Games
 ----------------
 
 .. index::
-   single: The Little Prover; 02. Even Older Games: frame 5
+   single: The Little Prover; 02. Even Older Games: frame 05
 
 What is this expression *obviously* equal to?
 
-.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_5
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_05
+
+where
+
+  .. pharo:autocompiledmethod:: TheLittleProver>>#ifSameº
 
 .. index::
-   single: The Little Prover; 02. Even Older Games: frame 7
+   single: The Little Prover; 02. Even Older Games: frame 07
 
 If :pharo:mref:`TheLittleProver>>#ifSameº` can start with an if expression and
 end with a variable, then it *must* also be able to start with a variable and
 end with an if expression. So ... what else is ``c`` equal to, according to
 :pharo:mref:`TheLittleProver>>#ifSameº`?
 
-.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_7
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_07
+
+.. index::
+   single: The Little Prover; 02. Even Older Games: frame 15
+
+Does the question message ``a = true`` tell us anything about the focus ``nil = nil ifTrue: [ a ] ifFalse: [ b ]``?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_15
+
+where
+
+  .. pharo:autocompiledmethod:: TheLittleProver>>#ifTrueº
+
+and
+
+  .. pharo:autocompiledmethod:: TheLittleProver>>#equalIfº
+
+respectively.

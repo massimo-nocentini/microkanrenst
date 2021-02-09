@@ -41,32 +41,32 @@ the search space of both succeeding and failing states.</p>
 <span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goal-onstate"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span>
 
-	&lt;<span class="k">doc:</span> #Realog topic: #( Gaol onState )&gt;
-	<span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
-	<span class="nv">aGoal</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">copy</span><span class="p">.</span>
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">onState:</span> (<span class="nv">aState</span> <span class="nf">pushGoal:</span> <span class="nv">aGoal</span>) <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
+  &lt;<span class="k">doc:</span> #Realog topic: #( Gaol onState )&gt;
+  <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+  <span class="nv">aGoal</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">copy</span><span class="p">.</span>
+  <span class="o">^</span> <span class="bp">self</span> <span class="nf">onState:</span> (<span class="nv">aState</span> <span class="nf">pushGoal:</span> <span class="nv">aGoal</span>) <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-fresh-onstate"><div class="highlight"><pre><span></span><span class="c">&quot;Fresh, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span>
 
-	<span class="o">^</span> <span class="nv">aState</span> <span class="nf">collectVars:</span> <span class="nv">receiver</span> <span class="nf">argumentNames</span> <span class="nf">forFresh:</span> <span class="bp">self</span>
+  <span class="o">^</span> <span class="nv">aState</span> <span class="nf">collectVars:</span> <span class="nv">receiver</span> <span class="nf">argumentNames</span> <span class="nf">forFresh:</span> <span class="bp">self</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-fresh-onstate-withvars"><div class="highlight"><pre><span></span><span class="c">&quot;Fresh, protocol dispatched&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span>
 
-	<span class="nv">variables</span> <span class="o">:=</span> <span class="nv">aCollection</span><span class="p">.</span>
-	<span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">valueWithArguments:</span> <span class="bp">self</span> <span class="nf">variables</span><span class="p">.</span>
-	<span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span>
+  <span class="nv">variables</span> <span class="o">:=</span> <span class="nv">aCollection</span><span class="p">.</span>
+  <span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">valueWithArguments:</span> <span class="bp">self</span> <span class="nf">variables</span><span class="p">.</span>
+  <span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-eta-onstate"><div class="highlight"><pre><span></span><span class="c">&quot;Eta, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span>
 
-	<span class="o">^</span> [ 
-	  <span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">value</span><span class="p">.</span>
-	  <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
+  <span class="o">^</span> [ 
+    <span class="nv">nestedGoal</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">value</span><span class="p">.</span>
+    <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
 </pre></div>
 </div>
 </div>
@@ -75,7 +75,7 @@ the search space of both succeeding and failing states.</p>
 <span class="target" id="pharo-compiledMethod-5"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goal-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol as yet unclassified&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 
-	<span class="bp">self</span> <span class="nf">subclassResponsibility</span>
+  <span class="bp">self</span> <span class="nf">subclassResponsibility</span>
 </pre></div>
 </div>
 <blockquote>
@@ -98,60 +98,60 @@ the search space of both succeeding and failing states.</p>
 <span class="target" id="pharo-compiledMethod-4"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testsucceedinvariant"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testSucceedInvariant</span>
 
-	<span class="nc">SBRAL</span> <span class="nb">new</span> <span class="nf">asState</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">s</span> <span class="o">|</span> 
-		<span class="o">|</span><span class="nv"> ss </span><span class="o">|</span>
-		<span class="nv">ss</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">onState:</span> <span class="nv">s</span><span class="p">.</span>
-		<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">ss</span> <span class="nf">car</span> <span class="nf">equals:</span> <span class="nv">s</span> ]<span class="p">.</span>
-	<span class="nc">SBRAL</span> <span class="nb">new</span> <span class="nf">asState</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">s</span> <span class="o">|</span> 
-		<span class="o">|</span><span class="nv"> ss </span><span class="o">|</span>
-		<span class="nv">ss</span> <span class="o">:=</span> <span class="nv">s</span> <span class="nf">srfi41Singleton</span>
-			      <span class="nf">zip:</span> (<span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">onState:</span> <span class="nv">s</span>)
-			      <span class="nf">with:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">a</span> <span class="nf">==</span> <span class="nv">b</span> ]<span class="p">.</span>
-		<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">ss</span> <span class="nf">equals:</span> { <span class="bp">true</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span> ]
+  <span class="nc">SBRAL</span> <span class="nb">new</span> <span class="nf">asState</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">s</span> <span class="o">|</span> 
+    <span class="o">|</span><span class="nv"> ss </span><span class="o">|</span>
+    <span class="nv">ss</span> <span class="o">:=</span> <span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">onState:</span> <span class="nv">s</span><span class="p">.</span>
+    <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">ss</span> <span class="nf">car</span> <span class="nf">equals:</span> <span class="nv">s</span> ]<span class="p">.</span>
+  <span class="nc">SBRAL</span> <span class="nb">new</span> <span class="nf">asState</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">s</span> <span class="o">|</span> 
+    <span class="o">|</span><span class="nv"> ss </span><span class="o">|</span>
+    <span class="nv">ss</span> <span class="o">:=</span> <span class="nv">s</span> <span class="nf">srfi41Singleton</span>
+            <span class="nf">zip:</span> (<span class="bp">true</span> <span class="nf">asGoal</span> <span class="nf">onState:</span> <span class="nv">s</span>)
+            <span class="nf">with:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">a</span> <span class="nf">==</span> <span class="nv">b</span> ]<span class="p">.</span>
+    <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">ss</span> <span class="nf">equals:</span> { <span class="bp">true</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span> ]
 </pre></div>
 </div>
 </div></blockquote>
 <span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-disj-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Disj, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
-	<span class="o">|</span><span class="nv"> aStream anotherStream </span><span class="o">|</span>
-	<span class="nv">aStream</span> <span class="o">:=</span> <span class="nv">left</span> <span class="nf">onState:</span> <span class="nv">aState</span><span class="p">.</span>
-	<span class="nv">anotherStream</span> <span class="o">:=</span> <span class="nv">right</span> <span class="nf">onState:</span> <span class="nv">aState</span><span class="p">.</span>
-	<span class="o">^</span> <span class="nv">combineBlock</span> <span class="nf">value:</span> <span class="nv">aStream</span> <span class="nf">value:</span> <span class="nv">anotherStream</span>
+  <span class="o">|</span><span class="nv"> aStream anotherStream </span><span class="o">|</span>
+  <span class="nv">aStream</span> <span class="o">:=</span> <span class="nv">left</span> <span class="nf">onState:</span> <span class="nv">aState</span><span class="p">.</span>
+  <span class="nv">anotherStream</span> <span class="o">:=</span> <span class="nv">right</span> <span class="nf">onState:</span> <span class="nv">aState</span><span class="p">.</span>
+  <span class="o">^</span> <span class="nv">combineBlock</span> <span class="nf">value:</span> <span class="nv">aStream</span> <span class="nf">value:</span> <span class="nv">anotherStream</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-11"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-conj-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Conj, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
-	<span class="o">^</span> [ <span class="o">:</span><span class="nv">refinedState</span> <span class="o">|</span> 
-	  <span class="nv">refinedState</span> <span class="nf">path</span> <span class="nf">value</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">aGoal</span> <span class="o">|</span> 
-		  <span class="nv">aGoal</span> <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">right</span> <span class="nf">fromConj:</span> <span class="bp">self</span> ] ]
-	  <span class="nf">&gt;&gt;=</span> (<span class="nv">left</span> <span class="nf">onState:</span> <span class="nv">aState</span>)
+  <span class="o">^</span> [ <span class="o">:</span><span class="nv">refinedState</span> <span class="o">|</span> 
+    <span class="nv">refinedState</span> <span class="nf">path</span> <span class="nf">value</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">aGoal</span> <span class="o">|</span> 
+      <span class="nv">aGoal</span> <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">right</span> <span class="nf">fromConj:</span> <span class="bp">self</span> ] ]
+    <span class="nf">&gt;&gt;=</span> (<span class="nv">left</span> <span class="nf">onState:</span> <span class="nv">aState</span>)
 </pre></div>
 </div>
 <blockquote>
 <div><span class="target" id="pharo-compiledMethod-9"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goal-onstate-forgoal-fromconj"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol as yet unclassified&quot;</span>
 <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">aGoal</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span>
 
-	<span class="bp">self</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">refinedState</span> <span class="nf">forConj:</span> <span class="nv">aConj</span><span class="p">.</span> <span class="c">&quot;this message should be removed to be full explicit.&quot;</span>
-	<span class="o">^</span> <span class="nv">aGoal</span> <span class="nf">onState:</span> <span class="nv">refinedState</span>
+  <span class="bp">self</span> <span class="nf">popGoalFromPathOfState:</span> <span class="nv">refinedState</span> <span class="nf">forConj:</span> <span class="nv">aConj</span><span class="p">.</span> <span class="c">&quot;this message should be removed to be full explicit.&quot;</span>
+  <span class="o">^</span> <span class="nv">aGoal</span> <span class="nf">onState:</span> <span class="nv">refinedState</span>
 </pre></div>
 </div>
 <blockquote>
 <div><span class="target" id="pharo-compiledMethod-7"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goal-popgoalfrompathofstate-forconj"><div class="highlight"><pre><span></span><span class="c">&quot;Goal, protocol as yet unclassified&quot;</span>
 <span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span>
 
-	<span class="c">&quot;No action for the generic goal because if I am the top of `aState`&#39;s goal path,</span>
-<span class="c">	 I have to remain there with respect to the computation running in the</span>
-<span class="c">	 conjunction goal `aGoal`.&quot;</span>
+  <span class="c">&quot;No action for the generic goal because if I am the top of `aState`&#39;s goal path,</span>
+<span class="c">   I have to remain there with respect to the computation running in the</span>
+<span class="c">   conjunction goal `aGoal`.&quot;</span>
 
-	
+  
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-succeed-popgoalfrompathofstate-forconj"><div class="highlight"><pre><span></span><span class="c">&quot;Succeed, protocol as yet unclassified&quot;</span>
 <span class="nf">popGoalFromPathOfState:</span> <span class="nv">aState</span> <span class="nf">forConj:</span> <span class="nv">aGoal</span>
 
-	<span class="nv">aState</span> <span class="nf">path:</span> <span class="nv">aState</span> <span class="nf">path</span> <span class="nf">nextLink</span>
+  <span class="nv">aState</span> <span class="nf">path:</span> <span class="nv">aState</span> <span class="nf">path</span> <span class="nf">nextLink</span>
 </pre></div>
 </div>
 <blockquote>
@@ -165,46 +165,46 @@ without creating a new copy of it.</p>
 <span class="target" id="pharo-compiledMethod-10"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-failed-onstate-forgoal-fromconj"><div class="highlight"><pre><span></span><span class="c">&quot;Failed, protocol as yet unclassified&quot;</span>
 <span class="nf">onState:</span> <span class="nv">refinedState</span> <span class="nf">forGoal:</span> <span class="nv">right</span> <span class="nf">fromConj:</span> <span class="nv">aConj</span>
 
-	<span class="o">^</span> <span class="nv">refinedState</span> <span class="nf">srfi41Singleton</span>
+  <span class="o">^</span> <span class="nv">refinedState</span> <span class="nf">srfi41Singleton</span>
 </pre></div>
 </div>
 </div></blockquote>
 <span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-unify-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Unify, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">aGoal</span>
 
-	<span class="o">|</span><span class="nv"> aStateOrException </span><span class="o">|</span>
-	<span class="nv">aStateOrException</span> <span class="o">:=</span> <span class="nc">Continuation</span> <span class="nf">currentDo:</span> [ <span class="o">:</span><span class="nv">k</span> <span class="o">|</span> 
-		                     <span class="nv">aState</span> <span class="nf">unifier</span>
-			                     <span class="nf">continuation:</span> <span class="nv">k</span><span class="p">;</span>
-			                     <span class="nf">value:</span> <span class="nv">left</span> <span class="nf">value:</span> <span class="nv">right</span> ]<span class="p">.</span>
-	<span class="o">^</span> <span class="nv">aStateOrException</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterUnificationByUnify:</span> <span class="bp">self</span>
+  <span class="o">|</span><span class="nv"> aStateOrException </span><span class="o">|</span>
+  <span class="nv">aStateOrException</span> <span class="o">:=</span> <span class="nc">Continuation</span> <span class="nf">currentDo:</span> [ <span class="o">:</span><span class="nv">k</span> <span class="o">|</span> 
+                         <span class="nv">aState</span> <span class="nf">unifier</span>
+                           <span class="nf">continuation:</span> <span class="nv">k</span><span class="p">;</span>
+                           <span class="nf">value:</span> <span class="nv">left</span> <span class="nf">value:</span> <span class="nv">right</span> ]<span class="p">.</span>
+  <span class="o">^</span> <span class="nv">aStateOrException</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterUnificationByUnify:</span> <span class="bp">self</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-13"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-cond-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Cond, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
-	<span class="o">^</span> [ 
-	  <span class="o">|</span> <span class="nv">g</span> <span class="nf">|</span>
-	  <span class="nv">g</span> <span class="o">:=</span> <span class="nv">clauses</span> <span class="nf">foldr:</span> <span class="nv">if</span> <span class="nf">init:</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
-	  <span class="nv">g</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
+  <span class="o">^</span> [ 
+    <span class="o">|</span> <span class="nv">g</span> <span class="nf">|</span>
+    <span class="nv">g</span> <span class="o">:=</span> <span class="nv">clauses</span> <span class="nf">foldr:</span> <span class="nv">if</span> <span class="nf">init:</span> <span class="bp">false</span> <span class="nf">asGoal</span><span class="p">.</span>
+    <span class="nv">g</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-14"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-ifpure-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;IfPure, protocol running&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
-	<span class="o">|</span><span class="nv"> disj </span><span class="o">|</span>
-	<span class="nv">disj</span> <span class="o">:=</span> <span class="nv">chainCombinationStrategy</span> <span class="nf">value</span>
-		        <span class="nf">left:</span> <span class="nv">question</span> <span class="nf">,</span> <span class="nv">answer</span><span class="p">;</span>
-		        <span class="nf">right:</span> <span class="nv">otherwise</span><span class="p">;</span>
-		        <span class="nf">yourself</span><span class="p">.</span>
+  <span class="o">|</span><span class="nv"> disj </span><span class="o">|</span>
+  <span class="nv">disj</span> <span class="o">:=</span> <span class="nv">chainCombinationStrategy</span> <span class="nf">value</span>
+            <span class="nf">left:</span> <span class="nv">question</span> <span class="nf">,</span> <span class="nv">answer</span><span class="p">;</span>
+            <span class="nf">right:</span> <span class="nv">otherwise</span><span class="p">;</span>
+            <span class="nf">yourself</span><span class="p">.</span>
 
-	<span class="o">^</span> <span class="nv">disj</span> <span class="nf">onState:</span> <span class="nv">aState</span>
+  <span class="o">^</span> <span class="nv">disj</span> <span class="nf">onState:</span> <span class="nv">aState</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-15"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-suspended-onstate-afterpushinggoal"><div class="highlight"><pre><span></span><span class="c">&quot;Suspended, protocol as yet unclassified&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">afterPushingGoal:</span> <span class="nv">_</span>
 
-	<span class="o">^</span> [ <span class="nv">nestedGoal</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
+  <span class="o">^</span> [ <span class="nv">nestedGoal</span> <span class="nf">onState:</span> <span class="nv">aState</span> ] <span class="nf">srfi41Stream</span>
 </pre></div>
 </div>
 </div>

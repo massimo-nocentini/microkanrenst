@@ -47,16 +47,16 @@
 <span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testacorn"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
 <span class="nf">testACORN</span>
 
-	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateSexpCaro</span> <span class="nf">value:</span> <span class="s">&#39;acorn&#39;</span> <span class="nf">asCons</span> <span class="nf">value:</span> <span class="nv">r</span> ]
-		     <span class="nf">asGoal</span><span class="p">.</span>
-	<span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="sc">$a</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateSexpCaro</span> <span class="nf">value:</span> <span class="s">&#39;acorn&#39;</span> <span class="nf">asCons</span> <span class="nf">value:</span> <span class="nv">r</span> ]
+         <span class="nf">asGoal</span><span class="p">.</span>
+  <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">equals:</span> { <span class="sc">$a</span> } <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-	<span class="c">&quot;Export it.&quot;</span>
-	<span class="bp">self</span>
-		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
-		<span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-acorn&#39;</span>
-		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+  <span class="c">&quot;Export it.&quot;</span>
+  <span class="bp">self</span>
+    <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+    <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-acorn&#39;</span>
+    <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
 </pre></div>
 </div>
 <blockquote>
@@ -64,22 +64,22 @@
 <span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testappendoforward"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
 <span class="nf">testAppendoForward</span>
 
-	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">|</span> 
-	     <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
-		     <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="nf">asCons</span>
-		     <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="nf">asCons</span>
-		     <span class="nf">value:</span> <span class="nv">l</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-		<span class="nf">equals:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span>
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">|</span> 
+       <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
+         <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="nf">asCons</span>
+         <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="nf">asCons</span>
+         <span class="nf">value:</span> <span class="nv">l</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+  <span class="bp">self</span>
+    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+    <span class="nf">equals:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span>
+    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-	<span class="c">&quot;Export it.&quot;</span>
-	<span class="bp">self</span>
-		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
-		<span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-forward&#39;</span>
-		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+  <span class="c">&quot;Export it.&quot;</span>
+  <span class="bp">self</span>
+    <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+    <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-forward&#39;</span>
+    <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
 </pre></div>
 </div>
 <blockquote>
@@ -87,29 +87,29 @@
 <span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testappendobackward"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
 <span class="nf">testAppendoBackward</span>
 
-	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-	     <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
-		     <span class="nf">value:</span> <span class="nv">l</span>
-		     <span class="nf">value:</span> <span class="nv">r</span>
-		     <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
-		<span class="nf">equals:</span> ({ 
-				 <span class="ss">#(</span> <span class="ss">nil</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
-				 <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">nil</span> <span class="ss">)</span> } <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">each</span> <span class="o">|</span> 
-				 <span class="nv">each</span> <span class="nf">collect:</span> <span class="ss">#asCons</span> ])
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">l</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+       <span class="nc">SexpTheory</span> <span class="nb">new</span> <span class="nf">appendo</span>
+         <span class="nf">value:</span> <span class="nv">l</span>
+         <span class="nf">value:</span> <span class="nv">r</span>
+         <span class="nf">value:</span> <span class="ss">#(</span> <span class="ss">a</span> <span class="ss">b</span> <span class="ss">c</span> <span class="ss">d</span> <span class="ss">e</span> <span class="ss">)</span> <span class="nf">asCons</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+  <span class="bp">self</span>
+    <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">solutions</span>
+    <span class="nf">equals:</span> ({ 
+         <span class="ss">#(</span> <span class="ss">nil</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">)</span> <span class="ss">#(</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">)</span><span class="p">.</span>
+         <span class="ss">#(</span> <span class="ss">#(</span> <span class="ss">#a</span> <span class="ss">#b</span> <span class="ss">#c</span> <span class="ss">#d</span> <span class="ss">#e</span> <span class="ss">)</span> <span class="ss">nil</span> <span class="ss">)</span> } <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">each</span> <span class="o">|</span> 
+         <span class="nv">each</span> <span class="nf">collect:</span> <span class="ss">#asCons</span> ])
+    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-	<span class="c">&quot;Export it.&quot;</span>
-	<span class="bp">self</span>
-		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
-		<span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-backward&#39;</span>
-		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+  <span class="c">&quot;Export it.&quot;</span>
+  <span class="bp">self</span>
+    <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">-1</span>)
+    <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-appendo-backward&#39;</span>
+    <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
 </pre></div>
 </div>
 <blockquote>
@@ -117,12 +117,12 @@
 <span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-mksexptest-testdycko"><div class="highlight"><pre><span></span><span class="c">&quot;MKSexpTest, protocol tests&quot;</span>
 <span class="nf">testDycko</span>
 
-	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">alpha</span> <span class="o">|</span> <span class="nc">MKPredicateSexpDycko</span> <span class="nf">value:</span> <span class="nv">alpha</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">20</span>)
-		<span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-dycko&#39;</span>
-		<span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
+  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">alpha</span> <span class="o">|</span> <span class="nc">MKPredicateSexpDycko</span> <span class="nf">value:</span> <span class="nv">alpha</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+  <span class="bp">self</span>
+    <span class="nf">export:</span> (<span class="nv">g</span> <span class="nf">asLogicComputationTreeLimitedTo:</span> <span class="m">20</span>)
+    <span class="nf">pathSuffix:</span> <span class="s">&#39;sexp-dycko&#39;</span>
+    <span class="nf">selector:</span> <span class="ss">#gtInspectorTreeUsingCanvas:</span>
 </pre></div>
 </div>
 <blockquote>

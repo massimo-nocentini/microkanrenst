@@ -49,14 +49,14 @@
 <span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfives"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFives</span>
 
-	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">fives:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
-		<span class="nf">equals:</span> { <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span> }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">fives:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+  <span class="bp">self</span>
+    <span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
+    <span class="nf">equals:</span> { <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span> }
+    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">10</span>
+  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">10</span>
 </pre></div>
 </div>
 <blockquote>
@@ -65,7 +65,7 @@
 <div><span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-fives"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
 <span class="nf">fives:</span> <span class="nv">x</span>
 
-	<span class="o">^</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">|</span> [ <span class="bp">self</span> <span class="nf">fives:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span>
+  <span class="o">^</span> (<span class="m">5</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">x</span>) <span class="nf">|</span> [ <span class="bp">self</span> <span class="nf">fives:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -73,14 +73,14 @@
 <span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfivesbypredicate"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFivesByPredicate</span>
 
-	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateFives</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
-		<span class="nf">equals:</span> { <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span> }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nc">MKPredicateFives</span> <span class="nf">value:</span> <span class="nv">r</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+  <span class="bp">self</span>
+    <span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
+    <span class="nf">equals:</span> { <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span> }
+    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">10</span>
+  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">10</span>
 </pre></div>
 </div>
 <blockquote>
@@ -91,15 +91,15 @@
 <span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testnats"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testNats</span>
 
-	<span class="o">|</span><span class="nv"> g M </span><span class="o">|</span>
-	<span class="nc">M</span> <span class="o">:=</span> <span class="m">1000</span><span class="p">.</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="nc">M</span>)
-		<span class="nf">equals:</span> (<span class="m">0</span> <span class="nf">to:</span> <span class="nc">M</span> <span class="nf">-</span> <span class="m">1</span>)
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+  <span class="o">|</span><span class="nv"> g M </span><span class="o">|</span>
+  <span class="nc">M</span> <span class="o">:=</span> <span class="m">1000</span><span class="p">.</span>
+  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+  <span class="bp">self</span>
+    <span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="nc">M</span>)
+    <span class="nf">equals:</span> (<span class="m">0</span> <span class="nf">to:</span> <span class="nc">M</span> <span class="nf">-</span> <span class="m">1</span>)
+    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">10</span>
+  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">10</span>
 </pre></div>
 </div>
 <blockquote>
@@ -108,20 +108,20 @@
 <div><span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-nats"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
 <span class="nf">nats:</span> <span class="nv">x</span>
 
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="m">0</span>
+  <span class="o">^</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="m">0</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-4"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-nats-stage"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
 <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span>
 
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">offset:</span> <span class="m">1</span>
+  <span class="o">^</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">offset:</span> <span class="m">1</span>
 </pre></div>
 </div>
 <span class="target" id="pharo-compiledMethod-5"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-nats-stage-offset"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
 <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">offset:</span> <span class="nv">o</span>
 
-	<span class="o">^</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">i</span>)
-	  <span class="nf">|</span> [ <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">+</span> <span class="nv">o</span> <span class="nf">offset:</span> <span class="nv">o</span> ] <span class="nf">asGoal</span>
+  <span class="o">^</span> (<span class="nv">x</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">i</span>)
+    <span class="nf">|</span> [ <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">+</span> <span class="nv">o</span> <span class="nf">offset:</span> <span class="nv">o</span> ] <span class="nf">asGoal</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -130,14 +130,14 @@
 <span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfivesbynats"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFivesByNats</span>
 
-	<span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
-	<span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">repeat:</span> <span class="nv">x</span> <span class="nf">value:</span> <span class="m">5</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-	<span class="bp">self</span>
-		<span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
-		<span class="nf">equals:</span> { <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span> }
-		<span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+  <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
+  <span class="nv">g</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">repeat:</span> <span class="nv">x</span> <span class="nf">value:</span> <span class="m">5</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+  <span class="bp">self</span>
+    <span class="nf">assert:</span> (<span class="nv">g</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">10</span>)
+    <span class="nf">equals:</span> { <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span><span class="p">.</span> <span class="m">5</span> }
+    <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
 
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">10</span>
+  <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">10</span>
 </pre></div>
 </div>
 <blockquote>
@@ -146,7 +146,7 @@
 <div><span class="target" id="pharo-compiledMethod-7"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-repeat-value"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol accessing structure variables&quot;</span>
 <span class="nf">repeat:</span> <span class="nv">x</span> <span class="nf">value:</span> <span class="nv">i</span>
 
-	<span class="o">^</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">offset:</span> <span class="m">0</span>
+  <span class="o">^</span> <span class="bp">self</span> <span class="nf">nats:</span> <span class="nv">x</span> <span class="nf">stage:</span> <span class="nv">i</span> <span class="nf">offset:</span> <span class="m">0</span>
 </pre></div>
 </div>
 </div></blockquote>
