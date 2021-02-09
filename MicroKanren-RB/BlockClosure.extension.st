@@ -27,12 +27,6 @@ BlockClosure >> asGoalWithASTof: aBlock select: selectBlock [
 ]
 
 { #category : #'*MicroKanren-RB' }
-BlockClosure >> asGoalWithUnaryASTof: aBlock [
-
-	^ self asGoalWithUnaryASTof: aBlock contextVariables: #(  )
-]
-
-{ #category : #'*MicroKanren-RB' }
 BlockClosure >> asGoalWithUnaryASTof: aBlock contextVariables: aCollection [
 
 	^ self
@@ -98,8 +92,9 @@ BlockClosure >> ·> aBlock [
 	  | z |
 	  z := aBlock substituteVariablesUsingSequenceableCollection:
 		       (Array with: x).
-	  (ast unifyo value: a) , (z unifyo value: b) ] ] 
-		  asGoalWithUnaryASTof: self ]
+	  (ast unifyo value: a) , (z unifyo value: b) ] ]
+		  asGoalWithUnaryASTof: self
+		  contextVariables: #(  ) ]
 ]
 
 { #category : #'*MicroKanren-RB' }
@@ -111,8 +106,9 @@ BlockClosure >> ··> aBlock [
 	  | z |
 	  z := aBlock substituteVariablesUsingSequenceableCollection:
 		       (Array with: x with: y).
-	  (ast unifyo value: a) , (z unifyo value: b) ] ] 
-		  asGoalWithUnaryASTof: self ]
+	  (ast unifyo value: a) , (z unifyo value: b) ] ]
+		  asGoalWithUnaryASTof: self
+		  contextVariables: #(  ) ]
 ]
 
 { #category : #'*MicroKanren-RB' }
@@ -124,6 +120,7 @@ BlockClosure >> ···> aBlock [
 	  | z |
 	  z := aBlock substituteVariablesUsingSequenceableCollection:
 		       (Array with: x with: y with: w).
-	  (ast unifyo value: a) , (z unifyo value: b) ] ] 
-		  asGoalWithUnaryASTof: self ]
+	  (ast unifyo value: a) , (z unifyo value: b) ] ]
+		  asGoalWithUnaryASTof: self
+		  contextVariables: #(  ) ]
 ]

@@ -83,8 +83,9 @@ BaselineOfMicroKanren >> scriptExportRBTheoryForDoc [
 
 	<script: 'BaselineOfMicroKanren new scriptExportRBTheoryForDoc'>
 	^ MetaSTExporter new
-		  selectors:
-			  #( asGoalWithUnaryASTof: substituteVariablesUsingDictionary:
+		  selectors: #( #asGoalWithUnaryASTof:contextVariables:
+			     #asGoalWithASTof:contextVariables:select:
+			     substituteVariablesUsingDictionary:
 			     visitLogicVariableNode: visitTemporaryNode:
 			     asRBNode asLiteralRBNode #asGoalWithASTof:select:
 			     unaryRBNode sourceNode ·> ··> ···> testSenderoForCompiledMethod
