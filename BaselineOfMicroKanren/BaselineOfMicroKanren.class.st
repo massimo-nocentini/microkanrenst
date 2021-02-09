@@ -147,8 +147,8 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverChapter02ForDoc [
 	<script:
 	'BaselineOfMicroKanren new scriptExportTheLittleProverChapter02ForDoc'>
 	^ MetaSTExporter new
-		  selectors: #( test_chapter_02_EvenOlderGames_frame_5
-			     test_chapter_02_EvenOlderGames_frame_7 );
+		  selectors: #( #test_chapter_02_EvenOlderGames_frame_05
+			     #test_chapter_02_EvenOlderGames_frame_07 );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover-chapter-02.json' ]

@@ -84,4 +84,6 @@ RBLogicVariableNode >> unifyWithVar: aVar usingUnifier: anUnifier [
 RBLogicVariableNode >> walkSBRAL: aSBRAL forState: aState [
 
 	^ (aState walkVar: logicVar inSBRAL: aSBRAL) asRBNode
+		  "parent: parent;
+		  yourself"
 ]

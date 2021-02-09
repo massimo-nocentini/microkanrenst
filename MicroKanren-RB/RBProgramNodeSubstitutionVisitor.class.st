@@ -15,13 +15,18 @@ RBProgramNodeSubstitutionVisitor >> substitution: anObject [
 { #category : #visiting }
 RBProgramNodeSubstitutionVisitor >> visitLogicVariableNode: aNode [
 
-	^ substitution at: aNode "ifAbsent: [ self halt. aNode ]"
+	^ (substitution at: aNode) copy in: [ :aVar | 
+		  aVar parent ifNil: [ aVar parent: aNode parent ].
+		  aVar ]
 ]
 
 { #category : #visiting }
 RBProgramNodeSubstitutionVisitor >> visitTemporaryNode: aNode [
 
 	^ aNode isVariable
-		  ifTrue: [ substitution at: aNode name ]
+		  ifTrue: [ 
+			  (substitution at: aNode name) copy "Here assume to talk with RBLogicVariable objs."
+				  parent: aNode parent;
+				  yourself ]
 		  ifFalse: [ aNode ]
 ]
