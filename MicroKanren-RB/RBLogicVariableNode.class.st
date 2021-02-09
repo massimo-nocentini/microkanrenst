@@ -83,7 +83,8 @@ RBLogicVariableNode >> unifyWithVar: aVar usingUnifier: anUnifier [
 { #category : #'as yet unclassified' }
 RBLogicVariableNode >> walkSBRAL: aSBRAL forState: aState [
 
-	^ (aState walkVar: logicVar inSBRAL: aSBRAL) asRBNode
-		  "parent: parent;
-		  yourself"
+	^ (aState walkVar: logicVar inSBRAL: aSBRAL) asRBNode in: [ :node | 
+		  node
+			  parent: parent;
+			  yourself ]
 ]

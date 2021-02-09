@@ -927,7 +927,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_12 [
 						          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
 						         ifTrue: [ c ]
 						         ifFalse: [ c ] ]
-				         do: [ :o :r | (theory parentº value: o value: r) , { r } projectº  ].
+				         do: theory equalIfº.
 
 			         prover then: [ :o | 
 				         theory unifyº value: o value: rewritten asRBNode ] ]

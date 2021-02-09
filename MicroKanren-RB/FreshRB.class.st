@@ -43,7 +43,7 @@ FreshRB >> onState: aState withVars: aCollection [
 		        | aNode |
 		        aNode := selectBlock value: aSequenceNode.
 		        aNode substituteVariablesUsingDictionary: dict ].
-	self halt.
+
 	receiver := nodeBlock value: node.
 
 	^ super onState: aState withVars: rbLogicVariables
