@@ -10,6 +10,14 @@ BlockClosure >> asGoal [
 		  yourself
 ]
 
+{ #category : #'*MicroKanren' }
+BlockClosure >> inspectº [
+
+	^ MKGoalInspect new
+		  blockClosure: self;
+		  yourself
+]
+
 { #category : #'*MicroKanren-core' }
 BlockClosure >> tabled [
 	| table ctor |
