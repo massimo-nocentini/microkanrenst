@@ -30,8 +30,11 @@ extensions = [
         'sphinx.ext.mathjax',
         'sphinx.ext.githubpages',
         'sphinxcontrib.pharodomain',
-        #'sphinx_rtd_theme',
+        'sphinxcontrib.bibtex',
 ]
+
+# For the bibliography.
+bibtex_bibfiles = ['biblio.bib']
 
 # The following configuation values concerns the Pharo domain.
 pharo_json_export_filenames = [
@@ -69,17 +72,16 @@ html_theme = 'alabaster'
 html_static_path = ['_static']
 
 html_theme_options = {
-    "sidebarwidth": "20%",
-    "body_max_width": "80%",
     "globaltoc_collapse": False,
     'github_user': 'massimo-nocentini',
     'github_repo': 'microkanrenst',
-    'code_font_family': 'Monaco',
+    'code_font_family': 'Monaco, Consolas',
     'code_font_size': '0.8em',
     'show_relbars': True,
     'fixed_sidebar':True,
-    'page_width':'80%',
-    'pre_bg':'white transparent',
+    'page_width':'85%',
+    'pre_bg':'white',
     'note_bg':'white',
+    'show_powered_by':False,
 }
 

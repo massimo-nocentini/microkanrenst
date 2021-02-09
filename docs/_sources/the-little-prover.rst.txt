@@ -2,12 +2,22 @@
 The Little Prover
 =================
 
+This is an annotated version of :cite:`10.5555:2815652`, with examples coded in
+Smalltalk on top of the logic language *µKanren*. To drive the reader through
+the text, please keep in mind that the *main flow* is taken from the original
+text, the smallest amount of text to give it sense and I don't deserve any
+merit for that.  My own notes and additions will be enphasized in *note boxes*.
+Therefore, if you would like to stick to the book be free to skip notes,
+otherwise dig into them to get a deeper understanding of what's new from our
+side.
 
 Old Games, New Rules
 --------------------
 
-*Salutations. What are salutations? Salutations are a fancy way of saying hello
-or good morning.* Thank you, D. Friedman and C. Eastlung.
+Salutations. 
+
+What are salutations? Salutations are a fancy way of saying hello
+or good morning. *Thank you, D. Friedman and C. Eastlung.*
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 06

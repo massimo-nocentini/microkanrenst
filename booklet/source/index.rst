@@ -27,6 +27,8 @@ properties.
    
    the-little-prover.rst
 
+   bibliography.rst
+
 Observations
 ------------
 
