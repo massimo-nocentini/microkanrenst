@@ -200,15 +200,7 @@ TheLittleProverTest >> flapjackEqualsConsº: ast isAtomº: rewritten [
 { #category : #predicates }
 TheLittleProverTest >> flapjackNilFalseº [
 
-	^ [ :a :b | 
-	  [ :ast1 | 
-	  [ 
-	  | g1 g2 |
-	  g1 := a unifyo value: ast1.
-	  g2 := b unifyo value: false asLiteralRBNode.
-	  g1 , g2 ] ]
-		  asGoalWithUnaryASTof: [ #flapjack = false ]
-		  contextVariables: #(  ) ]
+	^ [ :_ | #flapjack = false ] <~> [ :_ | false ]
 ]
 
 { #category : #running }

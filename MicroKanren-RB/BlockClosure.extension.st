@@ -1,6 +1,48 @@
 Extension { #name : #BlockClosure }
 
 { #category : #'*MicroKanren-RB' }
+BlockClosure >> <~> aBlock [
+
+	^ [ :a :b | 
+	  [ :ast | 
+	  [ :x | 
+	  | z |
+	  z := aBlock substituteVariablesUsingSequenceableCollection:
+		       (Array with: x).
+	  (ast unifyo value: a) , (z unifyo value: b) ] ]
+		  asGoalWithUnaryASTof: self
+		  contextVariables: #(  ) ]
+]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> <~~> aBlock [
+
+	^ [ :a :b | 
+	  [ :ast | 
+	  [ :x :y | 
+	  | z |
+	  z := aBlock substituteVariablesUsingSequenceableCollection:
+		       (Array with: x with: y).
+	  (ast unifyo value: a) , (z unifyo value: b) ] ]
+		  asGoalWithUnaryASTof: self
+		  contextVariables: #(  ) ]
+]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> <~~~> aBlock [
+
+	^ [ :a :b | 
+	  [ :ast | 
+	  [ :x :y :w | 
+	  | z |
+	  z := aBlock substituteVariablesUsingSequenceableCollection:
+		       (Array with: x with: y with: w).
+	  (ast unifyo value: a) , (z unifyo value: b) ] ]
+		  asGoalWithUnaryASTof: self
+		  contextVariables: #(  ) ]
+]
+
+{ #category : #'*MicroKanren-RB' }
 BlockClosure >> asGoalWithASTof: aBlock [
 
 	^ self asGoalWithASTof: aBlock select: #yourself
@@ -81,46 +123,4 @@ BlockClosure >> unaryRBNode [
 				  Error signal:
 					  ('Assumption that {} has 1 statement only is violated.' 
 						   format: { self }) ] ]
-]
-
-{ #category : #'*MicroKanren-RB' }
-BlockClosure >> ·> aBlock [
-
-	^ [ :a :b | 
-	  [ :ast | 
-	  [ :x | 
-	  | z |
-	  z := aBlock substituteVariablesUsingSequenceableCollection:
-		       (Array with: x).
-	  (ast unifyo value: a) , (z unifyo value: b) ] ]
-		  asGoalWithUnaryASTof: self
-		  contextVariables: #(  ) ]
-]
-
-{ #category : #'*MicroKanren-RB' }
-BlockClosure >> ··> aBlock [
-
-	^ [ :a :b | 
-	  [ :ast | 
-	  [ :x :y | 
-	  | z |
-	  z := aBlock substituteVariablesUsingSequenceableCollection:
-		       (Array with: x with: y).
-	  (ast unifyo value: a) , (z unifyo value: b) ] ]
-		  asGoalWithUnaryASTof: self
-		  contextVariables: #(  ) ]
-]
-
-{ #category : #'*MicroKanren-RB' }
-BlockClosure >> ···> aBlock [
-
-	^ [ :a :b | 
-	  [ :ast | 
-	  [ :x :y :w | 
-	  | z |
-	  z := aBlock substituteVariablesUsingSequenceableCollection:
-		       (Array with: x with: y with: w).
-	  (ast unifyo value: a) , (z unifyo value: b) ] ]
-		  asGoalWithUnaryASTof: self
-		  contextVariables: #(  ) ]
 ]
