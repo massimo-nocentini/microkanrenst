@@ -22,6 +22,12 @@ TheLittleProverTest >> consº: ast isAtomº: rewritten [
 	^ [ :a :b | theory isAtomConsº value: ast value: rewritten ]
 ]
 
+{ #category : #tests }
+TheLittleProverTest >> context_chapter_01_frame_19ª: a valueª: b [
+
+	^ #flapjack = (a cons: b) isAtom
+]
+
 { #category : #helpers }
 TheLittleProverTest >> expectedRBNode_chapter_01_frame_55 [
 
@@ -179,24 +185,6 @@ TheLittleProverTest >> expectedRBNode_chapter_02_frame_7 [
 											       { 2 asReifiedVar asRBNode })) }) })) }
 ]
 
-{ #category : #tests }
-TheLittleProverTest >> flapjackEqualsConsª: a isAtomª: b [
-
-	#flapjack = (a cons: b) isAtom
-]
-
-{ #category : #tests }
-TheLittleProverTest >> flapjackEqualsConsº: ast isAtomº: rewritten [
-
-	^ [ :a :b | 
-	  ast
-		  acl: [ :prover | 
-			  prover
-				  focus: [ :o | #flapjack = o ] do: theory isAtomConsº;
-				  then: [ :o | o unifyo value: rewritten ] ]
-		  contextVariables: #(  ) ]
-]
-
 { #category : #predicates }
 TheLittleProverTest >> flapjackNilFalseº [
 
@@ -236,26 +224,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_14 [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_backward [
-
-	| aGoal node |
-	aGoal := [ :ast | 
-	         [ :a | 
-	         theory isAtomConsº value: ast value: false asLiteralRBNode ] ]
-		         asGoalWithUnaryASTof: [ :a | a isAtom ]
-		         contextVariables: #(  ).
-
-	node := RBMessageNode
-		        receiver: 0 asReifiedVar asRBNode
-		        selector: #cons:
-		        arguments: { 1 asReifiedVar asRBNode }.
-	self
-		assert: aGoal solutions asArray equals: { node };
-		assert: node formattedCode equals: '•₀ cons: •₁'
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure [
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16 [
 
 	| aGoal |
 	aGoal := [ :rewrite | 
@@ -263,10 +232,30 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure 
 	         [ :a :b | 
 	         theory isAtomConsº value: ast value: rewrite asRBNode ] ]
 		         asGoalWithUnaryASTof: [ :a :b | (a cons: b) isAtom ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 	self
 		assert: aGoal solutions asArray
 		equals: { false asLiteralRBNode }
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_backward [
+
+	| aGoal node |
+	aGoal := [ :ast | 
+	         [ :a | 
+	         theory isAtomConsº value: ast value: false asLiteralRBNode ] ]
+		         asGoalWithUnaryASTof: [ :a | a isAtom ]
+		         contextVariables: Dictionary empty.
+
+	node := [ :a :b | a cons: b ] 
+		        substituteVariablesUsingSequenceableCollection: { 
+				        0 asReifiedVar asRBNode.
+				        1 asReifiedVar asRBNode }.
+				
+	self
+		assert: aGoal solutions asArray equals: { node };
+		assert: node formattedCode equals: '•₀ cons: •₁'
 ]
 
 { #category : #tests }
@@ -288,10 +277,18 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_19 [
 	| aGoal |
 	aGoal := [ :rewritten | 
 	         [ :ast | 
-	         self flapjackEqualsConsº: ast isAtomº: rewritten asRBNode ]
-		         asGoalWithUnaryASTof:
-		         self class >> #flapjackEqualsConsª:isAtomª:
-		         contextVariables: #(  ) ] asGoal.
+	         [ :a :b | 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | #flapjack = o ]
+				         do: theory isAtomConsº ]
+		         then: [ :ast1 :ast2 | 
+		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
+		         asGoalWithUnaryASTof: [ :a :b | 
+		         #flapjack = (a cons: b) isAtom ]
+		         contextVariables: Dictionary empty ] asGoal.
 	self
 		assert: aGoal solutions asArray
 		equals: { [ #flapjack = false ] unaryRBNode }
@@ -308,13 +305,13 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_21 [
 		         acl: [ :prover | 
 			         prover
 				         focus: [ :o | #flapjack = o ] do: theory isAtomConsº;
-				         focus: [ :o | o ] do: self flapjackNilFalseº;
-				         then: [ :o | 
-					         theory unifyº value: o value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: a with: b) ] ]
+				         focus: [ :o | o ] do: self flapjackNilFalseº ]
+		         then: [ :ast1 :ast2 :ast3 | 
+			         theory unifyº value: ast3 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :a :b | 
 		         #flapjack = (a cons: b) isAtom ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 	self
 		assert: aGoal solutions asArray
 		equals: { false asLiteralRBNode }
@@ -333,13 +330,13 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_28 [
 				         focus: [ :o | (o cons: nil) cdr isAtom ]
 				         do: theory carConsº;
 				         focus: [ :o | o isAtom ] do: theory cdrConsº;
-				         focus: [ :o | o ] do: theory isAtomNilº;
-				         then: [ :o | 
-					         theory unifyº value: o value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: a with: b) ] ]
+				         focus: [ :o | o ] do: theory isAtomNilº ]
+		         then: [ :ast1 :ast2 :ast3 :ast4 | 
+			         theory unifyº value: ast4 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :p :q | 
 		         ((p cons: q) car cons: nil) cdr isAtom ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }
 ]
@@ -355,12 +352,13 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_32 [
 		         acl: [ :prover | 
 			         prover
 				         focus: [ :o | o isAtom ] do: theory cdrConsº;
-				         focus: [ :o | o ] do: theory isAtomNilº;
-				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: a with: b) ] ]
+				         focus: [ :o | o ] do: theory isAtomNilº ]
+		         then: [ :ast1 :ast2 :ast3 | 
+			         theory unifyº value: ast3 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :p :q | 
 		         ((p cons: q) car cons: nil) cdr isAtom ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }
 ]
@@ -376,14 +374,15 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_44 [
 		         acl: [ :rewrite | 
 			         rewrite
 				         focus: [ :o | 
-					         (o cons: (#and cons: (#crumpets cons: nil))) car ]
-				         do: theory equalSameº;
-				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: a with: b) ] ]
+				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
+				         do: theory equalSameº ]
+		         then: [ :ast1 :ast2 | 
+		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	self
 		assert: aGoal solutions asArray
@@ -405,14 +404,14 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46 [
 				         focus: [ :o | 
 				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
 				         do: theory equalSameº.
-			         rewrite
-				         focus: [ :o | o ] do: theory carConsº;
-				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
-		         contextVariables: #(  ) ] ]
+			         rewrite focus: [ :o | o ] do: theory carConsº ]
+		         then: [ :ast1 :ast2 :ast3 | 
+			         theory unifyº value: ast3 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }
 ]
@@ -435,7 +434,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindin
 	         g1 , g2 ] asGoal ] ]
 		         asGoalWithUnaryASTof: [ :a :d | 
 		         (#and cons: d) = (a cons: nil) ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	self
 		assert: aGoal solutions asArray
@@ -453,7 +452,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindin
 		          (RBMessageNode receiver: a selector: #even))
 	         , ((RBLiteralValueNode value: 3) unifyo value: a) ] ]
 		         asGoalWithUnaryASTof: [ :a :b | a + b ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 	self
 		assert: aGoal solutions
 		equals: { [ 3 even ] unaryRBNode }
@@ -469,13 +468,13 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 	         [ :a :b | 
 	         ast
 		         acl: [ :rewrite | 
-			         rewrite
-				         focus: [ :o | o ] do: theory equalSwapº;
-				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: a with: b) ] ]
+		         rewrite focus: [ :o | o ] do: theory equalSwapº ]
+		         then: [ :ast1 :ast2 | 
+		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :x :y | 
 		         (x cons: y) = (#bagels cons: (#and cons: (#lox cons: nil))) ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	node := RBMessageNode
 		        receiver:
@@ -499,17 +498,21 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_55 [
 	| aGoal node |
 	aGoal := [ :rewritten | 
 	         [ :ast | 
-	         [ :x :y | 
+	         [ :a :b | 
 	         ast
 		         acl: [ :rewrite | 
 			         rewrite
-				         focus: [ :o | y cons: o = (x isAtom = false) ]
-				         do: [ :o :r | theory carConsº value: r value: o ];
-				         then: [ :o | o unifyo value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: x with: y) ] ]
+				         focus: [ :o | b cons: o = (a isAtom = false) ]
+				         do: [ :o :r | theory carConsº value: r value: o ] ]
+		         then: [ :ast1 :ast2 | 
+		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         contextVariables: (Dictionary new
+				          at: #a put: a;
+				          at: #b put: b;
+				          yourself) ] ]
 		         asGoalWithUnaryASTof: [ :x :y | 
 		         y cons: (x cdr cons: y car) car = (x isAtom = false) ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	node := self expectedRBNode_chapter_01_frame_55.
 
@@ -551,20 +554,19 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
 					         y cons:
 						         ((x cdr cons: y car) car cons: (#oats cons: nil)) car
 						         = (x isAtom = (b isAtom cons: o) isAtom) ]
-				         do: [ :o :r | theory equalSwapº value: o value: r ].
-
-			         rewrite then: [ :o | 
-				         theory unifyº value: o value: rewritten asRBNode ] ]
-		         contextVariables: (OrderedCollection new
-				          add: x;
-				          add: y;
-				          add: a;
-				          add: b;
-				          add: c;
+				         do: [ :o :r | theory equalSwapº value: o value: r ] ]
+		         then: [ :ast1 :ast2 :ast3 :ast4 :ast5 | 
+			         theory unifyº value: ast5 value: rewritten asRBNode ]
+		         contextVariables: (Dictionary new
+				          at: #x put: x;
+				          at: #y put: y;
+				          at: #a put: a;
+				          at: #b put: b;
+				          at: #c put: c;
 				          yourself) ] ]
 		         asGoalWithUnaryASTof: [ :x :y :a :b :c | 
 			         y cons: (x cdr cons: y car) car = (x isAtom = false) ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	node := self expectedRBNode_chapter_01_frame_56.
 
@@ -585,16 +587,15 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_05 [
 	         [ :a :c | 
 	         ast
 		         acl: [ :prover | 
-			         prover
-				         focus: [ :o | o ] do: theory ifSameº;
-				         then: [ :o | 
-					         theory unifyº value: o value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: a with: c) ] ]
+		         prover focus: [ :o | o ] do: theory ifSameº ]
+		         then: [ :ast1 :ast2 | 
+		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :a :c | 
 			         a
 				         ifTrue: [ 3 ]
 				         ifFalse: [ c ] ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	self assert: aGoal solutions asArray equals: { 3 asLiteralRBNode }
 ]
@@ -608,16 +609,15 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_05_rewriting_unbound
 	         [ :a :c | 
 	         ast
 		         acl: [ :prover | 
-			         prover
-				         focus: [ :o | o ] do: theory ifSameº;
-				         then: [ :o | 
-					         theory unifyº value: o value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: a with: c) ] ]
+		         prover focus: [ :o | o ] do: theory ifSameº ]
+		         then: [ :ast1 :ast2 | 
+		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :a :c | 
 			         a
 				         ifTrue: [ c ]
 				         ifFalse: [ c ] ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	self assert: aGoal solutions asArray equals: { 3 asLiteralRBNode }
 ]
@@ -633,15 +633,15 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_07 [
 		         acl: [ :prover | 
 			         prover
 				         focus: [ :o | o ]
-				         do: [ :o :r | theory ifSameº value: r value: o ];
-				         then: [ :o | 
-					         theory unifyº value: o value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: a with: c) ] ]
+				         do: [ :o :r | theory ifSameº value: r value: o ] ]
+		         then: [ :ast1 :ast2 | 
+		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :a :c | 
 			         (3 cons: nil) isAtom
 				         ifTrue: [ a ]
 				         ifFalse: [ c ] ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	node := self expectedRBNode_chapter_02_frame_7.
 	self
@@ -694,11 +694,14 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 						          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
 						         ifTrue: [ c ]
 						         ifFalse: [ c ] ]
-				         do: theory equalIfº.
-
-			         prover then: [ :o | 
-				         theory unifyº value: o value: rewritten asRBNode ] ]
-		         contextVariables: (Array with: a with: b with: c) ] ]
+				         do: theory equalIfº ]
+		         then: [ :ast1 :ast2 :ast3 :ast4 | 
+			         theory unifyº value: ast4 value: rewritten asRBNode ]
+		         contextVariables: (Dictionary new
+				          at: #a put: a;
+				          at: #b put: b;
+				          at: #c put: c;
+				          yourself) ] ]
 		         asGoalWithUnaryASTof: [ :a :b :c | 
 			         (a = true
 				          ifTrue: [ 
@@ -708,7 +711,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 				          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
 				         ifTrue: [ c ]
 				         ifFalse: [ c ] ]
-		         contextVariables: #(  ) ] asGoal.
+		         contextVariables: Dictionary empty ] asGoal.
 
 	node := self expectedRBNode_chapter_02_frame_12.
 

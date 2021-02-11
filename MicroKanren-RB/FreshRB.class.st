@@ -27,7 +27,8 @@ FreshRB >> onState: aState withVars: aCollection [
 	| dict node rbLogicVariables |
 	dict := Dictionary new.
 
-	contextVariables do: [ :each | dict at: each name put: each ].
+	contextVariables keysAndValuesDo: [ :aSymbol :aRBVar | 
+		dict at: aSymbol put: aRBVar ].
 
 	rbLogicVariables := receiver argumentNames
 		                    with: aCollection

@@ -119,10 +119,8 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverChapter01ForDoc [
 		  selectors: #( test_chapter_01_OldGamesNewRules_frame_06
 			     test_chapter_01_OldGamesNewRules_frame_11
 			     test_chapter_01_OldGamesNewRules_frame_14
-			     #test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure
+			     test_chapter_01_OldGamesNewRules_frame_16
 			     test_chapter_01_OldGamesNewRules_frame_16_byCompiledMethod
-			     test_chapter_01_OldGamesNewRules_frame_16_backward
-			     #flapjackEqualsConsº:isAtomº: #flapjackEqualsConsª:isAtomª:
 			     test_chapter_01_OldGamesNewRules_frame_19
 			     test_chapter_01_OldGamesNewRules_frame_21
 			     test_chapter_01_OldGamesNewRules_frame_28
@@ -164,7 +162,6 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverPredicatesForDoc [
 		  selectors:
 			  #( isAtom #isAtomConsº #consª:isAtomª: #consº:isAtomº:
 			     flapjackNilFalseº carConsº cdrConsº isAtomNilº equalSwapº
-			     #flapjackEqualsConsº:isAtomº: #flapjackEqualsConsª:isAtomª:
 			     ifSameº ifTrueº ifFalseº equalIfº );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
