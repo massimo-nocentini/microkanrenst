@@ -723,3 +723,157 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 	ifTrue: [ •₁ ]
 	ifFalse: [ •₁ ]'
 ]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorº [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         theory ancestorº
+		         value: false asLiteralRBNode
+		         value: rewritten asRBNode ] asGoal.
+
+	self
+		assert:
+		((aGoal solutions collect: [ :e | e formattedCode ]) next: 25)
+			asArray
+		equals: #( 'false' 'false = •₀' 'false' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀' 'false = •₀' '•₀ = false' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀ = •₁' 'false' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' '•₀ = false' '(false
+	 ifTrue: [ •₀ ]
+	 ifFalse: [ •₁ ]) = •₂' 'false = •₀' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' '•₀
+	ifTrue: [ false ]
+	ifFalse: [ •₁ ]' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' '•₀ = false = •₁' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]' 'false = •₀' '•₀
+	ifTrue: [ false ]
+	ifFalse: [ •₁ ]' '(•₀
+	 ifTrue: [ •₁ ]
+	 ifFalse: [ false ]) = •₂' '•₀ = false' '(false
+	 ifTrue: [ •₀ ]
+	 ifFalse: [ •₁ ])
+	ifTrue: [ •₂ ]
+	ifFalse: [ •₃ ]' )
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorºbackward [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         [ :a :b :c | 
+	         theory ancestorº
+		         value: rewritten asRBNode
+		         value: ([ :z :x :v | 
+			          false
+				          ifTrue: [ x ]
+				          ifFalse: [ v ] ] 
+				          substituteVariablesUsingSequenceableCollection: { 
+						          a asRBNode.
+						          b asRBNode.
+						          c asRBNode }) ] asGoal ] asGoal.
+
+	self
+		assert:
+			((aGoal solutions collect: [ :e | e asRBNode formattedCode ]) 
+				 next: 25) asArray
+		equals: #( 'false' 'false = •₀' 'false' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀' 'false = •₀' '•₀ = false' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀ = •₁' 'false' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' '•₀ = false' '(false
+	 ifTrue: [ •₀ ]
+	 ifFalse: [ •₁ ]) = •₂' 'false = •₀' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' '•₀
+	ifTrue: [ false ]
+	ifFalse: [ •₁ ]' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' '•₀ = false = •₁' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]' 'false = •₀' '•₀
+	ifTrue: [ false ]
+	ifFalse: [ •₁ ]' '(•₀
+	 ifTrue: [ •₁ ]
+	 ifFalse: [ false ]) = •₂' '•₀ = false' '(false
+	 ifTrue: [ •₀ ]
+	 ifFalse: [ •₁ ])
+	ifTrue: [ •₂ ]
+	ifFalse: [ •₃ ]' )
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_equalIfº [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         theory equalIfº
+		         value: rewritten asRBNode
+		         value: false asLiteralRBNode ] asGoal.
+
+	self
+		assert:
+			((aGoal solutions collect: [ :e | e asRBNode formattedCode ]) 
+				 next: 2) asArray
+		equals: #( 'false' 'false = •₀' 'false' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀' 'false = •₀' '•₀ = false' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀ = •₁' 'false' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' '•₀ = false' '(false
+	 ifTrue: [ •₀ ]
+	 ifFalse: [ •₁ ]) = •₂' 'false = •₀' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' '•₀
+	ifTrue: [ false ]
+	ifFalse: [ •₁ ]' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' '•₀ = false = •₁' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]' 'false = •₀' '•₀
+	ifTrue: [ false ]
+	ifFalse: [ •₁ ]' '(•₀
+	 ifTrue: [ •₁ ]
+	 ifFalse: [ false ]) = •₂' '•₀ = false' '(false
+	 ifTrue: [ •₀ ]
+	 ifFalse: [ •₁ ])
+	ifTrue: [ •₂ ]
+	ifFalse: [ •₃ ]' )
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parentº [
+
+	| aGoal |
+	aGoal := [ :rewritten | 
+	         theory parentº
+		         value: false asLiteralRBNode
+		         value: rewritten asRBNode ] asGoal.
+
+	self
+		assert: (aGoal solutions collect: [ :e | e formattedCode ]) asArray
+		equals: { 'false'. 'false = •₀'. 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]'. '•₀ = false'. '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]'. '•₀
+	ifTrue: [ false ]
+	ifFalse: [ •₁ ]' }
+]
