@@ -50,12 +50,19 @@ Can we find a value for the expression ``(#ham cons: (#eggs cons: nil)) isAtom``
 
   .. pharo:autocompiledmethod:: Cons>>#isAtom
 
-  precisely, with the corresponding class definition 
+  respectively. The latter is implemented in
 
   .. pharo:autoclass:: Cons
 
-No matter what values the variables ``a`` and ``b`` have, ``#cons:`` cannot
-produce an object ``c`` such that ``c isAtom`` evaluates to ``true``.
+  that can be instantiated with
+
+  .. pharo:autocompiledmethod:: Object>>#cons:
+  .. pharo:autocompiledmethod:: Object>>#consedObject:
+
+
+No matter what values the variables ``a`` and ``b`` have, the expression ``a
+cons: b`` cannot produce an object ``c`` such that ``c isAtom`` evaluates to
+``true``,
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 16
@@ -105,10 +112,15 @@ where
 
   - the message
 
-    .. pharo:autocompiledmethod:: BlockClosure>>#··>
+    .. pharo:autocompiledmethod:: BlockClosure>>#<~~>
 
-    is syntactic sugar to define a rewriting rule.
+    is syntactic sugar to define a rewriting rule upto α-conversion over names
+    of variables of both blocks, implemented in
+   
+    .. pharo:autocompiledmethod:: BlockClosure>>#substituteVariablesUsingSequenceableCollection:
 
+    Such conversion if helpful to be free to use arbitrary names during a rewriting, as in
+    :pharo:mref:`TheLittleProver>>#carConsº` for example.
 
 .. note::
 
