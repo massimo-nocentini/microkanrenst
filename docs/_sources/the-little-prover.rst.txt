@@ -14,10 +14,9 @@ side.
 Old Games, New Rules
 --------------------
 
-Salutations. 
-
-What are salutations? Salutations are a fancy way of saying hello
-or good morning. *Thank you, D. Friedman and C. Eastlung.*
+| Salutations.  What are salutations? Salutations are a fancy way of saying
+  hello or good morning. 
+| *Thank you, D. Friedman and C. Eastlung.*
 
 What is ``(#ham cons: (#eggs cons: nil))`` equal to?
 
@@ -67,7 +66,10 @@ cons: b`` cannot produce an object ``c`` such that ``c isAtom`` evaluates to
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 16
 
-.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16
+
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_16.svg
+    :align: center
 
 where 
 
@@ -121,6 +123,16 @@ where
 
     Such conversion if helpful to be free to use arbitrary names during a rewriting, as in
     :pharo:mref:`TheLittleProver>>#carConsº` for example.
+ 
+As usual in logic, we can run a computation backward. The following test case
+shows how to use ``#isAtomConsº`` to generate the receiver of ``#isAtom`` under
+the constraint that the whole expression yields ``false`` when evaluated:
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_backward
+
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_16_backward.svg
+    :align: center
+
 
 .. note::
 
@@ -148,13 +160,6 @@ where
   and ``º`` to each keyword in the selector, respectively. This scheme has the
   advantage to use the same words while being able to discriminate their usage.
   We mix the two approaches freely from now on.
- 
-As usual in logic, we can run a computation backward. The following test case
-shows how to use ``#isAtomConsº`` to generate the receiver of ``#isAtom`` under
-the constraint that the whole expression yields ``false`` when evaluated:
-
-.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_16_backward
-
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 19
@@ -163,13 +168,8 @@ We want to focus on ``(a cons: b) isAtom`` in the context of the outer ``#=`` me
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_19
 
-  where
-
-  .. pharo:autocompiledmethod:: TheLittleProverTest>>#flapjackEqualsConsª:isAtomª:
-
-  and
-
-  .. pharo:autocompiledmethod:: TheLittleProverTest>>#flapjackEqualsConsº:isAtomº:
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_19.svg
+    :align: center
 
 .. note::
 
