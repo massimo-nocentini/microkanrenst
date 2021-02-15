@@ -262,10 +262,10 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_backward [
 				        1 asReifiedVar asRBNode }.
 
 	self
-		assert: aGoal solutions asArray equals: { node };
+		assert: aGoal copy solutions asArray equals: { node };
 		assert: node formattedCode equals: '•₀ cons: •₁'.
 
-	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
+	^ self exportComputationTreeOfGoal: aGoal copy limitedTo: -1
 ]
 
 { #category : #tests }
@@ -300,8 +300,10 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_19 [
 		         #flapjack = (a cons: b) isAtom ]
 		         contextVariables: Dictionary empty ] asGoal.
 	self
-		assert: aGoal solutions asArray
-		equals: { [ #flapjack = false ] unaryRBNode }
+		assert: aGoal copy solutions asArray
+		equals: { [ #flapjack = false ] unaryRBNode }.
+
+	^ self exportComputationTreeOfGoal: aGoal copy limitedTo: -1
 ]
 
 { #category : #tests }
