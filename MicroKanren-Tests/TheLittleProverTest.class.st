@@ -3,7 +3,7 @@ A RBProgramNodeIdentityVisitorTest is a test class for testing the behavior of R
 "
 Class {
 	#name : #TheLittleProverTest,
-	#superclass : #Srfi41AbstractTest,
+	#superclass : #GoalAbstractTest,
 	#instVars : [
 		'theory'
 	],
@@ -191,6 +191,12 @@ TheLittleProverTest >> flapjackNilFalseº [
 	^ [ :_ | #flapjack = false ] <~> [ :_ | false ]
 ]
 
+{ #category : #utilities }
+TheLittleProverTest >> imagesPath [
+
+	^ self iceWorkingDirectory / 'booklet' / 'source' / '_images'
+]
+
 { #category : #running }
 TheLittleProverTest >> setUp [
 
@@ -235,7 +241,9 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16 [
 		         contextVariables: Dictionary empty ] asGoal.
 	self
 		assert: aGoal solutions asArray
-		equals: { false asLiteralRBNode }
+		equals: { false asLiteralRBNode }.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -252,10 +260,12 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_backward [
 		        substituteVariablesUsingSequenceableCollection: { 
 				        0 asReifiedVar asRBNode.
 				        1 asReifiedVar asRBNode }.
-				
+
 	self
 		assert: aGoal solutions asArray equals: { node };
-		assert: node formattedCode equals: '•₀ cons: •₁'
+		assert: node formattedCode equals: '•₀ cons: •₁'.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -735,8 +745,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorº [
 
 	self
 		assert:
-		((aGoal solutions collect: [ :e | e formattedCode ]) next: 25)
-			asArray
+			((aGoal solutions collect: [ :e | e asRBNode formattedCode ]) 
+				 next: 25) asArray
 		equals: #( 'false' 'false = •₀' 'false' 'false
 	ifTrue: [ •₀ ]
 	ifFalse: [ •₁ ]' 'false = •₀' 'false = •₀' '•₀ = false' 'false
@@ -775,9 +785,9 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorºbackwar
 	         theory ancestorº
 		         value: rewritten asRBNode
 		         value: ([ :z :x :v | 
-			          false
-				          ifTrue: [ x ]
-				          ifFalse: [ v ] ] 
+			          2 + z
+				          ifTrue: [ x  ]
+				          ifFalse: [ 3 - v ] ] 
 				          substituteVariablesUsingSequenceableCollection: { 
 						          a asRBNode.
 						          b asRBNode.
@@ -786,34 +796,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorºbackwar
 	self
 		assert:
 			((aGoal solutions collect: [ :e | e asRBNode formattedCode ]) 
-				 next: 25) asArray
-		equals: #( 'false' 'false = •₀' 'false' 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false = •₀' 'false = •₀' '•₀ = false' 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false = •₀ = •₁' 'false' '•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ false ]' '•₀ = false' '(false
-	 ifTrue: [ •₀ ]
-	 ifFalse: [ •₁ ]) = •₂' 'false = •₀' 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' '•₀
-	ifTrue: [ false ]
-	ifFalse: [ •₁ ]' '•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ false ]' '•₀ = false = •₁' 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false = •₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]' 'false = •₀' '•₀
-	ifTrue: [ false ]
-	ifFalse: [ •₁ ]' '(•₀
-	 ifTrue: [ •₁ ]
-	 ifFalse: [ false ]) = •₂' '•₀ = false' '(false
-	 ifTrue: [ •₀ ]
-	 ifFalse: [ •₁ ])
-	ifTrue: [ •₂ ]
-	ifFalse: [ •₃ ]' )
+				 next: 5) asArray
+		equals: #(  )
 ]
 
 { #category : #tests }
@@ -869,7 +853,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parentº [
 
 	self
 		assert: (aGoal solutions collect: [ :e | e formattedCode ]) asArray
-		equals: { 'false'. 'false = •₀'. 'false
+		equals: { 'false'. '[ false ]'. 'false = •₀'. 'false
 	ifTrue: [ •₀ ]
 	ifFalse: [ •₁ ]'. '•₀ = false'. '•₀
 	ifTrue: [ •₁ ]

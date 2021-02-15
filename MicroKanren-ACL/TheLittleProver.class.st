@@ -50,12 +50,6 @@ TheLittleProver >> cdrOfConsº [
 ]
 
 { #category : #predicates }
-TheLittleProver >> childº [
-
-	^ [ :a :b | self memberº value: a allChildren asCons value: b ]
-]
-
-{ #category : #predicates }
 TheLittleProver >> consº [
 
 	^ [ :a :d :c | self unifyº value: (a cons: d) value: c ]
@@ -228,18 +222,12 @@ TheLittleProver >> parentº [
 
 	                 equal | if ] asGoal.
 
-	  "Maybe redundant"
-	  blockGoal := [ :c | 
-	               | cRB |
-	               cRB := c asRBNode.
-	               (self unifyº
-		                value: b
-		                value:
-		                (RBBlockNode body:
-			                 (RBSequenceNode statements: { cRB })))
-	               , [ self parentº value: a value: cRB ] asGoal ] asGoal.
+	  blockGoal := self unifyº
+		               value: b
+		               value:
+		               (RBBlockNode body: (RBSequenceNode statements: { a })).
 
-	  sequenceGoal | messageNode "| blockGoal" ]
+	  sequenceGoal | messageNode | blockGoal ]
 ]
 
 { #category : #predicates }

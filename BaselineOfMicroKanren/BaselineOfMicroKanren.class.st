@@ -120,6 +120,7 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverChapter01ForDoc [
 			     test_chapter_01_OldGamesNewRules_frame_11
 			     test_chapter_01_OldGamesNewRules_frame_14
 			     test_chapter_01_OldGamesNewRules_frame_16
+			     test_chapter_01_OldGamesNewRules_frame_16_backward
 			     test_chapter_01_OldGamesNewRules_frame_16_byCompiledMethod
 			     test_chapter_01_OldGamesNewRules_frame_19
 			     test_chapter_01_OldGamesNewRules_frame_21

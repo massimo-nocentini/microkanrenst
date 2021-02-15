@@ -1,8 +1,6 @@
 Class {
 	#name : #GoalTest,
-	#superclass : #Srfi41AbstractTest,
-	#traits : 'TIceImagesExporting',
-	#classTraits : 'TIceImagesExporting classTrait',
+	#superclass : #GoalAbstractTest,
 	#instVars : [
 		'sexpTheory',
 		'combTheory'
@@ -14,15 +12,6 @@ Class {
 GoalTest >> eternity: x [
 
 	^ [ self eternity: x ] asGoal
-]
-
-{ #category : #'as yet unclassified' }
-GoalTest >> exportComputationTreeOfGoal: g limitedTo: n [
-
-	^ self
-		  export: (g asLogicComputationTreeLimitedTo: n)
-		  pathSuffix: self class name , '-' , testSelector
-		  selector: #gtInspectorTreeUsingCanvas:
 ]
 
 { #category : #utilities }
