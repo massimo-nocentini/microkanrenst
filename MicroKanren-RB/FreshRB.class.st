@@ -24,7 +24,7 @@ FreshRB >> nodeBlock: anObject [
 { #category : #dispatched }
 FreshRB >> onState: aState withVars: aCollection [
 
-	| dict node rbLogicVariables |
+	| dict node rbLogicVariables swapping aStream |
 	dict := Dictionary new.
 
 	contextVariables keysAndValuesDo: [ :aSymbol :aRBVar | 
@@ -45,9 +45,14 @@ FreshRB >> onState: aState withVars: aCollection [
 		        aNode := selectBlock value: aSequenceNode.
 		        aNode substituteVariablesUsingDictionary: dict ].
 
+	swapping := receiver.
 	receiver := nodeBlock value: node.
 
-	^ super onState: aState withVars: rbLogicVariables
+	aStream := super onState: aState withVars: rbLogicVariables.
+
+	receiver := swapping.
+
+	^ aStream
 ]
 
 { #category : #accessing }
