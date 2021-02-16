@@ -48,7 +48,7 @@ FreshRB >> onState: aState withVars: aCollection [
 	swapping := receiver.
 	receiver := nodeBlock value: node.
 
-	aStream := super onState: aState withVars: rbLogicVariables.
+	aStream := super onState: aState withVars: aCollection.
 
 	receiver := swapping.
 

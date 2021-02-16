@@ -97,9 +97,9 @@ MKGoalPrinter >> printOn: aStream aFresh: aGoal [
 			aStream nextPut: $!.
 			variables ifEmpty: [ Error signal ] ifNotEmpty: [ 
 				variables allButLastDo: [ :each | 
-					each printOn: aStream.
+					each printOn: aStream renderer: self.
 					aStream nextPut: Character space ].
-				aStream nextPutAll: variables last asString.
+				variables last printOn: aStream renderer: self.
 				aStream nextPutAll: '. ' ].
 			aGoal printOnNestedGoalOn: aStream renderer: self ]
 ]
@@ -129,6 +129,15 @@ MKGoalPrinter >> printOn: aStream aPredicateUnary: aPredicate [
 ]
 
 { #category : #printing }
+MKGoalPrinter >> printOn: aWriteStream aRBNode: aNode [
+
+	aWriteStream
+		nextPut: $[;
+		nextPutAll: aNode formattedCode;
+		nextPutAll: ']ª'
+]
+
+{ #category : #printing }
 MKGoalPrinter >> printOn: aStream aSucceed: aSucceed [
 
 	state path value == aSucceed
@@ -137,9 +146,9 @@ MKGoalPrinter >> printOn: aStream aSucceed: aSucceed [
 				ifEmpty: [ aStream nextPutAll: '✓' ]
 				ifNotEmpty: [ :assocs | 
 					assocs do: [ :each | 
-						each value printOn: aStream.
+						each value printOn: aStream renderer: self.
 						aStream nextPut: $/.
-						each key printOn: aStream.
+						each key printOn: aStream renderer: self.
 						aStream crlf ] ] ]
 		ifFalse: [ aStream nextPutAll: '✓' ]
 ]

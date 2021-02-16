@@ -263,7 +263,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_backward [
 
 	self
 		assert: aGoal solutions asArray equals: { node };
-		assert: node formattedCode equals: '•₀ cons: •₁'.
+		assert: node formattedCode equals: '◊•₀ cons: ◊•₁'.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -293,8 +293,8 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_19 [
 			         prover
 				         focus: [ :o | #flapjack = o ]
 				         do: theory isAtomConsº ]
-		         then: [ :ast1 :ast2 | 
-		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :a :b | 
 		         #flapjack = (a cons: b) isAtom ]
@@ -318,15 +318,17 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_21 [
 			         prover
 				         focus: [ :o | #flapjack = o ] do: theory isAtomConsº;
 				         focus: [ :o | o ] do: self flapjackNilFalseº ]
-		         then: [ :ast1 :ast2 :ast3 | 
-			         theory unifyº value: ast3 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :a :b | 
 		         #flapjack = (a cons: b) isAtom ]
 		         contextVariables: Dictionary empty ] asGoal.
 	self
 		assert: aGoal solutions asArray
-		equals: { false asLiteralRBNode }
+		equals: { false asLiteralRBNode }.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -343,14 +345,16 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_28 [
 				         do: theory carConsº;
 				         focus: [ :o | o isAtom ] do: theory cdrConsº;
 				         focus: [ :o | o ] do: theory isAtomNilº ]
-		         then: [ :ast1 :ast2 :ast3 :ast4 | 
-			         theory unifyº value: ast4 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :p :q | 
 		         ((p cons: q) car cons: nil) cdr isAtom ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }
+	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -365,14 +369,16 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_32 [
 			         prover
 				         focus: [ :o | o isAtom ] do: theory cdrConsº;
 				         focus: [ :o | o ] do: theory isAtomNilº ]
-		         then: [ :ast1 :ast2 :ast3 | 
-			         theory unifyº value: ast3 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :p :q | 
 		         ((p cons: q) car cons: nil) cdr isAtom ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }
+	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -388,8 +394,8 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_44 [
 				         focus: [ :o | 
 				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
 				         do: theory equalSameº ]
-		         then: [ :ast1 :ast2 | 
-		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
@@ -400,7 +406,9 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_44 [
 		assert: aGoal solutions asArray
 		equals:
 		{ [ (true cons: (#and cons: (#crumpets cons: nil))) car ]
-			unaryRBNode }
+			unaryRBNode }.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -417,19 +425,21 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46 [
 				         (o cons: (#and cons: (#crumpets cons: nil))) car ]
 				         do: theory equalSameº.
 			         rewrite focus: [ :o | o ] do: theory carConsº ]
-		         then: [ :ast1 :ast2 :ast3 | 
-			         theory unifyº value: ast3 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :x :y | 
 			         ((x cons: y) = (x cons: y) cons:
 				          (#and cons: (#crumpets cons: nil))) car ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }
+	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº [
+TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSame [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
@@ -438,11 +448,10 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindin
 	         [ :r | 
 	         | g1 g2 |
 	         g1 := theory equalSameº value: ast value: r asRBNode.
-	         g2 := rewritten asRBNode unifyo value:
-		               (RBMessageNode
-			                receiver: car
+	         g2 := rewritten asRBNode unifyo value: (RBMessageNode
+			                receiver: car asRBNode
 			                selector: #cons:
-			                arguments: { cdr }).
+			                arguments: { cdr asRBNode }).
 	         g1 , g2 ] asGoal ] ]
 		         asGoalWithUnaryASTof: [ :a :d | 
 		         (#and cons: d) = (a cons: nil) ]
@@ -450,7 +459,9 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindin
 
 	self
 		assert: aGoal solutions asArray
-		equals: { [ #and cons: nil ] unaryRBNode }
+		equals: { [ #and cons: nil ] unaryRBNode }.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -461,14 +472,16 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindin
 	         [ :ast | 
 	         [ :a :b | 
 	         (rewritten asRBNode unifyo value:
-		          (RBMessageNode receiver: a selector: #even))
-	         , ((RBLiteralValueNode value: 3) unifyo value: a) ] ]
+		          (RBMessageNode receiver: a asRBNode selector: #even))
+	         , ((RBLiteralValueNode value: 3) unifyo value: a asRBNode) ] ]
 		         asGoalWithUnaryASTof: [ :a :b | a + b ]
 		         contextVariables: Dictionary empty ] asGoal.
 	self
 		assert: aGoal solutions
 		equals: { [ 3 even ] unaryRBNode }
-		modulo: #asOrderedCollection
+		modulo: #asOrderedCollection.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -481,8 +494,8 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 	         ast
 		         acl: [ :rewrite | 
 		         rewrite focus: [ :o | o ] do: theory equalSwapº ]
-		         then: [ :ast1 :ast2 | 
-		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :x :y | 
 		         (x cons: y) = (#bagels cons: (#and cons: (#lox cons: nil))) ]
@@ -501,7 +514,9 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 		assert: aGoal solutions asArray equals: { node };
 		assert: node formattedCode
 		equals:
-			'(#bagels cons: (#and cons: (#lox cons: nil))) = (•₀ cons: •₁)'
+			'(#bagels cons: (#and cons: (#lox cons: nil))) = (◊•₀ cons: ◊•₁)'.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -516,11 +531,11 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_55 [
 			         rewrite
 				         focus: [ :o | b cons: o = (a isAtom = false) ]
 				         do: [ :o :r | theory carConsº value: r value: o ] ]
-		         then: [ :ast1 :ast2 | 
-		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: (Dictionary new
-				          at: #a put: a;
-				          at: #b put: b;
+				          at: #a put: a asRBNode;
+				          at: #b put: b asRBNode;
 				          yourself) ] ]
 		         asGoalWithUnaryASTof: [ :x :y | 
 		         y cons: (x cdr cons: y car) car = (x isAtom = false) ]
@@ -530,8 +545,10 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_55 [
 
 	self
 		assert: aGoal solutions asArray equals: { node };
-		assert: node formattedCode equals: '•₀ cons:
-	((•₁ cdr cons: •₀ car) car cons: •₂) car = (•₁ isAtom = false)'
+		assert: node formattedCode equals: '◊•₀ cons:
+	((◊•₁ cdr cons: ◊•₀ car) car cons: ◊•₂) car = (◊•₁ isAtom = false)'.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -567,14 +584,14 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
 						         ((x cdr cons: y car) car cons: (#oats cons: nil)) car
 						         = (x isAtom = (b isAtom cons: o) isAtom) ]
 				         do: [ :o :r | theory equalSwapº value: o value: r ] ]
-		         then: [ :ast1 :ast2 :ast3 :ast4 :ast5 | 
-			         theory unifyº value: ast5 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: (Dictionary new
-				          at: #x put: x;
-				          at: #y put: y;
-				          at: #a put: a;
-				          at: #b put: b;
-				          at: #c put: c;
+				          at: #x put: x asRBNode;
+				          at: #y put: y asRBNode;
+				          at: #a put: a asRBNode;
+				          at: #b put: b asRBNode;
+				          at: #c put: c asRBNode;
 				          yourself) ] ]
 		         asGoalWithUnaryASTof: [ :x :y :a :b :c | 
 			         y cons: (x cdr cons: y car) car = (x isAtom = false) ]
@@ -586,8 +603,10 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
 		assert: aGoal solutions asArray equals: { node };
 		assert: node formattedCode
 		equals:
-			'•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car
-	= (•₁ isAtom = (•₂ isAtom cons: •₃ = (•₄ cons: •₂)) isAtom)'
+			'◊•₀ cons: ((◊•₁ cdr cons: ◊•₀ car) car cons: (#oats cons: nil)) car
+	= (◊•₁ isAtom = (◊•₂ isAtom cons: ◊•₃ = (◊•₄ cons: ◊•₂)) isAtom)'.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -600,8 +619,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_05 [
 	         ast
 		         acl: [ :prover | 
 		         prover focus: [ :o | o ] do: theory ifSameº ]
-		         then: [ :ast1 :ast2 | 
-		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :a :c | 
 			         a
@@ -609,7 +628,9 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_05 [
 				         ifFalse: [ c ] ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { 3 asLiteralRBNode }
+	self assert: aGoal solutions asArray equals: { 3 asLiteralRBNode }.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -622,8 +643,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_05_rewriting_unbound
 	         ast
 		         acl: [ :prover | 
 		         prover focus: [ :o | o ] do: theory ifSameº ]
-		         then: [ :ast1 :ast2 | 
-		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :a :c | 
 			         a
@@ -631,7 +652,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_05_rewriting_unbound
 				         ifFalse: [ c ] ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { 3 asLiteralRBNode }
+	self assert: aGoal solutions asArray equals: { 0 asReifiedVar }
 ]
 
 { #category : #tests }
@@ -646,8 +667,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_07 [
 			         prover
 				         focus: [ :o | o ]
 				         do: [ :o :r | theory ifSameº value: r value: o ] ]
-		         then: [ :ast1 :ast2 | 
-		         theory unifyº value: ast2 value: rewritten asRBNode ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
 		         asGoalWithUnaryASTof: [ :a :c | 
 			         (3 cons: nil) isAtom
@@ -658,15 +679,17 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_07 [
 	node := self expectedRBNode_chapter_02_frame_7.
 	self
 		assert: aGoal solutions asArray equals: { node };
-		assert: node formattedCode equals: '•₀
+		assert: node formattedCode equals: '◊•₀
 	ifTrue: [ 
 		(3 cons: nil) isAtom
-			ifTrue: [ •₁ ]
-			ifFalse: [ •₂ ] ]
+			ifTrue: [ ◊•₁ ]
+			ifFalse: [ ◊•₂ ] ]
 	ifFalse: [ 
 		(3 cons: nil) isAtom
-			ifTrue: [ •₁ ]
-			ifFalse: [ •₂ ] ]'
+			ifTrue: [ ◊•₁ ]
+			ifFalse: [ ◊•₂ ] ]'.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
@@ -845,7 +868,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_equalIfº [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parentº [
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parento [
 
 	| aGoal |
 	aGoal := [ :rewritten | 
@@ -854,12 +877,15 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parentº [
 		         value: rewritten asRBNode ] asGoal.
 
 	self
-		assert: (aGoal solutions collect: [ :e | e formattedCode ]) asArray
-		equals: { 'false'. '[ false ]'. 'false = •₀'. 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]'. '•₀ = false'. '•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ false ]'. '•₀
+		assert:
+		(aGoal copy solutions collect: [ :e | e formattedCode ]) asArray
+		equals: { 'false'. '[ false ]'. 'false = ◊•₀'. 'false
+	ifTrue: [ ◊•₀ ]
+	ifFalse: [ ◊•₁ ]'. '◊•₀ = false'. '◊•₀
+	ifTrue: [ ◊•₁ ]
+	ifFalse: [ false ]'. '◊•₀
 	ifTrue: [ false ]
-	ifFalse: [ •₁ ]' }
+	ifFalse: [ ◊•₁ ]' }.
+
+	^ self exportComputationTreeOfGoal: aGoal copy limitedTo: -1
 ]

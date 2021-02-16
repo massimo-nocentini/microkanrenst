@@ -155,16 +155,6 @@ TheLittleProver >> isAtomNilº [
 ]
 
 { #category : #predicates }
-TheLittleProver >> memberº [
-
-	^ [ :aCons :anObject | 
-	  [ :a :d | 
-	  (self consº value: a asRBNode value: d value: aCons)
-	  , ((self unifyº value: a asRBNode value: anObject)
-		   | [ self memberº value: d value: anObject ] asGoal) ] asGoal ]
-]
-
-{ #category : #predicates }
 TheLittleProver >> parentº [
 
 	^ [ :a :b | 

@@ -8,7 +8,7 @@ BlockClosure >> <~> aBlock [
 	  [ :x | 
 	  | z |
 	  z := aBlock substituteVariablesUsingSequenceableCollection:
-		       (Array with: x).
+		       (Array with: x asRBNode).
 	  (ast unifyo value: a) , (z unifyo value: b) ] ]
 		  asGoalWithUnaryASTof: self
 		  contextVariables: #(  ) ]
@@ -22,7 +22,7 @@ BlockClosure >> <~~> aBlock [
 	  [ :x :y | 
 	  | z |
 	  z := aBlock substituteVariablesUsingSequenceableCollection:
-		       (Array with: x with: y).
+		       (Array with: x asRBNode with: y asRBNode).
 	  (ast unifyo value: a) , (z unifyo value: b) ] ]
 		  asGoalWithUnaryASTof: self
 		  contextVariables: #(  ) ]
@@ -36,7 +36,7 @@ BlockClosure >> <~~~> aBlock [
 	  [ :x :y :w | 
 	  | z |
 	  z := aBlock substituteVariablesUsingSequenceableCollection:
-		       (Array with: x with: y with: w).
+		       (Array with: x asRBNode with: y asRBNode with: w asRBNode).
 	  (ast unifyo value: a) , (z unifyo value: b) ] ]
 		  asGoalWithUnaryASTof: self
 		  contextVariables: #(  ) ]

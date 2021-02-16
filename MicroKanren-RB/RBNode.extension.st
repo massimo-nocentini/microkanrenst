@@ -7,6 +7,12 @@ RBNode >> asRBNode [
 ]
 
 { #category : #'*MicroKanren-RB' }
+RBNode >> printOn: aWriteStream renderer: aMKComputationTreeRenderer [
+
+	aMKComputationTreeRenderer printOn: aWriteStream aRBNode: self
+]
+
+{ #category : #'*MicroKanren-RB' }
 RBNode >> reifyUsingReifier: aReifier [
 
 	^ aReifier forRBNode: self

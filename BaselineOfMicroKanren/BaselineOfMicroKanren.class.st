@@ -128,7 +128,7 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverChapter01ForDoc [
 			     test_chapter_01_OldGamesNewRules_frame_32
 			     test_chapter_01_OldGamesNewRules_frame_44
 			     test_chapter_01_OldGamesNewRules_frame_46
-			     test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº
+			     #test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSame
 			     test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually
 			     test_chapter_01_OldGamesNewRules_frame_49
 			     test_chapter_01_OldGamesNewRules_frame_55
@@ -147,7 +147,8 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverChapter02ForDoc [
 	^ MetaSTExporter new
 		  selectors: #( #test_chapter_02_EvenOlderGames_frame_05
 			     #test_chapter_02_EvenOlderGames_frame_07
-			     #test_chapter_02_EvenOlderGames_frame_15 );
+			     #test_chapter_02_EvenOlderGames_frame_15
+			     test_chapter_02_EvenOlderGames_frame_15_parento );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover-chapter-02.json' ]
@@ -163,7 +164,7 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverPredicatesForDoc [
 		  selectors:
 			  #( isAtom #isAtomConsº #consª:isAtomª: #consº:isAtomº:
 			     flapjackNilFalseº carConsº cdrConsº isAtomNilº equalSwapº
-			     ifSameº ifTrueº ifFalseº equalIfº );
+			     ifSameº ifTrueº ifFalseº equalIfº parentº );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover-predicates.json' ]

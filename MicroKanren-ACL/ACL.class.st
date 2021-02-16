@@ -44,7 +44,7 @@ ACL >> focus: focusBlock do: doBlock [
 			rewriting: astToRewrite
 			rewritten: astRewritten
 			focusAST: astFocused
-			focusVar: o
+			focusVar: o asRBNode
 			do: doBlock ] ]
 			asGoalWithUnaryASTof: focusBlock
 			contextVariables: contextVariables ]
@@ -91,6 +91,7 @@ ACL >> rewriting: astToRewrite rewritten: astRewritten focusAST: astFocused focu
 	  g1 := astToRewrite unifyo value: astFocused.
 	  g2 := doBlock value: o value: rNode.
 	  g3 := astSubstituted unifyo value: astRewritten.
+	
 	  g1 , g2 , g3 ] asGoal
 ]
 
@@ -114,5 +115,5 @@ ACL >> valueWithArguments: vars [
 	  goals := { (rbVariables first unifyo value: node) } , goals.
 
 	  (goals foldr: #, init: true asGoal)
-	  , (lastBlock valueWithArguments: rbVariables) ] asGoal
+	  , (lastBlock value: rbVariables) ] asGoal
 ]
