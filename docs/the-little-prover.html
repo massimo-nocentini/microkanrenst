@@ -343,7 +343,7 @@ hello or good morning.</div>
      [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
      <span class="o">|</span><span class="nv"> z </span><span class="o">|</span>
      <span class="nv">z</span> <span class="o">:=</span> <span class="nv">aBlock</span> <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
-             (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">with:</span> <span class="nv">y</span>)<span class="p">.</span>
+             (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">x</span> <span class="nf">asRBNode</span> <span class="nf">with:</span> <span class="nv">y</span> <span class="nf">asRBNode</span>)<span class="p">.</span>
      (<span class="nv">ast</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) <span class="nf">,</span> (<span class="nv">z</span> <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">b</span>) ] ]
         <span class="nf">asGoalWithUnaryASTof:</span> <span class="bp">self</span>
         <span class="nf">contextVariables:</span> <span class="ss">#(</span>  <span class="ss">)</span> ]
@@ -383,7 +383,9 @@ the constraint that the whole expression yields <code class="docutils literal no
 
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
-      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀ cons: •₁&#39;</span>
+      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;◊•₀ cons: ◊•₁&#39;</span><span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -447,15 +449,17 @@ We mix the two approaches freely from now on.</p>
                   <span class="nv">prover</span>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="nv">o</span> ]
                      <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">isAtomConsº</span> ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">|</span> 
-               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast2</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
                <span class="ss">#flapjack</span> <span class="nf">=</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
-      <span class="nf">equals:</span> { [ <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }
+      <span class="nf">equals:</span> { [ <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }<span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
@@ -490,19 +494,21 @@ We mix the two approaches freely from now on.</p>
                   <span class="nv">prover</span>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">isAtomConsº</span><span class="p">;</span>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="bp">self</span> <span class="nf">flapjackNilFalseº</span> ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">:</span><span class="nv">ast3</span> <span class="o">|</span> 
-                  <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast3</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
                <span class="ss">#flapjack</span> <span class="nf">=</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
-      <span class="nf">equals:</span> { <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> }
+      <span class="nf">equals:</span> { <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
-<div><p>where</p>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_21.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_21.svg" /><p>where</p>
 <span class="target" id="pharo-compiledMethod-25"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-flapjacknilfalseo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol predicates&quot;</span>
 <span class="nf">flapjackNilFalseº</span>
 
@@ -525,18 +531,20 @@ We mix the two approaches freely from now on.</p>
                      <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">carConsº</span><span class="p">;</span>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">isAtom</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">cdrConsº</span><span class="p">;</span>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">isAtomNilº</span> ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">:</span><span class="nv">ast3</span> <span class="o">:</span><span class="nv">ast4</span> <span class="o">|</span> 
-                  <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast4</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">p</span> <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> 
                ((<span class="nv">p</span> <span class="nf">cons:</span> <span class="nv">q</span>) <span class="nf">car</span> <span class="nf">cons:</span> <span class="bp">nil</span>) <span class="nf">cdr</span> <span class="nf">isAtom</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
-<div><p>where</p>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_28.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_28.svg" /><p>where</p>
 <span class="target" id="pharo-compiledMethod-27"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-carconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">carConsº</span>
 
@@ -579,16 +587,20 @@ We mix the two approaches freely from now on.</p>
                   <span class="nv">prover</span>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> <span class="nf">isAtom</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">cdrConsº</span><span class="p">;</span>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">isAtomNilº</span> ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">:</span><span class="nv">ast3</span> <span class="o">|</span> 
-                  <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast3</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">p</span> <span class="o">:</span><span class="nv">q</span> <span class="o">|</span> 
                ((<span class="nv">p</span> <span class="nf">cons:</span> <span class="nv">q</span>) <span class="nf">car</span> <span class="nf">cons:</span> <span class="bp">nil</span>) <span class="nf">cdr</span> <span class="nf">isAtom</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_32.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_32.svg" /></div></blockquote>
 <p id="index-8">What is the value of the context <code class="docutils literal notranslate"><span class="pre">((x</span> <span class="pre">cons:</span> <span class="pre">y)</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">cons:</span> <span class="pre">y)</span> <span class="pre">cons:</span> <span class="pre">(#and</span> <span class="pre">cons:</span>
 <span class="pre">(#crumpets</span> <span class="pre">cons:</span> <span class="pre">nil)))</span> <span class="pre">car</span></code> with focus on <code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">cons:</span> <span class="pre">y)</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">cons:</span> <span class="pre">y)</span></code>?</p>
 <span class="target" id="pharo-compiledMethod-32"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-44"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
@@ -604,8 +616,8 @@ We mix the two approaches freely from now on.</p>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> 
                      (<span class="nv">o</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
                      <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">equalSameº</span> ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">|</span> 
-               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast2</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
                   ((<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">=</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">cons:</span>
@@ -616,9 +628,13 @@ We mix the two approaches freely from now on.</p>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
       <span class="nf">equals:</span>
       { [ (<span class="bp">true</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
-         <span class="nf">unaryRBNode</span> }
+         <span class="nf">unaryRBNode</span> }<span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_44.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_44.svg" /></div></blockquote>
 <p id="index-9">And, of course, the second step is easy.</p>
 <span class="target" id="pharo-compiledMethod-33"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_46</span>
@@ -634,22 +650,26 @@ We mix the two approaches freely from now on.</p>
                      (<span class="nv">o</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
                      <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">equalSameº</span><span class="p">.</span>
                   <span class="nv">rewrite</span> <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">carConsº</span> ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">:</span><span class="nv">ast3</span> <span class="o">|</span> 
-                  <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast3</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
                   ((<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">=</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">cons:</span>
                       (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_46.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_46.svg" /></div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Please note that <code class="docutils literal notranslate"><span class="pre">#equalSameº</span></code> also binds variables during its evaluation</p>
-<span class="target" id="pharo-compiledMethod-34"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46-variablesbindingbyequalsameo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
-<span class="nf">test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº</span>
+<span class="target" id="pharo-compiledMethod-34"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46-variablesbindingbyequalsame"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSame</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
    <span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
@@ -658,11 +678,10 @@ We mix the two approaches freely from now on.</p>
             [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
             <span class="o">|</span><span class="nv"> g1 g2 </span><span class="o">|</span>
             <span class="nv">g1</span> <span class="o">:=</span> <span class="nv">theory</span> <span class="nf">equalSameº</span> <span class="nf">value:</span> <span class="nv">ast</span> <span class="nf">value:</span> <span class="nv">r</span> <span class="nf">asRBNode</span><span class="p">.</span>
-            <span class="nv">g2</span> <span class="o">:=</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> <span class="nf">unifyo</span> <span class="nf">value:</span>
-                     (<span class="nc">RBMessageNode</span>
-                         <span class="nf">receiver:</span> <span class="nv">car</span>
+            <span class="nv">g2</span> <span class="o">:=</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> <span class="nf">unifyo</span> <span class="nf">value:</span> (<span class="nc">RBMessageNode</span>
+                         <span class="nf">receiver:</span> <span class="nv">car</span> <span class="nf">asRBNode</span>
                          <span class="nf">selector:</span> <span class="ss">#cons:</span>
-                         <span class="nf">arguments:</span> { <span class="nv">cdr</span> })<span class="p">.</span>
+                         <span class="nf">arguments:</span> { <span class="nv">cdr</span> <span class="nf">asRBNode</span> })<span class="p">.</span>
             <span class="nv">g1</span> <span class="nf">,</span> <span class="nv">g2</span> ] <span class="nf">asGoal</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">d</span> <span class="o">|</span> 
                (<span class="ss">#and</span> <span class="nf">cons:</span> <span class="nv">d</span>) <span class="nf">=</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="bp">nil</span>) ]
@@ -670,9 +689,13 @@ We mix the two approaches freely from now on.</p>
 
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
-      <span class="nf">equals:</span> { [ <span class="ss">#and</span> <span class="nf">cons:</span> <span class="bp">nil</span> ] <span class="nf">unaryRBNode</span> }
+      <span class="nf">equals:</span> { [ <span class="ss">#and</span> <span class="nf">cons:</span> <span class="bp">nil</span> ] <span class="nf">unaryRBNode</span> }<span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSame.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSame.svg" /></div></blockquote>
 <p>morever, variables binding can be performed manually as in</p>
 <span class="target" id="pharo-compiledMethod-35"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46-variablesbindingmanually"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually</span>
@@ -682,16 +705,20 @@ We mix the two approaches freely from now on.</p>
             [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
             [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
             (<span class="nv">rewritten</span> <span class="nf">asRBNode</span> <span class="nf">unifyo</span> <span class="nf">value:</span>
-                (<span class="nc">RBMessageNode</span> <span class="nf">receiver:</span> <span class="nv">a</span> <span class="nf">selector:</span> <span class="ss">#even</span>))
-            <span class="nf">,</span> ((<span class="nc">RBLiteralValueNode</span> <span class="nf">value:</span> <span class="m">3</span>) <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span>) ] ]
+                (<span class="nc">RBMessageNode</span> <span class="nf">receiver:</span> <span class="nv">a</span> <span class="nf">asRBNode</span> <span class="nf">selector:</span> <span class="ss">#even</span>))
+            <span class="nf">,</span> ((<span class="nc">RBLiteralValueNode</span> <span class="nf">value:</span> <span class="m">3</span>) <span class="nf">unifyo</span> <span class="nf">value:</span> <span class="nv">a</span> <span class="nf">asRBNode</span>) ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">a</span> <span class="nf">+</span> <span class="nv">b</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span>
       <span class="nf">equals:</span> { [ <span class="m">3</span> <span class="nf">even</span> ] <span class="nf">unaryRBNode</span> }
-      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
+      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually.svg" /></div></blockquote>
 </div>
 <p id="index-10">Does the order of the arguments to <code class="docutils literal notranslate"><span class="pre">#=</span></code> matter?</p>
 <span class="target" id="pharo-compiledMethod-36"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-49"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
@@ -704,8 +731,8 @@ We mix the two approaches freely from now on.</p>
             <span class="nv">ast</span>
                <span class="nf">acl:</span> [ <span class="o">:</span><span class="nv">rewrite</span> <span class="o">|</span> 
                <span class="nv">rewrite</span> <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">equalSwapº</span> ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">|</span> 
-               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast2</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
                (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">=</span> (<span class="ss">#bagels</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#lox</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) ]
@@ -724,9 +751,13 @@ We mix the two approaches freely from now on.</p>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span>
       <span class="nf">equals:</span>
-         <span class="s">&#39;(#bagels cons: (#and cons: (#lox cons: nil))) = (•₀ cons: •₁)&#39;</span>
+         <span class="s">&#39;(#bagels cons: (#and cons: (#lox cons: nil))) = (◊•₀ cons: ◊•₁)&#39;</span><span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_49.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_49.svg" /></div></blockquote>
 <p>where</p>
 <blockquote>
 <div><span class="target" id="pharo-compiledMethod-37"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-equalswapo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
@@ -754,11 +785,11 @@ Recall that “is equal to” works in both directions.</p>
                   <span class="nv">rewrite</span>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">b</span> <span class="nf">cons:</span> <span class="nv">o</span> <span class="nf">=</span> (<span class="nv">a</span> <span class="nf">isAtom</span> <span class="nf">=</span> <span class="bp">false</span>) ]
                      <span class="nf">do:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nv">theory</span> <span class="nf">carConsº</span> <span class="nf">value:</span> <span class="nv">r</span> <span class="nf">value:</span> <span class="nv">o</span> ] ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">|</span> 
-               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast2</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> (<span class="nc">Dictionary</span> <span class="nb">new</span>
-                      <span class="nf">at:</span> <span class="ss">#a</span> <span class="nf">put:</span> <span class="nv">a</span><span class="p">;</span>
-                      <span class="nf">at:</span> <span class="ss">#b</span> <span class="nf">put:</span> <span class="nv">b</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#a</span> <span class="nf">put:</span> <span class="nv">a</span> <span class="nf">asRBNode</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#b</span> <span class="nf">put:</span> <span class="nv">b</span> <span class="nf">asRBNode</span><span class="p">;</span>
                       <span class="nf">yourself</span>) ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> 
                <span class="nv">y</span> <span class="nf">cons:</span> (<span class="nv">x</span> <span class="nf">cdr</span> <span class="nf">cons:</span> <span class="nv">y</span> <span class="nf">car</span>) <span class="nf">car</span> <span class="nf">=</span> (<span class="nv">x</span> <span class="nf">isAtom</span> <span class="nf">=</span> <span class="bp">false</span>) ]
@@ -768,10 +799,14 @@ Recall that “is equal to” works in both directions.</p>
 
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
-      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀ cons:</span>
-<span class="s">   ((•₁ cdr cons: •₀ car) car cons: •₂) car = (•₁ isAtom = false)&#39;</span>
+      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;◊•₀ cons:</span>
+<span class="s">   ((◊•₁ cdr cons: ◊•₀ car) car cons: ◊•₂) car = (◊•₁ isAtom = false)&#39;</span><span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_55.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_55.svg" /></div></blockquote>
 <p id="index-12">Can we use <a class="reference internal" href="#pharo-compiledmethod-thelittleprover-carconsº" title="pharo-compiledmethod-thelittleprover-carconsº"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProver&gt;&gt;#carConsº</span></code></a>, then
 <a class="reference internal" href="#pharo-compiledmethod-thelittleprover-isatomconsº" title="pharo-compiledmethod-thelittleprover-isatomconsº"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProver&gt;&gt;#isAtomConsº</span></code></a> and finally then
 <a class="reference internal" href="#pharo-compiledmethod-thelittleprover-cdrconsº" title="pharo-compiledmethod-thelittleprover-cdrconsº"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProver&gt;&gt;#cdrConsº</span></code></a>? And what value is the final expression equal to?</p>
@@ -808,14 +843,14 @@ Recall that “is equal to” works in both directions.</p>
                            ((<span class="nv">x</span> <span class="nf">cdr</span> <span class="nf">cons:</span> <span class="nv">y</span> <span class="nf">car</span>) <span class="nf">car</span> <span class="nf">cons:</span> (<span class="ss">#oats</span> <span class="nf">cons:</span> <span class="bp">nil</span>)) <span class="nf">car</span>
                            <span class="nf">=</span> (<span class="nv">x</span> <span class="nf">isAtom</span> <span class="nf">=</span> (<span class="nv">b</span> <span class="nf">isAtom</span> <span class="nf">cons:</span> <span class="nv">o</span>) <span class="nf">isAtom</span>) ]
                      <span class="nf">do:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nv">theory</span> <span class="nf">equalSwapº</span> <span class="nf">value:</span> <span class="nv">o</span> <span class="nf">value:</span> <span class="nv">r</span> ] ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">:</span><span class="nv">ast3</span> <span class="o">:</span><span class="nv">ast4</span> <span class="o">:</span><span class="nv">ast5</span> <span class="o">|</span> 
-                  <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast5</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> (<span class="nc">Dictionary</span> <span class="nb">new</span>
-                      <span class="nf">at:</span> <span class="ss">#x</span> <span class="nf">put:</span> <span class="nv">x</span><span class="p">;</span>
-                      <span class="nf">at:</span> <span class="ss">#y</span> <span class="nf">put:</span> <span class="nv">y</span><span class="p">;</span>
-                      <span class="nf">at:</span> <span class="ss">#a</span> <span class="nf">put:</span> <span class="nv">a</span><span class="p">;</span>
-                      <span class="nf">at:</span> <span class="ss">#b</span> <span class="nf">put:</span> <span class="nv">b</span><span class="p">;</span>
-                      <span class="nf">at:</span> <span class="ss">#c</span> <span class="nf">put:</span> <span class="nv">c</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#x</span> <span class="nf">put:</span> <span class="nv">x</span> <span class="nf">asRBNode</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#y</span> <span class="nf">put:</span> <span class="nv">y</span> <span class="nf">asRBNode</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#a</span> <span class="nf">put:</span> <span class="nv">a</span> <span class="nf">asRBNode</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#b</span> <span class="nf">put:</span> <span class="nv">b</span> <span class="nf">asRBNode</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#c</span> <span class="nf">put:</span> <span class="nv">c</span> <span class="nf">asRBNode</span><span class="p">;</span>
                       <span class="nf">yourself</span>) ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">:</span><span class="nv">c</span> <span class="o">|</span> 
                   <span class="nv">y</span> <span class="nf">cons:</span> (<span class="nv">x</span> <span class="nf">cdr</span> <span class="nf">cons:</span> <span class="nv">y</span> <span class="nf">car</span>) <span class="nf">car</span> <span class="nf">=</span> (<span class="nv">x</span> <span class="nf">isAtom</span> <span class="nf">=</span> <span class="bp">false</span>) ]
@@ -827,10 +862,14 @@ Recall that “is equal to” works in both directions.</p>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span>
       <span class="nf">equals:</span>
-         <span class="s">&#39;•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car</span>
-<span class="s">   = (•₁ isAtom = (•₂ isAtom cons: •₃ = (•₄ cons: •₂)) isAtom)&#39;</span>
+         <span class="s">&#39;◊•₀ cons: ((◊•₁ cdr cons: ◊•₀ car) car cons: (#oats cons: nil)) car</span>
+<span class="s">   = (◊•₁ isAtom = (◊•₂ isAtom cons: ◊•₃ = (◊•₄ cons: ◊•₂)) isAtom)&#39;</span><span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_56.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_56.svg" /></div></blockquote>
 <p>That is a good question. We do not know, but we have had fun playing with it so far!</p>
 </div>
 <div class="section" id="even-older-games">
@@ -846,8 +885,8 @@ Recall that “is equal to” works in both directions.</p>
             <span class="nv">ast</span>
                <span class="nf">acl:</span> [ <span class="o">:</span><span class="nv">prover</span> <span class="o">|</span> 
                <span class="nv">prover</span> <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ] <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">ifSameº</span> ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">|</span> 
-               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast2</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">c</span> <span class="o">|</span> 
                   <span class="nv">a</span>
@@ -855,9 +894,13 @@ Recall that “is equal to” works in both directions.</p>
                      <span class="nb">ifFalse:</span> [ <span class="nv">c</span> ] ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="m">3</span> <span class="nf">asLiteralRBNode</span> }
+   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="m">3</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_05.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_05.svg" /></div></blockquote>
 <p>where</p>
 <blockquote>
 <div><span class="target" id="pharo-compiledMethod-41"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-ifsameo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
@@ -889,8 +932,8 @@ end with an if expression. So … what else is <code class="docutils literal not
                   <span class="nv">prover</span>
                      <span class="nf">focus:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> <span class="nv">o</span> ]
                      <span class="nf">do:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> <span class="nv">theory</span> <span class="nf">ifSameº</span> <span class="nf">value:</span> <span class="nv">r</span> <span class="nf">value:</span> <span class="nv">o</span> ] ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">|</span> 
-               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast2</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">c</span> <span class="o">|</span> 
                   (<span class="m">3</span> <span class="nf">cons:</span> <span class="bp">nil</span>) <span class="nf">isAtom</span>
@@ -901,17 +944,21 @@ end with an if expression. So … what else is <code class="docutils literal not
    <span class="nv">node</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">expectedRBNode_chapter_02_frame_7</span><span class="p">.</span>
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
-      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀</span>
+      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;◊•₀</span>
 <span class="s">   ifTrue: [ </span>
 <span class="s">      (3 cons: nil) isAtom</span>
-<span class="s">         ifTrue: [ •₁ ]</span>
-<span class="s">         ifFalse: [ •₂ ] ]</span>
+<span class="s">         ifTrue: [ ◊•₁ ]</span>
+<span class="s">         ifFalse: [ ◊•₂ ] ]</span>
 <span class="s">   ifFalse: [ </span>
 <span class="s">      (3 cons: nil) isAtom</span>
-<span class="s">         ifTrue: [ •₁ ]</span>
-<span class="s">         ifFalse: [ •₂ ] ]&#39;</span>
+<span class="s">         ifTrue: [ ◊•₁ ]</span>
+<span class="s">         ifFalse: [ ◊•₂ ] ]&#39;</span><span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_07.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_07.svg" /></div></blockquote>
 <p id="index-15">Does the question message <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">true</span></code> tell us anything about the focus <code class="docutils literal notranslate"><span class="pre">nil</span> <span class="pre">=</span> <span class="pre">nil</span> <span class="pre">ifTrue:</span> <span class="pre">[</span> <span class="pre">a</span> <span class="pre">]</span> <span class="pre">ifFalse:</span> <span class="pre">[</span> <span class="pre">b</span> <span class="pre">]</span></code>?</p>
 <span class="target" id="pharo-compiledMethod-43"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-02-evenoldergames-frame-15"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_02_EvenOlderGames_frame_15</span>
@@ -1026,6 +1073,103 @@ end with an if expression. So … what else is <code class="docutils literal not
 </div>
 </div></blockquote>
 <p>respectively.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<span class="target" id="pharo-compiledMethod-46"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-02-evenoldergames-frame-15-parento"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_02_EvenOlderGames_frame_15_parento</span>
+
+   <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+   <span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+            <span class="nv">theory</span> <span class="nf">parentº</span>
+               <span class="nf">value:</span> <span class="bp">false</span> <span class="nf">asLiteralRBNode</span>
+               <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+
+   <span class="bp">self</span>
+      <span class="nf">assert:</span>
+      (<span class="nv">aGoal</span> <span class="nf">copy</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">asArray</span>
+      <span class="nf">equals:</span> { <span class="s">&#39;false&#39;</span><span class="p">.</span> <span class="s">&#39;[ false ]&#39;</span><span class="p">.</span> <span class="s">&#39;false = ◊•₀&#39;</span><span class="p">.</span> <span class="s">&#39;false</span>
+<span class="s">   ifTrue: [ ◊•₀ ]</span>
+<span class="s">   ifFalse: [ ◊•₁ ]&#39;</span><span class="p">.</span> <span class="s">&#39;◊•₀ = false&#39;</span><span class="p">.</span> <span class="s">&#39;◊•₀</span>
+<span class="s">   ifTrue: [ ◊•₁ ]</span>
+<span class="s">   ifFalse: [ false ]&#39;</span><span class="p">.</span> <span class="s">&#39;◊•₀</span>
+<span class="s">   ifTrue: [ false ]</span>
+<span class="s">   ifFalse: [ ◊•₁ ]&#39;</span> }<span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">copy</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
+</div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_07.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_07.svg" /></div></blockquote>
+<p>where</p>
+<blockquote>
+<div><span class="target" id="pharo-compiledMethod-47"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-parento"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<span class="nf">parentº</span>
+
+   <span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+     <span class="o">|</span><span class="nv"> sequenceGoal blockGoal messageNode </span><span class="o">|</span>
+     <span class="nv">sequenceGoal</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
+                        <span class="nf">value:</span> <span class="nv">b</span>
+                        <span class="nf">value:</span> (<span class="nc">RBSequenceNode</span> <span class="nf">statements:</span> { <span class="nv">a</span> })<span class="p">.</span>
+
+     <span class="nv">messageNode</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">c</span> <span class="o">|</span> 
+                    <span class="o">|</span><span class="nv"> equal1 equal2 equal cRB if </span><span class="o">|</span>
+                    <span class="nv">cRB</span> <span class="o">:=</span> <span class="nv">c</span> <span class="nf">asRBNode</span><span class="p">.</span>
+                    <span class="nv">equal1</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
+                                 <span class="nf">value:</span> <span class="nv">b</span>
+                                 <span class="nf">value:</span>
+                                    ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">|</span> <span class="nv">q</span> <span class="nf">=</span> <span class="nv">w</span> ] 
+                                        <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
+                                        (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span>))<span class="p">.</span>
+                    <span class="nv">equal2</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
+                                 <span class="nf">value:</span> <span class="nv">b</span>
+                                 <span class="nf">value:</span>
+                                    ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">|</span> <span class="nv">w</span> <span class="nf">=</span> <span class="nv">q</span> ] 
+                                        <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
+                                        (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span>))<span class="p">.</span>
+                    <span class="nv">equal</span> <span class="o">:=</span> <span class="nv">equal1</span> <span class="nf">|</span> <span class="nv">equal2</span><span class="p">.</span>
+
+                    <span class="nv">if</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
+                          <span class="o">|</span><span class="nv"> rRB if1 if2 if3 </span><span class="o">|</span>
+                          <span class="nv">rRB</span> <span class="o">:=</span> <span class="nv">r</span> <span class="nf">asRBNode</span><span class="p">.</span>
+                          <span class="nv">if1</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
+                                    <span class="nf">value:</span> <span class="nv">b</span>
+                                    <span class="nf">value:</span> ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> 
+                                        <span class="nv">q</span>
+                                           <span class="nb">ifTrue:</span> [ <span class="nv">w</span> ]
+                                           <span class="nb">ifFalse:</span> [ <span class="nv">e</span> ] ] 
+                                           <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
+                                           (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span> <span class="nf">with:</span> <span class="nv">rRB</span>))<span class="p">.</span>
+                          <span class="nv">if2</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
+                                    <span class="nf">value:</span> <span class="nv">b</span>
+                                    <span class="nf">value:</span> ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> 
+                                        <span class="nv">w</span>
+                                           <span class="nb">ifTrue:</span> [ <span class="nv">q</span> ]
+                                           <span class="nb">ifFalse:</span> [ <span class="nv">e</span> ] ] 
+                                           <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
+                                           (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span> <span class="nf">with:</span> <span class="nv">rRB</span>))<span class="p">.</span>
+                          <span class="nv">if3</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
+                                    <span class="nf">value:</span> <span class="nv">b</span>
+                                    <span class="nf">value:</span> ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> 
+                                        <span class="nv">w</span>
+                                           <span class="nb">ifTrue:</span> [ <span class="nv">e</span> ]
+                                           <span class="nb">ifFalse:</span> [ <span class="nv">q</span> ] ] 
+                                           <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
+                                           (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span> <span class="nf">with:</span> <span class="nv">rRB</span>))<span class="p">.</span>
+
+                          <span class="nv">if1</span> <span class="nf">|</span> <span class="nv">if2</span> <span class="nf">|</span> <span class="nv">if3</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+
+                    <span class="nv">equal</span> <span class="nf">|</span> <span class="nv">if</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+
+     <span class="nv">blockGoal</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
+                     <span class="nf">value:</span> <span class="nv">b</span>
+                     <span class="nf">value:</span>
+                     (<span class="nc">RBBlockNode</span> <span class="nf">body:</span> (<span class="nc">RBSequenceNode</span> <span class="nf">statements:</span> { <span class="nv">a</span> }))<span class="p">.</span>
+
+     <span class="nv">sequenceGoal</span> <span class="nf">|</span> <span class="nv">messageNode</span> <span class="nf">|</span> <span class="nv">blockGoal</span> ]
+</pre></div>
+</div>
+</div></blockquote>
+</div>
 </div>
 </div>
 

@@ -186,6 +186,9 @@ Precisely. In that case, what value is ``#flapjack = false`` equal to?
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_21
 
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_21.svg
+    :align: center
+
   where
 
   .. pharo:autocompiledmethod:: TheLittleProverTest>>#flapjackNilFalseº
@@ -196,6 +199,9 @@ Precisely. In that case, what value is ``#flapjack = false`` equal to?
 What value is the expression ``((p cons: q) car cons: nil) cdr isAtom`` equal to?
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_28
+
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_28.svg
+    :align: center
 
   where
 
@@ -209,6 +215,9 @@ What value is the expression ``((p cons: q) car cons: nil) cdr isAtom`` equal to
 That took three steps. Can we do it in fewer?
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_32
+   
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_32.svg
+    :align: center
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 44
@@ -218,6 +227,9 @@ What is the value of the context ``((x cons: y) = (x cons: y) cons: (#and cons:
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_44
 
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_44.svg
+    :align: center
+
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 46
 
@@ -225,15 +237,24 @@ And, of course, the second step is easy.
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_46
 
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_46.svg
+    :align: center
+
 .. note::
 
   Please note that ``#equalSameº`` also binds variables during its evaluation
 
-  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSame
+
+    .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSame.svg
+      :align: center
 
   morever, variables binding can be performed manually as in
 
   .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually
+
+    .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually.svg
+      :align: center
 
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 49
@@ -241,6 +262,9 @@ And, of course, the second step is easy.
 Does the order of the arguments to ``#=`` matter?
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_49
+
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_49.svg
+    :align: center
 
 where
 
@@ -255,6 +279,9 @@ Recall that “is equal to” works in both directions.
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_55
 
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_55.svg
+    :align: center
+
 .. index::
    single: The Little Prover; 01. Old Games, New Rules: frame 56
 
@@ -263,6 +290,9 @@ Can we use :pharo:mref:`TheLittleProver>>#carConsº`, then
 :pharo:mref:`TheLittleProver>>#cdrConsº`? And what value is the final expression equal to?
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_01_OldGamesNewRules_frame_56
+
+  .. image:: _images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_56.svg
+    :align: center
 
 That is a good question. We do not know, but we have had fun playing with it so far!
 
@@ -275,6 +305,9 @@ Even Older Games
 What is this expression *obviously* equal to?
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_05
+
+  .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_05.svg
+    :align: center
 
 where
 
@@ -289,6 +322,9 @@ end with an if expression. So ... what else is ``c`` equal to, according to
 :pharo:mref:`TheLittleProver>>#ifSameº`?
 
 .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_07
+
+  .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_07.svg
+    :align: center
 
 .. index::
    single: The Little Prover; 02. Even Older Games: frame 15
@@ -306,3 +342,14 @@ and
   .. pharo:autocompiledmethod:: TheLittleProver>>#equalIfº
 
 respectively.
+
+.. note::
+
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_15_parento
+
+    .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_07.svg
+      :align: center
+
+  where
+
+    .. pharo:autocompiledmethod:: TheLittleProver>>#parentº
