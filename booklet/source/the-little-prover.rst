@@ -353,3 +353,16 @@ respectively.
   where
 
     .. pharo:autocompiledmethod:: TheLittleProver>>#parentº
+
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_15_ancestoro
+
+    .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_ancestoro.svg
+      :align: center
+
+  where
+
+    .. pharo:autocompiledmethod:: TheLittleProver>>#ancestorº
+
+
+.. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_ancestorobackward.svg
+  :align: center

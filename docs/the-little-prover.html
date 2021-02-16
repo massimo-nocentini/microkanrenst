@@ -1085,8 +1085,7 @@ end with an if expression. So … what else is <code class="docutils literal not
                <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span>
-      (<span class="nv">aGoal</span> <span class="nf">copy</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">asArray</span>
+      <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">asArray</span>
       <span class="nf">equals:</span> { <span class="s">&#39;false&#39;</span><span class="p">.</span> <span class="s">&#39;[ false ]&#39;</span><span class="p">.</span> <span class="s">&#39;false = ◊•₀&#39;</span><span class="p">.</span> <span class="s">&#39;false</span>
 <span class="s">   ifTrue: [ ◊•₀ ]</span>
 <span class="s">   ifFalse: [ ◊•₁ ]&#39;</span><span class="p">.</span> <span class="s">&#39;◊•₀ = false&#39;</span><span class="p">.</span> <span class="s">&#39;◊•₀</span>
@@ -1095,11 +1094,11 @@ end with an if expression. So … what else is <code class="docutils literal not
 <span class="s">   ifTrue: [ false ]</span>
 <span class="s">   ifFalse: [ ◊•₁ ]&#39;</span> }<span class="p">.</span>
 
-   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">copy</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
 </div>
 <blockquote>
-<div><img alt="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_07.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_07.svg" /></div></blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_parento.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_parento.svg" /></div></blockquote>
 <p>where</p>
 <blockquote>
 <div><span class="target" id="pharo-compiledMethod-47"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-parento"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
@@ -1169,8 +1168,69 @@ end with an if expression. So … what else is <code class="docutils literal not
 </pre></div>
 </div>
 </div></blockquote>
+<span class="target" id="pharo-compiledMethod-48"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-02-evenoldergames-frame-15-ancestoro"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="nf">test_chapter_02_EvenOlderGames_frame_15_ancestoro</span>
+
+   <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
+   <span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
+            <span class="nv">theory</span> <span class="nf">ancestorº</span>
+               <span class="nf">value:</span> <span class="bp">false</span> <span class="nf">asLiteralRBNode</span>
+               <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] <span class="nf">asGoal</span><span class="p">.</span>
+
+   <span class="bp">self</span>
+      <span class="nf">assert:</span>
+         ((<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">asRBNode</span> <span class="nf">formattedCode</span> ]) 
+             <span class="nf">next:</span> <span class="m">25</span>) <span class="nf">asArray</span>
+      <span class="nf">equals:</span> <span class="ss">#(</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;false</span>
+<span class="s">   ifTrue: [ •₀ ]</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;false</span>
+<span class="s">   ifTrue: [ •₀ ]</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false = •₀ = •₁&#39;</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifTrue: [ •₁ ]</span>
+<span class="s">   ifFalse: [ false ]&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;(false</span>
+<span class="s">    ifTrue: [ •₀ ]</span>
+<span class="s">    ifFalse: [ •₁ ]) = •₂&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;false</span>
+<span class="s">   ifTrue: [ •₀ ]</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifTrue: [ false ]</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifTrue: [ •₁ ]</span>
+<span class="s">   ifFalse: [ false ]&#39;</span> <span class="s">&#39;•₀ = false = •₁&#39;</span> <span class="s">&#39;false</span>
+<span class="s">   ifTrue: [ •₀ ]</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false = •₀</span>
+<span class="s">   ifTrue: [ •₁ ]</span>
+<span class="s">   ifFalse: [ •₂ ]&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifTrue: [ false ]</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;(•₀</span>
+<span class="s">    ifTrue: [ •₁ ]</span>
+<span class="s">    ifFalse: [ false ]) = •₂&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;(false</span>
+<span class="s">    ifTrue: [ •₀ ]</span>
+<span class="s">    ifFalse: [ •₁ ])</span>
+<span class="s">   ifTrue: [ •₂ ]</span>
+<span class="s">   ifFalse: [ •₃ ]&#39;</span> <span class="ss">)</span><span class="p">.</span>
+
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+</pre></div>
 </div>
+<blockquote>
+<div><img alt="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_ancestoro.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_ancestoro.svg" /></div></blockquote>
+<p>where</p>
+<blockquote>
+<div><span class="target" id="pharo-compiledMethod-49"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-ancestoro"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<span class="nf">ancestorº</span>
+
+   <span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+     [ <span class="o">:</span><span class="nv">p</span> <span class="o">|</span> 
+     <span class="o">|</span><span class="nv"> pRB </span><span class="o">|</span>
+     <span class="nv">pRB</span> <span class="o">:=</span> <span class="nv">p</span> <span class="nf">asRBNode</span><span class="p">.</span>
+     (<span class="bp">self</span> <span class="nf">parentº</span> <span class="nf">value:</span> <span class="nv">a</span> <span class="nf">value:</span> <span class="nv">pRB</span>)
+     <span class="nf">,</span> ((<span class="bp">self</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">pRB</span> <span class="nf">value:</span> <span class="nv">b</span>)
+         <span class="nf">|</span> [ <span class="bp">self</span> <span class="nf">ancestorº</span> <span class="nf">value:</span> <span class="nv">pRB</span> <span class="nf">value:</span> <span class="nv">b</span> ] <span class="nf">asGoal</span>) ] <span class="nf">asGoal</span> ]
+</pre></div>
 </div>
+</div></blockquote>
+</div>
+<img alt="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_ancestorobackward.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_ancestorobackward.svg" /></div>
 </div>
 
 
