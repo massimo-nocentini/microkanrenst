@@ -122,15 +122,12 @@ system; for the sake of clarity, we proceed in increasing order of complexity,
 explaining more complex concepts by using simpler ones.</p>
 <div class="section" id="goal">
 <h2>Goal<a class="headerlink" href="#goal" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="pharo-class-0"></span><div class="highlight-smalltalk notranslate" id="pharo-class-goal"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nc">Object</span> <span class="nf">subclass:</span> <span class="ss">#Goal</span>
+<span class="target" id="pharo-class-0"></span><div class="highlight-smalltalk notranslate" id="pharo-class-goal"><div class="highlight"><pre><span></span><span class="nc">Object</span> <span class="nf">subclass:</span> <span class="ss">#Goal</span>
 	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>I and my subclasses represent a small language to construct logical
 relations. Formally, I adhere to the abstract grammar:</p>
 <pre>
@@ -168,26 +165,16 @@ drop into a logic computation.</p>
 </div>
 <div class="section" id="failed">
 <h2>Failed<a class="headerlink" href="#failed" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="pharo-class-1"></span><div class="highlight-smalltalk notranslate" id="pharo-class-failed"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nc">Atomic</span> <span class="nf">subclass:</span> <span class="ss">#Failed</span>
+<span class="target" id="pharo-class-1"></span><div class="highlight-smalltalk notranslate" id="pharo-class-failed"><div class="highlight"><pre><span></span><span class="nc">Atomic</span> <span class="nf">subclass:</span> <span class="ss">#Failed</span>
 	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>I am a goal that represent logical falsehood, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-failed"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:failed</span></code></a> production. The simpler way to create me
 is to send the adapting message <code class="docutils literal notranslate"><span class="pre">#asGoal</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code>, as follows</p>
-<span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfailed"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-0"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfailed"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFailed</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -196,36 +183,22 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testFailed.svg" class="align-center" src="_images/GoalTest-testFailed.svg" /></div></blockquote>
 </div>
 <div class="section" id="succeed">
 <h2>Succeed<a class="headerlink" href="#succeed" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="pharo-class-2"></span><div class="highlight-smalltalk notranslate" id="pharo-class-succeed"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nc">Atomic</span> <span class="nf">subclass:</span> <span class="ss">#Succeed</span>
+<span class="target" id="pharo-class-2"></span><div class="highlight-smalltalk notranslate" id="pharo-class-succeed"><div class="highlight"><pre><span></span><span class="nc">Atomic</span> <span class="nf">subclass:</span> <span class="ss">#Succeed</span>
 	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>I am a goal that represent logical truth, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-succeed"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:succeed</span></code></a> production. The simpler way to create me
 is to send the adapting message <code class="docutils literal notranslate"><span class="pre">#asGoal</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>, as follows</p>
-<span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testsucceed"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-2"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testsucceed"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testSucceed</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -238,41 +211,28 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testSucceed.svg" class="align-center" src="_images/GoalTest-testSucceed.svg" /><p>where</p>
-<span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-var-class-tautology"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Var class, protocol creating&quot;</span>
+<span class="target" id="pharo-compiledMethod-1"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-var-class-tautology"><div class="highlight"><pre><span></span><span class="c">&quot;Var class, protocol creating&quot;</span>
 <span class="nf">tautology</span>
 
    <span class="o">^</span> <span class="ss">#tautology</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </div>
 <div class="section" id="fresh">
 <h2>Fresh<a class="headerlink" href="#fresh" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="pharo-class-3"></span><div class="highlight-smalltalk notranslate" id="pharo-class-fresh"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nc">Suspended</span> <span class="nf">subclass:</span> <span class="ss">#Fresh</span>
+<span class="target" id="pharo-class-3"></span><div class="highlight-smalltalk notranslate" id="pharo-class-fresh"><div class="highlight"><pre><span></span><span class="nc">Suspended</span> <span class="nf">subclass:</span> <span class="ss">#Fresh</span>
 	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;variables&#39;</span>
 	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>I am a goal that introduces logic variables, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-fresh"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:fresh</span></code></a> production.</p>
-<span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfreshfailed"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfreshfailed"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFreshFailed</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -281,20 +241,10 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testFreshFailed.svg" class="align-center" src="_images/GoalTest-testFreshFailed.svg" /></div></blockquote>
-<span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfreshsucceed"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfreshsucceed"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFreshSucceed</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -306,50 +256,30 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testFreshSucceed.svg" class="align-center" src="_images/GoalTest-testFreshSucceed.svg" /><p>where</p>
 <blockquote>
-<div><span class="target" id="pharo-compiledMethod-5"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-integer-asreifiedvar"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Integer, protocol *MicroKanren-core&quot;</span>
+<div><span class="target" id="pharo-compiledMethod-5"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-integer-asreifiedvar"><div class="highlight"><pre><span></span><span class="c">&quot;Integer, protocol *MicroKanren-core&quot;</span>
 <span class="nf">asReifiedVar</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">asReifiedWithVarClass:</span> <span class="nc">ReifiedVar</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><p>and</p>
-<span class="target" id="pharo-compiledMethod-4"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-integer-asreifiedwithvarclass"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Integer, protocol *MicroKanren-core&quot;</span>
+<span class="target" id="pharo-compiledMethod-4"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-integer-asreifiedwithvarclass"><div class="highlight"><pre><span></span><span class="c">&quot;Integer, protocol *MicroKanren-core&quot;</span>
 <span class="nf">asReifiedWithVarClass:</span> <span class="nv">aClass</span>
 
    <span class="o">^</span> <span class="nv">aClass</span> <span class="nb">new</span>
         <span class="nf">id:</span> <span class="bp">self</span><span class="p">;</span>
         <span class="nf">yourself</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
-<span class="target" id="pharo-compiledMethod-7"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfreshmultiplevars"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-7"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testfreshmultiplevars"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testFreshMultipleVars</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -363,61 +293,40 @@ is to send the adapting message <code class="docutils literal notranslate"><span
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testFreshMultipleVars.svg" class="align-center" src="_images/GoalTest-testFreshMultipleVars.svg" /></div></blockquote>
 <p>Moreover, we can also use a block without arguments in order to
 postpone the computation, for instance to support recursive goals such as</p>
-<span class="target" id="pharo-compiledMethod-9"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testetaraw"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-9"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testetaraw"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testEtaRaw</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
    <span class="nv">g</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nc">Object</span> <span class="nb">new</span><span class="p">.</span>
    <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">g</span> <span class="nf">class</span> <span class="nf">equals:</span> <span class="nc">Eta</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><p>where</p>
-<span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-eternity"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
+<span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-eternity"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol utilities&quot;</span>
 <span class="nf">eternity:</span> <span class="nv">x</span>
 
    <span class="o">^</span> [ <span class="bp">self</span> <span class="nf">eternity:</span> <span class="nv">x</span> ] <span class="nf">asGoal</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </div>
 <div class="section" id="unify">
 <h2>Unify<a class="headerlink" href="#unify" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="pharo-class-4"></span><div class="highlight-smalltalk notranslate" id="pharo-class-unify"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nc">Binary</span> <span class="nf">subclass:</span> <span class="ss">#Unify</span>
+<span class="target" id="pharo-class-4"></span><div class="highlight-smalltalk notranslate" id="pharo-class-unify"><div class="highlight"><pre><span></span><span class="nc">Binary</span> <span class="nf">subclass:</span> <span class="ss">#Unify</span>
 	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>I am a goal that represent logical equality, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-unify"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:unify</span></code></a> production.</p>
-<span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifythreewiththree"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifythreewiththree"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyThreeWithThree</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -429,27 +338,18 @@ postpone the computation, for instance to support recursive goals such as</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyThreeWithThree.svg" class="align-center" src="_images/GoalTest-testUnifyThreeWithThree.svg" /><p>where</p>
 <blockquote>
-<div><span class="target" id="pharo-compiledMethod-10"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-unifyo"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
+<div><span class="target" id="pharo-compiledMethod-10"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-unifyo"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
 <span class="nf">unifyo</span>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">anObject</span> <span class="o">|</span> <span class="bp">self</span> <span class="nf">unifyWith:</span> <span class="nv">anObject</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>and</p>
-<span class="target" id="pharo-compiledMethod-11"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-unifywith"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
+<span class="target" id="pharo-compiledMethod-11"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-unifywith"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
 <span class="nf">unifyWith:</span> <span class="nv">another</span>
 
    <span class="o">^</span> <span class="nc">Unify</span> <span class="nb">new</span>
@@ -457,17 +357,10 @@ postpone the computation, for instance to support recursive goals such as</p>
         <span class="nf">right:</span> <span class="nv">another</span><span class="p">;</span>
         <span class="nf">yourself</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 </div></blockquote>
-<span class="target" id="pharo-compiledMethod-13"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifysymmetryfourwithvar"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-13"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifysymmetryfourwithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifySymmetryFourWithVar</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -476,17 +369,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifySymmetryFourWithVar.svg" class="align-center" src="_images/GoalTest-testUnifySymmetryFourWithVar.svg" /></div></blockquote>
-<span class="target" id="pharo-compiledMethod-14"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifysymmetryvarwithfour"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-14"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifysymmetryvarwithfour"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifySymmetryVarWithFour</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -495,24 +381,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifySymmetryVarWithFour.svg" class="align-center" src="_images/GoalTest-testUnifySymmetryVarWithFour.svg" /></div></blockquote>
-<span class="target" id="pharo-compiledMethod-15"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifywithtopmostsharing"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-15"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifywithtopmostsharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyWithTopmostSharing</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -528,23 +400,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyWithTopmostSharing.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostSharing.svg" /></div></blockquote>
-<span class="target" id="pharo-compiledMethod-16"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifywithtopmostwithoutsharing"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-16"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifywithtopmostwithoutsharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyWithTopmostWithoutSharing</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -559,30 +418,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyWithTopmostWithoutSharing.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostWithoutSharing.svg" /></div></blockquote>
-<span class="target" id="pharo-compiledMethod-17"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifywithtopmostsharingwithrepetition"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-17"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifywithtopmostsharingwithrepetition"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyWithTopmostSharingWithRepetition</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -604,22 +443,10 @@ postpone the computation, for instance to support recursive goals such as</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyWithTopmostSharingWithRepetition.svg" class="align-center" src="_images/GoalTest-testUnifyWithTopmostSharingWithRepetition.svg" /></div></blockquote>
-<span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifysharing"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifysharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifySharing</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -633,20 +460,13 @@ postpone the computation, for instance to support recursive goals such as</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifySharing.svg" class="align-center" src="_images/GoalTest-testUnifySharing.svg" /></div></blockquote>
 <p>The previous examples show unifications that can be satisfied; on the
 contrary, when two objects cannot be equal for any substitution we have
 a <code class="docutils literal notranslate"><span class="pre">Failed</span></code> goal holding the counterexample, such as</p>
-<span class="target" id="pharo-compiledMethod-19"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifyfourwiththree"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-19"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testunifyfourwiththree"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testUnifyFourWithThree</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -655,33 +475,23 @@ a <code class="docutils literal notranslate"><span class="pre">Failed</span></co
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testUnifyFourWithThree.svg" class="align-center" src="_images/GoalTest-testUnifyFourWithThree.svg" /></div></blockquote>
 </div>
 <div class="section" id="disj">
 <h2>Disj<a class="headerlink" href="#disj" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="pharo-class-5"></span><div class="highlight-smalltalk notranslate" id="pharo-class-disj"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nc">Binary</span> <span class="nf">subclass:</span> <span class="ss">#Disj</span>
+<span class="target" id="pharo-class-5"></span><div class="highlight-smalltalk notranslate" id="pharo-class-disj"><div class="highlight"><pre><span></span><span class="nc">Binary</span> <span class="nf">subclass:</span> <span class="ss">#Disj</span>
 	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;combineBlock&#39;</span>
 	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>I am a goal that represent logical union, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-disj"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:disj</span></code></a> production.</p>
 <p>On the one hand, <code class="docutils literal notranslate"><span class="pre">false</span> <span class="pre">asGoal</span></code> is the neutral element for disjunction, so
 that both</p>
-<span class="target" id="pharo-compiledMethod-20"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjfalsefalse"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-20"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjfalsefalse"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjFalseFalse</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -690,21 +500,11 @@ that both</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjFalseFalse.svg" class="align-center" src="_images/GoalTest-testDisjFalseFalse.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="pharo-compiledMethod-21"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjfalsetrue"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-21"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjfalsetrue"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjFalseTrue</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -716,23 +516,11 @@ that both</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjFalseTrue.svg" class="align-center" src="_images/GoalTest-testDisjFalseTrue.svg" /></div></blockquote>
 <p>behave as usual in logic. On the other hand,</p>
-<span class="target" id="pharo-compiledMethod-22"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjtruetrue"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-22"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjtruetrue"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjTrueTrue</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -746,22 +534,12 @@ that both</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjTrueTrue.svg" class="align-center" src="_images/GoalTest-testDisjTrueTrue.svg" /></div></blockquote>
 <p>surprises with <em>two</em> solutions instead of one because <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">asGoal</span> <span class="pre">|º</span> <span class="pre">b</span></code> doesn’t bypass
 the exploration of the goal <code class="docutils literal notranslate"><span class="pre">b</span></code>. For the sake of clarity, two solutions are provided both by</p>
-<span class="target" id="pharo-compiledMethod-23"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreewithvarorthreewithvar"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-23"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreewithvarorthreewithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeWithVarOrThreeWithVar</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -773,23 +551,11 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithVarOrThreeWithVar.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="pharo-compiledMethod-24"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreewiththreeorfourwithvar"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-24"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreewiththreeorfourwithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeWithThreeOrFourWithVar</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -803,22 +569,12 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithThreeOrFourWithVar.svg" /></div></blockquote>
 <p>which leaves the variable unbound in the leftmost path.  Disjunction is
 <em>commutative</em>, so that both</p>
-<span class="target" id="pharo-compiledMethod-25"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreewithvarorfourwithvar"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-25"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreewithvarorfourwithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeWithVarOrFourWithVar</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -830,21 +586,11 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg" class="align-center" src="_images/GoalTest-testDisjThreeWithVarOrFourWithVar.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="pharo-compiledMethod-26"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjfourwithvarorthreewithvar"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-26"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjfourwithvarorthreewithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjFourWithVarOrThreeWithVar</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -856,25 +602,13 @@ the exploration of the goal <code class="docutils literal notranslate"><span cla
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjFourWithVarOrThreeWithVar.svg" class="align-center" src="_images/GoalTest-testDisjFourWithVarOrThreeWithVar.svg" /></div></blockquote>
 <p>are satisfied by the same set of substitutions or, in other words, have the
 same paths connecting the leaves to the roots.  Disjunction is <em>associative</em>,
 so that both trees</p>
-<span class="target" id="pharo-compiledMethod-27"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreefourthenfive"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-27"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreefourthenfive"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeFourThenFive</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -888,23 +622,11 @@ so that both trees</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeFourThenFive.svg" class="align-center" src="_images/GoalTest-testDisjThreeFourThenFive.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="pharo-compiledMethod-28"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreethenfourfive"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-28"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testdisjthreethenfourfive"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testDisjThreeThenFourFive</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -918,37 +640,24 @@ so that both trees</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testDisjThreeThenFourFive.svg" class="align-center" src="_images/GoalTest-testDisjThreeThenFourFive.svg" /></div></blockquote>
 <p>have the same set of leaves but different branching structures.</p>
 </div>
 <div class="section" id="conj">
 <h2>Conj<a class="headerlink" href="#conj" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="pharo-class-6"></span><div class="highlight-smalltalk notranslate" id="pharo-class-conj"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nc">Binary</span> <span class="nf">subclass:</span> <span class="ss">#Conj</span>
+<span class="target" id="pharo-class-6"></span><div class="highlight-smalltalk notranslate" id="pharo-class-conj"><div class="highlight"><pre><span></span><span class="nc">Binary</span> <span class="nf">subclass:</span> <span class="ss">#Conj</span>
 	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-Goals&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>I am a goal that represent logical intersection, in particular I encode the
 <a class="reference internal" href="#grammar-token-goalGrammar-conj"><code class="xref std std-token docutils literal notranslate"><span class="pre">goalGrammar:conj</span></code></a> production.</p>
 <p>On the one hand, <code class="docutils literal notranslate"><span class="pre">true</span> <span class="pre">asGoal</span></code> is the neutral element for disjunction, so
 that both</p>
-<span class="target" id="pharo-compiledMethod-29"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjtruetrue"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-29"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjtruetrue"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjTrueTrue</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -960,21 +669,11 @@ that both</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjTrueTrue.svg" class="align-center" src="_images/GoalTest-testConjTrueTrue.svg" /></div></blockquote>
 <p>and</p>
-<span class="target" id="pharo-compiledMethod-30"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjtruethreewiththree"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-30"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjtruethreewiththree"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjTrueThreeWithThree</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -986,19 +685,12 @@ that both</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjTrueThreeWithThree.svg" class="align-center" src="_images/GoalTest-testConjTrueThreeWithThree.svg" /></div></blockquote>
 <p>are succeeding goals. On the other hand, <code class="docutils literal notranslate"><span class="pre">false</span> <span class="pre">asGoal</span></code> makes a conjunction
 <code class="docutils literal notranslate"><span class="pre">false</span> <span class="pre">asGoal</span> <span class="pre">&amp;º</span> <span class="pre">b</span></code> failing for any goal <code class="docutils literal notranslate"><span class="pre">b</span></code>, as in</p>
-<span class="target" id="pharo-compiledMethod-31"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjfalsethreewithvar"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-31"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjfalsethreewithvar"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjFalseThreeWithVar</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -1007,21 +699,14 @@ that both</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjFalseThreeWithVar.svg" class="align-center" src="_images/GoalTest-testConjFalseThreeWithVar.svg" /></div></blockquote>
 <p>Conjunctions essentially propagates unified values by the left hand side
 subgoal into the right hand side one; for the sake of clarity, the following
 examples attempts to unify the same variable with two different values yielding
 no solution (but providing the corresponding counterexample)</p>
-<span class="target" id="pharo-compiledMethod-32"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjthreefour"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-32"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjthreefour"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjThreeFour</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -1030,18 +715,11 @@ no solution (but providing the corresponding counterexample)</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjThreeFour.svg" class="align-center" src="_images/GoalTest-testConjThreeFour.svg" /></div></blockquote>
 <p>while the following one succeeds and also shows the commutativity of the operator</p>
-<span class="target" id="pharo-compiledMethod-33"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjsymmetry"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-33"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjsymmetry"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjSymmetry</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -1050,20 +728,12 @@ no solution (but providing the corresponding counterexample)</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjSymmetry.svg" class="align-center" src="_images/GoalTest-testConjSymmetry.svg" /></div></blockquote>
 <p>In the same spirit, the following examples shows two succeeding conjunctions, the
 former introduces a variable in a nested goal,</p>
-<span class="target" id="pharo-compiledMethod-34"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjthreefresh"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-34"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjthreefresh"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjThreeFresh</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -1073,21 +743,11 @@ former introduces a variable in a nested goal,</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjThreeFresh.svg" class="align-center" src="_images/GoalTest-testConjThreeFresh.svg" /></div></blockquote>
 <p>the latter, introduces both variables in the topmost goal</p>
-<span class="target" id="pharo-compiledMethod-35"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjthreefourwithtwovars"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-35"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjthreefourwithtwovars"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjThreeFourWithTwoVars</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -1099,20 +759,11 @@ former introduces a variable in a nested goal,</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjThreeFourWithTwoVars.svg" class="align-center" src="_images/GoalTest-testConjThreeFourWithTwoVars.svg" /></div></blockquote>
 <p>Sharing among variables can be shown with both a succeeding example</p>
-<span class="target" id="pharo-compiledMethod-36"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjsucceedingsharing"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-36"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjsucceedingsharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjSucceedingSharing</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -1123,20 +774,11 @@ former introduces a variable in a nested goal,</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjSucceedingSharing.svg" class="align-center" src="_images/GoalTest-testConjSucceedingSharing.svg" /></div></blockquote>
 <p>and a failing one</p>
-<span class="target" id="pharo-compiledMethod-37"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjfailingsharing"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-37"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjfailingsharing"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjFailingSharing</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -1147,21 +789,12 @@ former introduces a variable in a nested goal,</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjFailingSharing.svg" class="align-center" src="_images/GoalTest-testConjFailingSharing.svg" /></div></blockquote>
 <p>Finally, the combination of a failing conjunction with a succeeding
 disjunction produces the following computation</p>
-<span class="target" id="pharo-compiledMethod-38"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjdisj"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-38"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-goaltest-testconjdisj"><div class="highlight"><pre><span></span><span class="c">&quot;GoalTest, protocol tests&quot;</span>
 <span class="nf">testConjDisj</span>
 
    <span class="o">|</span><span class="nv"> g </span><span class="o">|</span>
@@ -1172,7 +805,7 @@ disjunction produces the following computation</p>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">g</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/GoalTest-testConjDisj.svg" class="align-center" src="_images/GoalTest-testConjDisj.svg" /></div></blockquote>
 </div>

@@ -1,4 +1,5 @@
 
-.DS_Store
+*.swp
+*.DS_Store
 build/
 source/_ext/__pycache__/

@@ -128,117 +128,73 @@ hello or good morning.</div>
 <div class="line"><em>Thank you, D. Friedman and C. Eastlung.</em></div>
 </div>
 <p>What is <code class="docutils literal notranslate"><span class="pre">(#ham</span> <span class="pre">cons:</span> <span class="pre">(#eggs</span> <span class="pre">cons:</span> <span class="pre">nil))</span></code> equal to?</p>
-<span class="target" id="pharo-compiledMethod-0"><span id="index-0"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-06"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-0"><span id="index-0"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-06"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_06</span>
 
    <span class="c">&quot;(car (cons &#39;ham &#39;(eggs)))&quot;</span>
 
    <span class="bp">self</span> <span class="nf">assert:</span> (<span class="ss">#ham</span> <span class="nf">cons:</span> (<span class="ss">#eggs</span> <span class="nf">cons:</span> <span class="bp">nil</span>)) <span class="nf">car</span> <span class="nf">equals:</span> <span class="ss">#ham</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>What value is the expression <code class="docutils literal notranslate"><span class="pre">nil</span> <span class="pre">isAtom</span></code> equal to?</p>
-<span class="target" id="pharo-compiledMethod-1"><span id="index-1"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-11"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-1"><span id="index-1"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-11"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_11</span>
 
    <span class="c">&quot;(atom &#39;())&quot;</span>
 
    <span class="bp">self</span> <span class="nf">assert:</span> <span class="bp">nil</span> <span class="nf">isAtom</span> <span class="nf">equals:</span> <span class="bp">true</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>Can we find a value for the expression <code class="docutils literal notranslate"><span class="pre">(#ham</span> <span class="pre">cons:</span> <span class="pre">(#eggs</span> <span class="pre">cons:</span> <span class="pre">nil))</span> <span class="pre">isAtom</span></code>?</p>
-<span class="target" id="pharo-compiledMethod-2"><span id="index-2"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-14"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-2"><span id="index-2"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-14"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_14</span>
 
    <span class="c">&quot;(atom (cons &#39;ham &#39;(eggs)))&quot;</span>
 
    <span class="bp">self</span> <span class="nf">assert:</span> (<span class="ss">#ham</span> <span class="nf">cons:</span> (<span class="ss">#eggs</span> <span class="nf">cons:</span> <span class="bp">nil</span>)) <span class="nf">isAtom</span> <span class="nf">equals:</span> <span class="bp">false</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The selector <code class="docutils literal notranslate"><span class="pre">#isAtom</span></code> has two implementors, both</p>
-<span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-isatom"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *Collections-Sequenceable-Cons&quot;</span>
+<span class="target" id="pharo-compiledMethod-3"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-isatom"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *Collections-Sequenceable-Cons&quot;</span>
 <span class="nf">isAtom</span>
 
    <span class="o">^</span> <span class="bp">true</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>and</p>
-<span class="target" id="pharo-compiledMethod-4"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-cons-isatom"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Cons, protocol testing&quot;</span>
+<span class="target" id="pharo-compiledMethod-4"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-cons-isatom"><div class="highlight"><pre><span></span><span class="c">&quot;Cons, protocol testing&quot;</span>
 <span class="nf">isAtom</span>
 
    <span class="o">^</span> <span class="bp">false</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>respectively. The latter is implemented in</p>
-<span class="target" id="pharo-class-0"></span><div class="highlight-smalltalk notranslate" id="pharo-class-cons"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nc">Object</span> <span class="nf">subclass:</span> <span class="ss">#Cons</span>
+<span class="target" id="pharo-class-0"></span><div class="highlight-smalltalk notranslate" id="pharo-class-cons"><div class="highlight"><pre><span></span><span class="nc">Object</span> <span class="nf">subclass:</span> <span class="ss">#Cons</span>
 	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;car cdr&#39;</span>
 	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">package:</span> <span class="s">&#39;Collections-Sequenceable-Cons&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>that can be instantiated with</p>
-<span class="target" id="pharo-compiledMethod-5"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-cons"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
+<span class="target" id="pharo-compiledMethod-5"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-cons"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-core&quot;</span>
 <span class="nf">cons:</span> <span class="nv">anObj</span>
 
    <span class="o">^</span> <span class="nv">anObj</span> <span class="nf">consedObject:</span> <span class="bp">self</span>
 </pre></div>
-</td></tr></table></div>
-<span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-consedobject"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *Collections-Sequenceable-Cons&quot;</span>
+</div>
+<span class="target" id="pharo-compiledMethod-6"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-consedobject"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *Collections-Sequenceable-Cons&quot;</span>
 <span class="nf">consedObject:</span> <span class="nv">car</span>
 
    <span class="o">^</span> <span class="nc">Cons</span> <span class="nf">car:</span> <span class="nv">car</span> <span class="nf">cdr:</span> <span class="bp">self</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <p>No matter what values the variables <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> have, the expression <code class="docutils literal notranslate"><span class="pre">a</span>
 <span class="pre">cons:</span> <span class="pre">b</span></code> cannot produce an object <code class="docutils literal notranslate"><span class="pre">c</span></code> such that <code class="docutils literal notranslate"><span class="pre">c</span> <span class="pre">isAtom</span></code> evaluates to
 <code class="docutils literal notranslate"><span class="pre">true</span></code>,</p>
-<span class="target" id="pharo-compiledMethod-7"><span id="index-3"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-7"><span id="index-3"></span></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_16</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -254,18 +210,12 @@ hello or good morning.</div>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_16.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_16.svg" /></div></blockquote>
 <p>where</p>
 <blockquote>
-<div><span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomconso"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<div><span class="target" id="pharo-compiledMethod-8"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">isAtomConsº</span>
 
    <span class="c">&quot;(dethm atom/cons (x y)</span>
@@ -273,27 +223,14 @@ hello or good morning.</div>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">isAtom</span> ] <span class="nf">&lt;~~&gt;</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="bp">false</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Wait. Many new things pop up here, so digest one at the time. In order of occurrence:</p>
 <ul>
 <li><p>the message</p>
-<span class="target" id="pharo-compiledMethod-9"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-asgoalwithunaryastof-contextvariables"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-9"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-asgoalwithunaryastof-contextvariables"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">asGoalWithUnaryASTof:</span> <span class="nv">aBlock</span> <span class="nf">contextVariables:</span> <span class="nv">aCollection</span>
 
    <span class="o">^</span> <span class="bp">self</span>
@@ -308,17 +245,9 @@ hello or good morning.</div>
                        (<span class="s">&#39;Assumption that {} has 1 statement only is violated.&#39;</span> 
                            <span class="nf">format:</span> { <span class="nv">aSequenceNode</span> }) ] ] ]
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>forwards, after ensuring that <code class="docutils literal notranslate"><span class="pre">aBlock</span></code> has exactly one statement, to</p>
-<span class="target" id="pharo-compiledMethod-10"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-asgoalwithastof-contextvariables-select"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-10"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-asgoalwithastof-contextvariables-select"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">asGoalWithASTof:</span> <span class="nv">aBlock</span> <span class="nf">contextVariables:</span> <span class="nv">aCollection</span> <span class="nf">select:</span> <span class="nv">selectBlock</span>
 
    <span class="o">^</span> <span class="nc">FreshRB</span> <span class="nb">new</span>
@@ -328,34 +257,9 @@ hello or good morning.</div>
         <span class="nf">contextVariables:</span> <span class="nv">aCollection</span><span class="p">;</span>
         <span class="nf">yourself</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>in order to produce a <code class="docutils literal notranslate"><span class="pre">FreshRB</span></code> goal that, overriding the message</p>
-<span class="target" id="pharo-compiledMethod-11"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-freshrb-onstate-withvars"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;FreshRB, protocol dispatched&quot;</span>
+<span class="target" id="pharo-compiledMethod-11"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-freshrb-onstate-withvars"><div class="highlight"><pre><span></span><span class="c">&quot;FreshRB, protocol dispatched&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span>
 
    <span class="o">|</span><span class="nv"> dict node rbLogicVariables </span><span class="o">|</span>
@@ -382,30 +286,17 @@ hello or good morning.</div>
 
    <span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">rbLogicVariables</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>has the responsibility to lift block’s code variables</p>
-<span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnode-substitutevariablesusingdictionary"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;RBNode, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-12"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbnode-substitutevariablesusingdictionary"><div class="highlight"><pre><span></span><span class="c">&quot;RBNode, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">substituteVariablesUsingDictionary:</span> <span class="nv">aDict</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">acceptVisitor:</span> (<span class="nc">RBProgramNodeSubstitutionVisitor</span> <span class="nb">new</span>
             <span class="nf">substitution:</span> <span class="nv">aDict</span><span class="p">;</span>
             <span class="nf">yourself</span>)
 </pre></div>
-</td></tr></table></div>
-<span class="target" id="pharo-compiledMethod-13"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbprogramnodesubstitutionvisitor-visittemporarynode"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;RBProgramNodeSubstitutionVisitor, protocol visiting&quot;</span>
+</div>
+<span class="target" id="pharo-compiledMethod-13"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-rbprogramnodesubstitutionvisitor-visittemporarynode"><div class="highlight"><pre><span></span><span class="c">&quot;RBProgramNodeSubstitutionVisitor, protocol visiting&quot;</span>
 <span class="nf">visitTemporaryNode:</span> <span class="nv">aNode</span>
 
    <span class="o">^</span> <span class="nv">aNode</span> <span class="nf">isVariable</span>
@@ -415,58 +306,36 @@ hello or good morning.</div>
               <span class="nf">yourself</span> <span class="c">&quot;Here assume to talk with RBLogicVariable objs.&quot;</span> ]
         <span class="nb">ifFalse:</span> [ <span class="nv">aNode</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>to <code class="docutils literal notranslate"><span class="pre">RBNode</span></code> objects that support unification</p>
-<span class="target" id="pharo-class-1"></span><div class="highlight-smalltalk notranslate" id="pharo-class-rblogicvariablenode"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nc">RBVariableNode</span> <span class="nf">subclass:</span> <span class="ss">#RBLogicVariableNode</span>
+<span class="target" id="pharo-class-1"></span><div class="highlight-smalltalk notranslate" id="pharo-class-rblogicvariablenode"><div class="highlight"><pre><span></span><span class="nc">RBVariableNode</span> <span class="nf">subclass:</span> <span class="ss">#RBLogicVariableNode</span>
 	<span class="nf">instanceVariableNames:</span> <span class="s">&#39;logicVar&#39;</span>
 	<span class="nf">classVariableNames:</span> <span class="s">&#39;&#39;</span>
 	<span class="nf">package:</span> <span class="s">&#39;MicroKanren-RB&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>via</p>
-<span class="target" id="pharo-compiledMethod-14"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-var-asrbnode"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Var, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-14"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-var-asrbnode"><div class="highlight"><pre><span></span><span class="c">&quot;Var, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">asRBNode</span>
 
    <span class="o">^</span> <span class="nc">RBLogicVariableNode</span> <span class="nf">named:</span> <span class="nv">named</span> <span class="nf">logicVar:</span> <span class="bp">self</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>lying on <code class="xref pharo pharo-cref docutils literal notranslate"><span class="pre">Var</span></code> eventually.</p>
 </li>
 <li><p>the message</p>
-<span class="target" id="pharo-compiledMethod-15"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-asliteralrbnode"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-15"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-object-asliteralrbnode"><div class="highlight"><pre><span></span><span class="c">&quot;Object, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">asLiteralRBNode</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">isLiteral</span>
         <span class="nb">ifTrue:</span> [ <span class="nc">RBLiteralValueNode</span> <span class="nf">value:</span> <span class="bp">self</span> ]
         <span class="nb">ifFalse:</span> [ <span class="nc">Error</span> <span class="nf">signal:</span> <span class="s">&#39;I am not a literal value&#39;</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>allows us to lift a literal <em>value</em> to a literal <em>node</em>.</p>
 </li>
 <li><p>the message</p>
-<span class="target" id="pharo-compiledMethod-16"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-16"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">&lt;~~&gt;</span> <span class="nv">aBlock</span>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
@@ -479,20 +348,16 @@ hello or good morning.</div>
         <span class="nf">asGoalWithUnaryASTof:</span> <span class="bp">self</span>
         <span class="nf">contextVariables:</span> <span class="ss">#(</span>  <span class="ss">)</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>is syntactic sugar to define a rewriting rule upto α-conversion over names
 of variables of both blocks, implemented in</p>
-<span class="target" id="pharo-compiledMethod-17"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-substitutevariablesusingsequenceablecollection"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-17"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-substitutevariablesusingsequenceablecollection"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">substituteVariablesUsingSequenceableCollection:</span> <span class="nv">rbVariables</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">unaryRBNode</span> <span class="nf">substituteVariablesUsingDictionary:</span>
         (<span class="bp">self</span> <span class="nf">argumentNames</span> <span class="nf">with:</span> <span class="nv">rbVariables</span> <span class="nf">collect:</span> <span class="ss">#-&gt;</span>) <span class="nf">asDictionary</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>Such conversion if helpful to be free to use arbitrary names during a rewriting, as in
 <a class="reference internal" href="#pharo-compiledmethod-thelittleprover-carconsº" title="pharo-compiledmethod-thelittleprover-carconsº"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProver&gt;&gt;#carConsº</span></code></a> for example.</p>
 </li>
@@ -501,24 +366,7 @@ of variables of both blocks, implemented in</p>
 <p>As usual in logic, we can run a computation backward. The following test case
 shows how to use <code class="docutils literal notranslate"><span class="pre">#isAtomConsº</span></code> to generate the receiver of <code class="docutils literal notranslate"><span class="pre">#isAtom</span></code> under
 the constraint that the whole expression yields <code class="docutils literal notranslate"><span class="pre">false</span></code> when evaluated:</p>
-<span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-backward"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-18"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-backward"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_16_backward</span>
 
    <span class="o">|</span><span class="nv"> aGoal node </span><span class="o">|</span>
@@ -537,35 +385,22 @@ the constraint that the whole expression yields <code class="docutils literal no
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀ cons: •₁&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_16_backward.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_16_backward.svg" /></div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Since a <code class="docutils literal notranslate"><span class="pre">CompiledMethod</span></code> responds to</p>
-<span class="target" id="pharo-compiledMethod-19"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-compiledmethod-sourcenode"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;CompiledMethod, protocol *opalcompiler-core&quot;</span>
+<span class="target" id="pharo-compiledMethod-19"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-compiledmethod-sourcenode"><div class="highlight"><pre><span></span><span class="c">&quot;CompiledMethod, protocol *opalcompiler-core&quot;</span>
 <span class="nf">sourceNode</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">ast</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>the initial test
 <code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProverTest&gt;&gt;#test_chapter_01_OldGamesNewRules_frame_16_byBlockClosure</span></code>
 can also be written as</p>
-<span class="target" id="pharo-compiledMethod-20"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-bycompiledmethod"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-20"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-16-bycompiledmethod"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_16_byCompiledMethod</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -577,27 +412,21 @@ can also be written as</p>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
       <span class="nf">equals:</span> { <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> }
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>where, on one hand, code as data is</p>
-<span class="target" id="pharo-compiledMethod-21"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-consa-isatoma"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol code as data&quot;</span>
+<span class="target" id="pharo-compiledMethod-21"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-consa-isatoma"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol code as data&quot;</span>
 <span class="nf">consª:</span> <span class="nv">a</span> <span class="nf">isAtomª:</span> <span class="nv">b</span>
 
    (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>on the other hand, the rewriting is</p>
-<span class="target" id="pharo-compiledMethod-22"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-conso-isatomo"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol predicates&quot;</span>
+<span class="target" id="pharo-compiledMethod-22"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-conso-isatomo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol predicates&quot;</span>
 <span class="nf">consº:</span> <span class="nv">ast</span> <span class="nf">isAtomº:</span> <span class="nv">rewritten</span>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">theory</span> <span class="nf">isAtomConsº</span> <span class="nf">value:</span> <span class="nv">ast</span> <span class="nf">value:</span> <span class="nv">rewritten</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>Observe that the previous two messages allow us to establish a nomenclature
 for when we use a <code class="docutils literal notranslate"><span class="pre">CompiledMethod</span></code> both for its source code and for
 evaluating (a predicate <code class="docutils literal notranslate"><span class="pre">BlockClosure</span></code> in this case) by appending a <code class="docutils literal notranslate"><span class="pre">ª</span></code>
@@ -606,27 +435,7 @@ advantage to use the same words while being able to discriminate their usage.
 We mix the two approaches freely from now on.</p>
 </div>
 <p id="index-4">We want to focus on <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">cons:</span> <span class="pre">b)</span> <span class="pre">isAtom</span></code> in the context of the outer <code class="docutils literal notranslate"><span class="pre">#=</span></code> message send</p>
-<span class="target" id="pharo-compiledMethod-23"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-19"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-23"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-19"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_19</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -648,22 +457,13 @@ We mix the two approaches freely from now on.</p>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
       <span class="nf">equals:</span> { [ <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><img alt="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_19.svg" class="align-center" src="_images/TheLittleProverTest-test_chapter_01_OldGamesNewRules_frame_19.svg" /></div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The message</p>
-<span class="target" id="pharo-compiledMethod-24"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-unaryrbnode"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
+<span class="target" id="pharo-compiledMethod-24"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-blockclosure-unaryrbnode"><div class="highlight"><pre><span></span><span class="c">&quot;BlockClosure, protocol *MicroKanren-RB&quot;</span>
 <span class="nf">unaryRBNode</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">sourceNode</span> <span class="nf">body</span> <span class="nf">statements</span> <span class="nf">in:</span> [ <span class="o">:</span><span class="nv">statements</span> <span class="o">|</span> 
@@ -674,31 +474,11 @@ We mix the two approaches freely from now on.</p>
                  (<span class="s">&#39;Assumption that {} has 1 statement only is violated.&#39;</span> 
                      <span class="nf">format:</span> { <span class="bp">self</span> }) ] ]
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>is helpful to use a <code class="docutils literal notranslate"><span class="pre">BlockClosure</span></code> object as a container of its own code.</p>
 </div>
 <p id="index-5">Precisely. In that case, what value is <code class="docutils literal notranslate"><span class="pre">#flapjack</span> <span class="pre">=</span> <span class="pre">false</span></code> equal to?</p>
-<span class="target" id="pharo-compiledMethod-26"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-21"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-26"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-21"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_21</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -720,42 +500,18 @@ We mix the two approaches freely from now on.</p>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
       <span class="nf">equals:</span> { <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> }
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><p>where</p>
-<span class="target" id="pharo-compiledMethod-25"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-flapjacknilfalseo"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol predicates&quot;</span>
+<span class="target" id="pharo-compiledMethod-25"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-flapjacknilfalseo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol predicates&quot;</span>
 <span class="nf">flapjackNilFalseº</span>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">_</span> <span class="o">|</span> <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="bp">false</span> ] <span class="nf">&lt;~&gt;</span> [ <span class="o">:</span><span class="nv">_</span> <span class="o">|</span> <span class="bp">false</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p id="index-6">What value is the expression <code class="docutils literal notranslate"><span class="pre">((p</span> <span class="pre">cons:</span> <span class="pre">q)</span> <span class="pre">car</span> <span class="pre">cons:</span> <span class="pre">nil)</span> <span class="pre">cdr</span> <span class="pre">isAtom</span></code> equal to?</p>
-<span class="target" id="pharo-compiledMethod-30"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-28"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-30"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-28"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_28</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -778,16 +534,10 @@ We mix the two approaches freely from now on.</p>
 
    <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }
 </pre></div>
-</td></tr></table></div>
+</div>
 <blockquote>
 <div><p>where</p>
-<span class="target" id="pharo-compiledMethod-27"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-carconso"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<span class="target" id="pharo-compiledMethod-27"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-carconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">carConsº</span>
 
    <span class="c">&quot;(dethm car/cons (x y)</span>
@@ -795,14 +545,8 @@ We mix the two approaches freely from now on.</p>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">car</span> ] <span class="nf">&lt;~~&gt;</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">a</span> ]
 </pre></div>
-</td></tr></table></div>
-<span class="target" id="pharo-compiledMethod-28"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-cdrconso"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+</div>
+<span class="target" id="pharo-compiledMethod-28"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-cdrconso"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">cdrConsº</span>
 
    <span class="c">&quot;(dethm cdr/cons (x y)</span>
@@ -810,15 +554,8 @@ We mix the two approaches freely from now on.</p>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> (<span class="nv">x</span> <span class="nf">cons:</span> <span class="nv">y</span>) <span class="nf">cdr</span> ] <span class="nf">&lt;~~&gt;</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">y</span> ]
 </pre></div>
-</td></tr></table></div>
-<span class="target" id="pharo-compiledMethod-29"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomnilo"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+</div>
+<span class="target" id="pharo-compiledMethod-29"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-isatomnilo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">isAtomNilº</span>
 
    <span class="c">&quot;</span>
@@ -827,29 +564,10 @@ We mix the two approaches freely from now on.</p>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">_</span> <span class="o">|</span> <span class="bp">nil</span> <span class="nf">isAtom</span> ] <span class="nf">&lt;~&gt;</span> [ <span class="o">:</span><span class="nv">_</span> <span class="o">|</span> <span class="bp">true</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p id="index-7">That took three steps. Can we do it in fewer?</p>
-<span class="target" id="pharo-compiledMethod-31"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-32"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-31"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-32"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_32</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -870,35 +588,10 @@ We mix the two approaches freely from now on.</p>
 
    <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }
 </pre></div>
-</td></tr></table></div>
+</div>
 <p id="index-8">What is the value of the context <code class="docutils literal notranslate"><span class="pre">((x</span> <span class="pre">cons:</span> <span class="pre">y)</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">cons:</span> <span class="pre">y)</span> <span class="pre">cons:</span> <span class="pre">(#and</span> <span class="pre">cons:</span>
 <span class="pre">(#crumpets</span> <span class="pre">cons:</span> <span class="pre">nil)))</span> <span class="pre">car</span></code> with focus on <code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">cons:</span> <span class="pre">y)</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">cons:</span> <span class="pre">y)</span></code>?</p>
-<span class="target" id="pharo-compiledMethod-32"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-44"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-32"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-44"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_44</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -925,31 +618,9 @@ We mix the two approaches freely from now on.</p>
       { [ (<span class="bp">true</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
          <span class="nf">unaryRBNode</span> }
 </pre></div>
-</td></tr></table></div>
+</div>
 <p id="index-9">And, of course, the second step is easy.</p>
-<span class="target" id="pharo-compiledMethod-33"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-33"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_46</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -973,33 +644,11 @@ We mix the two approaches freely from now on.</p>
 
    <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }
 </pre></div>
-</td></tr></table></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Please note that <code class="docutils literal notranslate"><span class="pre">#equalSameº</span></code> also binds variables during its evaluation</p>
-<span class="target" id="pharo-compiledMethod-34"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46-variablesbindingbyequalsameo"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-34"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46-variablesbindingbyequalsameo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_46_variablesBindingByEqualSameº</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -1023,24 +672,9 @@ We mix the two approaches freely from now on.</p>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
       <span class="nf">equals:</span> { [ <span class="ss">#and</span> <span class="nf">cons:</span> <span class="bp">nil</span> ] <span class="nf">unaryRBNode</span> }
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>morever, variables binding can be performed manually as in</p>
-<span class="target" id="pharo-compiledMethod-35"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46-variablesbindingmanually"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-35"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-46-variablesbindingmanually"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_46_variablesBindingManually</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -1057,40 +691,10 @@ We mix the two approaches freely from now on.</p>
       <span class="nf">equals:</span> { [ <span class="m">3</span> <span class="nf">even</span> ] <span class="nf">unaryRBNode</span> }
       <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 </div>
 <p id="index-10">Does the order of the arguments to <code class="docutils literal notranslate"><span class="pre">#=</span></code> matter?</p>
-<span class="target" id="pharo-compiledMethod-36"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-49"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-36"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-49"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_49</span>
 
    <span class="o">|</span><span class="nv"> aGoal node </span><span class="o">|</span>
@@ -1122,16 +726,10 @@ We mix the two approaches freely from now on.</p>
       <span class="nf">equals:</span>
          <span class="s">&#39;(#bagels cons: (#and cons: (#lox cons: nil))) = (•₀ cons: •₁)&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>where</p>
 <blockquote>
-<div><span class="target" id="pharo-compiledMethod-37"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-equalswapo"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<div><span class="target" id="pharo-compiledMethod-37"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-equalswapo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">equalSwapº</span>
 
    <span class="c">&quot;(dethm equal-swap (x y)</span>
@@ -1139,39 +737,12 @@ We mix the two approaches freely from now on.</p>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">x</span> <span class="nf">=</span> <span class="nv">y</span> ] <span class="nf">&lt;~~&gt;</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">y</span> <span class="nf">=</span> <span class="nv">x</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p id="index-11">What else the context <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">cons:</span> <span class="pre">(x</span> <span class="pre">cdr</span> <span class="pre">cons:</span> <span class="pre">y</span> <span class="pre">car)</span> <span class="pre">car</span> <span class="pre">=</span> <span class="pre">(x</span> <span class="pre">isAtom</span> <span class="pre">=</span> <span class="pre">false)</span></code>
 equal to with focus on <code class="docutils literal notranslate"><span class="pre">(x</span> <span class="pre">cdr</span> <span class="pre">cons:</span> <span class="pre">y</span> <span class="pre">car)</span> <span class="pre">car</span></code> according to <code class="docutils literal notranslate"><span class="pre">#carConsº</span></code>?
 Recall that “is equal to” works in both directions.</p>
-<span class="target" id="pharo-compiledMethod-38"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-55"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-38"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-55"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_55</span>
 
    <span class="o">|</span><span class="nv"> aGoal node </span><span class="o">|</span>
@@ -1200,64 +771,11 @@ Recall that “is equal to” works in both directions.</p>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀ cons:</span>
 <span class="s">   ((•₁ cdr cons: •₀ car) car cons: •₂) car = (•₁ isAtom = false)&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p id="index-12">Can we use <a class="reference internal" href="#pharo-compiledmethod-thelittleprover-carconsº" title="pharo-compiledmethod-thelittleprover-carconsº"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProver&gt;&gt;#carConsº</span></code></a>, then
 <a class="reference internal" href="#pharo-compiledmethod-thelittleprover-isatomconsº" title="pharo-compiledmethod-thelittleprover-isatomconsº"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProver&gt;&gt;#isAtomConsº</span></code></a> and finally then
 <a class="reference internal" href="#pharo-compiledmethod-thelittleprover-cdrconsº" title="pharo-compiledmethod-thelittleprover-cdrconsº"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProver&gt;&gt;#cdrConsº</span></code></a>? And what value is the final expression equal to?</p>
-<span class="target" id="pharo-compiledMethod-39"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-56"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-39"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-01-oldgamesnewrules-frame-56"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_01_OldGamesNewRules_frame_56</span>
 
    <span class="o">|</span><span class="nv"> aGoal node </span><span class="o">|</span>
@@ -1312,32 +830,13 @@ Recall that “is equal to” works in both directions.</p>
          <span class="s">&#39;•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car</span>
 <span class="s">   = (•₁ isAtom = (•₂ isAtom cons: •₃ = (•₄ cons: •₂)) isAtom)&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>That is a good question. We do not know, but we have had fun playing with it so far!</p>
 </div>
 <div class="section" id="even-older-games">
 <h2>Even Older Games<a class="headerlink" href="#even-older-games" title="Permalink to this headline">¶</a></h2>
 <p id="index-13">What is this expression <em>obviously</em> equal to?</p>
-<span class="target" id="pharo-compiledMethod-40"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-02-evenoldergames-frame-05"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-40"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-02-evenoldergames-frame-05"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_02_EvenOlderGames_frame_05</span>
 
    <span class="o">|</span><span class="nv"> aGoal </span><span class="o">|</span>
@@ -1358,19 +857,10 @@ Recall that “is equal to” works in both directions.</p>
 
    <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="m">3</span> <span class="nf">asLiteralRBNode</span> }
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>where</p>
 <blockquote>
-<div><span class="target" id="pharo-compiledMethod-41"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-ifsameo"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<div><span class="target" id="pharo-compiledMethod-41"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-ifsameo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">ifSameº</span>
 
    <span class="c">&quot;(dethm cdr/cons (x y)</span>
@@ -1381,45 +871,13 @@ Recall that “is equal to” works in both directions.</p>
         <span class="nb">ifTrue:</span> [ <span class="nv">y</span> ]
         <span class="nb">ifFalse:</span> [ <span class="nv">y</span> ] ] <span class="nf">&lt;~~&gt;</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">y</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p id="index-14">If <a class="reference internal" href="#pharo-compiledmethod-thelittleprover-ifsameº" title="pharo-compiledmethod-thelittleprover-ifsameº"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProver&gt;&gt;#ifSameº</span></code></a> can start with an if expression and
 end with a variable, then it <em>must</em> also be able to start with a variable and
 end with an if expression. So … what else is <code class="docutils literal notranslate"><span class="pre">c</span></code> equal to, according to
 <a class="reference internal" href="#pharo-compiledmethod-thelittleprover-ifsameº" title="pharo-compiledmethod-thelittleprover-ifsameº"><code class="xref pharo pharo-mref docutils literal notranslate"><span class="pre">TheLittleProver&gt;&gt;#ifSameº</span></code></a>?</p>
-<span class="target" id="pharo-compiledMethod-42"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-02-evenoldergames-frame-07"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-42"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-02-evenoldergames-frame-07"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_02_EvenOlderGames_frame_07</span>
 
    <span class="o">|</span><span class="nv"> aGoal node </span><span class="o">|</span>
@@ -1453,73 +911,9 @@ end with an if expression. So … what else is <code class="docutils literal not
 <span class="s">         ifTrue: [ •₁ ]</span>
 <span class="s">         ifFalse: [ •₂ ] ]&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p id="index-15">Does the question message <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=</span> <span class="pre">true</span></code> tell us anything about the focus <code class="docutils literal notranslate"><span class="pre">nil</span> <span class="pre">=</span> <span class="pre">nil</span> <span class="pre">ifTrue:</span> <span class="pre">[</span> <span class="pre">a</span> <span class="pre">]</span> <span class="pre">ifFalse:</span> <span class="pre">[</span> <span class="pre">b</span> <span class="pre">]</span></code>?</p>
-<span class="target" id="pharo-compiledMethod-43"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-02-evenoldergames-frame-15"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
+<span class="target" id="pharo-compiledMethod-43"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprovertest-test-chapter-02-evenoldergames-frame-15"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProverTest, protocol tests&quot;</span>
 <span class="nf">test_chapter_02_EvenOlderGames_frame_15</span>
 
    <span class="o">|</span><span class="nv"> aGoal node </span><span class="o">|</span>
@@ -1585,19 +979,10 @@ end with an if expression. So … what else is <code class="docutils literal not
 <span class="s">   ifTrue: [ •₁ ]</span>
 <span class="s">   ifFalse: [ •₁ ]&#39;</span>
 </pre></div>
-</td></tr></table></div>
+</div>
 <p>where</p>
 <blockquote>
-<div><span class="target" id="pharo-compiledMethod-44"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-iftrueo"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<div><span class="target" id="pharo-compiledMethod-44"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-iftrueo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">ifTrueº</span>
 
    <span class="c">&quot;(dethm cdr/cons (x y)</span>
@@ -1608,35 +993,11 @@ end with an if expression. So … what else is <code class="docutils literal not
         <span class="nb">ifTrue:</span> [ <span class="nv">x</span> ]
         <span class="nb">ifFalse:</span> [ <span class="nv">y</span> ] ] <span class="nf">&lt;~~&gt;</span> [ <span class="o">:</span><span class="nv">x</span> <span class="o">:</span><span class="nv">y</span> <span class="o">|</span> <span class="nv">x</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>and</p>
 <blockquote>
-<div><span class="target" id="pharo-compiledMethod-45"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-equalifo"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
+<div><span class="target" id="pharo-compiledMethod-45"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-equalifo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">equalIfº</span>
 
    <span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
@@ -1662,7 +1023,7 @@ end with an if expression. So … what else is <code class="docutils literal not
 <span class="c">     &quot;</span> ]
         <span class="nf">asGoal</span> ]
 </pre></div>
-</td></tr></table></div>
+</div>
 </div></blockquote>
 <p>respectively.</p>
 </div>
