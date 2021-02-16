@@ -347,7 +347,7 @@ respectively.
 
   .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_15_parento
 
-    .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_07.svg
+    .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_parento.svg
       :align: center
 
   where
