@@ -148,7 +148,8 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverChapter02ForDoc [
 		  selectors: #( #test_chapter_02_EvenOlderGames_frame_05
 			     #test_chapter_02_EvenOlderGames_frame_07
 			     #test_chapter_02_EvenOlderGames_frame_15
-			     test_chapter_02_EvenOlderGames_frame_15_parento );
+			     test_chapter_02_EvenOlderGames_frame_15_parento
+			     test_chapter_02_EvenOlderGames_frame_15_ancestoro );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover-chapter-02.json' ]
@@ -164,7 +165,7 @@ BaselineOfMicroKanren >> scriptExportTheLittleProverPredicatesForDoc [
 		  selectors:
 			  #( isAtom #isAtomConsº #consª:isAtomª: #consº:isAtomº:
 			     flapjackNilFalseº carConsº cdrConsº isAtomNilº equalSwapº
-			     ifSameº ifTrueº ifFalseº equalIfº parentº );
+			     ifSameº ifTrueº ifFalseº equalIfº parentº ancestorº );
 		  exportWithRepositoryPath: [ :aPath | 
 			  aPath / 'booklet' / 'source'
 			  / 'microkanren-the-little-prover-predicates.json' ]
