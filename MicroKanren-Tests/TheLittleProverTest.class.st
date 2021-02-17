@@ -729,20 +729,22 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 						          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
 						         ifTrue: [ c ]
 						         ifFalse: [ c ] ]
-				         do: [ :o :r | 
-					         [ 
+				         premise: [ :o | 
+					         o
+						         ifTrue: [ c ]
+						         ifFalse: [ c ] ]
+				         do: theory equalIfº
+			         "do: [ :o :r | 
 					         theory equalIfº
 						         value: o
-						         value: ([ 
-							          a = true
-								          ifTrue: [ o ]
-								          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ] ]
-								          unaryRBNode substituteVariablesUsingDictionary:
-								          (Dictionary new
-									           at: #a put: a asRBNode;
-									           at: #o put: o;
-									           yourself))
-						         value: r ] asGoal ] ]
+						         value: ([ :x :y | 
+							          x = true
+								          ifTrue: [ y ]
+								          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ] ] 
+								          substituteVariablesUsingSequenceableCollection: { 
+										          a asRBNode.
+										          o asRBNode })
+						         value: r ]" ]
 		         then: [ :asts | 
 		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: (Dictionary new
@@ -832,54 +834,12 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorobackward
 
 	self
 		assert: ((aGoal solutions withIndexCollect: [ :e :i | 
-				  e asRBNode formattedCode ]) next: 30) asArray
+				  e asRBNode formattedCode ]) next: 20) asArray
 		equals: #( '2 + ◊•₀' '3 - ◊•₀' '◊•₀
 	ifTrue: [ 3 ]
 	ifFalse: [ 1 ]' '◊•₀' '1' '3' '◊•₀' '◊•₀' '◊•₀' '◊•₀' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: 20
-]
-
-{ #category : #tests }
-TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_equalIfº [
-
-	| aGoal |
-	aGoal := [ :rewritten | 
-	         theory equalIfº
-		         value: rewritten asRBNode
-		         value: false asLiteralRBNode ] asGoal.
-
-	self
-		assert:
-			((aGoal solutions collect: [ :e | e asRBNode formattedCode ]) 
-				 next: 2) asArray
-		equals: #( 'false' 'false = •₀' 'false' 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false = •₀' 'false = •₀' '•₀ = false' 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false = •₀ = •₁' 'false' '•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ false ]' '•₀ = false' '(false
-	 ifTrue: [ •₀ ]
-	 ifFalse: [ •₁ ]) = •₂' 'false = •₀' 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' '•₀
-	ifTrue: [ false ]
-	ifFalse: [ •₁ ]' '•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ false ]' '•₀ = false = •₁' 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false = •₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]' 'false = •₀' '•₀
-	ifTrue: [ false ]
-	ifFalse: [ •₁ ]' '(•₀
-	 ifTrue: [ •₁ ]
-	 ifFalse: [ false ]) = •₂' '•₀ = false' '(false
-	 ifTrue: [ •₀ ]
-	 ifFalse: [ •₁ ])
-	ifTrue: [ •₂ ]
-	ifFalse: [ •₃ ]' )
 ]
 
 { #category : #tests }

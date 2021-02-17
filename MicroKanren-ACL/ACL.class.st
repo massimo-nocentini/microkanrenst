@@ -51,6 +51,36 @@ ACL >> focus: focusBlock do: doBlock [
 ]
 
 { #category : #initialization }
+ACL >> focus: focusBlock premise: hpBlock do: doBlock [
+
+	steps add: [ :astToRewrite :astRewritten | 
+		[ :astFocused | 
+		[ :o | 
+		[ :astPremise | 
+		[ :oPremise | 
+		| g1 g2 |
+		g1 := [ :_ | 
+		      self
+			      rewriting: astToRewrite
+			      rewritten: _ asRBNode
+			      focusAST: astPremise
+			      focusVar: oPremise asRBNode
+			      do: [ :oo :rr | oo unifyo value: rr ] ] asGoal.
+		g2 := self
+			      rewriting: astToRewrite
+			      rewritten: astRewritten
+			      focusAST: astFocused
+			      focusVar: o asRBNode
+			      do: [ :oo :rr | 
+			      doBlock value: oo value: oPremise asRBNode value: rr ].
+		g1 , g2 ] ]
+			asGoalWithUnaryASTof: hpBlock
+			contextVariables: contextVariables ] ]
+			asGoalWithUnaryASTof: focusBlock
+			contextVariables: contextVariables ]
+]
+
+{ #category : #initialization }
 ACL >> initialize [
 
 	super initialize.
@@ -78,15 +108,6 @@ ACL >> rewriting: astToRewrite rewritten: astRewritten focusAST: astFocused focu
 	  contextVariables do: [ :each | dict at: each put: each ].
 	  astSubstituted := astFocused substituteVariablesUsingDictionary:
 		                    dict.
-
-	  astFocused allVariables
-		  detect: [ :each | each = o ]
-		  ifFound: [ :oNode | o parent: oNode parent ]
-		  ifNone: [ Error signal: 'Variable substitution failed!' ].
-	  astSubstituted allVariables
-		  detect: [ :each | each = rNode ]
-		  ifFound: [ :anotheRNode | rNode parent: anotheRNode parent ]
-		  ifNone: [ Error signal: 'Variable substitution failed!' ].
 
 	  g1 := astToRewrite unifyo value: astFocused.
 	  g2 := doBlock value: o value: rNode.
