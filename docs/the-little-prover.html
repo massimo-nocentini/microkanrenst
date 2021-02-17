@@ -383,7 +383,7 @@ the constraint that the whole expression yields <code class="docutils literal no
 
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
-      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;◊•₀ cons: ◊•₁&#39;</span><span class="p">.</span>
+      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀ cons: •₁&#39;</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -740,7 +740,8 @@ We mix the two approaches freely from now on.</p>
 
    <span class="nv">node</span> <span class="o">:=</span> <span class="nc">RBMessageNode</span>
               <span class="nf">receiver:</span>
-              [ <span class="ss">#bagels</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#lox</span> <span class="nf">cons:</span> <span class="bp">nil</span>)) ] <span class="nf">unaryRBNode</span>
+              [ (<span class="ss">#bagels</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#lox</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) ]
+                 <span class="nf">unaryRBNode</span>
               <span class="nf">selector:</span> <span class="ss">#=</span>
               <span class="nf">arguments:</span> { (<span class="nc">RBMessageNode</span>
                      <span class="nf">receiver:</span> <span class="m">0</span> <span class="nf">asReifiedVar</span> <span class="nf">asRBNode</span>
@@ -751,7 +752,7 @@ We mix the two approaches freely from now on.</p>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span>
       <span class="nf">equals:</span>
-         <span class="s">&#39;(#bagels cons: (#and cons: (#lox cons: nil))) = (◊•₀ cons: ◊•₁)&#39;</span><span class="p">.</span>
+         <span class="s">&#39;(#bagels cons: (#and cons: (#lox cons: nil))) = (•₀ cons: •₁)&#39;</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -799,8 +800,8 @@ Recall that “is equal to” works in both directions.</p>
 
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
-      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;◊•₀ cons:</span>
-<span class="s">   ((◊•₁ cdr cons: ◊•₀ car) car cons: ◊•₂) car = (◊•₁ isAtom = false)&#39;</span><span class="p">.</span>
+      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀ cons:</span>
+<span class="s">   ((•₁ cdr cons: •₀ car) car cons: •₂) car = (•₁ isAtom = false)&#39;</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -862,8 +863,8 @@ Recall that “is equal to” works in both directions.</p>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span>
       <span class="nf">equals:</span>
-         <span class="s">&#39;◊•₀ cons: ((◊•₁ cdr cons: ◊•₀ car) car cons: (#oats cons: nil)) car</span>
-<span class="s">   = (◊•₁ isAtom = (◊•₂ isAtom cons: ◊•₃ = (◊•₄ cons: ◊•₂)) isAtom)&#39;</span><span class="p">.</span>
+         <span class="s">&#39;•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car</span>
+<span class="s">   = (•₁ isAtom = (•₂ isAtom cons: •₃ = (•₄ cons: •₂)) isAtom)&#39;</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -944,15 +945,15 @@ end with an if expression. So … what else is <code class="docutils literal not
    <span class="nv">node</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">expectedRBNode_chapter_02_frame_7</span><span class="p">.</span>
    <span class="bp">self</span>
       <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
-      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;◊•₀</span>
+      <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀</span>
 <span class="s">   ifTrue: [ </span>
 <span class="s">      (3 cons: nil) isAtom</span>
-<span class="s">         ifTrue: [ ◊•₁ ]</span>
-<span class="s">         ifFalse: [ ◊•₂ ] ]</span>
+<span class="s">         ifTrue: [ •₁ ]</span>
+<span class="s">         ifFalse: [ •₂ ] ]</span>
 <span class="s">   ifFalse: [ </span>
 <span class="s">      (3 cons: nil) isAtom</span>
-<span class="s">         ifTrue: [ ◊•₁ ]</span>
-<span class="s">         ifFalse: [ ◊•₂ ] ]&#39;</span><span class="p">.</span>
+<span class="s">         ifTrue: [ •₁ ]</span>
+<span class="s">         ifFalse: [ •₂ ] ]&#39;</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -997,13 +998,17 @@ end with an if expression. So … what else is <code class="docutils literal not
                             <span class="nb">ifFalse:</span> [ <span class="ss">#or</span> <span class="nf">=</span> (<span class="ss">#black</span> <span class="nf">cons:</span> (<span class="ss">#coffee</span> <span class="nf">cons:</span> <span class="bp">nil</span>)) ])
                            <span class="nb">ifTrue:</span> [ <span class="nv">c</span> ]
                            <span class="nb">ifFalse:</span> [ <span class="nv">c</span> ] ]
+                     <span class="nf">premise:</span> [ <span class="o">:</span><span class="nv">o</span> <span class="o">|</span> 
+                        <span class="nv">o</span>
+                           <span class="nb">ifTrue:</span> [ <span class="nv">c</span> ]
+                           <span class="nb">ifFalse:</span> [ <span class="nv">c</span> ] ]
                      <span class="nf">do:</span> <span class="nv">theory</span> <span class="nf">equalIfº</span> ]
-               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">ast1</span> <span class="o">:</span><span class="nv">ast2</span> <span class="o">:</span><span class="nv">ast3</span> <span class="o">:</span><span class="nv">ast4</span> <span class="o">|</span> 
-                  <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ast4</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
+               <span class="nf">then:</span> [ <span class="o">:</span><span class="nv">asts</span> <span class="o">|</span> 
+               <span class="nv">theory</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">asts</span> <span class="nf">last</span> <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ]
                <span class="nf">contextVariables:</span> (<span class="nc">Dictionary</span> <span class="nb">new</span>
-                      <span class="nf">at:</span> <span class="ss">#a</span> <span class="nf">put:</span> <span class="nv">a</span><span class="p">;</span>
-                      <span class="nf">at:</span> <span class="ss">#b</span> <span class="nf">put:</span> <span class="nv">b</span><span class="p">;</span>
-                      <span class="nf">at:</span> <span class="ss">#c</span> <span class="nf">put:</span> <span class="nv">c</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#a</span> <span class="nf">put:</span> <span class="nv">a</span> <span class="nf">asRBNode</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#b</span> <span class="nf">put:</span> <span class="nv">b</span> <span class="nf">asRBNode</span><span class="p">;</span>
+                      <span class="nf">at:</span> <span class="ss">#c</span> <span class="nf">put:</span> <span class="nv">c</span> <span class="nf">asRBNode</span><span class="p">;</span>
                       <span class="nf">yourself</span>) ] ]
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">:</span><span class="nv">c</span> <span class="o">|</span> 
                   (<span class="nv">a</span> <span class="nf">=</span> <span class="bp">true</span>
@@ -1016,10 +1021,10 @@ end with an if expression. So … what else is <code class="docutils literal not
                      <span class="nb">ifFalse:</span> [ <span class="nv">c</span> ] ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="nv">node</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">expectedRBNode_chapter_02_frame_12</span><span class="p">.</span>
+   <span class="nv">node</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">expectedRBNode_chapter_02_frame_15</span><span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
+      <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">1</span>) <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;(•₀ = true</span>
 <span class="s">    ifTrue: [ true ]</span>
 <span class="s">    ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])</span>
@@ -1047,28 +1052,37 @@ end with an if expression. So … what else is <code class="docutils literal not
 <div><span class="target" id="pharo-compiledMethod-45"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-equalifo"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">equalIfº</span>
 
-   <span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
-     [ <span class="o">:</span><span class="nv">c</span> <span class="o">:</span><span class="nv">d</span> <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> 
-     <span class="o">|</span><span class="nv"> ancestor </span><span class="o">|</span>
-     <span class="nv">ancestor</span> <span class="o">:=</span> [ 
-                 <span class="nv">a</span> <span class="nf">=</span> <span class="nv">c</span>
-                    <span class="nb">ifTrue:</span> [ <span class="nv">d</span> ]
-                    <span class="nb">ifFalse:</span> [ <span class="nv">e</span> ] ] <span class="nf">unaryRBNode</span> 
-                    <span class="nf">substituteVariablesUsingDictionary:</span> (<span class="nc">Dictionary</span> <span class="nb">new</span>
-                           <span class="nf">at:</span> <span class="ss">#a</span> <span class="nf">put:</span> <span class="nv">a</span><span class="p">;</span>
-                           <span class="nf">at:</span> <span class="ss">#c</span> <span class="nf">put:</span> <span class="nv">c</span> <span class="nf">asRBNode</span><span class="p">;</span>
-                           <span class="nf">at:</span> <span class="ss">#d</span> <span class="nf">put:</span> <span class="nv">d</span> <span class="nf">asRBNode</span><span class="p">;</span>
-                           <span class="nf">at:</span> <span class="ss">#e</span> <span class="nf">put:</span> <span class="nv">e</span> <span class="nf">asRBNode</span><span class="p">;</span>
-                           <span class="nf">yourself</span>)<span class="p">.</span>
+   <span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">c</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
+     [ <span class="o">:</span><span class="nv">d</span> <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> 
+     <span class="o">|</span><span class="nv"> ancestor dRB </span><span class="o">|</span>
+     <span class="nv">dRB</span> <span class="o">:=</span> <span class="nv">d</span> <span class="nf">asRBNode</span><span class="p">.</span>
 
-     (<span class="bp">self</span> <span class="nf">ancestorº</span> <span class="nf">value:</span> <span class="nv">a</span> <span class="nf">value:</span> <span class="nv">ancestor</span>)
-     <span class="nf">,</span> (<span class="bp">self</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">c</span> <span class="nf">asRBNode</span> <span class="nf">value:</span> <span class="nv">b</span>)
-     <span class="c">&quot;, (self unifyº value: 3 asLiteralRBNode value: d asRBNode)</span>
-<span class="c">     &quot;</span>
-     <span class="c">&quot;, ((self unifyº value: a value: d asRBNode)</span>
-<span class="c">         | (self ancestorº value: a value: d asRBNode))</span>
-<span class="c">     &quot;</span> ]
-        <span class="nf">asGoal</span> ]
+     <span class="nv">ancestor</span> <span class="o">:=</span> <span class="nc">RBMessageNode</span>
+                    <span class="nf">receiver:</span>
+                    (<span class="nc">RBMessageNode</span>
+                        <span class="nf">receiver:</span> <span class="nv">a</span>
+                        <span class="nf">selector:</span> <span class="ss">#=</span>
+                        <span class="nf">arguments:</span> { <span class="nv">b</span> })
+                    <span class="nf">selector:</span> <span class="ss">#ifTrue:ifFalse:</span>
+                    <span class="nf">arguments:</span> { 
+                          (<span class="nc">RBBlockNode</span> <span class="nf">body:</span>
+                              (<span class="nc">RBSequenceNode</span> <span class="nf">statements:</span> { <span class="nv">dRB</span> }))<span class="p">.</span>
+                          (<span class="nc">RBBlockNode</span> <span class="nf">body:</span>
+                              (<span class="nc">RBSequenceNode</span> <span class="nf">statements:</span> { <span class="nv">e</span> <span class="nf">asRBNode</span> })) }<span class="p">.</span>
+
+     <span class="c">&quot; ancestor := [ </span>
+<span class="c">                 a = b</span>
+<span class="c">                    ifTrue: [ d ]</span>
+<span class="c">                    ifFalse: [ e ] ] unaryRBNode </span>
+<span class="c">                    substituteVariablesUsingDictionary: (Dictionary new</span>
+<span class="c">                           at: #a put: a;</span>
+<span class="c">                           at: #b put: b;</span>
+<span class="c">                           at: #d put: dRB;</span>
+<span class="c">                           at: #e put: e asRBNode;</span>
+<span class="c">                           yourself).&quot;</span>
+     (<span class="bp">self</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">ancestor</span> <span class="nf">value:</span> <span class="nv">c</span>)
+     <span class="nf">,</span> ((<span class="bp">self</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">a</span> <span class="nf">value:</span> <span class="nv">dRB</span>)
+         <span class="nf">|</span> (<span class="bp">self</span> <span class="nf">ancestorº</span> <span class="nf">value:</span> <span class="nv">a</span> <span class="nf">value:</span> <span class="nv">dRB</span>)) ] <span class="nf">asGoal</span> ]
 </pre></div>
 </div>
 </div></blockquote>
@@ -1086,13 +1100,14 @@ end with an if expression. So … what else is <code class="docutils literal not
 
    <span class="bp">self</span>
       <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">asArray</span>
-      <span class="nf">equals:</span> { <span class="s">&#39;false&#39;</span><span class="p">.</span> <span class="s">&#39;[ false ]&#39;</span><span class="p">.</span> <span class="s">&#39;false = ◊•₀&#39;</span><span class="p">.</span> <span class="s">&#39;false</span>
-<span class="s">   ifTrue: [ ◊•₀ ]</span>
-<span class="s">   ifFalse: [ ◊•₁ ]&#39;</span><span class="p">.</span> <span class="s">&#39;◊•₀ = false&#39;</span><span class="p">.</span> <span class="s">&#39;◊•₀</span>
-<span class="s">   ifTrue: [ ◊•₁ ]</span>
-<span class="s">   ifFalse: [ false ]&#39;</span><span class="p">.</span> <span class="s">&#39;◊•₀</span>
+      <span class="nf">equals:</span> <span class="ss">#(</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;[ false ]&#39;</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;false</span>
+<span class="s">   ifTrue: [ •₀ ]</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false + •₀&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifTrue: [ •₁ ]</span>
+<span class="s">   ifFalse: [ false ]&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;•₀</span>
 <span class="s">   ifTrue: [ false ]</span>
-<span class="s">   ifFalse: [ ◊•₁ ]&#39;</span> }<span class="p">.</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false - •₀&#39;</span> <span class="s">&#39;•₀ + false&#39;</span> <span class="s">&#39;false cons: •₀&#39;</span>
+            <span class="s">&#39;•₀ - false&#39;</span> <span class="s">&#39;•₀ cons: false&#39;</span> <span class="ss">)</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -1104,67 +1119,7 @@ end with an if expression. So … what else is <code class="docutils literal not
 <div><span class="target" id="pharo-compiledMethod-47"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-parento"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">parentº</span>
 
-   <span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
-     <span class="o">|</span><span class="nv"> sequenceGoal blockGoal messageNode </span><span class="o">|</span>
-     <span class="nv">sequenceGoal</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
-                        <span class="nf">value:</span> <span class="nv">b</span>
-                        <span class="nf">value:</span> (<span class="nc">RBSequenceNode</span> <span class="nf">statements:</span> { <span class="nv">a</span> })<span class="p">.</span>
-
-     <span class="nv">messageNode</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">c</span> <span class="o">|</span> 
-                    <span class="o">|</span><span class="nv"> equal1 equal2 equal cRB if </span><span class="o">|</span>
-                    <span class="nv">cRB</span> <span class="o">:=</span> <span class="nv">c</span> <span class="nf">asRBNode</span><span class="p">.</span>
-                    <span class="nv">equal1</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
-                                 <span class="nf">value:</span> <span class="nv">b</span>
-                                 <span class="nf">value:</span>
-                                    ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">|</span> <span class="nv">q</span> <span class="nf">=</span> <span class="nv">w</span> ] 
-                                        <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
-                                        (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span>))<span class="p">.</span>
-                    <span class="nv">equal2</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
-                                 <span class="nf">value:</span> <span class="nv">b</span>
-                                 <span class="nf">value:</span>
-                                    ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">|</span> <span class="nv">w</span> <span class="nf">=</span> <span class="nv">q</span> ] 
-                                        <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
-                                        (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span>))<span class="p">.</span>
-                    <span class="nv">equal</span> <span class="o">:=</span> <span class="nv">equal1</span> <span class="nf">|</span> <span class="nv">equal2</span><span class="p">.</span>
-
-                    <span class="nv">if</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">r</span> <span class="o">|</span> 
-                          <span class="o">|</span><span class="nv"> rRB if1 if2 if3 </span><span class="o">|</span>
-                          <span class="nv">rRB</span> <span class="o">:=</span> <span class="nv">r</span> <span class="nf">asRBNode</span><span class="p">.</span>
-                          <span class="nv">if1</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
-                                    <span class="nf">value:</span> <span class="nv">b</span>
-                                    <span class="nf">value:</span> ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> 
-                                        <span class="nv">q</span>
-                                           <span class="nb">ifTrue:</span> [ <span class="nv">w</span> ]
-                                           <span class="nb">ifFalse:</span> [ <span class="nv">e</span> ] ] 
-                                           <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
-                                           (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span> <span class="nf">with:</span> <span class="nv">rRB</span>))<span class="p">.</span>
-                          <span class="nv">if2</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
-                                    <span class="nf">value:</span> <span class="nv">b</span>
-                                    <span class="nf">value:</span> ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> 
-                                        <span class="nv">w</span>
-                                           <span class="nb">ifTrue:</span> [ <span class="nv">q</span> ]
-                                           <span class="nb">ifFalse:</span> [ <span class="nv">e</span> ] ] 
-                                           <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
-                                           (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span> <span class="nf">with:</span> <span class="nv">rRB</span>))<span class="p">.</span>
-                          <span class="nv">if3</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
-                                    <span class="nf">value:</span> <span class="nv">b</span>
-                                    <span class="nf">value:</span> ([ <span class="o">:</span><span class="nv">q</span> <span class="o">:</span><span class="nv">w</span> <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> 
-                                        <span class="nv">w</span>
-                                           <span class="nb">ifTrue:</span> [ <span class="nv">e</span> ]
-                                           <span class="nb">ifFalse:</span> [ <span class="nv">q</span> ] ] 
-                                           <span class="nf">substituteVariablesUsingSequenceableCollection:</span>
-                                           (<span class="nc">Array</span> <span class="nf">with:</span> <span class="nv">a</span> <span class="nf">with:</span> <span class="nv">cRB</span> <span class="nf">with:</span> <span class="nv">rRB</span>))<span class="p">.</span>
-
-                          <span class="nv">if1</span> <span class="nf">|</span> <span class="nv">if2</span> <span class="nf">|</span> <span class="nv">if3</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-
-                    <span class="nv">equal</span> <span class="nf">|</span> <span class="nv">if</span> ] <span class="nf">asGoal</span><span class="p">.</span>
-
-     <span class="nv">blockGoal</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">unifyº</span>
-                     <span class="nf">value:</span> <span class="nv">b</span>
-                     <span class="nf">value:</span>
-                     (<span class="nc">RBBlockNode</span> <span class="nf">body:</span> (<span class="nc">RBSequenceNode</span> <span class="nf">statements:</span> { <span class="nv">a</span> }))<span class="p">.</span>
-
-     <span class="nv">sequenceGoal</span> <span class="nf">|</span> <span class="nv">messageNode</span> <span class="nf">|</span> <span class="nv">blockGoal</span> ]
+   <span class="o">^</span> <span class="nc">MKPredicateBinaryParento</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -1179,37 +1134,26 @@ end with an if expression. So … what else is <code class="docutils literal not
 
    <span class="bp">self</span>
       <span class="nf">assert:</span>
-         ((<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">asRBNode</span> <span class="nf">formattedCode</span> ]) 
-             <span class="nf">next:</span> <span class="m">25</span>) <span class="nf">asArray</span>
-      <span class="nf">equals:</span> <span class="ss">#(</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;false</span>
+      ((<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">next:</span> <span class="m">25</span>)
+         <span class="nf">asArray</span>
+      <span class="nf">equals:</span>
+         <span class="ss">#(</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;false = •₀ = •₁&#39;</span> <span class="s">&#39;[ false ]&#39;</span> <span class="s">&#39;[ false = •₀ ]&#39;</span>
+            <span class="s">&#39;false&#39;</span> <span class="s">&#39;false = •₀ = •₁ = •₂&#39;</span> <span class="s">&#39;false</span>
 <span class="s">   ifTrue: [ •₀ ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;false</span>
-<span class="s">   ifTrue: [ •₀ ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false = •₀ = •₁&#39;</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;false + •₀&#39;</span> <span class="s">&#39;[ false = •₀ = •₁ ]&#39;</span>
+            <span class="s">&#39;•₀</span>
 <span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ false ]&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;(false</span>
-<span class="s">    ifTrue: [ •₀ ]</span>
-<span class="s">    ifFalse: [ •₁ ]) = •₂&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;false</span>
-<span class="s">   ifTrue: [ •₀ ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifFalse: [ false ]&#39;</span> <span class="s">&#39;[ false ] = •₀&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;false = •₀</span>
+<span class="s">   ifTrue: [ •₁ ]</span>
+<span class="s">   ifFalse: [ •₂ ]&#39;</span> <span class="s">&#39;•₀</span>
 <span class="s">   ifTrue: [ false ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;•₀</span>
-<span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ false ]&#39;</span> <span class="s">&#39;•₀ = false = •₁&#39;</span> <span class="s">&#39;false</span>
-<span class="s">   ifTrue: [ •₀ ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false = •₀</span>
-<span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ •₂ ]&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;•₀</span>
-<span class="s">   ifTrue: [ false ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;(•₀</span>
-<span class="s">    ifTrue: [ •₁ ]</span>
-<span class="s">    ifFalse: [ false ]) = •₂&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;(false</span>
-<span class="s">    ifTrue: [ •₀ ]</span>
-<span class="s">    ifFalse: [ •₁ ])</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false = •₀ = •₁&#39;</span> <span class="s">&#39;false - •₀&#39;</span> <span class="s">&#39;[ [ false ] ]&#39;</span>
+            <span class="s">&#39;•₀ + false&#39;</span> <span class="s">&#39;[ false = •₀ ] = •₁&#39;</span> <span class="s">&#39;false cons: •₀&#39;</span>
+            <span class="s">&#39;false = •₀ + •₁&#39;</span> <span class="s">&#39;•₀ - false&#39;</span> <span class="s">&#39;false = •₀ = •₁</span>
 <span class="s">   ifTrue: [ •₂ ]</span>
-<span class="s">   ifFalse: [ •₃ ]&#39;</span> <span class="ss">)</span><span class="p">.</span>
+<span class="s">   ifFalse: [ •₃ ]&#39;</span> <span class="s">&#39;[ false ]&#39;</span> <span class="ss">)</span><span class="p">.</span>
 
-   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
+   <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">25</span>
 </pre></div>
 </div>
 <blockquote>
@@ -1219,13 +1163,7 @@ end with an if expression. So … what else is <code class="docutils literal not
 <div><span class="target" id="pharo-compiledMethod-49"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-thelittleprover-ancestoro"><div class="highlight"><pre><span></span><span class="c">&quot;TheLittleProver, protocol predicates&quot;</span>
 <span class="nf">ancestorº</span>
 
-   <span class="o">^</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> 
-     [ <span class="o">:</span><span class="nv">p</span> <span class="o">|</span> 
-     <span class="o">|</span><span class="nv"> pRB </span><span class="o">|</span>
-     <span class="nv">pRB</span> <span class="o">:=</span> <span class="nv">p</span> <span class="nf">asRBNode</span><span class="p">.</span>
-     (<span class="bp">self</span> <span class="nf">parentº</span> <span class="nf">value:</span> <span class="nv">a</span> <span class="nf">value:</span> <span class="nv">pRB</span>)
-     <span class="nf">,</span> ((<span class="bp">self</span> <span class="nf">unifyº</span> <span class="nf">value:</span> <span class="nv">pRB</span> <span class="nf">value:</span> <span class="nv">b</span>)
-         <span class="nf">|</span> [ <span class="bp">self</span> <span class="nf">ancestorº</span> <span class="nf">value:</span> <span class="nv">pRB</span> <span class="nf">value:</span> <span class="nv">b</span> ] <span class="nf">asGoal</span>) ] <span class="nf">asGoal</span> ]
+   <span class="o">^</span> <span class="nc">MKPredicateBinaryAncestoro</span>
 </pre></div>
 </div>
 </div></blockquote>
