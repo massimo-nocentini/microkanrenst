@@ -263,7 +263,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_backward [
 
 	self
 		assert: aGoal solutions asArray equals: { node };
-		assert: node formattedCode equals: '◊•₀ cons: ◊•₁'.
+		assert: node formattedCode equals: '•₀ cons: •₁'.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -545,8 +545,8 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_55 [
 
 	self
 		assert: aGoal solutions asArray equals: { node };
-		assert: node formattedCode equals: '◊•₀ cons:
-	((◊•₁ cdr cons: ◊•₀ car) car cons: ◊•₂) car = (◊•₁ isAtom = false)'.
+		assert: node formattedCode equals: '•₀ cons:
+	((•₁ cdr cons: •₀ car) car cons: •₂) car = (•₁ isAtom = false)'.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -603,8 +603,8 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
 		assert: aGoal solutions asArray equals: { node };
 		assert: node formattedCode
 		equals:
-			'◊•₀ cons: ((◊•₁ cdr cons: ◊•₀ car) car cons: (#oats cons: nil)) car
-	= (◊•₁ isAtom = (◊•₂ isAtom cons: ◊•₃ = (◊•₄ cons: ◊•₂)) isAtom)'.
+			'•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car
+	= (•₁ isAtom = (•₂ isAtom cons: •₃ = (•₄ cons: •₂)) isAtom)'.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -679,15 +679,15 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_07 [
 	node := self expectedRBNode_chapter_02_frame_7.
 	self
 		assert: aGoal solutions asArray equals: { node };
-		assert: node formattedCode equals: '◊•₀
+		assert: node formattedCode equals: '•₀
 	ifTrue: [ 
 		(3 cons: nil) isAtom
-			ifTrue: [ ◊•₁ ]
-			ifFalse: [ ◊•₂ ] ]
+			ifTrue: [ •₁ ]
+			ifFalse: [ •₂ ] ]
 	ifFalse: [ 
 		(3 cons: nil) isAtom
-			ifTrue: [ ◊•₁ ]
-			ifFalse: [ ◊•₂ ] ]'.
+			ifTrue: [ •₁ ]
+			ifFalse: [ •₂ ] ]'.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -777,26 +777,21 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestoro [
 		((aGoal solutions collect: [ :e | e formattedCode ]) next: 25)
 			asArray
 		equals:
-			#( 'false' '[ false ]' 'false' 'false = ◊•₀' '[ false ]'
-			   '[ false ]' 'false
-	ifTrue: [ ◊•₀ ]
-	ifFalse: [ ◊•₁ ]' 'false = ◊•₀' '[ [ false ] ]' 'false' '◊•₀ = false'
-			   'false
-	ifTrue: [ ◊•₀ ]
-	ifFalse: [ ◊•₁ ]' '[ false = ◊•₀ ]' '[ false ]' 'false = ◊•₀'
-			   '◊•₀
-	ifTrue: [ ◊•₁ ]
-	ifFalse: [ false ]' '◊•₀ = false' '[ 
-false
-	ifTrue: [ ◊•₀ ]
-	ifFalse: [ ◊•₁ ] ]' 'false = ◊•₀' '[ false ] = ◊•₀' '[ false ]'
-			   '◊•₀
+			#( 'false = •₀' 'false = •₀ = •₁' '[ false ]' '[ false = •₀ ]'
+			   'false' 'false = •₀ = •₁ = •₂' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false = •₀' 'false + •₀' '[ false = •₀ = •₁ ]'
+			   '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' '[ false ] = •₀' '•₀ = false' 'false = •₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]' '•₀
 	ifTrue: [ false ]
-	ifFalse: [ ◊•₁ ]' '◊•₀
-	ifTrue: [ ◊•₁ ]
-	ifFalse: [ false ]' '[ ◊•₀ = false ]' 'false
-	ifTrue: [ ◊•₀ ]
-	ifFalse: [ ◊•₁ ]' ).
+	ifFalse: [ •₁ ]' 'false = •₀ = •₁' 'false - •₀' '[ [ false ] ]'
+			   '•₀ + false' '[ false = •₀ ] = •₁' 'false cons: •₀'
+			   'false = •₀ + •₁' '•₀ - false' 'false = •₀ = •₁
+	ifTrue: [ •₂ ]
+	ifFalse: [ •₃ ]' '[ false ]' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: 25
 ]
@@ -825,9 +820,10 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorobackward
 		assert:
 			((aGoal solutions withIndexCollect: [ :e :i | e formattedCode ]) 
 				 next: 20) asArray
-		equals: #( '2 + ◊•₀' '3 - ◊•₀' '◊•₀
+		equals: #( '2 + •₀' '3 - •₀' '•₀
 	ifTrue: [ 3 ]
-	ifFalse: [ 1 ]' '◊•₀' '1' '3' '◊•₀' '◊•₀' '◊•₀' '◊•₀' ).
+	ifFalse: [ 1 ]' '2' '◊•₀' '◊•₀' '1' '◊•₀' '3' '3' '◊•₀' '◊•₀' '◊•₀'
+			   '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: 20
 ]
