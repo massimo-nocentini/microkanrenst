@@ -11,12 +11,10 @@ Class {
 TheLittleProver >> ancestorº [
 
 	^ [ :a :b | 
-	  [ :p | 
-	  | pRB |
-	  pRB := p asRBNode.
-	  (self parentº value: a value: pRB)
-	  , ((self unifyº value: pRB value: b)
-		   | [ self ancestorº value: pRB value: b ] asGoal) ] asGoal ]
+	  (MKPredicateBinaryAncestoro value: a value: b)
+		  parentº: self parentº;
+		  unifyº: self unifyº;
+		  yourself ]
 ]
 
 { #category : #predicates }
@@ -58,27 +56,37 @@ TheLittleProver >> consº [
 { #category : #predicates }
 TheLittleProver >> equalIfº [
 
-	^ [ :a :b | 
-	  [ :c :d :e | 
-	  | ancestor |
-	  ancestor := [ 
-	              a = c
+	^ [ :a :c :b | 
+	  [ :d :e | 
+	  | ancestor dRB |
+	  dRB := d asRBNode.
+
+	  ancestor := RBMessageNode
+		              receiver:
+		              (RBMessageNode
+			               receiver: a
+			               selector: #=
+			               arguments: { b })
+		              selector: #ifTrue:ifFalse:
+		              arguments: { 
+				              (RBBlockNode body:
+					               (RBSequenceNode statements: { dRB })).
+				              (RBBlockNode body:
+					               (RBSequenceNode statements: { e asRBNode })) }.
+
+	  " ancestor := [ 
+	              a = b
 		              ifTrue: [ d ]
 		              ifFalse: [ e ] ] unaryRBNode 
 		              substituteVariablesUsingDictionary: (Dictionary new
 				               at: #a put: a;
-				               at: #c put: c asRBNode;
-				               at: #d put: d asRBNode;
+				               at: #b put: b;
+				               at: #d put: dRB;
 				               at: #e put: e asRBNode;
-				               yourself).
-
-	  (self ancestorº value: a value: ancestor)
-	  ", (self unifyº value: 3 asLiteralRBNode value: d asRBNode)
-	  ", (self unifyº value: c asRBNode value: b)
-	  ", ((self unifyº value: a value: d asRBNode)
-		   | (self ancestorº value: a value: d asRBNode))
-	  " ]
-		  asGoal ]
+				               yourself)."
+	  (self unifyº value: ancestor value: c)
+	  , ((self unifyº value: a value: dRB)
+		   | (self ancestorº value: a value: dRB)) ] asGoal ]
 ]
 
 { #category : #predicates }
@@ -157,67 +165,7 @@ TheLittleProver >> isAtomNilº [
 { #category : #predicates }
 TheLittleProver >> parentº [
 
-	^ [ :a :b | 
-	  | sequenceGoal blockGoal messageNode |
-	  sequenceGoal := self unifyº
-		                  value: b
-		                  value: (RBSequenceNode statements: { a }).
-
-	  messageNode := [ :c | 
-	                 | equal1 equal2 equal cRB if |
-	                 cRB := c asRBNode.
-	                 equal1 := self unifyº
-		                           value: b
-		                           value:
-			                           ([ :q :w | q = w ] 
-				                            substituteVariablesUsingSequenceableCollection:
-				                            (Array with: a with: cRB)).
-	                 equal2 := self unifyº
-		                           value: b
-		                           value:
-			                           ([ :q :w | w = q ] 
-				                            substituteVariablesUsingSequenceableCollection:
-				                            (Array with: a with: cRB)).
-	                 equal := equal1 | equal2.
-
-	                 if := [ :r | 
-	                       | rRB if1 if2 if3 |
-	                       rRB := r asRBNode.
-	                       if1 := self unifyº
-		                              value: b
-		                              value: ([ :q :w :e | 
-			                               q
-				                               ifTrue: [ w ]
-				                               ifFalse: [ e ] ] 
-				                               substituteVariablesUsingSequenceableCollection:
-				                               (Array with: a with: cRB with: rRB)).
-	                       if2 := self unifyº
-		                              value: b
-		                              value: ([ :q :w :e | 
-			                               w
-				                               ifTrue: [ q ]
-				                               ifFalse: [ e ] ] 
-				                               substituteVariablesUsingSequenceableCollection:
-				                               (Array with: a with: cRB with: rRB)).
-	                       if3 := self unifyº
-		                              value: b
-		                              value: ([ :q :w :e | 
-			                               w
-				                               ifTrue: [ e ]
-				                               ifFalse: [ q ] ] 
-				                               substituteVariablesUsingSequenceableCollection:
-				                               (Array with: a with: cRB with: rRB)).
-
-	                       if1 | if2 | if3 ] asGoal.
-
-	                 equal | if ] asGoal.
-
-	  blockGoal := self unifyº
-		               value: b
-		               value:
-		               (RBBlockNode body: (RBSequenceNode statements: { a })).
-
-	  sequenceGoal | messageNode | blockGoal ]
+	^ MKPredicateBinaryParento
 ]
 
 { #category : #predicates }

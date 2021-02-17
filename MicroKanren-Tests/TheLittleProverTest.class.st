@@ -729,13 +729,26 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 						          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
 						         ifTrue: [ c ]
 						         ifFalse: [ c ] ]
-				         do: theory equalIfº ]
-		         then: [ :ast1 :ast2 :ast3 :ast4 | 
-			         theory unifyº value: ast4 value: rewritten asRBNode ]
+				         do: [ :o :r | 
+					         [ 
+					         theory equalIfº
+						         value: o
+						         value: ([ 
+							          a = true
+								          ifTrue: [ o ]
+								          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ] ]
+								          unaryRBNode substituteVariablesUsingDictionary:
+								          (Dictionary new
+									           at: #a put: a asRBNode;
+									           at: #o put: o;
+									           yourself))
+						         value: r ] asGoal ] ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: (Dictionary new
-				          at: #a put: a;
-				          at: #b put: b;
-				          at: #c put: c;
+				          at: #a put: a asRBNode;
+				          at: #b put: b asRBNode;
+				          at: #c put: c asRBNode;
 				          yourself) ] ]
 		         asGoalWithUnaryASTof: [ :a :b :c | 
 			         (a = true
@@ -751,12 +764,12 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 	node := self expectedRBNode_chapter_02_frame_12.
 
 	self
-		assert: aGoal solutions asArray equals: { node };
-		assert: node formattedCode equals: '(•₀ = true
+		assert: (aGoal solutions next: 1) asArray equals: { node };
+		assert: node formattedCode equals: '(◊•₀ = true
 	 ifTrue: [ true ]
 	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₁ ]'
+	ifTrue: [ ◊•₁ ]
+	ifFalse: [ ◊•₁ ]'
 ]
 
 { #category : #tests }
@@ -770,8 +783,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestoro [
 
 	self
 		assert:
-			((aGoal solutions collect: [ :e | e asRBNode formattedCode ]) 
-				 next: 25) asArray
+		((aGoal solutions collect: [ :e | e formattedCode ]) next: 25)
+			asArray
 		equals:
 			#( 'false' '[ false ]' 'false' 'false = ◊•₀' '[ false ]'
 			   '[ false ]' 'false
@@ -807,20 +820,24 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorobackward
 		         value: rewritten asRBNode
 		         value: ([ :z :x :v | 
 			          2 + z
-				          ifTrue: [ x ]
+				          ifTrue: [ 
+					          x
+						          ifTrue: [ 3 ]
+						          ifFalse: [ 1 ] ]
 				          ifFalse: [ 3 - v ] ] 
 				          substituteVariablesUsingSequenceableCollection: { 
 						          a asRBNode.
 						          b asRBNode.
 						          c asRBNode }) ] asGoal ] asGoal.
 
-	"	self
-		assert:
-			((aGoal solutions collect: [ :e | e asRBNode formattedCode ]) 
-				 next: 5) asArray
-		equals: #(  )"
+	self
+		assert: ((aGoal solutions withIndexCollect: [ :e :i | 
+				  e asRBNode formattedCode ]) next: 30) asArray
+		equals: #( '2 + ◊•₀' '3 - ◊•₀' '◊•₀
+	ifTrue: [ 3 ]
+	ifFalse: [ 1 ]' '◊•₀' '1' '3' '◊•₀' '◊•₀' '◊•₀' '◊•₀' ).
 
-	^ self exportComputationTreeOfGoal: aGoal limitedTo: 10
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: 20
 ]
 
 { #category : #tests }
@@ -876,7 +893,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parento [
 
 	self
 		assert: (aGoal solutions collect: [ :e | e formattedCode ]) asArray
-		equals: { 'false'. '[ false ]'. 'false = ◊•₀'. 'false
+		equals: { 'false = ◊•₀'. '[ false ]'. 'false'. 'false
 	ifTrue: [ ◊•₀ ]
 	ifFalse: [ ◊•₁ ]'. '◊•₀ = false'. '◊•₀
 	ifTrue: [ ◊•₁ ]

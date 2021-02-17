@@ -19,3 +19,9 @@ Predicate >> name [
 Predicate >> onState: aState [
 	^ self goal onState: aState
 ]
+
+{ #category : #predicates }
+Predicate >> unifyº [
+
+	^ [ :a :b | a unifyo value: b ]
+]
