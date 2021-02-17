@@ -1,10 +1,6 @@
 Class {
 	#name : #MKPredicateBinaryAncestoro,
 	#superclass : #PredicateBinary,
-	#instVars : [
-		'parentº',
-		'unifyº'
-	],
 	#category : #'MicroKanren-ACL'
 }
 
@@ -14,8 +10,8 @@ MKPredicateBinaryAncestoro >> goal [
 	^ [ :p | 
 	  | pRB |
 	  pRB := p asRBNode.
-	  (parentº value: firstArgument value: pRB)
-	  , ((unifyº value: pRB value: secondArgument) | (self copy
+	  (MKPredicateBinaryParento value: firstArgument value: pRB)
+	  , ((self unifyº value: pRB value: secondArgument) | (self copy
 			    firstArgument: pRB;
 			    secondArgument: secondArgument;
 			    yourself)) ] asGoal
@@ -25,16 +21,4 @@ MKPredicateBinaryAncestoro >> goal [
 MKPredicateBinaryAncestoro >> name [
 
 	^ 'ancestorº'
-]
-
-{ #category : #accessing }
-MKPredicateBinaryAncestoro >> parentº: anObject [
-
-	parentº := anObject
-]
-
-{ #category : #accessing }
-MKPredicateBinaryAncestoro >> unifyº: anObject [
-
-	unifyº := anObject
 ]

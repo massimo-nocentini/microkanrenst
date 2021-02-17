@@ -114,7 +114,7 @@ TheLittleProverTest >> expectedRBNode_chapter_01_frame_56 [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> expectedRBNode_chapter_02_frame_12 [
+TheLittleProverTest >> expectedRBNode_chapter_02_frame_15 [
 
 	^ RBMessageNode
 		  receiver: (RBMessageNode
@@ -514,7 +514,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 		assert: aGoal solutions asArray equals: { node };
 		assert: node formattedCode
 		equals:
-			'(#bagels cons: (#and cons: (#lox cons: nil))) = (◊•₀ cons: ◊•₁)'.
+			'(#bagels cons: (#and cons: (#lox cons: nil))) = (•₀ cons: •₁)'.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -733,18 +733,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 					         o
 						         ifTrue: [ c ]
 						         ifFalse: [ c ] ]
-				         do: theory equalIfº
-			         "do: [ :o :r | 
-					         theory equalIfº
-						         value: o
-						         value: ([ :x :y | 
-							          x = true
-								          ifTrue: [ y ]
-								          ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ] ] 
-								          substituteVariablesUsingSequenceableCollection: { 
-										          a asRBNode.
-										          o asRBNode })
-						         value: r ]" ]
+				         do: theory equalIfº ]
 		         then: [ :asts | 
 		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: (Dictionary new
@@ -763,15 +752,15 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 				         ifFalse: [ c ] ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	node := self expectedRBNode_chapter_02_frame_12.
+	node := self expectedRBNode_chapter_02_frame_15.
 
 	self
 		assert: (aGoal solutions next: 1) asArray equals: { node };
-		assert: node formattedCode equals: '(◊•₀ = true
+		assert: node formattedCode equals: '(•₀ = true
 	 ifTrue: [ true ]
 	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
-	ifTrue: [ ◊•₁ ]
-	ifFalse: [ ◊•₁ ]'
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₁ ]'
 ]
 
 { #category : #tests }
@@ -833,8 +822,9 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorobackward
 						          c asRBNode }) ] asGoal ] asGoal.
 
 	self
-		assert: ((aGoal solutions withIndexCollect: [ :e :i | 
-				  e asRBNode formattedCode ]) next: 20) asArray
+		assert:
+			((aGoal solutions withIndexCollect: [ :e :i | e formattedCode ]) 
+				 next: 20) asArray
 		equals: #( '2 + ◊•₀' '3 - ◊•₀' '◊•₀
 	ifTrue: [ 3 ]
 	ifFalse: [ 1 ]' '◊•₀' '1' '3' '◊•₀' '◊•₀' '◊•₀' '◊•₀' ).
@@ -853,13 +843,14 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parento [
 
 	self
 		assert: (aGoal solutions collect: [ :e | e formattedCode ]) asArray
-		equals: { 'false = ◊•₀'. '[ false ]'. 'false'. 'false
-	ifTrue: [ ◊•₀ ]
-	ifFalse: [ ◊•₁ ]'. '◊•₀ = false'. '◊•₀
-	ifTrue: [ ◊•₁ ]
-	ifFalse: [ false ]'. '◊•₀
+		equals: #( 'false = •₀' '[ false ]' 'false' 'false
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' 'false + •₀' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' '•₀ = false' '•₀
 	ifTrue: [ false ]
-	ifFalse: [ ◊•₁ ]' }.
+	ifFalse: [ •₁ ]' 'false - •₀' '•₀ + false' 'false cons: •₀'
+			   '•₀ - false' '•₀ cons: false' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]

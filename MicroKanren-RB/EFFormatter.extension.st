@@ -3,7 +3,7 @@ Extension { #name : #EFFormatter }
 { #category : #'*MicroKanren-RB' }
 EFFormatter >> visitLogicVariableNode: aNode [
 
-	self writeString: '◊' , aNode logicVar asString
+	self writeString: aNode logicVar asString
 ]
 
 { #category : #'*MicroKanren-RB' }

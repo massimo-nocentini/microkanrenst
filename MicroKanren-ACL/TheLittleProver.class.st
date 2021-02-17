@@ -10,11 +10,7 @@ Class {
 { #category : #predicates }
 TheLittleProver >> ancestorº [
 
-	^ [ :a :b | 
-	  (MKPredicateBinaryAncestoro value: a value: b)
-		  parentº: self parentº;
-		  unifyº: self unifyº;
-		  yourself ]
+	^ MKPredicateBinaryAncestoro
 ]
 
 { #category : #predicates }
