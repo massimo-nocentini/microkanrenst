@@ -7,7 +7,7 @@ Class {
 { #category : #running }
 MKPredicateBinaryParento >> binaryMessages [
 
-	^ #( cons: = + - )
+	^ #( = cons: + - )
 ]
 
 { #category : #running }

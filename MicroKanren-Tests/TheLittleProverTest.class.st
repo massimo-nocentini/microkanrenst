@@ -776,22 +776,21 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestoro [
 		assert:
 		((aGoal solutions collect: [ :e | e formattedCode ]) next: 25)
 			asArray
-		equals:
-			#( 'false = •₀' 'false = •₀ = •₁' '[ false ]' '[ false = •₀ ]'
-			   'false' 'false = •₀ = •₁ = •₂' 'false
+		equals: #( 'false car' 'false car car' '[ false ]' '[ false car ]'
+			   'false' 'false car car car' 'false
 	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false = •₀' 'false + •₀' '[ false = •₀ = •₁ ]'
+	ifFalse: [ •₁ ]' 'false car' 'false = •₀' '[ false car car ]'
 			   '•₀
 	ifTrue: [ •₁ ]
-	ifFalse: [ false ]' '[ false ] = •₀' '•₀ = false' 'false = •₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]' '•₀
+	ifFalse: [ false ]' '[ false ] car' 'false cdr' 'false car
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' '•₀
 	ifTrue: [ false ]
-	ifFalse: [ •₁ ]' 'false = •₀ = •₁' 'false - •₀' '[ [ false ] ]'
-			   '•₀ + false' '[ false = •₀ ] = •₁' 'false cons: •₀'
-			   'false = •₀ + •₁' '•₀ - false' 'false = •₀ = •₁
-	ifTrue: [ •₂ ]
-	ifFalse: [ •₃ ]' '[ false ]' ).
+	ifFalse: [ •₁ ]' 'false car car' 'false cons: •₀' '[ [ false ] ]'
+			   '[ false car ] car' '•₀ = false' 'false car = •₀'
+			   'false + •₀' 'false car car
+	ifTrue: [ •₀ ]
+	ifFalse: [ •₁ ]' '•₀ cons: false' '[ false ]' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: 25
 ]
@@ -822,7 +821,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorobackward
 				 next: 20) asArray
 		equals: #( '2 + •₀' '3 - •₀' '•₀
 	ifTrue: [ 3 ]
-	ifFalse: [ 1 ]' '2' '◊•₀' '◊•₀' '1' '◊•₀' '3' '3' '◊•₀' '◊•₀' '◊•₀'
+	ifFalse: [ 1 ]' '◊•₀' '◊•₀' '1' '◊•₀' '3' '◊•₀' '2' '◊•₀' '3' '◊•₀'
 			   '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: 20
@@ -959,8 +958,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_50 [
 	| aGoal n a |
 	self skip.
 
-
 	aGoal := [ :v | 
+	         [ :w | 
 	         a := RBMessageNode
 		              receiver: (RBLiteralValueNode value: #ketchup)
 		              selector: #cons:
@@ -980,16 +979,40 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_50 [
 						                selector: #cdr) }) }.
 	         n := RBMessageNode
 		              receiver:
-		              (RBMessageNode
-			               receiver: nil asLiteralRBNode
-			               selector: #car)
+		              (RBMessageNode receiver: w asRBNode selector: #car)
 		              selector: #cdr.
 
-	         theory ancestorº value: n value: a ] asGoal.
+	         theory ancestorº value: n value: a ] asGoal ] asGoal.
 
 	self
-		assert: (aGoal solutions next: 1) asArray
-		equals: { [ nil car cdr ] unaryRBNode }
+		assert: ((aGoal solutions collect: #formattedCode) next: 40) asArray
+		equals:
+			#( '•₀ car cdr' '◊•₀' '•₀ car cdr car' '•₀ car cdr' '•₀ car cdr car'
+			   '•₀ car cdr car car' '[ •₀ car cdr ]' '•₀ car cdr car car'
+			   '[ •₀ car cdr car ]' '[ •₀ car cdr ]' '[ •₀ car cdr car ]'
+			   '•₀ car cdr' '•₀ car cdr' '•₀ car cdr car car car'
+			   '•₀ car cdr car car car' '•₀ car cdr
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]' '•₀ car cdr
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]' '•₀ car cdr car' '•₀ car cdr car' '•₀ car cdr = •₁'
+			   '[ •₀ car cdr car car ]' '•₀ car cdr = •₁' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ car cdr ]' '[ •₀ car cdr car car ]'
+			   '[ •₀ car cdr ] car' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ car cdr ]' '•₀ car cdr cdr' '[ •₀ car cdr ] car'
+			   '•₀ car cdr car
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]' '•₀ car cdr cdr' '•₀
+	ifTrue: [ •₁ car cdr ]
+	ifFalse: [ •₂ ]' '•₀ car cdr car
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]' '•₀ car cdr car car' '•₀
+	ifTrue: [ •₁ car cdr ]
+	ifFalse: [ •₂ ]' '•₀ car cdr cons: •₁' '[ [ •₀ car cdr ] ]'
+			   '•₀ car cdr car car' '[ •₀ car cdr car ] car'
+			   '•₀ car cdr cons: •₁' '•₀ = •₁ car cdr' )
 ]
 
 { #category : #tests }
