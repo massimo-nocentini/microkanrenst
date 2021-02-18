@@ -124,3 +124,9 @@ BlockClosure >> unaryRBNode [
 					  ('Assumption that {} has 1 statement only is violated.' 
 						   format: { self }) ] ]
 ]
+
+{ #category : #'*MicroKanren-RB' }
+BlockClosure >> valueWithExitUnary [
+
+	^ self value: [ :anObject | ^ anObject ]
+]

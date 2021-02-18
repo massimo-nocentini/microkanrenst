@@ -8,9 +8,9 @@ Class {
 Unify >> onState: aState afterPushingGoal: aGoal [
 
 	| aStateOrException |
-	aStateOrException := Continuation currentDo: [ :k | 
-		                     aState unifier
-			                     continuation: k;
-			                     value: left value: right ].
+	aStateOrException := [ :k | 
+	                     aState unifier
+		                     continuation: k;
+		                     value: left value: right ] valueWithExitUnary.
 	^ aStateOrException onState: aState afterUnificationByUnify: self
 ]

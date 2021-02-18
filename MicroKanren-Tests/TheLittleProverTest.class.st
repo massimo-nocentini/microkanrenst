@@ -956,7 +956,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_43 [
 { #category : #tests }
 TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_50 [
 
-	| aGoal node n a |
+	| aGoal n a |
 	self skip.
 
 
@@ -981,19 +981,15 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_50 [
 	         n := RBMessageNode
 		              receiver:
 		              (RBMessageNode
-			               receiver: v asRBNode
+			               receiver: nil asLiteralRBNode
 			               selector: #car)
 		              selector: #cdr.
 
 	         theory ancestorº value: n value: a ] asGoal.
 
 	self
-		assert: (aGoal solutions next: 1) asArray equals: { node };
-		assert: node formattedCode equals: '(•₀ = true
-	 ifTrue: [ true ]
-	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₁ ]'
+		assert: (aGoal solutions next: 1) asArray
+		equals: { [ nil car cdr ] unaryRBNode }
 ]
 
 { #category : #tests }
