@@ -159,6 +159,12 @@ TheLittleProver >> isAtomNilº [
 ]
 
 { #category : #predicates }
+TheLittleProver >> jabberwockyº [
+
+	^ MKPredicateUnaryJabberwockyo
+]
+
+{ #category : #predicates }
 TheLittleProver >> parentº [
 
 	^ MKPredicateBinaryParento

@@ -41,7 +41,8 @@ MKPredicateBinaryParento >> goal [
 		                value:
 		                (RBSequenceNode statements: { firstArgument }).
 
-	messageNode := self binaryMessagesGoal | self ifMessageGoal.
+	messageNode := self unaryMessagesGoal | self binaryMessagesGoal
+	               | self ifMessageGoal.
 
 	blockGoal := self unifyº
 		             value: secondArgument
@@ -88,4 +89,24 @@ MKPredicateBinaryParento >> ifMessageGoal [
 MKPredicateBinaryParento >> name [
 
 	^ 'parentº'
+]
+
+{ #category : #running }
+MKPredicateBinaryParento >> unaryMessages [
+
+	^ #( isUffish isBrillig isSlithy frabjous mimsy mome frumious )
+]
+
+{ #category : #running }
+MKPredicateBinaryParento >> unaryMessagesGoal [
+
+	^ self unaryMessages
+		  foldr: [ :each :aGoal | 
+			  | g |
+			  g := self unifyº
+				       value: secondArgument
+				       value:
+				       (RBMessageNode receiver: firstArgument selector: each).
+			  g | aGoal ]
+		  init: false asGoal
 ]

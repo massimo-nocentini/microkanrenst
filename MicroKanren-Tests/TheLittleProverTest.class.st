@@ -850,3 +850,103 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parento [
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_33 [
+
+	| aGoal node |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | 
+					         #gyre cons:
+						         ((#callooh cons: (#callay cons: nil)) isUffish
+							          ifTrue: [ 
+								          #gimble cons:
+									          ((#callooh cons: (#callay cons: nil)) isBrillig
+										           ifTrue: [ #borogove cons: (#outgrabe cons: nil) ]
+										           ifFalse: [ #bandersnatch cons: (#wabe cons: nil) ]) ]
+							          ifFalse: [ o cons: (#vorpal cons: nil) ]) ]
+				         premise: [ :o | #gyre cons: o ]
+				         do: theory jabberwockyº ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
+		         asGoalWithUnaryASTof: [ 
+			         #gyre cons:
+				         ((#callooh cons: (#callay cons: nil)) isUffish
+					          ifTrue: [ 
+						          #gimble cons:
+							          ((#callooh cons: (#callay cons: nil)) isBrillig
+								           ifTrue: [ #borogove cons: (#outgrabe cons: nil) ]
+								           ifFalse: [ #bandersnatch cons: (#wabe cons: nil) ]) ]
+					          ifFalse: [ 
+						          (#callooh cons: (#callay cons: nil)) frabjous cons:
+							          (#vorpal cons: nil) ]) ]
+		         contextVariables: Dictionary empty ] asGoal.
+
+	node := self expectedRBNode_chapter_02_frame_15.
+
+	self
+		assert: (aGoal solutions next: 1) asArray equals: { node };
+		assert: node formattedCode equals: '(•₀ = true
+	 ifTrue: [ true ]
+	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₁ ]'
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_43 [
+
+	| aGoal node |
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | 
+					         #gyre cons:
+						         ((#callooh cons: (#callay cons: nil)) isUffish
+							          ifTrue: [ 
+								          #gimble cons:
+									          ((#callooh cons: (#callay cons: nil)) isBrillig
+										           ifTrue: [ #borogove cons: (#outgrabe cons: nil) ]
+										           ifFalse: [ o cons: (#wabe cons: nil) ]) ]
+							          ifFalse: [ 
+								          (#callooh cons: (#callay cons: nil)) frabjous cons:
+									          (#vorpal cons: nil) ]) ]
+				         premise: [ :o | #gyre cons: o ]
+				         do: [ :o :p :r | 
+					         (theory jabberwockyº value: r value: p value: o)
+					         , [ :aState | self halt ] inspectº ] ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
+		         contextVariables: Dictionary empty ] ]
+		         asGoalWithUnaryASTof: [ 
+			         #gyre cons:
+				         ((#callooh cons: (#callay cons: nil)) isUffish
+					          ifTrue: [ 
+						          #gimble cons:
+							          ((#callooh cons: (#callay cons: nil)) isBrillig
+								           ifTrue: [ #borogove cons: (#outgrabe cons: nil) ]
+								           ifFalse: [ #bandersnatch cons: (#wabe cons: nil) ]) ]
+					          ifFalse: [ 
+						          (#callooh cons: (#callay cons: nil)) frabjous cons:
+							          (#vorpal cons: nil) ]) ]
+		         contextVariables: Dictionary empty ] asGoal.
+
+	node := self expectedRBNode_chapter_02_frame_15.
+
+	self
+		assert: (aGoal solutions next: 1) asArray equals: { node };
+		assert: node formattedCode equals: '(•₀ = true
+	 ifTrue: [ true ]
+	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₁ ]'
+]
