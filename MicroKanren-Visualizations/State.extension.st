@@ -15,6 +15,9 @@ State >> gtInspectorItemsInGLMPresentation: composite [
 		  column: 'Variable'
 		  evaluated: [ :aVar :index | aVar asString ]
 		  width: 50;
+		  column: 'Named'
+		  evaluated: [ :aVar :index | aVar name ]
+		  width: 50;
 		  column: 'Value'
 		  evaluated: [ :value | 
 			  GTObjectPrinter asTruncatedTextFrom: (self walk: value) ]

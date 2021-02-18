@@ -7,7 +7,7 @@ Class {
 { #category : #running }
 MKPredicateBinaryParento >> binaryMessages [
 
-	^ #( = + - cons: )
+	^ #( cons: = + - )
 ]
 
 { #category : #running }
@@ -94,7 +94,9 @@ MKPredicateBinaryParento >> name [
 { #category : #running }
 MKPredicateBinaryParento >> unaryMessages [
 
-	^ #( isUffish isBrillig isSlithy frabjous mimsy mome frumious )
+	"	^ #( isUffish isBrillig isSlithy frabjous mimsy mome frumious )"
+
+	^ #( car cdr )
 ]
 
 { #category : #running }

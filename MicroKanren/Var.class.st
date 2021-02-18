@@ -55,6 +55,12 @@ Var >> id: aString [
 ]
 
 { #category : #accessing }
+Var >> name [
+
+	^ named
+]
+
+{ #category : #accessing }
 Var >> named: anObject [
 
 	named := anObject

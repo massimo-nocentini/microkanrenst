@@ -855,6 +855,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parento [
 TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_33 [
 
 	| aGoal node |
+	self skip.
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ 
@@ -903,6 +904,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_33 [
 TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_43 [
 
 	| aGoal node |
+	self skip.
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ 
@@ -922,8 +924,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_43 [
 									          (#vorpal cons: nil) ]) ]
 				         premise: [ :o | #gyre cons: o ]
 				         do: [ :o :p :r | 
-					         (theory jabberwockyº value: r value: p value: o)
-					         , [ :aState | self halt ] inspectº ] ]
+					         theory jabberwockyº value: r value: p value: o
+					         " , [ :aState | self halt ] inspectº" ] ]
 		         then: [ :asts | 
 		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: Dictionary empty ] ]
@@ -938,6 +940,121 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_43 [
 					          ifFalse: [ 
 						          (#callooh cons: (#callay cons: nil)) frabjous cons:
 							          (#vorpal cons: nil) ]) ]
+		         contextVariables: Dictionary empty ] asGoal.
+
+	node := self expectedRBNode_chapter_02_frame_15.
+
+	self
+		assert: (aGoal solutions next: 1) asArray equals: { node };
+		assert: node formattedCode equals: '(•₀ = true
+	 ifTrue: [ true ]
+	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₁ ]'
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_50 [
+
+	| aGoal node n a |
+	self skip.
+
+
+	aGoal := [ :v | 
+	         a := RBMessageNode
+		              receiver: (RBLiteralValueNode value: #ketchup)
+		              selector: #cons:
+		              arguments: { (RBMessageNode
+				               receiver: (RBMessageNode
+						                receiver:
+						                (RBMessageNode
+							                 receiver: v asRBNode
+							                 selector: #car)
+						                selector: #car)
+				               selector: #cons:
+				               arguments: { (RBMessageNode
+						                receiver:
+						                (RBMessageNode
+							                 receiver: v asRBNode
+							                 selector: #car)
+						                selector: #cdr) }) }.
+	         n := RBMessageNode
+		              receiver:
+		              (RBMessageNode
+			               receiver: v asRBNode
+			               selector: #car)
+		              selector: #cdr.
+
+	         theory ancestorº value: n value: a ] asGoal.
+
+	self
+		assert: (aGoal solutions next: 1) asArray equals: { node };
+		assert: node formattedCode equals: '(•₀ = true
+	 ifTrue: [ true ]
+	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₁ ]'
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57 [
+
+	| aGoal node |
+	self skip.
+	aGoal := [ :rewritten | 
+	         [ :ast | 
+	         [ :a | 
+	         ast
+		         acl: [ :prover | 
+			         prover
+				         focus: [ :o | 
+					         a car isAtom
+						         ifTrue: [ 
+							         a car = a cdr
+								         ifTrue: [ #hominy ]
+								         ifFalse: [ #grits ] ]
+						         ifFalse: [ 
+							         a car cdr = (#hash cons: (#browns cons: nil))
+								         ifTrue: [ #ketchup cons: o ]
+								         ifFalse: [ #mustard cons: a car ] ] ]
+				         premise: [ :o | o ]
+				         do: [ :o :p :r | 
+				         theory consCarCdrº value: r value: p value: o ].
+
+			         prover
+				         focus: [ :o | 
+					         a car isAtom
+						         ifTrue: [ 
+							         a car = a cdr
+								         ifTrue: [ #hominy ]
+								         ifFalse: [ #grits ] ]
+						         ifFalse: [ 
+							         a car cdr = (#hash cons: (#browns cons: nil))
+								         ifTrue: [ #ketchup cons: (a car car cons: o) ]
+								         ifFalse: [ #mustard cons: a car ] ] ]
+				         premise: [ :o | 
+					         a car isAtom
+						         ifTrue: [ 
+							         a car = a cdr
+								         ifTrue: [ #hominy ]
+								         ifFalse: [ #grits ] ]
+						         ifFalse: [ o ] ]
+				         do: theory equalIfº ]
+		         then: [ :asts | 
+		         theory unifyº value: asts last value: rewritten asRBNode ]
+		         contextVariables: (Dictionary new
+				          at: #a put: a asRBNode;
+				          yourself) ] ]
+		         asGoalWithUnaryASTof: [ :a | 
+			         a car isAtom
+				         ifTrue: [ 
+					         a car = a cdr
+						         ifTrue: [ #hominy ]
+						         ifFalse: [ #grits ] ]
+				         ifFalse: [ 
+					         a car cdr = (#hash cons: (#browns cons: nil))
+						         ifTrue: [ #ketchup cons: a car ]
+						         ifFalse: [ #mustard cons: a car ] ] ]
 		         contextVariables: Dictionary empty ] asGoal.
 
 	node := self expectedRBNode_chapter_02_frame_15.

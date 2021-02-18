@@ -44,6 +44,36 @@ TheLittleProver >> cdrOfConsº [
 ]
 
 { #category : #predicates }
+TheLittleProver >> consCarCdrº [
+
+	^ [ :a :c :b | 
+	  [ :d :e :x :y :z | 
+	  | ancestor cons |
+	  ancestor := [ 
+	              x isAtom
+		              ifTrue: [ d ]
+		              ifFalse: [ e ] ] unaryRBNode 
+		              substituteVariablesUsingDictionary: (Dictionary new
+				               at: #x put: x asRBNode;
+				               at: #d put: d asRBNode;
+				               at: #e put: e asRBNode;
+				               yourself).
+
+	  cons := [ x car cons: x cdr ] unaryRBNode 
+		          substituteVariablesUsingDictionary: (Dictionary new
+				           at: #x put: x asRBNode;
+				           at: #y put: y asRBNode;
+				           at: #z put: z asRBNode;
+				           yourself).
+
+	  (self unifyº value: a value: cons)
+	  , (self unifyº value: b value: x asRBNode)
+	  , (self unifyº value: ancestor value: c)
+	  , ((self unifyº value: x asRBNode value: e asRBNode)
+		   | (self ancestorº value: x asRBNode value: e asRBNode)) ] asGoal ]
+]
+
+{ #category : #predicates }
 TheLittleProver >> consº [
 
 	^ [ :a :d :c | self unifyº value: (a cons: d) value: c ]
@@ -113,6 +143,70 @@ TheLittleProver >> ifFalseº [
 	  false
 		  ifTrue: [ x ]
 		  ifFalse: [ y ] ] <~~> [ :x :y | y ]
+]
+
+{ #category : #predicates }
+TheLittleProver >> ifNestedOtherwiseº [
+
+	^ [ :a :c :b | 
+	  [ :d :e :x :y :z | 
+	  | ancestor if |
+	  ancestor := [ 
+	              x
+		              ifTrue: [ d ]
+		              ifFalse: [ e ] ] unaryRBNode 
+		              substituteVariablesUsingDictionary: (Dictionary new
+				               at: #x put: x asRBNode;
+				               at: #d put: d asRBNode;
+				               at: #e put: e asRBNode;
+				               yourself).
+
+	  if := [ 
+	        x
+		        ifTrue: [ y ]
+		        ifFalse: [ z ] ] unaryRBNode 
+		        substituteVariablesUsingDictionary: (Dictionary new
+				         at: #x put: x asRBNode;
+				         at: #y put: y asRBNode;
+				         at: #z put: z asRBNode;
+				         yourself).
+
+	  (self unifyº value: a value: if)
+	  , (self unifyº value: b value: z asRBNode)
+	  , (self unifyº value: ancestor value: c)
+	  , (self ancestorº value: if value: e asRBNode) ] asGoal ]
+]
+
+{ #category : #predicates }
+TheLittleProver >> ifNestedThenº [
+
+	^ [ :a :c :b | 
+	  [ :d :e :x :y :z | 
+	  | ancestor if |
+	  ancestor := [ 
+	              x
+		              ifTrue: [ d ]
+		              ifFalse: [ e ] ] unaryRBNode 
+		              substituteVariablesUsingDictionary: (Dictionary new
+				               at: #x put: x asRBNode;
+				               at: #d put: d asRBNode;
+				               at: #e put: e asRBNode;
+				               yourself).
+
+	  if := [ 
+	        x
+		        ifTrue: [ y ]
+		        ifFalse: [ z ] ] unaryRBNode 
+		        substituteVariablesUsingDictionary: (Dictionary new
+				         at: #x put: x asRBNode;
+				         at: #y put: y asRBNode;
+				         at: #z put: z asRBNode;
+				         yourself).
+
+	  (self unifyº value: a value: if)
+	  , (self unifyº value: b value: y asRBNode)
+	  , (self unifyº value: ancestor value: c)
+	  , (self ancestorº value: if value: d asRBNode) ] asGoal ]
 ]
 
 { #category : #predicates }
