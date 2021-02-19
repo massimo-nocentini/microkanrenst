@@ -958,8 +958,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_50 [
 	| aGoal n a |
 	self skip.
 
-	aGoal := [ :v | 
-	         [ :w | 
+	aGoal := [ :v :w | 
 	         a := RBMessageNode
 		              receiver: (RBLiteralValueNode value: #ketchup)
 		              selector: #cons:
@@ -982,10 +981,10 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_50 [
 		              (RBMessageNode receiver: w asRBNode selector: #car)
 		              selector: #cdr.
 
-	         theory ancestorº value: n value: a ] asGoal ] asGoal.
+	         theory ancestorº value: n value: a ] asGoal.
 
 	self
-		assert: ((aGoal solutions collect: #formattedCode) next: 40) asArray
+		assert: (aGoal solutions next: 40) asArray
 		equals:
 			#( '•₀ car cdr' '◊•₀' '•₀ car cdr car' '•₀ car cdr' '•₀ car cdr car'
 			   '•₀ car cdr car car' '[ •₀ car cdr ]' '•₀ car cdr car car'

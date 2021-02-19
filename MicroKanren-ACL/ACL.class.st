@@ -8,7 +8,8 @@ Class {
 		'steps',
 		'node',
 		'lastBlock',
-		'contextVariables'
+		'contextVariables',
+		'freshContextVariables'
 	],
 	#category : #'MicroKanren-ACL'
 }
@@ -16,7 +17,7 @@ Class {
 { #category : #'as yet unclassified' }
 ACL >> argumentNames [
 
-	^ (1 to: steps size) collect: [ :each | 
+	^ (1 to: steps size + contextVariables size) collect: [ :each | 
 		  '§' , each asString subscript ]
 ]
 
@@ -60,10 +61,20 @@ ACL >> focus: focusBlock premise: hpBlock do: doBlock [
 		[ :oPremise | 
 		| g1 g2 |
 		g1 := [ :_ | 
+		      | dict |
+		      dict := Dictionary new
+			              at: oPremise asRBNode put: oPremise asRBNode;
+			              yourself.
+
+		      contextVariables values
+			      with: freshContextVariables
+			      do: [ :v :f | dict at: v put: f ].
+			
 		      self
 			      rewriting: astToRewrite
 			      rewritten: _ asRBNode
 			      focusAST: astPremise
+			      "(astPremise substituteVariablesUsingDictionary: dict)"
 			      focusVar: oPremise asRBNode
 			      do: [ :oo :rr | oo unifyo value: rr ] ] asGoal.
 		g2 := self
@@ -106,13 +117,14 @@ ACL >> rewriting: astToRewrite rewritten: astRewritten focusAST: astFocused focu
 		          yourself.
 
 	  contextVariables do: [ :each | dict at: each put: each ].
+	  freshContextVariables do: [ :each | dict at: each put: each ].
 	  astSubstituted := astFocused substituteVariablesUsingDictionary:
 		                    dict.
 
 	  g1 := astToRewrite unifyo value: astFocused.
 	  g2 := doBlock value: o value: rNode.
 	  g3 := astSubstituted unifyo value: astRewritten.
-	
+
 	  g1 , g2 , g3 ] asGoal
 ]
 
@@ -123,18 +135,20 @@ ACL >> then: aBlock [
 ]
 
 { #category : #initialization }
-ACL >> valueWithArguments: vars [
+ACL >> valueWithArguments: variables [
 
 	^ [ :astInitial | 
-	  | pairs goals rbVariables |
-	  rbVariables := { astInitial } , vars collect: #asRBNode.
-	  pairs := rbVariables overlappingPairsCollect: #->.
-	  goals := pairs
-		           with: steps
-		           collect: [ :pair :aBlock | 
-		           aBlock value: pair key value: pair value ].
-	  goals := { (rbVariables first unifyo value: node) } , goals.
+	  variables halvesAtIncluding: steps size in: [ :vars :doubles | 
+		  | pairs goals rbVariables |
+		  freshContextVariables := doubles collect: #asRBNode.
+		  rbVariables := { astInitial } , vars collect: #asRBNode.
+		  pairs := rbVariables overlappingPairsCollect: #->.
+		  goals := pairs
+			           with: steps
+			           collect: [ :pair :aBlock | 
+			           aBlock value: pair key value: pair value ].
+		  goals := { (rbVariables first unifyo value: node) } , goals.
 
-	  (goals foldr: #, init: true asGoal)
-	  , (lastBlock value: rbVariables) ] asGoal
+		  (goals foldr: #, init: true asGoal)
+		  , (lastBlock value: rbVariables) ] ] asGoal
 ]
