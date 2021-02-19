@@ -343,16 +343,8 @@ and
 
 respectively.
 
+
 .. note::
-
-  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_15_parento
-
-    .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_parento.svg
-      :align: center
-
-  where
-
-    .. pharo:autocompiledmethod:: TheLittleProver>>#parentº
 
   .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_15_ancestoro
 
@@ -362,7 +354,44 @@ respectively.
   where
 
     .. pharo:autocompiledmethod:: TheLittleProver>>#ancestorº
+   
+  and, in turn,
 
+    .. pharo:autocompiledmethod:: MKPredicateBinaryAncestoro>>#goal
 
-.. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_ancestorobackward.svg
-  :align: center
+  Moreover, the predicate can be used backwards,
+
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_15_ancestorobackward
+
+    .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_ancestorobackward.svg
+      :align: center
+
+  .. note::
+
+    .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_15_parento
+
+      .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_15_parento.svg
+        :align: center
+
+    where
+
+      .. pharo:autocompiledmethod:: TheLittleProver>>#parentº
+
+    and, in turn,
+
+      .. pharo:autocompiledmethod:: MKPredicateBinaryParento>>#goal
+
+.. index::
+   single: The Little Prover; 02. Even Older Games: frame 57
+
+Let’s see. Does the if question ``a car cdr = (#hash cons: (#browns cons:
+nil))`` tell us anything about the focus ``a car``?
+
+.. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_57
+
+.. note::
+
+  .. pharo:autocompiledmethod:: TheLittleProverTest>>#test_chapter_02_EvenOlderGames_frame_57_premise
+
+    .. image:: _images/TheLittleProverTest-test_chapter_02_EvenOlderGames_frame_57_premise.svg
+      :align: center
