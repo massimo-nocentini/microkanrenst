@@ -42,7 +42,7 @@ RBProgramNodeWalkVisitor >> visitMessageNode: aNode [
 { #category : #visiting }
 RBProgramNodeWalkVisitor >> visitSelectorNode: aNode [
 
-	^ RBSelectorNode value: (aNode value walkStarUsingWalker: walker)
+	^ RBSelectorNode value: (walker value: aNode value)
 ]
 
 { #category : #visiting }

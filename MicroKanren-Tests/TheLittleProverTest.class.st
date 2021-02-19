@@ -760,7 +760,9 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 	 ifTrue: [ true ]
 	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
 	ifTrue: [ •₁ ]
-	ifFalse: [ •₁ ]'
+	ifFalse: [ •₁ ]'.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: 1
 ]
 
 { #category : #tests }
@@ -1077,5 +1079,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57_premise [
 	ifTrue: [ •₁ ]
 	ifFalse: [ •₂ ]) •₀) an Array(RBSequenceNode(•₀ car cdr car car) •₀) an Array(RBMessageNode(•₀
 	ifTrue: [ •₁ car cdr ]
-	ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBBlockNode([ [ •₀ car cdr ] ]) •₀) an Array(RBSequenceNode(•₀ car cdr car car) •₀) an Array(RBMessageNode([ •₀ car cdr car ] car) •₀) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBMessageNode(•₀ = •₁ car cdr) •₁))'
+	ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBBlockNode([ [ •₀ car cdr ] ]) •₀) an Array(RBSequenceNode(•₀ car cdr car car) •₀) an Array(RBMessageNode([ •₀ car cdr car ] car) •₀) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBMessageNode(•₀ = •₁ car cdr) •₁))'.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: 40
 ]

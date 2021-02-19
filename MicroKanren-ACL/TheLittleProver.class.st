@@ -87,20 +87,7 @@ TheLittleProver >> equalIfº [
 	  | ancestor dRB |
 	  dRB := d asRBNode.
 
-	  ancestor := RBMessageNode
-		              receiver:
-		              (RBMessageNode
-			               receiver: a
-			               selector: #=
-			               arguments: { b })
-		              selector: #ifTrue:ifFalse:
-		              arguments: { 
-				              (RBBlockNode body:
-					               (RBSequenceNode statements: { dRB })).
-				              (RBBlockNode body:
-					               (RBSequenceNode statements: { e asRBNode })) }.
-
-	  " ancestor := [ 
+	  ancestor := [ 
 	              a = b
 		              ifTrue: [ d ]
 		              ifFalse: [ e ] ] unaryRBNode 
@@ -109,7 +96,8 @@ TheLittleProver >> equalIfº [
 				               at: #b put: b;
 				               at: #d put: dRB;
 				               at: #e put: e asRBNode;
-				               yourself)."
+				               yourself).
+
 	  (self unifyº value: ancestor value: c)
 	  , ((self unifyº value: a value: dRB)
 		   | (self ancestorº value: a value: dRB)) ] asGoal ]
