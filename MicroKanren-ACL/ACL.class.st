@@ -69,12 +69,11 @@ ACL >> focus: focusBlock premise: hpBlock do: doBlock [
 		      contextVariables values
 			      with: freshContextVariables
 			      do: [ :v :f | dict at: v put: f ].
-			
+
 		      self
 			      rewriting: astToRewrite
 			      rewritten: _ asRBNode
 			      focusAST: astPremise
-			      "(astPremise substituteVariablesUsingDictionary: dict)"
 			      focusVar: oPremise asRBNode
 			      do: [ :oo :rr | oo unifyo value: rr ] ] asGoal.
 		g2 := self

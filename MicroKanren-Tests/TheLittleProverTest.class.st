@@ -838,14 +838,14 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parento [
 
 	self
 		assert: (aGoal solutions collect: [ :e | e formattedCode ]) asArray
-		equals: #( 'false = •₀' '[ false ]' 'false' 'false
+		equals: #( 'false car' '[ false ]' 'false' 'false
 	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false + •₀' '•₀
+	ifFalse: [ •₁ ]' 'false = •₀' '•₀
 	ifTrue: [ •₁ ]
-	ifFalse: [ false ]' '•₀ = false' '•₀
+	ifFalse: [ false ]' 'false cdr' '•₀
 	ifTrue: [ false ]
-	ifFalse: [ •₁ ]' 'false - •₀' '•₀ + false' 'false cons: •₀'
-			   '•₀ - false' '•₀ cons: false' ).
+	ifFalse: [ •₁ ]' 'false cons: •₀' '•₀ = false' 'false + •₀'
+			   '•₀ cons: false' 'false - •₀' '•₀ + false' '•₀ - false' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -953,72 +953,11 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_43 [
 ]
 
 { #category : #tests }
-TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_50 [
-
-	| aGoal n a |
-	self skip.
-
-	aGoal := [ :v :w | 
-	         a := RBMessageNode
-		              receiver: (RBLiteralValueNode value: #ketchup)
-		              selector: #cons:
-		              arguments: { (RBMessageNode
-				               receiver: (RBMessageNode
-						                receiver:
-						                (RBMessageNode
-							                 receiver: v asRBNode
-							                 selector: #car)
-						                selector: #car)
-				               selector: #cons:
-				               arguments: { (RBMessageNode
-						                receiver:
-						                (RBMessageNode
-							                 receiver: v asRBNode
-							                 selector: #car)
-						                selector: #cdr) }) }.
-	         n := RBMessageNode
-		              receiver:
-		              (RBMessageNode receiver: w asRBNode selector: #car)
-		              selector: #cdr.
-
-	         theory ancestorº value: n value: a ] asGoal.
-
-	self
-		assert: (aGoal solutions next: 40) asArray
-		equals:
-			#( '•₀ car cdr' '◊•₀' '•₀ car cdr car' '•₀ car cdr' '•₀ car cdr car'
-			   '•₀ car cdr car car' '[ •₀ car cdr ]' '•₀ car cdr car car'
-			   '[ •₀ car cdr car ]' '[ •₀ car cdr ]' '[ •₀ car cdr car ]'
-			   '•₀ car cdr' '•₀ car cdr' '•₀ car cdr car car car'
-			   '•₀ car cdr car car car' '•₀ car cdr
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]' '•₀ car cdr
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]' '•₀ car cdr car' '•₀ car cdr car' '•₀ car cdr = •₁'
-			   '[ •₀ car cdr car car ]' '•₀ car cdr = •₁' '•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ car cdr ]' '[ •₀ car cdr car car ]'
-			   '[ •₀ car cdr ] car' '•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ car cdr ]' '•₀ car cdr cdr' '[ •₀ car cdr ] car'
-			   '•₀ car cdr car
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]' '•₀ car cdr cdr' '•₀
-	ifTrue: [ •₁ car cdr ]
-	ifFalse: [ •₂ ]' '•₀ car cdr car
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]' '•₀ car cdr car car' '•₀
-	ifTrue: [ •₁ car cdr ]
-	ifFalse: [ •₂ ]' '•₀ car cdr cons: •₁' '[ [ •₀ car cdr ] ]'
-			   '•₀ car cdr car car' '[ •₀ car cdr car ] car'
-			   '•₀ car cdr cons: •₁' '•₀ = •₁ car cdr' )
-]
-
-{ #category : #tests }
 TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57 [
 
-	| aGoal node |
+	| aGoal |
 	self skip.
+	
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a | 
@@ -1075,13 +1014,68 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57 [
 						         ifFalse: [ #mustard cons: a car ] ] ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	node := self expectedRBNode_chapter_02_frame_15.
+	self assert: (aGoal solutions next: 1) asArray equals: { [ :a | 
+		a car isAtom
+			ifTrue: [ 
+				a car = a cdr
+					ifTrue: [ #hominy ]
+					ifFalse: [ #grits ] ]
+			ifFalse: [ 
+				a car cdr = (#hash cons: (#browns cons: nil))
+					ifTrue: [ 
+					#ketchup cons:
+						(a car car cons: (#hash cons: (#browns cons: nil))) ]
+					ifFalse: [ #mustard cons: a car ] ] ] unaryRBNode }
+]
+
+{ #category : #tests }
+TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57_premise [
+
+	| aGoal n a |
+	aGoal := [ :v :w | 
+	         a := RBMessageNode
+		              receiver: (RBLiteralValueNode value: #ketchup)
+		              selector: #cons:
+		              arguments: { (RBMessageNode
+				               receiver: (RBMessageNode
+						                receiver:
+						                (RBMessageNode
+							                 receiver: v asRBNode
+							                 selector: #car)
+						                selector: #car)
+				               selector: #cons:
+				               arguments: { (RBMessageNode
+						                receiver:
+						                (RBMessageNode
+							                 receiver: v asRBNode
+							                 selector: #car)
+						                selector: #cdr) }) }.
+	         n := RBMessageNode
+		              receiver:
+		              (RBMessageNode receiver: w asRBNode selector: #car)
+		              selector: #cdr.
+
+	         (theory unifyº value: n value: a)
+	         | (theory ancestorº value: n value: a) ] asGoal.
 
 	self
-		assert: (aGoal solutions next: 1) asArray equals: { node };
-		assert: node formattedCode equals: '(•₀ = true
-	 ifTrue: [ true ]
-	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
+		assert: (aGoal solutions next: 40) asArray asString
+		equals:
+			'an Array(an Array(RBMessageNode(•₀ car cdr) •₀) an Array(•₀ •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBBlockNode([ •₀ car cdr car ]) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBBlockNode([ •₀ car cdr car ]) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car car car) •₀) an Array(RBMessageNode(•₀ car cdr car car car) •₀) an Array(RBMessageNode(•₀ car cdr
 	ifTrue: [ •₁ ]
-	ifFalse: [ •₁ ]'
+	ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀ car cdr
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]) •₀) an Array(RBSequenceNode(•₀ car cdr car) •₀) an Array(RBSequenceNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBBlockNode([ •₀ car cdr car car ]) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBMessageNode(•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ car cdr ]) •₂) an Array(RBBlockNode([ •₀ car cdr car car ]) •₀) an Array(RBMessageNode([ •₀ car cdr ] car) •₀) an Array(RBMessageNode(•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ car cdr ]) •₂) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBMessageNode([ •₀ car cdr ] car) •₀) an Array(RBMessageNode(•₀ car cdr car
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBMessageNode(•₀
+	ifTrue: [ •₁ car cdr ]
+	ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀ car cdr car
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]) •₀) an Array(RBSequenceNode(•₀ car cdr car car) •₀) an Array(RBMessageNode(•₀
+	ifTrue: [ •₁ car cdr ]
+	ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBBlockNode([ [ •₀ car cdr ] ]) •₀) an Array(RBSequenceNode(•₀ car cdr car car) •₀) an Array(RBMessageNode([ •₀ car cdr car ] car) •₀) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBMessageNode(•₀ = •₁ car cdr) •₁))'
 ]
