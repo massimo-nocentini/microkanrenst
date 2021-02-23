@@ -1,11 +1,18 @@
 Extension { #name : #ValueLink }
 
 { #category : #'*MicroKanren-Streams' }
+ValueLink >> appendMap: aBlock [
+
+	| aStream |
+	aStream := aBlock value: value.
+	^ aStream appendStream: (super appendMap: aBlock)
+]
+
+{ #category : #'*MicroKanren-Streams' }
 ValueLink >> appendStream: aStream [
 
-	^ self class new
+	^ (super appendStream: aStream)
 		  value: value;
-		  nextLink: (nextLink appendStream: aStream);
 		  yourself
 ]
 
@@ -19,11 +26,8 @@ ValueLink >> putOn: aStream fromStream: rootStream [
 { #category : #'*MicroKanren-Streams' }
 ValueLink >> streamNext: n [
 
-	^ n = 0
-		  ifTrue: [ nil ]
-		  ifFalse: [ 
-			  self class
-				  value: value;
-				  nextLink: (nextLink streamNext: n - 1);
-				  yourself ]
+	^ (super streamNext: n) ifNotNil: [ :aValueLink | 
+		  aValueLink
+			  value: value;
+			  yourself ]
 ]

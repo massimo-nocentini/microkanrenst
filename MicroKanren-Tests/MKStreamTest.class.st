@@ -4,6 +4,30 @@ Class {
 	#category : #'MicroKanren-Tests'
 }
 
+{ #category : #streams }
+MKStreamTest >> count: x [
+
+	^ x ~~> [ self count: x + 1 ]
+]
+
+{ #category : #streams }
+MKStreamTest >> repeat: x [
+
+	^ x ~~> [ self repeat: x ]
+]
+
+{ #category : #tests }
+MKStreamTest >> testAppendMap [
+
+	self
+		assert:
+			(((self count: 1) appendMap: [ :v | self repeat: v ]) streamNext:
+				 50) readStream upToEnd
+		equals:
+			#( 1 1 2 1 1 2 1 3 1 2 1 1 2 1 3 1 2 1 4 1 2 1 3 1 2 1 1 2 1 3 1 2
+			   1 4 1 2 1 3 1 2 1 5 1 2 1 3 1 2 1 4 )
+]
+
 { #category : #tests }
 MKStreamTest >> testAppendStream [
 
@@ -42,4 +66,12 @@ MKStreamTest >> testAppendStreamBlockNil [
 MKStreamTest >> testAppendStreamNilNil [
 
 	self assert: (nil appendStream: nil) readStream upToEnd equals: #(  )
+]
+
+{ #category : #tests }
+MKStreamTest >> testRepeat [
+
+	self
+		assert: ((self repeat: 1) streamNext: 20) readStream upToEnd
+		equals: (Array new: 20 withAll: 1)
 ]

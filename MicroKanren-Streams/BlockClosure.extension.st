@@ -1,6 +1,12 @@
 Extension { #name : #BlockClosure }
 
 { #category : #'*MicroKanren-Streams' }
+BlockClosure >> appendMap: aBlock [
+
+	^ [ self value appendMap: aBlock ]
+]
+
+{ #category : #'*MicroKanren-Streams' }
 BlockClosure >> appendStream: aStream [
 
 	^ [ aStream appendStream: self value ]

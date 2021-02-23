@@ -1,6 +1,12 @@
 Extension { #name : #UndefinedObject }
 
 { #category : #'*MicroKanren-Streams' }
+UndefinedObject >> appendMap: aBlock [
+
+	^ self
+]
+
+{ #category : #'*MicroKanren-Streams' }
 UndefinedObject >> appendStream: aStream [
 
 	^ aStream
