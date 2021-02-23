@@ -13,5 +13,5 @@ Failed >> isFailed [
 { #category : #'as yet unclassified' }
 Failed >> onState: refinedState forGoal: right fromConj: aConj [
 
-	^ refinedState srfi41Singleton
+	^ ValueLink value: refinedState
 ]

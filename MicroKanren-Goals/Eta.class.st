@@ -9,5 +9,5 @@ Eta >> onState: aState [
 
 	^ [ 
 	  nestedGoal := receiver value.
-	  super onState: aState ] srfi41Stream
+	  super onState: aState ]
 ]

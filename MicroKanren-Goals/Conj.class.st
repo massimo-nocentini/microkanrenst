@@ -7,8 +7,7 @@ Class {
 { #category : #running }
 Conj >> onState: aState afterPushingGoal: _ [
 
-	^ [ :refinedState | 
-	  refinedState path value in: [ :aGoal | 
-		  aGoal onState: refinedState forGoal: right fromConj: self ] ]
-	  >>= (left onState: aState)
+	^ (left onState: aState) appendMap: [ :refinedState | 
+		  refinedState path value in: [ :aGoal | 
+			  aGoal onState: refinedState forGoal: right fromConj: self ] ]
 ]

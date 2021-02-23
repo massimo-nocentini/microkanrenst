@@ -53,7 +53,7 @@ Cond >> onState: aState afterPushingGoal: _ [
 	^ [ 
 	  | g |
 	  g := clauses foldr: if init: false asGoal.
-	  g onState: aState ] srfi41Stream
+	  g onState: aState ]
 ]
 
 { #category : #initializing }

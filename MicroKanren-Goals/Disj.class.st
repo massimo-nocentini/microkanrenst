@@ -33,5 +33,5 @@ Disj >> onState: aState afterPushingGoal: _ [
 	| aStream anotherStream |
 	aStream := left onState: aState.
 	anotherStream := right onState: aState.
-	^ combineBlock value: aStream value: anotherStream
+	^ aStream appendStream: anotherStream
 ]
