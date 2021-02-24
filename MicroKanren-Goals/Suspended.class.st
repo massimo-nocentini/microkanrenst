@@ -11,7 +11,7 @@ Class {
 { #category : #'as yet unclassified' }
 Suspended >> onState: aState afterPushingGoal: _ [
 
-	^ [ nestedGoal onState: aState ] srfi41Stream
+	^ [ nestedGoal onState: aState ]
 ]
 
 { #category : #accessing }

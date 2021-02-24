@@ -240,7 +240,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16 [
 		         asGoalWithUnaryASTof: [ :a :b | (a cons: b) isAtom ]
 		         contextVariables: Dictionary empty ] asGoal.
 	self
-		assert: aGoal solutions asArray
+		assert: aGoal solutions readStream upToEnd
 		equals: { false asLiteralRBNode }.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
@@ -262,7 +262,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_backward [
 				        1 asReifiedVar asRBNode }.
 
 	self
-		assert: aGoal solutions asArray equals: { node };
+		assert: aGoal solutions readStream upToEnd equals: { node };
 		assert: node formattedCode equals: '•₀ cons: •₁'.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
@@ -277,7 +277,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_16_byCompiledMetho
 		         asGoalWithUnaryASTof: self class >> #consª:isAtomª:
 		         contextVariables: #(  ) ] asGoal.
 	self
-		assert: aGoal solutions asArray
+		assert: aGoal solutions readStream upToEnd
 		equals: { false asLiteralRBNode }
 ]
 
@@ -300,7 +300,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_19 [
 		         #flapjack = (a cons: b) isAtom ]
 		         contextVariables: Dictionary empty ] asGoal.
 	self
-		assert: aGoal solutions asArray
+		assert: aGoal solutions readStream upToEnd
 		equals: { [ #flapjack = false ] unaryRBNode }.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
@@ -325,7 +325,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_21 [
 		         #flapjack = (a cons: b) isAtom ]
 		         contextVariables: Dictionary empty ] asGoal.
 	self
-		assert: aGoal solutions asArray
+		assert: aGoal solutions readStream upToEnd
 		equals: { false asLiteralRBNode }.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
@@ -352,7 +352,9 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_28 [
 		         ((p cons: q) car cons: nil) cdr isAtom ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }.
+	self
+		assert: aGoal solutions readStream upToEnd
+		equals: { true asLiteralRBNode }.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -376,7 +378,9 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_32 [
 		         ((p cons: q) car cons: nil) cdr isAtom ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }.
+	self
+		assert: aGoal solutions readStream upToEnd
+		equals: { true asLiteralRBNode }.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -403,7 +407,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_44 [
 		         contextVariables: Dictionary empty ] asGoal.
 
 	self
-		assert: aGoal solutions asArray
+		assert: aGoal solutions readStream upToEnd
 		equals:
 		{ [ (true cons: (#and cons: (#crumpets cons: nil))) car ]
 			unaryRBNode }.
@@ -433,7 +437,9 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46 [
 				          (#and cons: (#crumpets cons: nil))) car ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { true asLiteralRBNode }.
+	self
+		assert: aGoal solutions readStream upToEnd
+		equals: { true asLiteralRBNode }.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -458,7 +464,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindin
 		         contextVariables: Dictionary empty ] asGoal.
 
 	self
-		assert: aGoal solutions asArray
+		assert: aGoal solutions readStream upToEnd
 		equals: { [ #and cons: nil ] unaryRBNode }.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
@@ -477,9 +483,8 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindin
 		         asGoalWithUnaryASTof: [ :a :b | a + b ]
 		         contextVariables: Dictionary empty ] asGoal.
 	self
-		assert: aGoal solutions
-		equals: { [ 3 even ] unaryRBNode }
-		modulo: #asOrderedCollection.
+		assert: aGoal solutions readStream upToEnd
+		equals: { [ 3 even ] unaryRBNode }.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -511,7 +516,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 				         arguments: { 1 asReifiedVar asRBNode }) }.
 
 	self
-		assert: aGoal solutions asArray equals: { node };
+		assert: aGoal solutions readStream upToEnd equals: { node };
 		assert: node formattedCode
 		equals:
 			'(#bagels cons: (#and cons: (#lox cons: nil))) = (•₀ cons: •₁)'.
@@ -544,7 +549,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_55 [
 	node := self expectedRBNode_chapter_01_frame_55.
 
 	self
-		assert: aGoal solutions asArray equals: { node };
+		assert: aGoal solutions readStream upToEnd equals: { node };
 		assert: node formattedCode equals: '•₀ cons:
 	((•₁ cdr cons: •₀ car) car cons: •₂) car = (•₁ isAtom = false)'.
 
@@ -600,7 +605,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_56 [
 	node := self expectedRBNode_chapter_01_frame_56.
 
 	self
-		assert: aGoal solutions asArray equals: { node };
+		assert: aGoal solutions readStream upToEnd equals: { node };
 		assert: node formattedCode
 		equals:
 			'•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car
@@ -628,7 +633,9 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_05 [
 				         ifFalse: [ c ] ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { 3 asLiteralRBNode }.
+	self
+		assert: aGoal solutions readStream upToEnd
+		equals: { 3 asLiteralRBNode }.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -652,7 +659,9 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_05_rewriting_unbound
 				         ifFalse: [ c ] ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: aGoal solutions asArray equals: { 0 asReifiedVar }
+	self
+		assert: aGoal solutions readStream upToEnd
+		equals: { 0 asReifiedVar }
 ]
 
 { #category : #tests }
@@ -678,7 +687,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_07 [
 
 	node := self expectedRBNode_chapter_02_frame_7.
 	self
-		assert: aGoal solutions asArray equals: { node };
+		assert: aGoal solutions readStream upToEnd equals: { node };
 		assert: node formattedCode equals: '•₀
 	ifTrue: [ 
 		(3 cons: nil) isAtom
@@ -696,6 +705,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_07 [
 TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 
 	| aGoal node |
+	self skip.
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b :c | 
@@ -755,7 +765,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 	node := self expectedRBNode_chapter_02_frame_15.
 
 	self
-		assert: (aGoal solutions next: 1) asArray equals: { node };
+		assert: (aGoal solutions next: 1) readStream upToEnd
+		equals: { node };
 		assert: node formattedCode equals: '(•₀ = true
 	 ifTrue: [ true ]
 	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
@@ -776,23 +787,21 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestoro [
 
 	self
 		assert:
-		((aGoal solutions collect: [ :e | e formattedCode ]) next: 25)
-			asArray
-		equals: #( 'false car' 'false car car' '[ false ]' '[ false car ]'
-			   'false' 'false car car car' 'false
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false car' 'false = •₀' '[ false car car ]'
-			   '•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ false ]' '[ false ] car' 'false cdr' 'false car
+			((aGoal solutions collect: [ :e | e formattedCode ]) next: 25)
+				readStream upToEnd
+		equals:
+			#( 'false car' 'false cdr' '[ false ]' 'false' 'false car car'
+			   'false cdr car' 'false = •₀' '•₀ = false' 'false cons: •₀'
+			   '•₀ cons: false' 'false + •₀' '•₀ + false' 'false - •₀'
+			   '•₀ - false' 'false
 	ifTrue: [ •₀ ]
 	ifFalse: [ •₁ ]' '•₀
 	ifTrue: [ false ]
-	ifFalse: [ •₁ ]' 'false car car' 'false cons: •₀' '[ [ false ] ]'
-			   '[ false car ] car' '•₀ = false' 'false car = •₀'
-			   'false + •₀' 'false car car
-	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' '•₀ cons: false' '[ false ]' ).
+	ifFalse: [ •₁ ]' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' 'false car cdr' 'false cdr cdr' '[ false ] car'
+			   'false car' 'false car car car' 'false cdr car car'
+			   '[ false car ]' '[ false cdr ]' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: 25
 ]
@@ -819,12 +828,12 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_ancestorobackward
 
 	self
 		assert:
-			((aGoal solutions withIndexCollect: [ :e :i | e formattedCode ]) 
-				 next: 20) asArray
-		equals: #( '2 + •₀' '3 - •₀' '•₀
+			((aGoal solutions collect: [ :e | e formattedCode ]) next: 20)
+				readStream upToEnd
+		equals: #( '2 + •₀' '•₀
 	ifTrue: [ 3 ]
-	ifFalse: [ 1 ]' '◊•₀' '◊•₀' '1' '◊•₀' '3' '◊•₀' '2' '◊•₀' '3' '◊•₀'
-			   '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' ).
+	ifFalse: [ 1 ]' '3 - •₀' '2' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '3' '1' '3' '◊•₀'
+			   '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' '◊•₀' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: 20
 ]
@@ -839,15 +848,18 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15_parento [
 		         value: rewritten asRBNode ] asGoal.
 
 	self
-		assert: (aGoal solutions collect: [ :e | e formattedCode ]) asArray
-		equals: #( 'false car' '[ false ]' 'false' 'false
+		assert:
+		(aGoal solutions collect: [ :e | e formattedCode ]) readStream
+			upToEnd
+		equals: #( 'false car' 'false cdr' '[ false ]' 'false' 'false = •₀'
+			   '•₀ = false' 'false cons: •₀' '•₀ cons: false' 'false + •₀'
+			   '•₀ + false' 'false - •₀' '•₀ - false' 'false
 	ifTrue: [ •₀ ]
-	ifFalse: [ •₁ ]' 'false = •₀' '•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ false ]' 'false cdr' '•₀
+	ifFalse: [ •₁ ]' '•₀
 	ifTrue: [ false ]
-	ifFalse: [ •₁ ]' 'false cons: •₀' '•₀ = false' 'false + •₀'
-			   '•₀ cons: false' 'false - •₀' '•₀ + false' '•₀ - false' ).
+	ifFalse: [ •₁ ]' '•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ false ]' ).
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
@@ -893,7 +905,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_33 [
 	node := self expectedRBNode_chapter_02_frame_15.
 
 	self
-		assert: (aGoal solutions next: 1) asArray equals: { node };
+		assert: (aGoal solutions next: 1) readStream upToEnd
+		equals: { node };
 		assert: node formattedCode equals: '(•₀ = true
 	 ifTrue: [ true ]
 	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
@@ -946,7 +959,8 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_43 [
 	node := self expectedRBNode_chapter_02_frame_15.
 
 	self
-		assert: (aGoal solutions next: 1) asArray equals: { node };
+		assert: (aGoal solutions next: 1) readStream upToEnd
+		equals: { node };
 		assert: node formattedCode equals: '(•₀ = true
 	 ifTrue: [ true ]
 	 ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])
@@ -959,7 +973,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57 [
 
 	| aGoal |
 	self skip.
-	
+
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a | 
@@ -1016,18 +1030,20 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57 [
 						         ifFalse: [ #mustard cons: a car ] ] ]
 		         contextVariables: Dictionary empty ] asGoal.
 
-	self assert: (aGoal solutions next: 1) asArray equals: { [ :a | 
-		a car isAtom
-			ifTrue: [ 
-				a car = a cdr
-					ifTrue: [ #hominy ]
-					ifFalse: [ #grits ] ]
-			ifFalse: [ 
-				a car cdr = (#hash cons: (#browns cons: nil))
-					ifTrue: [ 
-					#ketchup cons:
-						(a car car cons: (#hash cons: (#browns cons: nil))) ]
-					ifFalse: [ #mustard cons: a car ] ] ] unaryRBNode }
+	self
+		assert: (aGoal solutions next: 1) readStream upToEnd
+		equals: { [ :a | 
+			a car isAtom
+				ifTrue: [ 
+					a car = a cdr
+						ifTrue: [ #hominy ]
+						ifFalse: [ #grits ] ]
+				ifFalse: [ 
+					a car cdr = (#hash cons: (#browns cons: nil))
+						ifTrue: [ 
+						#ketchup cons:
+							(a car car cons: (#hash cons: (#browns cons: nil))) ]
+						ifFalse: [ #mustard cons: a car ] ] ] unaryRBNode }
 ]
 
 { #category : #tests }
@@ -1061,25 +1077,21 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57_premise [
 	         | (theory ancestorº value: n value: a) ] asGoal.
 
 	self
-		assert: (aGoal solutions next: 40) asArray asString
+		assert: (aGoal solutions next: 40) readStream upToEnd asString
 		equals:
-			'an Array(an Array(RBMessageNode(•₀ car cdr) •₀) an Array(•₀ •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBBlockNode([ •₀ car cdr car ]) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBBlockNode([ •₀ car cdr car ]) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car car car) •₀) an Array(RBMessageNode(•₀ car cdr car car car) •₀) an Array(RBMessageNode(•₀ car cdr
+			'an Array(an Array(•₀ •₀) an Array(RBMessageNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBMessageNode(•₀ car cdr cdr car) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBMessageNode(•₀ car cdr cdr car) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBMessageNode(•₀ = •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBMessageNode(•₀ cons: •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr + •₁) •₀) an Array(RBMessageNode(•₀ + •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr - •₁) •₀) an Array(RBMessageNode(•₀ - •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr
 	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀ car cdr
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]) •₀) an Array(RBSequenceNode(•₀ car cdr car) •₀) an Array(RBSequenceNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBBlockNode([ •₀ car cdr car car ]) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBMessageNode(•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ car cdr ]) •₂) an Array(RBBlockNode([ •₀ car cdr car car ]) •₀) an Array(RBMessageNode([ •₀ car cdr ] car) •₀) an Array(RBMessageNode(•₀
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ car cdr ]) •₂) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBMessageNode([ •₀ car cdr ] car) •₀) an Array(RBMessageNode(•₀ car cdr car
-	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBMessageNode(•₀
+	ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀
 	ifTrue: [ •₁ car cdr ]
-	ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀ car cdr car
+	ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀
 	ifTrue: [ •₁ ]
-	ifFalse: [ •₂ ]) •₀) an Array(RBSequenceNode(•₀ car cdr car car) •₀) an Array(RBMessageNode(•₀
+	ifFalse: [ •₂ car cdr ]) •₂) an Array(RBMessageNode(•₀ car cdr car cdr) •₀) an Array(RBMessageNode(•₀ car cdr cdr cdr) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBMessageNode(•₀ = •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBMessageNode(•₀ cons: •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr + •₁) •₀) an Array(RBMessageNode(•₀ + •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr - •₁) •₀) an Array(RBMessageNode(•₀ - •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀
 	ifTrue: [ •₁ car cdr ]
-	ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBBlockNode([ [ •₀ car cdr ] ]) •₀) an Array(RBSequenceNode(•₀ car cdr car car) •₀) an Array(RBMessageNode([ •₀ car cdr car ] car) •₀) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBMessageNode(•₀ = •₁ car cdr) •₁))'.
+	ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀
+	ifTrue: [ •₁ ]
+	ifFalse: [ •₂ car cdr ]) •₂) an Array(RBMessageNode(•₀ car cdr car cdr) •₀))'.
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: 40
 ]

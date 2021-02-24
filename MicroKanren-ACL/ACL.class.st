@@ -14,7 +14,7 @@ Class {
 	#category : #'MicroKanren-ACL'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 ACL >> argumentNames [
 
 	^ (1 to: steps size + contextVariables size) collect: [ :each | 

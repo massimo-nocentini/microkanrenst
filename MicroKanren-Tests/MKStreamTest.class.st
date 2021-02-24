@@ -21,8 +21,8 @@ MKStreamTest >> testAppendMap [
 
 	self
 		assert:
-			(((self count: 1) appendMap: [ :v | self repeat: v ]) streamNext:
-				 50) readStream upToEnd
+			(((self count: 1) appendMap: [ :v | self repeat: v ]) next: 50)
+				readStream upToEnd
 		equals:
 			#( 1 1 2 1 1 2 1 3 1 2 1 1 2 1 3 1 2 1 4 1 2 1 3 1 2 1 1 2 1 3 1 2
 			   1 4 1 2 1 3 1 2 1 5 1 2 1 3 1 2 1 4 )
@@ -72,6 +72,6 @@ MKStreamTest >> testAppendStreamNilNil [
 MKStreamTest >> testRepeat [
 
 	self
-		assert: ((self repeat: 1) streamNext: 20) readStream upToEnd
+		assert: ((self repeat: 1) next: 20) readStream upToEnd
 		equals: (Array new: 20 withAll: 1)
 ]

@@ -27,7 +27,7 @@ MKComputationTreeRenderer >> gtInspectorTreeUsingCanvas: aCanvas [
 
 	| states shapes edges assocs labelBuilder printers associations |
 	labelBuilder := RSMultilineLabelBuilder new.
-	states := statesStream asOrderedCollection.
+	states := statesStream readStream upToEnd.
 	printers := states collect: [ :each | 
 		            MKGoalPrinter new
 			            state: each;

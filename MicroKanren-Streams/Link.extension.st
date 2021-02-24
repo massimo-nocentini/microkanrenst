@@ -13,6 +13,32 @@ Link >> appendStream: aStream [
 ]
 
 { #category : #'*MicroKanren-Streams' }
+Link >> collect: aBlock [
+
+	^ self class nextLink: (nextLink collect: aBlock)
+]
+
+{ #category : #'*MicroKanren-Streams' }
+Link >> next: anObject [
+
+	^ anObject nextFromLink: self
+]
+
+{ #category : #'*MicroKanren-Streams' }
+Link >> nextFromLink: aLink [
+
+	^ aLink nextLink: self
+]
+
+{ #category : #'*MicroKanren-Streams' }
+Link >> nextInteger: n [
+
+	^ n = 0
+		  ifTrue: [ nil ]
+		  ifFalse: [ self class nextLink: (nextLink nextInteger: n - 1) ]
+]
+
+{ #category : #'*MicroKanren-Streams' }
 Link >> putOn: aStream fromStream: rootStream [
 
 	nextLink putOn: aStream fromStream: rootStream
@@ -26,9 +52,7 @@ Link >> readStream [
 ]
 
 { #category : #'*MicroKanren-Streams' }
-Link >> streamNext: n [
+Link >> select: aBlock [
 
-	^ n = 0
-		  ifTrue: [ nil ]
-		  ifFalse: [ self class nextLink: (nextLink streamNext: n - 1) ]
+	^ self class nextLink: (nextLink select: aBlock)
 ]

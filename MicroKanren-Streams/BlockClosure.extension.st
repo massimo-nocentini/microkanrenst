@@ -13,6 +13,24 @@ BlockClosure >> appendStream: aStream [
 ]
 
 { #category : #'*MicroKanren-Streams' }
+BlockClosure >> collect: aFullBlockClosure [
+
+	^ [ self value collect: aFullBlockClosure ]
+]
+
+{ #category : #'*MicroKanren-Streams' }
+BlockClosure >> next: n [
+
+	^ [ self value next: n ]
+]
+
+{ #category : #'*MicroKanren-Streams' }
+BlockClosure >> nextInteger: n [
+
+	^ [ self value nextInteger: n ]
+]
+
+{ #category : #'*MicroKanren-Streams' }
 BlockClosure >> putOn: aStream fromStream: rootStream [
 
 	self value putOn: aStream fromStream: rootStream
@@ -25,7 +43,7 @@ BlockClosure >> readStream [
 ]
 
 { #category : #'*MicroKanren-Streams' }
-BlockClosure >> streamNext: n [
+BlockClosure >> select: aFullBlockClosure [
 
-	^ [ self value streamNext: n ]
+	^ [ self value select: aFullBlockClosure ]
 ]

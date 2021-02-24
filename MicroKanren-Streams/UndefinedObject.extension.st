@@ -13,6 +13,24 @@ UndefinedObject >> appendStream: aStream [
 ]
 
 { #category : #'*MicroKanren-Streams' }
+UndefinedObject >> collect: aBlock [
+
+	^ self
+]
+
+{ #category : #'*MicroKanren-Streams' }
+UndefinedObject >> next: n [
+
+	^ self
+]
+
+{ #category : #'*MicroKanren-Streams' }
+UndefinedObject >> nextInteger: n [
+
+	^ self
+]
+
+{ #category : #'*MicroKanren-Streams' }
 UndefinedObject >> putOn: aStream fromStream: rootStream [
 
 	"nothing to do"
@@ -27,7 +45,7 @@ UndefinedObject >> readStream [
 ]
 
 { #category : #'*MicroKanren-Streams' }
-UndefinedObject >> streamNext: n [
+UndefinedObject >> select: aBlock [
 
 	^ self
 ]

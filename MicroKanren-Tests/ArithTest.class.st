@@ -6,28 +6,31 @@ Class {
 
 { #category : #'as yet unclassified' }
 ArithTest >> testAddero [
+
 	| g µ |
 	µ := Theory arith.
 	g := [ :x :y :r | 
-	µ addero
-		!!
-			{0.
-			x.
-			y.
-			r} ] asGoal.
+	     µ addero !! { 
+		     0.
+		     x.
+		     y.
+		     r } ] asGoal.
 	[ :_0 :_1 | 
 	self
-		assert:
-			{{_0.
-			0 asConsedBinaryRepr.
-			_0}.
-			{0 asConsedBinaryRepr.
-			(_0 cons: _1).
-			(_0 cons: _1)}.
-			({1.
-			1.
-			(1 + 1)} collect: #asConsedBinaryRepr)}
-		equals: (g solutions next: 3)
+		assert: { 
+				{ 
+					_0.
+					0 asConsedBinaryRepr.
+					_0 }.
+				{ 
+					0 asConsedBinaryRepr.
+					(_0 cons: _1).
+					(_0 cons: _1) }.
+				({ 
+					 1.
+					 1.
+					 (1 + 1) } collect: #asConsedBinaryRepr) }
+		equals: (g solutions next: 3) readStream upToEnd
 		modulo: #asOrderedCollection ] withEnumeratedReifiedVars
 ]
 

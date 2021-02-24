@@ -11,7 +11,9 @@ Goal >> addUnifiedSubgoalsInSet: unified [
 { #category : #'*MicroKanren-Visualizations' }
 Goal >> asLogicComputationTreeLimitedTo: n [
 
-	^ (self asStatesStream next: n) asLogicComputationTree
+	^ MKComputationTreeRenderer new
+		  statesStream: (self asStatesStream next: n);
+		  yourself
 ]
 
 { #category : #'*MicroKanren-Visualizations' }
