@@ -89,32 +89,35 @@ GoalTest >> teacup: x [
 
 { #category : #tests }
 GoalTest >> testAlphaRuleo [
+
 	| g µ |
 	µ := Theory sexp.
 	g := [ :x :y | µ alphaRuleo value: x value: y ] asGoal.
-	self assert: g solutions isEmpty.
-	g := [ [ :x :y | 
-	(x unifyo value: 3) , (y unifyo value: 3)
-		, (µ alphaRuleo value: x value: y) ] asGoal ] asGoal.
+	self assert: g solutions readStream upToEnd isEmpty.
+	g := [ 
+	     [ :x :y | 
+	     (x unifyo value: 3) , (y unifyo value: 3)
+	     , (µ alphaRuleo value: x value: y) ] asGoal ] asGoal.
 	self
 		assert: g solutions
-		equals: {Var tautology}
+		equals: { Var tautology }
 		modulo: #asOrderedCollection.
-	g := [ [ :x :y | 
-	(x unifyo value: 3) , (y unifyo value: 4)
-		, (µ alphaRuleo value: x value: y) ] asGoal ] asGoal.
-	self assert: g solutions isEmpty.
-	g := [ :x :y | (x unifyo value: y) , (µ alphaRuleo value: x value: y) ]
-		asGoal.
+	g := [ 
+	     [ :x :y | 
+	     (x unifyo value: 3) , (y unifyo value: 4)
+	     , (µ alphaRuleo value: x value: y) ] asGoal ] asGoal.
+	self assert: g solutions readStream upToEnd isEmpty.
+	g := [ :x :y | 
+	     (x unifyo value: y) , (µ alphaRuleo value: x value: y) ] asGoal.
 	self
 		assert: g solutions
-		equals:
-			{{0 asReifiedVar.
-			0 asReifiedVar}}
+		equals: { { 
+				0 asReifiedVar.
+				0 asReifiedVar } }
 		modulo: #asOrderedCollection.
-	g := [ :x :y | (µ alphaRuleo value: x value: y) , (x unifyo value: y) ]
-		asGoal.
-	self assert: g solutions isEmpty
+	g := [ :x :y | 
+	     (µ alphaRuleo value: x value: y) , (x unifyo value: y) ] asGoal.
+	self assert: g solutions readStream upToEnd isEmpty
 ]
 
 { #category : #tests }
@@ -294,131 +297,133 @@ GoalTest >> testCaro [
 
 { #category : #tests }
 GoalTest >> testCdro [
+
 	| g µ |
 	µ := Theory sexp.
 	g := [ :r | 
-	[ :d | (µ cdro value: 'acorn' asCons value: d) , (µ caro value: d value: r) ]
-		asGoal ] asGoal.
-	self assert: g solutions equals: {$c} modulo: #asOrderedCollection.
+	     [ :d | 
+	     (µ cdro value: 'acorn' asCons value: d)
+	     , (µ caro value: d value: r) ] asGoal ] asGoal.
+	self assert: g solutions equals: { $c } modulo: #asOrderedCollection.
 	g := [ :r | 
-	[ :x :y | 
-	(µ cdro value: {#grape . #raisin . #pear} asCons value: x)
-		,
-			(µ caro
-				value:
-					{(#a cons: nil).
-					(#b cons: nil).
-					(#c cons: nil)} asCons
-				value: y) , (µ conso value: x value: y value: r) ] asGoal ] asGoal.
+	     [ :x :y | 
+	     (µ cdro value: { #grape. #raisin. #pear } asCons value: x)
+	     , (µ caro
+			      value: { 
+					      (#a cons: nil).
+					      (#b cons: nil).
+					      (#c cons: nil) } asCons
+			      value: y) , (µ conso value: x value: y value: r) ] asGoal ]
+		     asGoal.
 	self
 		assert: g solutions
-		equals:
-			{{{#raisin . #pear}.
-			#a} asCons}
+		equals: { { 
+				{ #raisin. #pear }.
+				#a } asCons }
 		modulo: #asOrderedCollection.
 	g := [ µ cdro value: 'acorn' asCons value: 'corn' asCons ] asGoal.
 	self
 		assert: g solutions
-		equals: {Var tautology}
+		equals: { Var tautology }
 		modulo: #asOrderedCollection.
 	g := [ :r | µ cdro value: 'acorn' asCons value: 'acorn' asCons ]
-		asGoal.
-	self assert: g solutions isEmpty.
+		     asGoal.
+	self assert: g solutions readStream upToEnd isEmpty.
 	g := [ :r | 
-	µ cdro
-		value: 'corn' asCons
-		value:
-			{r.
-			$r.
-			$n} asCons ] asGoal.
-	self assert: g solutions equals: {$o} modulo: #asOrderedCollection.
+	     µ cdro value: 'corn' asCons value: { 
+			     r.
+			     $r.
+			     $n } asCons ] asGoal.
+	self assert: g solutions equals: { $o } modulo: #asOrderedCollection.
 	g := [ :l | 
-	[ :x | (µ caro value: l value: $a) , (µ cdro value: l value: 'corn' asCons) ]
-		asGoal ] asGoal.
+	     [ :x | 
+	     (µ caro value: l value: $a)
+	     , (µ cdro value: l value: 'corn' asCons) ] asGoal ] asGoal.
 	self
 		assert: g solutions
-		equals: {'acorn' asCons}
+		equals: { 'acorn' asCons }
 		modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
 GoalTest >> testConde [
+
 	| g |
 	g := (LinkedList new
-		add: false asGoal -> true asGoal;
-		yourself) cond e.
-	self assert: g solutions isEmpty.
+		      add: false asGoal -> true asGoal;
+		      yourself) cond e.
+	self assert: g solutions readStream upToEnd isEmpty.
 	g := (LinkedList new
-		add: false asGoal -> false asGoal;
-		add: true asGoal -> true asGoal;
-		yourself) cond e.
+		      add: false asGoal -> false asGoal;
+		      add: true asGoal -> true asGoal;
+		      yourself) cond e.
 	self
 		assert: g solutions
-		equals: {Var tautology}
+		equals: { Var tautology }
 		modulo: #asOrderedCollection.
 	g := [ :x | 
-	(LinkedList new
-		add: (x unifyo value: #olive) -> true asGoal;
-		add: (x unifyo value: #apple) -> false asGoal;
-		add: (x unifyo value: #oil) -> true asGoal;
-		yourself) cond e ] asGoal.
+	     (LinkedList new
+		      add: (x unifyo value: #olive) -> true asGoal;
+		      add: (x unifyo value: #apple) -> false asGoal;
+		      add: (x unifyo value: #oil) -> true asGoal;
+		      yourself) cond e ] asGoal.
 	self
 		assert: g solutions
-		equals: {#olive . #oil}
+		equals: { #olive. #oil }
 		modulo: #asOrderedCollection.
 	g := [ :x | 
-	(LinkedList new
-		add: (x unifyo value: #olive) -> true asGoal;
-		add: (x unifyo value: #apple) -> false asGoal;
-		add: (x unifyo value: #oil) -> true asGoal;
-		yourself) cond e ] asGoal.
+	     (LinkedList new
+		      add: (x unifyo value: #olive) -> true asGoal;
+		      add: (x unifyo value: #apple) -> false asGoal;
+		      add: (x unifyo value: #oil) -> true asGoal;
+		      yourself) cond e ] asGoal.
 	self
 		assert: (g solutions next: 1)
-		equals: {#olive}
+		equals: { #olive }
 		modulo: #asOrderedCollection.
 	g := [ :x :y | 
-	(LinkedList new
-		add: (x unifyo value: #split) -> (y unifyo value: #pea);
-		add: (x unifyo value: #navy) -> (y unifyo value: #bean);
-		yourself) cond e ] asGoal.
+	     (LinkedList new
+		      add: (x unifyo value: #split) -> (y unifyo value: #pea);
+		      add: (x unifyo value: #navy) -> (y unifyo value: #bean);
+		      yourself) cond e ] asGoal.
 	self
 		assert: g solutions
-		equals: (Array with: {#split . #pea} with: {#navy . #bean})
+		equals: (Array with: { #split. #pea } with: { #navy. #bean })
 		modulo: #asOrderedCollection.
 	g := [ :x :y | 
-	Goal cond e
-		if: (self teacup: x) , (y unifyo value: true) then: true asGoal;
-		if: (x unifyo value: true) then: (y unifyo value: false);
-		if: true asGoal then: true asGoal;
-		yourself ] asGoal.
+	     Goal cond e
+		     if: (self teacup: x) , (y unifyo value: true)
+		     then: true asGoal;
+		     if: (x unifyo value: true) then: (y unifyo value: false);
+		     if: true asGoal then: true asGoal;
+		     yourself ] asGoal.
 	self
 		assert: g solutions
-		equals:
-			(Array
-				with: {#tea . true}
-				with: {#cup . true}
-				with: {true . false}
-				with:
-					{0 asReifiedVar.
-					1 asReifiedVar})
+		equals: (Array
+				 with: { true. false }
+				 with: { 
+						 0 asReifiedVar.
+						 1 asReifiedVar }
+				 with: { #tea. true }
+				 with: { #cup. true })
 		modulo: #asOrderedCollection.
 	g := [ :x | 
-	(LinkedList new
-		add: (x unifyo value: #olive) -> true asGoal;
-		add: (x unifyo value: 5) -> (self fives: x);
-		add: (x unifyo value: #oil) -> true asGoal;
-		yourself) cond e ] asGoal.
+	     (LinkedList new
+		      add: (x unifyo value: #olive) -> true asGoal;
+		      add: (x unifyo value: 5) -> (self fives: x);
+		      add: (x unifyo value: #oil) -> true asGoal;
+		      yourself) cond e ] asGoal.
 	self
 		assert: (g solutions next: 10)
-		equals: {#olive . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}
+		equals: { #olive. 5. #oil. 5. 5. 5. 5. 5. 5. 5 }
 		modulo: #asOrderedCollection.
 	g := [ :x | 
-	(LinkedList new
-		add: (x unifyo value: #olive) -> true asGoal;
-		add: (self fives: x) -> false asGoal;
-		add: (x unifyo value: #oil) -> true asGoal;
-		yourself) cond e
-	"this line makes cond a divergent goal" ] asGoal
+	     (LinkedList new
+		      add: (x unifyo value: #olive) -> true asGoal;
+		      add: (self fives: x) -> false asGoal;
+		      add: (x unifyo value: #oil) -> true asGoal;
+		      yourself) cond e
+	     "this line makes cond a divergent goal" ] asGoal
 	"self
 	assert: (g solutions next: 10)
 	equals: {#olive . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5 . 5}"
@@ -453,7 +458,7 @@ GoalTest >> testConjFalseThreeWithVar [
 
 	| g |
 	g := [ :q | false asGoal , (3 unifyo value: q) ] asGoal.
-	self assert: g solutions isEmpty.
+	self assert: g solutions readStream upToEnd isEmpty.
 
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
@@ -485,7 +490,7 @@ GoalTest >> testConjThreeFour [
 
 	| g |
 	g := [ :a | (3 unifyo value: a) , (4 unifyo value: a) ] asGoal.
-	self assert: g solutions isEmpty.
+	self assert: g solutions readStream upToEnd isEmpty.
 
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
 ]
@@ -721,7 +726,7 @@ GoalTest >> testDisjThreeFourThenFive [
 		     asGoal.
 	self
 		assert: g solutions
-		equals: { 3. 5. 4 }
+		equals: { 3. 4. 5 }
 		modulo: #asOrderedCollection.
 
 	^ self exportComputationTreeOfGoal: g limitedTo: -1
@@ -1107,12 +1112,10 @@ GoalTest >> testLolo [
 		equals: { 
 				nil.
 				(nil cons: nil).
-				{ (0 asReifiedVar cons: nil) } asCons.
 				{ nil. nil } asCons.
-				({ 
-					 0 asReifiedVar.
-					 1 asReifiedVar } asCons cons: nil) }
-		modulo: #asOrderedCollection " an Array(nil (nil) ((•₀)) (nil nil) ((•₀ •₁)))"
+				{ (0 asReifiedVar cons: nil) } asCons.
+				{ nil. nil. nil } asCons }
+		modulo: #asOrderedCollection " an Array((nil (nil) (nil nil) ((•₀)) (nil nil nil)))"
 ]
 
 { #category : #tests }
@@ -1245,25 +1248,22 @@ GoalTest >> testTablingMutuallyRecursive [
 
 { #category : #tests }
 GoalTest >> testTeaCup [
+
 	| g |
 	g := [ :x | self teacup: x ] asGoal.
 	self
 		assert: g solutions
-		equals: {#tea . #cup}
+		equals: { #tea. #cup }
 		modulo: #asOrderedCollection.
-	g := [ :x :y :z | (self teacup: x) , ((self teacup: y) , (self teacup: z)) ]
-		asGoal.
+	g := [ :x :y :z | 
+	     (self teacup: x) , ((self teacup: y) , (self teacup: z)) ]
+		     asGoal.
 	self
 		assert: g solutions
 		equals:
-			{#(#tea #tea #tea).
-			#(#cup #tea #tea).
-			#(#tea #cup #tea).
-			#(#cup #cup #tea).
-			#(#tea #tea #cup).
-			#(#cup #tea #cup).
-			#(#tea #cup #cup).
-			#(#cup #cup #cup)}
+			#( #( #tea #tea #tea ) #( #tea #tea #cup ) #( #tea #cup #tea )
+			   #( #tea #cup #cup ) #( #cup #tea #tea ) #( #cup #tea #cup )
+			   #( #cup #cup #tea ) #( #cup #cup #cup ) )
 		modulo: #asOrderedCollection
 ]
 

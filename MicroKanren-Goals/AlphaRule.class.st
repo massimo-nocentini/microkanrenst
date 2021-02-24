@@ -10,8 +10,9 @@ Class {
 
 { #category : #running }
 AlphaRule >> onState: aState [
-	^ [ (x isAlphaEquivalentTo: y inState: aState) asGoal onState: aState ]
-		srfi41Stream
+
+	^ [ 
+	  (x isAlphaEquivalentTo: y inState: aState) asGoal onState: aState ]
 ]
 
 { #category : #accessing }

@@ -13,7 +13,7 @@ GoalAbstractTest >> assert: actual equals: expected modulo: aSelector [
 	check if they are the same with respect to conversion given by `aSelector`."
 
 	self
-		assert: (aSelector value: actual)
+		assert: (aSelector value: actual readStream upToEnd)
 		equals: (aSelector value: expected)
 ]
 
