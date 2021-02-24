@@ -205,7 +205,7 @@ hello or good morning.</div>
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
       <span class="nf">equals:</span> { <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
@@ -262,10 +262,11 @@ hello or good morning.</div>
 <span class="target" id="pharo-compiledMethod-11"></span><div class="highlight-smalltalk notranslate" id="pharo-compiledmethod-freshrb-onstate-withvars"><div class="highlight"><pre><span></span><span class="c">&quot;FreshRB, protocol dispatched&quot;</span>
 <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span>
 
-   <span class="o">|</span><span class="nv"> dict node rbLogicVariables </span><span class="o">|</span>
+   <span class="o">|</span><span class="nv"> dict node rbLogicVariables swapping aStream </span><span class="o">|</span>
    <span class="nv">dict</span> <span class="o">:=</span> <span class="nc">Dictionary</span> <span class="nb">new</span><span class="p">.</span>
 
-   <span class="nv">contextVariables</span> <span class="nf">do:</span> [ <span class="o">:</span><span class="nv">each</span> <span class="o">|</span> <span class="nv">dict</span> <span class="nf">at:</span> <span class="nv">each</span> <span class="nf">name</span> <span class="nf">put:</span> <span class="nv">each</span> ]<span class="p">.</span>
+   <span class="nv">contextVariables</span> <span class="nf">keysAndValuesDo:</span> [ <span class="o">:</span><span class="nv">aSymbol</span> <span class="o">:</span><span class="nv">aRBVar</span> <span class="o">|</span> 
+      <span class="nv">dict</span> <span class="nf">at:</span> <span class="nv">aSymbol</span> <span class="nf">put:</span> <span class="nv">aRBVar</span> ]<span class="p">.</span>
 
    <span class="nv">rbLogicVariables</span> <span class="o">:=</span> <span class="nv">receiver</span> <span class="nf">argumentNames</span>
                           <span class="nf">with:</span> <span class="nv">aCollection</span>
@@ -282,9 +283,14 @@ hello or good morning.</div>
               <span class="nv">aNode</span> <span class="o">:=</span> <span class="nv">selectBlock</span> <span class="nf">value:</span> <span class="nv">aSequenceNode</span><span class="p">.</span>
               <span class="nv">aNode</span> <span class="nf">substituteVariablesUsingDictionary:</span> <span class="nv">dict</span> ]<span class="p">.</span>
 
+   <span class="nv">swapping</span> <span class="o">:=</span> <span class="nv">receiver</span><span class="p">.</span>
    <span class="nv">receiver</span> <span class="o">:=</span> <span class="nv">nodeBlock</span> <span class="nf">value:</span> <span class="nv">node</span><span class="p">.</span>
 
-   <span class="o">^</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">rbLogicVariables</span>
+   <span class="nv">aStream</span> <span class="o">:=</span> <span class="bp">super</span> <span class="nf">onState:</span> <span class="nv">aState</span> <span class="nf">withVars:</span> <span class="nv">aCollection</span><span class="p">.</span>
+
+   <span class="nv">receiver</span> <span class="o">:=</span> <span class="nv">swapping</span><span class="p">.</span>
+
+   <span class="o">^</span> <span class="nv">aStream</span>
 </pre></div>
 </div>
 <p>has the responsibility to lift block’s code variables</p>
@@ -379,7 +385,7 @@ the constraint that the whole expression yields <code class="docutils literal no
                     <span class="m">1</span> <span class="nf">asReifiedVar</span> <span class="nf">asRBNode</span> }<span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀ cons: •₁&#39;</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
@@ -408,7 +414,7 @@ can also be written as</p>
                <span class="nf">asGoalWithUnaryASTof:</span> <span class="bp">self</span> <span class="nf">class</span> <span class="nf">&gt;&gt;</span> <span class="ss">#consª:isAtomª:</span>
                <span class="nf">contextVariables:</span> <span class="ss">#(</span>  <span class="ss">)</span> ] <span class="nf">asGoal</span><span class="p">.</span>
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
       <span class="nf">equals:</span> { <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> }
 </pre></div>
 </div>
@@ -453,7 +459,7 @@ We mix the two approaches freely from now on.</p>
                <span class="ss">#flapjack</span> <span class="nf">=</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
       <span class="nf">equals:</span> { [ <span class="ss">#flapjack</span> <span class="nf">=</span> <span class="bp">false</span> ] <span class="nf">unaryRBNode</span> }<span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
@@ -498,7 +504,7 @@ We mix the two approaches freely from now on.</p>
                <span class="ss">#flapjack</span> <span class="nf">=</span> (<span class="nv">a</span> <span class="nf">cons:</span> <span class="nv">b</span>) <span class="nf">isAtom</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
       <span class="nf">equals:</span> { <span class="bp">false</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
@@ -535,7 +541,9 @@ We mix the two approaches freely from now on.</p>
                ((<span class="nv">p</span> <span class="nf">cons:</span> <span class="nv">q</span>) <span class="nf">car</span> <span class="nf">cons:</span> <span class="bp">nil</span>) <span class="nf">cdr</span> <span class="nf">isAtom</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -591,7 +599,9 @@ We mix the two approaches freely from now on.</p>
                ((<span class="nv">p</span> <span class="nf">cons:</span> <span class="nv">q</span>) <span class="nf">car</span> <span class="nf">cons:</span> <span class="bp">nil</span>) <span class="nf">cdr</span> <span class="nf">isAtom</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -622,7 +632,7 @@ We mix the two approaches freely from now on.</p>
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
       <span class="nf">equals:</span>
       { [ (<span class="bp">true</span> <span class="nf">cons:</span> (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
          <span class="nf">unaryRBNode</span> }<span class="p">.</span>
@@ -655,7 +665,9 @@ We mix the two approaches freely from now on.</p>
                       (<span class="ss">#and</span> <span class="nf">cons:</span> (<span class="ss">#crumpets</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) <span class="nf">car</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span> { <span class="bp">true</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -685,7 +697,7 @@ We mix the two approaches freely from now on.</p>
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
       <span class="nf">equals:</span> { [ <span class="ss">#and</span> <span class="nf">cons:</span> <span class="bp">nil</span> ] <span class="nf">unaryRBNode</span> }<span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
@@ -707,9 +719,8 @@ We mix the two approaches freely from now on.</p>
                <span class="nf">asGoalWithUnaryASTof:</span> [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">|</span> <span class="nv">a</span> <span class="nf">+</span> <span class="nv">b</span> ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span>
-      <span class="nf">equals:</span> { [ <span class="m">3</span> <span class="nf">even</span> ] <span class="nf">unaryRBNode</span> }
-      <span class="nf">modulo:</span> <span class="ss">#asOrderedCollection</span><span class="p">.</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span> { [ <span class="m">3</span> <span class="nf">even</span> ] <span class="nf">unaryRBNode</span> }<span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -746,7 +757,7 @@ We mix the two approaches freely from now on.</p>
                      <span class="nf">arguments:</span> { <span class="m">1</span> <span class="nf">asReifiedVar</span> <span class="nf">asRBNode</span> }) }<span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span>
       <span class="nf">equals:</span>
          <span class="s">&#39;(#bagels cons: (#and cons: (#lox cons: nil))) = (•₀ cons: •₁)&#39;</span><span class="p">.</span>
@@ -796,7 +807,7 @@ Recall that “is equal to” works in both directions.</p>
    <span class="nv">node</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">expectedRBNode_chapter_01_frame_55</span><span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀ cons:</span>
 <span class="s">   ((•₁ cdr cons: •₀ car) car cons: •₂) car = (•₁ isAtom = false)&#39;</span><span class="p">.</span>
 
@@ -857,7 +868,7 @@ Recall that “is equal to” works in both directions.</p>
    <span class="nv">node</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">expectedRBNode_chapter_01_frame_56</span><span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span>
       <span class="nf">equals:</span>
          <span class="s">&#39;•₀ cons: ((•₁ cdr cons: •₀ car) car cons: (#oats cons: nil)) car</span>
@@ -892,7 +903,9 @@ Recall that “is equal to” works in both directions.</p>
                      <span class="nb">ifFalse:</span> [ <span class="nv">c</span> ] ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="bp">self</span> <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="m">3</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span> { <span class="m">3</span> <span class="nf">asLiteralRBNode</span> }<span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -941,7 +954,7 @@ end with an if expression. So … what else is <code class="docutils literal not
 
    <span class="nv">node</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">expectedRBNode_chapter_02_frame_7</span><span class="p">.</span>
    <span class="bp">self</span>
-      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
+      <span class="nf">assert:</span> <span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">readStream</span> <span class="nf">upToEnd</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;•₀</span>
 <span class="s">   ifTrue: [ </span>
 <span class="s">      (3 cons: nil) isAtom</span>
@@ -962,6 +975,7 @@ end with an if expression. So … what else is <code class="docutils literal not
 <span class="nf">test_chapter_02_EvenOlderGames_frame_15</span>
 
    <span class="o">|</span><span class="nv"> aGoal node </span><span class="o">|</span>
+   <span class="bp">self</span> <span class="nf">skip</span><span class="p">.</span>
    <span class="nv">aGoal</span> <span class="o">:=</span> [ <span class="o">:</span><span class="nv">rewritten</span> <span class="o">|</span> 
             [ <span class="o">:</span><span class="nv">ast</span> <span class="o">|</span> 
             [ <span class="o">:</span><span class="nv">a</span> <span class="o">:</span><span class="nv">b</span> <span class="o">:</span><span class="nv">c</span> <span class="o">|</span> 
@@ -1021,7 +1035,8 @@ end with an if expression. So … what else is <code class="docutils literal not
    <span class="nv">node</span> <span class="o">:=</span> <span class="bp">self</span> <span class="nf">expectedRBNode_chapter_02_frame_15</span><span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">1</span>) <span class="nf">asArray</span> <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
+      <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">1</span>) <span class="nf">readStream</span> <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span> { <span class="nv">node</span> }<span class="p">;</span>
       <span class="nf">assert:</span> <span class="nv">node</span> <span class="nf">formattedCode</span> <span class="nf">equals:</span> <span class="s">&#39;(•₀ = true</span>
 <span class="s">    ifTrue: [ true ]</span>
 <span class="s">    ifFalse: [ #or = (#black cons: (#coffee cons: nil)) ])</span>
@@ -1087,23 +1102,21 @@ end with an if expression. So … what else is <code class="docutils literal not
 
    <span class="bp">self</span>
       <span class="nf">assert:</span>
-      ((<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">next:</span> <span class="m">25</span>)
-         <span class="nf">asArray</span>
-      <span class="nf">equals:</span> <span class="ss">#(</span> <span class="s">&#39;false car&#39;</span> <span class="s">&#39;false car car&#39;</span> <span class="s">&#39;[ false ]&#39;</span> <span class="s">&#39;[ false car ]&#39;</span>
-            <span class="s">&#39;false&#39;</span> <span class="s">&#39;false car car car&#39;</span> <span class="s">&#39;false</span>
-<span class="s">   ifTrue: [ •₀ ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false car&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;[ false car car ]&#39;</span>
-            <span class="s">&#39;•₀</span>
-<span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ false ]&#39;</span> <span class="s">&#39;[ false ] car&#39;</span> <span class="s">&#39;false cdr&#39;</span> <span class="s">&#39;false car</span>
+         ((<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">next:</span> <span class="m">25</span>)
+            <span class="nf">readStream</span> <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span>
+         <span class="ss">#(</span> <span class="s">&#39;false car&#39;</span> <span class="s">&#39;false cdr&#39;</span> <span class="s">&#39;[ false ]&#39;</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;false car car&#39;</span>
+            <span class="s">&#39;false cdr car&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;false cons: •₀&#39;</span>
+            <span class="s">&#39;•₀ cons: false&#39;</span> <span class="s">&#39;false + •₀&#39;</span> <span class="s">&#39;•₀ + false&#39;</span> <span class="s">&#39;false - •₀&#39;</span>
+            <span class="s">&#39;•₀ - false&#39;</span> <span class="s">&#39;false</span>
 <span class="s">   ifTrue: [ •₀ ]</span>
 <span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;•₀</span>
 <span class="s">   ifTrue: [ false ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false car car&#39;</span> <span class="s">&#39;false cons: •₀&#39;</span> <span class="s">&#39;[ [ false ] ]&#39;</span>
-            <span class="s">&#39;[ false car ] car&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;false car = •₀&#39;</span>
-            <span class="s">&#39;false + •₀&#39;</span> <span class="s">&#39;false car car</span>
-<span class="s">   ifTrue: [ •₀ ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;•₀ cons: false&#39;</span> <span class="s">&#39;[ false ]&#39;</span> <span class="ss">)</span><span class="p">.</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifTrue: [ •₁ ]</span>
+<span class="s">   ifFalse: [ false ]&#39;</span> <span class="s">&#39;false car cdr&#39;</span> <span class="s">&#39;false cdr cdr&#39;</span> <span class="s">&#39;[ false ] car&#39;</span>
+            <span class="s">&#39;false car&#39;</span> <span class="s">&#39;false car car car&#39;</span> <span class="s">&#39;false cdr car car&#39;</span>
+            <span class="s">&#39;[ false car ]&#39;</span> <span class="s">&#39;[ false cdr ]&#39;</span> <span class="ss">)</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">25</span>
 </pre></div>
@@ -1163,12 +1176,12 @@ end with an if expression. So … what else is <code class="docutils literal not
 
    <span class="bp">self</span>
       <span class="nf">assert:</span>
-         ((<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">withIndexCollect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">:</span><span class="nv">i</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) 
-             <span class="nf">next:</span> <span class="m">20</span>) <span class="nf">asArray</span>
-      <span class="nf">equals:</span> <span class="ss">#(</span> <span class="s">&#39;2 + •₀&#39;</span> <span class="s">&#39;3 - •₀&#39;</span> <span class="s">&#39;•₀</span>
+         ((<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">next:</span> <span class="m">20</span>)
+            <span class="nf">readStream</span> <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span> <span class="ss">#(</span> <span class="s">&#39;2 + •₀&#39;</span> <span class="s">&#39;•₀</span>
 <span class="s">   ifTrue: [ 3 ]</span>
-<span class="s">   ifFalse: [ 1 ]&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;1&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;3&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;2&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;3&#39;</span> <span class="s">&#39;◊•₀&#39;</span>
-            <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="ss">)</span><span class="p">.</span>
+<span class="s">   ifFalse: [ 1 ]&#39;</span> <span class="s">&#39;3 - •₀&#39;</span> <span class="s">&#39;2&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;3&#39;</span> <span class="s">&#39;1&#39;</span> <span class="s">&#39;3&#39;</span> <span class="s">&#39;◊•₀&#39;</span>
+            <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="s">&#39;◊•₀&#39;</span> <span class="ss">)</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">20</span>
 </pre></div>
@@ -1187,15 +1200,18 @@ end with an if expression. So … what else is <code class="docutils literal not
                <span class="nf">value:</span> <span class="nv">rewritten</span> <span class="nf">asRBNode</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">asArray</span>
-      <span class="nf">equals:</span> <span class="ss">#(</span> <span class="s">&#39;false car&#39;</span> <span class="s">&#39;[ false ]&#39;</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;false</span>
+      <span class="nf">assert:</span>
+      (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">collect:</span> [ <span class="o">:</span><span class="nv">e</span> <span class="o">|</span> <span class="nv">e</span> <span class="nf">formattedCode</span> ]) <span class="nf">readStream</span>
+         <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span> <span class="ss">#(</span> <span class="s">&#39;false car&#39;</span> <span class="s">&#39;false cdr&#39;</span> <span class="s">&#39;[ false ]&#39;</span> <span class="s">&#39;false&#39;</span> <span class="s">&#39;false = •₀&#39;</span>
+            <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;false cons: •₀&#39;</span> <span class="s">&#39;•₀ cons: false&#39;</span> <span class="s">&#39;false + •₀&#39;</span>
+            <span class="s">&#39;•₀ + false&#39;</span> <span class="s">&#39;false - •₀&#39;</span> <span class="s">&#39;•₀ - false&#39;</span> <span class="s">&#39;false</span>
 <span class="s">   ifTrue: [ •₀ ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false = •₀&#39;</span> <span class="s">&#39;•₀</span>
-<span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ false ]&#39;</span> <span class="s">&#39;false cdr&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;•₀</span>
 <span class="s">   ifTrue: [ false ]</span>
-<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;false cons: •₀&#39;</span> <span class="s">&#39;•₀ = false&#39;</span> <span class="s">&#39;false + •₀&#39;</span>
-            <span class="s">&#39;•₀ cons: false&#39;</span> <span class="s">&#39;false - •₀&#39;</span> <span class="s">&#39;•₀ + false&#39;</span> <span class="s">&#39;•₀ - false&#39;</span> <span class="ss">)</span><span class="p">.</span>
+<span class="s">   ifFalse: [ •₁ ]&#39;</span> <span class="s">&#39;•₀</span>
+<span class="s">   ifTrue: [ •₁ ]</span>
+<span class="s">   ifFalse: [ false ]&#39;</span> <span class="ss">)</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">-1</span>
 </pre></div>
@@ -1301,18 +1317,20 @@ end with an if expression. So … what else is <code class="docutils literal not
                            <span class="nb">ifFalse:</span> [ <span class="ss">#mustard</span> <span class="nf">cons:</span> <span class="nv">a</span> <span class="nf">car</span> ] ] ]
                <span class="nf">contextVariables:</span> <span class="nc">Dictionary</span> <span class="nf">empty</span> ] <span class="nf">asGoal</span><span class="p">.</span>
 
-   <span class="bp">self</span> <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">1</span>) <span class="nf">asArray</span> <span class="nf">equals:</span> { [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
-      <span class="nv">a</span> <span class="nf">car</span> <span class="nf">isAtom</span>
-         <span class="nb">ifTrue:</span> [ 
-            <span class="nv">a</span> <span class="nf">car</span> <span class="nf">=</span> <span class="nv">a</span> <span class="nf">cdr</span>
-               <span class="nb">ifTrue:</span> [ <span class="ss">#hominy</span> ]
-               <span class="nb">ifFalse:</span> [ <span class="ss">#grits</span> ] ]
-         <span class="nb">ifFalse:</span> [ 
-            <span class="nv">a</span> <span class="nf">car</span> <span class="nf">cdr</span> <span class="nf">=</span> (<span class="ss">#hash</span> <span class="nf">cons:</span> (<span class="ss">#browns</span> <span class="nf">cons:</span> <span class="bp">nil</span>))
-               <span class="nb">ifTrue:</span> [ 
-               <span class="ss">#ketchup</span> <span class="nf">cons:</span>
-                  (<span class="nv">a</span> <span class="nf">car</span> <span class="nf">car</span> <span class="nf">cons:</span> (<span class="ss">#hash</span> <span class="nf">cons:</span> (<span class="ss">#browns</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) ]
-               <span class="nb">ifFalse:</span> [ <span class="ss">#mustard</span> <span class="nf">cons:</span> <span class="nv">a</span> <span class="nf">car</span> ] ] ] <span class="nf">unaryRBNode</span> }
+   <span class="bp">self</span>
+      <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">1</span>) <span class="nf">readStream</span> <span class="nf">upToEnd</span>
+      <span class="nf">equals:</span> { [ <span class="o">:</span><span class="nv">a</span> <span class="o">|</span> 
+         <span class="nv">a</span> <span class="nf">car</span> <span class="nf">isAtom</span>
+            <span class="nb">ifTrue:</span> [ 
+               <span class="nv">a</span> <span class="nf">car</span> <span class="nf">=</span> <span class="nv">a</span> <span class="nf">cdr</span>
+                  <span class="nb">ifTrue:</span> [ <span class="ss">#hominy</span> ]
+                  <span class="nb">ifFalse:</span> [ <span class="ss">#grits</span> ] ]
+            <span class="nb">ifFalse:</span> [ 
+               <span class="nv">a</span> <span class="nf">car</span> <span class="nf">cdr</span> <span class="nf">=</span> (<span class="ss">#hash</span> <span class="nf">cons:</span> (<span class="ss">#browns</span> <span class="nf">cons:</span> <span class="bp">nil</span>))
+                  <span class="nb">ifTrue:</span> [ 
+                  <span class="ss">#ketchup</span> <span class="nf">cons:</span>
+                     (<span class="nv">a</span> <span class="nf">car</span> <span class="nf">car</span> <span class="nf">cons:</span> (<span class="ss">#hash</span> <span class="nf">cons:</span> (<span class="ss">#browns</span> <span class="nf">cons:</span> <span class="bp">nil</span>))) ]
+                  <span class="nb">ifFalse:</span> [ <span class="ss">#mustard</span> <span class="nf">cons:</span> <span class="nv">a</span> <span class="nf">car</span> ] ] ] <span class="nf">unaryRBNode</span> }
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1348,25 +1366,21 @@ end with an if expression. So … what else is <code class="docutils literal not
             <span class="nf">|</span> (<span class="nv">theory</span> <span class="nf">ancestorº</span> <span class="nf">value:</span> <span class="nv">n</span> <span class="nf">value:</span> <span class="nv">a</span>) ] <span class="nf">asGoal</span><span class="p">.</span>
 
    <span class="bp">self</span>
-      <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">40</span>) <span class="nf">asArray</span> <span class="nf">asString</span>
+      <span class="nf">assert:</span> (<span class="nv">aGoal</span> <span class="nf">solutions</span> <span class="nf">next:</span> <span class="m">40</span>) <span class="nf">readStream</span> <span class="nf">upToEnd</span> <span class="nf">asString</span>
       <span class="nf">equals:</span>
-         <span class="s">&#39;an Array(an Array(RBMessageNode(•₀ car cdr) •₀) an Array(•₀ •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBBlockNode([ •₀ car cdr car ]) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBBlockNode([ •₀ car cdr car ]) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car car car) •₀) an Array(RBMessageNode(•₀ car cdr car car car) •₀) an Array(RBMessageNode(•₀ car cdr</span>
+         <span class="s">&#39;an Array(an Array(•₀ •₀) an Array(RBMessageNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBMessageNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBBlockNode([ •₀ car cdr ]) •₀) an Array(RBSequenceNode(•₀ car cdr) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBMessageNode(•₀ car cdr cdr car) •₀) an Array(RBMessageNode(•₀ car cdr car car) •₀) an Array(RBMessageNode(•₀ car cdr cdr car) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBMessageNode(•₀ = •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBMessageNode(•₀ cons: •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr + •₁) •₀) an Array(RBMessageNode(•₀ + •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr - •₁) •₀) an Array(RBMessageNode(•₀ - •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr</span>
 <span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀ car cdr</span>
-<span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ •₂ ]) •₀) an Array(RBSequenceNode(•₀ car cdr car) •₀) an Array(RBSequenceNode(•₀ car cdr car) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBBlockNode([ •₀ car cdr car car ]) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBMessageNode(•₀</span>
-<span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ •₂ car cdr ]) •₂) an Array(RBBlockNode([ •₀ car cdr car car ]) •₀) an Array(RBMessageNode([ •₀ car cdr ] car) •₀) an Array(RBMessageNode(•₀</span>
-<span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ •₂ car cdr ]) •₂) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBMessageNode([ •₀ car cdr ] car) •₀) an Array(RBMessageNode(•₀ car cdr car</span>
-<span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀ car cdr cdr) •₀) an Array(RBMessageNode(•₀</span>
+<span class="s">   ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀</span>
 <span class="s">   ifTrue: [ •₁ car cdr ]</span>
-<span class="s">   ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀ car cdr car</span>
+<span class="s">   ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀</span>
 <span class="s">   ifTrue: [ •₁ ]</span>
-<span class="s">   ifFalse: [ •₂ ]) •₀) an Array(RBSequenceNode(•₀ car cdr car car) •₀) an Array(RBMessageNode(•₀</span>
+<span class="s">   ifFalse: [ •₂ car cdr ]) •₂) an Array(RBMessageNode(•₀ car cdr car cdr) •₀) an Array(RBMessageNode(•₀ car cdr cdr cdr) •₀) an Array(RBMessageNode(•₀ car cdr = •₁) •₀) an Array(RBMessageNode(•₀ = •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBMessageNode(•₀ cons: •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr + •₁) •₀) an Array(RBMessageNode(•₀ + •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr - •₁) •₀) an Array(RBMessageNode(•₀ - •₁ car cdr) •₁) an Array(RBMessageNode(•₀ car cdr</span>
+<span class="s">   ifTrue: [ •₁ ]</span>
+<span class="s">   ifFalse: [ •₂ ]) •₀) an Array(RBMessageNode(•₀</span>
 <span class="s">   ifTrue: [ •₁ car cdr ]</span>
-<span class="s">   ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBBlockNode([ [ •₀ car cdr ] ]) •₀) an Array(RBSequenceNode(•₀ car cdr car car) •₀) an Array(RBMessageNode([ •₀ car cdr car ] car) •₀) an Array(RBMessageNode(•₀ car cdr cons: •₁) •₀) an Array(RBMessageNode(•₀ = •₁ car cdr) •₁))&#39;</span><span class="p">.</span>
+<span class="s">   ifFalse: [ •₂ ]) •₁) an Array(RBMessageNode(•₀</span>
+<span class="s">   ifTrue: [ •₁ ]</span>
+<span class="s">   ifFalse: [ •₂ car cdr ]) •₂) an Array(RBMessageNode(•₀ car cdr car cdr) •₀))&#39;</span><span class="p">.</span>
 
    <span class="o">^</span> <span class="bp">self</span> <span class="nf">exportComputationTreeOfGoal:</span> <span class="nv">aGoal</span> <span class="nf">limitedTo:</span> <span class="m">40</span>
 </pre></div>
