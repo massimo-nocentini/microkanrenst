@@ -10,16 +10,19 @@ BaselineOfMicroKanren >> baseline: spec [
 	<baseline>
 	spec for: #common do: [ "Externals."
 		spec
-			"baseline: 'Srfi41'
-			with: [ spec repository: 'github://massimo-nocentini/srfi-41st' ];"
 			baseline: 'dsst'
 			with: [ spec repository: 'github://massimo-nocentini/dsst' ];
 			baseline: 'MetaSTExporter'
-			with: [ spec repository: 'github://massimo-nocentini/MetaSTExporter/src' ].
+			with: [ 
+				spec repository: 'github://massimo-nocentini/MetaSTExporter/src' ].
+
 		"Packages"
 		spec
 			package: 'MicroKanren';
+			package: 'MicroKanren-Streams';
 			package: 'MicroKanren-Goals';
+			package: 'MicroKanren-Predicates'
+			with: [ spec requires: #( 'MicroKanren-Goals' ) ];
 			package: 'MicroKanren-Extensions'
 			with: [ spec requires: #( 'MicroKanren' ) ];
 			package: 'MicroKanren-Theories'
@@ -29,7 +32,8 @@ BaselineOfMicroKanren >> baseline: spec [
 			package: 'MicroKanren-Visualizations'
 			with: [ spec requires: #( 'MicroKanren' ) ];
 			package: 'MicroKanren-Realog';
-			package: 'MicroKanren-RB' ]
+			package: 'MicroKanren-RB';
+			package: 'MicroKanren-ACL' ]
 ]
 
 { #category : #export }
