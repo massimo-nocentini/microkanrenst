@@ -1,6 +1,6 @@
 Class {
 	#name : #ArithTest,
-	#superclass : #Srfi41AbstractTest,
+	#superclass : #GoalAbstractTest,
 	#category : #'MicroKanren-Tests'
 }
 

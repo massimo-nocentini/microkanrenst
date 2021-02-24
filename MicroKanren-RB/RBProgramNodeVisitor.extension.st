@@ -4,9 +4,3 @@ Extension { #name : #RBProgramNodeVisitor }
 RBProgramNodeVisitor >> visitLogicVariableNode: aRBMKVarNode [
 	self visitVariableNode: aRBMKVarNode
 ]
-
-{ #category : #'*MicroKanren-RB' }
-RBProgramNodeVisitor >> visitSelectorNode: aNode [
-
-	self subclassResponsibility
-]

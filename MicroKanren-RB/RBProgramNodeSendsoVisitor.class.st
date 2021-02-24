@@ -1,6 +1,6 @@
 Class {
 	#name : #RBProgramNodeSendsoVisitor,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeMKVisitor,
 	#instVars : [
 		'goals',
 		'selectorVar'
@@ -49,4 +49,10 @@ RBProgramNodeSendsoVisitor >> visitMessageNode: aMessageNode [
 	super visitMessageNode: aMessageNode.
 
 	goals add: (selectorVar unifyo value: aMessageNode selectorNode)
+]
+
+{ #category : #'*MicroKanren-RB' }
+RBProgramNodeSendsoVisitor >> visitSelectorNode: aNode [
+
+	self shouldNotImplement
 ]

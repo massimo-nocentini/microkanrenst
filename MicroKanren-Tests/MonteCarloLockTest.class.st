@@ -1,6 +1,6 @@
 Class {
 	#name : #MonteCarloLockTest,
-	#superclass : #Srfi41AbstractTest,
+	#superclass : #GoalAbstractTest,
 	#category : #'MicroKanren-Tests'
 }
 

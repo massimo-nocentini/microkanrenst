@@ -1,6 +1,6 @@
 Class {
 	#name : #RBProgramNodeWalkVisitor,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeMKVisitor,
 	#instVars : [
 		'walker'
 	],

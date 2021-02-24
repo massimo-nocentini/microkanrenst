@@ -3,7 +3,7 @@ I am a node program visitor that reconstruct an exact copy of the visited RBNode
 "
 Class {
 	#name : #RBProgramNodeIdentityVisitor,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeMKVisitor,
 	#category : #'MicroKanren-RB'
 }
 

@@ -1,6 +1,6 @@
 Class {
 	#name : #MKSexpTest,
-	#superclass : #Srfi41AbstractTest,
+	#superclass : #GoalAbstractTest,
 	#traits : 'TIceImagesExporting',
 	#classTraits : 'TIceImagesExporting classTrait',
 	#category : #'MicroKanren-Tests'

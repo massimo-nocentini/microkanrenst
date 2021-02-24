@@ -1,6 +1,6 @@
 Class {
 	#name : #RBProgramNodeReifyVisitor,
-	#superclass : #RBProgramNodeVisitor,
+	#superclass : #RBProgramNodeMKVisitor,
 	#instVars : [
 		'state'
 	],
