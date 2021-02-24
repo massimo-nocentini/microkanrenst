@@ -1116,68 +1116,6 @@ GoalTest >> testLolo [
 ]
 
 { #category : #tests }
-GoalTest >> testMethodTemperatureWrapper [
-
-	| methods wrappers selectors h classIndex matrix xLabels yLabels |
-	methods := (BaselineOfSrfi41 allPackageNames collect: [ :each | 
-		            each asPackage ]) flatCollect: [ :each | each methods ].
-
-	wrappers := methods collect: [ :each | 
-		            MethodTemperatureWrapper on: each ].
-	wrappers do: [ :each | each install ].
-
-	combTheory := CombinatoricsTheory new.
-	([ :alpha | combTheory dycko value: alpha ] asGoal solutions next: 25)
-		asOrderedCollection.
-
-	wrappers do: [ :each | each uninstall ].
-	"wrappers := (wrappers sorted: [ :a :b | a count <= b count ]) 
-		            collect: [ :e | e count -> e ]."
-
-	classIndex := Dictionary new.
-	selectors := Dictionary new.
-	wrappers do: [ :each | 
-		| selectorAssoc aClass |
-		aClass := each method methodClass.
-		selectorAssoc := selectors
-			                 at: each method selector
-			                 ifAbsentPut: [ 
-			                 selectors size + 1 -> Dictionary new ].
-		selectorAssoc value in: [ :d | 
-			d
-				at: aClass
-				ifPresent: [ Error signal ]
-				ifAbsentPut: [ each count ] ].
-		classIndex at: aClass ifAbsentPut: [ classIndex size + 1 ] ].
-
-	yLabels := Array new: selectors size.
-	xLabels := Array new: classIndex size.
-	matrix := Array new: selectors size.
-	selectors keysAndValuesDo: [ :sk :sv | 
-		| row |
-		yLabels at: sv key put: sk.
-		row := matrix
-			       at: sv key
-			       put: (Array new: classIndex size withAll: 0).
-		sv value keysAndValuesDo: [ :ck :cv | 
-			| ci |
-			ci := classIndex at: ck.
-			xLabels at: ci put: ck name.
-			row at: ci put: cv ] ].
-
-
-	"find one method"
-	"	wrappers detect: [ :e | e value method = (Succeed >> #onState:) ]"
-
-
-	h := RSHeatmap new.
-	h xLabels: xLabels.
-	h yLabels: yLabels.
-	h show: matrix.
-	h open
-]
-
-{ #category : #tests }
 GoalTest >> testNats [
 
 	| g M |
