@@ -1,6 +1,12 @@
 Extension { #name : #Cons }
 
 { #category : #'*MicroKanren' }
+Cons >> acceptOccurChecker: aChecker [
+
+	^ aChecker forCons: self
+]
+
+{ #category : #'*MicroKanren' }
 Cons >> reifyUsingReifier: aReifier [
 
 	^ aReifier forCons: self
