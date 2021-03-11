@@ -61,20 +61,34 @@ Unifier >> forSequenceableCollection: aCollection forSequenceableCollection: ano
 
 { #category : #unification }
 Unifier >> forVar: aVar forObject: anObject [
-	^ state at: aVar put: anObject
+
+	^ (OccurChecker new
+		   state: state;
+		   var: aVar;
+		   value: anObject)
+		  ifTrue: [ 
+			  | error |
+			  error := UnificationError new
+				           left: aVar;
+				           right: (state walker value: anObject);
+				           yourself.
+			  continuation value: error ]
+		  ifFalse: [ state at: aVar put: anObject ]
 ]
 
 { #category : #dispatched }
 Unifier >> forVar: aVar forVar: anotherVar [
+
 	^ aVar = anotherVar
-		ifTrue: [ state ]
-		ifFalse: [ | v w |
-			v := aVar.
-			w := anotherVar.
-			w id < v id
-				ifTrue: [ w := aVar.
-					v := anotherVar ].
-			self forVar: w forObject: v ]
+		  ifTrue: [ state ]
+		  ifFalse: [ 
+			  | v w |
+			  v := aVar.
+			  w := anotherVar.
+			  w id < v id ifTrue: [ 
+				  w := aVar.
+				  v := anotherVar ].
+			  state at: w put: v ]
 ]
 
 { #category : #accessing }

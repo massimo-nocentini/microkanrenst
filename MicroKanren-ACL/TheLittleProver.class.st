@@ -99,8 +99,8 @@ TheLittleProver >> equalIfº [
 				               yourself).
 
 	  (self unifyº value: ancestor value: c)
-	  , ((self unifyº value: a value: dRB)
-		   | (self ancestorº value: a value: dRB)) ] asGoal ]
+	  , ((self ancestorº value: a value: dRB)
+		   | (self unifyº value: a value: dRB)) ] asGoal ]
 ]
 
 { #category : #predicates }

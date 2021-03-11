@@ -1,6 +1,12 @@
 Extension { #name : #RBNode }
 
 { #category : #'*MicroKanren-RB' }
+RBNode >> acceptOccurChecker: aChecker [
+
+	^ aChecker forRBNode: self
+]
+
+{ #category : #'*MicroKanren-RB' }
 RBNode >> asRBNode [
 
 	^ self

@@ -1,6 +1,12 @@
 Extension { #name : #Symbol }
 
 { #category : #'*MicroKanren' }
+Symbol >> acceptOccurChecker: aChecker [
+
+	^ aChecker forObject: self
+]
+
+{ #category : #'*MicroKanren' }
 Symbol >> reifyUsingReifier: aReifier [
 
 	^ aReifier forObject: self

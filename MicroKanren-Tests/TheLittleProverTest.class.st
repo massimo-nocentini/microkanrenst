@@ -705,7 +705,6 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_07 [
 TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 
 	| aGoal node |
-	self skip.
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a :b :c | 
@@ -972,8 +971,6 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_43 [
 TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57 [
 
 	| aGoal |
-	self skip.
-
 	aGoal := [ :rewritten | 
 	         [ :ast | 
 	         [ :a | 
@@ -1032,18 +1029,20 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57 [
 
 	self
 		assert: (aGoal solutions next: 1) readStream upToEnd
-		equals: { [ :a | 
-			a car isAtom
-				ifTrue: [ 
-					a car = a cdr
-						ifTrue: [ #hominy ]
-						ifFalse: [ #grits ] ]
-				ifFalse: [ 
-					a car cdr = (#hash cons: (#browns cons: nil))
-						ifTrue: [ 
-						#ketchup cons:
-							(a car car cons: (#hash cons: (#browns cons: nil))) ]
-						ifFalse: [ #mustard cons: a car ] ] ] unaryRBNode }
+		equals: { ([ :a | 
+			 a car isAtom
+				 ifTrue: [ 
+					 a car = a cdr
+						 ifTrue: [ #hominy ]
+						 ifFalse: [ #grits ] ]
+				 ifFalse: [ 
+					 a car cdr = (#hash cons: (#browns cons: nil))
+						 ifTrue: [ 
+						 #ketchup cons:
+							 (a car car cons: (#hash cons: (#browns cons: nil))) ]
+						 ifFalse: [ #mustard cons: a car ] ] ] 
+				 substituteVariablesUsingSequenceableCollection:
+				 { 0 asReifiedVar asRBNode }) }
 ]
 
 { #category : #tests }

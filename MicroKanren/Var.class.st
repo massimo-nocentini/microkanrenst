@@ -32,6 +32,12 @@ Var >> = anObject [
 	^ anObject equalVar: self
 ]
 
+{ #category : #visiting }
+Var >> acceptOccurChecker: aChecker [
+
+	^ aChecker forVar: self
+]
+
 { #category : #comparing }
 Var >> equalVar: anotherReifiedVar [
 	^ id = anotherReifiedVar id

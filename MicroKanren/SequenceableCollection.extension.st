@@ -1,5 +1,11 @@
 Extension { #name : #SequenceableCollection }
 
+{ #category : #'*MicroKanren' }
+SequenceableCollection >> acceptOccurChecker: aChecker [
+
+	^ aChecker forSequenceableCollection: self
+]
+
 { #category : #'*MicroKanren-core' }
 SequenceableCollection >> cond [
  |g|
