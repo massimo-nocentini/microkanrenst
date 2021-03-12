@@ -1,5 +1,11 @@
 Extension { #name : #Object }
 
+{ #category : #'*MicroKanren' }
+Object >> acceptOccurChecker: aChecker [
+
+	^ aChecker forObject: self
+]
+
 { #category : #'*MicroKanren-core' }
 Object >> cons: anObj [
 	^ anObj consedObject: self
