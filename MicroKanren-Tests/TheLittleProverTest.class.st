@@ -742,7 +742,7 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_15 [
 					         o
 						         ifTrue: [ c ]
 						         ifFalse: [ c ] ]
-				         do: theory equalIfº ]
+				         do: theory equalIf0º ]
 		         then: [ :asts | 
 		         theory unifyº value: asts last value: rewritten asRBNode ]
 		         contextVariables: (Dictionary new

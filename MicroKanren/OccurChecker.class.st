@@ -18,6 +18,10 @@ OccurChecker >> forCons: aCons [
 OccurChecker >> forObject: anObj [
 
 	^ anObj = var
+		  ifTrue: [ 
+			  Error signal:
+				  'Logical inconsistency, re-check the entire unification algorithm.' ]
+		  ifFalse: [ false ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -33,7 +37,7 @@ OccurChecker >> forSequenceableCollection: aCollection [
 
 	^ aCollection
 		  inject: false
-		  into: [ :aBool :c | aBool or: [ self value: c ] ]
+		  into: [ :aBoolean :c | aBoolean or: [ self value: c ] ]
 ]
 
 { #category : #dispatched }

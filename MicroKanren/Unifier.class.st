@@ -19,8 +19,8 @@ Unifier >> forCons: aCons forCons: anotherCons [
 
 	| carState |
 	carState := self value: aCons car value: anotherCons car.
-	^ carState unifier
-		  continuation: continuation;
+	^ self
+		  state: carState;
 		  value: aCons cdr value: anotherCons cdr
 ]
 
@@ -45,9 +45,9 @@ Unifier >> forSequenceableCollection: aCollection forSequenceableCollection: ano
 		  ifTrue: [ 
 			  (aCollection zip: anotherCollection)
 				  inject: state
-				  into: [ :s :pair | 
-					  s unifier
-						  continuation: continuation;
+				  into: [ :aState :pair | "no problem to reassign the same object on the first message send"
+					  self
+						  state: aState;
 						  value: pair key value: pair value ] ]
 		  ifFalse: [ 
 			  | error |
@@ -62,10 +62,12 @@ Unifier >> forSequenceableCollection: aCollection forSequenceableCollection: ano
 { #category : #unification }
 Unifier >> forVar: aVar forObject: anObject [
 
-	^ (OccurChecker new
-		   state: state;
-		   var: aVar;
-		   value: anObject)
+	| aVarHasOccurred |
+	aVarHasOccurred := OccurChecker new
+		                   state: state;
+		                   var: aVar;
+		                   value: anObject.
+	^ aVarHasOccurred
 		  ifTrue: [ 
 			  | error |
 			  error := UnificationError new
@@ -92,7 +94,8 @@ Unifier >> forVar: aVar forVar: anotherVar [
 ]
 
 { #category : #accessing }
-Unifier >> state: aState [ 
+Unifier >> state: aState [
+
 	state := aState
 ]
 

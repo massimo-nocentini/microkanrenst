@@ -7,10 +7,9 @@ Unifier >> forRBBlockNode: aRBBlockNode forRBBlockNode: anotherRBBlockNode [
 	aState := self
 		          value: aRBBlockNode arguments
 		          value: anotherRBBlockNode arguments.
-	aState := aState unifier
-		          continuation: continuation;
-		          value: aRBBlockNode body value: anotherRBBlockNode body.
-	^ aState
+	^ self
+		  state: aState;
+		  value: aRBBlockNode body value: anotherRBBlockNode body
 ]
 
 { #category : #'*MicroKanren-RB' }
@@ -28,20 +27,25 @@ Unifier >> forRBLogicVariableNode: aNode forRBLogicVariableNode: anotherNode [
 { #category : #'*MicroKanren-RB' }
 Unifier >> forRBMessageNode: aRBMessageNode forRBMessageNode: anotherRBMessageNode [
 
-	| aState |
-	
-	aState := self
-		          value: aRBMessageNode receiver
-		          value: anotherRBMessageNode receiver.
-	aState := aState unifier
-		          continuation: continuation;
-		          value: aRBMessageNode selectorNode
-		          value: anotherRBMessageNode selectorNode.
-	aState := aState unifier
-		          continuation: continuation;
-		          value: aRBMessageNode arguments
-		          value: anotherRBMessageNode arguments.
-	^ aState
+	| steps |
+	steps := Array
+		         with: [ :aState | 
+			         self
+				         state: aState;
+				         value: aRBMessageNode receiver
+				         value: anotherRBMessageNode receiver ]
+		         with: [ :aState | 
+			         self
+				         state: aState;
+				         value: aRBMessageNode selectorNode
+				         value: anotherRBMessageNode selectorNode ]
+		         with: [ :aState | 
+			         self
+				         state: aState;
+				         value: aRBMessageNode arguments
+				         value: anotherRBMessageNode arguments ].
+
+	^ steps inject: state into: [ :aState :each | each value: aState ]
 ]
 
 { #category : #'*MicroKanren-RB' }

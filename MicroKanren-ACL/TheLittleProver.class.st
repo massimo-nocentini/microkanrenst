@@ -80,6 +80,29 @@ TheLittleProver >> consº [
 ]
 
 { #category : #predicates }
+TheLittleProver >> equalIf0º [
+
+	^ [ :a :c :b | 
+	  [ :d :e | 
+	  | ancestor dRB |
+	  dRB := d asRBNode.
+
+	  ancestor := [ 
+	              a = b
+		              ifTrue: [ d ]
+		              ifFalse: [ e ] ] unaryRBNode 
+		              substituteVariablesUsingDictionary: (Dictionary new
+				               at: #a put: a;
+				               at: #b put: b;
+				               at: #d put: dRB;
+				               at: #e put: e asRBNode;
+				               yourself).
+
+	  (self unifyº value: ancestor value: c)
+	  , (self unifyº value: a value: dRB) ] asGoal ]
+]
+
+{ #category : #predicates }
 TheLittleProver >> equalIfº [
 
 	^ [ :a :c :b | 
