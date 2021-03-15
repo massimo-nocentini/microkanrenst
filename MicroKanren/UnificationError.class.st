@@ -34,7 +34,7 @@ UnificationError >> left: anObject [
 ]
 
 { #category : #'as yet unclassified' }
-UnificationError >> onState: aState afterUnificationByUnify: aGoal [
+UnificationError >> onState: aState bindings: bindings fromUnify: aGoal [
 
 	| extendedState |
 	extendedState := aState failedBecauseOfUnificationError: self.

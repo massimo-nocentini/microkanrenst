@@ -34,15 +34,19 @@ State class >> fromUnionFind: aUF [
 ]
 
 { #category : #'as yet unclassified' }
+State >> at: aVar [
+
+	^ substitution at: (self indexOf: aVar)
+]
+
+{ #category : #'as yet unclassified' }
 State >> at: aVar put: aValue [
 
-	| index aCell aNewCell |
-	index := birthdate - aVar id + 1.
-	aCell := substitution at: index.
-	aNewCell := aCell unified: aValue.
+	| aCell |
+	aCell := (self at: aVar) unified: aValue.
 	^ self class new
 		  birthdate: birthdate;
-		  substitution: (substitution at: index put: aNewCell);
+		  substitution: (substitution at: (self indexOf: aVar) put: aCell);
 		  path: path;
 		  yourself
 ]
@@ -94,6 +98,12 @@ State >> ifCounterexampleFound: ceBlock otherwise: oBlock [
 	^ oBlock cull: self
 ]
 
+{ #category : #'as yet unclassified' }
+State >> indexOf: aVar [
+
+	^ birthdate - aVar id + 1
+]
+
 { #category : #testing }
 State >> isSound [
 
@@ -101,7 +111,7 @@ State >> isSound [
 ]
 
 { #category : #'as yet unclassified' }
-State >> onState: aState afterUnificationByUnify: aGoal [
+State >> onState: aState bindings: bindings fromUnify: aGoal [
 
 	^ true asGoal onState: self
 ]
@@ -119,14 +129,16 @@ State >> onState: aState unificationBy: bindings fromDisunite: aGoal [
 			  extendedState := aState failedBecauseOfUnificationError: error.
 			  false asGoal onState: extendedState ]
 		  ifFalse: [ 
-			  bindings associations
-				  inject: self
-				  into: [ :eachState :eachAssociation | 
-					  | aCell aNewCell aVar |
-					  aVar := eachAssociation key.
-					  aCell := eachState at: aVar.
-					  aNewCell := aCell disunited: eachAssociation value.
-					  eachState at: aVar put: aNewCell ] ]
+			  | aNewState |
+			  aNewState := bindings associations
+				               inject: self
+				               into: [ :eachState :eachAssociation | 
+					               | aCell aNewCell aVar |
+					               aVar := eachAssociation key.
+					               aCell := eachState at: aVar.
+					               aNewCell := aCell disunited: eachAssociation value.
+					               eachState at: aVar put: aNewCell ].
+			  true asGoal onState: aNewState ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -190,11 +202,6 @@ State >> substitution: aCollection [
 { #category : #reification }
 State >> trasparentReifier [
 	^ self reifierOfClass: TrasparentReifier
-]
-
-{ #category : #creating }
-State >> unifier [
-	^ Unifier new state: self; yourself
 ]
 
 { #category : #reification }

@@ -7,10 +7,30 @@ Class {
 { #category : #running }
 Unify >> onState: aState afterPushingGoal: aGoal [
 
-	| aStateOrException |
+	| aStateOrException unifier bindings |
+	bindings := Dictionary new.
+
+	unifier := Unifier new
+		           bindings: bindings;
+		           state: aState;
+		           yourself.
+
 	aStateOrException := [ :k | 
-	                     aState unifier
+	                     unifier
 		                     continuation: k;
 		                     value: left value: right ] valueWithExitUnary.
-	^ aStateOrException onState: aState afterUnificationByUnify: self
+
+	^ self
+		  onState: aState
+		  unificationResult: aStateOrException
+		  bindings: bindings
+]
+
+{ #category : #running }
+Unify >> onState: aState unificationResult: aStateOrException bindings: bindings [
+
+	^ aStateOrException
+		  onState: aState
+		  bindings: bindings
+		  fromUnify: self
 ]
