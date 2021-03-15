@@ -119,14 +119,14 @@ State >> onState: aState unificationBy: bindings fromDisunite: aGoal [
 			  extendedState := aState failedBecauseOfUnificationError: error.
 			  false asGoal onState: extendedState ]
 		  ifFalse: [ 
-				self halt.
 			  bindings associations
-				  inject: substitution
-				  into: [ :aSubstitution :each | 
-					  | aCell |
-					  aCell := aSubstitution at: each.
-
-					  aCell disunited: nil ] ]
+				  inject: self
+				  into: [ :eachState :eachAssociation | 
+					  | aCell aNewCell aVar |
+					  aVar := eachAssociation key.
+					  aCell := eachState at: aVar.
+					  aNewCell := aCell disunited: eachAssociation value.
+					  eachState at: aVar put: aNewCell ] ]
 ]
 
 { #category : #'as yet unclassified' }

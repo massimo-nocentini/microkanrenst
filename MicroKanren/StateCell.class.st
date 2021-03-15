@@ -8,6 +8,14 @@ Class {
 	#category : #MicroKanren
 }
 
+{ #category : #'as yet unclassified' }
+StateCell >> disunited: anObject [
+
+	^ self copy
+		  instVarNamed: #disunite put: anObject ~~> disunite;
+		  yourself
+]
+
 { #category : #initialization }
 StateCell >> initialize [
 

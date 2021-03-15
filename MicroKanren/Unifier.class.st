@@ -83,8 +83,8 @@ Unifier >> forVar: aVar forObject: anObject [
 				           yourself.
 			  continuation value: error ]
 		  ifFalse: [ 
-			  state at: aVar put: anObject.
-			  boundVariables at: aVar put: anObject ]
+			  boundVariables at: aVar put: anObject.
+			  state at: aVar put: anObject ]
 ]
 
 { #category : #dispatched }
@@ -99,8 +99,8 @@ Unifier >> forVar: aVar forVar: anotherVar [
 			  w id < v id ifTrue: [ 
 				  w := aVar.
 				  v := anotherVar ].
-			  state at: w put: v.
-			  boundVariables at: w put: v ]
+			  boundVariables at: w put: v.
+			  state at: w put: v ]
 ]
 
 { #category : #accessing }
