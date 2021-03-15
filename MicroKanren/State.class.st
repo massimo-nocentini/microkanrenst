@@ -131,7 +131,7 @@ State >> onState: aState unificationBy: bindings fromDisunite: aGoal [
 		  ifFalse: [ 
 			  | aNewState |
 			  aNewState := bindings associations
-				               inject: self
+				               inject: aState
 				               into: [ :eachState :eachAssociation | 
 					               | aCell aNewCell aVar |
 					               aVar := eachAssociation key.
