@@ -15,10 +15,10 @@ Object >> cons: anObj [
 Object >> disuniteo [
 
 	^ [ :anotherObject | 
-	  ^ Disunite new
-		    left: self;
-		    right: anotherObject;
-		    yourself ]
+	  Disunite new
+		  left: self;
+		  right: anotherObject;
+		  yourself ]
 ]
 
 { #category : #'*MicroKanren-core' }

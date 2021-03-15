@@ -101,7 +101,13 @@ State >> isSound [
 ]
 
 { #category : #'as yet unclassified' }
-State >> onState: aState afterUnificationByDisunite: aGoal [
+State >> onState: aState afterUnificationByUnify: aGoal [
+
+	^ true asGoal onState: self
+]
+
+{ #category : #'as yet unclassified' }
+State >> onState: aState unificationBy: bindings fromDisunite: aGoal [
 
 	^ self == aState
 		  ifTrue: [ 
@@ -112,13 +118,15 @@ State >> onState: aState afterUnificationByDisunite: aGoal [
 				           yourself.
 			  extendedState := aState failedBecauseOfUnificationError: error.
 			  false asGoal onState: extendedState ]
-		  ifFalse: [  ]
-]
+		  ifFalse: [ 
+				self halt.
+			  bindings associations
+				  inject: substitution
+				  into: [ :aSubstitution :each | 
+					  | aCell |
+					  aCell := aSubstitution at: each.
 
-{ #category : #'as yet unclassified' }
-State >> onState: aState afterUnificationByUnify: aGoal [
-
-	^ true asGoal onState: self
+					  aCell disunited: nil ] ]
 ]
 
 { #category : #'as yet unclassified' }

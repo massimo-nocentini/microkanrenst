@@ -11,6 +11,7 @@ Class {
 { #category : #initialization }
 StateCell >> initialize [
 
+	super initialize.
 	unify := Maybe nothing.
 	disunite := nil
 ]

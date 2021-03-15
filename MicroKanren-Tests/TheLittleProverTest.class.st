@@ -206,6 +206,18 @@ TheLittleProverTest >> setUp [
 ]
 
 { #category : #tests }
+TheLittleProverTest >> testDisuniteº [
+
+	self
+		assert: [ :x :y :z | 
+			(theory disuniteº value: 5 value: x) , (theory disuniteº
+				 value: (5 cons: (6 cons: nil))
+				 value: (y cons: (z cons: nil))) ] asGoal solutions readStream
+				upToEnd
+		equals: #(  )
+]
+
+{ #category : #tests }
 TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_06 [
 
 	"(car (cons 'ham '(eggs)))"

@@ -80,6 +80,12 @@ TheLittleProver >> consº [
 ]
 
 { #category : #predicates }
+TheLittleProver >> disuniteº [
+
+	^ [ :a :b | a disuniteo value: b ]
+]
+
+{ #category : #predicates }
 TheLittleProver >> equalIf0º [
 
 	^ [ :a :c :b | 

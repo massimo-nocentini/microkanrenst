@@ -3,10 +3,17 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'state',
-		'continuation'
+		'continuation',
+		'boundVariables'
 	],
 	#category : #MicroKanren
 }
+
+{ #category : #accessing }
+Unifier >> bindings: aDictionary [
+
+	boundVariables := aDictionary
+]
 
 { #category : #accessing }
 Unifier >> continuation: anObject [
@@ -75,7 +82,9 @@ Unifier >> forVar: aVar forObject: anObject [
 				           right: (state walker value: anObject);
 				           yourself.
 			  continuation value: error ]
-		  ifFalse: [ state at: aVar put: anObject ]
+		  ifFalse: [ 
+			  state at: aVar put: anObject.
+			  boundVariables at: aVar put: anObject ]
 ]
 
 { #category : #dispatched }
@@ -90,7 +99,8 @@ Unifier >> forVar: aVar forVar: anotherVar [
 			  w id < v id ifTrue: [ 
 				  w := aVar.
 				  v := anotherVar ].
-			  state at: w put: v ]
+			  state at: w put: v.
+			  boundVariables at: w put: v ]
 ]
 
 { #category : #accessing }
