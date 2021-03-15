@@ -1,0 +1,30 @@
+Class {
+	#name : #StateCell,
+	#superclass : #Object,
+	#instVars : [
+		'unify',
+		'disunite'
+	],
+	#category : #MicroKanren
+}
+
+{ #category : #initialization }
+StateCell >> initialize [
+
+	unify := Maybe nothing.
+	disunite := nil
+]
+
+{ #category : #'as yet unclassified' }
+StateCell >> unified [
+
+	^ unify
+]
+
+{ #category : #'as yet unclassified' }
+StateCell >> unified: anObject [
+
+	^ self copy
+		  instVarNamed: #unify put: (Maybe just: anObject);
+		  yourself
+]

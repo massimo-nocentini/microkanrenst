@@ -12,6 +12,16 @@ Object >> cons: anObj [
 ]
 
 { #category : #'*MicroKanren-core' }
+Object >> disuniteo [
+
+	^ [ :anotherObject | 
+	  ^ Disunite new
+		    left: self;
+		    right: anotherObject;
+		    yourself ]
+]
+
+{ #category : #'*MicroKanren-core' }
 Object >> equalVar: aReifiedVar [
 	^ false
 ]

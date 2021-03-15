@@ -34,6 +34,12 @@ UnificationError >> left: anObject [
 ]
 
 { #category : #'as yet unclassified' }
+UnificationError >> onState: aState afterUnificationByDisunite: aGoal [
+
+	^ true asGoal onState: aState
+]
+
+{ #category : #'as yet unclassified' }
 UnificationError >> onState: aState afterUnificationByUnify: aGoal [
 
 	| extendedState |

@@ -35,12 +35,14 @@ State class >> fromUnionFind: aUF [
 
 { #category : #'as yet unclassified' }
 State >> at: aVar put: aValue [
+
+	| index aCell aNewCell |
+	index := birthdate - aVar id + 1.
+	aCell := substitution at: index.
+	aNewCell := aCell unified: aValue.
 	^ self class new
 		  birthdate: birthdate;
-		  substitution:
-			  (substitution
-				   at: birthdate - aVar id + 1
-				   put: (Maybe just: aValue));
+		  substitution: (substitution at: index put: aNewCell);
 		  path: path;
 		  yourself
 ]
@@ -61,7 +63,7 @@ State >> collectVars: aCollection forFresh: aFresh [
 	extendedSubstitution := vars
 		                        inject: substitution
 		                        into: [ :aSBRAL :each | 
-		                        aSBRAL add: Maybe nothing ].
+		                        aSBRAL add: StateCell new ].
 	nextState := self class new
 		             substitution: extendedSubstitution;
 		             birthdate: birthdate + aCollection size;
@@ -96,6 +98,21 @@ State >> ifCounterexampleFound: ceBlock otherwise: oBlock [
 State >> isSound [
 
 	^ path value isFailed not
+]
+
+{ #category : #'as yet unclassified' }
+State >> onState: aState afterUnificationByDisunite: aGoal [
+
+	^ self == aState
+		  ifTrue: [ 
+			  | extendedState error |
+			  error := DisunificationError new
+				           left: aGoal left;
+				           right: aGoal right;
+				           yourself.
+			  extendedState := aState failedBecauseOfUnificationError: error.
+			  false asGoal onState: extendedState ]
+		  ifFalse: [  ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -189,7 +206,6 @@ State >> walk: anObj [
 { #category : #'as yet unclassified' }
 State >> walk: anObj inDictionary: aDictionary [
 
-	<doc: #Realog topic: #( State walk inDictionary )>
 	^ self walkIterative: anObj inDictionary: aDictionary
 ]
 
@@ -244,7 +260,7 @@ State >> walkRecursive: anObj inDictionary: aDictionary [
 State >> walkVar: aVar inSBRAL: aSBRAL [
 
 	| maybe |
-	maybe := aSBRAL at: birthdate - aVar id + 1.
+	maybe := (aSBRAL at: birthdate - aVar id + 1) unified.
 	^ maybe
 		  ifNothing: [ aVar ]
 		  ifJust: [ :aJust | self walk: aJust content inSBRAL: aSBRAL ]

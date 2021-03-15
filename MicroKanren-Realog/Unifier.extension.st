@@ -9,8 +9,8 @@ Unifier >> forRealogCompany: aCompany forRealogCompany: anotherCompany [
 Unifier >> forRealogContract: aContract forRealogContract: anotherContract [
 
 	^ #( id employee company type ) inject: state into: [ :s :each | 
-		  s unifier
-			  continuation: continuation;
+		  self
+			  state: s;
 			  value: (each value: aContract)
 			  value: (each value: anotherContract) ]
 ]

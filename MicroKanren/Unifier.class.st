@@ -38,7 +38,7 @@ Unifier >> forObject: anObj forObject: anotherObj [
 			  continuation value: error ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #dispatched }
 Unifier >> forSequenceableCollection: aCollection forSequenceableCollection: anotherCollection [
 
 	^ aCollection size = anotherCollection size
