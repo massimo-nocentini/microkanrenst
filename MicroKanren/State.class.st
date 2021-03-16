@@ -42,13 +42,18 @@ State >> at: aVar [
 { #category : #'as yet unclassified' }
 State >> at: aVar put: aValue [
 
-	| aCell |
-	aCell := (self at: aVar) unified: aValue.
-	^ self class new
-		  birthdate: birthdate;
-		  substitution: (substitution at: (self indexOf: aVar) put: aCell);
-		  path: path;
+	^ self copy
+		  substitution: (substitution at: (self indexOf: aVar) put: aValue);
 		  yourself
+]
+
+{ #category : #accessing }
+State >> at: aVar update: aBlock [
+
+	| anObject anotherObject |
+	anObject := self at: aVar.
+	anotherObject := aBlock value: anObject.
+	^ self at: aVar put: anotherObject
 ]
 
 { #category : #accessing }
@@ -68,10 +73,9 @@ State >> collectVars: aCollection forFresh: aFresh [
 		                        inject: substitution
 		                        into: [ :aSBRAL :each | 
 		                        aSBRAL add: StateCell new ].
-	nextState := self class new
+	nextState := self copy
 		             substitution: extendedSubstitution;
 		             birthdate: birthdate + aCollection size;
-		             path: path;
 		             yourself.
 	^ aFresh onState: nextState withVars: vars
 ]
@@ -160,11 +164,10 @@ State >> onState: aState unificationBy: bindings fromDisunite: aGoal [
 			  aNewState := bindings associations
 				               inject: aState
 				               into: [ :eachState :eachAssociation | 
-					               | aCell aNewCell aVar |
-					               aVar := eachAssociation key.
-					               aCell := eachState at: aVar.
-					               aNewCell := aCell disunited: eachAssociation value.
-					               eachState at: aVar put: aNewCell ].
+					               eachState
+						               at: eachAssociation key
+						               update: [ :aCell | 
+						               aCell disunited: eachAssociation value ] ].
 			  true asGoal onState: aNewState ]
 ]
 
@@ -301,8 +304,9 @@ State >> walkRecursive: anObj inDictionary: aDictionary [
 { #category : #dispatched }
 State >> walkVar: aVar inSBRAL: aSBRAL [
 
-	| maybe |
-	maybe := (aSBRAL at: birthdate - aVar id + 1) unified.
+	| index maybe |
+	index := self indexOf: aVar.
+	maybe := (aSBRAL at: index) unified.
 	^ maybe
 		  ifNothing: [ aVar ]
 		  ifJust: [ :aJust | self walk: aJust content inSBRAL: aSBRAL ]

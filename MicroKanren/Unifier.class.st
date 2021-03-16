@@ -86,7 +86,7 @@ Unifier >> forVar: aVar forObject: anObject [
 			  continuation value: error ]
 		  ifFalse: [ 
 			  boundVariables at: aVar put: anObject.
-			  state at: aVar put: anObject ]
+			  state at: aVar update: [ :aCell | aCell unified: anObject ] ]
 ]
 
 { #category : #dispatched }
@@ -102,7 +102,7 @@ Unifier >> forVar: aVar forVar: anotherVar [
 				  w := aVar.
 				  v := anotherVar ].
 			  boundVariables at: w put: v.
-			  state at: w put: v ]
+			  state at: w update: [ :aCell | aCell unified: v ] ]
 ]
 
 { #category : #accessing }
