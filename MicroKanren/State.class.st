@@ -280,8 +280,3 @@ State >> walkVar: aVar inSBRAL: aSBRAL [
 		  ifNothing: [ aVar ]
 		  ifJust: [ :aJust | self walk: aJust content inSBRAL: aSBRAL ]
 ]
-
-{ #category : #'as yet unclassified' }
-State >> walker [
-	^ Walker on: self
-]

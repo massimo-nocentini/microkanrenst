@@ -62,10 +62,13 @@ Reifier >> reifyVars: vars [
 		           yourself.
 	^ vars collect: [ :v | 
 		  | w s |
-		  walker state: state.
-		  w := walker value: v.
+		  w := walker
+			       state: state;
+			       value: v.
 		  s := reifier value: w.
-		  s walker value: w ]
+		  walker
+			  state: s;
+			  value: w ]
 ]
 
 { #category : #accessing }

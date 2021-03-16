@@ -25,9 +25,11 @@ PredicateBagOfo >> onState: aState [
 	| aDictionary aGoal |
 	aDictionary := ((firstArgument onState: aState) select: [ :each | 
 		                each isSound ])
-		               foldrStrict: [ :each :aDict | 
+		               foldr: [ :each :aDict | 
 			               | walker walkedTemplate key |
-			               walker := each walker.
+			               walker := Walker new
+				                         state: each;
+				                         yourself.
 			               walkedTemplate := walker value: secondArgument.
 			               key := walker value: variables.
 			               aDict

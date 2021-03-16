@@ -19,12 +19,15 @@ PredicateFindAllo >> name [
 { #category : #running }
 PredicateFindAllo >> onState: aState [
 
-	| states aGoal aCons |
+	| states aGoal aCons walker |
 	states := ((firstArgument onState: aState) select: [ :each | 
 		           each isSound ]) asOrderedCollection.
 
+	walker := Walker new.
 	aCons := (states collect: [ :each | 
-		          each walker value: secondArgument ]) asCons.
+		          walker
+			          state: each;
+			          value: secondArgument ]) asCons.
 
 	aGoal := aCons unifyo value: thirdArgument.
 
