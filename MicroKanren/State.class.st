@@ -113,7 +113,34 @@ State >> isSound [
 { #category : #'as yet unclassified' }
 State >> onState: aState bindings: bindings fromUnify: aGoal [
 
-	^ true asGoal onState: self
+	^ aState == self
+		  ifTrue: [ true asGoal onState: self ]
+		  ifFalse: [ 
+			  | aNewState |
+			  aNewState := bindings associations
+				               inject: self
+				               into: [ :eachState :eachAssociation | 
+					               | aCell aVar |
+					               aVar := eachAssociation key.
+					               aCell := eachState at: aVar.
+					               aCell disunited asLinkedList
+						               inject: eachState
+						               into: [ :cState :eachValue | 
+							               | cBindings aResult |
+							               cBindings := Dictionary new.
+							               aResult := [ :k | 
+							                          Unifier new
+								                          continuation: k;
+								                          state: cState;
+								                          bindings: cBindings;
+								                          value: aVar value: eachValue ]
+								                          valueWithExitUnary.
+							               aResult
+								               onState: cState
+								               bindings: cBindings
+								               fromState: self ] ].
+
+			  true asGoal onState: aNewState ]
 ]
 
 { #category : #'as yet unclassified' }

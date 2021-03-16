@@ -76,13 +76,12 @@ Unifier >> forVar: aVar forObject: anObject [
 		                   value: anObject.
 	^ aVarHasOccurred
 		  ifTrue: [ 
-			  | error walker |
-			  walker := Walker new
-				            state: state;
-				            yourself.
+			  | error |
 			  error := UnificationError new
 				           left: aVar;
-				           right: (walker value: anObject);
+				           right: (Walker new
+						            state: state;
+						            value: anObject);
 				           yourself.
 			  continuation value: error ]
 		  ifFalse: [ 

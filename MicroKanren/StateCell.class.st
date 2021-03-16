@@ -9,6 +9,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+StateCell >> disunited [
+
+	^ disunite
+]
+
+{ #category : #'as yet unclassified' }
 StateCell >> disunited: anObject [
 
 	^ self copy
