@@ -55,13 +55,14 @@ Reifier >> forVar: aVar [
 { #category : #reification }
 Reifier >> reifyVars: vars [
 
-	| walker reifier |
-	walker := state walker.
+	| reifier walker |
+	walker := Walker new.
 	reifier := self class new
 		           state: Dictionary new asState;
 		           yourself.
 	^ vars collect: [ :v | 
 		  | w s |
+		  walker state: state.
 		  w := walker value: v.
 		  s := reifier value: w.
 		  s walker value: w ]

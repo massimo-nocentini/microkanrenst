@@ -4,8 +4,6 @@ Extension { #name : #State }
 State >> gtInspectorItemsInGLMPresentation: composite [
 
 	<gtInspectorPresentationOrder: 20>
-	| walker |
-	walker := self walker.
 	^ composite fastTable
 		  title: 'Walked Variables';
 		  display: [ (1 to: birthdate) collect: #asVar ];
@@ -15,25 +13,22 @@ State >> gtInspectorItemsInGLMPresentation: composite [
 		  column: 'Variable'
 		  evaluated: [ :aVar :index | aVar asString ]
 		  width: 50;
-		  column: 'Named'
-		  evaluated: [ :aVar :index | aVar name ]
-		  width: 50;
+		  column: 'Named' evaluated: [ :aVar :index | aVar name ] width: 50;
 		  column: 'Value'
 		  evaluated: [ :value | 
 			  GTObjectPrinter asTruncatedTextFrom: (self walk: value) ]
 		  width: 300;
-		  column: 'Walked Value'
-		  evaluated: [ :value | 
-			  GTObjectPrinter asTruncatedTextFrom: (walker value: value) ]
+		  column: 'Walked Value' evaluated: [ :value | 
+			  GTObjectPrinter asTruncatedTextFrom: (Walker new
+						   state: self;
+						   value: value) ]
 		  width: 300;
-		  send: [ :result | "withSmalltalkSearch;
-		showOnly: 50;
-		helpMessage: 'Quick selection field. Given your INPUT, it executes: self select: [:each | INPUT ]'."
+		  send: [ :result | 
 			  result ifNotNil: [ 
-					  result isCollection
-						  ifTrue: [ 
-							  result size = 1
-								  ifTrue: [ result anyOne ]
-								  ifFalse: [ self species withAll: result ] ]
-						  ifFalse: [ result ] ] ]
+				  result isCollection
+					  ifTrue: [ 
+						  result size = 1
+							  ifTrue: [ result anyOne ]
+							  ifFalse: [ self species withAll: result ] ]
+					  ifFalse: [ result ] ] ]
 ]
