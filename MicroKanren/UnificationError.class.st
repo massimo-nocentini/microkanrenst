@@ -34,6 +34,12 @@ UnificationError >> left: anObject [
 ]
 
 { #category : #'as yet unclassified' }
+UnificationError >> onState: aState bindings: aCollection fromState: aSenderState [
+
+	^ true asGoal onState: aState
+]
+
+{ #category : #'as yet unclassified' }
 UnificationError >> onState: aState bindings: bindings fromUnify: aGoal [
 
 	| extendedState |

@@ -22,6 +22,14 @@ StateCell >> disunited: anObject [
 		  yourself
 ]
 
+{ #category : #'as yet unclassified' }
+StateCell >> emptyDisunite [
+
+	^ self copy
+		  instVarNamed: #disunite put: nil;
+		  yourself
+]
+
 { #category : #initialization }
 StateCell >> initialize [
 

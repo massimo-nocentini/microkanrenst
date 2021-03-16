@@ -115,6 +115,17 @@ State >> isSound [
 ]
 
 { #category : #'as yet unclassified' }
+State >> onState: aState bindings: aCollection fromState: aSenderState [
+
+	^ aCollection associations
+		  inject: aState
+		  into: [ :eachState :eachAssociation | 
+			  eachState
+				  at: eachAssociation key
+				  update: [ :aCell | aCell disunited: eachAssociation value ] ]
+]
+
+{ #category : #'as yet unclassified' }
 State >> onState: aState bindings: bindings fromUnify: aGoal [
 
 	^ aState == self
@@ -124,25 +135,44 @@ State >> onState: aState bindings: bindings fromUnify: aGoal [
 			  aNewState := bindings associations
 				               inject: self
 				               into: [ :eachState :eachAssociation | 
-					               | aCell aVar |
+					               | aCell aVar outerState |
 					               aVar := eachAssociation key.
 					               aCell := eachState at: aVar.
-					               aCell disunited asLinkedList
-						               inject: eachState
-						               into: [ :cState :eachValue | 
-							               | cBindings aResult |
-							               cBindings := Dictionary new.
-							               aResult := [ :k | 
-							                          Unifier new
-								                          continuation: k;
-								                          state: cState;
-								                          bindings: cBindings;
-								                          value: aVar value: eachValue ]
-								                          valueWithExitUnary.
-							               aResult
-								               onState: cState
-								               bindings: cBindings
-								               fromState: self ] ].
+					               self halt.
+					               outerState := aCell disunited asLinkedList
+						                             inject: eachState
+						                             into: [ :cState :eachValue | 
+							                             | cBindings |
+							                             cBindings := Dictionary new.
+							                             [ :k | 
+							                             Unifier new
+								                             continuation: k;
+								                             state: cState;
+								                             bindings: cBindings;
+								                             value: aVar value: eachValue ]
+								                             valueWithExitUnary in: [ 
+								                             :innerState | 
+								                             innerState == cState
+									                             ifTrue: [ 
+										                             | extendedState error |
+										                             error := DisunificationError
+											                                      new
+											                                      left: aGoal left;
+											                                      right: aGoal right;
+											                                      yourself.
+										                             extendedState := aState 
+											                                              failedBecauseOfUnificationError:
+											                                              error.
+										                             ^ false asGoal onState:
+											                               extendedState ]
+									                             ifFalse: [ 
+									                             innerState
+										                             onState: cState
+										                             bindings: cBindings
+										                             fromState: self ] ] ].
+					               outerState
+						               at: aVar
+						               update: [ :c | c emptyDisunite ] ].
 
 			  true asGoal onState: aNewState ]
 ]
