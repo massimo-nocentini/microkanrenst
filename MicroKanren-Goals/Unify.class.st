@@ -17,7 +17,7 @@ Unify >> beforeUnificationState: previousState afterUnificationState: aState del
 		             ifTrue: [ aState ]
 		             ifFalse: [ 
 			             bindings associations
-				             inject: self
+				             inject: aState
 				             into: [ :eachState :eachAssociation | 
 					             | aCell aVar |
 					             aVar := eachAssociation key.
