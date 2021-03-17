@@ -5,16 +5,31 @@ Class {
 }
 
 { #category : #running }
-Disunite >> onState: aState unificationResult: aStateOrException bindings: bindings [
+Disunite >> beforeUnificationState: previousState afterUnificationState: aState deltaBindings: bindings [
 
-	^ aStateOrException
-		  onState: aState
-		  bindings: bindings
-		  fromDisunite: self
+	^ previousState == aState
+		  ifTrue: [ 
+			  | extendedState error |
+			  error := DisunificationError new
+				           left: left;
+				           right: right;
+				           yourself.
+			  extendedState := aState failedBecauseOfUnificationError: error.
+			  false asGoal onState: extendedState ]
+		  ifFalse: [ 
+			  | aNewState |
+			  aNewState := bindings associations
+				               inject: previousState
+				               into: [ :eachState :eachAssociation | 
+					               eachState
+						               at: eachAssociation key
+						               update: [ :aCell | 
+						               aCell disunited: eachAssociation value ] ].
+			  true asGoal onState: aNewState ]
 ]
 
-{ #category : #printing }
-Disunite >> printOn: aStream renderer: aRenderer [
+{ #category : #running }
+Disunite >> beforeUnificationState: aState afterUnificationUnificationError: anError deltaBindings: bindings [
 
-	self shouldBeImplemented
+	^ true asGoal onState: aState
 ]

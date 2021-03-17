@@ -56,6 +56,15 @@ State >> at: aVar update: aBlock [
 	^ self at: aVar put: anotherObject
 ]
 
+{ #category : #'as yet unclassified' }
+State >> beforeUnificationState: aState deltaBindings: bindings fromUnify: aGoal [
+
+	^ aGoal
+		  beforeUnificationState: aState
+		  afterUnificationState: self
+		  deltaBindings: bindings
+]
+
 { #category : #accessing }
 State >> birthdate: anInteger [ 
 	birthdate := anInteger
@@ -123,52 +132,6 @@ State >> indexOf: aVar [
 State >> isSound [
 
 	^ path value isFailed not
-]
-
-{ #category : #'as yet unclassified' }
-State >> onState: aState bindings: bindings fromDisunite: aGoal [
-
-	^ self == aState
-		  ifTrue: [ 
-			  | extendedState error |
-			  error := DisunificationError new
-				           left: aGoal left;
-				           right: aGoal right;
-				           yourself.
-			  extendedState := aState failedBecauseOfUnificationError: error.
-			  false asGoal onState: extendedState ]
-		  ifFalse: [ 
-			  | aNewState |
-			  aNewState := bindings associations
-				               inject: aState
-				               into: [ :eachState :eachAssociation | 
-					               eachState
-						               at: eachAssociation key
-						               update: [ :aCell | 
-						               aCell disunited: eachAssociation value ] ].
-			  true asGoal onState: aNewState ]
-]
-
-{ #category : #'as yet unclassified' }
-State >> onState: aState bindings: bindings fromUnify: aGoal [
-
-	^ aState == self
-		  ifTrue: [ true asGoal onState: self ]
-		  ifFalse: [ 
-			  | aNewState |
-			  aNewState := bindings associations
-				               inject: self
-				               into: [ :eachState :eachAssociation | 
-					               | aCell aVar |
-					               aVar := eachAssociation key.
-					               aCell := eachState at: aVar.
-					               aCell
-						               ifDisuniteConstraintViolated: [ :aFailureState | 
-						               ^ false asGoal onState: aFailureState ]
-						               forVar: aVar
-						               forUnify: aGoal
-						               fromState: eachState ].
-			  true asGoal onState: aNewState ]
 ]
 
 { #category : #'as yet unclassified' }

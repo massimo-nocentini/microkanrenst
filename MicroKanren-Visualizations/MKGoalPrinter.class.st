@@ -75,6 +75,14 @@ MKGoalPrinter >> printOn: aStream aDisj: aDisj [
 ]
 
 { #category : #printing }
+MKGoalPrinter >> printOn: aStream aDisunite: aGoal [
+
+	aGoal left printOn: aStream renderer: self.
+	aStream nextPutAll: ' ≠° '.
+	aGoal right printOn: aStream renderer: self
+]
+
+{ #category : #printing }
 MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 
 	state path value == aGoal

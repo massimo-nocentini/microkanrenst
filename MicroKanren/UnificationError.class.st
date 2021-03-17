@@ -8,6 +8,15 @@ Class {
 	#category : #MicroKanren
 }
 
+{ #category : #'as yet unclassified' }
+UnificationError >> beforeUnificationState: aState deltaBindings: bindings fromUnify: aGoal [
+
+	^ aGoal
+		  beforeUnificationState: aState
+		  afterUnificationUnificationError: self
+		  deltaBindings: bindings
+]
+
 { #category : #accessing }
 UnificationError >> description [
 
@@ -38,20 +47,6 @@ UnificationError >> left [
 UnificationError >> left: anObject [
 
 	left := anObject
-]
-
-{ #category : #'as yet unclassified' }
-UnificationError >> onState: aState bindings: anUnifier fromDisunite: aGoal [
-
-	^ true asGoal onState: aState
-]
-
-{ #category : #'as yet unclassified' }
-UnificationError >> onState: aState bindings: bindings fromUnify: aGoal [
-
-	| extendedState |
-	extendedState := aState failedBecauseOfUnificationError: self.
-	^ false asGoal onState: extendedState
 ]
 
 { #category : #accessing }

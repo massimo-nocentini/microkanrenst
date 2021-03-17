@@ -4,6 +4,12 @@ Class {
 	#category : #MicroKanren
 }
 
+{ #category : #'as yet unclassified' }
+DisunificationError >> beforeUnificationState: aState deltaBindings: bindings fromUnify: aGoal [
+
+	self shouldNotImplement
+]
+
 { #category : #accessing }
 DisunificationError >> description [
 
