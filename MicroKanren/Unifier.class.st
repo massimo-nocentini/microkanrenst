@@ -38,6 +38,7 @@ Unifier >> forObject: anObj forObject: anotherObj [
 		  ifTrue: [ state ]
 		  ifFalse: [ 
 			  | error |
+			  boundVariables removeAll.
 			  error := UnificationError new
 				           left: anObj;
 				           right: anotherObj;
@@ -58,6 +59,7 @@ Unifier >> forSequenceableCollection: aCollection forSequenceableCollection: ano
 						  value: pair key value: pair value ] ]
 		  ifFalse: [ 
 			  | error |
+			  boundVariables removeAll.
 			  error := UnificationError new
 				           left: aCollection;
 				           right: anotherCollection;
@@ -77,6 +79,7 @@ Unifier >> forVar: aVar forObject: anObject [
 	^ aVarHasOccurred
 		  ifTrue: [ 
 			  | error |
+			  boundVariables removeAll.
 			  error := UnificationError new
 				           left: aVar;
 				           right: (Walker new
