@@ -21,6 +21,13 @@ UnificationError >> description [
 				  (self messageText ifEmpty: [ 'they are different objects' ]) ]
 ]
 
+{ #category : #'as yet unclassified' }
+UnificationError >> disuniteConstraintSatisfied: bindings previousState: previousState [
+
+	self assert: bindings isEmpty.
+	^ previousState
+]
+
 { #category : #accessing }
 UnificationError >> left [
 
@@ -31,12 +38,6 @@ UnificationError >> left [
 UnificationError >> left: anObject [
 
 	left := anObject
-]
-
-{ #category : #'as yet unclassified' }
-UnificationError >> onState: aState bindings: aCollection fromState: aSenderState [
-
-	^ true asGoal onState: aState
 ]
 
 { #category : #'as yet unclassified' }

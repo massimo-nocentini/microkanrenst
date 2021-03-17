@@ -30,6 +30,41 @@ StateCell >> emptyDisunite [
 		  yourself
 ]
 
+{ #category : #'as yet unclassified' }
+StateCell >> ifDisuniteConstraintViolated: aBlock forVar: aVar forUnify: aGoal fromState: aState [
+
+	| unifier |
+	unifier := Unifier new.
+
+	^ disunite reversed asLinkedList
+		  inject: aState
+		  into: [ :previousState :eachValue | 
+			  | bindings aNewStateOrError |
+			  bindings := Dictionary new.
+			  aNewStateOrError := [ :k | 
+			                      unifier
+				                      continuation: k;
+				                      state: previousState;
+				                      bindings: bindings;
+				                      value: aVar value: eachValue ]
+				                      valueWithExitUnary.
+
+			  aNewStateOrError == previousState
+				  ifTrue: [ 
+					  | error failingState |
+					  error := DisunificationError new
+						           left: aVar;
+						           right: eachValue;
+						           yourself.
+					  failingState := previousState failedBecauseOfUnificationError:
+						                  error.
+					  aBlock value: failingState ]
+				  ifFalse: [ 
+					  aNewStateOrError
+						  disuniteConstraintSatisfied: bindings
+						  previousState: previousState ] ]
+]
+
 { #category : #initialization }
 StateCell >> initialize [
 
