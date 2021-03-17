@@ -88,10 +88,7 @@ MKGoalPrinter >> printOn: aStream aFailed: aGoal [
 	state path value == aGoal
 		ifTrue: [ 
 			state
-				ifCounterexampleFound: [ :ce | 
-					ce left printOn: aStream.
-					aStream nextPutAll: ' ≠ '.
-					ce right printOn: aStream ]
+				ifCounterexampleFound: [ :ce | ce printOn: aStream renderer: self ]
 				otherwise: [ aStream nextPutAll: 'Ø' ] ]
 		ifFalse: [ aStream nextPutAll: 'Ø' ]
 ]

@@ -7,8 +7,6 @@ Class {
 { #category : #running }
 Unify >> beforeUnificationState: previousState afterUnificationState: aState deltaBindings: bindings [
 
-	"^ aState onState: previousState bindings: bindings fromUnify: self"
-
 	| aNewState exitBlock |
 	exitBlock := [ :aFailureState | 
 	             ^ false asGoal onState: aFailureState ].

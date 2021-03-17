@@ -33,36 +33,40 @@ StateCell >> emptyDisunite [
 { #category : #'as yet unclassified' }
 StateCell >> ifDisuniteConstraintViolated: aBlock forVar: aVar forUnify: aGoal fromState: aState [
 
-	| unifier |
-	unifier := Unifier new.
+	| aNewState |
+	aNewState := disunite reversed asLinkedList
+		             inject: aState
+		             into: [ :previousState :eachValue | 
+			             | bindings aNewStateOrError |
+			             self halt.
+			             self assert: (aState instVarNamed: #substitution)
+				             = (previousState instVarNamed: #substitution).
+			             bindings := Dictionary new.
+			             aNewStateOrError := [ :k | 
+			                                 Unifier new
+				                                 continuation: k;
+				                                 state: previousState;
+				                                 bindings: bindings;
+				                                 value: aVar value: eachValue ]
+				                                 valueWithExitUnary.
 
-	^ disunite reversed asLinkedList
-		  inject: aState
-		  into: [ :previousState :eachValue | 
-			  | bindings aNewStateOrError |
-			  bindings := Dictionary new.
-			  aNewStateOrError := [ :k | 
-			                      unifier
-				                      continuation: k;
-				                      state: previousState;
-				                      bindings: bindings;
-				                      value: aVar value: eachValue ]
-				                      valueWithExitUnary.
+			             aNewStateOrError == previousState
+				             ifTrue: [ 
+					             | error failingState |
+					             error := DisunificationError new
+						                      left: aVar;
+						                      right: eachValue;
+						                      yourself.
+					             failingState := previousState 
+						                             failedBecauseOfUnificationError:
+						                             error.
+					             aBlock value: failingState ]
+				             ifFalse: [ 
+					             aNewStateOrError
+						             disuniteConstraintSatisfied: bindings
+						             previousState: previousState ] ].
 
-			  aNewStateOrError == previousState
-				  ifTrue: [ 
-					  | error failingState |
-					  error := DisunificationError new
-						           left: aVar;
-						           right: eachValue;
-						           yourself.
-					  failingState := previousState failedBecauseOfUnificationError:
-						                  error.
-					  aBlock value: failingState ]
-				  ifFalse: [ 
-					  aNewStateOrError
-						  disuniteConstraintSatisfied: bindings
-						  previousState: previousState ] ]
+	^ aNewState at: aVar update: [ :aCell | aCell emptyDisunite ]
 ]
 
 { #category : #initialization }

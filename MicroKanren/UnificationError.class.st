@@ -49,6 +49,14 @@ UnificationError >> left: anObject [
 	left := anObject
 ]
 
+{ #category : #printing }
+UnificationError >> printOn: aStream renderer: aRenderer [
+
+	left printOn: aStream.
+	aStream nextPutAll: ' ≠ '.
+	right printOn: aStream
+]
+
 { #category : #accessing }
 UnificationError >> right [
 

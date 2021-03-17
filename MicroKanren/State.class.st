@@ -56,7 +56,7 @@ State >> at: aVar update: aBlock [
 	^ self at: aVar put: anotherObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #dispatching }
 State >> beforeUnificationState: aState deltaBindings: bindings fromUnify: aGoal [
 
 	^ aGoal
@@ -93,7 +93,7 @@ State >> collectVars: aCollection forFresh: aFresh [
 State >> disuniteConstraintSatisfied: bindings previousState: previousState [
 
 	^ bindings associations
-		  inject: self
+		  inject: previousState
 		  into: [ :aState :anAssociation | 
 			  aState
 				  at: anAssociation key

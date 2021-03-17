@@ -22,3 +22,11 @@ DisunificationError >> description [
 			  nextPutAll:
 				  (self messageText ifEmpty: [ 'they are equal objects' ]) ]
 ]
+
+{ #category : #printing }
+DisunificationError >> printOn: aStream renderer: aRenderer [
+
+	left printOn: aStream.
+	aStream nextPutAll: ' = '.
+	right printOn: aStream
+]
