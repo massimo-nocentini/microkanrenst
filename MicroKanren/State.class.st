@@ -126,29 +126,7 @@ State >> isSound [
 ]
 
 { #category : #'as yet unclassified' }
-State >> onState: aState bindings: bindings fromUnify: aGoal [
-
-	^ aState == self
-		  ifTrue: [ true asGoal onState: self ]
-		  ifFalse: [ 
-			  | aNewState |
-			  aNewState := bindings associations
-				               inject: self
-				               into: [ :eachState :eachAssociation | 
-					               | aCell aVar |
-					               aVar := eachAssociation key.
-					               aCell := eachState at: aVar.
-					               aCell
-						               ifDisuniteConstraintViolated: [ :aFailureState | 
-						               ^ false asGoal onState: aFailureState ]
-						               forVar: aVar
-						               forUnify: aGoal
-						               fromState: eachState ].
-			  true asGoal onState: aNewState ]
-]
-
-{ #category : #'as yet unclassified' }
-State >> onState: aState unificationBy: bindings fromDisunite: aGoal [
+State >> onState: aState bindings: bindings fromDisunite: aGoal [
 
 	^ self == aState
 		  ifTrue: [ 
@@ -168,6 +146,28 @@ State >> onState: aState unificationBy: bindings fromDisunite: aGoal [
 						               at: eachAssociation key
 						               update: [ :aCell | 
 						               aCell disunited: eachAssociation value ] ].
+			  true asGoal onState: aNewState ]
+]
+
+{ #category : #'as yet unclassified' }
+State >> onState: aState bindings: bindings fromUnify: aGoal [
+
+	^ aState == self
+		  ifTrue: [ true asGoal onState: self ]
+		  ifFalse: [ 
+			  | aNewState |
+			  aNewState := bindings associations
+				               inject: self
+				               into: [ :eachState :eachAssociation | 
+					               | aCell aVar |
+					               aVar := eachAssociation key.
+					               aCell := eachState at: aVar.
+					               aCell
+						               ifDisuniteConstraintViolated: [ :aFailureState | 
+						               ^ false asGoal onState: aFailureState ]
+						               forVar: aVar
+						               forUnify: aGoal
+						               fromState: eachState ].
 			  true asGoal onState: aNewState ]
 ]
 

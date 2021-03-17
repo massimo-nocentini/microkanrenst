@@ -9,7 +9,7 @@ Disunite >> onState: aState unificationResult: aStateOrException bindings: bindi
 
 	^ aStateOrException
 		  onState: aState
-		  unificationBy: bindings
+		  bindings: bindings
 		  fromDisunite: self
 ]
 
