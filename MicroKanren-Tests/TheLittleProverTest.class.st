@@ -239,6 +239,73 @@ TheLittleProverTest >> testDisuniteo2 [
 ]
 
 { #category : #tests }
+TheLittleProverTest >> testDisuniteo3 [
+
+	| aGoal |
+	aGoal := [ :q | 
+	         (theory unifyº value: 5 value: q)
+	         , (theory disuniteº value: 5 value: q) ] asGoal.
+
+	self assert: aGoal solutions readStream upToEnd equals: #(  ).
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
+]
+
+{ #category : #tests }
+TheLittleProverTest >> testDisuniteo4 [
+
+	| aGoal |
+	aGoal := [ :q | 
+	         (theory disuniteº value: 5 value: q)
+	         , (theory unifyº value: 5 value: q) ] asGoal.
+
+	self assert: aGoal solutions readStream upToEnd equals: #(  ).
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
+]
+
+{ #category : #tests }
+TheLittleProverTest >> testDisuniteo5 [
+
+	| aGoal |
+	aGoal := [ :q | theory disuniteº value: 5 value: 5 ] asGoal.
+
+	self assert: aGoal solutions readStream upToEnd equals: #(  ).
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
+]
+
+{ #category : #tests }
+TheLittleProverTest >> testDisuniteo6 [
+
+	| aGoal |
+	aGoal := [ :q | theory disuniteº value: 5 value: 6 ] asGoal.
+
+	self
+		assert: aGoal solutions readStream upToEnd
+		equals: { 0 asReifiedVar }.
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
+]
+
+{ #category : #tests }
+TheLittleProverTest >> testDisuniteo7 [
+
+	| aGoal |
+	aGoal := [ :q :x | 
+	         (theory disuniteº value: 5 value: q)
+	         , (theory unifyº value: x value: q)
+	         , (theory disuniteº value: 6 value: x) ] asGoal.
+
+	self
+		assert: aGoal solutions readStream upToEnd
+		equals: { (Array with: 0 asReifiedVar with: 0 asReifiedVar) }.
+
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
+]
+
+{ #category : #tests }
 TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_06 [
 
 	"(car (cons 'ham '(eggs)))"
