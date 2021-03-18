@@ -14,17 +14,12 @@ Disunite >> beforeUnificationState: previousState afterUnificationState: aState 
 				           left: left;
 				           right: right;
 				           yourself.
-			  extendedState := aState failedBecauseOfUnificationError: error.
+			  extendedState := aState failedBecauseOfError: error.
 			  false asGoal onState: extendedState ]
 		  ifFalse: [ 
 			  | aNewState |
-			  aNewState := bindings associations
-				               inject: previousState
-				               into: [ :eachState :eachAssociation | 
-					               eachState
-						               at: eachAssociation key
-						               update: [ :aCell | 
-						               aCell disunited: eachAssociation value ] ].
+			  aNewState := previousState addDisuniteConstraintAdaptingBindings:
+				               bindings.
 			  true asGoal onState: aNewState ]
 ]
 

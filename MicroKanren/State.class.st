@@ -5,7 +5,7 @@ Class {
 		'substitution',
 		'birthdate',
 		'path',
-		'disuniteConstraint'
+		'disuniteConstraints'
 	],
 	#category : #MicroKanren
 }
@@ -32,6 +32,25 @@ State class >> fromSBRAL: aSBRAL [
 { #category : #'instance creation' }
 State class >> fromUnionFind: aUF [
 	^ self emptyWithSubstitution: aUF
+]
+
+{ #category : #adding }
+State >> addDisuniteConstraint: aConstraint [
+
+	^ self copy
+		  instVarNamed: #disuniteConstraints
+		  put: aConstraint ~~> disuniteConstraints;
+		  yourself
+]
+
+{ #category : #adding }
+State >> addDisuniteConstraintAdaptingBindings: bindings [
+
+	| aConstraint |
+	aConstraint := bindings associations
+		               inject: nil
+		               into: [ :aValueLink :each | each ~~> aValueLink ].
+	^ self addDisuniteConstraint: aConstraint
 ]
 
 { #category : #accessing }
@@ -109,7 +128,7 @@ State >> disuniteConstraintSatisfied: bindings previousState: previousState [
 ]
 
 { #category : #'disunite constraint' }
-State >> failedBecauseOfUnificationError: e [
+State >> failedBecauseOfError: e [
 
 	^ FailedState new
 		  substitution: substitution;

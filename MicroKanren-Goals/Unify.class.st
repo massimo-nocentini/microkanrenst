@@ -34,7 +34,7 @@ Unify >> beforeUnificationState: previousState afterUnificationState: aState del
 Unify >> beforeUnificationState: aState afterUnificationUnificationError: anError deltaBindings: bindings [
 
 	| extendedState |
-	extendedState := aState failedBecauseOfUnificationError: anError.
+	extendedState := aState failedBecauseOfError: anError.
 	^ false asGoal onState: extendedState
 ]
 

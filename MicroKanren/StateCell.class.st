@@ -58,7 +58,7 @@ StateCell >> ifDisuniteConstraintViolated: aBlock forVar: aVar forUnify: aGoal f
 						                      right: eachValue;
 						                      yourself.
 					             failingState := previousState 
-						                             failedBecauseOfUnificationError:
+						                             failedBecauseOfError:
 						                             error.
 					             aBlock value: failingState ]
 				             ifFalse: [ 
