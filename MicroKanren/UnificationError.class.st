@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-UnificationError >> beforeUnificationState: aState deltaBindings: bindings fromUnify: aGoal [
+UnificationError >> beforeUnificationState: aState deltaBindings: bindings dispatchOver: aGoal [
 
 	^ aGoal
 		  beforeUnificationState: aState

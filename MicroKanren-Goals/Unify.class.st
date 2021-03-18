@@ -41,21 +41,20 @@ Unify >> beforeUnificationState: aState afterUnificationUnificationError: anErro
 { #category : #running }
 Unify >> onState: aState afterPushingGoal: aGoal [
 
-	| aStateOrException unifier bindings |
+	| aStateOrException bindings |
+	"Prepare the dictionary to hold new bindings occurring in the current unification process."
 	bindings := Dictionary new.
 
-	unifier := Unifier new
-		           bindings: bindings;
-		           state: aState;
-		           yourself.
+	"Perform unification."
+	aStateOrException := Unifier new
+		                     onState: aState
+		                     unify: left
+		                     and: right
+		                     bindings: bindings.
 
-	aStateOrException := [ :k | 
-	                     unifier
-		                     continuation: k;
-		                     value: left value: right ] valueWithExitUnary.
-
+	"Then dispatch over the resulting object."
 	^ aStateOrException
 		  beforeUnificationState: aState
 		  deltaBindings: bindings
-		  fromUnify: self
+		  dispatchOver: self
 ]

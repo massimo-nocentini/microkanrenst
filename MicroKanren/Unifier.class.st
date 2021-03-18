@@ -108,6 +108,17 @@ Unifier >> forVar: aVar forVar: anotherVar [
 			  state at: w put: (Maybe just: v) ]
 ]
 
+{ #category : #api }
+Unifier >> onState: aState unify: left and: right bindings: bindings [
+
+	^ [ :k | 
+	  self
+		  bindings: bindings;
+		  state: aState;
+		  continuation: k;
+		  value: left value: right ] valueWithExitUnary
+]
+
 { #category : #accessing }
 Unifier >> state: aState [
 

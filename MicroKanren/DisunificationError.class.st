@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-DisunificationError >> beforeUnificationState: aState deltaBindings: bindings fromUnify: aGoal [
+DisunificationError >> beforeUnificationState: aState deltaBindings: bindings dispatchOver: aGoal [
 
 	self shouldNotImplement
 ]

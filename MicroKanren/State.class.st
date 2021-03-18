@@ -58,7 +58,7 @@ State >> at: aVar update: aBlock [
 ]
 
 { #category : #dispatching }
-State >> beforeUnificationState: aState deltaBindings: bindings fromUnify: aGoal [
+State >> beforeUnificationState: aState deltaBindings: bindings dispatchOver: aGoal [
 
 	^ aGoal
 		  beforeUnificationState: aState
