@@ -17,6 +17,17 @@ UnificationError >> beforeUnificationState: aState deltaBindings: bindings dispa
 		  deltaBindings: bindings
 ]
 
+{ #category : #dispatching }
+UnificationError >> checkDisuniteAssociation: anAssociation constraint: aConstraint constraints: currentConstraintsLink on: newConstraintsLink bindings: bindings ifViolated: aBlock referenceState: aState [
+
+	^ aState
+		  checkDisuniteConstraints: currentConstraintsLink
+		  on: newConstraintsLink
+		  bindings: nil
+		  ifViolated: aBlock
+		  referenceState: aState
+]
+
 { #category : #accessing }
 UnificationError >> description [
 
@@ -28,13 +39,6 @@ UnificationError >> description [
 			  nextPutAll: ' because ';
 			  nextPutAll:
 				  (self messageText ifEmpty: [ 'they are different objects' ]) ]
-]
-
-{ #category : #'as yet unclassified' }
-UnificationError >> disuniteConstraintSatisfied: bindings previousState: previousState [
-
-	self assert: bindings isEmpty.
-	^ previousState
 ]
 
 { #category : #accessing }

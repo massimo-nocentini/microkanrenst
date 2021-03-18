@@ -7,25 +7,13 @@ Class {
 { #category : #running }
 Unify >> beforeUnificationState: previousState afterUnificationState: aState deltaBindings: bindings [
 
-	| aNewState exitBlock |
-	exitBlock := [ :aFailureState | 
-	             ^ false asGoal onState: aFailureState ].
-
+	| aNewState |
 	aNewState := aState == previousState
 		             ifTrue: [ aState ]
 		             ifFalse: [ 
-			             bindings associations
-				             inject: aState
-				             into: [ :eachState :eachAssociation | 
-					             | aCell aVar |
-					             aVar := eachAssociation key.
-					             aCell := eachState at: aVar.
-					eachState
-					          "   aCell
-						             ifDisuniteConstraintViolated: exitBlock
-						             forVar: aVar
-						             forUnify: self
-						             fromState: eachState" ] ].
+			             aState checkDisuniteConstraintsIfViolated: [ 
+				             :aFailureState | 
+				             ^ false asGoal onState: aFailureState ] ].
 
 	^ true asGoal onState: aNewState
 ]

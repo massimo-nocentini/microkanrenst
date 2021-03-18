@@ -34,22 +34,19 @@ State class >> fromUnionFind: aUF [
 	^ self emptyWithSubstitution: aUF
 ]
 
-{ #category : #adding }
+{ #category : #'disunite constraint' }
 State >> addDisuniteConstraint: aConstraint [
 
 	^ self copy
-		  instVarNamed: #disuniteConstraints
-		  put: aConstraint ~~> disuniteConstraints;
+		  disuniteConstraints: aConstraint ~~> disuniteConstraints;
 		  yourself
 ]
 
-{ #category : #adding }
+{ #category : #'disunite constraint' }
 State >> addDisuniteConstraintAdaptingBindings: bindings [
 
 	| aConstraint |
-	aConstraint := bindings associations
-		               inject: nil
-		               into: [ :aValueLink :each | each ~~> aValueLink ].
+	aConstraint := self linksFromBindings: bindings init: nil.
 	^ self addDisuniteConstraint: aConstraint
 ]
 
@@ -90,6 +87,88 @@ State >> birthdate: anInteger [
 	birthdate := anInteger
 ]
 
+{ #category : #dispatched }
+State >> checkDisuniteAssociation: anAssociation constraint: aConstraint constraints: currentConstraintsLink on: newConstraintsLink bindings: bindings ifViolated: aBlock referenceState: aState [
+
+	^ self == aState
+		  ifTrue: [ 
+			  | extendedState error |
+			  error := DisunificationError new
+				           left: anAssociation key;
+				           right: anAssociation value;
+				           yourself.
+			  extendedState := aState failedBecauseOfError: error.
+			  aBlock value: extendedState ]
+		  ifFalse: [ 
+			  self
+				  checkDisuniteConstraint: aConstraint
+				  constraints: currentConstraintsLink
+				  on: newConstraintsLink
+				  bindings: bindings
+				  ifViolated: aBlock
+				  referenceState: aState ]
+]
+
+{ #category : #'disunite constraint' }
+State >> checkDisuniteConstraint: aConstraint constraints: currentConstraintsLink on: newConstraintsLink bindings: bindings ifViolated: aBlock referenceState: aState [
+
+	^ aConstraint
+		  ifNil: [ 
+			  self
+				  checkDisuniteConstraints: currentConstraintsLink
+				  on: bindings ~~> newConstraintsLink
+				  bindings: nil
+				  ifViolated: aBlock
+				  referenceState: aState ]
+		  ifNotNil: [ 
+			  | newBindings aResult anAssociation |
+			  anAssociation := aConstraint value.
+			  newBindings := Dictionary new.
+			  aResult := Unifier new
+				             onState: self
+				             unify: anAssociation key
+				             and: anAssociation value
+				             bindings: newBindings.
+
+			  aResult
+				  checkDisuniteAssociation: anAssociation
+				  constraint: aConstraint nextLink
+				  constraints: currentConstraintsLink
+				  on: newConstraintsLink
+				  bindings: (self linksFromBindings: newBindings init: bindings)
+				  ifViolated: aBlock
+				  referenceState: aState ]
+]
+
+{ #category : #'disunite constraint' }
+State >> checkDisuniteConstraints: currentConstraintsLink on: newConstraintsLink bindings: bindings ifViolated: aBlock referenceState: aState [
+
+	^ currentConstraintsLink
+		  ifNil: [ 
+			  aState copy
+				  disuniteConstraints: newConstraintsLink;
+				  yourself ]
+		  ifNotNil: [ 
+			  self
+				  checkDisuniteConstraint: currentConstraintsLink value
+				  constraints: currentConstraintsLink nextLink
+				  on: newConstraintsLink
+				  bindings: bindings
+				  ifViolated: aBlock
+				  referenceState: aState ]
+]
+
+{ #category : #'disunite constraint' }
+State >> checkDisuniteConstraintsIfViolated: aBlock [
+	
+	^ self
+		  checkDisuniteConstraints: disuniteConstraints
+		  on: nil
+		  bindings: nil
+		  ifViolated: aBlock
+		  referenceState: self
+]
+
 { #category : #dispatching }
 State >> collectVars: aCollection forFresh: aFreshGoal [
 
@@ -128,6 +207,12 @@ State >> disuniteConstraintSatisfied: bindings previousState: previousState [
 ]
 
 { #category : #'disunite constraint' }
+State >> disuniteConstraints: aValueLink [
+
+	disuniteConstraints := aValueLink
+]
+
+{ #category : #'disunite constraint' }
 State >> failedBecauseOfError: e [
 
 	^ FailedState new
@@ -159,6 +244,14 @@ State >> indexOf: aVar [
 State >> isSound [
 
 	^ path value isFailed not
+]
+
+{ #category : #'disunite constraint' }
+State >> linksFromBindings: bindings init: aLink [
+
+	^ bindings associations
+		  inject: aLink
+		  into: [ :aValueLink :each | each ~~> aValueLink ]
 ]
 
 { #category : #accessing }

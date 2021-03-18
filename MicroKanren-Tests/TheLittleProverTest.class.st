@@ -215,22 +215,27 @@ TheLittleProverTest >> testDisuniteo1 [
 	         , (theory unifyº value: 5 value: x)
 	         , (theory unifyº value: 7 value: y) ] asGoal.
 
-	self assert: aGoal solutions readStream upToEnd equals: #(  ).
+	self
+		assert: aGoal solutions readStream upToEnd
+		equals: { (Array with: (5 cons: (7 cons: nil)) with: 5 with: 7) }.
 
 
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }
-TheLittleProverTest >> testDisuniteº [
+TheLittleProverTest >> testDisuniteo2 [
 
-	self
-		assert: [ :x :y :z | 
-			(theory disuniteº value: 5 value: x) , (theory disuniteº
-				 value: (5 cons: (6 cons: nil))
-				 value: (y cons: (z cons: nil))) ] asGoal solutions readStream
-				upToEnd
-		equals: #(  )
+	| aGoal |
+	aGoal := [ :p :x :y | 
+	         (theory disuniteº value: (5 cons: (6 cons: nil)) value: p)
+	         , (theory unifyº value: (x cons: (y cons: nil)) value: p)
+	         , (theory unifyº value: 5 value: x)
+	         , (theory unifyº value: 6 value: y) ] asGoal.
+
+	self assert: aGoal solutions readStream upToEnd equals: #(  ).
+	
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
 { #category : #tests }

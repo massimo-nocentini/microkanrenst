@@ -10,6 +10,12 @@ DisunificationError >> beforeUnificationState: aState deltaBindings: bindings di
 	self shouldNotImplement
 ]
 
+{ #category : #dispatching }
+DisunificationError >> checkDisuniteAssociation: anAssociation constraint: aConstraint constraints: currentConstraintsLink on: newConstraintsLink bindings: bindings ifViolated: aBlock referenceState: aState [
+
+	self shouldNotImplement
+]
+
 { #category : #accessing }
 DisunificationError >> description [
 
