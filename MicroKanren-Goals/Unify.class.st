@@ -20,11 +20,12 @@ Unify >> beforeUnificationState: previousState afterUnificationState: aState del
 					             | aCell aVar |
 					             aVar := eachAssociation key.
 					             aCell := eachState at: aVar.
-					             aCell
+					eachState
+					          "   aCell
 						             ifDisuniteConstraintViolated: exitBlock
 						             forVar: aVar
 						             forUnify: self
-						             fromState: eachState ] ].
+						             fromState: eachState" ] ].
 
 	^ true asGoal onState: aNewState
 ]

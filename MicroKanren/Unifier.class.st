@@ -31,7 +31,7 @@ Unifier >> forCons: aCons forCons: anotherCons [
 		  value: aCons cdr value: anotherCons cdr
 ]
 
-{ #category : #unification }
+{ #category : #dispatched }
 Unifier >> forObject: anObj forObject: anotherObj [
 
 	^ anObj = anotherObj
@@ -68,7 +68,7 @@ Unifier >> forSequenceableCollection: aCollection forSequenceableCollection: ano
 			  continuation value: error ]
 ]
 
-{ #category : #unification }
+{ #category : #dispatched }
 Unifier >> forVar: aVar forObject: anObject [
 
 	| aVarHasOccurred |
@@ -89,7 +89,7 @@ Unifier >> forVar: aVar forObject: anObject [
 			  continuation value: error ]
 		  ifFalse: [ 
 			  boundVariables at: aVar put: anObject.
-			  state at: aVar update: [ :aCell | aCell unified: anObject ] ]
+			  state at: aVar put: (Maybe just: anObject) ]
 ]
 
 { #category : #dispatched }
@@ -105,7 +105,7 @@ Unifier >> forVar: aVar forVar: anotherVar [
 				  w := aVar.
 				  v := anotherVar ].
 			  boundVariables at: w put: v.
-			  state at: w update: [ :aCell | aCell unified: v ] ]
+			  state at: w put: (Maybe just: v) ]
 ]
 
 { #category : #accessing }

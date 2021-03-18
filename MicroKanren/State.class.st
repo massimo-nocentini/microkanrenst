@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'substitution',
 		'birthdate',
-		'path'
+		'path',
+		'disuniteConstraint'
 	],
 	#category : #MicroKanren
 }
@@ -33,13 +34,13 @@ State class >> fromUnionFind: aUF [
 	^ self emptyWithSubstitution: aUF
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 State >> at: aVar [
 
 	^ substitution at: (self indexOf: aVar)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 State >> at: aVar put: aValue [
 
 	^ self copy
@@ -71,25 +72,32 @@ State >> birthdate: anInteger [
 ]
 
 { #category : #dispatching }
-State >> collectVars: aCollection forFresh: aFresh [
+State >> collectVars: aCollection forFresh: aFreshGoal [
 
 	| nextState vars extendedSubstitution |
+	"Lift `aCollection` to a collection of logic variables that carry names also."
 	vars := aCollection withIndexCollect: [ :aName :each | 
 		        (each + birthdate) asVar
 			        named: aName;
 			        yourself ].
+
+	"Allocate a slot for each variable in the substitution."
 	extendedSubstitution := vars
 		                        inject: substitution
-		                        into: [ :aSBRAL :each | 
-		                        aSBRAL add: StateCell new ].
+		                        into: [ :aSubstitution :each | 
+		                        aSubstitution add: Maybe nothing ].
+
+	"Produce a copy of mine with the new substitution and increased birthdate."
 	nextState := self copy
 		             substitution: extendedSubstitution;
 		             birthdate: birthdate + aCollection size;
 		             yourself.
-	^ aFresh onState: nextState withVars: vars
+
+	"Finally, return back to the sender."
+	^ aFreshGoal onState: nextState withVars: vars
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'disunite constraint' }
 State >> disuniteConstraintSatisfied: bindings previousState: previousState [
 
 	^ bindings associations
@@ -100,7 +108,7 @@ State >> disuniteConstraintSatisfied: bindings previousState: previousState [
 				  update: [ :aCell | aCell disunited: anAssociation value ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'disunite constraint' }
 State >> failedBecauseOfUnificationError: e [
 
 	^ FailedState new
@@ -111,18 +119,18 @@ State >> failedBecauseOfUnificationError: e [
 		  yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reification }
 State >> identityReifier [
 	^ self reifierOfClass: IdentityReifier
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 State >> ifCounterexampleFound: ceBlock otherwise: oBlock [
 
 	^ oBlock cull: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 State >> indexOf: aVar [
 
 	^ birthdate - aVar id + 1
@@ -134,7 +142,7 @@ State >> isSound [
 	^ path value isFailed not
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 State >> path [
 	^ path
 ]
@@ -144,7 +152,7 @@ State >> path: anObject [
 	path := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 State >> pushGoal: aGoal [
 
 	^ self copy in: [ :aState | 
@@ -165,7 +173,7 @@ State >> reifierOfClass: aClass [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #reification }
 State >> reifyTopmostVariables [
 
 	^ path reversed value variables in: [ :vars | 
@@ -205,32 +213,32 @@ State >> var: aReifiedVar reifies: aVar [
 		ifAbsentPut: [ aReifiedVar ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #walking }
 State >> walk: anObj [
 
 	^ substitution walk: anObj fromState: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #walking }
 State >> walk: anObj inDictionary: aDictionary [
 
 	^ self walkIterative: anObj inDictionary: aDictionary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #walking }
 State >> walk: anObj inSBRAL: aSBRAL [
 
 	^ anObj walkSBRAL: aSBRAL forState: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #walking }
 State >> walk: anObj inUnionFind: aUF [
 	^ (aUF includesKey: anObj)
 		ifTrue: [ aUF at: anObj ]
 		ifFalse: [ anObj ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #walking }
 State >> walkIterative: anObj inDictionary: aDictionary [
 	"searches for the value of `anObj` in substitution"
 
@@ -253,7 +261,7 @@ State >> walkObject: anObject inSBRAL: aSBRAL [
 	^ anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #walking }
 State >> walkRecursive: anObj inDictionary: aDictionary [
 	^ aDictionary
 		at: anObj
@@ -269,7 +277,7 @@ State >> walkVar: aVar inSBRAL: aSBRAL [
 
 	| index maybe |
 	index := self indexOf: aVar.
-	maybe := (aSBRAL at: index) unified.
+	maybe := aSBRAL at: index.
 	^ maybe
 		  ifNothing: [ aVar ]
 		  ifJust: [ :aJust | self walk: aJust content inSBRAL: aSBRAL ]
