@@ -15,12 +15,17 @@ Run >> goal: aGoal [
 { #category : #'as yet unclassified' }
 Run >> onState: aState [
 
-	| aStream vars selector |
+	| aStream vars selector reifier |
 	aStream := goal onState: aState.
 	vars := goal variables ifEmpty: [ { Var tautology } ].
 	selector := vars size = 1
 		            ifTrue: [ #first ]
 		            ifFalse: [ #yourself ].
-	^ (aStream select: [ :each | each isSound ]) collect: [ :s | 
-		  selector value: (s reifier reifyVars: vars) ]
+	reifier := Reifier new.
+	^ (aStream select: [ :each | each isSound ]) collect: [ :eachState | 
+		  | reifiedVars |
+		  reifiedVars := reifier
+			                 state: eachState;
+			                 reifyVars: vars.
+		  reifiedVars perform: selector ]
 ]
