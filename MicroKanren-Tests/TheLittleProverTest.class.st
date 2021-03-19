@@ -306,6 +306,44 @@ TheLittleProverTest >> testDisuniteo7 [
 ]
 
 { #category : #tests }
+TheLittleProverTest >> testDisuniteo8 [
+
+	| aGoal |
+	aGoal := [ :q | 
+	         [ :x :y | 
+	         theory disuniteº value: (x cons: (y cons: nil)) value: q ]
+		         asGoal ] asGoal.
+
+	self
+		assert: aGoal solutions readStream upToEnd
+		equals: { 0 asReifiedVar }.
+
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
+]
+
+{ #category : #tests }
+TheLittleProverTest >> testDisuniteo9 [
+
+	| aGoal |
+	aGoal := [ :q | 
+	         [ :x :y :z | 
+	         (theory disuniteº value: (y cons: z) value: x)
+	         ,
+	         (theory unifyº
+		          value: (x cons: (y cons: (z cons: nil)))
+		          value: q) ] asGoal ] asGoal.
+
+	self assert: aGoal solutions readStream upToEnd equals: { (Array
+			 with: 0 asReifiedVar
+			 with: 1 asReifiedVar
+			 with: 2 asReifiedVar) asCons }.
+
+
+	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
+]
+
+{ #category : #tests }
 TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_06 [
 
 	"(car (cons 'ham '(eggs)))"
