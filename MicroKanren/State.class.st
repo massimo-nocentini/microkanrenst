@@ -38,7 +38,7 @@ State class >> fromUnionFind: aUF [
 State >> addDisuniteConstraint: aConstraint [
 
 	^ self copy
-		  disuniteConstraints: aConstraint ~~> disuniteConstraints;
+		  disuniteConstraints: (aConstraint cons: disuniteConstraints);
 		  yourself
 ]
 
@@ -94,8 +94,8 @@ State >> checkDisuniteAssociation: anAssociation constraint: aConstraint constra
 		  ifTrue: [ 
 			  | extendedState error |
 			  error := DisunificationError new
-				           left: anAssociation key;
-				           right: anAssociation value;
+				           left: anAssociation car;
+				           right: anAssociation cdr;
 				           yourself.
 			  extendedState := aState failedBecauseOfError: error.
 			  aBlock value: extendedState ]
@@ -116,23 +116,23 @@ State >> checkDisuniteConstraint: aConstraint constraints: currentConstraintsLin
 		  ifNil: [ 
 			  self
 				  checkDisuniteConstraints: currentConstraintsLink
-				  on: bindings ~~> newConstraintsLink
+				  on: (bindings cons: newConstraintsLink)
 				  bindings: nil
 				  ifViolated: aBlock
 				  referenceState: aState ]
 		  ifNotNil: [ 
 			  | newBindings aResult anAssociation |
-			  anAssociation := aConstraint value.
+			  anAssociation := aConstraint car.
 			  newBindings := Dictionary new.
 			  aResult := Unifier new
 				             onState: self
-				             unify: anAssociation key
-				             and: anAssociation value
+				             unify: anAssociation car
+				             and: anAssociation cdr
 				             bindings: newBindings.
 
 			  aResult
 				  checkDisuniteAssociation: anAssociation
-				  constraint: aConstraint nextLink
+				  constraint: aConstraint cdr
 				  constraints: currentConstraintsLink
 				  on: newConstraintsLink
 				  bindings: (self linksFromBindings: newBindings init: bindings)
@@ -150,8 +150,8 @@ State >> checkDisuniteConstraints: currentConstraintsLink on: newConstraintsLink
 				  yourself ]
 		  ifNotNil: [ 
 			  self
-				  checkDisuniteConstraint: currentConstraintsLink value
-				  constraints: currentConstraintsLink nextLink
+				  checkDisuniteConstraint: currentConstraintsLink car
+				  constraints: currentConstraintsLink cdr
 				  on: newConstraintsLink
 				  bindings: bindings
 				  ifViolated: aBlock
@@ -251,7 +251,7 @@ State >> linksFromBindings: bindings init: aLink [
 
 	^ bindings associations
 		  inject: aLink
-		  into: [ :aValueLink :each | each ~~> aValueLink ]
+		  into: [ :aCons :each | (each key cons: each value) cons: aCons ]
 ]
 
 { #category : #accessing }
@@ -262,6 +262,20 @@ State >> path [
 { #category : #accessing }
 State >> path: anObject [
 	path := anObject
+]
+
+{ #category : #'as yet unclassified' }
+State >> purifyDisuniteConstraints: c usingWalker: aWalker [
+
+	^ c ifNotNil: [ 
+		  | aConstraint aCons |
+		  aConstraint := c car.
+		  aCons := self
+			           purifyDisuniteConstraints: c cdr
+			           usingWalker: aWalker.
+		  (aConstraint anyVarInState: self)
+			  ifTrue: [ aCons ]
+			  ifFalse: [ aConstraint cons: aCons ] ]
 ]
 
 { #category : #accessing }
@@ -348,6 +362,12 @@ State >> walk: anObj inUnionFind: aUF [
 	^ (aUF includesKey: anObj)
 		ifTrue: [ aUF at: anObj ]
 		ifFalse: [ anObj ]
+]
+
+{ #category : #dispatching }
+State >> walkDisuniteConstraintsUsingWalker: aWalker [
+
+	^ aWalker value: disuniteConstraints
 ]
 
 { #category : #walking }

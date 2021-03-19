@@ -38,6 +38,12 @@ Var >> acceptOccurChecker: aChecker [
 	^ aChecker forVar: self
 ]
 
+{ #category : #'as yet unclassified' }
+Var >> anyVarInState: aState [
+
+	^ (aState walk: self) species == self species
+]
+
 { #category : #comparing }
 Var >> equalVar: anotherReifiedVar [
 	^ id = anotherReifiedVar id

@@ -57,18 +57,20 @@ Reifier >> reifyVars: vars [
 
 	| reifier walker |
 	walker := Walker new.
-	reifier := self class new
+	reifier := self copy
 		           state: Dictionary new asState;
 		           yourself.
 	^ vars collect: [ :v | 
-		  | w s |
-		  w := walker
-			       state: state;
-			       value: v.
+		  | w s c wWalked cPurified cWalked |
+		  walker state: state.
+		  w := walker value: v.
+		  c := walker walkDisuniteConstraints.
 		  s := reifier value: w.
-		  walker
-			  state: s;
-			  value: w ]
+		  walker state: s.
+		  cPurified := s purifyDisuniteConstraints: c usingWalker: walker.
+		  wWalked := walker value: w.
+		  cWalked := walker value: cPurified.
+		  cWalked reifiedDisuniteConstraints: wWalked ]
 ]
 
 { #category : #accessing }

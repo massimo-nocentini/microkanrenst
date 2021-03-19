@@ -7,6 +7,21 @@ Cons >> acceptOccurChecker: aChecker [
 ]
 
 { #category : #'*MicroKanren' }
+Cons >> anyVarInState: aState [
+
+	^ (car anyVarInState: aState) or: [ cdr anyVarInState: aState ]
+]
+
+{ #category : #'*MicroKanren' }
+Cons >> reifiedDisuniteConstraints: anObject [
+
+	^ DisuniteConstraints new
+		  argument: anObject;
+		  constraints: self;
+		  yourself
+]
+
+{ #category : #'*MicroKanren' }
 Cons >> reifyUsingReifier: aReifier [
 
 	^ aReifier forCons: self

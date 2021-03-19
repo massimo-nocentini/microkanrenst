@@ -48,3 +48,9 @@ Walker >> value: aVar [
 	^ (state walk: aVar)
 		walkStarUsingWalker: self
 ]
+
+{ #category : #'as yet unclassified' }
+Walker >> walkDisuniteConstraints [
+
+	^ state walkDisuniteConstraintsUsingWalker: self
+]
