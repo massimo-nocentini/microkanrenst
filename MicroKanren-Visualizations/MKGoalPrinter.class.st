@@ -151,9 +151,6 @@ MKGoalPrinter >> printOn: aStream aSucceed: aSucceed [
 				ifEmpty: [ aStream nextPutAll: '✓' ]
 				ifNotEmpty: [ :assocs | 
 					assocs do: [ :each | 
-						
-						"self halt."
-						
 						each value printOn: aStream renderer: self.
 						aStream nextPut: $/.
 						each key printOn: aStream renderer: self.

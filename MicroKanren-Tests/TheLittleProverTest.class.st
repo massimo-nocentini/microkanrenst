@@ -339,7 +339,6 @@ TheLittleProverTest >> testDisuniteo9 [
 			 with: 1 asReifiedVar
 			 with: 2 asReifiedVar) asCons }.
 
-
 	^ self exportComputationTreeOfGoal: aGoal limitedTo: -1
 ]
 
