@@ -19,18 +19,6 @@ UndefinedObject >> collect: aBlock [
 ]
 
 { #category : #'*MicroKanren-Streams' }
-UndefinedObject >> next: n [
-
-	^ self
-]
-
-{ #category : #'*MicroKanren-Streams' }
-UndefinedObject >> nextInteger: n [
-
-	^ self
-]
-
-{ #category : #'*MicroKanren-Streams' }
 UndefinedObject >> putOn: aStream fromStream: rootStream [
 
 	"nothing to do"

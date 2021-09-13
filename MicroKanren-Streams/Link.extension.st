@@ -19,26 +19,6 @@ Link >> collect: aBlock [
 ]
 
 { #category : #'*MicroKanren-Streams' }
-Link >> next: anObject [
-
-	^ anObject nextFromLink: self
-]
-
-{ #category : #'*MicroKanren-Streams' }
-Link >> nextFromLink: aLink [
-
-	^ aLink nextLink: self
-]
-
-{ #category : #'*MicroKanren-Streams' }
-Link >> nextInteger: n [
-
-	^ n = 0
-		  ifTrue: [ nil ]
-		  ifFalse: [ self class nextLink: (nextLink nextInteger: n - 1) ]
-]
-
-{ #category : #'*MicroKanren-Streams' }
 Link >> putOn: aStream fromStream: rootStream [
 
 	nextLink putOn: aStream fromStream: rootStream

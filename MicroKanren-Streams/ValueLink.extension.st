@@ -28,15 +28,6 @@ ValueLink >> collect: aBlock [
 ]
 
 { #category : #'*MicroKanren-Streams' }
-ValueLink >> nextInteger: n [
-
-	^ (super nextInteger: n) ifNotNil: [ :aValueLink | 
-		  aValueLink
-			  value: value;
-			  yourself ]
-]
-
-{ #category : #'*MicroKanren-Streams' }
 ValueLink >> putOn: aStream fromStream: rootStream [
 
 	aStream nextPut: value.
