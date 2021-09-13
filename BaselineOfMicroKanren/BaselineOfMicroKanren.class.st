@@ -10,8 +10,8 @@ BaselineOfMicroKanren >> baseline: spec [
 	<baseline>
 	spec for: #common do: [ "Externals."
 		spec
-			baseline: 'dsst'
-			with: [ spec repository: 'github://massimo-nocentini/dsst' ];
+			baseline: 'ContainersEssentials'
+			with: [ spec repository: 'github://massimo-nocentini/Containers-Essentials' ];
 			baseline: 'MetaSTExporter'
 			with: [ 
 				spec repository: 'github://massimo-nocentini/MetaSTExporter/src' ].

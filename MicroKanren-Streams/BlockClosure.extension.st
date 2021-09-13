@@ -13,6 +13,15 @@ BlockClosure >> appendStream: aStream [
 ]
 
 { #category : #'*MicroKanren-Streams' }
+BlockClosure >> asLinkPrepend: anObject [
+
+	^ ValueLink new
+		  value: anObject;
+		  nextLink: self;
+		  yourself
+]
+
+{ #category : #'*MicroKanren-Streams' }
 BlockClosure >> collect: aFullBlockClosure [
 
 	^ [ self value collect: aFullBlockClosure ]
