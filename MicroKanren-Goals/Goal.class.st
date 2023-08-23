@@ -55,7 +55,7 @@ Goal >> , other [
 { #category : #running }
 Goal >> asStatesStream [
 
-	^ self onState: SBRAL new asState
+	^ self onState: CTSBRAL new asState
 ]
 
 { #category : #testing }

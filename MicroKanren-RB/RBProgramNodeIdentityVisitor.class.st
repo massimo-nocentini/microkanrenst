@@ -126,7 +126,7 @@ RBProgramNodeIdentityVisitor >> visitReturnNode: aReturnNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : #'as yet unclassified' }
 RBProgramNodeIdentityVisitor >> visitSelectorNode: aNode [
 
 	self shouldBeImplemented

@@ -35,12 +35,12 @@ State class >> fromUnionFind: aUF [
 
 { #category : #'as yet unclassified' }
 State >> at: aVar put: aValue [
+
 	^ self class new
 		  birthdate: birthdate;
-		  substitution:
-			  (substitution
+		  substitution: (substitution
 				   at: birthdate - aVar id + 1
-				   put: (Maybe just: aValue));
+				   put: (CTMaybeCategory just: aValue));
 		  path: path;
 		  yourself
 ]
@@ -54,14 +54,14 @@ State >> birthdate: anInteger [
 State >> collectVars: aCollection forFresh: aFresh [
 
 	| nextState vars extendedSubstitution |
-	vars := aCollection withIndexCollect: [ :aName :each | 
+	vars := aCollection withIndexCollect: [ :aName :each |
 		        (each + birthdate) asVar
 			        named: aName;
 			        yourself ].
 	extendedSubstitution := vars
 		                        inject: substitution
-		                        into: [ :aSBRAL :each | 
-		                        aSBRAL add: Maybe nothing ].
+		                        into: [ :aSBRAL :each |
+		                        aSBRAL add: CTMaybeCategory nothing ].
 	nextState := self class new
 		             substitution: extendedSubstitution;
 		             birthdate: birthdate + aCollection size;
@@ -247,7 +247,7 @@ State >> walkVar: aVar inSBRAL: aSBRAL [
 	maybe := aSBRAL at: birthdate - aVar id + 1.
 	^ maybe
 		  ifNothing: [ aVar ]
-		  ifJust: [ :aJust | self walk: aJust content inSBRAL: aSBRAL ]
+		  ifJust: [ :aJust | self walk: aJust argument inSBRAL: aSBRAL ]
 ]
 
 { #category : #'as yet unclassified' }

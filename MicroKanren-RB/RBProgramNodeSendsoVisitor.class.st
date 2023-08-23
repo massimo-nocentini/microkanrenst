@@ -51,7 +51,7 @@ RBProgramNodeSendsoVisitor >> visitMessageNode: aMessageNode [
 	goals add: (selectorVar unifyo value: aMessageNode selectorNode)
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : #'as yet unclassified' }
 RBProgramNodeSendsoVisitor >> visitSelectorNode: aNode [
 
 	self shouldNotImplement

@@ -1,11 +1,13 @@
-Extension { #name : #SBRAL }
+Extension { #name : #CTSBRAL }
 
 { #category : #'*MicroKanren' }
-SBRAL >> asState [
+CTSBRAL >> asState [
+
 	^ State fromSBRAL: self
 ]
 
 { #category : #'*MicroKanren' }
-SBRAL >> walk: aVar fromState: aState [
+CTSBRAL >> walk: aVar fromState: aState [
+
 	^ aState walk: aVar inSBRAL: self
 ]

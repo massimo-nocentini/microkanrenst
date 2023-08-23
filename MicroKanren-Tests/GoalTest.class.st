@@ -122,31 +122,32 @@ GoalTest >> testAlphaRuleo [
 
 { #category : #tests }
 GoalTest >> testAppendo [
+
 	| g |
-	g := [ :l | 
-	sexpTheory appendo
-		value: #(#a #b #c) asCons
-		value: #(#d #e) asCons
-		value: l ] asGoal.
+	g := [ :l |
+	     sexpTheory appendo
+		     value: #( #a #b #c ) asCons
+		     value: #( #d #e ) asCons
+		     value: l ] asGoal.
 	self
 		assert: g solutions
-		equals: {#(#a #b #c #d #e) asCons}
+		equals: { #( #a #b #c #d #e ) asCons }
 		modulo: #asOrderedCollection.
-	g := [ :l | 
-	sexpTheory appendo
-		value: #(#a #b #c) asCons
-		value: (#(#d) asConsWithCdr: l)
-		value: #(#a #b #c #d #e) asCons ] asGoal.
+	g := [ :l |
+	     sexpTheory appendo
+		     value: #( #a #b #c ) asCons
+		     value: (#( #d ) asConsWithCdr: l)
+		     value: #( #a #b #c #d #e ) asCons ] asGoal.
 	self
 		assert: g solutions
-		equals: {(#e cons: nil)}
+		equals: { (#e cons: nil) }
 		modulo: #asOrderedCollection.
-	g := [ :l | 
-	sexpTheory appendo
-		value: #(#a #b #c) asCons
-		value: (#(#d) asConsWithCdr: l)
-		value: (#(#a #b #c #d) asConsWithCdr: #e) ] asGoal.
-	self assert: g solutions equals: {#e} modulo: #asOrderedCollection
+	g := [ :l |
+	     sexpTheory appendo
+		     value: #( #a #b #c ) asCons
+		     value: (#( #d ) asConsWithCdr: l)
+		     value: (#( #a #b #c #d ) asConsWithCdr: #e) ] asGoal.
+	self assert: g solutions equals: { #e } modulo: #asOrderedCollection
 ]
 
 { #category : #tests }
@@ -1149,11 +1150,11 @@ GoalTest >> testSucceed [
 { #category : #tests }
 GoalTest >> testSucceedInvariant [
 
-	SBRAL new asState in: [ :s | 
+	CTSBRAL new asState in: [ :s |
 		| ss |
 		ss := true asGoal onState: s.
 		self assert: ss car equals: s ].
-	SBRAL new asState in: [ :s | 
+	CTSBRAL new asState in: [ :s |
 		| ss |
 		ss := s srfi41Singleton
 			      zip: (true asGoal onState: s)

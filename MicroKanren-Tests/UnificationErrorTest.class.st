@@ -11,7 +11,7 @@ Class {
 UnificationErrorTest >> testUnificationFailsOnArraysWithDifferentSizes [
 
 	self
-		should: [ SBRAL new asState unifier value: { 3 } value: { 4. 5 } ]
+		should: [ CTSBRAL new asState unifier value: { 3 } value: { 4. 5 } ]
 		raise: UnificationError
 		whoseDescriptionIncludes:
 		'#(4 5) cannot be unified with #(3) because they have different sizes'
@@ -22,7 +22,7 @@ UnificationErrorTest >> testUnificationFailsOnArraysWithDifferentSizes [
 UnificationErrorTest >> testUnificationFailsOnDifferentObjects [
 
 	self
-		should: [ SBRAL new asState unifier value: 3 value: 4 ]
+		should: [ CTSBRAL new asState unifier value: 3 value: 4 ]
 		raise: UnificationError
 		whoseDescriptionIncludes:
 		'4 cannot be unified with 3 because they are different objects'

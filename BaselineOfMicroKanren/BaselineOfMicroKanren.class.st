@@ -8,15 +8,13 @@ Class {
 BaselineOfMicroKanren >> baseline: spec [
 
 	<baseline>
-	spec for: #common do: [ "Externals."
+	spec for: #common do: [ "Externals.""
 		spec
 			baseline: 'ContainersEssentials'
 			with: [ spec repository: 'github://massimo-nocentini/Containers-Essentials' ];
 			baseline: 'MetaSTExporter'
 			with: [ 
-				spec repository: 'github://massimo-nocentini/MetaSTExporter/src' ].
-
-		"Packages"
+				spec repository: 'github://massimo-nocentini/MetaSTExporter/src' ]"
 		spec
 			package: 'MicroKanren';
 			package: 'MicroKanren-Streams';

@@ -4,7 +4,7 @@ Class {
 	#category : #'MicroKanren-RB'
 }
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : #'as yet unclassified' }
 RBProgramNodeMKVisitor >> visitSelectorNode: aNode [
 
 	self subclassResponsibility

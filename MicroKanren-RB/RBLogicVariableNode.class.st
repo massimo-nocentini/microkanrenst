@@ -54,13 +54,13 @@ RBLogicVariableNode >> logicVar: anObject [
 	logicVar := anObject
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : #'as yet unclassified' }
 RBLogicVariableNode >> unifyWith: anObject usingUnifier: anUnifier [
 
 	^ anObject unifyWithRBLogicVariableNode: self usingUnifier: anUnifier
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : #'as yet unclassified' }
 RBLogicVariableNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
 
 	^ anUnifier
