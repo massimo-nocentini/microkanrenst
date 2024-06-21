@@ -1,6 +1,6 @@
-Extension { #name : #RBProgramNodeVisitor }
+Extension { #name : 'RBProgramNodeVisitor' }
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 RBProgramNodeVisitor >> visitLogicVariableNode: aRBMKVarNode [
 	self visitVariableNode: aRBMKVarNode
 ]

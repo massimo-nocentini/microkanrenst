@@ -2,18 +2,19 @@
 I contains theorems described in ""The Littler Prover"".
 "
 Class {
-	#name : #TheLittleProver,
-	#superclass : #Object,
-	#category : #'MicroKanren-ACL'
+	#name : 'TheLittleProver',
+	#superclass : 'Object',
+	#category : 'MicroKanren-ACL',
+	#package : 'MicroKanren-ACL'
 }
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> ancestorº [
 
 	^ MKPredicateBinaryAncestoro
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> carConsº [
 
 	"(dethm car/cons (x y)
@@ -22,7 +23,7 @@ TheLittleProver >> carConsº [
 	^ [ :x :y | (x cons: y) car ] <~~> [ :a :b | a ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> cdrConsº [
 
 	"(dethm cdr/cons (x y)
@@ -31,7 +32,7 @@ TheLittleProver >> cdrConsº [
 	^ [ :x :y | (x cons: y) cdr ] <~~> [ :x :y | y ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> cdrOfConsº [
 
 	^ [ :c :d | 
@@ -43,7 +44,7 @@ TheLittleProver >> cdrOfConsº [
 			   arguments: { d }) ] asGoal ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> consCarCdrº [
 
 	^ [ :a :c :b | 
@@ -73,13 +74,13 @@ TheLittleProver >> consCarCdrº [
 		   | (self ancestorº value: x asRBNode value: e asRBNode)) ] asGoal ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> consº [
 
 	^ [ :a :d :c | self unifyº value: (a cons: d) value: c ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> equalIf0º [
 
 	^ [ :a :c :b | 
@@ -102,7 +103,7 @@ TheLittleProver >> equalIf0º [
 	  , (self unifyº value: a value: dRB) ] asGoal ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> equalIfº [
 
 	^ [ :a :c :b | 
@@ -126,7 +127,7 @@ TheLittleProver >> equalIfº [
 		   | (self unifyº value: a value: dRB)) ] asGoal ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> equalSameº [
 
 	"(dethm equal-same (x)
@@ -135,7 +136,7 @@ TheLittleProver >> equalSameº [
 	^ [ :x | x = x ] <~> [ :x | true ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> equalSwapº [
 
 	"(dethm equal-swap (x y)
@@ -144,7 +145,7 @@ TheLittleProver >> equalSwapº [
 	^ [ :x :y | x = y ] <~~> [ :x :y | y = x ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> ifFalseº [
 
 	"(dethm cdr/cons (x y)
@@ -156,7 +157,7 @@ TheLittleProver >> ifFalseº [
 		  ifFalse: [ y ] ] <~~> [ :x :y | y ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> ifNestedOtherwiseº [
 
 	^ [ :a :c :b | 
@@ -188,7 +189,7 @@ TheLittleProver >> ifNestedOtherwiseº [
 	  , (self ancestorº value: if value: e asRBNode) ] asGoal ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> ifNestedThenº [
 
 	^ [ :a :c :b | 
@@ -220,7 +221,7 @@ TheLittleProver >> ifNestedThenº [
 	  , (self ancestorº value: if value: d asRBNode) ] asGoal ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> ifSameº [
 
 	"(dethm cdr/cons (x y)
@@ -232,7 +233,7 @@ TheLittleProver >> ifSameº [
 		  ifFalse: [ y ] ] <~~> [ :x :y | y ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> ifTrueº [
 
 	"(dethm cdr/cons (x y)
@@ -244,7 +245,7 @@ TheLittleProver >> ifTrueº [
 		  ifFalse: [ y ] ] <~~> [ :x :y | x ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> isAtomConsº [
 
 	"(dethm atom/cons (x y)
@@ -253,7 +254,7 @@ TheLittleProver >> isAtomConsº [
 	^ [ :x :y | (x cons: y) isAtom ] <~~> [ :x :y | false ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> isAtomNilº [
 
 	"
@@ -263,19 +264,19 @@ TheLittleProver >> isAtomNilº [
 	^ [ :_ | nil isAtom ] <~> [ :_ | true ]
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> jabberwockyº [
 
 	^ MKPredicateUnaryJabberwockyo
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> parentº [
 
 	^ MKPredicateBinaryParento
 ]
 
-{ #category : #predicates }
+{ #category : 'predicates' }
 TheLittleProver >> unifyº [
 
 	^ [ :a :b | a unifyo value: b ]

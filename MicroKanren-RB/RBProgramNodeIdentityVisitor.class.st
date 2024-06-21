@@ -2,33 +2,34 @@
 I am a node program visitor that reconstruct an exact copy of the visited RBNode object.
 "
 Class {
-	#name : #RBProgramNodeIdentityVisitor,
-	#superclass : #RBProgramNodeMKVisitor,
-	#category : #'MicroKanren-RB'
+	#name : 'RBProgramNodeIdentityVisitor',
+	#superclass : 'RBProgramNodeMKVisitor',
+	#category : 'MicroKanren-RB',
+	#package : 'MicroKanren-RB'
 }
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitArgumentNode: anArgumentNode [
 
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitArgumentNodes: aNodeCollection [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitArrayNode: anArrayNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitAssignmentNode: anAssignmentNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitBlockNode: aBlockNode [
 
 	^ RBBlockNode
@@ -37,50 +38,50 @@ RBProgramNodeIdentityVisitor >> visitBlockNode: aBlockNode [
 		  body: (aBlockNode body acceptVisitor: self)
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitCascadeNode: aCascadeNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitEnglobingErrorNode: anEnglobingErrorNode [
 
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitGlobalNode: aSelfNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitInstanceVariableNode: aSelfNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitLiteralArrayNode: aRBLiteralArrayNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitLiteralNode: aLiteralNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitLiteralValueNode: aRBLiteralValueNode [
 
 	^ aRBLiteralValueNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitLogicVariableNode: aRBMKVarNode [
 
 	self shouldNotImplement
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitMessageNode: aMessageNode [
 	^ RBMessageNode
 		receiver: (aMessageNode receiver acceptVisitor: self)
@@ -91,53 +92,53 @@ RBProgramNodeIdentityVisitor >> visitMessageNode: aMessageNode [
 				collect: [ :aNode | aNode acceptVisitor: self ])
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitMethodNode: aMethodNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitNode: aNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitParseErrorNode: anErrorNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitPatternBlockNode: aRBPatternBlockNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitPatternWrapperBlockNode: aRBPatternWrapperBlockNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitPragmaNode: aPragmaNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitReturnNode: aReturnNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 RBProgramNodeIdentityVisitor >> visitSelectorNode: aNode [
 
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitSelfNode: aSelfNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitSequenceNode: aSequenceNode [
 
 	^ RBSequenceNode statements:
@@ -145,32 +146,32 @@ RBProgramNodeIdentityVisitor >> visitSequenceNode: aSequenceNode [
 			   aNode acceptVisitor: self ])
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitSuperNode: aSuperNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitTemporaryDeclarationNode: aTemporaryDeclarationNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitTemporaryNode: aNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitTemporaryNodes: aNodeCollection [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitThisContextNode: aThisContextNode [
 	self shouldBeImplemented
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeIdentityVisitor >> visitVariableNode: aVariableNode [
 	self shouldBeImplemented
 ]

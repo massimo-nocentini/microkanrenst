@@ -1,19 +1,20 @@
 Class {
-	#name : #RBProgramNodeOccurCheckVisitor,
-	#superclass : #RBProgramNodeMKVisitor,
+	#name : 'RBProgramNodeOccurCheckVisitor',
+	#superclass : 'RBProgramNodeMKVisitor',
 	#instVars : [
 		'occurChecker'
 	],
-	#category : #'MicroKanren-RB'
+	#category : 'MicroKanren-RB',
+	#package : 'MicroKanren-RB'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBProgramNodeOccurCheckVisitor >> occurChecker: anObject [
 
 	occurChecker := anObject
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeOccurCheckVisitor >> visitBlockNode: aNode [
 
 	^ aNode arguments
@@ -21,19 +22,19 @@ RBProgramNodeOccurCheckVisitor >> visitBlockNode: aNode [
 		  into: [ :aBoolean :each | aBoolean or: [ self visitNode: each ] ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeOccurCheckVisitor >> visitLiteralValueNode: aLiteralNode [
 
 	^ occurChecker value: aLiteralNode value
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeOccurCheckVisitor >> visitLogicVariableNode: aNode [
 
 	^ occurChecker value: aNode logicVar
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeOccurCheckVisitor >> visitMessageNode: aNode [
 
 	^ (aNode receiver acceptVisitor: self) or: [ 
@@ -43,13 +44,13 @@ RBProgramNodeOccurCheckVisitor >> visitMessageNode: aNode [
 			  aBoolean or: [ each acceptVisitor: self ] ] ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeOccurCheckVisitor >> visitSelectorNode: aNode [
 
 	^ occurChecker value: aNode value
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeOccurCheckVisitor >> visitSequenceNode: aSequenceNode [
 
 	^ aSequenceNode statements

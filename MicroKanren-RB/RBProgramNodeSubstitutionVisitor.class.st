@@ -1,24 +1,25 @@
 Class {
-	#name : #RBProgramNodeSubstitutionVisitor,
-	#superclass : #RBProgramNodeIdentityVisitor,
+	#name : 'RBProgramNodeSubstitutionVisitor',
+	#superclass : 'RBProgramNodeIdentityVisitor',
 	#instVars : [
 		'substitution'
 	],
-	#category : #'MicroKanren-RB'
+	#category : 'MicroKanren-RB',
+	#package : 'MicroKanren-RB'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBProgramNodeSubstitutionVisitor >> substitution: anObject [
 	substitution := anObject
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeSubstitutionVisitor >> visitLogicVariableNode: aNode [
 
 	^ substitution at: aNode
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeSubstitutionVisitor >> visitTemporaryNode: aNode [
 
 	^ aNode isVariable

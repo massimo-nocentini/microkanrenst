@@ -1,10 +1,11 @@
 Class {
-	#name : #MKPredicateUnaryJabberwockyo,
-	#superclass : #PredicateTernary,
-	#category : #'MicroKanren-ACL'
+	#name : 'MKPredicateUnaryJabberwockyo',
+	#superclass : 'PredicateTernary',
+	#category : 'MicroKanren-ACL',
+	#package : 'MicroKanren-ACL'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MKPredicateUnaryJabberwockyo >> goal [
 
 	^ [ :x :d :e :f :g :h :i | 
@@ -102,7 +103,7 @@ MKPredicateUnaryJabberwockyo >> goal [
 	  goal , (ifTrueGoal | ifFalseGoal) ] asGoal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MKPredicateUnaryJabberwockyo >> name [
 
 	^ 'jabberwockyº'

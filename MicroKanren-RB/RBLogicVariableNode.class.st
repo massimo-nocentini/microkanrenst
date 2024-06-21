@@ -1,13 +1,14 @@
 Class {
-	#name : #RBLogicVariableNode,
-	#superclass : #RBVariableNode,
+	#name : 'RBLogicVariableNode',
+	#superclass : 'RBVariableNode',
 	#instVars : [
 		'logicVar'
 	],
-	#category : #'MicroKanren-RB'
+	#category : 'MicroKanren-RB',
+	#package : 'MicroKanren-RB'
 }
 
-{ #category : #'instance creation' }
+{ #category : 'instance creation' }
 RBLogicVariableNode class >> named: aString logicVar: aVar [
 
 	^ (self named: aString)
@@ -15,52 +16,52 @@ RBLogicVariableNode class >> named: aString logicVar: aVar [
 		  yourself
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 RBLogicVariableNode >> = anObject [
 
 	^ anObject equalRBLogicVariableNode: self
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBLogicVariableNode >> acceptVisitor: aProgramNodeVisitor [
 	^ aProgramNodeVisitor visitLogicVariableNode: self
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 RBLogicVariableNode >> equalRBLogicVariableNode: aNode [
 
 	^ logicVar = aNode logicVar
 ]
 
-{ #category : #comparing }
+{ #category : 'comparing' }
 RBLogicVariableNode >> hash [
 
 	^ logicVar hash
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 RBLogicVariableNode >> id [
 
 	^ logicVar id
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBLogicVariableNode >> logicVar [
 	^ logicVar
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBLogicVariableNode >> logicVar: anObject [
 	logicVar := anObject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 RBLogicVariableNode >> unifyWith: anObject usingUnifier: anUnifier [
 
 	^ anObject unifyWithRBLogicVariableNode: self usingUnifier: anUnifier
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 RBLogicVariableNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
 
 	^ anUnifier
@@ -68,19 +69,19 @@ RBLogicVariableNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifi
 		  forRBLogicVariableNode: aNode
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 RBLogicVariableNode >> unifyWithRBNode: aNode usingUnifier: anUnifier [
 
 	^ logicVar unifyWithObject: aNode usingUnifier: anUnifier
 ]
 
-{ #category : #dispatched }
+{ #category : 'dispatched' }
 RBLogicVariableNode >> unifyWithVar: aVar usingUnifier: anUnifier [
 
 	self shouldNotImplement
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 RBLogicVariableNode >> walkSBRAL: aSBRAL forState: aState [
 
 	^ (aState walkVar: logicVar inSBRAL: aSBRAL) asRBNode in: [ :node | 

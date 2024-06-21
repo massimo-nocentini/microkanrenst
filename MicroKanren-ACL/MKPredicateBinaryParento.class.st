@@ -1,16 +1,17 @@
 Class {
-	#name : #MKPredicateBinaryParento,
-	#superclass : #PredicateBinary,
-	#category : #'MicroKanren-ACL'
+	#name : 'MKPredicateBinaryParento',
+	#superclass : 'PredicateBinary',
+	#category : 'MicroKanren-ACL',
+	#package : 'MicroKanren-ACL'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MKPredicateBinaryParento >> binaryMessages [
 
 	^ #( = cons: + - )
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MKPredicateBinaryParento >> binaryMessagesGoal [
 
 	^ [ :c | 
@@ -32,7 +33,7 @@ MKPredicateBinaryParento >> binaryMessagesGoal [
 		  init: false asGoal ] asGoal
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MKPredicateBinaryParento >> goal [
 
 	| sequenceGoal blockGoal messageNode |
@@ -53,7 +54,7 @@ MKPredicateBinaryParento >> goal [
 	^ messageNode | sequenceGoal | blockGoal
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MKPredicateBinaryParento >> ifMessageGoal [
 
 	^ [ :c :r | 
@@ -85,13 +86,13 @@ MKPredicateBinaryParento >> ifMessageGoal [
 	  if1 | if2 | if3 ] asGoal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MKPredicateBinaryParento >> name [
 
 	^ 'parentº'
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MKPredicateBinaryParento >> unaryMessages [
 
 	"	^ #( isUffish isBrillig isSlithy frabjous mimsy mome frumious )"
@@ -99,7 +100,7 @@ MKPredicateBinaryParento >> unaryMessages [
 	^ #( car cdr )
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 MKPredicateBinaryParento >> unaryMessagesGoal [
 
 	^ self unaryMessages

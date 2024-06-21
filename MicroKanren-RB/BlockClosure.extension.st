@@ -1,6 +1,6 @@
-Extension { #name : #BlockClosure }
+Extension { #name : 'BlockClosure' }
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> <~> aBlock [
 
 	^ [ :a :b | 
@@ -14,7 +14,7 @@ BlockClosure >> <~> aBlock [
 		  contextVariables: #(  ) ]
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> <~~> aBlock [
 
 	^ [ :a :b | 
@@ -28,7 +28,7 @@ BlockClosure >> <~~> aBlock [
 		  contextVariables: #(  ) ]
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> <~~~> aBlock [
 
 	^ [ :a :b | 
@@ -42,13 +42,13 @@ BlockClosure >> <~~~> aBlock [
 		  contextVariables: #(  ) ]
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> asGoalWithASTof: aBlock [
 
 	^ self asGoalWithASTof: aBlock select: #yourself
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> asGoalWithASTof: aBlock contextVariables: aCollection select: selectBlock [
 
 	^ FreshRB new
@@ -59,7 +59,7 @@ BlockClosure >> asGoalWithASTof: aBlock contextVariables: aCollection select: se
 		  yourself
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> asGoalWithASTof: aBlock select: selectBlock [
 
 	^ self
@@ -68,7 +68,7 @@ BlockClosure >> asGoalWithASTof: aBlock select: selectBlock [
 		  select: selectBlock
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> asGoalWithUnaryASTof: aBlock contextVariables: aCollection [
 
 	^ self
@@ -84,7 +84,7 @@ BlockClosure >> asGoalWithUnaryASTof: aBlock contextVariables: aCollection [
 								   format: { aSequenceNode }) ] ] ]
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> context [
 	^ self sourceNode body
 		acceptVisitor:
@@ -100,20 +100,20 @@ BlockClosure >> context [
 				yourself)
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> sendso [
 
 	^ self sourceNode body sendso
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> substituteVariablesUsingSequenceableCollection: rbVariables [
 
 	^ self unaryRBNode substituteVariablesUsingDictionary:
 		  (self argumentNames with: rbVariables collect: #->) asDictionary
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> unaryRBNode [
 
 	^ self sourceNode body statements in: [ :statements | 
@@ -125,7 +125,7 @@ BlockClosure >> unaryRBNode [
 						   format: { self }) ] ]
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 BlockClosure >> valueWithExitUnary [
 
 	^ self value: [ :anObject | ^ anObject ]

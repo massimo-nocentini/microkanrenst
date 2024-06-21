@@ -1,27 +1,28 @@
 Class {
-	#name : #FreshRB,
-	#superclass : #Fresh,
+	#name : 'FreshRB',
+	#superclass : 'Fresh',
 	#instVars : [
 		'nodeBlock',
 		'selectBlock',
 		'contextVariables'
 	],
-	#category : #'MicroKanren-RB'
+	#category : 'MicroKanren-RB',
+	#package : 'MicroKanren-RB'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreshRB >> contextVariables: anObject [
 
 	contextVariables := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreshRB >> nodeBlock: anObject [
 
 	nodeBlock := anObject
 ]
 
-{ #category : #dispatched }
+{ #category : 'dispatched' }
 FreshRB >> onState: aState withVars: aCollection [
 
 	| dict node rbLogicVariables swapping aStream |
@@ -55,7 +56,7 @@ FreshRB >> onState: aState withVars: aCollection [
 	^ aStream
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FreshRB >> selectBlock: anObject [
 
 	selectBlock := anObject

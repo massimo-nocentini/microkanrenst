@@ -1,12 +1,12 @@
-Extension { #name : #EFFormatter }
+Extension { #name : 'EFFormatter' }
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 EFFormatter >> visitLogicVariableNode: aNode [
 
 	self writeString: aNode logicVar asString
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 EFFormatter >> visitSelectorNode: aNode [
 
 	self writeString: aNode selector

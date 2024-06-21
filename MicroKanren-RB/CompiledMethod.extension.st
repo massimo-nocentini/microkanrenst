@@ -1,6 +1,6 @@
-Extension { #name : #CompiledMethod }
+Extension { #name : 'CompiledMethod' }
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 CompiledMethod >> sendso [
 
 	^ self sourceNode body sendso

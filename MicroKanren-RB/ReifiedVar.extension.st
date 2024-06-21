@@ -1,6 +1,6 @@
-Extension { #name : #ReifiedVar }
+Extension { #name : 'ReifiedVar' }
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 ReifiedVar >> formattedCode [
 
 	^ '◊' , self asString

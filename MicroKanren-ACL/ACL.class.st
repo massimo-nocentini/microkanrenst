@@ -2,8 +2,8 @@
 A Computational Logic.
 "
 Class {
-	#name : #ACL,
-	#superclass : #Object,
+	#name : 'ACL',
+	#superclass : 'Object',
 	#instVars : [
 		'steps',
 		'node',
@@ -11,17 +11,18 @@ Class {
 		'contextVariables',
 		'freshContextVariables'
 	],
-	#category : #'MicroKanren-ACL'
+	#category : 'MicroKanren-ACL',
+	#package : 'MicroKanren-ACL'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ACL >> argumentNames [
 
 	^ (1 to: steps size + contextVariables size) collect: [ :each | 
 		  '§' , each asString subscript ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ACL >> asGoal [
 
 	^ Fresh new
@@ -29,13 +30,13 @@ ACL >> asGoal [
 		  yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ACL >> contextVariables: anObject [
 
 	contextVariables := anObject
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ACL >> focus: focusBlock do: doBlock [
 
 	steps add: [ :astToRewrite :astRewritten | 
@@ -51,7 +52,7 @@ ACL >> focus: focusBlock do: doBlock [
 			contextVariables: contextVariables ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ACL >> focus: focusBlock premise: hpBlock do: doBlock [
 
 	steps add: [ :astToRewrite :astRewritten | 
@@ -90,7 +91,7 @@ ACL >> focus: focusBlock premise: hpBlock do: doBlock [
 			contextVariables: contextVariables ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ACL >> initialize [
 
 	super initialize.
@@ -99,13 +100,13 @@ ACL >> initialize [
 	lastBlock := [ :o | true asGoal ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ACL >> node: aRBNode [
 
 	node := aRBNode
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ACL >> rewriting: astToRewrite rewritten: astRewritten focusAST: astFocused focusVar: o do: doBlock [
 
 	^ [ :r | 
@@ -127,13 +128,13 @@ ACL >> rewriting: astToRewrite rewritten: astRewritten focusAST: astFocused focu
 	  g1 , g2 , g3 ] asGoal
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 ACL >> then: aBlock [
 
 	lastBlock := aBlock
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 ACL >> valueWithArguments: variables [
 
 	^ [ :astInitial | 

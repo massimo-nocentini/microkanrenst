@@ -1,25 +1,26 @@
 Class {
-	#name : #RBProgramNodeReifyVisitor,
-	#superclass : #RBProgramNodeMKVisitor,
+	#name : 'RBProgramNodeReifyVisitor',
+	#superclass : 'RBProgramNodeMKVisitor',
 	#instVars : [
 		'state'
 	],
-	#category : #'MicroKanren-RB'
+	#category : 'MicroKanren-RB',
+	#package : 'MicroKanren-RB'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBProgramNodeReifyVisitor >> state [
 
 	^ state
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBProgramNodeReifyVisitor >> state: anObject [
 
 	state := anObject
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeReifyVisitor >> visitBlockNode: aNode [
 
 	state := aNode arguments
@@ -29,19 +30,19 @@ RBProgramNodeReifyVisitor >> visitBlockNode: aNode [
 	state := state reifier value: aNode body
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeReifyVisitor >> visitLiteralValueNode: aLiteralNode [
 
 	state := state reifier value: aLiteralNode value
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeReifyVisitor >> visitLogicVariableNode: aNode [
 
 	state := state reifier value: aNode logicVar
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeReifyVisitor >> visitMessageNode: aNode [
 
 	aNode receiver acceptVisitor: self.
@@ -49,13 +50,13 @@ RBProgramNodeReifyVisitor >> visitMessageNode: aNode [
 	aNode arguments do: [ :each | each acceptVisitor: self ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeReifyVisitor >> visitSelectorNode: aNode [
 
 	state := state reifier value: aNode value
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeReifyVisitor >> visitSequenceNode: aSequenceNode [
 
 	state := aSequenceNode statements

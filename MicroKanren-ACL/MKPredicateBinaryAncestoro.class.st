@@ -1,10 +1,11 @@
 Class {
-	#name : #MKPredicateBinaryAncestoro,
-	#superclass : #PredicateBinary,
-	#category : #'MicroKanren-ACL'
+	#name : 'MKPredicateBinaryAncestoro',
+	#superclass : 'PredicateBinary',
+	#category : 'MicroKanren-ACL',
+	#package : 'MicroKanren-ACL'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 MKPredicateBinaryAncestoro >> goal [
 
 	| g1 g2 |
@@ -22,7 +23,7 @@ MKPredicateBinaryAncestoro >> goal [
 	^ g1 | g2
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 MKPredicateBinaryAncestoro >> name [
 
 	^ 'ancestorº'

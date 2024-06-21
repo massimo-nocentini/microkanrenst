@@ -1,7 +1,7 @@
-Extension { #name : #RBNode }
+Extension { #name : 'ASTNode' }
 
-{ #category : #'*MicroKanren-ACL' }
-RBNode >> acl: aBlock contextVariables: aCollection [
+{ #category : '*MicroKanren-ACL' }
+ASTNode >> acl: aBlock contextVariables: aCollection [
 
 	^ ACL new
 		  node: self;
@@ -11,8 +11,8 @@ RBNode >> acl: aBlock contextVariables: aCollection [
 			  acl asGoal ]
 ]
 
-{ #category : #'*MicroKanren-ACL' }
-RBNode >> acl: aBlock then: goalBlock contextVariables: aCollection [
+{ #category : '*MicroKanren-ACL' }
+ASTNode >> acl: aBlock then: goalBlock contextVariables: aCollection [
 
 	^ ACL new
 		  node: self;

@@ -1,20 +1,21 @@
 Class {
-	#name : #RBProgramNodeSendsoVisitor,
-	#superclass : #RBProgramNodeMKVisitor,
+	#name : 'RBProgramNodeSendsoVisitor',
+	#superclass : 'RBProgramNodeMKVisitor',
 	#instVars : [
 		'goals',
 		'selectorVar'
 	],
-	#category : #'MicroKanren-RB'
+	#category : 'MicroKanren-RB',
+	#package : 'MicroKanren-RB'
 }
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 RBProgramNodeSendsoVisitor >> asGoal [
 
 	^ goals foldr: [ :each :g | each | g ] init: false asGoal
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 RBProgramNodeSendsoVisitor >> initialize [
 
 	super initialize.
@@ -22,13 +23,13 @@ RBProgramNodeSendsoVisitor >> initialize [
 	goals := OrderedCollection new
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 RBProgramNodeSendsoVisitor >> selectorVar: anObject [
 
 	selectorVar := anObject
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeSendsoVisitor >> visitLogicVariableNode: aNode [
 
 	super visitLogicVariableNode: aNode.
@@ -43,7 +44,7 @@ RBProgramNodeSendsoVisitor >> visitLogicVariableNode: aNode [
 						 selector: each) ] asGoal ]
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 RBProgramNodeSendsoVisitor >> visitMessageNode: aMessageNode [
 
 	super visitMessageNode: aMessageNode.
@@ -51,7 +52,7 @@ RBProgramNodeSendsoVisitor >> visitMessageNode: aMessageNode [
 	goals add: (selectorVar unifyo value: aMessageNode selectorNode)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : 'as yet unclassified' }
 RBProgramNodeSendsoVisitor >> visitSelectorNode: aNode [
 
 	self shouldNotImplement

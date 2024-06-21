@@ -1,1 +1,1 @@
-Package { #name : #'MicroKanren-RB' }
+Package { #name : 'MicroKanren-RB' }

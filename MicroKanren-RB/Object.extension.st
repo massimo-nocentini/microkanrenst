@@ -1,6 +1,6 @@
-Extension { #name : #Object }
+Extension { #name : 'Object' }
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 Object >> asLiteralRBNode [
 
 	^ self isLiteral
@@ -8,7 +8,7 @@ Object >> asLiteralRBNode [
 		  ifFalse: [ Error signal: 'I am not a literal value' ]
 ]
 
-{ #category : #'*MicroKanren-RB' }
+{ #category : '*MicroKanren-RB' }
 Object >> equalRBLogicVariableNode: aNode [
 
 	^ false
