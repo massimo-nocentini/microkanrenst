@@ -1,6 +1,6 @@
 Class {
 	#name : 'RBProgramNodeMKVisitor',
-	#superclass : 'RBProgramNodeVisitor',
+	#superclass : 'ASTProgramNodeVisitor',
 	#category : 'MicroKanren-RB',
 	#package : 'MicroKanren-RB'
 }

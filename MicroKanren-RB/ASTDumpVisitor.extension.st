@@ -1,7 +1,7 @@
-Extension { #name : 'RBDumpVisitor' }
+Extension { #name : 'ASTDumpVisitor' }
 
 { #category : '*MicroKanren-RB' }
-RBDumpVisitor >> visitLogicVariableNode: aRBMKVarNode [
+ASTDumpVisitor >> visitLogicVariableNode: aRBMKVarNode [
 	self visitVariableNode: aRBMKVarNode.
 	stream nextPutAll: aRBMKVarNode logicVar asString
 ]

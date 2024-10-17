@@ -1,13 +1,13 @@
-Extension { #name : 'RBSelectorNode' }
+Extension { #name : 'ASTSelectorNode' }
 
 { #category : '*MicroKanren-RB' }
-RBSelectorNode >> unifyWith: aNode usingUnifier: anUnifier [
+ASTSelectorNode >> unifyWith: aNode usingUnifier: anUnifier [
 
 	^ aNode unifyWithRBSelectorNode: self usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-RBSelectorNode >> unifyWithRBSelectorNode: aRBSelectorNode usingUnifier: anUnifier [
+ASTSelectorNode >> unifyWithRBSelectorNode: aRBSelectorNode usingUnifier: anUnifier [
 
 	^ anUnifier
 		  forRBSelectorNode: self

@@ -1,6 +1,6 @@
 Class {
 	#name : 'RBLogicVariableNode',
-	#superclass : 'RBVariableNode',
+	#superclass : 'ASTVariableNode',
 	#instVars : [
 		'logicVar'
 	],
