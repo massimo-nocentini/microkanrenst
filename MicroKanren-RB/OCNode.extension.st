@@ -1,31 +1,31 @@
-Extension { #name : 'ASTNode' }
+Extension { #name : 'OCNode' }
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> acceptOccurChecker: aChecker [
+OCNode >> acceptOccurChecker: aChecker [
 
 	^ aChecker forRBNode: self
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> asRBNode [
+OCNode >> asRBNode [
 
 	^ self
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> printOn: aWriteStream renderer: aMKComputationTreeRenderer [
+OCNode >> printOn: aWriteStream renderer: aMKComputationTreeRenderer [
 
 	aMKComputationTreeRenderer printOn: aWriteStream aRBNode: self
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> reifyUsingReifier: aReifier [
+OCNode >> reifyUsingReifier: aReifier [
 
 	^ aReifier forRBNode: self
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> sendso [
+OCNode >> sendso [
 
 	^ [ :anObject | 
 	  RBProgramNodeSendsoVisitor new
@@ -35,7 +35,7 @@ ASTNode >> sendso [
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> substituteVariablesUsingDictionary: aDict [
+OCNode >> substituteVariablesUsingDictionary: aDict [
 
 	^ self acceptVisitor: (RBProgramNodeSubstitutionVisitor new
 			   substitution: aDict;
@@ -43,55 +43,55 @@ ASTNode >> substituteVariablesUsingDictionary: aDict [
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> unifyWith: anObject usingUnifier: anUnifier [
+OCNode >> unifyWith: anObject usingUnifier: anUnifier [
 
 	self subclassResponsibility
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> unifyWithRBBlockNode: aNode usingUnifier: anUnifier [
+OCNode >> unifyWithRBBlockNode: aNode usingUnifier: anUnifier [
 
 	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
+OCNode >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
 
 	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
+OCNode >> unifyWithRBLogicVariableNode: aNode usingUnifier: anUnifier [
 
 	^ aNode unifyWithRBNode: self usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
+OCNode >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
 
 	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> unifyWithRBNode: aNode usingUnifier: anUnifier [
+OCNode >> unifyWithRBNode: aNode usingUnifier: anUnifier [
 
 	^ self unifyWithObject: aNode usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> unifyWithRBSelectorNode: aNode usingUnifier: anUnifier [
+OCNode >> unifyWithRBSelectorNode: aNode usingUnifier: anUnifier [
 
 	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> unifyWithRBSequenceNode: aNode usingUnifier: anUnifier [
+OCNode >> unifyWithRBSequenceNode: aNode usingUnifier: anUnifier [
 
 	^ self unifyWithRBNode: aNode usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTNode >> walkStarUsingWalker: aWalker [
+OCNode >> walkStarUsingWalker: aWalker [
 
 	^ aWalker forRBNode: self
 ]

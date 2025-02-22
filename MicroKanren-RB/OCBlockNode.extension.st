@@ -1,13 +1,13 @@
-Extension { #name : 'ASTBlockNode' }
+Extension { #name : 'OCBlockNode' }
 
 { #category : '*MicroKanren-RB' }
-ASTBlockNode >> unifyWith: anObject usingUnifier: anUnifier [
+OCBlockNode >> unifyWith: anObject usingUnifier: anUnifier [
 
 	^ anObject unifyWithRBBlockNode: self usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTBlockNode >> unifyWithRBBlockNode: aRBBlockNode usingUnifier: anUnifier [
+OCBlockNode >> unifyWithRBBlockNode: aRBBlockNode usingUnifier: anUnifier [
 
 	^ anUnifier forRBBlockNode: self forRBBlockNode: aRBBlockNode
 ]

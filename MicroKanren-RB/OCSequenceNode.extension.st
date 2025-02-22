@@ -1,13 +1,13 @@
-Extension { #name : 'ASTSequenceNode' }
+Extension { #name : 'OCSequenceNode' }
 
 { #category : '*MicroKanren-RB' }
-ASTSequenceNode >> unifyWith: anObject usingUnifier: anUnifier [
+OCSequenceNode >> unifyWith: anObject usingUnifier: anUnifier [
 
 	^ anObject unifyWithRBSequenceNode: self usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTSequenceNode >> unifyWithRBSequenceNode: aNode usingUnifier: anUnifier [
+OCSequenceNode >> unifyWithRBSequenceNode: aNode usingUnifier: anUnifier [
 
 	^ anUnifier forRBSequenceNode: self forRBSequenceNode: aNode
 ]

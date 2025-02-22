@@ -1,13 +1,13 @@
-Extension { #name : 'ASTMessageNode' }
+Extension { #name : 'OCMessageNode' }
 
 { #category : '*MicroKanren-RB' }
-ASTMessageNode >> unifyWith: anObject usingUnifier: anUnifier [
+OCMessageNode >> unifyWith: anObject usingUnifier: anUnifier [
 
 	^ anObject unifyWithRBMessageNode: self usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTMessageNode >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
+OCMessageNode >> unifyWithRBMessageNode: aNode usingUnifier: anUnifier [
 
 	^ anUnifier forRBMessageNode: self forRBMessageNode: aNode
 ]

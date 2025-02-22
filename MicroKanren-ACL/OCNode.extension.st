@@ -1,7 +1,7 @@
-Extension { #name : 'ASTNode' }
+Extension { #name : 'OCNode' }
 
 { #category : '*MicroKanren-ACL' }
-ASTNode >> acl: aBlock contextVariables: aCollection [
+OCNode >> acl: aBlock contextVariables: aCollection [
 
 	^ ACL new
 		  node: self;
@@ -12,7 +12,7 @@ ASTNode >> acl: aBlock contextVariables: aCollection [
 ]
 
 { #category : '*MicroKanren-ACL' }
-ASTNode >> acl: aBlock then: goalBlock contextVariables: aCollection [
+OCNode >> acl: aBlock then: goalBlock contextVariables: aCollection [
 
 	^ ACL new
 		  node: self;

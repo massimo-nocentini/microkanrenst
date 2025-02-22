@@ -1,13 +1,13 @@
-Extension { #name : 'ASTLiteralValueNode' }
+Extension { #name : 'OCLiteralValueNode' }
 
 { #category : '*MicroKanren-RB' }
-ASTLiteralValueNode >> unifyWith: anObject usingUnifier: anUnifier [
+OCLiteralValueNode >> unifyWith: anObject usingUnifier: anUnifier [
 
 	^ anObject unifyWithRBLiteralValueNode: self usingUnifier: anUnifier
 ]
 
 { #category : '*MicroKanren-RB' }
-ASTLiteralValueNode >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
+OCLiteralValueNode >> unifyWithRBLiteralValueNode: aNode usingUnifier: anUnifier [
 
 	^ anUnifier forRBLiteralValueNode: self forRBLiteralValueNode: aNode
 ]
