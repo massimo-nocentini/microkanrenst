@@ -85,7 +85,7 @@ RBProgramNodeIdentityVisitor >> visitLogicVariableNode: aRBMKVarNode [
 RBProgramNodeIdentityVisitor >> visitMessageNode: aMessageNode [
 	^ RBMessageNode
 		receiver: (aMessageNode receiver acceptVisitor: self)
-		selector: aMessageNode selector
+		selector: (aMessageNode selectorNode acceptVisitor: self)
 		keywordsPositions: aMessageNode keywordsPositions
 		arguments:
 			(aMessageNode arguments
@@ -129,8 +129,9 @@ RBProgramNodeIdentityVisitor >> visitReturnNode: aReturnNode [
 
 { #category : 'as yet unclassified' }
 RBProgramNodeIdentityVisitor >> visitSelectorNode: aNode [
+	"Since Pharo 15 a message node holds a selector node, not a Symbol."
 
-	self shouldBeImplemented
+	^ RBSelectorNode value: aNode value
 ]
 
 { #category : 'visiting' }

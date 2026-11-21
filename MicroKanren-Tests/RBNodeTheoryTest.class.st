@@ -28,9 +28,9 @@ RBNodeTheoryTest >> testUnifyConsIsAtomBlock [
 				(RBSequenceNode statements: { (RBMessageNode
 						  receiver: (RBMessageNode
 								   receiver: (RBLiteralValueNode value: 3)
-								   selector: #cons:
+								   selector: (RBSelectorNode value: #cons:)
 								   arguments: { 0 asReifiedVar asRBNode })
-						  selector: #isAtom) }).
+						  selector: (RBSelectorNode value: #isAtom)) }).
 				0 asReifiedVar asRBNode } }
 		modulo: #asOrderedCollection
 ]

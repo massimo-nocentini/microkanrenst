@@ -8,7 +8,7 @@ Load in a Pharo image with:
 ```smalltalk
 Metacello new
     baseline: 'MicroKanren';
-    repository: 'github://massimo-nocentini/microkanrenst';
+    repository: 'github://massimo-nocentini/microkanrenst:master';
     load.
 ```
 

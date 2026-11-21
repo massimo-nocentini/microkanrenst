@@ -41,7 +41,7 @@ RBProgramNodeSendsoVisitor >> visitLogicVariableNode: aNode [
 				selectorVar unifyo value:
 					(RBMessageNode
 						 receiver: receiver asRBNode
-						 selector: each) ] asGoal ]
+						 selector: (RBSelectorNode value: each)) ] asGoal ]
 ]
 
 { #category : 'visiting' }
@@ -54,6 +54,7 @@ RBProgramNodeSendsoVisitor >> visitMessageNode: aMessageNode [
 
 { #category : 'as yet unclassified' }
 RBProgramNodeSendsoVisitor >> visitSelectorNode: aNode [
+	"Pharo 15 visits the selector node of a message node too: #visitMessageNode: takes care of it."
 
-	self shouldNotImplement
+	^ aNode
 ]

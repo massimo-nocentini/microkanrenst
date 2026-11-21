@@ -33,7 +33,7 @@ TheLittleProverTest >> expectedRBNode_chapter_01_frame_55 [
 
 	^ RBMessageNode
 		  receiver: 0 asReifiedVar asRBNode
-		  selector: #cons:
+		  selector: (RBSelectorNode value: #cons:)
 		  arguments: { (RBMessageNode
 				   receiver: (RBMessageNode
 						    receiver: (RBMessageNode
@@ -42,23 +42,23 @@ TheLittleProverTest >> expectedRBNode_chapter_01_frame_55 [
 												       receiver:
 												       (RBMessageNode
 													        receiver: 1 asReifiedVar asRBNode
-													        selector: #cdr)
-												       selector: #cons:
+													        selector: (RBSelectorNode value: #cdr))
+												       selector: (RBSelectorNode value: #cons:)
 												       arguments:
 												       { (RBMessageNode
 													        receiver: 0 asReifiedVar asRBNode
-													        selector: #car) })
-										      selector: #car)
-								     selector: #cons:
+													        selector: (RBSelectorNode value: #car)) })
+										      selector: (RBSelectorNode value: #car))
+								     selector: (RBSelectorNode value: #cons:)
 								     arguments: { 2 asReifiedVar asRBNode })
-						    selector: #car)
-				   selector: #=
+						    selector: (RBSelectorNode value: #car))
+				   selector: (RBSelectorNode value: #=)
 				   arguments: { (RBMessageNode
 						    receiver:
 						    (RBMessageNode
 							     receiver: 1 asReifiedVar asRBNode
-							     selector: #isAtom)
-						    selector: #=
+							     selector: (RBSelectorNode value: #isAtom))
+						    selector: (RBSelectorNode value: #=)
 						    arguments: { (RBLiteralValueNode value: false) }) }) }
 ]
 
@@ -67,7 +67,7 @@ TheLittleProverTest >> expectedRBNode_chapter_01_frame_56 [
 
 	^ RBMessageNode
 		  receiver: 0 asReifiedVar asRBNode
-		  selector: #cons:
+		  selector: (RBSelectorNode value: #cons:)
 		  arguments: { (RBMessageNode
 				   receiver: (RBMessageNode
 						    receiver: (RBMessageNode
@@ -76,41 +76,41 @@ TheLittleProverTest >> expectedRBNode_chapter_01_frame_56 [
 												       receiver:
 												       (RBMessageNode
 													        receiver: 1 asReifiedVar asRBNode
-													        selector: #cdr)
-												       selector: #cons:
+													        selector: (RBSelectorNode value: #cdr))
+												       selector: (RBSelectorNode value: #cons:)
 												       arguments:
 												       { (RBMessageNode
 													        receiver: 0 asReifiedVar asRBNode
-													        selector: #car) })
-										      selector: #car)
-								     selector: #cons:
+													        selector: (RBSelectorNode value: #car)) })
+										      selector: (RBSelectorNode value: #car))
+								     selector: (RBSelectorNode value: #cons:)
 								     arguments: { (RBMessageNode
 										      receiver: (RBLiteralValueNode value: #oats)
-										      selector: #cons:
+										      selector: (RBSelectorNode value: #cons:)
 										      arguments: { (RBLiteralValueNode value: nil) }) })
-						    selector: #car)
-				   selector: #=
+						    selector: (RBSelectorNode value: #car))
+				   selector: (RBSelectorNode value: #=)
 				   arguments: { (RBMessageNode
 						    receiver:
 						    (RBMessageNode
 							     receiver: 1 asReifiedVar asRBNode
-							     selector: #isAtom)
-						    selector: #=
+							     selector: (RBSelectorNode value: #isAtom))
+						    selector: (RBSelectorNode value: #=)
 						    arguments: { (RBMessageNode
 								     receiver: (RBMessageNode
 										      receiver:
 										      (RBMessageNode
 											       receiver: 2 asReifiedVar asRBNode
-											       selector: #isAtom)
-										      selector: #cons:
+											       selector: (RBSelectorNode value: #isAtom))
+										      selector: (RBSelectorNode value: #cons:)
 										      arguments: { (RBMessageNode
 												       receiver: 3 asReifiedVar asRBNode
-												       selector: #=
+												       selector: (RBSelectorNode value: #=)
 												       arguments: { (RBMessageNode
 														        receiver: 4 asReifiedVar asRBNode
-														        selector: #cons:
+														        selector: (RBSelectorNode value: #cons:)
 														        arguments: { 2 asReifiedVar asRBNode }) }) })
-								     selector: #isAtom) }) }) }
+								     selector: (RBSelectorNode value: #isAtom)) }) }) }
 ]
 
 { #category : #tests }
@@ -120,9 +120,9 @@ TheLittleProverTest >> expectedRBNode_chapter_02_frame_15 [
 		  receiver: (RBMessageNode
 				   receiver: (RBMessageNode
 						    receiver: 0 asReifiedVar asRBNode
-						    selector: #=
+						    selector: (RBSelectorNode value: #=)
 						    arguments: { (RBLiteralValueNode value: true) })
-				   selector: #ifTrue:ifFalse:
+				   selector: (RBSelectorNode value: #ifTrue:ifFalse:)
 				   arguments: { 
 						   (RBBlockNode body:
 							    (RBSequenceNode statements:
@@ -130,15 +130,15 @@ TheLittleProverTest >> expectedRBNode_chapter_02_frame_15 [
 						   (RBBlockNode body:
 							    (RBSequenceNode statements: { (RBMessageNode
 									      receiver: (RBLiteralValueNode value: #or)
-									      selector: #=
+									      selector: (RBSelectorNode value: #=)
 									      arguments: { (RBMessageNode
 											       receiver: (RBLiteralValueNode value: #black)
-											       selector: #cons:
+											       selector: (RBSelectorNode value: #cons:)
 											       arguments: { (RBMessageNode
 													        receiver: (RBLiteralValueNode value: #coffee)
-													        selector: #cons:
+													        selector: (RBSelectorNode value: #cons:)
 													        arguments: { (RBLiteralValueNode value: nil) }) }) }) })) })
-		  selector: #ifTrue:ifFalse:
+		  selector: (RBSelectorNode value: #ifTrue:ifFalse:)
 		  arguments: { 
 				  (RBBlockNode body:
 					   (RBSequenceNode statements: { 1 asReifiedVar asRBNode })).
@@ -151,16 +151,16 @@ TheLittleProverTest >> expectedRBNode_chapter_02_frame_7 [
 
 	^ RBMessageNode
 		  receiver: 0 asReifiedVar asRBNode
-		  selector: #ifTrue:ifFalse:
+		  selector: (RBSelectorNode value: #ifTrue:ifFalse:)
 		  arguments: { 
 				  (RBBlockNode body: (RBSequenceNode statements: { (RBMessageNode
 							     receiver: (RBMessageNode
 									      receiver: (RBMessageNode
 											       receiver: (RBLiteralValueNode value: 3)
-											       selector: #cons:
+											       selector: (RBSelectorNode value: #cons:)
 											       arguments: { (RBLiteralValueNode value: nil) })
-									      selector: #isAtom)
-							     selector: #ifTrue:ifFalse:
+									      selector: (RBSelectorNode value: #isAtom))
+							     selector: (RBSelectorNode value: #ifTrue:ifFalse:)
 							     arguments: { 
 									     (RBBlockNode body:
 										      (RBSequenceNode statements:
@@ -172,10 +172,10 @@ TheLittleProverTest >> expectedRBNode_chapter_02_frame_7 [
 							     receiver: (RBMessageNode
 									      receiver: (RBMessageNode
 											       receiver: (RBLiteralValueNode value: 3)
-											       selector: #cons:
+											       selector: (RBSelectorNode value: #cons:)
 											       arguments: { (RBLiteralValueNode value: nil) })
-									      selector: #isAtom)
-							     selector: #ifTrue:ifFalse:
+									      selector: (RBSelectorNode value: #isAtom))
+							     selector: (RBSelectorNode value: #ifTrue:ifFalse:)
 							     arguments: { 
 									     (RBBlockNode body:
 										      (RBSequenceNode statements:
@@ -456,7 +456,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindin
 	         g1 := theory equalSameº value: ast value: r asRBNode.
 	         g2 := rewritten asRBNode unifyo value: (RBMessageNode
 			                receiver: car asRBNode
-			                selector: #cons:
+			                selector: (RBSelectorNode value: #cons:)
 			                arguments: { cdr asRBNode }).
 	         g1 , g2 ] asGoal ] ]
 		         asGoalWithUnaryASTof: [ :a :d | 
@@ -478,7 +478,7 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_46_variablesBindin
 	         [ :ast | 
 	         [ :a :b | 
 	         (rewritten asRBNode unifyo value:
-		          (RBMessageNode receiver: a asRBNode selector: #even))
+		          (RBMessageNode receiver: a asRBNode selector: (RBSelectorNode value: #even)))
 	         , ((RBLiteralValueNode value: 3) unifyo value: a asRBNode) ] ]
 		         asGoalWithUnaryASTof: [ :a :b | a + b ]
 		         contextVariables: Dictionary empty ] asGoal.
@@ -509,10 +509,10 @@ TheLittleProverTest >> test_chapter_01_OldGamesNewRules_frame_49 [
 	node := RBMessageNode
 		        receiver:
 		        [ #bagels cons: (#and cons: (#lox cons: nil)) ] unaryRBNode
-		        selector: #=
+		        selector: (RBSelectorNode value: #=)
 		        arguments: { (RBMessageNode
 				         receiver: 0 asReifiedVar asRBNode
-				         selector: #cons:
+				         selector: (RBSelectorNode value: #cons:)
 				         arguments: { 1 asReifiedVar asRBNode }) }.
 
 	self
@@ -1052,25 +1052,25 @@ TheLittleProverTest >> test_chapter_02_EvenOlderGames_frame_57_premise [
 	aGoal := [ :v :w | 
 	         a := RBMessageNode
 		              receiver: (RBLiteralValueNode value: #ketchup)
-		              selector: #cons:
+		              selector: (RBSelectorNode value: #cons:)
 		              arguments: { (RBMessageNode
 				               receiver: (RBMessageNode
 						                receiver:
 						                (RBMessageNode
 							                 receiver: v asRBNode
-							                 selector: #car)
-						                selector: #car)
-				               selector: #cons:
+							                 selector: (RBSelectorNode value: #car))
+						                selector: (RBSelectorNode value: #car))
+				               selector: (RBSelectorNode value: #cons:)
 				               arguments: { (RBMessageNode
 						                receiver:
 						                (RBMessageNode
 							                 receiver: v asRBNode
-							                 selector: #car)
-						                selector: #cdr) }) }.
+							                 selector: (RBSelectorNode value: #car))
+						                selector: (RBSelectorNode value: #cdr)) }) }.
 	         n := RBMessageNode
 		              receiver:
-		              (RBMessageNode receiver: w asRBNode selector: #car)
-		              selector: #cdr.
+		              (RBMessageNode receiver: w asRBNode selector: (RBSelectorNode value: #car))
+		              selector: (RBSelectorNode value: #cdr).
 
 	         (theory unifyº value: n value: a)
 	         | (theory ancestorº value: n value: a) ] asGoal.

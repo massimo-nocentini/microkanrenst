@@ -23,11 +23,11 @@ MKPredicateBinaryParento >> binaryMessagesGoal [
 			  | l r |
 			  l := self unifyº value: secondArgument value: (RBMessageNode
 					        receiver: firstArgument
-					        selector: each
+					        selector: (RBSelectorNode value: each)
 					        arguments: { cRB }).
 			  r := self unifyº value: secondArgument value: (RBMessageNode
 					        receiver: cRB
-					        selector: each
+					        selector: (RBSelectorNode value: each)
 					        arguments: { firstArgument }).
 			  l | r | aGoal ]
 		  init: false asGoal ] asGoal
@@ -109,7 +109,7 @@ MKPredicateBinaryParento >> unaryMessagesGoal [
 			  g := self unifyº
 				       value: secondArgument
 				       value:
-				       (RBMessageNode receiver: firstArgument selector: each).
+				       (RBMessageNode receiver: firstArgument selector: (RBSelectorNode value: each)).
 			  g | aGoal ]
 		  init: false asGoal
 ]

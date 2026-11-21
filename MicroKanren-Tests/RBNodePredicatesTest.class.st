@@ -15,19 +15,19 @@ RBNodePredicatesTest >> arguments_testSenderoBackwards [
 	messageNodes := { 
 		                (RBMessageNode
 			                 receiver: receiverNode
-			                 selector: #numberOfEdges).
+			                 selector: (RBSelectorNode value: #numberOfEdges)).
 		                (RBMessageNode
 			                 receiver: receiverNode
-			                 selector: #testStackedVertically).
+			                 selector: (RBSelectorNode value: #testStackedVertically)).
 		                (RBMessageNode
 			                 receiver: receiverNode
-			                 selector: #iconicHaloSpecifications).
+			                 selector: (RBSelectorNode value: #iconicHaloSpecifications)).
 		                (RBMessageNode
 			                 receiver: receiverNode
-			                 selector: #packageModels).
+			                 selector: (RBSelectorNode value: #packageModels)).
 		                (RBMessageNode
 			                 receiver: receiverNode
-			                 selector: #testReversed) }.
+			                 selector: (RBSelectorNode value: #testReversed)) }.
 
 	self
 		assert: ([ :aSend | 

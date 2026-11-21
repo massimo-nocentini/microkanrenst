@@ -8,30 +8,54 @@ Class {
 BaselineOfMicroKanren >> baseline: spec [
 
 	<baseline>
-	spec for: #common do: [ "Externals.""
+	spec for: #common do: [ "Externals."
 		spec
 			baseline: 'ContainersEssentials'
-			with: [ spec repository: 'github://massimo-nocentini/Containers-Essentials' ];
-			baseline: 'MetaSTExporter'
-			with: [ 
-				spec repository: 'github://massimo-nocentini/MetaSTExporter/src' ]"
+			with: [ spec repository: 'github://massimo-nocentini/Containers-Essentials:master' ].
+
 		spec
-			package: 'MicroKanren';
-			package: 'MicroKanren-Streams';
-			package: 'MicroKanren-Goals';
+			baseline: 'ContainersCategory'
+			with: [ spec repository: 'github://massimo-nocentini/Containers-Category:master/src' ].
+
+		spec
+			baseline: 'ContainersCons'
+			with: [ spec repository: 'github://massimo-nocentini/Containers-Cons:master/src' ].
+
+		spec
+			baseline: 'ContainersSBRAL'
+			with: [ spec repository: 'github://massimo-nocentini/Containers-SBRAL:master/src' ].
+
+		spec
+			baseline: 'MetaSTExporter'
+			with: [ spec repository: 'github://massimo-nocentini/MetaSTExporter:master/src' ].
+
+		"Packages"
+		spec
+			package: 'MicroKanren' with: [
+				spec requires:
+						#( 'ContainersEssentials' 'ContainersCategory' 'ContainersCons'
+						   'ContainersSBRAL' ) ];
+			package: 'MicroKanren-Streams'
+			with: [ spec requires: #( 'MicroKanren' ) ];
+			package: 'MicroKanren-Goals'
+			with: [ spec requires: #( 'MicroKanren' 'MicroKanren-Streams' ) ];
 			package: 'MicroKanren-Predicates'
 			with: [ spec requires: #( 'MicroKanren-Goals' ) ];
 			package: 'MicroKanren-Extensions'
 			with: [ spec requires: #( 'MicroKanren' ) ];
 			package: 'MicroKanren-Theories'
-			with: [ spec requires: #( 'MicroKanren' 'MicroKanren-Extensions' ) ];
-			package: 'MicroKanren-Tests'
-			with: [ spec requires: #( 'MicroKanren-Theories' ) ];
+			with: [ spec requires: #( 'MicroKanren' 'MicroKanren-Extensions' 'MicroKanren-Goals' 'MicroKanren-Predicates' ) ];
+			package: 'MicroKanren-Tests' with: [
+				spec requires:
+						#( 'MicroKanren-Theories' 'MicroKanren-RB' 'MicroKanren-Realog' 'MicroKanren-ACL' 'MetaSTExporter' ) ];
 			package: 'MicroKanren-Visualizations'
 			with: [ spec requires: #( 'MicroKanren' ) ];
-			package: 'MicroKanren-Realog';
-			package: 'MicroKanren-RB';
-			package: 'MicroKanren-ACL' ]
+			package: 'MicroKanren-Realog'
+			with: [ spec requires: #( 'MicroKanren-Goals' ) ];
+			package: 'MicroKanren-RB'
+			with: [ spec requires: #( 'MicroKanren-Goals' ) ];
+			package: 'MicroKanren-ACL'
+			with: [ spec requires: #( 'MicroKanren-Goals' ) ] ]
 ]
 
 { #category : #export }

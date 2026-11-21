@@ -64,7 +64,7 @@ MKPredicateUnaryJabberwockyo >> goal [
 	                , (self unifyº
 			                 value: a
 			                 value:
-			                 (RBMessageNode receiver: xRB selector: #mimsy))
+			                 (RBMessageNode receiver: xRB selector: (RBSelectorNode value: #mimsy)))
 	                ,
 	                (self unifyº
 		                 value: #borogove asLiteralRBNode
@@ -74,7 +74,7 @@ MKPredicateUnaryJabberwockyo >> goal [
 		                 , (self unifyº
 				                  value: a
 				                  value:
-				                  (RBMessageNode receiver: xRB selector: #mome))
+				                  (RBMessageNode receiver: xRB selector: (RBSelectorNode value: #mome)))
 		                 ,
 		                 (self unifyº value: #rath asLiteralRBNode value: b)).
 
@@ -82,7 +82,7 @@ MKPredicateUnaryJabberwockyo >> goal [
 	                 , (self unifyº
 			                  value: a
 			                  value:
-			                  (RBMessageNode receiver: xRB selector: #frumious))
+			                  (RBMessageNode receiver: xRB selector: (RBSelectorNode value: #frumious)))
 	                 ,
 	                 (self unifyº
 		                  value: #bandersnatch asLiteralRBNode
@@ -94,7 +94,7 @@ MKPredicateUnaryJabberwockyo >> goal [
 				                   value:
 				                   (RBMessageNode
 					                    receiver: xRB
-					                    selector: #frabjous))
+					                    selector: (RBSelectorNode value: #frabjous)))
 		                  ,
 		                  (self unifyº
 			                   value: #beamish asLiteralRBNode

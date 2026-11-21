@@ -40,7 +40,7 @@ TheLittleProver >> cdrOfConsº [
 	  c unifyo value:
 		  (RBMessageNode
 			   receiver: a asRBNode
-			   selector: #cons:
+			   selector: (RBSelectorNode value: #cons:)
 			   arguments: { d }) ] asGoal ]
 ]
 
