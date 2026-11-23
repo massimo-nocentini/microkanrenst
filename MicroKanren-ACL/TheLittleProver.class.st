@@ -1,5 +1,5 @@
 "
-I contains theorems described in ""The Littler Prover"".
+I contain theorems described in ""The Little Prover"".
 "
 Class {
 	#name : 'TheLittleProver',

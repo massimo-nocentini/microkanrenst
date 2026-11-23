@@ -1,5 +1,5 @@
 "
-I am a node program visitor that reconstruct an exact copy of the visited RBNode object.
+I am a node program visitor that reconstructs an exact copy of the visited `RBNode` object.
 "
 Class {
 	#name : 'RBProgramNodeIdentityVisitor',

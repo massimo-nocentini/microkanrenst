@@ -1,5 +1,5 @@
 "
-A RBProgramNodeIdentityVisitorTest is a test class for testing the behavior of RBProgramNodeIdentityVisitor
+A `RBProgramNodeIdentityVisitorTest` is a test class for testing the behavior of `RBProgramNodeIdentityVisitor`
 "
 Class {
 	#name : #TheLittleProverTest,

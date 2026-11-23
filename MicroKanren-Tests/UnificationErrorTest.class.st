@@ -1,5 +1,5 @@
 "
-An UnificationErrorTest is a test class for testing the behavior of UnificationError
+An `UnificationErrorTest` is a test class for testing the behavior of `UnificationError`
 "
 Class {
 	#name : #UnificationErrorTest,
