@@ -5,6 +5,8 @@ I am the theory of S-expressions, that is of conses and nil. `Theory class>>sexp
 - `nilo`, `pairo`, `lengtho` and `reverseo` answer a block; the numbers of `lengtho` are those of `ArithTheory`.
 - `alphaRuleo` answers a block that makes an `AlphaRule`.
 
+`pairo` and `reverseo`, and `lengtho` by `pairo`, send `!!` to a predicate class, which does not understand it.
+
 ```smalltalk
 [ :l :r |
 	Theory sexp appendo value: l value: r value: #( 1 ) asCons ]

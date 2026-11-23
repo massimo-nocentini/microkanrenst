@@ -20,7 +20,7 @@ aState := (Dictionary new
 aState walker value: 1 asVar. ""=> #(3 5)""
 ```
 
-I am sound (`isSound`) unless the last goal of my path is a failed one. I also make the objects that work on me: `unifier`, `walker`, `reifier`, `trasparentReifier` and `identityReifier`.
+Once a goal has been pushed on my path, I am sound (`isSound`) unless the last one is a failed goal. I also make the objects that work on me: `unifier`, `walker`, `reifier`, `trasparentReifier` and `identityReifier`.
 "
 Class {
 	#name : #State,

@@ -1,5 +1,5 @@
 "
-I relate the list `4 β` to the reverse of `γ` whenever my machine relates `β` to `γ`.
+I relate the list `4 β` to the reverse of `γ` whenever my machine relates `β` to `γ`. I need `reverseo` of `SexpTheory`, which sends `!!` to a predicate class, which does not understand it.
 "
 Class {
 	#name : #McCullochReverseRule,

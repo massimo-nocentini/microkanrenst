@@ -4,11 +4,15 @@ I am the theory of two machines, each an `InductiveRelation` made of McCulloch's
 - `mccullocho` has the rules `McCullochAssociateRule` and `McCullochIdentityRule`.
 - `mclocko` has the rules `McCullochRepeatRule`, `McCullochReverseRule`, `McCullochRightHalfAssociateRule` and `McCullochShrinkRule`.
 
+`McCullochReverseRule` needs `reverseo` of `SexpTheory`, which sends `!!` to a predicate class, which does not understand it.
+
 `Theory class>>montecarloLock` makes me.
 
 ```smalltalk
 ([ :x |
-	Theory montecarloLock mccullocho value: #( 2 3 ) asCons value: x ]
+	Theory montecarloLock mccullocho
+		value: #( 2 3 ) asCons
+		value: x ]
 	asGoal solutions next: 1) readStream upToEnd.
 ""=> an Array((3))""
 ```

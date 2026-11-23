@@ -11,7 +11,8 @@ I am a contract between an `employee` and a `company`, with an `id` and a `type`
 			employee: (MKRealogIDType employee: 2);
 			company: (MKRealogIDType company: x);
 			type: #full;
-			yourself) ] asGoal solutions readStream upToEnd. ""=> #(3)""
+			yourself) ] asGoal solutions readStream upToEnd.
+""=> #(3)""
 ```
 "
 Class {

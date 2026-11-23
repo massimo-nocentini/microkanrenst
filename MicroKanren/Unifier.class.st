@@ -5,7 +5,7 @@ I unify two objects in a `state`: `value:value:` looks both up in the state, dis
 - Two different variables: the one with the greater id gets the other as value.
 - Two conses: their `car`, then their `cdr`.
 - A collection and a cons, in this order: the collection is turned into conses.
-- Two sequenceable collections: their elements, if they are as many; a `Symbol` is a plain object instead.
+- Two sequenceable collections: their elements, if they are as many; a `Symbol` on the left is a plain object instead, and one on the right of another collection of the same size signals an error.
 - Any other two objects: they have to be equal.
 
 `MicroKanren-RB` and `MicroKanren-Realog` extend me for their own objects. The goal `Unify` is my client:

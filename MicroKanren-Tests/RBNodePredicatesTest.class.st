@@ -1,5 +1,5 @@
 "
-I test `sendso`, from a block or a compiled method to the selectors it sends, and from a selector back to a message.
+I test `sendso`: from a block or a compiled method to the selectors it sends, and on a logic variable in place of the AST, where the expected answers are unary messages sent to a variable.
 "
 Class {
 	#name : #RBNodePredicatesTest,

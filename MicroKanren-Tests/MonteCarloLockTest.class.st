@@ -1,5 +1,5 @@
 "
-I test the two machines of `MontecarloLockTheory`: pairs of lists they relate, or do not, and lists they relate to themselves.
+I test the two machines of `MontecarloLockTheory`: pairs of lists that `mccullocho` relates, or does not, and lists that each machine relates to themselves.
 "
 Class {
 	#name : #MonteCarloLockTest,

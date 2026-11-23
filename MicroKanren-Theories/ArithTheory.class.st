@@ -5,6 +5,8 @@ I am a theory of natural numbers, represented as lists of bits, the least signif
 - About the shape of a number: `zeroo`, `oneo`, `positiveo` (a pair) and `greaterThanOneo` (at least two bits).
 - About sums: `addero` (a carry, two numbers and their sum), `genAddero` (the case of `addero` that goes bit by bit), `pluso` (`addero` with carry 0), `minuso` (`pluso` with the arguments in another order) and `succo`.
 
+`genAddero` sends `!!` to a predicate class, which does not understand it, hence `addero`, `pluso`, `minuso` and `succo` signal an error when they reach it.
+
 ```smalltalk
 6 asConsedBinaryRepr printString. ""=> '(0 1 1)'""
 [ :sum :carry |
