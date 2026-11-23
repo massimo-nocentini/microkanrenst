@@ -1,3 +1,6 @@
+"
+I answer a copy of an AST where the variables are replaced by their values, according to my `walker`. `Walker>>forRBNode:` uses me.
+"
 Class {
 	#name : 'RBProgramNodeWalkVisitor',
 	#superclass : 'RBProgramNodeMKVisitor',

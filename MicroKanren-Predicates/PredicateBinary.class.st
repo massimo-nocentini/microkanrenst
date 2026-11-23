@@ -1,3 +1,12 @@
+"
+I am a predicate with two arguments. `PredicateBinary class>>value:value:` makes me out of them.
+
+```smalltalk
+[ :x | MKPredicateSexpCaro value: #( 1 2 ) asCons value: x ]
+	asGoal solutions readStream upToEnd.
+""=> #(1)""
+```
+"
 Class {
 	#name : #PredicateBinary,
 	#superclass : #PredicateUnary,

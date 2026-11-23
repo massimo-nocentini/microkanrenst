@@ -1,3 +1,6 @@
+"
+I relate the list `4 β` to the reverse of `γ` whenever my machine relates `β` to `γ`.
+"
 Class {
 	#name : #McCullochReverseRule,
 	#superclass : #InductionRule,

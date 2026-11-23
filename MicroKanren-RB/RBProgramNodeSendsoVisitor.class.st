@@ -1,3 +1,14 @@
+"
+I collect `goals` about the messages sent in an AST: `asGoal` answers their disjunction, the goal that my `selectorVar` is the selector node of one of them. For a logic variable in the AST I add a goal for every unary selector of the image, that my `selectorVar` is that message sent to a new variable.
+
+`sendso`, understood by blocks, compiled methods and AST nodes, uses me:
+
+```smalltalk
+[ :x | [ :o | o + 1 ] sendso value: x ]
+	asGoal solutions readStream upToEnd.
+""=> an Array(OCSelectorNode(+))""
+```
+"
 Class {
 	#name : 'RBProgramNodeSendsoVisitor',
 	#superclass : 'RBProgramNodeMKVisitor',

@@ -1,3 +1,13 @@
+"
+I check whether a variable (`var`) occurs in an object, with respect to the values in a `state`. `Unifier` asks me before it gives an object as value to a variable, and takes a positive answer as a failure.
+
+```smalltalk
+OccurChecker new
+	state: Dictionary new asState;
+	var: 1 asVar;
+	value: { 3. { 1 asVar } }. ""=> true""
+```
+"
 Class {
 	#name : #OccurChecker,
 	#superclass : #Object,

@@ -1,3 +1,16 @@
+"
+I relate two lists and the list made of the elements of the former followed by those of the latter; the second argument becomes the tail, whatever it is.
+
+```smalltalk
+[ :x |
+	MKPredicateSexpAppendo
+		value: #( 1 ) asCons
+		value: x
+		value: #( 1 2 3 ) asCons ]
+	asGoal solutions readStream upToEnd.
+""=> an Array((2 3))""
+```
+"
 Class {
 	#name : #MKPredicateSexpAppendo,
 	#superclass : #PredicateTernary,

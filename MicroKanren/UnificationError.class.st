@@ -1,3 +1,8 @@
+"
+I tell that `left` and `right` cannot be unified, with the reason as message text (by default they are different objects).
+
+I am an `Error`, but `Unifier` does not signal me: it passes me to its continuation, and `Unify` sends me `onState:afterUnificationByUnify:`, which runs a `Failed` goal on a `FailedState` that keeps me as counterexample.
+"
 Class {
 	#name : #UnificationError,
 	#superclass : #Error,

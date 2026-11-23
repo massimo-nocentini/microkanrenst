@@ -1,3 +1,6 @@
+"
+I relate the list `6 β` to the list `2 γ` whenever my machine relates `β` to `γ`.
+"
 Class {
 	#name : #McCullochRightHalfAssociateRule,
 	#superclass : #InductionRule,

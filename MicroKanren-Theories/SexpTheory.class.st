@@ -1,3 +1,17 @@
+"
+I am the theory of S-expressions, that is of conses and nil. `Theory class>>sexp` makes me.
+
+- `conso`, `caro`, `cdro` and `appendo` answer a predicate class.
+- `nilo`, `pairo`, `lengtho` and `reverseo` answer a block; the numbers of `lengtho` are those of `ArithTheory`.
+- `alphaRuleo` answers a block that makes an `AlphaRule`.
+
+```smalltalk
+[ :l :r |
+	Theory sexp appendo value: l value: r value: #( 1 ) asCons ]
+	asGoal solutions readStream upToEnd.
+""=> an Array(an Array(nil (1)) an Array((1) nil))""
+```
+"
 Class {
 	#name : #SexpTheory,
 	#superclass : #Theory,

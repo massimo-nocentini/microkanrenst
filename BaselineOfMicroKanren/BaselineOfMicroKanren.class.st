@@ -1,3 +1,8 @@
+"
+I am the Metacello baseline of the project: I load the `MicroKanren` packages, with the projects they need (`ContainersEssentials`, `ContainersCategory`, `ContainersCons`, `ContainersSBRAL` and `MetaSTExporter`). I do not name the package `MicroKanren-Pie`.
+
+My `scriptExport...` methods write the sources of selected methods of the project as JSON files in `booklet/source`, for the documentation, by means of a `MetaSTExporter`.
+"
 Class {
 	#name : #BaselineOfMicroKanren,
 	#superclass : #BaselineOf,

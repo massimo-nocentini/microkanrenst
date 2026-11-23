@@ -1,3 +1,19 @@
+"
+I am a conditional goal, a list of `clauses`: each is a question and an answer, two goals, and I build a chain of `IfPure` goals out of them that ends with a `Failed` one. `Goal class>>cond` makes me; send me `e` or `i`, which choose the disjunction that combines the clauses (`Disj appended` or `Disj interleaved`), before you run me.
+
+- `if:then:` adds a clause.
+- `otherwise:` adds a clause whose question always succeeds.
+
+```smalltalk
+[ :x |
+	Goal cond e
+		if: (x unifyo value: #tea) then: true asGoal;
+		if: (x unifyo value: #milk) then: false asGoal;
+		otherwise: (x unifyo value: #cup);
+		yourself ] asGoal solutions readStream upToEnd.
+""=> #(#tea #cup)""
+```
+"
 Class {
 	#name : #Cond,
 	#superclass : #Goal,

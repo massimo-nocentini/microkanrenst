@@ -1,3 +1,6 @@
+"
+I test the streams of `MicroKanren-Streams`, made of links and blocks: `appendStream:`, `appendMap:` and `next:`, on infinite streams too.
+"
 Class {
 	#name : #MKStreamTest,
 	#superclass : #TestCase,

@@ -1,3 +1,6 @@
+"
+I test `car`, `cdr` and `,` on linked lists.
+"
 Class {
 	#name : #ExtensionMethodsTest,
 	#superclass : #TestCase,

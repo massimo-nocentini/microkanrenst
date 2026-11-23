@@ -1,3 +1,6 @@
+"
+I extend my `state` with the reifications of the variables that occur in an AST, in the order I visit them. `Reifier>>forRBNode:` uses me.
+"
 Class {
 	#name : 'RBProgramNodeReifyVisitor',
 	#superclass : 'RBProgramNodeMKVisitor',

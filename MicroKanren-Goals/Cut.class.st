@@ -1,3 +1,8 @@
+"
+I am the cut of a goal (`cuttingGoal`): I take the first `length` states of its stream, or the given state when the stream is empty, and append them to what `super onState:` answers. `Goal>>!` makes me, with length 1, as the left part of a conjunction.
+
+I send `ifEmpty:ifNotEmpty:` to the stream and `srfi41Singleton` to the state: no package of this project implements them.
+"
 Class {
 	#name : #Cut,
 	#superclass : #Goal,

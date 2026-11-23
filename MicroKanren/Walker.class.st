@@ -1,3 +1,14 @@
+"
+I answer an object with the variables replaced by their values in my `state`, at any depth: `value:` looks the object up in the state, then visits the result by double dispatch (`walkStarUsingWalker:`) and answers a copy of conses, collections and AST nodes. `State>>walker` makes me.
+
+```smalltalk
+(Walker on: (Dictionary new
+	at: 1 asVar put: 2 asVar;
+	at: 2 asVar put: 5;
+	yourself) asState)
+		value: { 1 asVar. 7 }. ""=> #(5 7)""
+```
+"
 Class {
 	#name : #Walker,
 	#superclass : #Object,

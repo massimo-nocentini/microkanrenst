@@ -1,3 +1,6 @@
+"
+I test the predicates `MKPredicateSexpCaro` and `MKPredicateSexpAppendo` (forward and backward), and export images of their computation trees, and of that of `MKPredicateSexpDycko`, in `booklet/source/_images`.
+"
 Class {
 	#name : #MKSexpTest,
 	#superclass : #GoalAbstractTest,

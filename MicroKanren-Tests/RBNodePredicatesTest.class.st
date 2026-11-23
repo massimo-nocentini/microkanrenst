@@ -1,3 +1,6 @@
+"
+I test `sendso`, from a block or a compiled method to the selectors it sends, and from a selector back to a message.
+"
 Class {
 	#name : #RBNodePredicatesTest,
 	#superclass : #GoalAbstractTest,

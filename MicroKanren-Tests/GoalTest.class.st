@@ -1,3 +1,6 @@
+"
+I test the goals (success, failure, unification, fresh variables, conjunctions, disjunctions, conditionals, cuts and tabling), the predicates on lists and those that collect values, by the answers they give. Many of my tests also export an image of the computation tree of their goal in `booklet/source/_images`.
+"
 Class {
 	#name : #GoalTest,
 	#superclass : #GoalAbstractTest,

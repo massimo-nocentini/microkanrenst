@@ -1,3 +1,14 @@
+"
+I am the superclass of the objects that are identified by an `id`, and that can be unified, walked and reified as a whole; any of their parts may be a logic variable. My class methods `employee:`, `company:` and `contract:` make an instance of my subclasses for an id.
+
+```smalltalk
+[ :x |
+	(MKRealogIDType employee: 3) unifyo
+		value: (MKRealogIDType employee: x) ]
+	asGoal solutions readStream upToEnd.
+""=> #(3)""
+```
+"
 Class {
 	#name : #MKRealogIDType,
 	#superclass : #Object,

@@ -1,3 +1,6 @@
+"
+I test the unification of AST nodes, by goals about the AST of a block.
+"
 Class {
 	#name : #RBNodeTheoryTest,
 	#superclass : #GoalAbstractTest,

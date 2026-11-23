@@ -1,3 +1,10 @@
+"
+I print the goals on the path of a `state`, for the nodes of the tree of a `MKComputationTreeRenderer`: after `value`, my `associations` give the text of each goal, from the first run to the last one. The goals dispatch on their class by `printOn:renderer:`.
+
+- `=°` is a unification, `&°` a conjunction, `|°` a disjunction and `!°` a cut.
+- `✓` is a goal that succeeds and `Ø` one that fails. As the last goal of the path, the former shows the values of the variables of the first goal, if any, and the latter the two objects that could not be unified, if known.
+- `…` stands for a goal that has not been evaluated.
+"
 Class {
 	#name : #MKGoalPrinter,
 	#superclass : #Object,

@@ -1,3 +1,8 @@
+"
+I answer a tabled call out of the `cache` of a former one: I unify `args` with the cached answers, one after the other. `Tabled` makes me when its arguments are already in the table.
+
+I refer to the classes `Waiting` and `Sequential`, which are not in the packages of this project.
+"
 Class {
 	#name : #Reuse,
 	#superclass : #TablingCall,

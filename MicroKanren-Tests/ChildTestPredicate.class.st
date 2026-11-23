@@ -1,3 +1,6 @@
+"
+I relate a mother and her child, for the tests: `#martha` and `#charlotte`, `#charlotte` and `#caroline`, `#caroline` and `#laura`, `#laura` and `#rose`.
+"
 Class {
 	#name : #ChildTestPredicate,
 	#superclass : #PredicateBinary,

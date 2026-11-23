@@ -1,3 +1,12 @@
+"
+I hold of a well balanced list of parentheses, the characters `$(` and `$)`: nil, or such a list between parentheses followed by such a list. `CombinatoricsTheory>>dycko` answers my class.
+
+```smalltalk
+([ :x | MKPredicateSexpDycko value: x ]
+	asGoal solutions next: 3) readStream upToEnd.
+""=> an Array(nil ($( $)) ($( $) $( $)))""
+```
+"
 Class {
 	#name : #MKPredicateSexpDycko,
 	#superclass : #PredicateUnary,

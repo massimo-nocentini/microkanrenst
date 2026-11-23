@@ -1,3 +1,20 @@
+"
+I relate an AST node and a node that has it as a direct part. The second argument may be:
+
+- the message `car` or `cdr` sent to the first one
+- a message `=`, `cons:`, `+` or `-` with the first one as receiver or as argument
+- an `ifTrue:ifFalse:` with the first one as the condition or in one of the branches
+- a sequence, or a block, with the first one as its only statement
+
+```smalltalk
+[ :x |
+	MKPredicateBinaryParento
+		value: x asRBNode
+		value: [ 1 car ] unaryRBNode ]
+	asGoal solutions readStream upToEnd.
+""=> an Array(OCLiteralValueNode(1))""
+```
+"
 Class {
 	#name : 'MKPredicateBinaryParento',
 	#superclass : 'PredicateBinary',

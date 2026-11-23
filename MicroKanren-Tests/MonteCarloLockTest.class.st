@@ -1,3 +1,6 @@
+"
+I test the two machines of `MontecarloLockTheory`: pairs of lists they relate, or do not, and lists they relate to themselves.
+"
 Class {
 	#name : #MonteCarloLockTest,
 	#superclass : #GoalAbstractTest,

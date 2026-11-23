@@ -1,3 +1,16 @@
+"
+I am a predicate with three arguments. `PredicateTernary class>>value:value:value:` makes me out of them.
+
+```smalltalk
+[ :x |
+	MKPredicateSexpAppendo
+		value: #( 1 ) asCons
+		value: #( 2 ) asCons
+		value: x ]
+	asGoal solutions readStream upToEnd.
+""=> an Array((1 2))""
+```
+"
 Class {
 	#name : #PredicateTernary,
 	#superclass : #PredicateBinary,

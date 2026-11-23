@@ -1,3 +1,15 @@
+"
+I relate an AST node and a node that has it as a part, at any depth: `MKPredicateBinaryParento` relates them, or it relates an intermediate node to the second one, and I relate the first one to it.
+
+```smalltalk
+([ :x |
+	MKPredicateBinaryAncestoro
+		value: x asRBNode
+		value: [ 1 car cdr ] unaryRBNode ]
+	asGoal solutions next: 2) readStream upToEnd.
+""=> an Array(OCMessageNode(1 car) OCLiteralValueNode(1))""
+```
+"
 Class {
 	#name : 'MKPredicateBinaryAncestoro',
 	#superclass : 'PredicateBinary',

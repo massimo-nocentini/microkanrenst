@@ -1,3 +1,6 @@
+"
+I am a goal made of a `question`, an `answer` and an `otherwise` goal. My `chainCombinationStrategy` is a block that answers a new `Disj`, for subclasses to combine them; how to run me is up to them, see `IfPure`.
+"
 Class {
 	#name : #If,
 	#superclass : #Goal,

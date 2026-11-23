@@ -1,3 +1,27 @@
+"
+I am the state of a logic computation: what a goal receives in `onState:`, and what the streams that goals answer are made of. `at:put:`, `pushGoal:` and `collectVars:forFresh:` go on from a new state, while `var:reifies:` changes my substitution in place.
+
+Instance variables:
+
+- `substitution`: the values of the variables, a `CTSBRAL` (one `CTMaybeCategory` per variable) or a `Dictionary`
+- `birthdate`: the number of variables introduced so far, hence the `id` of the newest one
+- `path`: the chain of the goals run, the newest first
+
+To build the empty state send `asState` to a `CTSBRAL` or to a `Dictionary`. `at:put:` and `collectVars:forFresh:` work on the former: the variable with identifier `id` is at the index `birthdate - id + 1`.
+
+I look variables up with `walk:`, which follows a variable to its value and leaves the parts of the value alone, while my `walker` replaces the variables inside the value too:
+
+```smalltalk
+| aState |
+aState := (Dictionary new
+	at: 1 asVar put: { 3. 2 asVar };
+	at: 2 asVar put: 5;
+	yourself) asState.
+aState walker value: 1 asVar. ""=> #(3 5)""
+```
+
+I am sound (`isSound`) unless the last goal of my path is a failed one. I also make the objects that work on me: `unifier`, `walker`, `reifier`, `trasparentReifier` and `identityReifier`.
+"
 Class {
 	#name : #State,
 	#superclass : #Object,

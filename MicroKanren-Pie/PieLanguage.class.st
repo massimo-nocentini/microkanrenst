@@ -1,3 +1,6 @@
+"
+I hold the relation `synthº` between an expression `e` and an object `aThe`: the goal asks `e` to be a message `the:`, its argument to be a type by `isaTypeº`, its receiver to be of that type by `isAº`, and `aThe` to be the message `the:` with the resulting expression and type. The methods `isAº` and `isaTypeº` are empty.
+"
 Class {
 	#name : #PieLanguage,
 	#superclass : #Object,

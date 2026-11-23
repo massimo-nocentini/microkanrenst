@@ -1,3 +1,16 @@
+"
+I am an AST node for a logic variable, my `logicVar`, so that it can be a part of an AST. I am equal to another node for the same variable, I am unified, walked and reified as the variable is, and visitors get me by `visitLogicVariableNode:`. `Var>>asRBNode` and `ReifiedVar>>asRBNode` make me.
+
+```smalltalk
+[ :x |
+	[ 3 + 4 ] unaryRBNode unifyo value: (RBMessageNode
+		receiver: x asRBNode
+		selector: (RBSelectorNode value: #+)
+		arguments: { 4 asLiteralRBNode }) ]
+			asGoal solutions readStream upToEnd.
+""=> an Array(OCLiteralValueNode(3))""
+```
+"
 Class {
 	#name : 'RBLogicVariableNode',
 	#superclass : 'OCVariableNode',

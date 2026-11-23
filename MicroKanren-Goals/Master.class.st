@@ -1,3 +1,6 @@
+"
+I add the answer of a tabled goal to its `cache`: if no answer in there is equivalent to `args` in the given state (`isAlphaEquivalentTo:inState:`), I put `args`, reified, at the front of the cache and succeed; otherwise I fail. `Tabled` runs me after the goal of its block.
+"
 Class {
 	#name : #Master,
 	#superclass : #TablingCall,

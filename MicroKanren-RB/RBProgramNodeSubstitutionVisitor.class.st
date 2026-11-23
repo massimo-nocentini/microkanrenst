@@ -1,3 +1,13 @@
+"
+I answer a copy of an AST with other nodes in place of its variables: my `substitution` maps the names of the temporaries, and the `RBLogicVariableNode` objects, to these nodes. `OCNode>>substituteVariablesUsingDictionary:` and `BlockClosure>>substituteVariablesUsingSequenceableCollection:` use me.
+
+```smalltalk
+[ :x :y | x + y ] substituteVariablesUsingSequenceableCollection: {
+		1 asLiteralRBNode.
+		2 asLiteralRBNode }.
+""=> OCMessageNode(1 + 2)""
+```
+"
 Class {
 	#name : 'RBProgramNodeSubstitutionVisitor',
 	#superclass : 'RBProgramNodeIdentityVisitor',

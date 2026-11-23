@@ -1,3 +1,6 @@
+"
+I relate the list `5 β` to the list `γ γ` whenever my machine relates `β` to `γ`.
+"
 Class {
 	#name : #McCullochRepeatRule,
 	#superclass : #InductionRule,

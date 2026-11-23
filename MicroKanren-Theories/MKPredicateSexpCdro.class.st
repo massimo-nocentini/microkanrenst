@@ -1,3 +1,12 @@
+"
+I relate a cons and its `cdr`.
+
+```smalltalk
+[ :x | MKPredicateSexpCdro value: #( 1 2 ) asCons value: x ]
+	asGoal solutions readStream upToEnd.
+""=> an Array((2))""
+```
+"
 Class {
 	#name : #MKPredicateSexpCdro,
 	#superclass : #PredicateBinary,

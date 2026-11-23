@@ -1,3 +1,6 @@
+"
+I hold of a cons, that is of any pair of objects.
+"
 Class {
 	#name : #MKPredicateSexpPairo,
 	#superclass : #PredicateUnary,

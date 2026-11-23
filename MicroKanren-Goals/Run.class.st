@@ -1,3 +1,6 @@
+"
+I run a `goal` and turn the states it answers into answers: I discard those that are not sound, and reify the variables of the goal in the others. An answer is an object when the goal has one variable, a collection when it has more, and `#tautology` when it has none. `Goal>>solutions` makes me.
+"
 Class {
 	#name : #Run,
 	#superclass : #Goal,

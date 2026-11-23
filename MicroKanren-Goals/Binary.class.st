@@ -1,3 +1,6 @@
+"
+I am a goal that depends on two objects, `left` and `right`: two goals for `Conj` and `Disj`, the objects to unify for `Unify`.
+"
 Class {
 	#name : #Binary,
 	#superclass : #Goal,

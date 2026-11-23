@@ -1,3 +1,6 @@
+"
+I am the superclass of the goals that work on the `cache` of the answers of a tabled goal, for the arguments `args` of a call. See `Tabled`, `Master` and `Reuse`.
+"
 Class {
 	#name : #TablingCall,
 	#superclass : #Goal,

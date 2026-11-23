@@ -1,3 +1,6 @@
+"
+I test the relation `dycko` of `CombinatoricsTheory`: the first 20 lists it answers, and one that is not well balanced.
+"
 Class {
 	#name : #CombinatoricsTheoryTest,
 	#superclass : #GoalAbstractTest,

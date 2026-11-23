@@ -1,3 +1,6 @@
+"
+I test the relations of `ArithTheory`, on bits and on numbers.
+"
 Class {
 	#name : #ArithTest,
 	#superclass : #GoalAbstractTest,

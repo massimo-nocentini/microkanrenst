@@ -1,3 +1,6 @@
+"
+I am the superclass of the tests about goals: `assert:equals:modulo:` compares a stream with a collection, both converted by a selector, and `exportComputationTreeOfGoal:limitedTo:` exports an image of the computation tree of a goal.
+"
 Class {
 	#name : #GoalAbstractTest,
 	#superclass : #TestCase,

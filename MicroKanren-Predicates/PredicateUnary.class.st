@@ -1,3 +1,6 @@
+"
+I am a predicate with one argument. `PredicateUnary class>>value:` makes me out of it.
+"
 Class {
 	#name : #PredicateUnary,
 	#superclass : #Predicate,

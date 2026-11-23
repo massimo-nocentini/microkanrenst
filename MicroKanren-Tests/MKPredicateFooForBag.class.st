@@ -1,3 +1,12 @@
+"
+I am a predicate for the tests of `PredicateBagOfo` and `PredicateFindAllo`, which holds of five triples of symbols:
+
+```smalltalk
+[ :a :b :c | MKPredicateFooForBag value: a value: b value: c ]
+	asGoal solutions readStream upToEnd.
+""=> #(#(#a #b #c) #(#a #b #d) #(#b #c #e) #(#b #c #f) #(#c #c #g))""
+```
+"
 Class {
 	#name : #MKPredicateFooForBag,
 	#superclass : #PredicateTernary,

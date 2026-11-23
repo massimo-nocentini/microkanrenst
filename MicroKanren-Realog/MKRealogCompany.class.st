@@ -1,3 +1,6 @@
+"
+I am a company, known by my `id` only: two companies unify when their ids do.
+"
 Class {
 	#name : #MKRealogCompany,
 	#superclass : #MKRealogIDType,

@@ -1,3 +1,33 @@
+"
+I am the superclass of the goals, the logic computations: a goal receives a `State` by `onState:` and answers the stream of the states in which it is satisfied, possibly among failed ones (`State>>isSound` tells them apart).
+
+## How to make goals
+
+- `true asGoal` is a `Succeed` goal and `false asGoal` a `Failed` one.
+- `x unifyo value: y` is a `Unify` goal.
+- `[ ... ] asGoal` is an `Eta` goal, and `[ :x :y | ... ] asGoal` a `Fresh` one, that introduces variables.
+- `Goal cond` is a `Cond` goal to add clauses to.
+- A subclass of `Predicate` gives a goal a name and arguments.
+
+## How to combine them
+
+- `a , b` is the conjunction (`Conj`).
+- `a | b` is the disjunction (`Disj`).
+- `a ! b` is the conjunction of a `Cut` of `a`, limited to one state, and `b`.
+- `a not` is the negation (`Not`).
+
+## How to run them
+
+`solutions` answers the stream of the answers, as `Run` makes it; `asStatesStream` the stream of the states, starting from the empty one. A stream is made of links and of blocks to evaluate: send it `next:` to limit it, then `readStream`.
+
+```smalltalk
+[ :x | (x unifyo value: 1) | (x unifyo value: 2) ]
+	asGoal solutions readStream upToEnd.
+""=> #(1 2)""
+```
+
+Subclasses implement `onState:afterPushingGoal:`, which I send after I have pushed a copy of the goal on the path of the state, or `onState:` itself. `onState:forGoal:fromConj:` decides how a conjunction goes on when a goal is the last one on the path of a state.
+"
 Class {
 	#name : #Goal,
 	#superclass : #Object,

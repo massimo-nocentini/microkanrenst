@@ -1,3 +1,6 @@
+"
+I am an employee, known by my `id` only: two employees unify when their ids do.
+"
 Class {
 	#name : #MKRealogEmployee,
 	#superclass : #MKRealogIDType,

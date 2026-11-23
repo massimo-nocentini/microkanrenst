@@ -1,3 +1,6 @@
+"
+I tell whether the variable of my `occurChecker` occurs in an AST. `OccurChecker>>forRBNode:` uses me.
+"
 Class {
 	#name : 'RBProgramNodeOccurCheckVisitor',
 	#superclass : 'RBProgramNodeMKVisitor',

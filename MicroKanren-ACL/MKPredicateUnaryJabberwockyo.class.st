@@ -1,3 +1,15 @@
+"
+I relate three AST nodes, a message, a nested conditional and a literal, as `TheLittleProver>>jabberwockyº`. Despite my name I have three arguments.
+
+The second argument has to unify with `x isUffish ifTrue: [ d ] ifFalse: [ e ]`, where `d` has `x isSlithy ifTrue: [ f ] ifFalse: [ g ]` as a part and `e` has `x isBrillig ifTrue: [ h ] ifFalse: [ i ]`. The other two go together, according to where the first one is:
+
+| In | First argument | Third argument |
+|:--|:--|:--|
+| `f` | `x mimsy` | `#borogove` |
+| `g` | `x mome` | `#rath` |
+| `h` | `x frumious` | `#bandersnatch` |
+| `i` | `x frabjous` | `#beamish` |
+"
 Class {
 	#name : 'MKPredicateUnaryJabberwockyo',
 	#superclass : 'PredicateTernary',

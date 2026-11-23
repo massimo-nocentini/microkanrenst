@@ -1,3 +1,19 @@
+"
+I am a contract between an `employee` and a `company`, with an `id` and a `type`: two contracts unify when these four parts do.
+
+```smalltalk
+[ :x |
+	((MKRealogIDType contract: 1)
+		employee: (MKRealogIDType employee: 2);
+		company: (MKRealogIDType company: 3);
+		type: #full;
+		yourself) unifyo value: ((MKRealogIDType contract: 1)
+			employee: (MKRealogIDType employee: 2);
+			company: (MKRealogIDType company: x);
+			type: #full;
+			yourself) ] asGoal solutions readStream upToEnd. ""=> #(3)""
+```
+"
 Class {
 	#name : #MKRealogContract,
 	#superclass : #MKRealogIDType,

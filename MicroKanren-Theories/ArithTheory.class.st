@@ -1,3 +1,19 @@
+"
+I am a theory of natural numbers, represented as lists of bits, the least significant first, without a trailing zero: nil is zero, and `Integer>>asConsedBinaryRepr` converts a number. `Theory class>>arith` makes me.
+
+- About bits: `bitXoro`, `bitAndo`, `bitHalfAddero` (two bits, their sum and carry) and `bitFullAddero` (a carry, two bits, their sum and carry).
+- About the shape of a number: `zeroo`, `oneo`, `positiveo` (a pair) and `greaterThanOneo` (at least two bits).
+- About sums: `addero` (a carry, two numbers and their sum), `genAddero` (the case of `addero` that goes bit by bit), `pluso` (`addero` with carry 0), `minuso` (`pluso` with the arguments in another order) and `succo`.
+
+```smalltalk
+6 asConsedBinaryRepr printString. ""=> '(0 1 1)'""
+[ :sum :carry |
+	Theory arith bitHalfAddero
+		valueWithArguments: { 1. 1. sum. carry } ]
+	asGoal solutions readStream upToEnd.
+""=> #(#(0 1))""
+```
+"
 Class {
 	#name : #ArithTheory,
 	#superclass : #Theory,

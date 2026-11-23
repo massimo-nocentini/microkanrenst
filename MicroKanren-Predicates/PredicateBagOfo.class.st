@@ -1,3 +1,10 @@
+"
+I collect the values that a template takes in the sound states of a goal, grouped by the values of some `variables` in the same states: for each group I unify the variables with their values, and my third argument with the list of the group. I fail if there are no groups. My arguments are the goal, the template and the object for the list. I override `onState:`, hence I have no `goal`.
+
+`Goal class>>bagOfo` answers my class; send `variables:` to the predicate, with an empty collection to have one group.
+
+I send `foldrStrict:init:` to the stream of the states, which no package of this project implements.
+"
 Class {
 	#name : #PredicateBagOfo,
 	#superclass : #PredicateTernary,

@@ -1,3 +1,20 @@
+"
+I am a `Fresh` goal about the AST of a block, my receiver: I introduce a variable for each argument of it, take its body with these variables in place of the arguments, as `RBLogicVariableNode` objects, and give it to my `nodeBlock`, which has to answer a block that makes the goal out of the variables.
+
+`BlockClosure>>asGoalWithASTof:` makes me; its longer forms set the other instance variables too:
+
+- `selectBlock`: takes the sequence node of the body and answers the node to consider, the whole or its only statement
+- `contextVariables`: a dictionary from other names that occur in the body to the nodes to put in their place
+
+```smalltalk
+[ :a |
+	[ :ast | [ :x | a asRBNode unifyo value: ast ] ]
+		asGoalWithUnaryASTof: [ :x | 3 + 4 ]
+		contextVariables: #(  ) ]
+			asGoal solutions readStream upToEnd.
+""=> an Array(OCMessageNode(3 + 4))""
+```
+"
 Class {
 	#name : 'FreshRB',
 	#superclass : 'Fresh',
